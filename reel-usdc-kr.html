@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>TchotchoPay — Kont USDC</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:#000;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif}
+.reel-wrap{position:relative;width:390px;height:844px;overflow:hidden;background:#020B2D}
+
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:96px 24px 200px;opacity:0;transition:opacity 0.35s ease;pointer-events:none;background:linear-gradient(175deg,#020B2D 0%,#0A1F6E 55%,#020B2D 100%)}
+.scene.active{opacity:1}
+.scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 280px 220px at 50% 42%,rgba(0,174,239,0.07) 0%,transparent 70%);pointer-events:none}
+
+.tag{font-size:11px;letter-spacing:2.8px;color:#00AEEF;text-transform:uppercase;margin-bottom:10px;text-align:center;font-weight:700}
+.headline{font-size:30px;font-weight:800;color:#fff;text-align:center;line-height:1.22;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.sub{font-size:15px;color:rgba(255,255,255,0.72);text-align:center;line-height:1.55}
+.green{color:#00C896}.cyan{color:#00AEEF}.gold{color:#F7B731}.red{color:#ff6b6b}
+
+.card{background:rgba(10,31,110,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px 18px;width:100%;margin-top:12px}
+
+/* S1 stats */
+.hero-icon{font-size:64px;margin-bottom:14px;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+.stat-row:last-child{border:none}
+.stat-label{font-size:14px;color:rgba(255,255,255,0.55);font-weight:500}
+.stat-val{font-size:16px;font-weight:700}
+.val-bad{color:#ff6b6b}.val-good{color:#00C896}
+
+/* S2 wallet */
+.wallet-card{background:linear-gradient(135deg,rgba(10,31,110,0.9),rgba(15,48,153,0.9));border:1px solid rgba(0,200,150,0.3);border-radius:20px;padding:20px;width:100%;margin-top:12px;backdrop-filter:blur(8px)}
+.wl-logo{font-size:11px;color:#00C896;letter-spacing:2px;font-weight:700;margin-bottom:18px}
+.wl-bal-label{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:4px}
+.wl-bal{font-size:46px;font-weight:800;color:#fff;line-height:1}
+.wl-usdc{font-size:17px;color:#00AEEF;margin-top:4px;margin-bottom:18px;font-weight:600}
+.wl-meta{display:flex;justify-content:space-between}
+.wm .wm-l{font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:2px}
+.wm .wm-v{font-size:13px;color:#fff;font-weight:600}
+.usdc-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,0.12);border:1px solid rgba(0,174,239,0.4);border-radius:20px;padding:6px 14px;font-size:12px;color:#00AEEF;font-weight:600;margin-top:12px}
+
+/* S3 chart */
+.chart-title{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:10px;text-align:left;width:100%;font-weight:500}
+.chart-group{display:flex;gap:8px;align-items:flex-end;height:100px;width:100%}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.bar-fill{width:100%;border-radius:5px 5px 0 0}
+.bar-m{font-size:10px;color:rgba(255,255,255,0.4)}
+.b-htg{background:linear-gradient(180deg,#ff6b6b,#993333)}
+.b-usdc{background:linear-gradient(180deg,#00C896,#007755)}
+.legend{display:flex;gap:16px;justify-content:center;margin-top:10px}
+.leg{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.6)}
+.ldot{width:9px;height:9px;border-radius:50%}
+
+/* S4 use grid */
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%;margin-top:12px}
+.ug-card{background:rgba(10,31,110,0.85);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:13px;text-align:center}
+.ug-icon{font-size:26px;margin-bottom:6px}
+.ug-title{font-size:13px;color:#fff;font-weight:700;margin-bottom:2px}
+.ug-sub{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4}
+
+/* S5 compare cards */
+.cmp-cards{display:flex;gap:10px;width:100%;margin-top:12px}
+.cmp-card{flex:1;border-radius:16px;padding:15px 12px;text-align:center}
+.cc-bad{background:rgba(26,8,8,0.9);border:1.5px solid rgba(102,34,34,0.8)}
+.cc-good{background:rgba(8,26,16,0.9);border:1.5px solid rgba(0,200,150,0.5)}
+.cc-cur{font-size:13px;font-weight:700;margin-bottom:10px;letter-spacing:.5px}
+.cc-cur.htg{color:#ff6b6b}.cc-cur.usdc{color:#00C896}
+.cc-row{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px;line-height:1.4}
+.cc-row strong{color:#fff}
+
+/* S6 CTA */
+.cta-box{background:linear-gradient(135deg,rgba(0,174,239,0.12),rgba(16,85,204,0.18));border:1.5px solid rgba(0,174,239,0.5);border-radius:20px;padding:20px;width:100%;text-align:center;margin-top:12px;backdrop-filter:blur(8px)}
+.cta-main{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-url{font-size:14px;color:#00AEEF;margin-bottom:14px}
+.cta-btn{background:linear-gradient(135deg,#00AEEF,#1055CC);border-radius:14px;padding:14px;font-size:16px;font-weight:700;color:#fff}
+
+/* ════ IG CHROME ════ */
+.ig-progress{position:absolute;top:48px;left:8px;right:8px;display:flex;gap:3px;z-index:300}
+.ig-seg{flex:1;height:2.5px;background:rgba(255,255,255,0.28);border-radius:2px;overflow:hidden}
+.ig-seg-fill{height:100%;background:#fff;width:0%;border-radius:2px}
+.ig-top{position:absolute;top:56px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:6px 14px 0;z-index:300}
+.ig-back{font-size:22px;color:#fff;opacity:.9;line-height:1}
+.ig-top-icons{display:flex;gap:16px;align-items:center}
+.ig-top-icon{font-size:19px;color:#fff;opacity:.88}
+.ig-bl{position:absolute;bottom:90px;left:12px;right:86px;z-index:300}
+.ig-profile-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.ig-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00AEEF,#1055CC);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;border:1.5px solid rgba(255,255,255,0.55);flex-shrink:0}
+.ig-uname{font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.6)}
+.ig-follow{font-size:12px;font-weight:700;color:#fff;border:1.5px solid rgba(255,255,255,0.75);border-radius:6px;padding:2px 9px;margin-left:2px}
+.ig-caption{font-size:13px;color:rgba(255,255,255,0.92);line-height:1.45;text-shadow:0 1px 4px rgba(0,0,0,0.5);margin-bottom:8px}
+.ig-music{display:flex;align-items:center;gap:5px}
+.ig-music-txt{font-size:12px;color:rgba(255,255,255,0.8)}
+.ig-actions{position:absolute;bottom:86px;right:10px;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:300}
+.ig-act{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ig-act-icon{font-size:28px;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5))}
+.ig-act-count{font-size:12px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
+.ig-disc{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#222,#444);border:3px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;animation:spin 4s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ig-nav{position:absolute;bottom:0;left:0;right:0;height:88px;background:rgba(0,0,0,0.92);display:flex;align-items:flex-start;justify-content:space-around;padding-top:14px;z-index:300;border-top:0.5px solid rgba(255,255,255,0.08)}
+.ig-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ig-nav-icon{font-size:22px;opacity:.75}
+.ig-nav-dot{width:4px;height:4px;border-radius:50%;background:#fff;margin-top:2px}
+
+#countdown{position:fixed;inset:0;background:rgba(2,11,45,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+#countdown .num{font-size:110px;font-weight:800;color:#00AEEF;line-height:1}
+#countdown .hint{font-size:14px;color:rgba(255,255,255,0.5);margin-top:14px;text-align:center;line-height:1.65}
+#countdown .logo{font-size:20px;font-weight:700;color:#fff;margin-bottom:36px;letter-spacing:.5px}
+#countdown .logo span{color:#00AEEF}
+</style>
+</head>
+<body>
+<div class="reel-wrap">
+
+  <!-- S1: Pwoblèm HTG -->
+  <div class="scene active" id="s1">
+    <div class="hero-icon">📉</div>
+    <div class="tag">Pwoblèm HTG</div>
+    <div class="headline">Goud la pèdi valè<br>chak ane</div>
+    <div class="card">
+      <div class="stat-row"><span class="stat-label">HTG pèdi an 2023</span><span class="stat-val val-bad">−43%</span></div>
+      <div class="stat-row"><span class="stat-label">HTG pèdi an 2024</span><span class="stat-val val-bad">−35%</span></div>
+      <div class="stat-row"><span class="stat-label">USDC TchotchoPay</span><span class="stat-val val-good">$1.00 = $1.00 ✅</span></div>
+    </div>
+  </div>
+
+  <!-- S2: Bous USDC -->
+  <div class="scene" id="s2">
+    <div class="tag">Bous USDC ou</div>
+    <div class="headline">Chak dola rete<br>yon dola</div>
+    <div class="wallet-card">
+      <div class="wl-logo">TCHOTCHOPAY WALLET</div>
+      <div class="wl-bal-label">Balans USDC ou</div>
+      <div class="wl-bal">$500</div>
+      <div class="wl-usdc">500.00 USDC</div>
+      <div class="wl-meta">
+        <div class="wm"><div class="wm-l">Estati</div><div class="wm-v" style="color:#00C896">✓ Estab</div></div>
+        <div class="wm"><div class="wm-l">Rezo</div><div class="wm-v">Base</div></div>
+        <div class="wm"><div class="wm-l">Aksè</div><div class="wm-v">24/7</div></div>
+      </div>
+    </div>
+    <div class="usdc-badge">💎 Dola nimerik · Base blockchain</div>
+  </div>
+
+  <!-- S3: Konparezon valè -->
+  <div class="scene" id="s3">
+    <div class="tag">Balans pa chanje</div>
+    <div class="headline">USDC estab.<br>HTG <span class="red">tonbe.</span></div>
+    <div style="width:100%;margin-top:14px">
+      <div class="chart-title">Valè relatif sou 6 mwa</div>
+      <div class="chart-title" style="color:rgba(255,107,107,0.8);margin-bottom:4px">HTG</div>
+      <div class="chart-group">
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:90px"></div><div class="bar-m">Jan</div></div>
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:72px"></div><div class="bar-m">Fev</div></div>
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:56px"></div><div class="bar-m">Mas</div></div>
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:44px"></div><div class="bar-m">Avr</div></div>
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:36px"></div><div class="bar-m">Me</div></div>
+        <div class="bar-col"><div class="bar-fill b-htg" style="height:28px"></div><div class="bar-m">Jen</div></div>
+      </div>
+      <div class="chart-title" style="color:#00C896;margin-top:10px;margin-bottom:4px">USDC</div>
+      <div class="chart-group">
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Jan</div></div>
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Fev</div></div>
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Mas</div></div>
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Avr</div></div>
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Me</div></div>
+        <div class="bar-col"><div class="bar-fill b-usdc" style="height:90px"></div><div class="bar-m">Jen</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: Sa ou ka fè -->
+  <div class="scene" id="s4">
+    <div class="tag">Pouvwa USDC ou</div>
+    <div class="headline">Kach dola ou,<br>itilize lib</div>
+    <div class="use-grid">
+      <div class="ug-card"><div class="ug-icon">💸</div><div class="ug-title">Voye lajan</div><div class="ug-sub">Bay fanmi, zanmi nenpòt ki lè</div></div>
+      <div class="ug-card"><div class="ug-icon">🛒</div><div class="ug-title">Mache TchotchoPay</div><div class="ug-sub">Achte lokal ak USDC</div></div>
+      <div class="ug-card"><div class="ug-icon">📱</div><div class="ug-title">Rechaj gratis</div><div class="ug-sub">Digicel ak Natcom</div></div>
+      <div class="ug-card"><div class="ug-icon">💵</div><div class="ug-title">Retire kach</div><div class="ug-sub">Bank lokal oswa ajan</div></div>
+    </div>
+  </div>
+
+  <!-- S5: HTG vs USDC -->
+  <div class="scene" id="s5">
+    <div class="tag">HTG vs USDC</div>
+    <div class="headline">Epay entelijan<br>kòmanse isit</div>
+    <div class="cmp-cards">
+      <div class="cmp-card cc-bad">
+        <div class="cc-cur htg">HTG 🇭🇹</div>
+        <div class="cc-row">Tonbe <strong style="color:#ff6b6b">chak ane</strong></div>
+        <div class="cc-row">Enflamasyon <strong style="color:#ff6b6b">elve</strong></div>
+        <div class="cc-row">Valè <strong style="color:#ff6b6b">ensèten</strong></div>
+      </div>
+      <div class="cmp-card cc-good">
+        <div class="cc-cur usdc">USDC 💎</div>
+        <div class="cc-row">Estab <strong style="color:#00C896">$1 = $1</strong></div>
+        <div class="cc-row">Disponib <strong style="color:#00C896">24/7</strong></div>
+        <div class="cc-row">Sekirite <strong style="color:#00C896">blockchain</strong></div>
+      </div>
+    </div>
+    <div class="sub" style="margin-top:16px;font-size:14px">Kòmanse epay an dola jodi a.</div>
+  </div>
+
+  <!-- S6: CTA -->
+  <div class="scene" id="s6">
+    <div class="tag">TchotchoPay</div>
+    <div class="headline" style="font-size:30px">Kenbe dola ou.<br><span class="cyan">Pa goud ki devalye.</span></div>
+    <div class="cta-box">
+      <div class="cta-main">Ouvri Kont USDC jodi a →</div>
+      <div class="cta-url">tchotchopay.com/wallet</div>
+      <div class="cta-btn">Kòmanse Gratis</div>
+    </div>
+  </div>
+
+  <!-- IG Chrome -->
+  <div class="ig-progress" id="igProgress">
+    <div class="ig-seg"><div class="ig-seg-fill" id="f0"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f1"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f2"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f3"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f4"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f5"></div></div>
+  </div>
+  <div class="ig-top">
+    <div class="ig-back">←</div>
+    <div class="ig-top-icons"><span class="ig-top-icon">🔊</span><span class="ig-top-icon">⋯</span></div>
+  </div>
+  <div class="ig-bl">
+    <div class="ig-profile-row">
+      <div class="ig-av">T</div>
+      <span class="ig-uname">tchotchopay</span>
+      <span class="ig-follow">Suiv</span>
+    </div>
+    <div class="ig-caption"><strong>Sispann kite goud la vale lajan ou.</strong> Epay an USDC ak TchotchoPay — $1 rete $1 pou toujou 💎 #USDC #Ayiti #TchotchoPay</div>
+    <div class="ig-music"><span>🎵</span><span class="ig-music-txt">Son orijinal · tchotchopay</span></div>
+  </div>
+  <div class="ig-actions">
+    <div class="ig-act"><span class="ig-act-icon">🤍</span><span class="ig-act-count">3.8K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">💬</span><span class="ig-act-count">241</span></div>
+    <div class="ig-act"><span class="ig-act-icon">➤</span><span class="ig-act-count">987</span></div>
+    <div class="ig-act"><span class="ig-act-icon">🔖</span><span class="ig-act-count">1.2K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">⋯</span></div>
+    <div class="ig-disc">🎵</div>
+  </div>
+  <div class="ig-nav">
+    <div class="ig-nav-item"><span class="ig-nav-icon">🏠</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">🔍</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon" style="opacity:1">▶️</span><div class="ig-nav-dot"></div></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">❤️</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">👤</span></div>
+  </div>
+</div>
+
+<div id="countdown">
+  <div class="logo">Tchotcho<span>Pay</span></div>
+  <div class="num" id="cdNum">3</div>
+  <div class="hint">Prepare pou anrejistre<br>⌘+Shift+5 → Anrejistre Zòn Chwazi</div>
+</div>
+<script>
+const scenes=['s1','s2','s3','s4','s5','s6'];
+const durations=[5,5,5,6,5,4];
+let current=0,elapsed=0,timer=null;
+function showScene(i){scenes.forEach((s,idx)=>document.getElementById(s).classList.toggle('active',idx===i));for(let k=0;k<i;k++)document.getElementById('f'+k).style.width='100%';document.getElementById('f'+i).style.width='0%';current=i;elapsed=0;}
+function tick(){elapsed+=0.05;document.getElementById('f'+current).style.width=Math.min((elapsed/durations[current])*100,100)+'%';if(elapsed>=durations[current]){const next=current+1;if(next>=scenes.length){clearInterval(timer);return;}showScene(next);}}
+let count=3;const cdNum=document.getElementById('cdNum');const cdOverlay=document.getElementById('countdown');
+const cdTimer=setInterval(()=>{count--;if(count<=0){clearInterval(cdTimer);cdOverlay.style.display='none';showScene(0);timer=setInterval(tick,50);}else{cdNum.textContent=count;}},1000);
+</script>
+</body>
+</html>

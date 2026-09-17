@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:1080px; height:1920px;
+  background:linear-gradient(160deg,#020B2D 0%,#0A1F6E 60%,#020B2D 100%);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:relative;
+}
+.glow1 { position:absolute; width:700px; height:700px; background:radial-gradient(circle,rgba(0,174,239,.22) 0%,transparent 70%); top:-120px; right:-180px; }
+.glow2 { position:absolute; width:500px; height:500px; background:radial-gradient(circle,rgba(0,174,239,.12) 0%,transparent 70%); bottom:120px; left:-100px; }
+
+/* LOGO — very top, small */
+.logo { position:absolute; top:64px; left:0; right:0; text-align:center; font-size:26px; font-weight:900; letter-spacing:.22em; color:rgba(255,255,255,.38); text-transform:uppercase; }
+
+/* CARD — below logo */
+.card { position:absolute; top:145px; left:60px; right:60px; height:346px; background:linear-gradient(135deg,#0A1F6E 0%,#1055CC 52%,#0D62E8 100%); border-radius:36px; padding:48px 52px; box-shadow:0 60px 140px rgba(0,0,0,.55),0 0 100px rgba(0,174,239,.22); overflow:hidden; }
+.cc1 { position:absolute; top:-80px; right:-80px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,.06); }
+.cc2 { position:absolute; bottom:-100px; left:-60px; width:260px; height:260px; border-radius:50%; background:rgba(0,174,239,.08); }
+.card-inner { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+.card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.card-brand { font-size:20px; font-weight:900; letter-spacing:.18em; color:rgba(255,255,255,.6); }
+.chip { width:64px; height:46px; background:linear-gradient(135deg,#d4af37,#f5d87a,#d4af37); border-radius:10px; }
+.card-num { font-size:38px; font-weight:700; letter-spacing:.24em; color:#fff; text-align:center; }
+.card-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+.card-name { font-size:22px; font-weight:800; color:#fff; letter-spacing:.06em; }
+.card-visa { font-size:44px; font-weight:900; font-style:italic; color:rgba(255,255,255,.92); }
+
+/* BADGE — right below card, no overlap */
+.badge { position:absolute; top:514px; right:60px; background:rgba(0,174,239,.12); border:2px solid rgba(0,174,239,.35); border-radius:40px; padding:10px 30px; font-size:20px; font-weight:900; color:#00AEEF; letter-spacing:.12em; }
+
+/* BIG HEADLINE — well below badge */
+.headline { position:absolute; top:610px; left:60px; right:60px; }
+.headline h1 { font-size:120px; font-weight:900; line-height:1.05; color:#fff; }
+.headline h1 span { color:#00AEEF; }
+
+/* SUB TEXT — below headline (headline is 2 lines = ~260px, starts 610, ends ~870) */
+.sub { position:absolute; top:910px; left:60px; right:60px; font-size:44px; color:rgba(255,255,255,.58); line-height:1.5; }
+
+/* TAGS — below sub (~2 lines = ~130px, sub starts 910, ends ~1040) */
+.tags { position:absolute; top:1120px; left:60px; display:flex; gap:20px; flex-wrap:wrap; }
+.tag { display:flex; align-items:center; gap:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:40px; padding:16px 32px; }
+.tag-dot { width:14px; height:14px; border-radius:50%; background:#00AEEF; }
+.tag span { font-size:24px; font-weight:800; color:rgba(255,255,255,.52); letter-spacing:.1em; }
+
+/* HANDLE — very bottom, isolated */
+.handle { position:absolute; bottom:64px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:rgba(255,255,255,.22); letter-spacing:.18em; }
+</style>
+</head>
+<body>
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="logo">TCHOTCHOPAY</div>
+
+<div class="card">
+  <div class="cc1"></div><div class="cc2"></div>
+  <div class="card-inner">
+    <div class="card-top"><div class="card-brand">TCHOTCHOPAY</div><div class="chip"></div></div>
+    <div class="card-num">•••• •••• •••• 4291</div>
+    <div class="card-bottom"><div class="card-name">SOPHIE JOSEPH</div><div class="card-visa">VISA</div></div>
+  </div>
+</div>
+
+<div class="badge">USDC POWERED</div>
+
+<div class="headline">
+  <h1>Spend USDC<br>Like <span>Cash.</span></h1>
+</div>
+
+<div class="sub">Your free TchotchoPay Visa card — works anywhere in the world, no bank required.</div>
+
+<div class="tags">
+  <div class="tag"><div class="tag-dot"></div><span>VIRTUAL</span></div>
+  <div class="tag"><div class="tag-dot"></div><span>FREE</span></div>
+  <div class="tag"><div class="tag-dot"></div><span>INSTANT</span></div>
+</div>
+
+<div class="handle">@TCHOTCHOPAY</div>
+</body>
+</html>

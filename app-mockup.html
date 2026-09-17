@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tchotcho Pay — App Preview</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0f1e;min-height:100vh;padding:32px 16px 48px;display:flex;flex-direction:column;align-items:center}
+
+/* ── PAGE HEADER ── */
+.page-header{text-align:center;margin-bottom:28px}
+.page-header h1{color:#fff;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em}
+.page-header h1 em{color:#00AEEF;font-style:normal}
+.page-header p{color:#8FA8CC;font-size:0.88rem;margin-top:6px}
+
+/* ── NAV TABS ── */
+.tabs{display:flex;gap:6px;margin-bottom:24px;background:rgba(255,255,255,0.06);border:1px solid rgba(0,174,239,0.2);border-radius:50px;padding:4px;flex-wrap:wrap;justify-content:center}
+.tab{border:none;background:none;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;color:rgba(255,255,255,0.45);font-family:inherit;white-space:nowrap;transition:all 0.2s;display:flex;align-items:center;gap:5px}
+.tab.on{background:#0A1F6E;color:#fff;box-shadow:0 0 16px rgba(0,174,239,0.3)}
+.tab i{font-size:14px}
+
+/* ── PHONE SHELL ── */
+.phone{width:300px;background:#020B2D;border-radius:40px;overflow:hidden;border:7px solid #0d1020;box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(0,174,239,0.1)}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 4px;color:rgba(255,255,255,0.45);font-size:11px;flex-shrink:0}
+
+/* ── SCREENS ── */
+.screen{display:none;flex-direction:column;min-height:600px;position:relative}
+.screen.on{display:flex}
+
+/* ── BOTTOM NAV ── */
+.bnav{display:flex;justify-content:space-around;padding:10px 0 12px;border-top:0.5px solid rgba(255,255,255,0.08);flex-shrink:0;margin-top:auto}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:rgba(255,255,255,0.3);cursor:pointer;padding:0 10px;transition:color 0.15s}
+.bni.on{color:#00AEEF}
+.bni i{font-size:22px}
+
+/* ── HOME ── */
+.ph-header{padding:16px 20px 10px;color:#fff}
+.ph-title{font-size:19px;font-weight:800;margin-bottom:2px}
+.ph-sub{font-size:12px;color:rgba(255,255,255,0.45)}
+.ph-section{font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin:0 20px 8px}
+.wallet-card{margin:4px 16px 14px;border-radius:22px;padding:22px;background:linear-gradient(135deg,#0A1F6E,#1055CC);position:relative;overflow:hidden}
+.wallet-card::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(0,174,239,0.12)}
+.wc-label{font-size:10px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+.wc-balance{font-size:34px;font-weight:800;color:#fff;line-height:1}
+.wc-usdc{font-size:13px;color:#00AEEF;font-weight:600;margin-top:5px}
+.wc-row{display:flex;justify-content:space-between;margin-top:14px;font-size:11px;color:rgba(255,255,255,0.45)}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 14px}
+.action{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.action-icon{width:50px;height:50px;border-radius:15px;background:rgba(13,37,128,0.7);display:flex;align-items:center;justify-content:center;color:#00AEEF;font-size:22px;border:1px solid rgba(0,174,239,0.15);transition:background 0.15s}
+.action:hover .action-icon{background:rgba(0,174,239,0.2)}
+.action-label{font-size:10px;color:rgba(255,255,255,0.5);font-weight:500}
+.tx-list{padding:0 16px 14px;display:flex;flex-direction:column;gap:8px}
+.tx{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.05);border-radius:12px;cursor:pointer;transition:background 0.15s}
+.tx:hover{background:rgba(255,255,255,0.09)}
+.tx-avatar{width:38px;height:38px;border-radius:50%;background:#0D2580;display:flex;align-items:center;justify-content:center;color:#00AEEF;font-size:17px;flex-shrink:0}
+.tx-info{flex:1}
+.tx-name{font-size:13px;font-weight:600;color:#fff}
+.tx-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px}
+.tx-amt{font-size:13px;font-weight:700}
+.tx-amt.pos{color:#00C896}
+.tx-amt.neg{color:rgba(255,255,255,0.65)}
+
+/* ── SEND ── */
+.send-header{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;flex-shrink:0}
+.back-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:17px;border:none;flex-shrink:0;transition:background 0.15s}
+.back-btn:hover{background:rgba(255,255,255,0.15)}
+.send-title{font-size:17px;font-weight:700;color:#fff}
+.send-step{font-size:11px;color:#00AEEF;font-weight:600;margin-left:auto;background:rgba(0,174,239,0.12);padding:3px 10px;border-radius:50px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px 16px 16px}
+.contact{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:14px;border:1.5px solid transparent;transition:all 0.15s}
+.contact.sel{border-color:#00AEEF;background:rgba(0,174,239,0.08)}
+.contact:hover{background:rgba(255,255,255,0.05)}
+.c-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
+.c-name{font-size:11px;color:rgba(255,255,255,0.7);text-align:center;font-weight:600}
+.c-addr{font-size:10px;color:rgba(255,255,255,0.35);text-align:center}
+.amt-display{text-align:center;padding:16px 16px 10px;color:#fff}
+.amt-big{font-size:48px;font-weight:800;color:#fff;line-height:1}
+.amt-usdc{font-size:14px;color:#00AEEF;font-weight:600;margin-top:6px}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);margin:0 16px;border-radius:16px;overflow:hidden}
+.key{padding:15px;text-align:center;font-size:20px;font-weight:600;color:#fff;cursor:pointer;background:#020B2D;transition:background 0.1s;user-select:none}
+.key:active{background:rgba(0,174,239,0.18)}
+.key.del{color:#00AEEF}
+.ph-btn{margin:10px 16px 0;padding:14px;border-radius:50px;border:none;font-size:14px;font-weight:700;cursor:pointer;width:calc(100% - 32px);font-family:inherit;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.ph-btn.primary{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff}
+.ph-btn.primary:hover{opacity:0.88}
+.ph-btn.green{background:linear-gradient(135deg,#16a34a,#00C896);color:#fff}
+.ph-btn.outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.ph-btn.outline:hover{background:rgba(255,255,255,0.06)}
+.confirm-box{margin:8px 16px;background:rgba(255,255,255,0.05);border-radius:16px;padding:14px}
+.cf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);font-size:13px}
+.cf-row:last-child{border-bottom:none}
+.cf-label{color:rgba(255,255,255,0.45)}
+.cf-val{color:#fff;font-weight:600}
+.cf-val.cyan{color:#00AEEF}
+.cf-val.green{color:#00C896}
+.success-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center}
+.success-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#00C896);display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;margin-bottom:20px;box-shadow:0 0 32px rgba(34,212,94,0.4)}
+.success-title{font-size:24px;font-weight:800;color:#fff;margin-bottom:8px}
+.success-sub{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7}
+
+/* ── RECEIVE / QR ── */
+.qr-box{margin:10px 16px;background:rgba(255,255,255,0.97);border-radius:20px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.qr-svg{width:160px;height:160px}
+.qr-user{font-size:14px;font-weight:700;color:#020B2D}
+.qr-addr{font-size:11px;color:#666;text-align:center}
+.share-row{display:flex;gap:8px;padding:8px 16px;flex-wrap:wrap}
+.share-btn{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:10px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;white-space:nowrap;transition:background 0.15s}
+.share-btn:hover{background:rgba(0,174,239,0.15);border-color:rgba(0,174,239,0.3)}
+.receive-opts{display:flex;flex-direction:column;gap:8px;padding:4px 16px 12px}
+.recv-opt{display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,0.05);border-radius:12px;font-size:13px;color:rgba(255,255,255,0.7)}
+.recv-opt i{font-size:18px;color:#00AEEF;width:28px;flex-shrink:0}
+.recv-opt strong{color:#fff;display:block;font-size:12px}
+
+/* ── MARKETPLACE ── */
+.search-bar{margin:4px 16px 10px;background:rgba(255,255,255,0.06);border-radius:10px;display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,0.06);transition:border-color 0.2s;cursor:pointer}
+.search-bar:hover{border-color:rgba(0,174,239,0.2)}
+.search-bar i{font-size:16px;color:rgba(255,255,255,0.35)}
+.search-bar span{font-size:13px;color:rgba(255,255,255,0.28)}
+.cat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 16px 12px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 6px;background:rgba(255,255,255,0.05);border-radius:14px;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.cat:hover{background:rgba(0,174,239,0.1);border-color:rgba(0,174,239,0.2)}
+.cat i{font-size:22px;color:#00AEEF}
+.cat-name{font-size:10px;color:rgba(255,255,255,0.6);font-weight:500;text-align:center}
+.merchant-list{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px}
+.merchant{display:flex;align-items:center;gap:10px;padding:11px 12px;background:rgba(255,255,255,0.05);border-radius:12px;cursor:pointer;transition:background 0.15s;border:1px solid transparent}
+.merchant:hover{background:rgba(255,255,255,0.09);border-color:rgba(0,174,239,0.15)}
+.m-icon{width:40px;height:40px;border-radius:11px;background:#0D2580;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.m-info{flex:1}
+.m-name{font-size:13px;font-weight:600;color:#fff}
+.m-desc{font-size:11px;color:rgba(255,255,255,0.4)}
+.m-price{font-size:13px;font-weight:700;color:#00AEEF;white-space:nowrap}
+
+/* ── CASH OUT ── */
+.co-options{display:flex;flex-direction:column;gap:8px;padding:4px 16px 12px}
+.co-opt{display:flex;align-items:center;gap:12px;padding:13px;background:rgba(255,255,255,0.05);border-radius:14px;cursor:pointer;border:1.5px solid transparent;transition:all 0.15s}
+.co-opt.sel{border-color:#00AEEF;background:rgba(0,174,239,0.08)}
+.co-opt:hover:not(.sel){background:rgba(255,255,255,0.08)}
+.co-icon{width:42px;height:42px;border-radius:12px;background:#0D2580;display:flex;align-items:center;justify-content:center;font-size:20px;color:#00AEEF;flex-shrink:0}
+.co-info{flex:1}
+.co-name{font-size:13px;font-weight:600;color:#fff}
+.co-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.co-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:50px;background:rgba(0,174,239,0.15);color:#00AEEF;white-space:nowrap}
+.amt-slider{padding:0 16px 12px}
+.slider-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}
+.slider-label span{color:rgba(255,255,255,0.45)}
+.slider-label strong{color:#00AEEF;font-size:15px}
+input[type=range]{width:100%;accent-color:#00AEEF;height:4px}
+.rate-info{margin:0 16px 8px;padding:10px 12px;background:rgba(0,174,239,0.08);border:0.5px solid rgba(0,174,239,0.25);border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+.rate-info span{font-size:12px;color:rgba(255,255,255,0.45)}
+.rate-info strong{font-size:13px;color:#00C896;font-weight:700}
+
+/* ── HISTORY ── */
+.history-filter{display:flex;gap:6px;padding:4px 16px 12px;overflow-x:auto}
+.hf-btn{background:rgba(255,255,255,0.06);border:none;border-radius:50px;padding:7px 14px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.15s}
+.hf-btn.on{background:#0A1F6E;color:#fff;border:1px solid rgba(0,174,239,0.3)}
+.history-group{padding:0 16px 4px}
+.hg-date{font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.history-tx{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.06)}
+.history-tx:last-child{border-bottom:none}
+.htx-icon{width:36px;height:36px;border-radius:50%;background:#0D2580;display:flex;align-items:center;justify-content:center;color:#00AEEF;font-size:16px;flex-shrink:0}
+.htx-info{flex:1}
+.htx-name{font-size:13px;font-weight:600;color:#fff}
+.htx-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px}
+.htx-right{text-align:right}
+.htx-amt{font-size:13px;font-weight:700}
+.htx-status{font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px}
+
+/* ── PROFILE ── */
+.profile-hero{display:flex;flex-direction:column;align-items:center;padding:16px 20px 20px}
+.profile-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#0A1F6E,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#fff;margin-bottom:10px;position:relative}
+.profile-badge{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-radius:50%;background:#00C896;border:2px solid #020B2D;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff}
+.profile-name{font-size:17px;font-weight:800;color:#fff;margin-bottom:2px}
+.profile-handle{font-size:12px;color:#00AEEF;margin-bottom:4px}
+.profile-since{font-size:11px;color:rgba(255,255,255,0.35)}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border-radius:14px;margin:0 16px 16px;overflow:hidden}
+.pstat{padding:12px 8px;text-align:center;background:#020B2D}
+.pstat-num{font-size:16px;font-weight:800;color:#fff}
+.pstat-label{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+.settings-list{display:flex;flex-direction:column;padding:0 16px;gap:2px}
+.setting-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer}
+.setting-item:last-child{border-bottom:none}
+.setting-icon{width:34px;height:34px;border-radius:10px;background:rgba(13,37,128,0.7);display:flex;align-items:center;justify-content:center;color:#00AEEF;font-size:17px;flex-shrink:0}
+.setting-info{flex:1}
+.setting-name{font-size:13px;font-weight:600;color:#fff}
+.setting-desc{font-size:11px;color:rgba(255,255,255,0.35);margin-top:1px}
+.setting-arrow{color:rgba(255,255,255,0.3);font-size:16px}
+.setting-toggle{width:36px;height:20px;background:#00C896;border-radius:50px;position:relative;cursor:pointer;flex-shrink:0}
+.setting-toggle::after{content:'';position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff}
+.logout-btn{margin:12px 16px 0;padding:13px;background:rgba(255,75,85,0.1);border:1px solid rgba(255,75,85,0.25);color:#FF4C6A;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100%-32px);transition:all 0.15s}
+.logout-btn:hover{background:rgba(255,75,85,0.18)}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Tchotcho<em>Pay</em> — App Preview</h1>
+  <p>Interactive mobile prototype · 6 screens · Click to explore</p>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="go('home')"><i class="ti ti-home"></i> Wallet</button>
+  <button class="tab" onclick="go('send')"><i class="ti ti-send"></i> Send</button>
+  <button class="tab" onclick="go('receive')"><i class="ti ti-qrcode"></i> Receive</button>
+  <button class="tab" onclick="go('market')"><i class="ti ti-shopping-cart"></i> Marketplace</button>
+  <button class="tab" onclick="go('cashout')"><i class="ti ti-cash"></i> Cash Out</button>
+  <button class="tab" onclick="go('history')"><i class="ti ti-clock"></i> History</button>
+  <button class="tab" onclick="go('profile')"><i class="ti ti-user"></i> Profile</button>
+</div>
+
+<div class="phone">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span><i class="ti ti-wifi"></i>&nbsp;<i class="ti ti-battery-2"></i></span>
+  </div>
+
+  <!-- ═══ HOME ═══ -->
+  <div class="screen on" id="s-home">
+    <div class="ph-header">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.4)">Good morning,</div>
+          <div class="ph-title">Marie J. 👋</div>
+        </div>
+        <div style="position:relative">
+          <div style="width:42px;height:42px;border-radius:50%;background:#0D2580;display:flex;align-items:center;justify-content:center;color:#00AEEF;font-size:19px;cursor:pointer" onclick="go('profile')"><i class="ti ti-bell"></i></div>
+          <div style="position:absolute;top:0;right:0;width:10px;height:10px;border-radius:50%;background:#FF4C6A;border:2px solid #020B2D"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wallet-card">
+      <div class="wc-label">Tchotcho Wallet</div>
+      <div class="wc-balance">$250.00</div>
+      <div class="wc-usdc">250.00 USDC · Base Network</div>
+      <div class="wc-row">
+        <span>@marie.haiti</span>
+        <span style="color:#00C896">▲ +$100 today</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="action" onclick="go('send')">
+        <div class="action-icon"><i class="ti ti-send"></i></div>
+        <div class="action-label">Send</div>
+      </div>
+      <div class="action" onclick="go('receive')">
+        <div class="action-icon"><i class="ti ti-qrcode"></i></div>
+        <div class="action-label">Receive</div>
+      </div>
+      <div class="action" onclick="go('market')">
+        <div class="action-icon"><i class="ti ti-shopping-cart"></i></div>
+        <div class="action-label">Shop</div>
+      </div>
+      <div class="action" onclick="go('cashout')">
+        <div class="action-icon"><i class="ti ti-cash"></i></div>
+        <div class="action-label">Cash Out</div>
+      </div>
+    </div>
+
+    <!-- Mini chart bar -->
+    <div style="margin:0 16px 14px;padding:12px;background:rgba(255,255,255,0.04);border-radius:14px;border:0.5px solid rgba(0,174,239,0.12)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span style="font-size:11px;font-weight:600;color:#fff">Monthly activity</span>
+        <span style="font-size:10px;color:#00AEEF">June 2026</span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:5px;height:40px">
+        <div style="flex:1;background:rgba(0,174,239,0.25);border-radius:3px;height:55%"></div>
+        <div style="flex:1;background:rgba(0,174,239,0.25);border-radius:3px;height:70%"></div>
+        <div style="flex:1;background:rgba(0,174,239,0.25);border-radius:3px;height:45%"></div>
+        <div style="flex:1;background:rgba(0,174,239,0.25);border-radius:3px;height:80%"></div>
+        <div style="flex:1;background:rgba(0,174,239,0.3);border-radius:3px;height:60%"></div>
+        <div style="flex:1;background:rgba(0,174,239,0.3);border-radius:3px;height:90%"></div>
+        <div style="flex:1;background:#00AEEF;border-radius:3px;height:100%"></div>
+      </div>
+    </div>
+
+    <div class="ph-section">Recent activity</div>
+    <div class="tx-list">
+      <div class="tx" onclick="go('history')">
+        <div class="tx-avatar"><i class="ti ti-user"></i></div>
+        <div class="tx-info">
+          <div class="tx-name">John Francois</div>
+          <div class="tx-desc">Received · 2 min ago</div>
+        </div>
+        <div class="tx-amt pos">+$100</div>
+      </div>
+      <div class="tx" onclick="go('history')">
+        <div class="tx-avatar"><i class="ti ti-bolt"></i></div>
+        <div class="tx-info">
+          <div class="tx-name">Electricité d'Haïti</div>
+          <div class="tx-desc">Electricity bill · Yesterday</div>
+        </div>
+        <div class="tx-amt neg">-$18</div>
+      </div>
+      <div class="tx" onclick="go('history')">
+        <div class="tx-avatar"><i class="ti ti-device-mobile"></i></div>
+        <div class="tx-info">
+          <div class="tx-name">Digicel Top-up</div>
+          <div class="tx-desc">Phone recharge · 2 days ago</div>
+        </div>
+        <div class="tx-amt neg">-$5</div>
+      </div>
+    </div>
+
+    <div class="bnav">
+      <div class="bni on" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ SEND ═══ -->
+  <div class="screen" id="s-send">
+    <!-- Step 1 -->
+    <div id="ss1">
+      <div class="send-header">
+        <button class="back-btn" onclick="go('home')"><i class="ti ti-arrow-left"></i></button>
+        <span class="send-title">Send Money</span>
+        <span class="send-step">1 / 3</span>
+      </div>
+      <div style="padding:0 16px 10px;font-size:12px;color:rgba(255,255,255,0.4)">Select recipient</div>
+      <div class="contact-grid">
+        <div class="contact sel" onclick="pickContact(this,'Marie J.','@marie.haiti')">
+          <div class="c-avatar" style="background:#0D2580">MJ</div>
+          <div class="c-name">Marie J.</div>
+          <div class="c-addr">@marie.haiti</div>
+        </div>
+        <div class="contact" onclick="pickContact(this,'Jean Pierre','@jean.509')">
+          <div class="c-avatar" style="background:#1a3a6e">JP</div>
+          <div class="c-name">Jean Pierre</div>
+          <div class="c-addr">@jean.509</div>
+        </div>
+        <div class="contact" onclick="pickContact(this,'Rose Cajuste','@rose.cap')">
+          <div class="c-avatar" style="background:#0e4d7a">RC</div>
+          <div class="c-name">Rose C.</div>
+          <div class="c-addr">@rose.cap</div>
+        </div>
+        <div class="contact" onclick="pickContact(this,'Claudine M.','@claudine')">
+          <div class="c-avatar" style="background:#2d1b69">CM</div>
+          <div class="c-name">Claudine M.</div>
+          <div class="c-addr">@claudine</div>
+        </div>
+        <div class="contact" onclick="pickContact(this,'Paul Duval','+509 3821')">
+          <div class="c-avatar" style="background:#1a4d2e">PD</div>
+          <div class="c-name">Paul D.</div>
+          <div class="c-addr">+509 3821</div>
+        </div>
+        <div class="contact" style="opacity:0.5;cursor:default">
+          <div class="c-avatar" style="background:#1a1a2e"><i class="ti ti-plus" style="font-size:18px;color:#8FA8CC"></i></div>
+          <div class="c-name">Add new</div>
+          <div class="c-addr">contact</div>
+        </div>
+      </div>
+      <button class="ph-btn primary" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="ss2" style="display:none;flex-direction:column">
+      <div class="send-header">
+        <button class="back-btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i></button>
+        <span class="send-title">Enter Amount</span>
+        <span class="send-step">2 / 3</span>
+      </div>
+      <div class="amt-display">
+        <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:8px">To <span id="recv-name" style="color:#00AEEF;font-weight:700">Marie J.</span></div>
+        <div class="amt-big">$<span id="amt-val">0</span></div>
+        <div class="amt-usdc"><span id="amt-usdc">0.00</span> USDC</div>
+      </div>
+      <div class="numpad">
+        <div class="key" onclick="tap('1')">1</div><div class="key" onclick="tap('2')">2</div><div class="key" onclick="tap('3')">3</div>
+        <div class="key" onclick="tap('4')">4</div><div class="key" onclick="tap('5')">5</div><div class="key" onclick="tap('6')">6</div>
+        <div class="key" onclick="tap('7')">7</div><div class="key" onclick="tap('8')">8</div><div class="key" onclick="tap('9')">9</div>
+        <div class="key" onclick="tap('.')">.</div><div class="key" onclick="tap('0')">0</div>
+        <div class="key del" onclick="del()"><i class="ti ti-backspace"></i></div>
+      </div>
+      <button class="ph-btn primary" style="margin-top:12px" onclick="goStep(3)">Review Transfer <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="ss3" style="display:none;flex-direction:column">
+      <div class="send-header">
+        <button class="back-btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i></button>
+        <span class="send-title">Confirm Send</span>
+        <span class="send-step">3 / 3</span>
+      </div>
+      <div class="confirm-box">
+        <div class="cf-row"><span class="cf-label">To</span><span class="cf-val" id="cf-to">Marie J.</span></div>
+        <div class="cf-row"><span class="cf-label">Handle</span><span class="cf-val" id="cf-handle">@marie.haiti</span></div>
+        <div class="cf-row"><span class="cf-label">Amount (USDC)</span><span class="cf-val cyan" id="cf-amt">$0.00</span></div>
+        <div class="cf-row"><span class="cf-label">Network fee</span><span class="cf-val green">$0.00 (free)</span></div>
+        <div class="cf-row"><span class="cf-label">Arrives</span><span class="cf-val green">Instantly ⚡</span></div>
+        <div class="cf-row"><span class="cf-label">Total deducted</span><span class="cf-val" id="cf-total">$0.00</span></div>
+      </div>
+      <button class="ph-btn green" onclick="goSendDone()"><i class="ti ti-check"></i> Confirm &amp; Send</button>
+      <button class="ph-btn outline" style="margin-top:6px" onclick="goStep(2)"><i class="ti ti-edit"></i> Edit Amount</button>
+    </div>
+
+    <!-- Done -->
+    <div id="ss-done" style="display:none">
+      <div class="success-screen">
+        <div class="success-icon"><i class="ti ti-check"></i></div>
+        <div class="success-title">Money Sent! 🎉</div>
+        <div class="success-sub" id="ss-done-msg">Sent successfully via<br>Base Network</div>
+        <div style="background:rgba(34,212,94,0.08);border:1px solid rgba(34,212,94,0.2);border-radius:12px;padding:12px 20px;margin-top:20px;font-size:12px;color:#00C896;font-weight:600">
+          ✓ Transaction on Base blockchain
+        </div>
+        <button class="ph-btn primary" style="margin-top:20px" onclick="go('send')"><i class="ti ti-send"></i> Send Another</button>
+        <button class="ph-btn outline" style="margin-top:8px" onclick="go('home')"><i class="ti ti-home"></i> Back to Wallet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RECEIVE ═══ -->
+  <div class="screen" id="s-receive">
+    <div class="send-header">
+      <button class="back-btn" onclick="go('home')"><i class="ti ti-arrow-left"></i></button>
+      <span class="send-title">Receive Money</span>
+    </div>
+
+    <div class="qr-box">
+      <svg class="qr-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="160" height="160" fill="white"/>
+        <!-- QR corner squares -->
+        <rect x="10" y="10" width="44" height="44" rx="4" fill="#020B2D"/>
+        <rect x="16" y="16" width="32" height="32" rx="2" fill="white"/>
+        <rect x="22" y="22" width="20" height="20" rx="1" fill="#020B2D"/>
+        <rect x="106" y="10" width="44" height="44" rx="4" fill="#020B2D"/>
+        <rect x="112" y="16" width="32" height="32" rx="2" fill="white"/>
+        <rect x="118" y="22" width="20" height="20" rx="1" fill="#020B2D"/>
+        <rect x="10" y="106" width="44" height="44" rx="4" fill="#020B2D"/>
+        <rect x="16" y="112" width="32" height="32" rx="2" fill="white"/>
+        <rect x="22" y="118" width="20" height="20" rx="1" fill="#020B2D"/>
+        <!-- QR data dots (representative) -->
+        <rect x="62" y="10" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="74" y="10" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="86" y="10" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="62" y="22" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="86" y="22" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="62" y="34" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="74" y="34" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="10" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="22" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="34" y="74" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="10" y="86" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="34" y="86" width="8" height="8" rx="1" fill="#020B2D"/>
+        <!-- center logo area -->
+        <rect x="64" y="64" width="32" height="32" rx="6" fill="#020B2D"/>
+        <rect x="68" y="68" width="24" height="24" rx="4" fill="#00AEEF"/>
+        <!-- More dots -->
+        <rect x="62" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="106" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="118" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="130" y="62" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="106" y="74" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="130" y="74" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="118" y="86" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="62" y="106" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="74" y="118" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="86" y="106" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="98" y="118" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="110" y="106" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="62" y="130" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="86" y="130" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="110" y="130" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="122" y="118" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="134" y="130" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="74" y="74" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="98" y="74" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="74" y="98" width="8" height="8" rx="1" fill="#020B2D"/>
+        <rect x="98" y="98" width="8" height="8" rx="1" fill="#020B2D"/>
+      </svg>
+      <div class="qr-user">@marie.haiti</div>
+      <div class="qr-addr">0x3F2...8e1a · Base Network</div>
+    </div>
+
+    <div class="share-row">
+      <button class="share-btn"><i class="ti ti-copy" style="font-size:14px"></i> Copy link</button>
+      <button class="share-btn"><i class="ti ti-share" style="font-size:14px"></i> Share</button>
+    </div>
+
+    <div style="padding:4px 16px 8px;font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em">Or receive by</div>
+    <div class="receive-opts">
+      <div class="recv-opt">
+        <i class="ti ti-phone"></i>
+        <div>
+          <strong>Phone number</strong>
+          +1 (305) 555-0142
+        </div>
+      </div>
+      <div class="recv-opt">
+        <i class="ti ti-at"></i>
+        <div>
+          <strong>Username</strong>
+          @marie.haiti
+        </div>
+      </div>
+    </div>
+
+    <div class="bnav">
+      <div class="bni" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ MARKETPLACE ═══ -->
+  <div class="screen" id="s-market">
+    <div class="ph-header">
+      <div class="ph-title">Marketplace</div>
+      <div class="ph-sub">Pay with USDC — no cash needed</div>
+    </div>
+    <div class="search-bar"><i class="ti ti-search"></i><span>Search merchants, services...</span></div>
+    <div class="ph-section">Categories</div>
+    <div class="cat-row">
+      <div class="cat"><i class="ti ti-tools-kitchen-2"></i><div class="cat-name">Food</div></div>
+      <div class="cat"><i class="ti ti-bolt"></i><div class="cat-name">Electricity</div></div>
+      <div class="cat"><i class="ti ti-device-mobile"></i><div class="cat-name">Phone</div></div>
+      <div class="cat"><i class="ti ti-school"></i><div class="cat-name">School</div></div>
+      <div class="cat"><i class="ti ti-bus"></i><div class="cat-name">Transport</div></div>
+      <div class="cat"><i class="ti ti-building-store"></i><div class="cat-name">Merchants</div></div>
+    </div>
+    <div class="ph-section">Featured merchants</div>
+    <div class="merchant-list">
+      <div class="merchant">
+        <div class="m-icon"><i class="ti ti-bolt"></i></div>
+        <div class="m-info"><div class="m-name">Electricité d'Haïti</div><div class="m-desc">Pay electricity bill instantly</div></div>
+        <div class="m-price">Pay now</div>
+      </div>
+      <div class="merchant">
+        <div class="m-icon"><i class="ti ti-device-mobile"></i></div>
+        <div class="m-info"><div class="m-name">Digicel Recharge</div><div class="m-desc">Top-up any number</div></div>
+        <div class="m-price">From $2</div>
+      </div>
+      <div class="merchant">
+        <div class="m-icon"><i class="ti ti-tools-kitchen-2"></i></div>
+        <div class="m-info"><div class="m-name">Mache Salomon</div><div class="m-desc">Fresh produce &amp; food</div></div>
+        <div class="m-price">Browse</div>
+      </div>
+      <div class="merchant">
+        <div class="m-icon"><i class="ti ti-school"></i></div>
+        <div class="m-info"><div class="m-name">Frais Scolaires</div><div class="m-desc">School fee payments</div></div>
+        <div class="m-price">Pay now</div>
+      </div>
+      <div class="merchant">
+        <div class="m-icon"><i class="ti ti-bus"></i></div>
+        <div class="m-info"><div class="m-name">TP Haïti Transport</div><div class="m-desc">Bus &amp; tap-tap tickets</div></div>
+        <div class="m-price">$0.50+</div>
+      </div>
+    </div>
+
+    <div class="bnav">
+      <div class="bni" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni on" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ CASH OUT ═══ -->
+  <div class="screen" id="s-cashout">
+    <div class="send-header">
+      <button class="back-btn" onclick="go('home')"><i class="ti ti-arrow-left"></i></button>
+      <span class="send-title">Cash Out</span>
+    </div>
+    <div style="padding:0 16px 10px;font-size:12px;color:rgba(255,255,255,0.4)">Withdraw or convert your USDC</div>
+
+    <div class="ph-section">Withdrawal method</div>
+    <div class="co-options">
+      <div class="co-opt sel" onclick="selCO(this)">
+        <div class="co-icon"><i class="ti ti-building-bank"></i></div>
+        <div class="co-info"><div class="co-name">Local bank account</div><div class="co-desc">BNC, Unibank, Sogebank, BPH</div></div>
+        <div class="co-tag">1% fee</div>
+      </div>
+      <div class="co-opt" onclick="selCO(this)">
+        <div class="co-icon"><i class="ti ti-users"></i></div>
+        <div class="co-info"><div class="co-name">Cash agent</div><div class="co-desc">Pick up at nearby agent location</div></div>
+        <div class="co-tag">1% fee</div>
+      </div>
+      <div class="co-opt" onclick="selCO(this)">
+        <div class="co-icon"><i class="ti ti-currency-dollar"></i></div>
+        <div class="co-info"><div class="co-name">Convert to HTG</div><div class="co-desc">Haitian gourdes to your account</div></div>
+        <div class="co-tag">FX spread</div>
+      </div>
+      <div class="co-opt" onclick="selCO(this)">
+        <div class="co-icon"><i class="ti ti-piggy-bank"></i></div>
+        <div class="co-info"><div class="co-name">Keep as USDC savings</div><div class="co-desc">Earn stable digital dollars</div></div>
+        <div class="co-tag" style="background:rgba(34,212,94,0.15);color:#00C896">Free</div>
+      </div>
+    </div>
+
+    <div class="amt-slider">
+      <div class="slider-label">
+        <span>Amount to withdraw</span>
+        <strong id="co-val">$125.00</strong>
+      </div>
+      <input type="range" min="1" max="250" value="125" step="1" oninput="updateCO(this.value)">
+    </div>
+    <div class="rate-info">
+      <span>1 USDC = </span>
+      <strong id="htg-rate">130.5 HTG</strong>
+    </div>
+    <button class="ph-btn primary" id="co-btn" style="margin-bottom:8px"><i class="ti ti-cash"></i> Withdraw $125.00</button>
+
+    <div class="bnav">
+      <div class="bni" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ HISTORY ═══ -->
+  <div class="screen" id="s-history">
+    <div class="ph-header">
+      <div class="ph-title">Transaction History</div>
+      <div class="ph-sub">All your activity in one place</div>
+    </div>
+
+    <div class="history-filter">
+      <button class="hf-btn on">All</button>
+      <button class="hf-btn">Sent</button>
+      <button class="hf-btn">Received</button>
+      <button class="hf-btn">Marketplace</button>
+      <button class="hf-btn">Cash Out</button>
+    </div>
+
+    <div style="flex:1;overflow-y:auto;padding-bottom:8px">
+      <div class="history-group">
+        <div class="hg-date">Today · June 23, 2026</div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-arrow-down-left"></i></div>
+          <div class="htx-info"><div class="htx-name">John Francois</div><div class="htx-desc">Received · @john.pay</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:#00C896">+$100.00</div><div class="htx-status">Completed</div></div>
+        </div>
+      </div>
+      <div class="history-group">
+        <div class="hg-date">Yesterday · June 22</div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-bolt"></i></div>
+          <div class="htx-info"><div class="htx-name">Electricité d'Haïti</div><div class="htx-desc">Electricity bill · Marketplace</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:rgba(255,255,255,0.7)">-$18.00</div><div class="htx-status">Completed</div></div>
+        </div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-device-mobile"></i></div>
+          <div class="htx-info"><div class="htx-name">Digicel Recharge</div><div class="htx-desc">Phone top-up · Marketplace</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:rgba(255,255,255,0.7)">-$5.00</div><div class="htx-status">Completed</div></div>
+        </div>
+      </div>
+      <div class="history-group">
+        <div class="hg-date">June 20</div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-arrow-up-right"></i></div>
+          <div class="htx-info"><div class="htx-name">Rose Cajuste</div><div class="htx-desc">Sent · @rose.cap</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:rgba(255,255,255,0.7)">-$50.00</div><div class="htx-status">Completed</div></div>
+        </div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-building-bank"></i></div>
+          <div class="htx-info"><div class="htx-name">Bank Withdrawal</div><div class="htx-desc">BNC · Cash out</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:rgba(255,255,255,0.7)">-$75.00</div><div class="htx-status">Completed</div></div>
+        </div>
+      </div>
+      <div class="history-group">
+        <div class="hg-date">June 18</div>
+        <div class="history-tx">
+          <div class="htx-icon"><i class="ti ti-arrow-down-left"></i></div>
+          <div class="htx-info"><div class="htx-name">Mom (Haiti)</div><div class="htx-desc">Received · @maman.marie</div></div>
+          <div class="htx-right"><div class="htx-amt" style="color:#00C896">+$200.00</div><div class="htx-status">Completed</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bnav">
+      <div class="bni" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni on" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ PROFILE ═══ -->
+  <div class="screen" id="s-profile">
+    <div class="profile-hero">
+      <div class="profile-avatar">
+        MJ
+        <div class="profile-badge">✓</div>
+      </div>
+      <div class="profile-name">Marie Jean</div>
+      <div class="profile-handle">@marie.haiti</div>
+      <div class="profile-since">Member since January 2026</div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="pstat"><div class="pstat-num">$4,820</div><div class="pstat-label">Total sent</div></div>
+      <div class="pstat"><div class="pstat-num">47</div><div class="pstat-label">Transfers</div></div>
+      <div class="pstat"><div class="pstat-num">$250</div><div class="pstat-label">Saved</div></div>
+    </div>
+
+    <div style="padding:0 16px;margin-bottom:8px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em">Account</div>
+    <div class="settings-list">
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-user"></i></div>
+        <div class="setting-info"><div class="setting-name">Personal Information</div><div class="setting-desc">Name, phone, email</div></div>
+        <i class="ti ti-chevron-right setting-arrow"></i>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="setting-info"><div class="setting-name">Identity Verified</div><div class="setting-desc">KYC approved ✓</div></div>
+        <i class="ti ti-chevron-right setting-arrow"></i>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-fingerprint"></i></div>
+        <div class="setting-info"><div class="setting-name">Biometric Login</div><div class="setting-desc">Fingerprint &amp; Face ID</div></div>
+        <div class="setting-toggle"></div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-bell"></i></div>
+        <div class="setting-info"><div class="setting-name">Notifications</div><div class="setting-desc">Transaction alerts</div></div>
+        <div class="setting-toggle"></div>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-language"></i></div>
+        <div class="setting-info"><div class="setting-name">Language</div><div class="setting-desc">English</div></div>
+        <i class="ti ti-chevron-right setting-arrow"></i>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon"><i class="ti ti-help"></i></div>
+        <div class="setting-info"><div class="setting-name">Help &amp; Support</div><div class="setting-desc">Contact us, FAQs</div></div>
+        <i class="ti ti-chevron-right setting-arrow"></i>
+      </div>
+    </div>
+    <button class="logout-btn" style="margin:12px 16px 4px;width:calc(100% - 32px)"><i class="ti ti-logout"></i> Sign Out</button>
+
+    <div class="bnav">
+      <div class="bni" onclick="go('home')"><i class="ti ti-home"></i><span>Home</span></div>
+      <div class="bni" onclick="go('send')"><i class="ti ti-send"></i><span>Send</span></div>
+      <div class="bni" onclick="go('market')"><i class="ti ti-shopping-cart"></i><span>Shop</span></div>
+      <div class="bni" onclick="go('history')"><i class="ti ti-clock"></i><span>History</span></div>
+      <div class="bni on" onclick="go('profile')"><i class="ti ti-user"></i><span>Profile</span></div>
+    </div>
+  </div>
+
+</div><!-- /phone -->
+
+<script>
+// ── STATE ──
+let amtStr = '0';
+let selName = 'Marie J.';
+let selHandle = '@marie.haiti';
+
+// ── NAVIGATION ──
+const screens = ['home','send','receive','market','cashout','history','profile'];
+function go(id) {
+  screens.forEach(s => {
+    document.getElementById('s-'+s).classList.toggle('on', s===id);
+  });
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('on', screens[i]===id);
+  });
+  if (id === 'send') resetSend();
+}
+
+// ── SEND FLOW ──
+function resetSend() {
+  ['ss1','ss2','ss3','ss-done'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = i===0 ? '' : 'none';
+  });
+  amtStr = '0';
+  updateAmtDisplay();
+}
+function goStep(n) {
+  document.getElementById('ss1').style.display = n===1 ? '' : 'none';
+  document.getElementById('ss2').style.display = n===2 ? 'flex' : 'none';
+  document.getElementById('ss3').style.display = n===3 ? 'flex' : 'none';
+  document.getElementById('ss-done').style.display = 'none';
+  if (n===2) { document.getElementById('recv-name').textContent = selName; }
+  if (n===3) {
+    const v = parseFloat(amtStr) || 0;
+    if (v <= 0) { goStep(2); return; }
+    document.getElementById('cf-to').textContent = selName;
+    document.getElementById('cf-handle').textContent = selHandle;
+    document.getElementById('cf-amt').textContent = '$' + v.toFixed(2);
+    document.getElementById('cf-total').textContent = '$' + v.toFixed(2);
+  }
+}
+function pickContact(el, name, handle) {
+  document.querySelectorAll('.contact').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  selName = name; selHandle = handle;
+}
+function tap(d) {
+  if (d==='.' && amtStr.includes('.')) return;
+  if (amtStr.length > 8) return;
+  if (amtStr==='0' && d!=='.') amtStr = d; else amtStr += d;
+  updateAmtDisplay();
+}
+function del() {
+  amtStr = amtStr.length > 1 ? amtStr.slice(0,-1) : '0';
+  updateAmtDisplay();
+}
+function updateAmtDisplay() {
+  const v = parseFloat(amtStr) || 0;
+  document.getElementById('amt-val').textContent = amtStr;
+  document.getElementById('amt-usdc').textContent = v.toFixed(2);
+}
+function goSendDone() {
+  const v = parseFloat(amtStr) || 0;
+  document.getElementById('ss3').style.display = 'none';
+  document.getElementById('ss-done').style.display = '';
+  document.getElementById('ss-done-msg').innerHTML =
+    '<strong style="color:#fff;font-size:16px">$' + v.toFixed(2) + '</strong> sent to ' + selName + '<br><span style="color:rgba(255,255,255,0.5)">Arrived instantly on Base Network</span>';
+}
+
+// ── CASH OUT ──
+function selCO(el) {
+  document.querySelectorAll('.co-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function updateCO(v) {
+  document.getElementById('co-val').textContent = '$' + parseFloat(v).toFixed(2);
+  document.getElementById('co-btn').innerHTML = '<i class="ti ti-cash"></i> Withdraw $' + parseFloat(v).toFixed(2);
+  document.getElementById('htg-rate').textContent = (parseFloat(v) * 130.5).toFixed(0) + ' HTG';
+}
+
+// ── HISTORY FILTER TABS ──
+document.querySelectorAll('.hf-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.hf-btn').forEach(b => b.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+</script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

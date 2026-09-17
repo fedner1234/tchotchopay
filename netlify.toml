@@ -1,0 +1,77 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# ── Security Headers (all pages) ─────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking — nobody can embed tchotchopay.com in an iframe
+    X-Frame-Options = "DENY"
+
+    # Stop browsers from guessing file types (MIME sniffing attacks)
+    X-Content-Type-Options = "nosniff"
+
+    # Only send origin in referrer, never full URL with query params
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Force HTTPS for 1 year — browsers will refuse HTTP connections
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Block XSS in older browsers
+    X-XSS-Protection = "1; mode=block"
+
+    # Content Security Policy — whitelist exactly what can load on our pages
+    # Blocks malicious scripts, injected iframes, and data exfiltration
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' cdn.jsdelivr.net cdnjs.cloudflare.com challenges.cloudflare.com connect.facebook.net https://js.stripe.com https://www.googletagmanager.com https://esm.sh https://cdn.withpersona.com https://cdn.plaid.com;
+      style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com;
+      font-src 'self' fonts.gstatic.com cdn.jsdelivr.net data:;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://api.tchotchopay.com https://*.netlify.app https://*.reloadly.com https://auth.reloadly.com https://api.stripe.com https://m.stripe.com https://www.google-analytics.com https://region1.google-analytics.com https://api.cdp.coinbase.com https://api.developer.coinbase.com https://esm.sh https://sepolia.base.org https://sepolia.basescan.org https://keys.coinbase.com wss://keys.coinbase.com https://*.base.org https://withpersona.com https://*.withpersona.com https://production.plaid.com https://sandbox.plaid.com https://*.plaid.com https://challenges.cloudflare.com;
+      frame-src https://js.stripe.com https://hooks.stripe.com https://keys.coinbase.com https://withpersona.com https://*.withpersona.com https://*.plaid.com https://challenges.cloudflare.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://api.netlify.com;
+      upgrade-insecure-requests;
+    """
+
+    # Disable browser features we don't use — reduces attack surface
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), accelerometer=(), gyroscope=()"
+
+    # Prevent cross-origin attacks from other sites reading our responses
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# ── API Function Headers ──────────────────────────────────────────
+# Note: CORS headers are set inside each function to avoid duplicates.
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    # No caching of API responses — always fresh
+    Cache-Control = "no-store, no-cache, must-revalidate"
+
+# ── Static Asset Caching ──────────────────────────────────────────
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

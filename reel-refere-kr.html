@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>TchotchoPay — Refere yon Zanmi</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:#000;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif}
+.reel-wrap{position:relative;width:390px;height:844px;overflow:hidden;background:#020B2D}
+
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:96px 24px 200px;opacity:0;transition:opacity 0.35s ease;pointer-events:none;background:linear-gradient(175deg,#020B2D 0%,#0A1F6E 55%,#020B2D 100%)}
+.scene.active{opacity:1}
+.scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 280px 200px at 50% 42%,rgba(247,183,49,0.06) 0%,transparent 70%);pointer-events:none}
+
+.tag{font-size:11px;letter-spacing:2.8px;color:#F7B731;text-transform:uppercase;margin-bottom:10px;text-align:center;font-weight:700}
+.headline{font-size:30px;font-weight:800;color:#fff;text-align:center;line-height:1.22;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.sub{font-size:15px;color:rgba(255,255,255,0.72);text-align:center;line-height:1.55}
+.green{color:#00C896}.cyan{color:#00AEEF}.gold{color:#F7B731}
+
+.card{background:rgba(10,31,110,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px 18px;width:100%;margin-top:12px}
+
+/* S1 hook */
+.money-icon{font-size:68px;margin-bottom:12px;animation:bounce 1.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+.reward-badge{background:linear-gradient(135deg,rgba(247,183,49,0.18),rgba(247,183,49,0.06));border:2px solid rgba(247,183,49,0.6);border-radius:20px;padding:18px 24px;text-align:center;margin-top:12px;width:100%;backdrop-filter:blur(6px)}
+.rwd-amt{font-size:52px;font-weight:800;color:#F7B731;line-height:1;text-shadow:0 0 25px rgba(247,183,49,0.3)}
+.rwd-label{font-size:15px;color:#fff;margin-top:6px;font-weight:600}
+.rwd-sub{font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px}
+
+/* S2 how it works */
+.how-list{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.how-item{display:flex;align-items:flex-start;gap:12px}
+.hnum{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#F7B731,#ff9f00);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#020B2D;flex-shrink:0;margin-top:2px}
+.ht-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.ht-sub{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.4}
+.how-div{width:2px;height:10px;background:rgba(255,255,255,0.08);margin-left:14px}
+
+/* S3 share */
+.share-card{background:rgba(10,31,110,0.88);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px;width:100%;margin-top:12px}
+.refcode-box{background:linear-gradient(135deg,rgba(247,183,49,0.15),rgba(247,183,49,0.05));border:1px solid rgba(247,183,49,0.35);border-radius:12px;padding:12px;text-align:center;margin-bottom:12px}
+.rc-label{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;font-weight:600;letter-spacing:.5px}
+.rc-val{font-size:26px;font-weight:800;color:#F7B731;letter-spacing:3px}
+.share-link{background:rgba(2,11,45,0.7);border-radius:10px;padding:10px 12px;font-size:12px;color:#00AEEF;font-family:monospace;margin-bottom:12px;word-break:break-all}
+.share-btns{display:flex;gap:8px}
+.sbtn{flex:1;padding:11px 6px;border-radius:11px;text-align:center;font-size:12px;font-weight:700}
+.sb-wa{background:rgba(37,211,102,0.15);border:1.5px solid rgba(37,211,102,0.5);color:#25d366}
+.sb-sms{background:rgba(0,174,239,0.12);border:1.5px solid rgba(0,174,239,0.4);color:#00AEEF}
+.sb-copy{background:rgba(247,183,49,0.12);border:1.5px solid rgba(247,183,49,0.4);color:#F7B731}
+
+/* S4 both win */
+.rwd-cards{display:flex;gap:10px;width:100%;margin-top:12px}
+.rwdc{flex:1;border-radius:16px;padding:14px 10px;text-align:center}
+.rwdc-you{background:linear-gradient(180deg,rgba(247,183,49,0.15),rgba(247,183,49,0.04));border:1.5px solid rgba(247,183,49,0.45)}
+.rwdc-fr{background:linear-gradient(180deg,rgba(0,200,150,0.12),rgba(0,200,150,0.03));border:1.5px solid rgba(0,200,150,0.4)}
+.rwdc-icon{font-size:30px;margin-bottom:7px}
+.rwdc-who{font-size:11px;font-weight:700;letter-spacing:.8px;margin-bottom:8px}
+.rwdc-you .rwdc-who{color:#F7B731}
+.rwdc-fr .rwdc-who{color:#00C896}
+.rwdc-amt{font-size:30px;font-weight:800;color:#fff;line-height:1;margin-bottom:4px}
+.rwdc-cond{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4}
+.total-box{background:rgba(10,31,110,0.85);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:12px;text-align:center;width:100%;margin-top:10px}
+.total-lbl{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:3px}
+.total-val{font-size:22px;font-weight:800;color:#F7B731}
+
+/* S5 calc */
+.calc-card{width:100%;margin-top:12px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;background:rgba(10,31,110,0.8);border-radius:12px;padding:12px 16px;margin-bottom:8px}
+.calc-lbl{font-size:14px;color:rgba(255,255,255,0.6)}
+.calc-val{font-size:16px;font-weight:700;color:#F7B731}
+.calc-total{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(247,183,49,0.15),rgba(247,183,49,0.06));border:1.5px solid rgba(247,183,49,0.4);border-radius:14px;padding:14px 16px;margin-top:4px}
+.calc-tlbl{font-size:14px;font-weight:700;color:#F7B731}
+.calc-tval{font-size:22px;font-weight:800;color:#F7B731}
+
+/* S6 CTA */
+.cta-box{background:linear-gradient(135deg,rgba(247,183,49,0.15),rgba(16,85,204,0.15));border:1.5px solid rgba(247,183,49,0.55);border-radius:20px;padding:20px;width:100%;text-align:center;margin-top:12px;backdrop-filter:blur(8px)}
+.cta-main{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-url{font-size:14px;color:#00AEEF;margin-bottom:14px}
+.cta-btn{background:linear-gradient(135deg,#F7B731,#ff9f00);border-radius:14px;padding:14px;font-size:16px;font-weight:700;color:#020B2D}
+
+/* IG Chrome */
+.ig-progress{position:absolute;top:48px;left:8px;right:8px;display:flex;gap:3px;z-index:300}
+.ig-seg{flex:1;height:2.5px;background:rgba(255,255,255,0.28);border-radius:2px;overflow:hidden}
+.ig-seg-fill{height:100%;background:#fff;width:0%;border-radius:2px}
+.ig-top{position:absolute;top:56px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:6px 14px 0;z-index:300}
+.ig-back{font-size:22px;color:#fff;opacity:.9;line-height:1}
+.ig-top-icons{display:flex;gap:16px;align-items:center}
+.ig-top-icon{font-size:19px;color:#fff;opacity:.88}
+.ig-bl{position:absolute;bottom:90px;left:12px;right:86px;z-index:300}
+.ig-profile-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.ig-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#F7B731,#ff9f00);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#020B2D;border:1.5px solid rgba(255,255,255,0.55);flex-shrink:0}
+.ig-uname{font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.6)}
+.ig-follow{font-size:12px;font-weight:700;color:#fff;border:1.5px solid rgba(255,255,255,0.75);border-radius:6px;padding:2px 9px;margin-left:2px}
+.ig-caption{font-size:13px;color:rgba(255,255,255,0.92);line-height:1.45;text-shadow:0 1px 4px rgba(0,0,0,0.5);margin-bottom:8px}
+.ig-music{display:flex;align-items:center;gap:5px}
+.ig-music-txt{font-size:12px;color:rgba(255,255,255,0.8)}
+.ig-actions{position:absolute;bottom:86px;right:10px;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:300}
+.ig-act{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ig-act-icon{font-size:28px;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5))}
+.ig-act-count{font-size:12px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
+.ig-disc{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#222,#444);border:3px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;animation:spin 4s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ig-nav{position:absolute;bottom:0;left:0;right:0;height:88px;background:rgba(0,0,0,0.92);display:flex;align-items:flex-start;justify-content:space-around;padding-top:14px;z-index:300;border-top:0.5px solid rgba(255,255,255,0.08)}
+.ig-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ig-nav-icon{font-size:22px;opacity:.75}
+.ig-nav-dot{width:4px;height:4px;border-radius:50%;background:#fff;margin-top:2px}
+
+#countdown{position:fixed;inset:0;background:rgba(2,11,45,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+#countdown .num{font-size:110px;font-weight:800;color:#F7B731;line-height:1}
+#countdown .hint{font-size:14px;color:rgba(255,255,255,0.5);margin-top:14px;text-align:center;line-height:1.65}
+#countdown .logo{font-size:20px;font-weight:700;color:#fff;margin-bottom:36px;letter-spacing:.5px}
+#countdown .logo span{color:#F7B731}
+</style>
+</head>
+<body>
+<div class="reel-wrap">
+
+  <!-- S1: Hook $10 -->
+  <div class="scene active" id="s1">
+    <div class="money-icon">💰</div>
+    <div class="tag">Pwogram Referans</div>
+    <div class="headline">Fè lajan ak<br>TchotchoPay</div>
+    <div class="reward-badge">
+      <div class="rwd-amt">$10</div>
+      <div class="rwd-label">Chak zanmi ou refere</div>
+      <div class="rwd-sub">Zanmi ou resevwa $5 tou ✅</div>
+    </div>
+  </div>
+
+  <!-- S2: Kòman sa travay -->
+  <div class="scene" id="s2">
+    <div class="tag">Trè fasil</div>
+    <div class="headline">3 etap pou<br>kòmanse genyen</div>
+    <div class="how-list">
+      <div class="how-item">
+        <div class="hnum">1</div>
+        <div><div class="ht-title">Pataje lyen ou</div><div class="ht-sub">Voye pa WhatsApp, SMS oswa rezo sosyal</div></div>
+      </div>
+      <div class="how-div"></div>
+      <div class="how-item">
+        <div class="hnum">2</div>
+        <div><div class="ht-title">Zanmi ou enskri</div><div class="ht-sub">Li kreye kont epi verifye idantite li</div></div>
+      </div>
+      <div class="how-div"></div>
+      <div class="how-item">
+        <div class="hnum">3</div>
+        <div><div class="ht-title">Tou de genyen</div><div class="ht-sub">Ou jwenn $10 USDC, li jwenn $5 USDC</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Pataje lyen -->
+  <div class="scene" id="s3">
+    <div class="tag">Pataje lyen ou</div>
+    <div class="headline">Yon klik,<br>yon zanmi</div>
+    <div class="share-card">
+      <div class="refcode-box">
+        <div class="rc-label">KÒD REFERANS OU</div>
+        <div class="rc-val">JEAN25</div>
+      </div>
+      <div class="share-link">tchotchopay.com/r/JEAN25</div>
+      <div class="share-btns">
+        <div class="sbtn sb-wa">📱 WhatsApp</div>
+        <div class="sbtn sb-sms">💬 SMS</div>
+        <div class="sbtn sb-copy">📋 Kopye</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: Tou de genyen -->
+  <div class="scene" id="s4">
+    <div class="tag">Tou de genyen</div>
+    <div class="headline">Rekonpans<br>pou toulede</div>
+    <div class="rwd-cards">
+      <div class="rwdc rwdc-you">
+        <div class="rwdc-icon">🤑</div>
+        <div class="rwdc-who">OU</div>
+        <div class="rwdc-amt">$10</div>
+        <div class="rwdc-cond">Chak zanmi ki enskri ak verifye</div>
+      </div>
+      <div class="rwdc rwdc-fr">
+        <div class="rwdc-icon">😊</div>
+        <div class="rwdc-who">ZANMI OU</div>
+        <div class="rwdc-amt">$5</div>
+        <div class="rwdc-cond">Bonis byenveni nan premye depo</div>
+      </div>
+    </div>
+    <div class="total-box">
+      <div class="total-lbl">Valè total pou 2 moun</div>
+      <div class="total-val">$15 USDC 💎</div>
+    </div>
+  </div>
+
+  <!-- S5: Kalkil -->
+  <div class="scene" id="s5">
+    <div class="tag">Kalkil Reyèl</div>
+    <div class="headline" style="font-size:26px">Refere zanmi,<br>ou genyen...</div>
+    <div class="calc-card">
+      <div class="calc-row"><span class="calc-lbl">1 zanmi refere</span><span class="calc-val">$10</span></div>
+      <div class="calc-row"><span class="calc-lbl">3 zanmi refere</span><span class="calc-val">$30</span></div>
+      <div class="calc-row"><span class="calc-lbl">5 zanmi refere</span><span class="calc-val">$50</span></div>
+      <div class="calc-total"><span class="calc-tlbl">Limit referans</span><span class="calc-tval">San limit 🚀</span></div>
+    </div>
+  </div>
+
+  <!-- S6: CTA -->
+  <div class="scene" id="s6">
+    <div class="tag">TchotchoPay</div>
+    <div class="headline" style="font-size:28px">Envite zanmi.<br><span class="gold">Genyen lajan.</span></div>
+    <div class="cta-box">
+      <div class="cta-main">Jwenn kòd referans ou →</div>
+      <div class="cta-url">tchotchopay.com/refer</div>
+      <div class="cta-btn">Kòmanse Genyen $10</div>
+    </div>
+  </div>
+
+  <!-- IG Chrome -->
+  <div class="ig-progress">
+    <div class="ig-seg"><div class="ig-seg-fill" id="f0"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f1"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f2"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f3"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f4"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f5"></div></div>
+  </div>
+  <div class="ig-top">
+    <div class="ig-back">←</div>
+    <div class="ig-top-icons"><span class="ig-top-icon">🔊</span><span class="ig-top-icon">⋯</span></div>
+  </div>
+  <div class="ig-bl">
+    <div class="ig-profile-row">
+      <div class="ig-av">T</div>
+      <span class="ig-uname">tchotchopay</span>
+      <span class="ig-follow">Suiv</span>
+    </div>
+    <div class="ig-caption"><strong>Refere yon zanmi, jwenn $10 USDC.</strong> Li jwenn $5 tou. San limit! 💰 #TchotchoPay #Referans #Ayiti</div>
+    <div class="ig-music"><span>🎵</span><span class="ig-music-txt">Son orijinal · tchotchopay</span></div>
+  </div>
+  <div class="ig-actions">
+    <div class="ig-act"><span class="ig-act-icon">🤍</span><span class="ig-act-count">6.7K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">💬</span><span class="ig-act-count">584</span></div>
+    <div class="ig-act"><span class="ig-act-icon">➤</span><span class="ig-act-count">2.3K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">🔖</span><span class="ig-act-count">1.5K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">⋯</span></div>
+    <div class="ig-disc">🎵</div>
+  </div>
+  <div class="ig-nav">
+    <div class="ig-nav-item"><span class="ig-nav-icon">🏠</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">🔍</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon" style="opacity:1">▶️</span><div class="ig-nav-dot"></div></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">❤️</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">👤</span></div>
+  </div>
+</div>
+
+<div id="countdown">
+  <div class="logo">Tchotcho<span>Pay</span></div>
+  <div class="num" id="cdNum">3</div>
+  <div class="hint">Prepare pou anrejistre<br>⌘+Shift+5 → Anrejistre Zòn Chwazi</div>
+</div>
+<script>
+const scenes=['s1','s2','s3','s4','s5','s6'];
+const durations=[5,5,5,6,5,4];
+let current=0,elapsed=0,timer=null;
+function showScene(i){scenes.forEach((s,idx)=>document.getElementById(s).classList.toggle('active',idx===i));for(let k=0;k<i;k++)document.getElementById('f'+k).style.width='100%';document.getElementById('f'+i).style.width='0%';current=i;elapsed=0;}
+function tick(){elapsed+=0.05;document.getElementById('f'+current).style.width=Math.min((elapsed/durations[current])*100,100)+'%';if(elapsed>=durations[current]){const next=current+1;if(next>=scenes.length){clearInterval(timer);return;}showScene(next);}}
+let count=3;const cdNum=document.getElementById('cdNum');const cdOverlay=document.getElementById('countdown');
+const cdTimer=setInterval(()=>{count--;if(count<=0){clearInterval(cdTimer);cdOverlay.style.display='none';showScene(0);timer=setInterval(tick,50);}else{cdNum.textContent=count;}},1000);
+</script>
+</body>
+</html>

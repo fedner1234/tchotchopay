@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1080px; height: 1920px;
+  background: #020B2D;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.glow {
+  position: absolute;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(0,174,239,0.18) 0%, transparent 70%);
+  top: 400px; left: 50%; transform: translateX(-50%);
+}
+.logo-area {
+  margin-top: 110px;
+  text-align: center;
+}
+.logo-text {
+  font-size: 72px; font-weight: 700; color: #fff; letter-spacing: -1px;
+}
+.logo-line {
+  width: 280px; height: 2px;
+  background: linear-gradient(90deg, transparent, #00C896, transparent);
+  margin: 12px auto;
+}
+.tag {
+  font-size: 28px; font-weight: 400; color: #00C896; letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.headline {
+  margin-top: 120px;
+  text-align: center;
+  font-size: 76px; font-weight: 700; color: #fff;
+  line-height: 1.1;
+}
+.headline span { color: #00C896; }
+.card {
+  margin-top: 80px;
+  width: 940px;
+  background: rgba(10,31,110,0.85);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 44px;
+  padding: 30px 60px;
+}
+.row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 38px 0;
+}
+.row + .row { border-top: 1px solid rgba(255,255,255,0.1); }
+.row-label { font-size: 44px; font-weight: 400; color: #8899BB; }
+.row-val { font-size: 50px; font-weight: 700; }
+.red { color: #FF6B6B; }
+.green { color: #00C896; }
+.sub {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 40px; color: rgba(200,215,240,0.75); font-weight: 400;
+}
+.url {
+  position: absolute;
+  bottom: 72px;
+  font-size: 30px; color: rgba(136,153,187,0.55); letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="logo-area">
+  <div class="logo-text">TchotchoPay</div>
+  <div class="logo-line"></div>
+  <div class="tag">Voye Lajan</div>
+</div>
+<div class="headline">Sispann peye<br>twop fre!<span>.</span></div>
+<div class="card">
+  <div class="row">
+    <span class="row-label">Western Union</span>
+    <span class="row-val red">-$8 fre</span>
+  </div>
+  <div class="row">
+    <span class="row-label">MoneyGram</span>
+    <span class="row-val red">-$6 fre</span>
+  </div>
+  <div class="row">
+    <span class="row-label">TchotchoPay</span>
+    <span class="row-val green">$1 selman ✓</span>
+  </div>
+</div>
+<div class="sub">Voye $100 bay fanmi Ayiti<br>pou $1 selman</div>
+<div class="url">tchotchopay.com</div>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TchotchoPay Reel — Fanmi ou ka peye tout bagay</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',system-ui,sans-serif;}
+
+/* ── Instagram Reels Shell (no side icons) ── */
+.player{position:relative;width:340px;height:604px;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.8);background:#000;}
+
+/* Progress bar */
+.progress-bar{position:absolute;top:8px;left:12px;right:12px;height:3px;z-index:60;display:flex;gap:3px;}
+.prog-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden;}
+.prog-seg .fill{height:100%;background:#fff;width:0%;}
+.prog-seg.done .fill{width:100%;}
+.prog-seg.active .fill{animation:fillBar var(--dur,4s) linear forwards;}
+@keyframes fillBar{from{width:0%}to{width:100%}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+@keyframes checkDraw{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+
+/* Top bar */
+.player-top{position:absolute;top:18px;left:0;right:0;z-index:50;padding:0 16px;display:flex;align-items:center;justify-content:space-between;}
+.handle{color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.handle-av{width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:linear-gradient(135deg,#0a1f6e,#00c8ff);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;}
+.follow-btn{border:1.5px solid #fff;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;background:transparent;}
+
+/* Bottom bar */
+.player-bottom{position:absolute;bottom:0;left:0;right:0;z-index:50;padding:12px 16px 18px;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 100%);}
+.caption{color:#fff;font-size:12px;line-height:1.4;margin-bottom:7px;}
+.caption strong{font-weight:700;}
+.audio-row{display:flex;align-items:center;gap:8px;color:#fff;font-size:10px;}
+.audio-disc{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#0a1f6e,#00c8ff);animation:spin 3s linear infinite;}
+
+/* Nav dots */
+.nav-dots{position:absolute;bottom:68px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:60;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;}
+.dot.on{background:#fff;width:18px;border-radius:3px;}
+
+/* Slides container */
+.slides{position:absolute;inset:0;z-index:10;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;}
+.slide.on{opacity:1;}
+
+/* ═══ SLIDE 1 — Hook ═══ */
+.s1{background:linear-gradient(160deg,#060c1a 0%,#0a1f6e 100%);}
+.s1-emoji{font-size:52px;margin-bottom:16px;animation:pop .5s ease both;}
+.s1-title{font-size:27px;font-weight:900;color:#fff;text-align:center;line-height:1.2;padding:0 22px;animation:fadeUp .5s .1s ease both;}
+.s1-title span{color:#00c8ff;}
+.s1-sub{font-size:13px;color:rgba(255,255,255,.6);text-align:center;margin-top:12px;padding:0 32px;line-height:1.5;animation:fadeUp .5s .2s ease both;}
+.s1-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px;padding:0 24px;animation:fadeUp .5s .3s ease both;}
+.s1-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:7px 14px;font-size:11px;color:#fff;font-weight:600;}
+
+/* ═══ PHONE FRAME (shared) ═══ */
+.phone-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+.phone-frame{width:200px;height:350px;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.65);}
+.app-header{background:linear-gradient(135deg,#0a1f6e,#0052ff);padding:11px 14px 10px;display:flex;align-items:center;gap:8px;}
+.app-logo{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;flex-shrink:0;}
+.app-title{font-size:11px;color:#fff;font-weight:700;}
+.app-sub-title{font-size:9px;color:rgba(255,255,255,.6);margin-top:1px;}
+.app-body{padding:12px 14px;background:#fff;flex:1;}
+.pay-icon-row{text-align:center;margin-bottom:10px;}
+.pay-icon{font-size:32px;}
+.pay-category{font-size:9px;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;text-align:center;margin-bottom:10px;}
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:10px;}
+.pay-row:last-of-type{border-bottom:none;}
+.pay-row .pl{color:#666;}
+.pay-row .pv{font-weight:700;color:#000;}
+.pay-success-box{margin-top:10px;background:#e8fff4;border-radius:10px;padding:10px;text-align:center;}
+.pay-success-box .ps-lbl{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;}
+.pay-success-box .ps-amt{font-size:20px;font-weight:900;color:#00a86b;margin-top:2px;}
+.pay-success-box .ps-sub{font-size:9px;color:#666;margin-top:2px;}
+.pay-btn{margin:10px 0 0;background:linear-gradient(135deg,#0052ff,#0a1f6e);color:#fff;font-weight:700;font-size:11px;border-radius:8px;padding:10px;text-align:center;}
+.success-ring{margin:8px auto 6px;width:36px;height:36px;position:relative;}
+.success-ring svg{width:36px;height:36px;}
+.success-ring circle{fill:none;stroke:#00a86b;stroke-width:3;}
+.success-ring path{fill:none;stroke:#00a86b;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;animation:checkDraw .5s .3s ease both;}
+
+/* slide bottom label */
+.slide-caption{margin-top:16px;text-align:center;animation:fadeUp .4s .1s ease both;}
+.slide-caption .sc-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.slide-caption .sc-text{font-size:15px;font-weight:800;color:#fff;line-height:1.3;padding:0 16px;}
+
+/* slide bg colors */
+.s2{background:linear-gradient(160deg,#0d1117 0%,#1a0a00 100%);}
+.s2 .sc-tag{color:#ffa500;}
+.s3{background:linear-gradient(160deg,#0d1117 0%,#001a10 100%);}
+.s3 .sc-tag{color:#00e676;}
+.s4{background:linear-gradient(160deg,#0d1117 0%,#1a001a 100%);}
+.s4 .sc-tag{color:#c084fc;}
+.s5{background:linear-gradient(160deg,#0d1117 0%,#001a1a 100%);}
+.s5 .sc-tag{color:#00c8ff;}
+
+/* ═══ SLIDE 6 — Summary ═══ */
+.s6{background:linear-gradient(160deg,#060c1a 0%,#0a1f6e 100%);}
+.s6-title{font-size:22px;font-weight:900;color:#fff;text-align:center;line-height:1.25;padding:0 20px;animation:fadeUp .5s ease both;}
+.s6-title span{color:#00c8ff;}
+.s6-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding:0 24px;animation:fadeUp .5s .1s ease both;}
+.s6-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;text-align:center;}
+.s6-card .sc-emoji{font-size:22px;margin-bottom:6px;}
+.s6-card .sc-name{font-size:10px;font-weight:700;color:rgba(255,255,255,.7);}
+.s6-card .sc-status{font-size:9px;color:#00e676;font-weight:600;margin-top:3px;}
+.s6-sub{font-size:12px;color:rgba(255,255,255,.5);text-align:center;margin-top:16px;padding:0 28px;line-height:1.5;animation:fadeUp .5s .2s ease both;}
+
+/* ═══ SLIDE 7 — CTA ═══ */
+.s7{background:linear-gradient(160deg,#0a1f6e 0%,#001233 100%);}
+.s7-icon{width:60px;height:60px;border-radius:16px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;margin-bottom:18px;animation:pop .5s ease both;}
+.s7-title{font-size:24px;font-weight:900;color:#fff;text-align:center;line-height:1.2;padding:0 20px;animation:fadeUp .5s .1s ease both;}
+.s7-sub{font-size:12px;color:rgba(255,255,255,.6);text-align:center;margin-top:10px;padding:0 28px;line-height:1.5;animation:fadeUp .5s .15s ease both;}
+.s7-btn{margin-top:22px;background:#fff;color:#0a1f6e;font-size:13px;font-weight:800;padding:13px 30px;border-radius:13px;animation:fadeUp .5s .2s ease both;}
+.s7-url{margin-top:10px;font-size:11px;color:rgba(255,255,255,.4);animation:fadeUp .5s .25s ease both;}
+.s7-chips{display:flex;gap:10px;margin-top:18px;animation:fadeUp .5s .3s ease both;}
+.s7-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:7px 12px;font-size:10px;color:rgba(255,255,255,.7);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="player">
+
+  <!-- Progress -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:5s"><div class="fill"></div></div>
+  </div>
+
+  <!-- Top -->
+  <div class="player-top">
+    <div class="handle">
+      <div class="handle-av">T</div>
+      <span>tchotchopay</span>
+    </div>
+    <div class="follow-btn">Suiv</div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="player-bottom">
+    <div class="caption"><strong>tchotchopay</strong> · Fanmi ou ann Ayiti ka peye tout bagay — elektrisite, lekòl, manje, telefòn 🇭🇹 tchotchopay.com</div>
+    <div class="audio-row">
+      <div class="audio-disc"></div>
+      <span>TchotchoPay — Peye fasil ann Ayiti</span>
+    </div>
+  </div>
+
+  <!-- Nav dots -->
+  <div class="nav-dots" id="nav-dots">
+    <div class="dot on"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- ══ SLIDES ══ -->
+  <div class="slides" id="slides">
+
+    <!-- 1 · Hook -->
+    <div class="slide s1 on" id="slide-0">
+      <div class="s1-emoji">🇭🇹</div>
+      <div class="s1-title">Fanmi ou ann Ayiti ka peye <span>tout bagay</span> ak TchotchoPay</div>
+      <div class="s1-sub">Elektrisite, lekòl, manje, rechaj — tout sa nan yon sèl aplikasyon.</div>
+      <div class="s1-pills">
+        <div class="s1-pill">⚡ Elektrisite</div>
+        <div class="s1-pill">🎓 Lekòl</div>
+        <div class="s1-pill">🛒 Manje</div>
+        <div class="s1-pill">📱 Telefòn</div>
+      </div>
+    </div>
+
+    <!-- 2 · Electricity -->
+    <div class="slide s2" id="slide-1">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="app-header">
+            <div class="app-logo">T</div>
+            <div><div class="app-title">TchotchoPay</div><div class="app-sub-title">Peye Bill</div></div>
+          </div>
+          <div class="app-body">
+            <div class="pay-icon-row"><div class="pay-icon">⚡</div></div>
+            <div class="pay-category">Elektrisite — EDH</div>
+            <div class="pay-row"><span class="pl">Nimewo kont</span><span class="pv">EDH-4821-09</span></div>
+            <div class="pay-row"><span class="pl">Non kliyan</span><span class="pv">Marie Jean</span></div>
+            <div class="pay-row"><span class="pl">Mwa</span><span class="pv">Septanm 2026</span></div>
+            <div class="pay-success-box">
+              <div class="success-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><path d="M11 18l5 5 9-9" stroke-dasharray="60" class="checkmark"/></svg></div>
+              <div class="ps-lbl">Bill peye ✓</div>
+              <div class="ps-amt">1,850 HTG</div>
+              <div class="ps-sub">Depui kont USDC ou</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-caption">
+          <div class="sc-tag">⚡ Elektrisite EDH</div>
+          <div class="sc-text">"Limyè limen — bill peye nan 10 segonn"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · School fees -->
+    <div class="slide s3" id="slide-2">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="app-header">
+            <div class="app-logo">T</div>
+            <div><div class="app-title">TchotchoPay</div><div class="app-sub-title">Peye Lekòl</div></div>
+          </div>
+          <div class="app-body">
+            <div class="pay-icon-row"><div class="pay-icon">🎓</div></div>
+            <div class="pay-category">Frè Lekòl</div>
+            <div class="pay-row"><span class="pl">Lekòl</span><span class="pv">Collège Moderne</span></div>
+            <div class="pay-row"><span class="pl">Elèv</span><span class="pv">Junior Jean</span></div>
+            <div class="pay-row"><span class="pl">Trimès</span><span class="pv">1ème trim. 2026–27</span></div>
+            <div class="pay-success-box">
+              <div class="success-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><path d="M11 18l5 5 9-9" stroke-dasharray="60" class="checkmark"/></svg></div>
+              <div class="ps-lbl">Frè peye ✓</div>
+              <div class="ps-amt">$75.00</div>
+              <div class="ps-sub">Resèt voye pa imel</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-caption">
+          <div class="sc-tag">🎓 Frè lekòl</div>
+          <div class="sc-text">"Pitit ou a nan lekòl — san ou pa bezwen kouri"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Groceries -->
+    <div class="slide s4" id="slide-3">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="app-header">
+            <div class="app-logo">T</div>
+            <div><div class="app-title">TchotchoPay</div><div class="app-sub-title">Achte nan Makèt</div></div>
+          </div>
+          <div class="app-body">
+            <div class="pay-icon-row"><div class="pay-icon">🛒</div></div>
+            <div class="pay-category">Makèt Solèy — Pétion-Ville</div>
+            <div class="pay-row"><span class="pl">Diri ak pwa</span><span class="pv">850 HTG</span></div>
+            <div class="pay-row"><span class="pl">Poul ak legim</span><span class="pv">1,200 HTG</span></div>
+            <div class="pay-row"><span class="pl">Lòt pwodwi</span><span class="pv">650 HTG</span></div>
+            <div class="pay-success-box">
+              <div class="success-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><path d="M11 18l5 5 9-9" stroke-dasharray="60" class="checkmark"/></svg></div>
+              <div class="ps-lbl">Achte konfime ✓</div>
+              <div class="ps-amt">2,700 HTG</div>
+              <div class="ps-sub">QR code skannen nan kès la</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-caption">
+          <div class="sc-tag">🛒 Manje nan makèt</div>
+          <div class="sc-text">"Peye nan kès la ak QR code — pa bezwen kach"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · Phone top-up -->
+    <div class="slide s5" id="slide-4">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="app-header">
+            <div class="app-logo">T</div>
+            <div><div class="app-title">TchotchoPay</div><div class="app-sub-title">Rechaj Telefòn</div></div>
+          </div>
+          <div class="app-body">
+            <div class="pay-icon-row"><div class="pay-icon">📱</div></div>
+            <div class="pay-category">Digicel Haiti — Rechaj</div>
+            <div class="pay-row"><span class="pl">Nimewo</span><span class="pv">+509 3712-3456</span></div>
+            <div class="pay-row"><span class="pl">Operatè</span><span class="pv">Digicel 🇭🇹</span></div>
+            <div class="pay-row"><span class="pl">Pakèt</span><span class="pv">500 HTG Kredit</span></div>
+            <div class="pay-success-box">
+              <div class="success-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><path d="M11 18l5 5 9-9" stroke-dasharray="60" class="checkmark"/></svg></div>
+              <div class="ps-lbl">Rechaj voye ✓</div>
+              <div class="ps-amt">500 HTG</div>
+              <div class="ps-sub">Kredit ajoute imedyatman</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-caption">
+          <div class="sc-tag">📱 Rechaj telefòn</div>
+          <div class="sc-text">"Telefòn fanmi ou pa janm mouri ankò"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · Summary grid -->
+    <div class="slide s6" id="slide-5">
+      <div class="s6-title">Tout sa, nan <span>yon sèl</span> aplikasyon 📲</div>
+      <div class="s6-grid">
+        <div class="s6-card"><div class="sc-emoji">⚡</div><div class="sc-name">Elektrisite EDH</div><div class="sc-status">✓ Disponib</div></div>
+        <div class="s6-card"><div class="sc-emoji">🎓</div><div class="sc-name">Frè Lekòl</div><div class="sc-status">✓ Disponib</div></div>
+        <div class="s6-card"><div class="sc-emoji">🛒</div><div class="sc-name">Makèt & Manje</div><div class="sc-status">✓ Disponib</div></div>
+        <div class="s6-card"><div class="sc-emoji">📱</div><div class="sc-name">Rechaj Telefòn</div><div class="sc-status">✓ Disponib</div></div>
+      </div>
+      <div class="s6-sub">Fanmi ou ann Ayiti ka resevwa lajan ou epi peye tou — san yo pa soti lakay yo.</div>
+    </div>
+
+    <!-- 7 · CTA -->
+    <div class="slide s7" id="slide-6">
+      <div class="s7-icon">T</div>
+      <div class="s7-title">Voye lajan. Fanmi ou peye. Tout moun kontan.</div>
+      <div class="s7-sub">Kont gratis. Voye nan MonCash ak NatCash. Peye bill yo dirèkteman depi Etazini.</div>
+      <div class="s7-btn">Kreye kont ou gratis →</div>
+      <div class="s7-url">tchotchopay.com</div>
+      <div class="s7-chips">
+        <div class="s7-chip">🇭🇹 Haiti</div>
+        <div class="s7-chip">🇺🇸 USA</div>
+        <div class="s7-chip">🇨🇦 Canada</div>
+      </div>
+    </div>
+
+  </div><!-- /slides -->
+</div><!-- /player -->
+
+<script>
+const TOTAL = 7;
+const DURS  = [4000,4000,4000,4000,4000,4000,5000];
+let cur = 0, timer = null;
+
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.dot');
+const segs   = document.querySelectorAll('.prog-seg');
+
+function goTo(n) {
+  if (n >= TOTAL) n = 0;
+  if (n < 0) n = TOTAL - 1;
+
+  slides.forEach((s,i) => s.classList.toggle('on', i === n));
+  dots.forEach((d,i)   => d.classList.toggle('on', i === n));
+
+  segs.forEach((s,i) => {
+    s.classList.remove('active','done');
+    const fill = s.querySelector('.fill');
+    fill.style.animation = 'none';
+    fill.offsetHeight;
+    if (i < n)  { s.classList.add('done'); }
+    if (i === n){ s.classList.add('active'); fill.style.animation = ''; }
+  });
+
+  cur = n;
+  clearTimeout(timer);
+  timer = setTimeout(() => goTo(cur + 1), DURS[n]);
+}
+
+// Tap left = back, tap right = forward
+document.querySelector('.slides').addEventListener('click', e => {
+  const x = e.clientX;
+  const w = e.currentTarget.getBoundingClientRect().width;
+  if (x < w / 2) goTo(cur - 1);
+  else           goTo(cur + 1);
+});
+
+goTo(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.stage{display:flex;justify-content:center;align-items:flex-start;padding:1rem 0;gap:2rem;flex-wrap:wrap}
+.phone{width:220px;height:390px;background:#020B2D;border-radius:32px;border:3px solid #00C896;overflow:hidden;position:relative;flex-shrink:0;box-shadow:0 8px 32px rgba(0,200,150,0.18)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.5s ease;pointer-events:none}
+.scene.active{opacity:1;pointer-events:auto}
+.tag{font-size:9px;letter-spacing:1.5px;color:#00C896;text-transform:uppercase;margin-bottom:10px;font-family:sans-serif}
+.headline{font-size:16px;font-weight:700;color:#fff;text-align:center;line-height:1.35;font-family:sans-serif;margin-bottom:8px}
+.sub{font-size:12px;color:#c8d0e0;text-align:center;line-height:1.5;font-family:sans-serif}
+.accent{color:#00AEEF}
+.green{color:#00C896}
+
+/* Scene 1 - problem */
+.money-icon{font-size:44px;margin-bottom:14px;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.fee-bar{background:#0A1F6E;border-radius:10px;padding:10px 14px;width:100%;margin-top:10px}
+.fee-row{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif}
+.fee-label{font-size:10px;color:#8899bb}
+.fee-val{font-size:12px;font-weight:700}
+.fee-bad{color:#ff6b6b}
+.fee-good{color:#00C896}
+
+/* Scene 2 - form */
+.form-card{background:#0A1F6E;border-radius:12px;padding:12px;width:100%;margin-top:8px}
+.field{margin-bottom:8px}
+.field-label{font-size:9px;color:#8899bb;font-family:sans-serif;margin-bottom:3px}
+.field-val{font-size:12px;color:#fff;font-weight:600;font-family:sans-serif;background:#020B2D;border-radius:6px;padding:6px 8px}
+.wallet-badges{display:flex;gap:6px;margin-bottom:8px}
+.badge{flex:1;padding:6px;border-radius:8px;text-align:center;font-size:10px;font-weight:700;font-family:sans-serif;cursor:pointer}
+.badge-mc{background:rgba(255,100,0,0.15);border:1.5px solid #ff6400;color:#ff9f4a}
+.badge-nc{background:rgba(0,174,239,0.1);border:1px solid #334;color:#8899bb}
+.badge-mc.sel{border-color:#ff6400;background:rgba(255,100,0,0.25)}
+.send-btn{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:8px;padding:9px;text-align:center;font-size:12px;color:#fff;font-weight:700;font-family:sans-serif;margin-top:4px}
+
+/* Scene 3 - sending animation */
+.transfer-anim{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.av-sender{background:#0A1F6E;border:2px solid #1055CC}
+.av-recv{background:#0A1F6E;border:2px solid #00C896}
+.transfer-line{flex:1;height:2px;background:linear-gradient(90deg,#1055CC,#00C896);position:relative;border-radius:2px}
+.transfer-dot{width:10px;height:10px;border-radius:50%;background:#00AEEF;position:absolute;top:-4px;left:0;animation:slide 1.2s ease-in-out infinite}
+@keyframes slide{0%{left:0;opacity:1}80%{left:calc(100% - 10px);opacity:1}100%{left:calc(100% - 10px);opacity:0}}
+.amount-big{font-size:32px;font-weight:800;color:#00C896;font-family:sans-serif;margin-bottom:4px}
+.htg-small{font-size:11px;color:#8899bb;font-family:sans-serif}
+
+/* Scene 4 - recipient gets it */
+.notif{background:#0A1F6E;border-radius:12px;padding:12px;width:100%;border-left:3px solid #00C896}
+.notif-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.notif-icon{font-size:18px}
+.notif-app{font-size:10px;color:#8899bb;font-family:sans-serif}
+.notif-title{font-size:12px;font-weight:700;color:#fff;font-family:sans-serif}
+.notif-body{font-size:11px;color:#c8d0e0;font-family:sans-serif;line-height:1.4}
+.spend-options{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.spend-pill{font-size:9px;padding:4px 8px;border-radius:20px;border:1px solid #334;color:#8899bb;font-family:sans-serif}
+.spend-pill.lit{border-color:#00C896;color:#00C896}
+
+/* Scene 5 - compare */
+.compare{width:100%;margin-top:8px}
+.cmp-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #1a2540}
+.cmp-name{font-size:10px;color:#8899bb;font-family:sans-serif;width:70px;flex-shrink:0}
+.cmp-bar-wrap{flex:1;background:#0A1F6E;border-radius:4px;height:8px;overflow:hidden}
+.cmp-bar{height:100%;border-radius:4px}
+.cmp-pct{font-size:10px;font-weight:700;font-family:sans-serif;width:32px;text-align:right;flex-shrink:0}
+.bar-bad{background:#ff6b6b}
+.bar-ok{background:#F7B731}
+.bar-good{background:#00C896}
+.pct-bad{color:#ff6b6b}
+.pct-ok{color:#F7B731}
+.pct-good{color:#00C896}
+
+/* Scene 6 */
+.cta-box{background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(16,85,204,0.2));border:1px solid #00C896;border-radius:14px;padding:16px;width:100%;text-align:center;margin-top:8px}
+.cta-main{font-size:15px;font-weight:700;color:#fff;font-family:sans-serif;margin-bottom:6px}
+.cta-url{font-size:12px;color:#00AEEF;font-family:sans-serif;margin-bottom:10px}
+.cta-btn2{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:10px;padding:10px;font-size:13px;font-weight:700;color:#fff;font-family:sans-serif}
+
+.progress-bar{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,#00C896,#00AEEF);transition:width 0.1s linear}
+
+/* Controls */
+.controls{display:flex;flex-direction:column;gap:12px;min-width:200px;max-width:260px}
+.scene-list{display:flex;flex-direction:column;gap:6px}
+.scene-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:0.5px solid var(--border);cursor:pointer;background:var(--surface-1)}
+.scene-item.active-item{border-color:#00C896;background:rgba(0,200,150,0.06)}
+.scene-num{width:22px;height:22px;border-radius:50%;background:#020B2D;border:1.5px solid #334;display:flex;align-items:center;justify-content:center;font-size:10px;color:#8899bb;font-family:sans-serif;flex-shrink:0}
+.scene-item.active-item .scene-num{background:#00C896;border-color:#00C896;color:#020B2D}
+.scene-desc{font-size:12px;color:var(--text-secondary);font-family:sans-serif;line-height:1.3}
+.scene-time{font-size:10px;color:var(--text-muted);font-family:sans-serif;margin-left:auto;flex-shrink:0}
+.ctrl-btns{display:flex;gap:8px}
+.ctrl-btn{flex:1;padding:8px;border-radius:8px;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;font-size:12px;color:var(--text-primary);font-family:sans-serif;text-align:center}
+.ctrl-btn:hover{background:var(--surface-1)}
+.lang-toggle{display:flex;gap:6px}
+.lang-btn{flex:1;padding:6px;border-radius:6px;border:0.5px solid var(--border);background:var(--surface-1);cursor:pointer;font-size:11px;color:var(--text-secondary);font-family:sans-serif;text-align:center}
+.lang-btn.active-lang{background:#020B2D;border-color:#00C896;color:#00C896}
+</style>
+
+<div class="stage">
+  <div class="phone" id="phone">
+    <!-- Scene 1: The Problem -->
+    <div class="scene active" id="s1">
+      <div class="money-icon">💸</div>
+      <div class="tag">The Problem</div>
+      <div class="headline" id="s1h">Sending $100 to Haiti?</div>
+      <div class="fee-bar">
+        <div class="fee-row" style="margin-bottom:6px"><span class="fee-label">Western Union</span><span class="fee-val fee-bad">−$8 fee</span></div>
+        <div class="fee-row" style="margin-bottom:6px"><span class="fee-label">MoneyGram</span><span class="fee-val fee-bad">−$6 fee</span></div>
+        <div class="fee-row"><span class="fee-label">TchotchoPay</span><span class="fee-val fee-good" id="s1fee">−$1 fee ✅</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 2: Enter details -->
+    <div class="scene" id="s2">
+      <div class="tag" id="s2tag">Send to wallet</div>
+      <div class="wallet-badges">
+        <div class="badge badge-mc sel">MonCash</div>
+        <div class="badge badge-nc">NatCash</div>
+      </div>
+      <div class="form-card">
+        <div class="field"><div class="field-label" id="s2l1">Recipient phone</div><div class="field-val">+509 3712 ••••</div></div>
+        <div class="field"><div class="field-label" id="s2l2">Amount (USD)</div><div class="field-val green">$100.00</div></div>
+        <div class="send-btn" id="s2btn">Send Now →</div>
+      </div>
+    </div>
+
+    <!-- Scene 3: Transfer in flight -->
+    <div class="scene" id="s3">
+      <div class="tag" id="s3tag">Sending...</div>
+      <div class="transfer-anim">
+        <div class="avatar av-sender">👤</div>
+        <div class="transfer-line"><div class="transfer-dot"></div></div>
+        <div class="avatar av-recv">🇭🇹</div>
+      </div>
+      <div class="amount-big">$100</div>
+      <div class="htg-label" id="s3htg" style="font-size:11px;color:#8899bb;font-family:sans-serif;margin-bottom:8px">≈ 13,000 HTG</div>
+      <div class="sub" id="s3sub">Arriving in seconds ⚡</div>
+    </div>
+
+    <!-- Scene 4: Recipient gets it -->
+    <div class="scene" id="s4">
+      <div class="tag" id="s4tag">Haiti — MonCash wallet</div>
+      <div class="notif">
+        <div class="notif-top">
+          <span class="notif-icon">🟠</span>
+          <div>
+            <div class="notif-app">MonCash</div>
+            <div class="notif-title" id="s4title">You received $100!</div>
+          </div>
+        </div>
+        <div class="notif-body" id="s4body">From TchotchoPay. Balance updated ✅</div>
+      </div>
+      <div class="spend-options" style="margin-top:10px">
+        <div class="spend-pill lit" id="sp1">🛒 Buy food</div>
+        <div class="spend-pill lit" id="sp2">⚡ Electricity</div>
+        <div class="spend-pill lit" id="sp3">📱 Top-up</div>
+        <div class="spend-pill" id="sp4">💵 Cash out</div>
+        <div class="spend-pill" id="sp5">👤 Send</div>
+      </div>
+      <div class="sub" style="margin-top:10px;font-size:11px" id="s4sub">No bank needed.</div>
+    </div>
+
+    <!-- Scene 5: vs competitors -->
+    <div class="scene" id="s5">
+      <div class="tag" id="s5tag">Why TchotchoPay</div>
+      <div class="headline" style="font-size:13px;margin-bottom:10px" id="s5h">Stop paying too much</div>
+      <div class="compare">
+        <div class="cmp-row"><span class="cmp-name">W. Union</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-bad" style="width:85%"></div></div><span class="cmp-pct pct-bad">8%</span></div>
+        <div class="cmp-row"><span class="cmp-name">MoneyGram</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-ok" style="width:65%"></div></div><span class="cmp-pct pct-ok">6%</span></div>
+        <div class="cmp-row" style="border:none"><span class="cmp-name">TchotchoPay</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-good" style="width:12%"></div></div><span class="cmp-pct pct-good">1%</span></div>
+      </div>
+    </div>
+
+    <!-- Scene 6: CTA -->
+    <div class="scene" id="s6">
+      <div class="tag">TchotchoPay</div>
+      <div class="headline" id="s6h" style="margin-bottom:12px">Send money.<br>Not fees.</div>
+      <div class="cta-box">
+        <div class="cta-main" id="s6main">Send to MonCash today →</div>
+        <div class="cta-url">tchotchopay.com/send</div>
+        <div class="cta-btn2" id="s6btn">Start Now — It's Free</div>
+      </div>
+    </div>
+
+    <div class="progress-bar" id="pbar"></div>
+  </div>
+
+  <div class="controls">
+    <div class="lang-toggle">
+      <button class="lang-btn active-lang" onclick="setLang('en')">🇺🇸 English</button>
+      <button class="lang-btn" onclick="setLang('ht')">🇭🇹 Kreyòl</button>
+    </div>
+    <div class="scene-list">
+      <div class="scene-item active-item" onclick="goTo(0)"><div class="scene-num">1</div><div class="scene-desc">High fees problem</div><div class="scene-time">0–5s</div></div>
+      <div class="scene-item" onclick="goTo(1)"><div class="scene-num">2</div><div class="scene-desc">Enter phone + amount</div><div class="scene-time">5–10s</div></div>
+      <div class="scene-item" onclick="goTo(2)"><div class="scene-num">3</div><div class="scene-desc">Money in flight ⚡</div><div class="scene-time">10–16s</div></div>
+      <div class="scene-item" onclick="goTo(3)"><div class="scene-num">4</div><div class="scene-desc">Wallet credited Haiti</div><div class="scene-time">16–22s</div></div>
+      <div class="scene-item" onclick="goTo(4)"><div class="scene-num">5</div><div class="scene-desc">vs competitors</div><div class="scene-time">22–27s</div></div>
+      <div class="scene-item" onclick="goTo(5)"><div class="scene-num">6</div><div class="scene-desc">Call to action</div><div class="scene-time">27–30s</div></div>
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn" onclick="prevScene()">← Prev</button>
+      <button class="ctrl-btn" id="playBtn" onclick="togglePlay()">▶ Play</button>
+      <button class="ctrl-btn" onclick="nextScene()">Next →</button>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);font-family:sans-serif;line-height:1.5;">
+      Green accent = send money theme. Use in Canva / CapCut as your scene guide.
+    </div>
+  </div>
+</div>
+
+<script>
+const scenes=['s1','s2','s3','s4','s5','s6'];
+const durations=[5,5,6,6,5,3];
+let current=0,playing=false,elapsed=0,frameTimer=null;
+
+const copy={
+  en:{
+    s1h:'Sending $100 to Haiti?',s1fee:'−$1 fee ✅',
+    s2tag:'Send to wallet',s2l1:'Recipient phone',s2l2:'Amount (USD)',s2btn:'Send Now →',
+    s3tag:'Sending...',s3htg:'≈ 13,000 HTG',s3sub:'Arriving in seconds ⚡',
+    s4tag:'Haiti — MonCash wallet',s4title:'You received $100!',s4body:'From TchotchoPay. Balance updated ✅',
+    sp1:'🛒 Buy food',sp2:'⚡ Electricity',sp3:'📱 Top-up',sp4:'💵 Cash out',sp5:'👤 Send',s4sub:'No bank needed.',
+    s5tag:'Why TchotchoPay',s5h:'Stop paying too much',
+    s6h:'Send money.\nNot fees.',s6main:'Send to MonCash today →',s6btn:'Start Now — It\'s Free'
+  },
+  ht:{
+    s1h:'Voye $100 ann Ayiti?',s1fee:'−$1 frè ✅',
+    s2tag:'Voye nan pòtefèy',s2l1:'Telefòn destinatè',s2l2:'Montan (USD)',s2btn:'Voye Kounye a →',
+    s3tag:'Ap voye...',s3htg:'≈ 13,000 HTG',s3sub:'Ap rive an segonn ⚡',
+    s4tag:'Ayiti — Pòtefèy MonCash',s4title:'Ou resevwa $100!',s4body:'Depi TchotchoPay. Balans ajou ✅',
+    sp1:'🛒 Achte manje',sp2:'⚡ Elektrisite',sp3:'📱 Recharge',sp4:'💵 Retire',sp5:'👤 Voye',s4sub:'Pa bezwen bank.',
+    s5tag:'Poukisa TchotchoPay',s5h:'Sispann peye twòp',
+    s6h:'Voye lajan.\nPa frè.',s6main:'Voye nan MonCash jodi a →',s6btn:'Kòmanse — Gratis'
+  }
+};
+let lang='en';
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach((b,i)=>{b.classList.toggle('active-lang',(i===0&&l==='en')||(i===1&&l==='ht'));});
+  const c=copy[l];
+  Object.keys(c).forEach(k=>{const el=document.getElementById(k);if(el)el.textContent=c[k];});
+}
+
+function showScene(i){
+  scenes.forEach((s,idx)=>{document.getElementById(s).classList.toggle('active',idx===i);});
+  document.querySelectorAll('.scene-item').forEach((el,idx)=>{el.classList.toggle('active-item',idx===i);});
+  current=i;elapsed=0;updateBar();
+}
+
+function updateBar(){
+  const pct=Math.min((elapsed/durations[current])*100,100);
+  document.getElementById('pbar').style.width=pct+'%';
+}
+
+function goTo(i){stopPlay();showScene(i);}
+function nextScene(){stopPlay();showScene((current+1)%scenes.length);}
+function prevScene(){stopPlay();showScene((current-1+scenes.length)%scenes.length);}
+function togglePlay(){playing?stopPlay():startPlay();}
+
+function startPlay(){
+  playing=true;
+  document.getElementById('playBtn').textContent='⏸ Pause';
+  elapsed=0;tick();
+}
+
+function stopPlay(){
+  playing=false;
+  document.getElementById('playBtn').textContent='▶ Play';
+  clearTimeout(frameTimer);
+}
+
+function tick(){
+  if(!playing)return;
+  elapsed+=0.05;updateBar();
+  if(elapsed>=durations[current]){
+    const next=(current+1)%scenes.length;
+    if(next===0){stopPlay();showScene(0);return;}
+    showScene(next);elapsed=0;
+  }
+  frameTimer=setTimeout(tick,50);
+}
+
+showScene(0);
+</script>

@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caribbean Phone Top-Up — Haiti & Dominican Republic</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Digicel recharge Haiti & Natcom top-up instantly. Also covers Dominican Republic (Claro, Altice, Viva). Send airtime from the U.S., Canada, or France with your Tchotcho Pay USDC balance."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/topup.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/topup.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/topup.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/topup.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/topup.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/topup.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/topup.html"/>
+  <meta property="og:title" content="Caribbean Phone Top-Up — Haiti & Dominican Republic"/>
+  <meta property="og:description" content="Top up phones in Haiti (Digicel, Natcom) and Dominican Republic (Claro, Altice, Viva) instantly from the U.S., Canada, or France. Pay with your Tchotcho Pay USDC balance."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Caribbean Phone Top-Up — Haiti & Dominican Republic"/>
+  <meta name="twitter:description" content="Top up phones in Haiti (Digicel, Natcom) and Dominican Republic (Claro, Altice, Viva) instantly from the U.S., Canada, or France. Pay with your Tchotcho Pay USDC balance."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    html { overflow-x: hidden; }
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --digicel:#E20613; --natcom:#0057A8; --claro:#DA0000; --altice:#6B2D8B; --viva:#00A651;
+    --cubacel:#003087; --flow:#FF6900; --bmobile:#00529B; --gtt:#005F3C;
+    }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:9999;
+      display:flex; align-items:center; padding:14px 32px;
+      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
+    }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
+    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
+    .nav-logo img { width:100%; height:100%; object-fit:cover; }
+    .nav-brand span { font-weight:700; font-size:1rem; }
+    .nav-brand em { color:var(--cyan); font-style:normal; }
+    .nav-back { margin-left:auto; color:var(--gray); text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
+    .nav-back:hover { color:var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      padding:120px 24px 48px;
+      text-align:center;
+      background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,174,239,0.1) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(0,174,239,0.12); border:1px solid rgba(0,174,239,0.3);
+      color:var(--cyan); padding:6px 16px; border-radius:50px;
+      font-size:0.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:18px;
+    }
+    .hero h1 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; line-height:1.15; margin-bottom:12px; }
+    .hero h1 em { color:var(--cyan); font-style:normal; }
+    .hero p { color:var(--gray); font-size:1rem; max-width:480px; margin:0 auto; }
+
+    /* ── MAIN LAYOUT ── */
+    .page-wrap { max-width:960px; margin:0 auto; padding:0 24px 80px; display:grid; grid-template-columns:1fr 360px; gap:32px; align-items:start; }
+    @media(max-width:760px) { .page-wrap { grid-template-columns:1fr; } .phone-preview { display:none; } }
+
+    /* ── FLOW CARD ── */
+    .flow-card {
+      background:linear-gradient(135deg,rgba(10,31,110,0.55),rgba(2,11,45,0.8));
+      border:1px solid rgba(0,174,239,0.2); border-radius:24px; padding:36px;
+      backdrop-filter:blur(8px);
+    }
+
+    /* Step indicator */
+    .steps-bar { display:flex; align-items:center; margin-bottom:32px; gap:0; }
+    .step-dot {
+      width:32px; height:32px; border-radius:50%; border:2px solid rgba(0,174,239,0.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.78rem; font-weight:800; color:var(--gray); flex-shrink:0;
+      transition:all .3s;
+    }
+    .step-dot.active { border-color:var(--cyan); color:var(--cyan); background:rgba(0,174,239,0.1); }
+    .step-dot.done { border-color:var(--green); background:var(--green); color:#000; }
+    .step-line { flex:1; height:2px; background:rgba(0,174,239,0.15); transition:background .3s; }
+    .step-line.done { background:var(--green); }
+
+    /* Panels */
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    .panel-title { font-size:1.15rem; font-weight:800; margin-bottom:6px; }
+    .panel-sub { color:var(--gray); font-size:0.88rem; margin-bottom:24px; }
+
+    /* Country toggle */
+    .country-toggle { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px; }
+    @media(max-width:480px) { .country-toggle { grid-template-columns:repeat(2,1fr); } }
+    .country-btn {
+      border:2px solid rgba(0,174,239,0.2); border-radius:14px;
+      padding:12px 8px; cursor:pointer; text-align:center; background:rgba(2,11,45,0.5);
+      transition:all .2s; font-family:inherit; color:var(--white);
+    }
+    .country-btn:hover { border-color:rgba(0,174,239,0.5); }
+    .country-btn.selected { border-color:var(--cyan); background:rgba(0,174,239,0.1); }
+    .country-btn .cb-flag { font-size:1.5rem; display:block; margin-bottom:4px; }
+    .country-btn .cb-name { font-weight:700; font-size:0.82rem; }
+    .country-btn .cb-sub  { color:var(--gray); font-size:0.68rem; }
+
+    /* Carrier grid */
+    .carrier-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+    .carrier-card {
+      border:2px solid rgba(0,174,239,0.2); border-radius:16px;
+      padding:20px 16px; cursor:pointer; text-align:center;
+      transition:all .2s; position:relative; overflow:hidden;
+      background:rgba(2,11,45,0.5);
+    }
+    .carrier-card:hover { border-color:rgba(0,174,239,0.5); transform:translateY(-2px); }
+    .carrier-card.selected { border-color:var(--cyan); background:rgba(0,174,239,0.08); }
+    .carrier-card.selected::after {
+      content:'✓'; position:absolute; top:10px; right:12px;
+      color:var(--cyan); font-size:1rem; font-weight:800;
+    }
+    .carrier-logo {
+      width:52px; height:52px; border-radius:14px; margin:0 auto 10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; font-weight:900; letter-spacing:-1px;
+    }
+    .carrier-logo.digicel { background:var(--digicel); color:#fff; }
+    .carrier-logo.natcom  { background:var(--natcom);  color:#fff; font-size:0.9rem; }
+    .carrier-logo.claro   { background:var(--claro);   color:#fff; font-size:0.9rem; }
+    .carrier-logo.altice  { background:var(--altice);  color:#fff; font-size:0.8rem; }
+    .carrier-logo.viva    { background:var(--viva);    color:#fff; font-size:0.9rem; }
+    .carrier-logo.cubacel { background:var(--cubacel); color:#fff; font-size:0.8rem; }
+    .carrier-logo.flow    { background:var(--flow);    color:#fff; font-size:0.9rem; }
+    .carrier-logo.bmobile { background:var(--bmobile); color:#fff; font-size:0.8rem; }
+    .carrier-logo.gtt     { background:var(--gtt);     color:#fff; font-size:0.9rem; }
+    .carrier-name { font-weight:700; font-size:0.95rem; margin-bottom:4px; }
+    .carrier-sub  { color:var(--gray); font-size:0.78rem; }
+
+    /* Input */
+    .input-label { font-size:0.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gray); margin-bottom:6px; }
+    .phone-row { display:flex; gap:10px; margin-bottom:20px; }
+    .country-code {
+      background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25); border-radius:12px;
+      color:var(--white); font-size:0.95rem; font-weight:700; padding:14px 14px;
+      display:flex; align-items:center; gap:6px; white-space:nowrap; flex-shrink:0;
+    }
+    .phone-input {
+      flex:1; background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25);
+      border-radius:12px; color:var(--white); font-size:1rem; font-weight:600;
+      padding:14px 16px; font-family:inherit; outline:none; transition:border-color .2s;
+      width:100%;
+    }
+    .phone-input:focus { border-color:var(--cyan); }
+    .phone-input::placeholder { color:rgba(143,168,204,0.4); }
+
+    /* Amount grid */
+    .amount-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+    .amount-card {
+      border:1.5px solid rgba(0,174,239,0.2); border-radius:14px;
+      padding:14px 10px; text-align:center; cursor:pointer;
+      background:rgba(2,11,45,0.5); transition:all .2s;
+    }
+    .amount-card:hover { border-color:rgba(0,174,239,0.5); }
+    .amount-card.selected { border-color:var(--cyan); background:rgba(0,174,239,0.08); }
+    .amount-usd { font-size:1.2rem; font-weight:800; color:var(--white); }
+    .amount-htg { font-size:0.75rem; color:var(--gray); margin-top:2px; }
+    .amount-data { font-size:0.72rem; color:var(--cyan); margin-top:3px; }
+
+    /* Summary box */
+    .summary-box {
+      background:rgba(2,11,45,0.6); border:1px solid rgba(0,174,239,0.15);
+      border-radius:16px; padding:20px; margin-bottom:20px;
+    }
+    .summary-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,174,239,0.08); font-size:0.9rem; }
+    .summary-row:last-child { border-bottom:none; }
+    .summary-row .label { color:var(--gray); }
+    .summary-row .val { font-weight:700; }
+    .summary-row .val.green { color:var(--green); }
+    .summary-row .val.cyan  { color:var(--cyan); }
+
+    /* Wallet balance */
+    .wallet-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(0,200,150,0.08); border:1px solid rgba(0,200,150,0.2);
+      border-radius:12px; padding:12px 16px; margin-bottom:20px;
+    }
+    .wallet-bar .wl { display:flex; align-items:center; gap:8px; font-size:0.88rem; }
+    .wallet-bar .wl i { color:var(--green); }
+    .wallet-bar .wl-val { font-weight:800; color:var(--green); }
+
+    /* Buttons */
+    .btn-primary {
+      width:100%; background:linear-gradient(135deg,var(--mid),var(--cyan));
+      color:#fff; border:none; border-radius:50px; padding:16px;
+      font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      transition:opacity .2s, transform .15s;
+    }
+    .btn-primary:hover { opacity:.9; transform:translateY(-1px); }
+    .btn-primary:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+    .btn-secondary {
+      width:100%; background:none; border:1.5px solid rgba(0,174,239,0.3);
+      color:var(--gray); border-radius:50px; padding:13px;
+      font-size:0.9rem; font-weight:600; cursor:pointer; font-family:inherit;
+      margin-top:10px; transition:all .2s;
+    }
+    .btn-secondary:hover { border-color:var(--cyan); color:var(--white); }
+
+    /* Success screen */
+    .success-wrap { text-align:center; padding:20px 0; }
+    .success-icon {
+      width:72px; height:72px; border-radius:50%; background:rgba(0,200,150,0.15);
+      border:2px solid var(--green); margin:0 auto 20px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem; animation:popIn .4s ease;
+    }
+    @keyframes popIn { 0%{transform:scale(0)} 80%{transform:scale(1.1)} 100%{transform:scale(1)} }
+    .success-title { font-size:1.4rem; font-weight:800; color:var(--green); margin-bottom:8px; }
+    .success-sub { color:var(--gray); font-size:0.9rem; margin-bottom:24px; line-height:1.5; }
+    .success-detail {
+      background:rgba(0,200,150,0.06); border:1px solid rgba(0,200,150,0.2);
+      border-radius:16px; padding:20px; text-align:left; margin-bottom:24px;
+    }
+    .success-detail .srow { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(0,174,239,0.07); font-size:0.88rem; }
+    .success-detail .srow:last-child { border:none; }
+    .success-detail .srow .sl { color:var(--gray); }
+    .success-detail .srow .sv { font-weight:700; }
+    .confetti-bar { display:flex; justify-content:center; gap:8px; font-size:1.4rem; margin-bottom:12px; }
+
+    /* Phone preview */
+    .phone-preview { position:sticky; top:100px; }
+    .phone-shell {
+      width:260px; margin:0 auto;
+      background:linear-gradient(160deg,#0d1f4e,#050e28);
+      border:2px solid rgba(0,174,239,0.35); border-radius:40px;
+      padding:14px; box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,174,239,0.1);
+      position:relative;
+    }
+    .phone-notch { width:80px; height:22px; background:#000; border-radius:12px; margin:0 auto 10px; }
+    .phone-screen {
+      background:#0a1428; border-radius:28px; overflow:hidden;
+      min-height:480px; position:relative;
+    }
+    .ps-header {
+      background:linear-gradient(135deg,#0A1F6E,#1055CC);
+      padding:16px; text-align:center;
+    }
+    .ps-header .ps-title { font-size:0.85rem; font-weight:700; color:rgba(255,255,255,0.7); margin-bottom:2px; }
+    .ps-header .ps-carrier { font-size:1.1rem; font-weight:800; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .ps-body { padding:16px; }
+    .ps-phone-display { text-align:center; padding:12px; background:rgba(0,174,239,0.06); border-radius:12px; margin-bottom:12px; }
+    .ps-phone-display .psd-label { font-size:0.7rem; color:var(--gray); margin-bottom:2px; }
+    .ps-phone-display .psd-num { font-size:1.05rem; font-weight:800; color:var(--white); }
+    .ps-amounts { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:12px; }
+    .ps-amt {
+      border:1.5px solid rgba(0,174,239,0.2); border-radius:10px;
+      padding:8px 4px; text-align:center; cursor:pointer; transition:all .2s;
+    }
+    .ps-amt.sel { border-color:var(--cyan); background:rgba(0,174,239,0.1); }
+    .ps-amt .pa-usd { font-size:0.8rem; font-weight:800; }
+    .ps-amt .pa-htg { font-size:0.58rem; color:var(--gray); }
+    .ps-total {
+      background:rgba(0,200,150,0.1); border:1px solid rgba(0,200,150,0.25);
+      border-radius:10px; padding:10px 12px; margin-bottom:12px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .ps-total .pt-label { font-size:0.7rem; color:var(--gray); }
+    .ps-total .pt-val { font-size:1rem; font-weight:800; color:var(--green); }
+    .ps-btn {
+      width:100%; background:linear-gradient(135deg,#1055CC,#00AEEF);
+      color:#fff; border:none; border-radius:50px; padding:12px;
+      font-size:0.85rem; font-weight:700; cursor:pointer; font-family:inherit;
+    }
+    .ps-carrier-logo {
+      width:28px; height:28px; border-radius:8px; display:inline-flex;
+      align-items:center; justify-content:center; font-size:0.65rem; font-weight:900;
+    }
+    .ps-carrier-logo.digicel { background:var(--digicel); color:#fff; }
+    .ps-carrier-logo.natcom  { background:var(--natcom);  color:#fff; }
+    .ps-carrier-logo.claro   { background:var(--claro);   color:#fff; }
+    .ps-carrier-logo.altice  { background:var(--altice);  color:#fff; }
+    .ps-carrier-logo.viva    { background:var(--viva);    color:#fff; }
+    .ps-carrier-logo.cubacel { background:var(--cubacel); color:#fff; }
+    .ps-carrier-logo.flow    { background:var(--flow);    color:#fff; }
+    .ps-carrier-logo.bmobile { background:var(--bmobile); color:#fff; }
+    .ps-carrier-logo.gtt     { background:var(--gtt);     color:#fff; }
+
+    /* How it works strip */
+    .how-strip { margin:0 0 48px; }
+    .how-strip h2 { font-size:1.3rem; font-weight:800; margin-bottom:20px; text-align:center; }
+    .how-steps { display:flex; gap:0; justify-content:center; flex-wrap:wrap; }
+    .how-step { display:flex; align-items:center; gap:12px; padding:0 24px; position:relative; }
+    .how-step:not(:last-child)::after { content:'→'; color:var(--cyan); font-size:1.2rem; margin-left:12px; }
+    .hs-num { width:40px; height:40px; border-radius:50%; background:rgba(0,174,239,0.12); border:1.5px solid rgba(0,174,239,0.3); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--cyan); flex-shrink:0; font-size:0.9rem; }
+    .hs-text .ht { font-weight:700; font-size:0.9rem; margin-bottom:2px; }
+    .hs-text .hs { color:var(--gray); font-size:0.78rem; }
+
+    /* Popular plans */
+    .plans-section { margin:0 0 48px; }
+    .plans-section h2 { font-size:1.3rem; font-weight:800; margin-bottom:6px; text-align:center; }
+    .plans-sub { color:var(--gray); font-size:0.88rem; text-align:center; margin-bottom:24px; }
+    .plans-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+    .plan-card {
+      background:rgba(10,31,110,0.4); border:1px solid rgba(0,174,239,0.18);
+      border-radius:16px; padding:18px; cursor:pointer; transition:all .2s;
+    }
+    .plan-card:hover { border-color:var(--cyan); transform:translateY(-2px); }
+    .plan-carrier { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+    .plan-carrier-badge { padding:3px 8px; border-radius:6px; font-size:0.7rem; font-weight:800; }
+    .plan-carrier-badge.digicel { background:rgba(226,6,19,0.2); color:#ff6b76; border:1px solid rgba(226,6,19,0.3); }
+    .plan-carrier-badge.natcom  { background:rgba(0,87,168,0.2); color:#7eb8ff; border:1px solid rgba(0,87,168,0.3); }
+    .plan-carrier-badge.claro   { background:rgba(218,0,0,0.2); color:#ff7070; border:1px solid rgba(218,0,0,0.3); }
+    .plan-carrier-badge.altice  { background:rgba(107,45,139,0.2); color:#d699ff; border:1px solid rgba(107,45,139,0.3); }
+    .plan-carrier-badge.viva    { background:rgba(0,166,81,0.2); color:#5dffa0; border:1px solid rgba(0,166,81,0.3); }
+    .plan-carrier-badge.cubacel { background:rgba(0,48,135,0.2); color:#80aaff; border:1px solid rgba(0,48,135,0.3); }
+    .plan-carrier-badge.flow    { background:rgba(255,105,0,0.2); color:#ffb066; border:1px solid rgba(255,105,0,0.3); }
+    .plan-carrier-badge.bmobile { background:rgba(0,82,155,0.2); color:#7eb8ff; border:1px solid rgba(0,82,155,0.3); }
+    .plan-carrier-badge.gtt     { background:rgba(0,95,60,0.2); color:#5dffb0; border:1px solid rgba(0,95,60,0.3); }
+    .plan-amount { font-size:1.5rem; font-weight:900; margin-bottom:4px; }
+    .plan-htg { font-size:0.8rem; color:var(--gray); margin-bottom:8px; }
+    .plan-perks { display:flex; flex-direction:column; gap:4px; }
+    .plan-perk { font-size:0.75rem; color:var(--light); display:flex; align-items:center; gap:6px; }
+    .plan-perk i { color:var(--cyan); font-size:0.8rem; }
+    .plan-btn { width:100%; background:linear-gradient(135deg,var(--mid),var(--cyan)); color:#fff; border:none; border-radius:50px; padding:10px; font-size:0.82rem; font-weight:700; cursor:pointer; font-family:inherit; margin-top:12px; }
+
+    /* Error */
+    .field-error { color:var(--red); font-size:0.78rem; margin-top:4px; display:none; }
+    .field-error.show { display:block; }
+
+    /* ── PAYMENT PANEL ── */
+    .payment-mini-summary {
+      background:rgba(2,11,45,0.6); border:1px solid rgba(0,174,239,0.15);
+      border-radius:14px; padding:16px; margin-bottom:20px;
+    }
+    .pms-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:7px 0; font-size:0.88rem; border-bottom:1px solid rgba(0,174,239,0.07);
+    }
+    .pms-row:last-child { border-bottom:none; }
+    .pms-row .pms-label { color:var(--gray); }
+    .pms-row .pms-val { font-weight:700; color:var(--white); }
+    .pms-row.pms-total .pms-label,
+    .pms-row.pms-total .pms-val { font-size:1rem; font-weight:800; color:var(--cyan); }
+
+    /* ── Payment method tabs ── */
+    .pay-method-tabs{display:flex;gap:8px;margin-bottom:16px;}
+    .pm-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--border);background:none;color:var(--gray);font-size:.83rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
+    .pm-tab.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,174,239,0.08);}
+    .wallet-pay-box{background:rgba(0,174,239,0.04);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;}
+    .wpb-bal{text-align:center;padding:10px 0;}
+    .wpb-label{font-size:.72rem;color:var(--gray);margin-bottom:4px;}
+    .wpb-amount{font-size:1.8rem;font-weight:900;color:var(--cyan);}
+    .wpb-sub{font-size:.73rem;color:var(--gray);margin-top:3px;}
+    .wpb-divider{border:none;border-top:1px solid rgba(0,174,239,0.1);margin:10px 0;}
+    .wpb-fee-note{font-size:.77rem;color:var(--green);text-align:center;margin:8px 0 0;}
+
+    .stripe-card-wrap {
+      background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25);
+      border-radius:12px; padding:14px 16px; margin-bottom:16px;
+      transition:border-color .2s;
+    }
+    .stripe-card-wrap.focused { border-color:var(--cyan); }
+    .stripe-card-wrap.invalid { border-color:var(--red); }
+
+    .security-row {
+      display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;
+    }
+    .sec-badge {
+      display:flex; align-items:center; gap:4px;
+      background:rgba(0,174,239,0.06); border:1px solid rgba(0,174,239,0.15);
+      color:var(--gray); padding:4px 10px; border-radius:50px;
+      font-size:0.72rem; font-weight:600;
+    }
+    .sec-badge i { color:var(--green); font-size:0.8rem; }
+
+    .payment-error {
+      display:none; background:rgba(255,76,106,0.12); border:1px solid rgba(255,76,106,0.35);
+      color:var(--red); padding:12px 16px; border-radius:12px;
+      margin-top:12px; font-size:0.85rem; line-height:1.4;
+    }
+
+    @media(max-width:580px) {
+      nav { padding:12px 16px; }
+      .flow-card { padding:20px 16px; }
+      .carrier-grid { grid-template-columns:1fr 1fr; gap:10px; }
+      .amount-grid { grid-template-columns:repeat(3,1fr); gap:8px; }
+      .how-step:not(:last-child)::after { content:''; }
+      .how-steps { flex-direction:column; align-items:flex-start; padding-left:24px; }
+    }
+  
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color:var(--gray,#8FA8CC);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+  .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
+    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'" /></div>
+    <span>Tchotcho<em>Pay</em></span>
+  </a>
+    <div class="nav-links">
+    <a href="send.html" class="nav-link" style="color:#4fd48a;font-weight:700;">💸 Send to Wallet</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="faq.html" class="nav-link">Help</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="login.html" class="nav-login">Log In</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-device-mobile"></i> <span id="badge-text">Caribbean Mobile Top-Up</span></div>
+  <h1 id="hero-title">Top up phones across the <em>Caribbean</em></h1>
+  <p id="hero-sub">Haiti, Dominican Republic, Cuba, Jamaica, Trinidad & Guyana — send airtime from anywhere in the world, paid with USDC.</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<div style="max-width:960px;margin:0 auto;padding:0 24px 40px;">
+  <div class="how-strip">
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="hs-num">1</div>
+        <div class="hs-text">
+          <div class="ht" id="hs1t">Choose Country & Carrier</div>
+          <div class="hs" id="hs1s">Haiti or Dominican Republic</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">2</div>
+        <div class="hs-text">
+          <div class="ht" id="hs2t">Enter Number</div>
+          <div class="hs" id="hs2s">Local mobile number</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">3</div>
+        <div class="hs-text">
+          <div class="ht" id="hs3t">Pick Amount</div>
+          <div class="hs" id="hs3s">$5 to $50 USDC</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="hs-num">4</div>
+        <div class="hs-text">
+          <div class="ht" id="hs4t">Done!</div>
+          <div class="hs" id="hs4s">Delivered in seconds</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <!-- FLOW CARD -->
+  <div class="flow-card">
+
+    <!-- Steps bar -->
+    <div class="steps-bar">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3">3</div>
+      <div class="step-line" id="line3"></div>
+      <div class="step-dot" id="dot4">4</div>
+      <div class="step-line" id="line4"></div>
+      <div class="step-dot" id="dot5">5</div>
+    </div>
+
+    <!-- STEP 1: Country + Carrier -->
+    <div class="panel active" id="panel1">
+      <div class="panel-title" id="p1-title">Select country</div>
+      <div class="panel-sub" id="p1-sub">Choose the country of the phone you're topping up.</div>
+
+      <!-- Country toggle -->
+      <div class="country-toggle">
+        <button class="country-btn selected" id="btn-country-ht" onclick="selectCountry('HT',this)">
+          <span class="cb-flag">🇭🇹</span>
+          <div class="cb-name">Haiti</div>
+          <div class="cb-sub">Digicel · Natcom</div>
+        </button>
+        <button class="country-btn" id="btn-country-do" onclick="selectCountry('DO',this)">
+          <span class="cb-flag">🇩🇴</span>
+          <div class="cb-name">Dominican Rep.</div>
+          <div class="cb-sub">Claro · Altice · Viva</div>
+        </button>
+        <button class="country-btn" id="btn-country-cu" onclick="selectCountry('CU',this)">
+          <span class="cb-flag">🇨🇺</span>
+          <div class="cb-name">Cuba</div>
+          <div class="cb-sub">Cubacel</div>
+        </button>
+        <button class="country-btn" id="btn-country-jm" onclick="selectCountry('JM',this)">
+          <span class="cb-flag">🇯🇲</span>
+          <div class="cb-name">Jamaica</div>
+          <div class="cb-sub">Digicel · Flow</div>
+        </button>
+        <button class="country-btn" id="btn-country-tt" onclick="selectCountry('TT',this)">
+          <span class="cb-flag">🇹🇹</span>
+          <div class="cb-name">Trinidad</div>
+          <div class="cb-sub">Digicel · bmobile</div>
+        </button>
+        <button class="country-btn" id="btn-country-gy" onclick="selectCountry('GY',this)">
+          <span class="cb-flag">🇬🇾</span>
+          <div class="cb-name">Guyana</div>
+          <div class="cb-sub">Digicel · GTT</div>
+        </button>
+      </div>
+
+      <div class="panel-title" id="p1-carrier-title" style="margin-bottom:6px;font-size:1rem;">Select carrier</div>
+      <div class="carrier-grid" id="carrier-grid">
+        <!-- filled by buildCarrierGrid() -->
+      </div>
+      <button class="btn-primary" id="btn1" onclick="goStep(2)" disabled>
+        <i class="ti ti-arrow-right"></i> <span id="btn1-text">Continue</span>
+      </button>
+    </div>
+
+    <!-- STEP 2: Phone number -->
+    <div class="panel" id="panel2">
+      <div class="panel-title" id="p2-title">Enter phone number</div>
+      <div class="panel-sub" id="p2-sub">The mobile number that will receive the top-up.</div>
+      <div class="input-label" id="phone-label">Phone Number</div>
+      <div class="phone-row">
+        <div class="country-code" id="phone-country-code">🇭🇹 +509</div>
+        <input class="phone-input" id="phone-input" type="tel" placeholder="XX XX XXXX" maxlength="13" oninput="formatPhone(this);validatePhone()" />
+      </div>
+      <div class="field-error" id="phone-error">Please enter a valid phone number</div>
+      <div style="font-size:.78rem;color:var(--gray);margin-bottom:24px;" id="phone-hint">
+        Digicel: starts with 36, 37, 38, 46, 47, 55, 3X<br>Natcom: starts with 34, 35, 48
+      </div>
+      <button class="btn-primary" id="btn2" onclick="goStep(3)" disabled>
+        <i class="ti ti-arrow-right"></i> <span id="btn2-text">Continue</span>
+      </button>
+      <button class="btn-secondary" onclick="goStep(1)" id="back2-text">← Back</button>
+    </div>
+
+    <!-- STEP 3: Amount -->
+    <div class="panel" id="panel3">
+      <div class="panel-title" id="p3-title">Choose amount</div>
+      <div class="panel-sub" id="p3-sub">All amounts paid in USDC from your Tchotcho wallet.</div>
+      <div class="amount-grid" id="amount-grid">
+        <!-- filled by JS -->
+      </div>
+      <div class="wallet-bar">
+        <div class="wl"><i class="ti ti-wallet"></i> <span id="wallet-label">Wallet Balance</span></div>
+        <span class="wl-val">48.20 USDC</span>
+      </div>
+      <div class="summary-box" id="summary-box" style="display:none">
+        <div class="summary-row"><span class="label" id="sl-carrier">Carrier</span><span class="val" id="sv-carrier">—</span></div>
+        <div class="summary-row"><span class="label" id="sl-number">Number</span><span class="val" id="sv-number">—</span></div>
+        <div class="summary-row"><span class="label" id="sl-amount">Top-Up Amount</span><span class="val cyan" id="sv-amount">—</span></div>
+        <div class="summary-row"><span class="label" id="sl-fee">Service Fee</span><span class="val green" id="sv-fee">—</span></div>
+        <div class="summary-row"><span class="label" id="sl-total">Total Charged</span><span class="val cyan" id="sv-total">—</span></div>
+      </div>
+      <button class="btn-primary" id="btn3" onclick="goStep(4)" disabled>
+        <i class="ti ti-credit-card"></i> <span id="btn3-text">Continue to Payment</span>
+      </button>
+      <button class="btn-secondary" onclick="goStep(2)" id="back3-text">← Back</button>
+    </div>
+
+    <!-- STEP 4: Payment -->
+    <div class="panel" id="panel4">
+      <div class="panel-title">Payment</div>
+      <div class="panel-sub">Choose how to pay.</div>
+
+      <!-- Payment method tabs -->
+      <div class="pay-method-tabs">
+        <button class="pm-tab active" id="tab-card" onclick="switchPayMethod('card')">
+          <i class="ti ti-credit-card"></i> Credit / Debit Card
+        </button>
+        <button class="pm-tab" id="tab-usdc" onclick="switchPayMethod('usdc')">
+          <i class="ti ti-wallet"></i> USDC Wallet
+        </button>
+      </div>
+
+      <!-- USDC Wallet panel -->
+      <div id="usdc-panel" style="display:none;">
+        <div class="wallet-pay-box">
+          <div class="wpb-bal">
+            <div class="wpb-label">Your USDC Balance</div>
+            <div class="wpb-amount" id="wpb-amount">—</div>
+            <div class="wpb-sub" id="wpb-sub"></div>
+          </div>
+          <hr class="wpb-divider"/>
+          <div class="payment-mini-summary">
+            <div class="pms-row"><span class="pms-label">Carrier</span><span class="pms-val" id="upay-carrier">—</span></div>
+            <div class="pms-row"><span class="pms-label">Phone</span><span class="pms-val" id="upay-phone">—</span></div>
+            <div class="pms-row"><span class="pms-label">Top-Up Amount</span><span class="pms-val" id="upay-topup">—</span></div>
+            <div class="pms-row"><span class="pms-label">Platform Fee (1%)</span><span class="pms-val" id="upay-fee">—</span></div>
+            <div class="pms-row pms-total"><span class="pms-label">Total USDC</span><span class="pms-val" id="upay-total">—</span></div>
+          </div>
+          <div class="wpb-fee-note"><i class="ti ti-piggy-bank"></i> No card fees — save up to 4.9% + $0.30</div>
+        </div>
+        <div id="usdc-error" class="payment-error" style="display:none;"></div>
+        <button class="btn-primary" id="btn-usdc" onclick="doWalletPayment()">
+          <i class="ti ti-wallet"></i> Pay with USDC Wallet
+        </button>
+        <p style="text-align:center;font-size:.8rem;color:var(--gray);margin-top:10px;">
+          Not logged in? <a href="login.html" style="color:var(--cyan);">Sign in</a> to use your wallet.
+        </p>
+      </div>
+
+      <!-- Card panel -->
+      <div id="card-panel">
+        <!-- Mini order summary -->
+        <div class="payment-mini-summary">
+          <div class="pms-row"><span class="pms-label">Carrier</span><span class="pms-val" id="pay-carrier">—</span></div>
+          <div class="pms-row"><span class="pms-label">Phone</span><span class="pms-val" id="pay-phone">—</span></div>
+          <div class="pms-row"><span class="pms-label">Top-Up Amount</span><span class="pms-val" id="pay-topup">—</span></div>
+          <div class="pms-row"><span class="pms-label">Service Fee (4.9% + $0.30)</span><span class="pms-val" id="pay-fee">—</span></div>
+          <div class="pms-row pms-total"><span class="pms-label">Total Charged</span><span class="pms-val" id="pay-total">—</span></div>
+        </div>
+
+        <!-- Name on card -->
+        <div class="input-label" style="margin-bottom:6px;">Name on Card</div>
+        <input type="text" id="name-on-card" class="phone-input" placeholder="e.g. Marie Joseph" autocomplete="cc-name" style="margin-bottom:16px;width:100%;" />
+
+        <!-- Stripe Card Element -->
+        <div class="input-label" style="margin-bottom:6px;">Card Details</div>
+        <div id="card-element" class="stripe-card-wrap">
+          <!-- Stripe.js mounts here -->
+        </div>
+        <div id="card-errors" class="field-error" style="margin-bottom:12px;"></div>
+
+        <!-- Security badges -->
+        <div class="security-row">
+          <span class="sec-badge"><i class="ti ti-lock"></i> SSL Encrypted</span>
+          <span class="sec-badge"><i class="ti ti-shield-check"></i> Secured by Stripe</span>
+          <span class="sec-badge"><i class="ti ti-certificate"></i> PCI Compliant</span>
+        </div>
+
+        <button class="btn-primary" id="btn4" onclick="doPayment()">
+          <i class="ti ti-credit-card"></i> <span id="btn4-text">Pay Now</span>
+        </button>
+        <div id="payment-error" class="payment-error"></div>
+      </div>
+
+      <button class="btn-secondary" onclick="goStep(3)">← Back</button>
+    </div>
+
+    <!-- STEP 5: Success -->
+    <div class="panel" id="panel5">
+      <div class="success-wrap">
+        <div class="confetti-bar" id="confetti-bar">🎉 📱 ✅ 💸</div>
+        <div class="success-icon">✓</div>
+        <div class="success-title" id="s-title">Top-Up Sent!</div>
+        <div class="success-sub" id="s-sub">The airtime has been delivered to the phone. It usually arrives within seconds.</div>
+        <div class="success-detail" id="success-detail">
+          <!-- filled by JS -->
+        </div>
+        <button class="btn-primary" onclick="resetFlow()">
+          <i class="ti ti-plus"></i> <span id="new-topup-text">Send Another Top-Up</span>
+        </button>
+        <button class="btn-secondary" onclick="window.location.href='index.html'">
+          <span id="go-home-text">Go to Homepage</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /flow-card -->
+
+  <!-- PHONE PREVIEW -->
+  <div class="phone-preview">
+    <div class="phone-shell">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="ps-header">
+          <div class="ps-title" id="ps-title-text">Mobile Top-Up</div>
+          <div class="ps-carrier">
+            <div class="ps-carrier-logo digicel" id="ps-carrier-logo">D!</div>
+            <span id="ps-carrier-name">Digicel Haiti</span>
+          </div>
+        </div>
+        <div class="ps-body">
+          <div class="ps-phone-display">
+            <div class="psd-label" id="psd-label">Sending to</div>
+            <div class="psd-num" id="psd-num">+509 __ __ ____</div>
+          </div>
+          <div class="ps-amounts">
+            <div class="ps-amt sel" onclick="psSelectAmt(this,'$5','652 HTG')"><div class="pa-usd">$5</div><div class="pa-htg">652 HTG</div></div>
+            <div class="ps-amt" onclick="psSelectAmt(this,'$10','1,305 HTG')"><div class="pa-usd">$10</div><div class="pa-htg">1,305 HTG</div></div>
+            <div class="ps-amt" onclick="psSelectAmt(this,'$20','2,610 HTG')"><div class="pa-usd">$20</div><div class="pa-htg">2,610 HTG</div></div>
+            <div class="ps-amt" onclick="psSelectAmt(this,'$25','3,262 HTG')"><div class="pa-usd">$25</div><div class="pa-htg">3,262 HTG</div></div>
+            <div class="ps-amt" onclick="psSelectAmt(this,'$35','4,567 HTG')"><div class="pa-usd">$35</div><div class="pa-htg">4,567 HTG</div></div>
+            <div class="ps-amt" onclick="psSelectAmt(this,'$50','6,525 HTG')"><div class="pa-usd">$50</div><div class="pa-htg">6,525 HTG</div></div>
+          </div>
+          <div class="ps-total">
+            <div>
+              <div class="pt-label" id="ps-charges-label">Total Charged</div>
+              <div class="pt-val" id="ps-total-val">$5.00 USDC</div>
+            </div>
+            <div style="font-size:.7rem;color:var(--gray);text-align:right;">
+              <div id="ps-free-label">Fee: <span id="ps-fee-val">$0.79</span></div>
+              <div style="color:var(--green);font-weight:700;" id="ps-instant-label">⚡ Instant</div>
+            </div>
+          </div>
+          <button class="ps-btn" id="ps-send-btn">Send Top-Up →</button>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--gray);font-size:.75rem;margin-top:12px;" id="preview-label">Live interactive preview</p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- POPULAR PLANS -->
+<div style="max-width:960px;margin:0 auto;padding:0 24px 80px;">
+  <div class="plans-section">
+    <h2 id="plans-title">Popular Top-Up Plans</h2>
+    <p class="plans-sub" id="plans-sub">Quick one-tap top-ups. All fees included.</p>
+    <div class="plans-grid" id="plans-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Stripe.js — must load from js.stripe.com, never self-host -->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="lang.js"></script>
+<script>
+  // ── COUNTRY CONFIG ────────────────────────────────────────────────
+  const COUNTRY_CONFIG = {
+    HT: {
+      flag: '🇭🇹', dialCode: '+509', code: 'HT',
+      phonePlaceholder: 'XX XX XXXX', phoneDigits: 8,
+      phoneFormat: v => {
+        v = v.slice(0,8);
+        if (v.length > 4) return v.slice(0,2)+' '+v.slice(2,4)+' '+v.slice(4);
+        if (v.length > 2) return v.slice(0,2)+' '+v.slice(2);
+        return v;
+      },
+      phoneHint: 'Digicel: starts with 36, 37, 38, 46, 47, 55, 3X<br>Natcom: starts with 34, 35, 48',
+      localCurrency: 'HTG', localRate: 130.5,
+      carriers: [
+        { key:'digicel', label:'Digicel', sub:"Haiti's #1 network", abbr:'D!',  cls:'digicel' },
+        { key:'natcom',  label:'Natcom',  sub:'National Telecom',   abbr:'NT',  cls:'natcom'  },
+      ],
+      amounts: [
+        { usd:5,  local:652,  data:'500 MB / 30 mins' },
+        { usd:10, local:1305, data:'1 GB / 60 mins' },
+        { usd:20, local:2610, data:'2 GB / 120 mins' },
+        { usd:25, local:3262, data:'3 GB / 180 mins' },
+        { usd:35, local:4567, data:'5 GB / 250 mins' },
+        { usd:50, local:6525, data:'10 GB / Unlimited calls' },
+      ],
+      plans: [
+        { carrier:'digicel', usd:5,  local:652,  perks:['500 MB data','30 min calls','Valid 7 days'] },
+        { carrier:'digicel', usd:10, local:1305, perks:['1 GB data','60 min calls','Valid 14 days'] },
+        { carrier:'digicel', usd:25, local:3262, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
+        { carrier:'natcom',  usd:5,  local:652,  perks:['400 MB data','30 min calls','Valid 7 days'] },
+        { carrier:'natcom',  usd:10, local:1305, perks:['1 GB data','60 min calls','Valid 14 days'] },
+        { carrier:'natcom',  usd:20, local:2610, perks:['2 GB data','Unlimited local','Valid 30 days'] },
+      ],
+    },
+    DO: {
+      flag: '🇩🇴', dialCode: '+1', code: 'DO',
+      phonePlaceholder: '809-XXX-XXXX', phoneDigits: 10,
+      phoneFormat: v => {
+        v = v.slice(0,10);
+        if (v.length > 6) return v.slice(0,3)+'-'+v.slice(3,6)+'-'+v.slice(6);
+        if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
+        return v;
+      },
+      phoneHint: 'Area codes: 809, 829, or 849<br>Format: 809-XXX-XXXX',
+      localCurrency: 'DOP', localRate: 60,
+      carriers: [
+        { key:'claro',  label:'Claro',  sub:"DR's largest network", abbr:'CLR', cls:'claro'  },
+        { key:'altice', label:'Altice', sub:'Formerly Orange DR',   abbr:'ALT', cls:'altice' },
+        { key:'viva',   label:'Viva',   sub:'Trilogy Communications', abbr:'VIV', cls:'viva'  },
+      ],
+      amounts: [
+        { usd:5,  local:300,  data:'500 MB / 30 mins' },
+        { usd:10, local:600,  data:'1 GB / 60 mins' },
+        { usd:20, local:1200, data:'2 GB / 120 mins' },
+        { usd:25, local:1500, data:'3 GB / 180 mins' },
+        { usd:35, local:2100, data:'5 GB / 250 mins' },
+        { usd:50, local:3000, data:'10 GB / Unlimited calls' },
+      ],
+      plans: [
+        { carrier:'claro',  usd:5,  local:300,  perks:['500 MB data','30 min calls','Valid 7 days'] },
+        { carrier:'claro',  usd:10, local:600,  perks:['1 GB data','60 min calls','Valid 14 days'] },
+        { carrier:'claro',  usd:25, local:1500, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
+        { carrier:'altice', usd:5,  local:300,  perks:['400 MB data','30 min calls','Valid 7 days'] },
+        { carrier:'altice', usd:10, local:600,  perks:['1 GB data','60 min calls','Valid 14 days'] },
+        { carrier:'viva',   usd:20, local:1200, perks:['2 GB data','Unlimited local','Valid 30 days'] },
+      ],
+    }
+  };
+
+  // ── ADD 4 MORE COUNTRIES ─────────────────────────────────────────
+  COUNTRY_CONFIG.CU = {
+    flag: '🇨🇺', dialCode: '+53', code: 'CU',
+    phonePlaceholder: '5X XX XXXX', phoneDigits: 8,
+    phoneFormat: v => {
+      v = v.slice(0,8);
+      if (v.length > 4) return v.slice(0,2)+' '+v.slice(2,4)+' '+v.slice(4);
+      if (v.length > 2) return v.slice(0,2)+' '+v.slice(2);
+      return v;
+    },
+    phoneHint: 'Cuban mobile numbers start with 5<br>Format: 5X XX XXXX',
+    localCurrency: 'CUP', localRate: 24,
+    carriers: [
+      { key:'cubacel', label:'Cubacel', sub:'Cuba\'s only mobile network', abbr:'CU', cls:'cubacel' },
+    ],
+    amounts: [
+      { usd:5,  local:120,  data:'300 MB / 30 mins' },
+      { usd:10, local:240,  data:'700 MB / 60 mins' },
+      { usd:20, local:480,  data:'1.5 GB / 120 mins' },
+      { usd:25, local:600,  data:'2 GB / 180 mins' },
+      { usd:35, local:840,  data:'3 GB / 250 mins' },
+      { usd:50, local:1200, data:'5 GB / Unlimited calls' },
+    ],
+    plans: [
+      { carrier:'cubacel', usd:5,  local:120,  perks:['300 MB data','30 min calls','Valid 7 days'] },
+      { carrier:'cubacel', usd:10, local:240,  perks:['700 MB data','60 min calls','Valid 14 days'] },
+      { carrier:'cubacel', usd:25, local:600,  perks:['2 GB data','Unlimited SMS','Valid 30 days'] },
+    ],
+  };
+
+  COUNTRY_CONFIG.JM = {
+    flag: '🇯🇲', dialCode: '+1', code: 'JM',
+    phonePlaceholder: '876-XXX-XXXX', phoneDigits: 10,
+    phoneFormat: v => {
+      v = v.slice(0,10);
+      if (v.length > 6) return v.slice(0,3)+'-'+v.slice(3,6)+'-'+v.slice(6);
+      if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
+      return v;
+    },
+    phoneHint: 'Jamaica area code: 876<br>Format: 876-XXX-XXXX',
+    localCurrency: 'JMD', localRate: 155,
+    carriers: [
+      { key:'digicel-jm', label:'Digicel', sub:"Jamaica's largest network", abbr:'D!', cls:'digicel' },
+      { key:'flow-jm',    label:'Flow',    sub:'Cable & Wireless Jamaica',  abbr:'FL', cls:'flow'   },
+    ],
+    amounts: [
+      { usd:5,  local:775,  data:'500 MB / 30 mins' },
+      { usd:10, local:1550, data:'1 GB / 60 mins' },
+      { usd:20, local:3100, data:'2 GB / 120 mins' },
+      { usd:25, local:3875, data:'3 GB / 180 mins' },
+      { usd:35, local:5425, data:'5 GB / 250 mins' },
+      { usd:50, local:7750, data:'10 GB / Unlimited calls' },
+    ],
+    plans: [
+      { carrier:'digicel-jm', usd:5,  local:775,  perks:['500 MB data','30 min calls','Valid 7 days'] },
+      { carrier:'digicel-jm', usd:10, local:1550, perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'digicel-jm', usd:25, local:3875, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
+      { carrier:'flow-jm',    usd:10, local:1550, perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'flow-jm',    usd:20, local:3100, perks:['2 GB data','Unlimited local','Valid 30 days'] },
+    ],
+  };
+
+  COUNTRY_CONFIG.TT = {
+    flag: '🇹🇹', dialCode: '+1', code: 'TT',
+    phonePlaceholder: '868-XXX-XXXX', phoneDigits: 10,
+    phoneFormat: v => {
+      v = v.slice(0,10);
+      if (v.length > 6) return v.slice(0,3)+'-'+v.slice(3,6)+'-'+v.slice(6);
+      if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
+      return v;
+    },
+    phoneHint: 'Trinidad area code: 868<br>Format: 868-XXX-XXXX',
+    localCurrency: 'TTD', localRate: 6.8,
+    carriers: [
+      { key:'digicel-tt', label:'Digicel',  sub:'Trinidad\'s #1 network', abbr:'D!', cls:'digicel' },
+      { key:'bmobile',    label:'bmobile',  sub:'TSTT mobile network',    abbr:'BM', cls:'bmobile' },
+    ],
+    amounts: [
+      { usd:5,  local:34,  data:'500 MB / 30 mins' },
+      { usd:10, local:68,  data:'1 GB / 60 mins' },
+      { usd:20, local:136, data:'2 GB / 120 mins' },
+      { usd:25, local:170, data:'3 GB / 180 mins' },
+      { usd:35, local:238, data:'5 GB / 250 mins' },
+      { usd:50, local:340, data:'10 GB / Unlimited calls' },
+    ],
+    plans: [
+      { carrier:'digicel-tt', usd:5,  local:34,  perks:['500 MB data','30 min calls','Valid 7 days'] },
+      { carrier:'digicel-tt', usd:10, local:68,  perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'digicel-tt', usd:25, local:170, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
+      { carrier:'bmobile',    usd:10, local:68,  perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'bmobile',    usd:20, local:136, perks:['2 GB data','Unlimited local','Valid 30 days'] },
+    ],
+  };
+
+  COUNTRY_CONFIG.GY = {
+    flag: '🇬🇾', dialCode: '+592', code: 'GY',
+    phonePlaceholder: 'XXX-XXXX', phoneDigits: 7,
+    phoneFormat: v => {
+      v = v.slice(0,7);
+      if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
+      return v;
+    },
+    phoneHint: 'Guyana 7-digit mobile number<br>Format: XXX-XXXX',
+    localCurrency: 'GYD', localRate: 209,
+    carriers: [
+      { key:'digicel-gy', label:'Digicel', sub:'Guyana\'s largest network', abbr:'D!', cls:'digicel' },
+      { key:'gtt',        label:'GTT',     sub:'Guyana Telephone & Tel.',   abbr:'GT', cls:'gtt'    },
+    ],
+    amounts: [
+      { usd:5,  local:1045, data:'500 MB / 30 mins' },
+      { usd:10, local:2090, data:'1 GB / 60 mins' },
+      { usd:20, local:4180, data:'2 GB / 120 mins' },
+      { usd:25, local:5225, data:'3 GB / 180 mins' },
+      { usd:35, local:7315, data:'5 GB / 250 mins' },
+      { usd:50, local:10450, data:'10 GB / Unlimited calls' },
+    ],
+    plans: [
+      { carrier:'digicel-gy', usd:5,  local:1045, perks:['500 MB data','30 min calls','Valid 7 days'] },
+      { carrier:'digicel-gy', usd:10, local:2090, perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'digicel-gy', usd:25, local:5225, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
+      { carrier:'gtt',        usd:10, local:2090, perks:['1 GB data','60 min calls','Valid 14 days'] },
+      { carrier:'gtt',        usd:20, local:4180, perks:['2 GB data','Unlimited local','Valid 30 days'] },
+    ],
+  };
+
+  let selectedCountry = 'HT';
+  let selectedCarrier = null;
+  let selectedAmount  = null;
+  let currentStep     = 1;
+
+  // ── RELOADLY OPERATOR IDs (fetched per country) ───────────────────
+  const RELOADLY_FN = '/.netlify/functions/reloadly';
+  // Cache per country
+  const operatorCache = { HT: {}, DO: {}, CU: {}, JM: {}, TT: {}, GY: {} };
+
+  async function loadOperators(country) {
+    try {
+      const res  = await fetch(RELOADLY_FN, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'operators', country })
+      });
+      const ops = await res.json();
+      ops.forEach(op => {
+        const name = op.name.toLowerCase();
+        if (country === 'HT') {
+          if (name === 'digicel haiti') operatorCache.HT.digicel = op.id;
+          if (name === 'natcom haiti')  operatorCache.HT.natcom  = op.id;
+        } else if (country === 'DO') {
+          if (name.includes('claro'))  operatorCache.DO.claro  = op.id;
+          if (name.includes('altice') || name.includes('orange')) operatorCache.DO.altice = op.id;
+          if (name.includes('viva') || name.includes('trilogy'))  operatorCache.DO.viva   = op.id;
+        } else if (country === 'CU') {
+          if (name.includes('cubacel') || name.includes('etecsa')) operatorCache.CU.cubacel = op.id;
+        } else if (country === 'JM') {
+          if (name.includes('digicel')) operatorCache.JM['digicel-jm'] = op.id;
+          if (name.includes('flow') || name.includes('cable') || name.includes('lime')) operatorCache.JM['flow-jm'] = op.id;
+        } else if (country === 'TT') {
+          if (name.includes('digicel')) operatorCache.TT['digicel-tt'] = op.id;
+          if (name.includes('bmobile') || name.includes('tstt')) operatorCache.TT['bmobile'] = op.id;
+        } else if (country === 'GY') {
+          if (name.includes('digicel')) operatorCache.GY['digicel-gy'] = op.id;
+          if (name.includes('gtt') || name.includes('guyana telephone')) operatorCache.GY['gtt'] = op.id;
+        }
+      });
+      console.log(`Operators loaded for ${country}:`, operatorCache[country]);
+    } catch (e) {
+      console.warn('Could not load Reloadly operators:', e.message);
+    }
+  }
+  // Pre-load Haiti on page load
+  loadOperators('HT');
+
+  // ── COUNTRY SELECT ────────────────────────────────────────────────
+  function selectCountry(code, el) {
+    selectedCountry = code;
+    selectedCarrier = null;
+    document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btn1').disabled = true;
+
+    const cfg = COUNTRY_CONFIG[code];
+    // Update phone preview header
+    document.getElementById('ps-carrier-name').textContent = cfg.carriers[0].label + ' ' + (code === 'HT' ? 'Haiti' : 'DR');
+
+    // Load operators if not yet cached
+    if (Object.keys(operatorCache[code]).length === 0) loadOperators(code);
+
+    buildCarrierGrid();
+    updatePhoneStep();
+    buildPlans();
+  }
+
+  // ── BUILD CARRIER GRID ────────────────────────────────────────────
+  function buildCarrierGrid() {
+    const cfg  = COUNTRY_CONFIG[selectedCountry];
+    const grid = document.getElementById('carrier-grid');
+    grid.innerHTML = '';
+    // Use 2 cols for 2 carriers, 3 cols for 3
+    grid.style.gridTemplateColumns = cfg.carriers.length >= 3 ? 'repeat(3,1fr)' : '1fr 1fr';
+    cfg.carriers.forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'carrier-card';
+      div.id = 'card-' + c.key;
+      div.innerHTML = `<div class="carrier-logo ${c.cls}">${c.abbr}</div><div class="carrier-name">${c.label}</div><div class="carrier-sub">${c.sub}</div>`;
+      div.onclick = () => selectCarrier(c.key, div);
+      grid.appendChild(div);
+    });
+  }
+  buildCarrierGrid(); // init on load
+
+  // ── CARRIER SELECT ────────────────────────────────────────────────
+  function selectCarrier(name, el) {
+    selectedCarrier = name;
+    document.querySelectorAll('.carrier-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btn1').disabled = false;
+    // Update phone preview
+    const cfg     = COUNTRY_CONFIG[selectedCountry];
+    const carrier = cfg.carriers.find(c => c.key === name);
+    const logoEl  = document.getElementById('ps-carrier-logo');
+    logoEl.className    = 'ps-carrier-logo ' + carrier.cls;
+    logoEl.textContent  = carrier.abbr;
+    const countryName   = selectedCountry === 'HT' ? 'Haiti' : 'DR';
+    document.getElementById('ps-carrier-name').textContent = carrier.label + ' ' + countryName;
+  }
+
+  // ── PHONE FORMAT ─────────────────────────────────────────────────
+  function updatePhoneStep() {
+    const cfg = COUNTRY_CONFIG[selectedCountry];
+    document.getElementById('phone-country-code').textContent = cfg.flag + ' ' + cfg.dialCode;
+    document.getElementById('phone-input').placeholder = cfg.phonePlaceholder;
+    document.getElementById('phone-hint').innerHTML = cfg.phoneHint;
+    document.getElementById('phone-input').value = '';
+    document.getElementById('psd-num').textContent = cfg.dialCode + ' ' + cfg.phonePlaceholder;
+    document.getElementById('btn2').disabled = true;
+  }
+
+  function formatPhone(el) {
+    const cfg = COUNTRY_CONFIG[selectedCountry];
+    let v = el.value.replace(/\D/g,'');
+    el.value = cfg.phoneFormat(v);
+    const dialCode = cfg.dialCode;
+    document.getElementById('psd-num').textContent = dialCode + ' ' + (el.value || cfg.phonePlaceholder);
+  }
+
+  function validatePhone() {
+    const cfg = COUNTRY_CONFIG[selectedCountry];
+    const raw = document.getElementById('phone-input').value.replace(/\D/g,'');
+    const valid = raw.length === cfg.phoneDigits;
+    document.getElementById('btn2').disabled = !valid;
+    document.getElementById('phone-error').classList.toggle('show', raw.length > 0 && !valid);
+    return valid;
+  }
+
+  // ── AMOUNT SELECT ────────────────────────────────────────────────
+  function buildAmounts() {
+    const cfg  = COUNTRY_CONFIG[selectedCountry];
+    const grid = document.getElementById('amount-grid');
+    grid.innerHTML = '';
+    cfg.amounts.forEach((a) => {
+      const d = document.createElement('div');
+      d.className = 'amount-card';
+      d.innerHTML = `<div class="amount-usd">$${a.usd}</div><div class="amount-htg">${a.local.toLocaleString()} ${cfg.localCurrency}</div><div class="amount-data">${a.data}</div>`;
+      d.onclick = () => selectAmount(a, d);
+      grid.appendChild(d);
+    });
+  }
+
+  function selectAmount(a, el) {
+    selectedAmount = a;
+    document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btn3').disabled = false;
+
+    const cfg     = COUNTRY_CONFIG[selectedCountry];
+    const carrier = cfg.carriers.find(c => c.key === selectedCarrier);
+    const countryName = selectedCountry === 'HT' ? 'Haiti' : 'DR';
+
+    // Update summary
+    const box = document.getElementById('summary-box');
+    box.style.display = 'block';
+    const phone = document.getElementById('phone-input').value;
+    document.getElementById('sv-carrier').textContent = (carrier ? carrier.label : '') + ' ' + countryName;
+    document.getElementById('sv-number').textContent = cfg.dialCode + ' ' + phone;
+    document.getElementById('sv-amount').textContent = `${a.local.toLocaleString()} ${cfg.localCurrency} (${a.data})`;
+    const _feeUsd  = ((Math.round(a.usd * 0.029 * 100) + 30 + Math.round(a.usd * 0.02 * 100)) / 100).toFixed(2);
+    const _totalUsd = (a.usd + parseFloat(_feeUsd)).toFixed(2);
+    document.getElementById('sv-fee').textContent   = '$' + _feeUsd;
+    document.getElementById('sv-total').textContent = '$' + _totalUsd;
+
+    // Update phone preview
+    const _psFee  = ((Math.round(a.usd * 0.029 * 100) + 30 + Math.round(a.usd * 0.02 * 100)) / 100).toFixed(2);
+    const _psTotal = (a.usd + parseFloat(_psFee)).toFixed(2);
+    document.getElementById('ps-fee-val').textContent   = '$' + _psFee;
+    document.getElementById('ps-total-val').textContent = '$' + _psTotal + ' USDC';
+    document.querySelectorAll('.ps-amt').forEach(pa => {
+      pa.classList.toggle('sel', pa.querySelector('.pa-usd').textContent === '$'+a.usd);
+    });
+  }
+
+  // ── STRIPE INIT ──────────────────────────────────────────────────
+  // Replace with your Stripe publishable key from dashboard.stripe.com
+  // Test key starts with pk_test_  |  Live key starts with pk_live_
+  const STRIPE_PK = 'pk_live_51U0wFAC4eLwVz6CMDQGr4RBg6l9muv0k0ZV3y8ESZSFVuwfPHhz7JPb6VsAwE4kxFvAcyZwDJX15gpJpvFJUSAcx00EqGDVqmI';
+  const stripe    = Stripe(STRIPE_PK);
+  const elements  = stripe.elements();
+  const cardElement = elements.create('card', {
+    style: {
+      base: {
+        color: '#F0F6FF',
+        fontSize: '16px',
+        fontFamily: "'Segoe UI', system-ui, sans-serif",
+        fontSmoothing: 'antialiased',
+        '::placeholder': { color: 'rgba(143,168,204,0.45)' },
+      },
+      invalid: { color: '#FF4C6A', iconColor: '#FF4C6A' },
+    },
+    hidePostalCode: true,
+  });
+
+  // Mount only once DOM is ready; remount guard
+  let cardMounted = false;
+  function mountCard() {
+    if (!cardMounted) {
+      cardElement.mount('#card-element');
+      cardMounted = true;
+      cardElement.on('change', e => {
+        const errEl = document.getElementById('card-errors');
+        const wrap  = document.getElementById('card-element');
+        if (e.error) {
+          errEl.textContent = e.error.message;
+          errEl.classList.add('show');
+          wrap.classList.add('invalid');
+        } else {
+          errEl.textContent = '';
+          errEl.classList.remove('show');
+          wrap.classList.remove('invalid');
+          if (e.complete) wrap.classList.add('focused');
+        }
+      });
+    }
+  }
+
+  // ── STEPS ────────────────────────────────────────────────────────
+  function goStep(n) {
+    if (n === 2) updatePhoneStep();
+    if (n === 3) buildAmounts();
+    if (n === 4) {
+      mountCard();
+      populatePaymentSummary();
+    }
+    currentStep = n;
+    for(let i=1;i<=5;i++) {
+      const panel = document.getElementById('panel'+i);
+      if (panel) panel.classList.toggle('active', i===n);
+      const dot = document.getElementById('dot'+i);
+      if (dot) {
+        dot.classList.remove('active','done');
+        if (i < n) { dot.classList.add('done'); dot.textContent = '✓'; }
+        else if (i === n) { dot.classList.add('active'); dot.textContent = i; }
+        else dot.textContent = i;
+      }
+    }
+    for(let i=1;i<=4;i++) {
+      const line = document.getElementById('line'+i);
+      if (line) line.classList.toggle('done', i < n);
+    }
+  }
+
+  // ── POPULATE PAYMENT SUMMARY ─────────────────────────────────────
+  function populatePaymentSummary() {
+    if (!selectedAmount) return;
+    const cfg     = COUNTRY_CONFIG[selectedCountry];
+    const phone   = document.getElementById('phone-input').value;
+    const carrier = cfg.carriers.find(c => c.key === selectedCarrier);
+    const countryName = selectedCountry === 'HT' ? 'Haiti' : 'Dominican Republic';
+    const amt      = selectedAmount.usd;
+    const stripeCents   = Math.round(amt * 0.029 * 100) + 30;
+    const platformCents = Math.round(amt * 0.02 * 100);
+    const feeCents      = stripeCents + platformCents;
+    const feeUsd        = (feeCents / 100).toFixed(2);
+    const total         = (amt + feeCents / 100).toFixed(2);
+    document.getElementById('pay-carrier').textContent = (carrier ? carrier.label + ' ' : '') + countryName;
+    document.getElementById('pay-phone').textContent   = cfg.dialCode + ' ' + phone;
+    document.getElementById('pay-topup').textContent   = '$' + amt + '.00';
+    document.getElementById('pay-fee').textContent     = '$' + feeUsd;
+    document.getElementById('pay-total').textContent   = '$' + total;
+  }
+
+  // ── PAY & TOP UP ─────────────────────────────────────────────────
+  async function doPayment() {
+    const btn     = document.getElementById('btn4');
+    const errDiv  = document.getElementById('payment-error');
+    const nameVal = document.getElementById('name-on-card').value.trim();
+
+    if (!nameVal) {
+      errDiv.style.display = 'block';
+      errDiv.textContent   = '⚠️ Please enter the name on your card.';
+      return;
+    }
+
+    btn.disabled    = true;
+    btn.innerHTML   = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Processing payment…';
+    errDiv.style.display = 'none';
+
+    const phoneRaw   = document.getElementById('phone-input').value.replace(/\D/g,'');
+    const finalOpId  = (operatorCache[selectedCountry] || {})[selectedCarrier] || null;
+    if (!finalOpId) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-credit-card"></i> <span>Pay Now</span>';
+      errDiv.style.display = 'block';
+      errDiv.textContent   = '⚠️ Carrier not available. Please refresh and try again.';
+      return;
+    }
+
+    try {
+      // 0 — Balance pre-check (before charging card)
+      const balRes  = await fetch(RELOADLY_FN, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'balance', amount: selectedAmount.usd })
+      });
+      if (!balRes.ok) {
+        const balData = await balRes.json();
+        throw new Error(balData.error || 'Top-up service temporarily unavailable. Please try again later.');
+      }
+
+      // 1 — Create PaymentIntent on server
+      const piRes = await fetch('/.netlify/functions/stripe-payment', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount:      selectedAmount.usd,
+          carrier:     selectedCarrier,
+          phoneNumber: phoneRaw,
+        })
+      });
+      const piData = await piRes.json();
+      if (!piRes.ok) throw new Error(piData.error || 'Payment setup failed');
+
+      // 2 — Confirm card payment with Stripe.js
+      const { paymentIntent, error } = await stripe.confirmCardPayment(piData.clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: { name: nameVal },
+        }
+      });
+      if (error) throw new Error(error.message);
+      if (paymentIntent.status !== 'succeeded') throw new Error('Payment did not complete. Please try again.');
+
+      // 3 — Payment captured — trigger Reloadly top-up
+      btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Sending top-up…';
+
+      const topupRes = await fetch(RELOADLY_FN, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action:           'topup',
+          operatorId:       finalOpId,
+          amount:           selectedAmount.usd,
+          phoneNumber:      phoneRaw,
+          recipientCountry: selectedCountry,
+        })
+      });
+      const topupData = await topupRes.json();
+
+      if (!topupRes.ok) {
+        // Payment taken but top-up failed — show special message with payment ref
+        throw new Error(
+          'Payment received but the top-up encountered an issue. ' +
+          'Please email support@tchotchopay.com with ref: ' + paymentIntent.id
+        );
+      }
+
+      window._lastTopupTxId  = topupData.transactionId || topupData.id || null;
+      window._lastPaymentId  = paymentIntent.id;
+      showSuccess();
+
+    } catch (err) {
+      btn.disabled  = false;
+      btn.innerHTML = '<i class="ti ti-credit-card"></i> <span>Pay Now</span>';
+      errDiv.style.display = 'block';
+      errDiv.textContent   = '⚠️ ' + err.message;
+    }
+  }
+
+  // ── USDC WALLET PAYMENT ──────────────────────────────────────────────────
+  let payMethod = 'card';
+  let walletBal = null;
+
+  function switchPayMethod(m) {
+    payMethod = m;
+    document.getElementById('tab-card').classList.toggle('active', m === 'card');
+    document.getElementById('tab-usdc').classList.toggle('active', m === 'usdc');
+    document.getElementById('card-panel').style.display  = m === 'card'  ? '' : 'none';
+    document.getElementById('usdc-panel').style.display  = m === 'usdc'  ? '' : 'none';
+    if (m === 'usdc') { loadWalletBal(); updateUsdcSummary(); }
+  }
+
+  async function loadWalletBal() {
+    const amtEl = document.getElementById('wpb-amount');
+    const subEl = document.getElementById('wpb-sub');
+    const token = sessionStorage.getItem('tp_session_token');
+    if (!token) {
+      amtEl.textContent = '—';
+      subEl.textContent = 'Sign in to use your wallet balance';
+      return;
+    }
+    amtEl.textContent = 'Loading…';
+    try {
+      const res  = await fetch('/.netlify/functions/user-profile', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      walletBal  = parseFloat(data.wallet?.usdc_balance) || 0;
+      amtEl.textContent = walletBal.toFixed(2) + ' USDC';
+      subEl.textContent = '≈ $' + walletBal.toFixed(2) + ' USD available';
+      updateUsdcSummary();
+    } catch {
+      amtEl.textContent = 'Could not load balance';
+      subEl.textContent = '';
+    }
+  }
+
+  function updateUsdcSummary() {
+    if (!selectedAmount) return;
+    const cfg       = COUNTRY_CONFIG[selectedCountry];
+    const carrier   = cfg.carriers.find(c => c.key === selectedCarrier);
+    const country   = selectedCountry === 'HT' ? 'Haiti' : 'Dominican Republic';
+    const amt  = selectedAmount.usd;
+    const fee  = parseFloat((amt * 0.01).toFixed(2));
+    const total = parseFloat((amt + fee).toFixed(2));
+    document.getElementById('upay-carrier').textContent = (carrier ? carrier.label + ' ' : '') + country;
+    document.getElementById('upay-phone').textContent   = cfg.dialCode + ' ' + document.getElementById('phone-input').value;
+    document.getElementById('upay-topup').textContent   = '$' + amt.toFixed(2);
+    document.getElementById('upay-fee').textContent     = '$' + fee.toFixed(2);
+    document.getElementById('upay-total').textContent   = total.toFixed(2) + ' USDC';
+  }
+
+  async function doWalletPayment() {
+    const token  = sessionStorage.getItem('tp_session_token');
+    const errDiv = document.getElementById('usdc-error');
+    const btn    = document.getElementById('btn-usdc');
+    errDiv.style.display = 'none';
+
+    if (!token) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = '⚠️ Please sign in to pay with your USDC wallet.';
+      return;
+    }
+    if (!selectedAmount) return;
+
+    const amt   = selectedAmount.usd;
+    const fee   = parseFloat((amt * 0.01).toFixed(2));
+    const total = parseFloat((amt + fee).toFixed(6));
+
+    if (walletBal !== null && walletBal < total) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = `⚠️ Insufficient balance. You have ${walletBal.toFixed(2)} USDC but need ${total.toFixed(2)} USDC.`;
+      return;
+    }
+
+    const phoneRaw  = document.getElementById('phone-input').value.replace(/\D/g,'');
+    const finalOpId = (operatorCache[selectedCountry] || {})[selectedCarrier] || null;
+    if (!finalOpId) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = '⚠️ Carrier not available. Please refresh and try again.';
+      return;
+    }
+
+    btn.disabled  = true;
+    btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Processing…';
+
+    try {
+      // 0 — Reloadly balance pre-check
+      const balRes = await fetch(RELOADLY_FN, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'balance', amount: amt }),
+      });
+      if (!balRes.ok) {
+        const d = await balRes.json();
+        throw new Error(d.error || 'Top-up service temporarily unavailable. Please try again later.');
+      }
+
+      // 1 — Deduct USDC from wallet
+      const deductRes = await fetch('/.netlify/functions/wallet-pay', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionToken: token, amountUSDC: total }),
+      });
+      const deductData = await deductRes.json();
+      if (!deductRes.ok) throw new Error(deductData.error || 'Wallet payment failed. Please try again.');
+
+      // 2 — Trigger Reloadly top-up
+      btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Sending top-up…';
+      const topupRes = await fetch(RELOADLY_FN, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'topup', operatorId: finalOpId,
+          amount: selectedAmount.usd, phoneNumber: phoneRaw,
+          recipientCountry: selectedCountry,
+        }),
+      });
+      const topupData = await topupRes.json();
+      if (!topupRes.ok) {
+        throw new Error('Wallet debited but top-up failed. Please email support@tchotchopay.com with ref: USDC-WALLET');
+      }
+
+      // 3 — Success
+      walletBal = deductData.newBalance;
+      window._lastTopupTxId = topupData.transactionId || topupData.id || null;
+      window._lastPaymentId = null;
+      window._payMethod  = 'usdc';
+      window._usdcTotal  = total;
+      showSuccess();
+
+    } catch (err) {
+      errDiv.style.display = 'block';
+      errDiv.textContent = '⚠️ ' + err.message;
+      btn.disabled  = false;
+      btn.innerHTML = '<i class="ti ti-wallet"></i> Pay with USDC Wallet';
+    }
+  }
+
+  function showSuccess() {
+    goStep(5);
+    const cfg     = COUNTRY_CONFIG[selectedCountry];
+    const phone   = document.getElementById('phone-input').value;
+    const a       = selectedAmount;
+    const carrier = cfg.carriers.find(c => c.key === selectedCarrier);
+    const countryName = selectedCountry === 'HT' ? 'Haiti' : 'Dominican Republic';
+    const now     = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    const totalDisplay = window._payMethod === 'usdc'
+      ? (window._usdcTotal?.toFixed(2) || '') + ' USDC'
+      : '$' + (a.usd + (Math.round(a.usd * 0.029 * 100) + 30) / 100).toFixed(2) + ' USD';
+    // Update confetti flag
+    document.getElementById('confetti-bar').textContent = '🎉 📱 ✅ 💸 ' + cfg.flag;
+    document.getElementById('success-detail').innerHTML = `
+      <div class="srow"><span class="sl">Carrier</span><span class="sv">${carrier ? carrier.label : ''} ${countryName}</span></div>
+      <div class="srow"><span class="sl">Phone</span><span class="sv">${cfg.dialCode} ${phone}</span></div>
+      <div class="srow"><span class="sl">Recharge</span><span class="sv">${a.local.toLocaleString()} ${cfg.localCurrency}</span></div>
+      <div class="srow"><span class="sl">Data / Mins</span><span class="sv">${a.data}</span></div>
+      <div class="srow"><span class="sl">Total Paid</span><span class="sv" style="color:var(--cyan)">${totalDisplay}</span></div>
+      <div class="srow"><span class="sl">Delivered</span><span class="sv" style="color:var(--green)">✓ ${now} (seconds)</span></div>
+      ${window._lastTopupTxId ? `<div class="srow"><span class="sl">Top-Up Ref</span><span class="sv" style="font-size:0.78rem;color:var(--gray)">${window._lastTopupTxId}</span></div>` : ''}
+      ${window._lastPaymentId ? `<div class="srow"><span class="sl">Payment Ref</span><span class="sv" style="font-size:0.78rem;color:var(--gray)">${window._lastPaymentId}</span></div>` : ''}
+    `;
+  }
+
+  function resetFlow() {
+    selectedCarrier = null;
+    selectedAmount  = null;
+    const cfg = COUNTRY_CONFIG[selectedCountry];
+    document.getElementById('phone-input').value     = '';
+    document.getElementById('name-on-card').value    = '';
+    document.getElementById('psd-num').textContent   = cfg.dialCode + ' ' + cfg.phonePlaceholder;
+    document.getElementById('btn1').disabled         = true;
+    document.getElementById('btn3').disabled         = true;
+    document.getElementById('btn3').innerHTML        = '<i class="ti ti-credit-card"></i> <span id="btn3-text">Continue to Payment</span>';
+    document.getElementById('payment-error').style.display = 'none';
+    document.querySelectorAll('.carrier-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('summary-box').style.display = 'none';
+    if (cardMounted) cardElement.clear();
+    goStep(1);
+  }
+
+  // ── PHONE PREVIEW AMOUNT ─────────────────────────────────────────
+  function psSelectAmt(el, usdStr, htgStr) {
+    document.querySelectorAll('.ps-amt').forEach(p => p.classList.remove('sel'));
+    el.classList.add('sel');
+    const amt = parseFloat(usdStr.replace('$',''));
+    const fee = ((Math.round(amt * 0.029 * 100) + 30 + Math.round(amt * 0.02 * 100)) / 100).toFixed(2);
+    const total = (amt + parseFloat(fee)).toFixed(2);
+    document.getElementById('ps-fee-val').textContent  = '$' + fee;
+    document.getElementById('ps-total-val').textContent = '$' + total + ' USDC';
+  }
+
+  // ── POPULAR PLANS ────────────────────────────────────────────────
+  function buildPlans() {
+    const cfg  = COUNTRY_CONFIG[selectedCountry];
+    const grid = document.getElementById('plans-grid');
+    grid.innerHTML = '';
+    cfg.plans.forEach(p => {
+      const carrierDef = cfg.carriers.find(c => c.key === p.carrier);
+      const cName = carrierDef ? carrierDef.label : p.carrier;
+      const d = document.createElement('div');
+      d.className = 'plan-card';
+      d.innerHTML = `
+        <div class="plan-carrier">
+          <span class="plan-carrier-badge ${p.carrier}">${cName}</span>
+        </div>
+        <div class="plan-amount">$${p.usd}</div>
+        <div class="plan-htg">${p.local.toLocaleString()} ${cfg.localCurrency}</div>
+        <div class="plan-perks">
+          ${p.perks.map(k=>`<div class="plan-perk"><i class="ti ti-check"></i>${k}</div>`).join('')}
+        </div>
+        <button class="plan-btn" onclick="quickTopUp('${p.carrier}',${p.usd})">Top Up Now</button>
+      `;
+      grid.appendChild(d);
+    });
+  }
+
+  function quickTopUp(carrier, usd) {
+    // Pre-select carrier and amount, jump to phone step
+    buildCarrierGrid();
+    const cardEl = document.getElementById('card-' + carrier);
+    if (cardEl) selectCarrier(carrier, cardEl);
+    goStep(2);
+    window._quickUsd = usd;
+  }
+
+  // Auto-select plan amount when reaching step 3
+  const origBuildAmounts = buildAmounts;
+  buildAmounts = function() {
+    origBuildAmounts();
+    if (window._quickUsd) {
+      const cfg = COUNTRY_CONFIG[selectedCountry];
+      const a = cfg.amounts.find(x => x.usd === window._quickUsd);
+      if (a) {
+        const cards = document.querySelectorAll('.amount-card');
+        const idx = cfg.amounts.indexOf(a);
+        if (cards[idx]) selectAmount(a, cards[idx]);
+      }
+      window._quickUsd = null;
+    }
+  };
+
+  // ── SPIN ANIMATION ───────────────────────────────────────────────
+  const styleEl = document.createElement('style');
+  styleEl.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(styleEl);
+
+  // ── INIT ─────────────────────────────────────────────────────────
+  buildPlans();
+</script>
+
+<div class="footer-mini" style="background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:24px;text-align:center;">
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <a href="index.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Home</a>
+    <a href="calculator.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Calculator</a>
+    <a href="pricing.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Pricing</a>
+    <a href="security.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Security</a>
+    <a href="faq.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Help Center</a>
+    <a href="contact.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Contact</a>
+    <a href="signup.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Sign Up</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div style="font-size:.72rem;color:rgba(143,168,204,.35);">© 2026 Tchotcho Pay LLC · <a href="social.html" style="color:var(--cyan);">📲 Social Media</a> · <a href="mailto:hello@tchotchopay.com" style="color:#00AEEF;text-decoration:none;">hello@tchotchopay.com</a></div>
+</div>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

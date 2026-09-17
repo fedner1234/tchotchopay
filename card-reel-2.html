@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:1080px; height:1920px;
+  background:#020B2D;
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:relative;
+}
+.topbar { position:absolute; top:0; left:0; right:0; height:10px; background:linear-gradient(90deg,#00AEEF,#1055CC); }
+
+/* LOGO */
+.logo { position:absolute; top:64px; left:0; right:0; text-align:center; font-size:26px; font-weight:900; letter-spacing:.22em; color:rgba(255,255,255,.32); text-transform:uppercase; }
+
+/* BIG STAT */
+.stat-block { position:absolute; top:140px; left:0; right:0; text-align:center; }
+.stat-num { font-size:200px; font-weight:900; color:#00AEEF; line-height:1; }
+.stat-label { font-size:36px; font-weight:800; color:rgba(255,255,255,.5); letter-spacing:.1em; margin-top:12px; }
+
+/* DIVIDER — below stat block (~340px tall, starts 140, ends ~480) */
+.divider { position:absolute; top:510px; left:80px; right:80px; height:2px; background:rgba(255,255,255,.08); }
+
+/* PROBLEMS — below divider */
+.problems { position:absolute; top:545px; left:60px; right:60px; display:flex; flex-direction:column; gap:26px; }
+.prob { display:flex; align-items:center; gap:30px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:26px; padding:34px 38px; }
+.prob-icon { font-size:54px; flex-shrink:0; }
+.prob-text { font-size:38px; font-weight:700; color:rgba(255,255,255,.7); line-height:1.3; }
+
+/* HEADLINE — below problems (4 probs × ~140px = 560px + gaps, starts 545, ends ~1165) */
+.headline { position:absolute; top:1220px; left:60px; right:60px; text-align:center; }
+.headline h2 { font-size:72px; font-weight:900; color:#fff; line-height:1.15; }
+.headline h2 span { color:#00AEEF; }
+
+/* HANDLE */
+.handle { position:absolute; bottom:64px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:rgba(255,255,255,.22); letter-spacing:.18em; }
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div class="logo">TCHOTCHOPAY</div>
+
+<div class="stat-block">
+  <div class="stat-num">47%</div>
+  <div class="stat-label">OF HAITIANS ARE UNBANKED</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="problems">
+  <div class="prob"><div class="prob-icon">❌</div><div class="prob-text">No Visa or Mastercard access</div></div>
+  <div class="prob"><div class="prob-icon">❌</div><div class="prob-text">Can't shop online or pay subscriptions</div></div>
+  <div class="prob"><div class="prob-icon">❌</div><div class="prob-text">Cash only — risky and inconvenient</div></div>
+  <div class="prob"><div class="prob-icon">❌</div><div class="prob-text">Locked out of the digital economy</div></div>
+</div>
+
+<div class="headline">
+  <h2>There is a better way.<br><span>TchotchoPay.</span></h2>
+</div>
+
+<div class="handle">@TCHOTCHOPAY</div>
+</body>
+</html>

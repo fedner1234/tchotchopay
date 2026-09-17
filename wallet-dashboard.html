@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Wallet — Tchotcho Pay</title>
+  <meta name="description" content="View your TchotchoPay USDC balance, transaction history, and manage your digital wallet."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="canonical" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/wallet-dashboard.html"/>
+  <meta property="og:title" content="My Wallet — Tchotcho Pay"/>
+  <meta property="og:description" content="Your TchotchoPay USDC wallet dashboard."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:url" content="https://tchotchopay.com/wallet-dashboard.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+      --card:rgba(10,31,110,0.55); --border:rgba(0,174,239,0.18);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column}
+
+    /* ─── TOP BAR ─── */
+    .topbar{
+      display:flex;align-items:center;padding:12px 24px;gap:16px;
+      background:rgba(2,11,45,0.97);border-bottom:1px solid var(--border);
+      flex-shrink:0;z-index:100;
+    }
+    .topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--white);}
+    .topbar-logo{width:30px;height:30px;border-radius:7px;overflow:hidden;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .topbar-logo img{width:100%;height:100%;object-fit:cover;}
+    .topbar-brand span{font-weight:700;font-size:.95rem;}
+    .topbar-brand em{color:var(--cyan);font-style:normal;}
+    .topbar-mid{flex:1;display:flex;justify-content:center;}
+    .demo-pill{background:rgba(247,183,49,0.15);border:1px solid rgba(247,183,49,0.4);color:var(--gold);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.05em;}
+    .topbar-right{display:flex;align-items:center;gap:12px;}
+    .notif-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--gray);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;position:relative;transition:all .2s;}
+    .notif-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+    .notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1.5px solid var(--navy);}
+    .user-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#1055CC,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;cursor:pointer;border:2px solid rgba(0,174,239,0.3);}
+    .topbar-exit{color:var(--gray);text-decoration:none;font-size:.8rem;display:flex;align-items:center;gap:5px;transition:color .2s;}
+    .topbar-exit:hover{color:var(--cyan);}
+
+    /* ─── LAYOUT ─── */
+    .app-body{display:flex;flex:1;overflow:hidden;}
+
+    /* ─── SIDEBAR ─── */
+    .sidebar{
+      width:220px;flex-shrink:0;
+      background:rgba(2,11,45,0.9);border-right:1px solid var(--border);
+      display:flex;flex-direction:column;padding:20px 12px;gap:4px;overflow-y:auto;
+    }
+    .nav-item{
+      display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
+      color:var(--gray);font-size:.88rem;font-weight:600;cursor:pointer;
+      transition:all .2s;text-decoration:none;border:none;background:none;font-family:inherit;width:100%;text-align:left;
+    }
+    .nav-item i{font-size:1.1rem;flex-shrink:0;}
+    .nav-item:hover{background:rgba(0,174,239,0.08);color:var(--white);}
+    .nav-item.active{background:rgba(0,174,239,0.12);color:var(--cyan);border:1px solid rgba(0,174,239,0.2);}
+    .nav-section{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(143,168,204,0.4);padding:14px 14px 4px;margin-top:4px;}
+    .nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:.62rem;font-weight:800;padding:1px 6px;border-radius:50px;}
+    .nav-badge.green{background:var(--green);color:#000;}
+    .sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border);}
+
+    /* ─── MAIN ─── */
+    .main{flex:1;overflow-y:auto;padding:28px 28px 100px;}
+
+    /* ─── VIEWS ─── */
+    .view{display:none;}
+    .view.active{display:block;}
+
+    /* ─── HOME VIEW ─── */
+    .home-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;}
+
+    /* Balance card */
+    .balance-card{
+      background:linear-gradient(135deg,rgba(16,85,204,0.7),rgba(0,174,239,0.3));
+      border:1px solid rgba(0,174,239,0.35);border-radius:22px;padding:28px;
+      position:relative;overflow:hidden;margin-bottom:20px;
+    }
+    .balance-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);}
+    .bc-label{font-size:.75rem;color:rgba(240,246,255,0.6);font-weight:600;margin-bottom:4px;}
+    .bc-amount{font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:4px;}
+    .bc-usdc{font-size:1rem;color:rgba(240,246,255,0.6);margin-bottom:16px;}
+    .bc-usdc span{color:var(--cyan);font-weight:700;}
+    .bc-sub{display:flex;gap:24px;}
+    .bc-sub-item .bsi-label{font-size:.7rem;color:rgba(240,246,255,0.5);margin-bottom:2px;}
+    .bc-sub-item .bsi-val{font-size:.9rem;font-weight:700;}
+    .bc-address{position:absolute;bottom:20px;right:20px;background:rgba(2,11,45,0.5);border:1px solid rgba(0,174,239,0.2);border-radius:8px;padding:5px 10px;font-size:.72rem;color:var(--light);cursor:pointer;}
+    .bc-address:hover{border-color:var(--cyan);}
+
+    /* Quick actions */
+    .quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+    .qa-btn{
+      display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      cursor:pointer;transition:all .2s;font-family:inherit;color:var(--white);
+    }
+    .qa-btn:hover{border-color:var(--cyan);transform:translateY(-2px);background:rgba(0,174,239,0.08);}
+    .qa-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+    .qa-label{font-size:.75rem;font-weight:700;color:var(--gray);}
+
+    /* Transactions */
+    .panel-title{font-size:1rem;font-weight:800;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;}
+    .panel-title a{font-size:.78rem;font-weight:600;color:var(--cyan);text-decoration:none;cursor:pointer;}
+    .tx-list{display:flex;flex-direction:column;gap:2px;}
+    .tx-item{
+      display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;
+      transition:background .15s;cursor:pointer;
+    }
+    .tx-item:hover{background:rgba(0,174,239,0.06);}
+    .tx-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .tx-info{flex:1;}
+    .tx-name{font-size:.88rem;font-weight:700;}
+    .tx-time{font-size:.73rem;color:var(--gray);}
+    .tx-amt{font-size:.9rem;font-weight:800;}
+    .tx-amt.pos{color:var(--green);}
+    .tx-amt.neg{color:var(--white);}
+    .tx-status{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:50px;}
+    .tx-status.done{background:rgba(0,200,150,0.15);color:var(--green);}
+    .tx-status.pend{background:rgba(247,183,49,0.15);color:var(--gold);}
+
+    /* Right column */
+    .right-col{display:flex;flex-direction:column;gap:16px;}
+
+    /* Rate card */
+    .rate-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;}
+    .rate-live{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+    .rate-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .rate-live span{font-size:.72rem;color:var(--gray);font-weight:600;}
+    .rate-big{font-size:1.5rem;font-weight:900;color:var(--cyan);margin-bottom:4px;}
+    .rate-sub{font-size:.75rem;color:var(--gray);}
+    .rate-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+    .rate-mini{background:rgba(2,11,45,0.6);border:1px solid rgba(0,174,239,0.1);border-radius:10px;padding:10px;text-align:center;}
+    .rate-mini .rm-label{font-size:.68rem;color:var(--gray);margin-bottom:2px;}
+    .rate-mini .rm-val{font-size:.88rem;font-weight:800;}
+
+    /* Savings card */
+    .savings-mini{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;}
+    .sm-goal{margin-bottom:14px;}
+    .sm-goal:last-child{margin-bottom:0;}
+    .sm-goal-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+    .sm-goal-name{font-size:.83rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+    .sm-goal-pct{font-size:.78rem;font-weight:700;color:var(--cyan);}
+    .sm-bar{height:6px;background:rgba(0,174,239,0.1);border-radius:50px;overflow:hidden;}
+    .sm-fill{height:100%;border-radius:50px;transition:width .6s ease;}
+    .sm-amounts{display:flex;justify-content:space-between;font-size:.7rem;color:var(--gray);margin-top:4px;}
+
+    /* ─── SEND VIEW ─── */
+    .send-wrap{max-width:520px;margin:0 auto;}
+    .send-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:32px;}
+    .field-label{font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:7px;}
+    .recipient-search{display:flex;align-items:center;gap:10px;background:rgba(2,11,45,0.7);border:1.5px solid var(--border);border-radius:13px;padding:12px 16px;margin-bottom:16px;transition:border-color .2s;}
+    .recipient-search:focus-within{border-color:var(--cyan);}
+    .recipient-search i{color:var(--gray);font-size:1.1rem;}
+    .recipient-search input{flex:1;background:none;border:none;outline:none;color:var(--white);font-size:.95rem;font-family:inherit;}
+    .recipient-search input::placeholder{color:rgba(143,168,204,0.4);}
+    .quick-contacts{display:flex;gap:10px;margin-bottom:24px;overflow-x:auto;padding-bottom:4px;}
+    .qc{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;}
+    .qc-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(0,174,239,0.2);transition:border-color .2s;}
+    .qc:hover .qc-avatar{border-color:var(--cyan);}
+    .qc-name{font-size:.68rem;color:var(--gray);white-space:nowrap;}
+    .amount-field-big{display:flex;align-items:center;gap:0;background:rgba(2,11,45,0.7);border:1.5px solid var(--border);border-radius:13px;margin-bottom:10px;overflow:hidden;transition:border-color .2s;}
+    .amount-field-big:focus-within{border-color:var(--cyan);}
+    .afb-prefix{padding:0 16px;font-size:1.5rem;font-weight:700;color:var(--cyan);}
+    .afb-input{flex:1;background:none;border:none;outline:none;color:var(--white);font-size:2rem;font-weight:800;padding:16px 8px 16px 0;font-family:inherit;width:100%;}
+    .afb-input::placeholder{color:rgba(143,168,204,0.25);}
+    .afb-currency{padding:0 16px;font-size:.85rem;font-weight:700;color:var(--gray);}
+    .conversion-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,174,239,0.05);border-radius:10px;margin-bottom:20px;font-size:.85rem;}
+    .conversion-row .cv-label{color:var(--gray);}
+    .conversion-row .cv-val{font-weight:700;color:var(--light);}
+    .note-field{width:100%;background:rgba(2,11,45,0.7);border:1.5px solid var(--border);border-radius:13px;color:var(--white);font-size:.9rem;padding:12px 16px;font-family:inherit;outline:none;resize:none;transition:border-color .2s;margin-bottom:20px;}
+    .note-field:focus{border-color:var(--cyan);}
+    .note-field::placeholder{color:rgba(143,168,204,0.35);}
+    .fee-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(0,174,239,0.07);font-size:.85rem;}
+    .fee-row:last-of-type{border:none;margin-bottom:20px;}
+    .fee-label{color:var(--gray);}
+    .fee-val{font-weight:700;}
+    .fee-val.free{color:var(--green);}
+    .btn-full{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:16px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .15s;}
+    .btn-full:hover{opacity:.9;transform:translateY(-1px);}
+    .btn-full:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+    /* Success overlay */
+    .send-success{display:none;text-align:center;padding:20px 0;}
+    .send-success.show{display:block;}
+    .ss-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,200,150,0.15);border:2px solid var(--green);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;animation:pop .4s ease;}
+    @keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+    .ss-title{font-size:1.3rem;font-weight:800;color:var(--green);margin-bottom:6px;}
+    .ss-sub{color:var(--gray);font-size:.9rem;margin-bottom:20px;}
+
+    /* ─── RECEIVE VIEW ─── */
+    .receive-wrap{max-width:440px;margin:0 auto;text-align:center;}
+    .qr-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:32px;}
+    .qr-box{width:200px;height:200px;margin:0 auto 20px;background:#fff;border-radius:16px;padding:12px;display:flex;align-items:center;justify-content:center;}
+    .qr-svg{width:100%;height:100%;}
+    .address-box{display:flex;align-items:center;gap:10px;background:rgba(2,11,45,0.7);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin:0 0 16px;cursor:pointer;transition:border-color .2s;}
+    .address-box:hover{border-color:var(--cyan);}
+    .address-box span{flex:1;font-size:.78rem;color:var(--light);word-break:break-all;text-align:left;}
+    .address-box i{color:var(--gray);font-size:1rem;flex-shrink:0;}
+    .share-row{display:flex;gap:10px;justify-content:center;}
+    .share-btn{flex:1;background:rgba(0,174,239,0.1);border:1px solid rgba(0,174,239,0.25);border-radius:12px;padding:12px;color:var(--cyan);font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;}
+    .share-btn:hover{background:rgba(0,174,239,0.18);border-color:var(--cyan);}
+    .username-box{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0;padding:12px;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:12px;}
+    .ub-label{font-size:.78rem;color:var(--gray);}
+    .ub-val{font-size:1rem;font-weight:800;color:var(--green);}
+
+    /* ─── HISTORY VIEW ─── */
+    .history-filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+    .hf-btn{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);background:none;color:var(--gray);font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s;}
+    .hf-btn.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,174,239,0.08);}
+    .history-month{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(143,168,204,0.5);padding:12px 0 6px;}
+    .tx-item-full{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;transition:background .15s;cursor:pointer;border:1px solid transparent;}
+    .tx-item-full:hover{background:rgba(0,174,239,0.06);border-color:rgba(0,174,239,0.1);}
+    .tx-full-info{flex:1;}
+    .tx-full-name{font-size:.9rem;font-weight:700;}
+    .tx-full-meta{font-size:.73rem;color:var(--gray);margin-top:2px;}
+    .tx-full-right{text-align:right;}
+    .tx-full-amt{font-size:.9rem;font-weight:800;}
+    .tx-full-bal{font-size:.7rem;color:var(--gray);margin-top:2px;}
+
+    /* ─── SAVINGS VIEW ─── */
+    .savings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:4px;}
+    .goal-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;transition:transform .2s,border-color .2s;}
+    .goal-card:hover{transform:translateY(-2px);border-color:rgba(0,174,239,0.3);}
+    .goal-icon{font-size:1.8rem;margin-bottom:12px;}
+    .goal-name{font-size:.95rem;font-weight:800;margin-bottom:4px;}
+    .goal-target{font-size:.78rem;color:var(--gray);margin-bottom:12px;}
+    .goal-bar{height:8px;background:rgba(0,174,239,0.1);border-radius:50px;overflow:hidden;margin-bottom:8px;}
+    .goal-fill{height:100%;border-radius:50px;}
+    .goal-bottom{display:flex;justify-content:space-between;font-size:.78rem;}
+    .goal-saved{font-weight:700;color:var(--cyan);}
+    .goal-remain{color:var(--gray);}
+    .add-goal-card{background:rgba(0,174,239,0.04);border:1.5px dashed rgba(0,174,239,0.2);border-radius:18px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;min-height:160px;transition:all .2s;}
+    .add-goal-card:hover{border-color:var(--cyan);background:rgba(0,174,239,0.08);}
+    .add-goal-card i{font-size:1.6rem;color:var(--cyan);margin-bottom:8px;}
+    .add-goal-card span{font-size:.85rem;font-weight:700;color:var(--cyan);}
+    .total-savings-bar{background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(0,174,239,0.1));border:1px solid rgba(0,200,150,0.25);border-radius:16px;padding:20px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+    .tsb-label{font-size:.78rem;color:var(--gray);margin-bottom:2px;}
+    .tsb-val{font-size:1.6rem;font-weight:900;color:var(--green);}
+    .tsb-sub{font-size:.75rem;color:rgba(0,200,150,0.6);margin-top:2px;}
+    .apy-badge{background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.3);color:var(--green);padding:8px 16px;border-radius:12px;font-size:.82rem;font-weight:700;}
+
+    /* ─── SETTINGS VIEW ─── */
+    .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;}
+    .settings-section{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;}
+    .settings-title{font-size:.85rem;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .settings-title i{color:var(--cyan);}
+    .setting-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,174,239,0.07);}
+    .setting-row:last-child{border:none;}
+    .setting-label{font-size:.85rem;color:var(--gray);}
+    .setting-val{font-size:.85rem;font-weight:700;}
+    .toggle{width:40px;height:22px;border-radius:50px;cursor:pointer;position:relative;transition:background .2s;border:none;}
+    .toggle.on{background:var(--cyan);}
+    .toggle.off{background:rgba(143,168,204,0.2);}
+    .toggle::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;}
+    .toggle.on::after{left:21px;}
+    .toggle.off::after{left:3px;}
+    .kyc-badge{background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.3);color:var(--green);padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:700;}
+
+    /* ─── BOTTOM NAV (mobile) ─── */
+    .bottom-nav{
+      display:none;position:fixed;bottom:0;left:0;right:0;
+      background:rgba(2,11,45,0.97);border-top:1px solid var(--border);
+      padding:8px 0 max(8px,env(safe-area-inset-bottom));
+      z-index:100;
+    }
+    .bn-items{display:flex;justify-content:space-around;}
+    .bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 12px;cursor:pointer;color:var(--gray);font-size:.62rem;font-weight:700;border:none;background:none;font-family:inherit;transition:color .15s;}
+    .bn-item i{font-size:1.3rem;}
+    .bn-item.active{color:var(--cyan);}
+
+    /* ─── MODALS ─── */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(2,11,45,0.85);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+    .modal-overlay.show{display:flex;}
+    .modal{background:linear-gradient(135deg,rgba(10,31,110,0.9),rgba(2,11,45,0.95));border:1px solid var(--border);border-radius:22px;padding:32px;max-width:400px;width:90%;position:relative;}
+    .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--gray);font-size:1.2rem;cursor:pointer;}
+    .modal-close:hover{color:var(--white);}
+    .modal-title{font-size:1.1rem;font-weight:800;margin-bottom:6px;}
+    .modal-sub{color:var(--gray);font-size:.85rem;margin-bottom:20px;}
+    .pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:24px;}
+    .pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(0,174,239,0.2);border:2px solid rgba(0,174,239,0.3);transition:all .2s;}
+    .pin-dot.filled{background:var(--cyan);border-color:var(--cyan);}
+    .pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .pin-key{padding:16px;border-radius:12px;border:1px solid var(--border);background:rgba(2,11,45,0.6);color:var(--white);font-size:1.2rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s;}
+    .pin-key:hover{background:rgba(0,174,239,0.12);border-color:var(--cyan);}
+
+    /* ─── TOAST ─── */
+    .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(10,31,110,0.95);border:1px solid rgba(0,174,239,0.3);border-radius:12px;padding:10px 20px;font-size:.85rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:300;white-space:nowrap;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:900px){
+      .home-grid{grid-template-columns:1fr;}
+      .right-col{display:none;}
+      .savings-grid{grid-template-columns:1fr;}
+      .settings-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:680px){
+      .sidebar{display:none;}
+      .bottom-nav{display:block;}
+      .main{padding:16px 16px 80px;}
+      .quick-actions{grid-template-columns:repeat(4,1fr);}
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="index.html" class="topbar-brand">
+    <div class="topbar-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span>Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="topbar-mid">
+    <div class="demo-pill">✦ Interactive Demo</div>
+  </div>
+  <div class="topbar-right">
+    <button class="notif-btn" onclick="showToast('3 new notifications')"><i class="ti ti-bell"></i><div class="notif-dot"></div></button>
+    <div class="user-avatar" onclick="showView('settings')">MJ</div>
+    <a href="index.html" class="topbar-exit"><i class="ti ti-logout"></i> Exit</a>
+  </div>
+</div>
+
+<!-- APP BODY -->
+<div class="app-body">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">Main</div>
+    <button class="nav-item active" onclick="showView('home',this)"><i class="ti ti-home"></i> Home</button>
+    <button class="nav-item" onclick="showView('send',this)"><i class="ti ti-send"></i> Send Money</button>
+    <button class="nav-item" onclick="showView('receive',this)"><i class="ti ti-qrcode"></i> Receive</button>
+    <button class="nav-item" onclick="showView('history',this)"><i class="ti ti-list"></i> History <span class="nav-badge green">New</span></button>
+
+    <div class="nav-section">Services</div>
+    <button class="nav-item" onclick="window.open('topup.html','_blank')"><i class="ti ti-device-mobile"></i> Mobile Top-Up</button>
+    <button class="nav-item" onclick="showView('savings',this)"><i class="ti ti-piggy-bank"></i> Savings</button>
+    <button class="nav-item" onclick="showToast('Marketplace coming soon!')"><i class="ti ti-shopping-bag"></i> Marketplace</button>
+    <button class="nav-item" onclick="showToast('Cash out coming soon!')"><i class="ti ti-cash"></i> Cash Out</button>
+
+    <div class="nav-section">Account</div>
+    <button class="nav-item" onclick="showView('settings',this)"><i class="ti ti-settings"></i> Settings</button>
+    <button class="nav-item" onclick="window.open('referral.html','_blank')"><i class="ti ti-gift"></i> Refer & Earn <span class="nav-badge">$5</span></button>
+    <button class="nav-item" onclick="window.open('faq.html','_blank')"><i class="ti ti-help-circle"></i> Help</button>
+
+    <div class="sidebar-footer">
+      <a href="index.html" style="text-decoration:none;">
+        <button class="nav-item" style="width:100%;"><i class="ti ti-arrow-left"></i> Back to Site</button>
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ══ HOME VIEW ══ -->
+    <div class="view active" id="view-home">
+      <div style="margin-bottom:20px;">
+        <div style="font-size:.85rem;color:var(--gray);">Good morning,</div>
+        <div style="font-size:1.4rem;font-weight:800;">Marie Joseph 👋</div>
+      </div>
+
+      <div class="home-grid">
+        <div>
+          <!-- Balance card -->
+          <div class="balance-card">
+            <div class="bc-label">Total Balance <span id="balance-status" style="font-size:.65rem;opacity:.6;margin-left:6px;">loading…</span></div>
+            <div class="bc-amount" id="bc-amount">—</div>
+            <div class="bc-usdc"><span id="bc-usdc-amount">— USDC</span> · Base Network</div>
+            <div class="bc-sub">
+              <div class="bc-sub-item">
+                <div class="bsi-label">≈ HTG Value</div>
+                <div class="bsi-val" id="bc-htg">— HTG</div>
+              </div>
+              <div class="bc-sub-item">
+                <div class="bsi-label">Network</div>
+                <div class="bsi-val" style="color:var(--green)" id="bc-network">Base</div>
+              </div>
+              <div class="bc-sub-item">
+                <div class="bsi-label">Gas Fees</div>
+                <div class="bsi-val" style="color:var(--green)">Free ✓</div>
+              </div>
+            </div>
+            <div class="bc-address" onclick="copyAddress()">0x65b5…baf3 <i class="ti ti-copy" style="font-size:.7rem;"></i></div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="quick-actions">
+            <button class="qa-btn" onclick="showView('send')">
+              <div class="qa-icon" style="background:rgba(0,174,239,0.15)"><i class="ti ti-send" style="color:var(--cyan)"></i></div>
+              <span class="qa-label">Send</span>
+            </button>
+            <button class="qa-btn" onclick="showView('receive')">
+              <div class="qa-icon" style="background:rgba(0,200,150,0.15)"><i class="ti ti-qrcode" style="color:var(--green)"></i></div>
+              <span class="qa-label">Receive</span>
+            </button>
+            <button class="qa-btn" onclick="window.open('topup.html','_blank')">
+              <div class="qa-icon" style="background:rgba(139,92,246,0.15)"><i class="ti ti-device-mobile" style="color:var(--gold)"></i></div>
+              <span class="qa-label">Top-Up</span>
+            </button>
+            <button class="qa-btn" onclick="showToast('Cash out coming soon!')">
+              <div class="qa-icon" style="background:rgba(247,183,49,0.15)"><i class="ti ti-cash" style="color:var(--gold)"></i></div>
+              <span class="qa-label">Cash Out</span>
+            </button>
+          </div>
+
+          <!-- Transactions -->
+          <div class="panel-title">Recent Activity <a onclick="showView('history')">See all →</a></div>
+          <div class="tx-list" id="home-tx-list"></div>
+        </div>
+
+        <!-- Right column -->
+        <div class="right-col">
+          <!-- Rate card -->
+          <div class="rate-card">
+            <div class="rate-live"><div class="rate-dot"></div><span>Live Exchange Rate</span></div>
+            <div class="rate-big">130.50 HTG</div>
+            <div class="rate-sub">per 1 USDC · Updated just now</div>
+            <div class="rate-mini-grid">
+              <div class="rate-mini">
+                <div class="rm-label">$100 =</div>
+                <div class="rm-val">13,050 HTG</div>
+              </div>
+              <div class="rate-mini">
+                <div class="rm-label">$500 =</div>
+                <div class="rm-val">65,250 HTG</div>
+              </div>
+              <div class="rate-mini">
+                <div class="rm-label">Network Fee</div>
+                <div class="rm-val" style="color:var(--green)">~$0.001</div>
+              </div>
+              <div class="rate-mini">
+                <div class="rm-label">Speed</div>
+                <div class="rm-val" style="color:var(--cyan)">~2 min</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Savings mini -->
+          <div class="savings-mini">
+            <div class="panel-title" style="margin-bottom:14px;">Savings Goals <a onclick="showView('savings')">Manage →</a></div>
+            <div class="sm-goal">
+              <div class="sm-goal-top">
+                <div class="sm-goal-name">🏠 New House</div>
+                <div class="sm-goal-pct">42%</div>
+              </div>
+              <div class="sm-bar"><div class="sm-fill" style="width:42%;background:linear-gradient(90deg,var(--mid),var(--cyan))"></div></div>
+              <div class="sm-amounts"><span>$840 saved</span><span>$2,000 goal</span></div>
+            </div>
+            <div class="sm-goal">
+              <div class="sm-goal-top">
+                <div class="sm-goal-name">🎓 School Fees</div>
+                <div class="sm-goal-pct">78%</div>
+              </div>
+              <div class="sm-bar"><div class="sm-fill" style="width:78%;background:linear-gradient(90deg,var(--green),#00E5AC)"></div></div>
+              <div class="sm-amounts"><span>$390 saved</span><span>$500 goal</span></div>
+            </div>
+          </div>
+
+          <!-- Refer banner -->
+          <div style="background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(0,174,239,0.1));border:1px solid rgba(139,92,246,0.25);border-radius:16px;padding:18px;cursor:pointer;" onclick="window.open('referral.html','_blank')">
+            <div style="font-size:.8rem;color:var(--gold);font-weight:700;margin-bottom:4px;">🎁 REFER & EARN</div>
+            <div style="font-size:.95rem;font-weight:800;margin-bottom:4px;">Invite a friend — get $5 USDC</div>
+            <div style="font-size:.78rem;color:var(--gray);">Your code: <strong style="color:var(--cyan)">MARIE-K3X7</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SEND VIEW ══ -->
+    <div class="view" id="view-send">
+      <div style="margin-bottom:24px;">
+        <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Send Money</div>
+        <div style="font-size:.88rem;color:var(--gray);">Send USDC instantly — anywhere in the world.</div>
+      </div>
+      <div class="send-wrap">
+        <div class="send-card" id="send-form-card">
+          <div class="field-label">Send To</div>
+          <div class="recipient-search">
+            <i class="ti ti-search"></i>
+            <input type="text" id="recipient-input" placeholder="Name, username, or phone…" oninput="filterContacts(this.value)" />
+          </div>
+
+          <div style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Recent</div>
+          <div class="quick-contacts" id="contacts-row"></div>
+
+          <div class="field-label">Amount (USD)</div>
+          <div class="amount-field-big">
+            <span class="afb-prefix">$</span>
+            <input class="afb-input" type="number" id="send-amount" placeholder="0.00" min="10" oninput="updateConversion()" />
+            <span class="afb-currency">USD</span>
+          </div>
+          <div class="conversion-row">
+            <span class="cv-label">Recipient receives</span>
+            <span class="cv-val" id="conversion-display">— HTG</span>
+          </div>
+
+          <div class="field-label">Note (optional)</div>
+          <textarea class="note-field" rows="2" placeholder="For school fees, groceries…"></textarea>
+
+          <div class="fee-row"><span class="fee-label">Transfer fee</span><span class="fee-val free">Free</span></div>
+          <div class="fee-row"><span class="fee-label">Network fee (Base)</span><span class="fee-val free">~$0.001</span></div>
+          <div class="fee-row" style="margin-bottom:0"><span class="fee-label">Total charged</span><span class="fee-val" id="total-charged">$0.00</span></div>
+          <div style="border-bottom:1px solid rgba(0,174,239,0.07);margin-bottom:20px;"></div>
+
+          <button class="btn-full" id="send-btn" onclick="doSend()"><i class="ti ti-send"></i> Send Money</button>
+        </div>
+
+        <!-- Success state -->
+        <div class="send-card" id="send-success-card" style="display:none;">
+          <div class="send-success show">
+            <div class="ss-icon">✓</div>
+            <div class="ss-title">Sent Successfully!</div>
+            <div class="ss-sub" id="ss-msg">$0 sent. Arrives in ~2 minutes.</div>
+            <button class="btn-full" onclick="resetSend()" style="margin-top:0;"><i class="ti ti-plus"></i> Send Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ RECEIVE VIEW ══ -->
+    <div class="view" id="view-receive">
+      <div style="margin-bottom:24px;">
+        <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Receive Money</div>
+        <div style="font-size:.88rem;color:var(--gray);">Share your QR code or address to receive USDC.</div>
+      </div>
+      <div class="receive-wrap">
+        <div class="qr-card">
+          <div style="text-align:center;margin-bottom:20px;">
+            <div style="font-size:.75rem;color:var(--gray);margin-bottom:4px;">Tchotcho Pay Wallet</div>
+            <div style="font-size:1.1rem;font-weight:800;">Marie Joseph</div>
+          </div>
+          <!-- QR code built with SVG pattern -->
+          <div class="qr-box">
+            <svg class="qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="white"/>
+              <!-- Top-left finder -->
+              <rect x="5" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+              <rect x="12" y="12" width="16" height="16" fill="#000"/>
+              <!-- Top-right finder -->
+              <rect x="65" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+              <rect x="72" y="12" width="16" height="16" fill="#000"/>
+              <!-- Bottom-left finder -->
+              <rect x="5" y="65" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+              <rect x="12" y="72" width="16" height="16" fill="#000"/>
+              <!-- Data modules (pattern) -->
+              <rect x="40" y="5" width="5" height="5" fill="#000"/>
+              <rect x="50" y="5" width="5" height="5" fill="#000"/>
+              <rect x="55" y="5" width="5" height="5" fill="#000"/>
+              <rect x="40" y="12" width="5" height="5" fill="#000"/>
+              <rect x="50" y="12" width="5" height="5" fill="#000"/>
+              <rect x="40" y="20" width="5" height="5" fill="#000"/>
+              <rect x="55" y="20" width="5" height="5" fill="#000"/>
+              <rect x="5" y="40" width="5" height="5" fill="#000"/>
+              <rect x="15" y="40" width="5" height="5" fill="#000"/>
+              <rect x="25" y="40" width="5" height="5" fill="#000"/>
+              <rect x="5" y="50" width="5" height="5" fill="#000"/>
+              <rect x="20" y="50" width="5" height="5" fill="#000"/>
+              <rect x="30" y="50" width="5" height="5" fill="#000"/>
+              <rect x="5" y="55" width="5" height="5" fill="#000"/>
+              <rect x="15" y="55" width="5" height="5" fill="#000"/>
+              <rect x="5" y="60" width="5" height="5" fill="#000"/>
+              <rect x="25" y="60" width="5" height="5" fill="#000"/>
+              <rect x="40" y="40" width="5" height="5" fill="#000"/>
+              <rect x="50" y="40" width="5" height="5" fill="#000"/>
+              <rect x="60" y="40" width="5" height="5" fill="#000"/>
+              <rect x="70" y="40" width="5" height="5" fill="#000"/>
+              <rect x="80" y="40" width="5" height="5" fill="#000"/>
+              <rect x="90" y="40" width="5" height="5" fill="#000"/>
+              <rect x="40" y="50" width="5" height="5" fill="#000"/>
+              <rect x="55" y="50" width="5" height="5" fill="#000"/>
+              <rect x="65" y="50" width="5" height="5" fill="#000"/>
+              <rect x="80" y="50" width="5" height="5" fill="#000"/>
+              <rect x="45" y="55" width="5" height="5" fill="#000"/>
+              <rect x="60" y="55" width="5" height="5" fill="#000"/>
+              <rect x="75" y="55" width="5" height="5" fill="#000"/>
+              <rect x="90" y="55" width="5" height="5" fill="#000"/>
+              <rect x="40" y="60" width="5" height="5" fill="#000"/>
+              <rect x="50" y="60" width="5" height="5" fill="#000"/>
+              <rect x="70" y="60" width="5" height="5" fill="#000"/>
+              <rect x="85" y="60" width="5" height="5" fill="#000"/>
+              <rect x="40" y="70" width="5" height="5" fill="#000"/>
+              <rect x="55" y="70" width="5" height="5" fill="#000"/>
+              <rect x="65" y="70" width="5" height="5" fill="#000"/>
+              <rect x="80" y="70" width="5" height="5" fill="#000"/>
+              <rect x="45" y="75" width="5" height="5" fill="#000"/>
+              <rect x="60" y="75" width="5" height="5" fill="#000"/>
+              <rect x="75" y="75" width="5" height="5" fill="#000"/>
+              <rect x="90" y="75" width="5" height="5" fill="#000"/>
+              <rect x="40" y="80" width="5" height="5" fill="#000"/>
+              <rect x="50" y="80" width="5" height="5" fill="#000"/>
+              <rect x="70" y="80" width="5" height="5" fill="#000"/>
+              <rect x="40" y="90" width="5" height="5" fill="#000"/>
+              <rect x="55" y="90" width="5" height="5" fill="#000"/>
+              <rect x="65" y="90" width="5" height="5" fill="#000"/>
+              <rect x="85" y="90" width="5" height="5" fill="#000"/>
+              <!-- Tchotcho logo in center -->
+              <rect x="43" y="43" width="14" height="14" rx="2" fill="#1055CC"/>
+              <text x="50" y="52" fill="white" font-size="7" font-weight="bold" text-anchor="middle" font-family="sans-serif">T</text>
+            </svg>
+          </div>
+
+          <div class="username-box">
+            <span class="ub-label">Username</span>
+            <span class="ub-val">@marie.joseph</span>
+            <button style="background:none;border:none;color:var(--cyan);cursor:pointer;font-size:.8rem;font-weight:700;" onclick="showToast('Username copied!')">Copy</button>
+          </div>
+
+          <div class="field-label">Wallet Address (USDC on Base)</div>
+          <div class="address-box" onclick="copyAddress()">
+            <span id="wallet-address">0x65b587e050908446e69b00f4097c0ffbf89fbaf3</span>
+            <i class="ti ti-copy"></i>
+          </div>
+
+          <div class="share-row">
+            <button class="share-btn" onclick="showToast('Link copied to clipboard!')"><i class="ti ti-link"></i> Copy Link</button>
+            <button class="share-btn" onclick="showToast('Opening WhatsApp…')"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
+            <button class="share-btn" onclick="showToast('Download coming soon!')"><i class="ti ti-download"></i> Save QR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ HISTORY VIEW ══ -->
+    <div class="view" id="view-history">
+      <div style="margin-bottom:20px;">
+        <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Transaction History</div>
+        <div style="font-size:.88rem;color:var(--gray);">All your transfers, payments, and top-ups.</div>
+      </div>
+      <div class="history-filters">
+        <button class="hf-btn active" onclick="filterHistory('all',this)">All</button>
+        <button class="hf-btn" onclick="filterHistory('sent',this)">Sent</button>
+        <button class="hf-btn" onclick="filterHistory('received',this)">Received</button>
+        <button class="hf-btn" onclick="filterHistory('topup',this)">Top-Ups</button>
+        <button class="hf-btn" onclick="filterHistory('bills',this)">Bills</button>
+      </div>
+      <div id="history-list"></div>
+    </div>
+
+    <!-- ══ SAVINGS VIEW ══ -->
+    <div class="view" id="view-savings">
+      <div style="margin-bottom:20px;">
+        <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Savings Goals</div>
+        <div style="font-size:.88rem;color:var(--gray);">Grow your USDC — earn 4.5% APY on your savings balance.</div>
+      </div>
+      <div class="total-savings-bar">
+        <div>
+          <div class="tsb-label">Total Saved</div>
+          <div class="tsb-val">$1,230.00 USDC</div>
+          <div class="tsb-sub">Earning 4.5% APY</div>
+        </div>
+        <div class="apy-badge">4.5% APY 🌱</div>
+      </div>
+      <div class="savings-grid">
+        <div class="goal-card">
+          <div class="goal-icon">🏠</div>
+          <div class="goal-name">New House in Haiti</div>
+          <div class="goal-target">Goal: $2,000 USDC</div>
+          <div class="goal-bar"><div class="goal-fill" style="width:42%;background:linear-gradient(90deg,var(--mid),var(--cyan))"></div></div>
+          <div class="goal-bottom"><span class="goal-saved">$840 saved</span><span class="goal-remain">$1,160 to go</span></div>
+        </div>
+        <div class="goal-card">
+          <div class="goal-icon">🎓</div>
+          <div class="goal-name">School Fees — Jean</div>
+          <div class="goal-target">Goal: $500 USDC</div>
+          <div class="goal-bar"><div class="goal-fill" style="width:78%;background:linear-gradient(90deg,var(--green),#00E5AC)"></div></div>
+          <div class="goal-bottom"><span class="goal-saved">$390 saved</span><span class="goal-remain">$110 to go</span></div>
+        </div>
+        <div class="goal-card">
+          <div class="goal-icon">✈️</div>
+          <div class="goal-name">Visit Haiti — Christmas</div>
+          <div class="goal-target">Goal: $800 USDC</div>
+          <div class="goal-bar"><div class="goal-fill" style="width:25%;background:linear-gradient(90deg,var(--gold),#FFD700)"></div></div>
+          <div class="goal-bottom"><span class="goal-saved">$200 saved</span><span class="goal-remain">$600 to go</span></div>
+        </div>
+        <div class="add-goal-card" onclick="showToast('Create goal — coming soon!')">
+          <i class="ti ti-plus"></i>
+          <span>New Savings Goal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS VIEW ══ -->
+    <div class="view" id="view-settings">
+      <div style="margin-bottom:24px;">
+        <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Account Settings</div>
+        <div style="font-size:.88rem;color:var(--gray);">Manage your profile, security, and preferences.</div>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-section">
+          <div class="settings-title"><i class="ti ti-user"></i> Profile</div>
+          <div class="setting-row"><span class="setting-label">Full Name</span><span class="setting-val">Marie Joseph</span></div>
+          <div class="setting-row"><span class="setting-label">Username</span><span class="setting-val" style="color:var(--cyan)">@marie.joseph</span></div>
+          <div class="setting-row"><span class="setting-label">Phone</span><span class="setting-val">+1 (786) ···-4521</span></div>
+          <div class="setting-row"><span class="setting-label">Email</span><span class="setting-val">marie@gmail.com</span></div>
+          <div class="setting-row"><span class="setting-label">KYC Status</span><span class="kyc-badge">✓ Verified</span></div>
+          <div class="setting-row"><span class="setting-label">Country</span><span class="setting-val">🇺🇸 United States</span></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-title"><i class="ti ti-shield"></i> Security</div>
+          <div class="setting-row"><span class="setting-label">PIN Lock</span><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">Face ID / Biometric</span><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">2-Factor Auth</span><button class="toggle off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">Transaction Limit</span><span class="setting-val">$5,000/day</span></div>
+          <div class="setting-row"><span class="setting-label">Last Login</span><span class="setting-val">Today, 9:41 AM</span></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-title"><i class="ti ti-bell"></i> Notifications</div>
+          <div class="setting-row"><span class="setting-label">Transfer alerts</span><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">Rate alerts</span><button class="toggle off" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">Promotions</span><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+          <div class="setting-row"><span class="setting-label">SMS alerts</span><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-title"><i class="ti ti-globe"></i> Preferences</div>
+          <div class="setting-row"><span class="setting-label">Language</span><span class="setting-val">English</span></div>
+          <div class="setting-row"><span class="setting-label">Currency Display</span><span class="setting-val">USD + HTG</span></div>
+          <div class="setting-row"><span class="setting-label">Member Since</span><span class="setting-val">Jan 2026</span></div>
+          <div class="setting-row"><span class="setting-label">Referral Code</span><span class="setting-val" style="color:var(--cyan)">MARIE-K3X7</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav">
+  <div class="bn-items">
+    <button class="bn-item active" onclick="showView('home',this)"><i class="ti ti-home"></i>Home</button>
+    <button class="bn-item" onclick="showView('send',this)"><i class="ti ti-send"></i>Send</button>
+    <button class="bn-item" onclick="showView('receive',this)"><i class="ti ti-qrcode"></i>Receive</button>
+    <button class="bn-item" onclick="showView('history',this)"><i class="ti ti-list"></i>History</button>
+    <button class="bn-item" onclick="showView('savings',this)"><i class="ti ti-piggy-bank"></i>Savings</button>
+  </div>
+</nav>
+
+<!-- PIN MODAL -->
+<div class="modal-overlay" id="pin-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePin()"><i class="ti ti-x"></i></button>
+    <div class="modal-title">Confirm Transaction</div>
+    <div class="modal-sub" id="pin-sub">Enter your 4-digit PIN to send <strong id="pin-amount">$0</strong></div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd4"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-key" onclick="pinPress(1)">1</button>
+      <button class="pin-key" onclick="pinPress(2)">2</button>
+      <button class="pin-key" onclick="pinPress(3)">3</button>
+      <button class="pin-key" onclick="pinPress(4)">4</button>
+      <button class="pin-key" onclick="pinPress(5)">5</button>
+      <button class="pin-key" onclick="pinPress(6)">6</button>
+      <button class="pin-key" onclick="pinPress(7)">7</button>
+      <button class="pin-key" onclick="pinPress(8)">8</button>
+      <button class="pin-key" onclick="pinPress(9)">9</button>
+      <button class="pin-key" onclick="pinClear()" style="font-size:.85rem">⌫</button>
+      <button class="pin-key" onclick="pinPress(0)">0</button>
+      <button class="pin-key" onclick="pinPress('ok')" style="background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border-color:transparent;">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── LIVE CIRCLE WALLET ────────────────────────────────────────────
+  // In production, walletId comes from the authenticated user's session.
+  // For this demo we use the TchotchoPay test wallet on Base Sepolia.
+  const WALLET_ID = 'c3e5342f-a4d7-55a0-bfaf-c52e0d24bfc9';
+  const HTG_RATE  = 130.5; // 1 USDC ≈ 130.5 HTG
+
+  async function loadWalletData() {
+    const statusEl  = document.getElementById('balance-status');
+    const amountEl  = document.getElementById('bc-amount');
+    const usdcEl    = document.getElementById('bc-usdc-amount');
+    const htgEl     = document.getElementById('bc-htg');
+    const addrEl    = document.getElementById('wallet-address');
+
+    try {
+      // 1. Fetch balance
+      const res  = await fetch('/.netlify/functions/circle-wallet', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'getBalance', walletId: WALLET_ID }),
+      });
+      const data = await res.json();
+
+      const usdc = parseFloat(data.usdcBalance || '0');
+      const htg  = (usdc * HTG_RATE).toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+      // 2. Update UI
+      amountEl.textContent  = '$' + usdc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      usdcEl.textContent    = usdc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USDC';
+      htgEl.textContent     = htg + ' HTG';
+      statusEl.textContent  = '✓ Live';
+      statusEl.style.color  = 'var(--green)';
+
+      // 3. Fetch wallet address
+      const wRes  = await fetch('/.netlify/functions/circle-wallet', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ action: 'getWallet', walletId: WALLET_ID }),
+      });
+      const wData = await wRes.json();
+      const addr  = wData?.wallet?.wallet?.address || wData?.wallet?.address;
+      if (addr && addrEl) addrEl.textContent = addr;
+
+    } catch (err) {
+      console.warn('Wallet load error:', err.message);
+      statusEl.textContent = '⚠ offline';
+      statusEl.style.color = 'var(--red)';
+      // Fall back to demo values
+      amountEl.textContent = '$0.00';
+      usdcEl.textContent   = '0.00 USDC';
+      htgEl.textContent    = '0 HTG';
+    }
+  }
+
+  // Load live data on page start
+  document.addEventListener('DOMContentLoaded', loadWalletData);
+
+  // ── DATA ──────────────────────────────────────────────────────────
+  const CONTACTS = [
+    { name:'Jean F.', initial:'JF', color:'linear-gradient(135deg,#1055CC,#00AEEF)' },
+    { name:'Mama',    initial:'M',  color:'linear-gradient(135deg,#00C896,#1055CC)' },
+    { name:'Pierre',  initial:'P',  color:'linear-gradient(135deg,#F7B731,#E20613)' },
+    { name:'Claire',  initial:'C',  color:'linear-gradient(135deg,#8B5CF6,#00AEEF)' },
+    { name:'David',   initial:'D',  color:'linear-gradient(135deg,#00C896,#F7B731)' },
+  ];
+
+  const TRANSACTIONS = [
+    { type:'received', icon:'👤', iconBg:'rgba(0,200,150,0.15)', name:'John François', time:'2 min ago',  amt:'+$120.00', pos:true,  status:'done', htg:'+15,660 HTG', bal:'$485.20', cat:'received' },
+    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Digicel Top-Up',time:'Yesterday',  amt:'-$10.00',  pos:false, status:'done', htg:'-1,305 HTG',  bal:'$365.20', cat:'topup' },
+    { type:'sent',     icon:'⚡', iconBg:'rgba(247,183,49,0.15)', name:"EDH Electricité",time:'2 days ago',amt:'-$18.00',  pos:false, status:'done', htg:'-2,349 HTG',  bal:'$375.20', cat:'bills' },
+    { type:'sent',     icon:'👤', iconBg:'rgba(0,174,239,0.15)', name:'Claire Pierre',  time:'3 days ago', amt:'-$50.00',  pos:false, status:'done', htg:'-6,525 HTG',  bal:'$393.20', cat:'sent' },
+    { type:'received', icon:'💰', iconBg:'rgba(0,200,150,0.15)', name:'Add Funds (ACH)', time:'5 days ago', amt:'+$300.00', pos:true,  status:'done', htg:'+39,150 HTG', bal:'$443.20', cat:'received' },
+    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Natcom Top-Up',  time:'6 days ago', amt:'-$5.00',   pos:false, status:'done', htg:'-652 HTG',    bal:'$143.20', cat:'topup' },
+    { type:'sent',     icon:'🎓', iconBg:'rgba(247,183,49,0.15)', name:'School Fees Savings',time:'1 week ago',amt:'-$50.00',  pos:false, status:'done', htg:'-6,525 HTG',  bal:'$148.20', cat:'bills' },
+    { type:'sent',     icon:'👤', iconBg:'rgba(0,174,239,0.15)', name:'Marie D.',        time:'1 week ago', amt:'-$25.00',  pos:false, status:'pend', htg:'-3,262 HTG',  bal:'$198.20', cat:'sent' },
+  ];
+
+  let activeFilter = 'all';
+  let pinDigits = [];
+  let pendingAmount = 0;
+  let pendingRecipient = '';
+
+  // ── VIEWS ────────────────────────────────────────────────────────
+  function showView(name, el) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    // Sidebar
+    document.querySelectorAll('.sidebar .nav-item').forEach(n => n.classList.remove('active'));
+    if (el && el.classList.contains('nav-item')) el.classList.add('active');
+    // Bottom nav
+    document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+    if (el && el.classList.contains('bn-item')) el.classList.add('active');
+    // scroll to top
+    document.querySelector('.main').scrollTo(0, 0);
+  }
+
+  // ── HOME TX ──────────────────────────────────────────────────────
+  function renderHomeTx() {
+    const list = document.getElementById('home-tx-list');
+    list.innerHTML = TRANSACTIONS.slice(0, 5).map(tx => `
+      <div class="tx-item">
+        <div class="tx-icon" style="background:${tx.iconBg}">${tx.icon}</div>
+        <div class="tx-info">
+          <div class="tx-name">${tx.name}</div>
+          <div class="tx-time">${tx.time}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="tx-amt ${tx.pos?'pos':'neg'}">${tx.amt}</div>
+          <div class="tx-status ${tx.status}">${tx.status==='done'?'Completed':'Pending'}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── HISTORY ──────────────────────────────────────────────────────
+  function renderHistory(filter) {
+    const list = document.getElementById('history-list');
+    const filtered = filter === 'all' ? TRANSACTIONS : TRANSACTIONS.filter(t => t.cat === filter);
+    // Group by rough time
+    const thisWeek = filtered.filter(t => !t.time.includes('week') && !t.time.includes('month'));
+    const lastWeek = filtered.filter(t => t.time.includes('week'));
+
+    let html = '';
+    if (thisWeek.length) {
+      html += '<div class="history-month">This Week</div>';
+      html += thisWeek.map(tx => txFullRow(tx)).join('');
+    }
+    if (lastWeek.length) {
+      html += '<div class="history-month">Last Week</div>';
+      html += lastWeek.map(tx => txFullRow(tx)).join('');
+    }
+    if (!filtered.length) html = '<div style="text-align:center;color:var(--gray);padding:40px;">No transactions found.</div>';
+    list.innerHTML = html;
+  }
+
+  function txFullRow(tx) {
+    return `<div class="tx-item-full">
+      <div class="tx-icon" style="background:${tx.iconBg}">${tx.icon}</div>
+      <div class="tx-full-info">
+        <div class="tx-full-name">${tx.name}</div>
+        <div class="tx-full-meta">${tx.time} · ${tx.htg}</div>
+      </div>
+      <div class="tx-full-right">
+        <div class="tx-full-amt" style="color:${tx.pos?'var(--green)':'var(--white)'}">${tx.amt}</div>
+        <div class="tx-full-bal">Balance: ${tx.bal}</div>
+      </div>
+    </div>`;
+  }
+
+  function filterHistory(type, btn) {
+    activeFilter = type;
+    document.querySelectorAll('.hf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderHistory(type);
+  }
+
+  // ── CONTACTS ────────────────────────────────────────────────────
+  function renderContacts(filter) {
+    const row = document.getElementById('contacts-row');
+    const contacts = filter ? CONTACTS.filter(c => c.name.toLowerCase().includes(filter.toLowerCase())) : CONTACTS;
+    row.innerHTML = contacts.map(c => `
+      <div class="qc" onclick="selectContact('${c.name}')">
+        <div class="qc-avatar" style="background:${c.color}">${c.initial}</div>
+        <div class="qc-name">${c.name}</div>
+      </div>`).join('');
+  }
+
+  function selectContact(name) {
+    document.getElementById('recipient-input').value = name;
+    pendingRecipient = name;
+  }
+
+  function filterContacts(val) { renderContacts(val); pendingRecipient = val; }
+
+  // ── SEND FLOW ────────────────────────────────────────────────────
+  function updateConversion() {
+    const amt = parseFloat(document.getElementById('send-amount').value) || 0;
+    const htg = (amt * 130.50).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    document.getElementById('conversion-display').textContent = amt > 0 ? `${htg} HTG` : '— HTG';
+    document.getElementById('total-charged').textContent = amt > 0 ? `$${amt.toFixed(2)}` : '$0.00';
+  }
+
+  function doSend() {
+    const amt = parseFloat(document.getElementById('send-amount').value) || 0;
+    const recip = document.getElementById('recipient-input').value.trim();
+    if (!recip) { showToast('Please enter a recipient'); return; }
+    if (amt < 10) { showToast('Minimum send is $10'); return; }
+    pendingAmount = amt;
+    pendingRecipient = recip;
+    document.getElementById('pin-amount').textContent = `$${amt.toFixed(2)} to ${recip}`;
+    document.getElementById('pin-modal').classList.add('show');
+    pinDigits = [];
+    updatePinDots();
+  }
+
+  function resetSend() {
+    document.getElementById('send-form-card').style.display = 'block';
+    document.getElementById('send-success-card').style.display = 'none';
+    document.getElementById('send-amount').value = '';
+    document.getElementById('recipient-input').value = '';
+    document.getElementById('conversion-display').textContent = '— HTG';
+    document.getElementById('total-charged').textContent = '$0.00';
+  }
+
+  // ── PIN ──────────────────────────────────────────────────────────
+  function pinPress(key) {
+    if (key === 'ok') { confirmPin(); return; }
+    if (pinDigits.length < 4) { pinDigits.push(key); updatePinDots(); }
+    if (pinDigits.length === 4) setTimeout(confirmPin, 300);
+  }
+
+  function pinClear() { if (pinDigits.length) { pinDigits.pop(); updatePinDots(); } }
+
+  function updatePinDots() {
+    [1,2,3,4].forEach(i => {
+      document.getElementById('pd'+i).classList.toggle('filled', i <= pinDigits.length);
+    });
+  }
+
+  function confirmPin() {
+    closePin();
+    // Show sending animation then success
+    const btn = document.getElementById('send-btn');
+    btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('send-form-card').style.display = 'none';
+      document.getElementById('send-success-card').style.display = 'block';
+      const htg = (pendingAmount * 130.50).toLocaleString('en-US', { maximumFractionDigits: 0 });
+      document.getElementById('ss-msg').textContent = `$${pendingAmount.toFixed(2)} sent to ${pendingRecipient}. They receive ${htg} HTG. Arrives in ~2 minutes.`;
+      btn.innerHTML = '<i class="ti ti-send"></i> Send Money';
+      btn.disabled = false;
+    }, 1200);
+  }
+
+  function closePin() { document.getElementById('pin-modal').classList.remove('show'); pinDigits = []; updatePinDots(); }
+
+  // ── COPY ────────────────────────────────────────────────────────
+  function copyAddress() {
+    const addr = document.getElementById('wallet-address')?.textContent || '0x65b587e050908446e69b00f4097c0ffbf89fbaf3';
+    navigator.clipboard?.writeText(addr).catch(()=>{});
+    showToast('Wallet address copied!');
+  }
+
+  // ── TOAST ────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── SPIN ANIMATION ───────────────────────────────────────────────
+  const style = document.createElement('style');
+  style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(style);
+
+  // ── INIT ────────────────────────────────────────────────────────
+  renderHomeTx();
+  renderContacts();
+  renderHistory('all');
+</script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

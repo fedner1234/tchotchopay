@@ -1,0 +1,8 @@
+{
+  "name": "tchotchopay-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for TchotchoPay",
+  "dependencies": {
+    "stripe": "^15.0.0"
+  }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In — TchotchoPay</title>
+  <meta name="description" content="Sign in to your TchotchoPay account to send money, pay bills, and manage your USDC wallet."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="canonical" href="https://tchotchopay.com/login.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/login.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/login.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/login.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/login.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/login.html"/>
+  <meta property="og:title" content="Sign In — TchotchoPay"/>
+  <meta property="og:description" content="Sign in to your TchotchoPay account."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:url" content="https://tchotchopay.com/login.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    html { overflow-x: hidden; }
+    :root{--navy:#020B2D;--blue:#0A1F6E;--mid:#1055CC;--cyan:#00AEEF;--light:#7FD4F7;--gray:#8FA8CC;--white:#F0F6FF;--green:#00C896;--red:#FF4C6A;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+    .card{background:rgba(10,31,110,0.6);border:1px solid rgba(0,174,239,0.2);border-radius:24px;padding:36px;width:100%;max-width:400px;}
+    .logo{text-align:center;margin-bottom:28px;}
+    .logo-text{font-size:1.6rem;font-weight:900;color:var(--white);}
+    .logo-text em{color:var(--cyan);font-style:normal;}
+    .logo-sub{font-size:.85rem;color:var(--gray);margin-top:4px;}
+    label{display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;margin-top:18px;}
+    input{
+      width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(0,174,239,0.18);
+      border-radius:10px;padding:12px 14px;color:var(--white);font-size:.9rem;
+      font-family:inherit;outline:none;transition:border-color .2s;
+    }
+    input:focus{border-color:var(--cyan);}
+    .password-wrap{position:relative;}
+    .password-wrap input{padding-right:40px;}
+    .toggle-pw{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray);cursor:pointer;font-size:1rem;padding:0;}
+    .error-msg{color:var(--red);font-size:.82rem;margin-top:10px;display:none;}
+    .submit-btn{
+      width:100%;margin-top:24px;padding:13px;background:var(--cyan);color:#020B2D;
+      font-size:1rem;font-weight:800;border:none;border-radius:12px;cursor:pointer;
+      font-family:inherit;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .submit-btn:hover{background:var(--light);}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+    .divider{text-align:center;color:var(--gray);font-size:.82rem;margin:20px 0;}
+    .signup-link{text-align:center;font-size:.85rem;}
+    .signup-link a{color:var(--cyan);text-decoration:none;font-weight:700;}
+    .signup-link a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-text">Tchotcho<em>Pay</em></div>
+      <div class="logo-sub">Sign in to your wallet</div>
+    </div>
+
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="you@example.com" required autocomplete="email"/>
+
+      <label for="password">Password</label>
+      <div class="password-wrap">
+        <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password"/>
+        <button type="button" class="toggle-pw" onclick="togglePassword()"><i class="ti ti-eye" id="eye-icon"></i></button>
+      </div>
+
+      <p class="error-msg" id="error-msg"></p>
+
+      <!-- Cloudflare Turnstile CAPTCHA -->
+      <div class="cf-turnstile"
+           data-sitekey="0x4AAAAAAEqmWYFfGWg_CHD3"
+           data-theme="dark"
+           data-callback="onTurnstileSolved"
+           data-expired-callback="onTurnstileExpired"
+           style="margin:16px 0;"></div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <i class="ti ti-login"></i> Sign In
+      </button>
+    </form>
+
+    <div class="divider">Don't have an account?</div>
+    <div class="signup-link"><a href="signup.html">Create a free TchotchoPay wallet →</a></div>
+  </div>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  // Redirect if already logged in
+  if (sessionStorage.getItem('tp_session_token')) {
+    window.location.href = 'dashboard.html';
+  }
+
+  // Turnstile token stored via official callback
+  let _turnstileToken = '';
+
+  function onTurnstileSolved(token) {
+    _turnstileToken = token;
+  }
+
+  function onTurnstileExpired() {
+    _turnstileToken = '';
+  }
+
+  function togglePassword() {
+    const input = document.getElementById('password');
+    const icon  = document.getElementById('eye-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.className = 'ti ti-eye-off';
+    } else {
+      input.type = 'password';
+      icon.className = 'ti ti-eye';
+    }
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const btn      = document.getElementById('submit-btn');
+    const err      = document.getElementById('error-msg');
+
+    err.style.display = 'none';
+
+    // Get token — official callback first, then Turnstile JS API, then DOM fallback
+    const turnstileToken = _turnstileToken
+      || (window.turnstile?.getResponse?.() ?? '')
+      || document.querySelector('[name="cf-turnstile-response"]')?.value
+      || '';
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ti ti-loader-2"></i> Signing in...';
+
+    try {
+      const res = await fetch('/.netlify/functions/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, turnstileToken }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || (!data.token && !data.sessionToken)) {
+        throw new Error(data.error || 'Invalid email or password.');
+      }
+
+      sessionStorage.setItem('tp_session_token', data.token || data.sessionToken);
+      sessionStorage.setItem('tp_user_id', data.user.id);
+      window.location.href = 'dashboard.html';
+
+    } catch (error) {
+      err.textContent = error.message;
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-login"></i> Sign In';
+      // Reset Turnstile so user can try again
+      _turnstileToken = '';
+      if (window.turnstile) window.turnstile.reset();
+    }
+  }
+</script>
+</body>
+</html>

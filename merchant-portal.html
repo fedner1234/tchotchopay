@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tchotcho Pay — Merchant Portal</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+:root {
+  --bg:      #07091a;
+  --panel:   #0d1120;
+  --card:    #111827;
+  --border:  #1e2a40;
+  --cyan:    #00e5ff;
+  --cyan2:   #00b4cc;
+  --green:   #00e676;
+  --yellow:  #ffd740;
+  --red:     #ff5252;
+  --orange:  #F7B731;
+  
+  --txt:     #e8eaf6;
+  --muted:   #8899aa;
+  --sidebar: 240px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar);min-height:100vh;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;}
+.sb-brand{padding:20px 16px 16px;border-bottom:1px solid var(--border);}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-logo img{width:34px;height:34px;border-radius:8px;object-fit:contain;}
+.sb-logo-txt{font-size:15px;font-weight:700;color:var(--cyan);letter-spacing:.5px;}
+.sb-logo-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+
+.sb-store{padding:14px 16px;border-bottom:1px solid var(--border);}
+.store-row{display:flex;align-items:center;gap:10px;}
+.store-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#F7B731,#ff6b6b);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.store-name{font-size:13px;font-weight:700;}
+.store-cat{font-size:11px;color:var(--muted);margin-top:2px;}
+.store-badge{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:#00e67620;color:var(--green);border:1px solid #00e67640;}
+.store-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);}
+
+.sb-nav{flex:1;padding:10px 0;}
+.sb-nav a{display:flex;align-items:center;gap:10px;padding:10px 16px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;transition:.15s;cursor:pointer;border-left:3px solid transparent;}
+.sb-nav a:hover{color:var(--txt);background:#ffffff08;}
+.sb-nav a.on{color:var(--cyan);background:#00e5ff10;border-left-color:var(--cyan);}
+.sb-nav a i{font-size:17px;}
+.sb-nav a .notif{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;}
+.sb-nav .section-lbl{padding:10px 16px 4px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:600;}
+.sb-bottom{padding:12px 16px;border-top:1px solid var(--border);}
+.sb-bottom a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;font-size:13px;padding:8px 0;cursor:pointer;transition:.15s;}
+.sb-bottom a:hover{color:var(--txt);}
+.sb-bottom a i{font-size:17px;}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;}
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;gap:16px;}
+.topbar-title{font-size:17px;font-weight:700;}
+.topbar-sub{font-size:12px;color:var(--muted);margin-top:1px;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar-time{font-size:12px;color:var(--muted);}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s;}
+.btn-cyan{background:var(--cyan);color:#000;}
+.btn-cyan:hover{background:var(--cyan2);}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan);}
+.btn-outline:hover{background:#00e5ff10;}
+.btn-ghost{background:#ffffff0d;color:var(--txt);border:1px solid var(--border);}
+.btn-ghost:hover{background:#ffffff18;}
+.btn-red{background:#ff525220;color:var(--red);border:1px solid #ff525240;}
+.btn-green{background:#00e67620;color:var(--green);border:1px solid #00e67640;}
+.btn-purple{background:rgba(247,183,49,.12);color:var(--gold);border:1px solid rgba(247,183,49,.25);}
+.btn-sm{padding:5px 12px;font-size:12px;}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;}
+
+/* ── CONTENT ── */
+.content{padding:24px 28px;flex:1;}
+.page{display:none;}
+.page.on{display:block;}
+
+/* ── STORE HERO ── */
+.store-hero{
+  background:linear-gradient(135deg,#0a1628,#10203a);
+  border:1px solid var(--border);border-radius:16px;padding:22px 24px;
+  margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.hero-logo{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#F7B731,#ff6b6b);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
+.hero-info{flex:1;}
+.hero-name{font-size:20px;font-weight:800;}
+.hero-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.hero-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;}
+.tag-cyan{background:#00e5ff18;color:var(--cyan);border:1px solid #00e5ff30;}
+.tag-green{background:#00e67618;color:var(--green);border:1px solid #00e67630;}
+.tag-orange{background:#F7B73118;color:var(--orange);border:1px solid #F7B73130;}
+.hero-right{display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.hero-balance{text-align:right;}
+.hero-balance-lbl{font-size:11px;color:var(--muted);}
+.hero-balance-amt{font-size:24px;font-weight:700;color:var(--cyan);}
+.hero-balance-htg{font-size:12px;color:var(--muted);}
+.hero-actions{display:flex;gap:8px;}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.stat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.stat-icon i{font-size:18px;}
+.stat-val{font-size:22px;font-weight:700;line-height:1;}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;}
+.stat-delta{font-size:11px;margin-top:6px;display:flex;align-items:center;gap:4px;}
+.up{color:var(--green);}
+.dn{color:var(--red);}
+
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 340px;gap:20px;}
+.col{display:flex;flex-direction:column;gap:20px;}
+
+/* ── SECTION CARD ── */
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.section-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.section-title{font-size:14px;font-weight:700;}
+.section-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.count-pill{background:#00e5ff18;color:var(--cyan);font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;}
+
+/* ── PAYMENT FEED ── */
+.pay-item{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;transition:.15s;}
+.pay-item:last-child{border-bottom:none;}
+.pay-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;}
+.pay-info{flex:1;}
+.pay-name{font-size:13px;font-weight:600;}
+.pay-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+.pay-right{text-align:right;}
+.pay-amt{font-size:14px;font-weight:700;color:var(--green);}
+.pay-time{font-size:10px;color:var(--muted);margin-top:2px;}
+.pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;display:inline-block;}
+.pill-done{background:#00e67620;color:var(--green);}
+.pill-pend{background:#ffd74020;color:var(--yellow);}
+.pill-fail{background:#ff525220;color:var(--red);}
+.new-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* ── QR PANEL ── */
+.qr-wrap{padding:24px;text-align:center;}
+.qr-code{
+  width:180px;height:180px;margin:0 auto 16px;
+  background:white;border-radius:12px;padding:12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.qr-code svg{width:100%;height:100%;}
+.qr-store-name{font-size:15px;font-weight:700;margin-bottom:4px;}
+.qr-handle{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.qr-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.qr-amount-row{display:flex;gap:8px;margin-bottom:12px;}
+.qr-amount-row input{flex:1;padding:8px 12px;background:#ffffff08;border:1px solid var(--border);border-radius:8px;color:var(--txt);font-size:14px;outline:none;}
+.qr-amount-row input:focus{border-color:var(--cyan);}
+.qr-amount-row input::placeholder{color:var(--muted);}
+
+/* ── CHART BARS ── */
+.bars-wrap{padding:16px 18px 8px;display:flex;align-items:flex-end;gap:5px;height:100px;}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(to top,var(--cyan2),var(--cyan));min-height:4px;transition:.4s;}
+.bar.alt{background:linear-gradient(to top,#7c4dff,#b388ff);}
+.bar-lbl{font-size:9px;color:var(--muted);}
+.bar-val{font-size:9px;color:var(--txt);margin-bottom:2px;}
+
+/* ── PRODUCTS ── */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:18px;}
+.product-card{background:#ffffff06;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.2s;}
+.product-card:hover{border-color:var(--cyan);background:#00e5ff05;}
+.product-img{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;background:#ffffff04;}
+.product-body{padding:12px;}
+.product-name{font-size:13px;font-weight:700;}
+.product-cat{font-size:11px;color:var(--muted);margin-top:2px;}
+.product-price{font-size:16px;font-weight:700;color:var(--cyan);margin-top:8px;}
+.product-htg{font-size:10px;color:var(--muted);}
+.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+.product-stock{font-size:11px;color:var(--muted);}
+.product-actions{display:flex;gap:6px;}
+
+/* ── PAYOUT ── */
+.payout-banner{
+  background:linear-gradient(135deg,#0a2010,#102010);
+  border:1px solid #00e67630;border-radius:14px;padding:20px 22px;margin-bottom:20px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.pb-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--green),#00b248);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pb-icon i{font-size:24px;color:#000;}
+.pb-info{flex:1;}
+.pb-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;}
+.pb-amount{font-size:28px;font-weight:700;color:var(--green);}
+.pb-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.method-card{background:#ffffff06;border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.method-card:hover,.method-card.on{border-color:var(--cyan);background:#00e5ff08;}
+.method-card.on .method-radio{border-color:var(--cyan);}
+.method-card.on .method-radio::after{opacity:1;}
+.method-radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted);flex-shrink:0;position:relative;}
+.method-radio::after{content:'';position:absolute;inset:2px;border-radius:50%;background:var(--cyan);opacity:0;transition:.15s;}
+.method-icon{width:34px;height:34px;border-radius:8px;background:#ffffff08;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.method-info{flex:1;}
+.method-name{font-size:13px;font-weight:600;}
+.method-sub{font-size:11px;color:var(--muted);}
+.method-fee{font-size:12px;font-weight:600;color:var(--orange);}
+
+/* ── ANALYTICS ── */
+.analytics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.an-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;text-align:center;}
+.an-val{font-size:26px;font-weight:700;color:var(--cyan);}
+.an-lbl{font-size:11px;color:var(--muted);margin-top:4px;}
+.top-products{padding:0;}
+.tp-row{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.tp-row:last-child{border-bottom:none;}
+.tp-rank{width:22px;font-size:12px;font-weight:700;color:var(--muted);}
+.tp-emoji{font-size:20px;margin-right:4px;}
+.tp-info{flex:1;}
+.tp-name{font-size:13px;font-weight:600;}
+.tp-count{font-size:11px;color:var(--muted);}
+.tp-rev{font-size:14px;font-weight:700;color:var(--green);}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;margin-top:5px;}
+.progress-fill{height:100%;border-radius:2px;background:linear-gradient(to right,var(--cyan2),var(--cyan));}
+
+/* ── SETTINGS ── */
+.settings-section{margin-bottom:20px;}
+.settings-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;padding:0 0 10px;font-weight:600;}
+.settings-row{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.sr-left{display:flex;align-items:center;gap:10px;}
+.sr-icon{width:32px;height:32px;border-radius:8px;background:#ffffff08;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sr-label{font-size:13px;font-weight:500;}
+.sr-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.sr-right{color:var(--muted);font-size:13px;}
+.toggle{width:38px;height:20px;background:var(--border);border-radius:20px;position:relative;cursor:pointer;transition:.2s;flex-shrink:0;}
+.toggle.on{background:var(--cyan);}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;}
+.toggle.on::after{left:21px;}
+.input-row{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:8px;}
+.input-row label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px;}
+.input-row input,.input-row select{width:100%;padding:8px 12px;background:#ffffff08;border:1px solid var(--border);border-radius:8px;color:var(--txt);font-size:13px;outline:none;}
+.input-row input:focus,.input-row select:focus{border-color:var(--cyan);}
+.input-row select option{background:var(--panel);}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:#00000088;z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:18px;width:460px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:.2s;}
+.overlay.show .modal{transform:translateY(0);}
+.modal-head{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;}
+.modal-title{font-size:15px;font-weight:700;}
+.modal-close{width:28px;height:28px;border-radius:6px;background:#ffffff10;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:var(--muted);font-size:16px;transition:.15s;}
+.modal-close:hover{background:#ffffff20;color:var(--txt);}
+.modal-body{padding:20px 22px;}
+.form-row{margin-bottom:14px;}
+.form-row label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px;}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:9px 12px;background:#ffffff08;border:1px solid var(--border);border-radius:8px;color:var(--txt);font-size:13px;outline:none;resize:none;}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--cyan);}
+.form-row select option{background:var(--panel);}
+.emoji-picker{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.emoji-btn{width:36px;height:36px;border-radius:8px;background:#ffffff08;border:1px solid var(--border);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.emoji-btn:hover,.emoji-btn.on{border-color:var(--cyan);background:#00e5ff15;}
+.modal-actions{display:flex;gap:10px;margin-top:18px;}
+.modal-actions .btn{flex:1;justify-content:center;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;min-width:280px;max-width:360px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.3s;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{font-size:20px;}
+.toast.success i{color:var(--green);}
+.toast.error i{color:var(--red);}
+.toast.info i{color:var(--cyan);}
+.toast-title{font-size:13px;font-weight:700;}
+.toast-msg{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* ── MISC ── */
+.empty-state{padding:40px;text-align:center;color:var(--muted);font-size:13px;}
+.empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.4;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.animate-in{animation:fadeIn .3s ease both;}
+@media(max-width:1100px){.stats-row{grid-template-columns:repeat(2,1fr);}.grid2{grid-template-columns:1fr;}}
+@media(max-width:860px){.main{margin-left:0;}.sidebar{transform:translateX(-100%);transition:.25s;}.sidebar.open{transform:none;}.content{padding:16px;}.analytics-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <div class="sb-logo">
+      <img src="logo.png" alt="T" onerror="this.style.background='#00e5ff';this.innerHTML='<span style=font-weight:700;color:#000;font-size:14px;>T</span>'"/>
+      <div>
+        <div class="sb-logo-txt">Tchotcho Pay</div>
+        <div class="sb-logo-sub">Merchant Portal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-store">
+    <div class="store-row">
+      <div class="store-icon">🛒</div>
+      <div>
+        <div class="store-name">Marché Soleil</div>
+        <div class="store-cat">Food & Grocery</div>
+      </div>
+    </div>
+    <div class="store-badge">✓ Verified Merchant</div>
+  </div>
+
+  <div class="sb-nav">
+    <a class="on" onclick="showPage('overview',this)"><i class="ti ti-layout-dashboard"></i>Overview</a>
+    <a onclick="showPage('payments',this)"><i class="ti ti-receipt"></i>Payments <span class="notif" id="new-badge">2</span></a>
+    <a onclick="showPage('products',this)"><i class="ti ti-package"></i>Products</a>
+    <a onclick="showPage('analytics',this)"><i class="ti ti-chart-bar"></i>Analytics</a>
+    <div class="section-lbl">Finances</div>
+    <a onclick="showPage('payouts',this)"><i class="ti ti-cash"></i>Payouts</a>
+    <a onclick="showPage('settings',this)"><i class="ti ti-settings"></i>Settings</a>
+  </div>
+
+  <div class="sb-bottom">
+    <a onclick="showToast('info','Support','Live chat available 8AM–8PM EST')"><i class="ti ti-headset"></i>Help & Support</a>
+    <a onclick="showToast('info','Signed out','Redirecting to login...')"><i class="ti ti-logout"></i>Sign Out</a>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="page-title">Overview</div>
+      <div class="topbar-sub" id="page-sub">Rue des Miracles 12, Port-au-Prince · @marche.soleil</div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-time" id="clock">—</div>
+      <button class="btn btn-ghost btn-sm" onclick="showPage('payouts',document.querySelector('.sb-nav a:nth-child(6)'))"><i class="ti ti-cash"></i> Request Payout</button>
+      <button class="btn btn-cyan btn-sm" onclick="openAddProduct()"><i class="ti ti-plus"></i> Add Product</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ PAGE: OVERVIEW ══ -->
+    <div class="page on animate-in" id="page-overview">
+
+      <div class="store-hero">
+        <div class="hero-logo">🛒</div>
+        <div class="hero-info">
+          <div class="hero-name">Marché Soleil</div>
+          <div class="hero-sub">Rue des Miracles 12, Pétion-Ville · Port-au-Prince, Haiti</div>
+          <div class="hero-tags">
+            <span class="tag tag-cyan"><i class="ti ti-shield-check" style="font-size:10px;"></i> KYC Verified</span>
+            <span class="tag tag-green"><i class="ti ti-bolt" style="font-size:10px;"></i> Instant Payouts</span>
+            <span class="tag tag-orange"><i class="ti ti-star" style="font-size:10px;"></i> Top Merchant</span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-balance">
+            <div class="hero-balance-lbl">Pending Balance</div>
+            <div class="hero-balance-amt" id="hero-balance">842.30 USDC</div>
+            <div class="hero-balance-htg" id="hero-htg">≈ 109,920 HTG</div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-outline btn-sm" onclick="showPage('payouts',document.querySelector('.sb-nav a:nth-child(6)'))"><i class="ti ti-cash"></i> Withdraw</button>
+            <button class="btn btn-ghost btn-sm" onclick="showPage('payments',document.querySelector('.sb-nav a:nth-child(2)'))"><i class="ti ti-eye"></i> Payments</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#00e5ff15;"><i class="ti ti-currency-dollar" style="color:var(--cyan);"></i></div>
+          <div class="stat-val">$1,284</div>
+          <div class="stat-lbl">Revenue Today (USDC)</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> +18% vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#00e67615;"><i class="ti ti-shopping-cart" style="color:var(--green);"></i></div>
+          <div class="stat-val">47</div>
+          <div class="stat-lbl">Orders Today</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> +6 vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#b388ff15;"><i class="ti ti-users" style="color:var(--gold);"></i></div>
+          <div class="stat-val">31</div>
+          <div class="stat-lbl">Unique Customers</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> 8 new</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#ffd74015;"><i class="ti ti-receipt" style="color:var(--yellow);"></i></div>
+          <div class="stat-val">$27.30</div>
+          <div class="stat-lbl">Avg. Order Value</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> Up from $23.10</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <!-- Payment Feed -->
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <div class="section-title">Live Payment Feed</div>
+              <div class="section-sub">Real-time incoming payments</div>
+            </div>
+            <span class="count-pill" id="live-count">2 new</span>
+          </div>
+          <div id="payment-feed"></div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col">
+
+          <!-- QR Code Panel -->
+          <div class="section-card">
+            <div class="section-head">
+              <div class="section-title">Accept Payment</div>
+              <div class="section-sub">Customer scans to pay</div>
+            </div>
+            <div class="qr-wrap">
+              <div class="qr-code">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <!-- QR border squares -->
+                  <rect x="5" y="5" width="28" height="28" rx="3" fill="none" stroke="#000" stroke-width="3"/>
+                  <rect x="10" y="10" width="18" height="18" rx="1" fill="#000"/>
+                  <rect x="67" y="5" width="28" height="28" rx="3" fill="none" stroke="#000" stroke-width="3"/>
+                  <rect x="72" y="10" width="18" height="18" rx="1" fill="#000"/>
+                  <rect x="5" y="67" width="28" height="28" rx="3" fill="none" stroke="#000" stroke-width="3"/>
+                  <rect x="10" y="72" width="18" height="18" rx="1" fill="#000"/>
+                  <!-- QR dots pattern -->
+                  <rect x="40" y="5" width="4" height="4" fill="#000"/><rect x="48" y="5" width="4" height="4" fill="#000"/>
+                  <rect x="56" y="5" width="4" height="4" fill="#000"/><rect x="40" y="13" width="4" height="4" fill="#000"/>
+                  <rect x="56" y="13" width="4" height="4" fill="#000"/><rect x="44" y="21" width="4" height="4" fill="#000"/>
+                  <rect x="52" y="21" width="4" height="4" fill="#000"/><rect x="5" y="40" width="4" height="4" fill="#000"/>
+                  <rect x="13" y="40" width="4" height="4" fill="#000"/><rect x="21" y="44" width="4" height="4" fill="#000"/>
+                  <rect x="5" y="52" width="4" height="4" fill="#000"/><rect x="13" y="56" width="4" height="4" fill="#000"/>
+                  <rect x="40" y="40" width="20" height="20" rx="2" fill="#00b4cc"/>
+                  <rect x="44" y="44" width="12" height="12" rx="1" fill="#000"/>
+                  <text x="50" y="53" text-anchor="middle" font-size="8" font-weight="900" fill="white">T</text>
+                  <rect x="67" y="40" width="4" height="4" fill="#000"/><rect x="75" y="40" width="4" height="4" fill="#000"/>
+                  <rect x="83" y="44" width="4" height="4" fill="#000"/><rect x="91" y="40" width="4" height="4" fill="#000"/>
+                  <rect x="67" y="52" width="4" height="4" fill="#000"/><rect x="75" y="56" width="4" height="4" fill="#000"/>
+                  <rect x="83" y="52" width="4" height="4" fill="#000"/><rect x="40" y="67" width="4" height="4" fill="#000"/>
+                  <rect x="48" y="71" width="4" height="4" fill="#000"/><rect x="56" y="67" width="4" height="4" fill="#000"/>
+                  <rect x="40" y="79" width="4" height="4" fill="#000"/><rect x="52" y="83" width="4" height="4" fill="#000"/>
+                  <rect x="64" y="67" width="4" height="4" fill="#000"/><rect x="72" y="71" width="4" height="4" fill="#000"/>
+                  <rect x="80" y="67" width="4" height="4" fill="#000"/><rect x="64" y="83" width="4" height="4" fill="#000"/>
+                  <rect x="72" y="79" width="4" height="4" fill="#000"/><rect x="88" y="75" width="4" height="4" fill="#000"/>
+                </svg>
+              </div>
+              <div class="qr-store-name">Marché Soleil</div>
+              <div class="qr-handle">@marche.soleil · Pétion-Ville</div>
+              <div class="qr-amount-row">
+                <input type="number" id="qr-amt" placeholder="Amount (USDC)" min="0" oninput="updateQRAmount()" />
+              </div>
+              <div class="qr-actions">
+                <button class="btn btn-cyan btn-sm"><i class="ti ti-download"></i> Download QR</button>
+                <button class="btn btn-ghost btn-sm"><i class="ti ti-share"></i> Share</button>
+                <button class="btn btn-ghost btn-sm" onclick="showToast('info','QR Printed','Sending to printer...')"><i class="ti ti-printer"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Today's Chart -->
+          <div class="section-card">
+            <div class="section-head">
+              <div class="section-title">Today's Revenue</div>
+              <div style="font-size:11px;color:var(--muted);">By hour</div>
+            </div>
+            <div class="bars-wrap" id="today-bars"></div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /overview -->
+
+
+    <!-- ══ PAGE: PAYMENTS ══ -->
+    <div class="page animate-in" id="page-payments">
+      <div class="section-card">
+        <div class="section-head">
+          <div class="section-title">All Payments</div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-xs" onclick="showToast('info','Export','Downloading CSV...')"><i class="ti ti-download"></i> Export</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+          <div class="h-tab on" onclick="filterPayments('all',this)">All</div>
+          <div class="h-tab" onclick="filterPayments('completed',this)">Completed</div>
+          <div class="h-tab" onclick="filterPayments('pending',this)">Pending</div>
+          <div class="h-tab" onclick="filterPayments('refunded',this)">Refunded</div>
+        </div>
+        <div id="all-payments"></div>
+      </div>
+    </div>
+
+
+    <!-- ══ PAGE: PRODUCTS ══ -->
+    <div class="page animate-in" id="page-products">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+        <div>
+          <div style="font-size:15px;font-weight:700;">Product Catalog</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">8 products · Customers can browse and pay directly</div>
+        </div>
+        <button class="btn btn-cyan" onclick="openAddProduct()"><i class="ti ti-plus"></i> Add Product</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+
+
+    <!-- ══ PAGE: ANALYTICS ══ -->
+    <div class="page animate-in" id="page-analytics">
+      <div class="analytics-grid">
+        <div class="an-card"><div class="an-val">$8,420</div><div class="an-lbl">Revenue This Month</div></div>
+        <div class="an-card"><div class="an-val">312</div><div class="an-lbl">Orders This Month</div></div>
+        <div class="an-card"><div class="an-val">147</div><div class="an-lbl">Unique Customers</div></div>
+        <div class="an-card"><div class="an-val" style="color:var(--green);">94%</div><div class="an-lbl">Payment Success Rate</div></div>
+        <div class="an-card"><div class="an-val" style="color:var(--yellow);">$27.30</div><div class="an-lbl">Avg. Order Value</div></div>
+        <div class="an-card"><div class="an-val" style="color:var(--gold);">3.2x</div><div class="an-lbl">Repeat Customer Rate</div></div>
+      </div>
+
+      <div class="grid2">
+        <div class="section-card">
+          <div class="section-head">
+            <div class="section-title">Weekly Revenue</div>
+            <div style="font-size:11px;color:var(--muted);">USDC</div>
+          </div>
+          <div class="bars-wrap" id="weekly-bars" style="height:120px;padding:20px 18px 10px;"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head"><div class="section-title">Top Products</div></div>
+          <div class="top-products" id="top-products"></div>
+        </div>
+      </div>
+
+      <div class="section-card" style="margin-top:20px;">
+        <div class="section-head">
+          <div class="section-title">Customer Breakdown</div>
+          <div style="font-size:11px;color:var(--muted);">Payment sources</div>
+        </div>
+        <div style="padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;color:var(--cyan);">68%</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Tchotcho Wallet</div>
+            <div style="height:4px;background:var(--border);border-radius:2px;margin-top:8px;"><div style="height:100%;width:68%;border-radius:2px;background:var(--cyan);"></div></div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;color:var(--gold);">21%</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Scan-to-Pay QR</div>
+            <div style="height:4px;background:var(--border);border-radius:2px;margin-top:8px;"><div style="height:100%;width:21%;border-radius:2px;background:var(--gold);"></div></div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:28px;font-weight:700;color:var(--orange);">11%</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">P2P Send</div>
+            <div style="height:4px;background:var(--border);border-radius:2px;margin-top:8px;"><div style="height:100%;width:11%;border-radius:2px;background:var(--orange);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ PAGE: PAYOUTS ══ -->
+    <div class="page animate-in" id="page-payouts">
+      <div class="payout-banner">
+        <div class="pb-icon"><i class="ti ti-wallet"></i></div>
+        <div class="pb-info">
+          <div class="pb-label">Available to Withdraw</div>
+          <div class="pb-amount">842.30 USDC</div>
+          <div class="pb-sub">≈ 109,920 HTG · Clears within 1–2 hours</div>
+        </div>
+        <button class="btn btn-green" onclick="openPayoutModal()"><i class="ti ti-arrow-up-right"></i> Withdraw Now</button>
+      </div>
+
+      <div class="grid2">
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:12px;">Withdrawal Method</div>
+          <div class="method-card on" onclick="selMethod(this)">
+            <div class="method-radio"></div>
+            <div class="method-icon">🏦</div>
+            <div class="method-info">
+              <div class="method-name">Local Bank Transfer</div>
+              <div class="method-sub">BNC · ****4821 · 1–2 hours</div>
+            </div>
+            <div class="method-fee">1% fee</div>
+          </div>
+          <div class="method-card" onclick="selMethod(this)">
+            <div class="method-radio"></div>
+            <div class="method-icon">📱</div>
+            <div class="method-info">
+              <div class="method-name">MonCash</div>
+              <div class="method-sub">+509 3412-8844 · Instant</div>
+            </div>
+            <div class="method-fee">1.5% fee</div>
+          </div>
+          <div class="method-card" onclick="selMethod(this)">
+            <div class="method-radio"></div>
+            <div class="method-icon">💵</div>
+            <div class="method-info">
+              <div class="method-name">Cash via Agent</div>
+              <div class="method-sub">Nearest agent · Same-day HTG</div>
+            </div>
+            <div class="method-fee">1% fee</div>
+          </div>
+          <div class="method-card" onclick="selMethod(this)">
+            <div class="method-radio"></div>
+            <div class="method-icon"><i class="ti ti-currency-dollar" style="color:var(--cyan);font-size:16px;"></i></div>
+            <div class="method-info">
+              <div class="method-name">Keep as USDC</div>
+              <div class="method-sub">Stays in Tchotcho wallet · No fee</div>
+            </div>
+            <div class="method-fee" style="color:var(--green);">Free</div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="section-card">
+            <div class="section-head"><div class="section-title">Recent Payouts</div></div>
+            <div id="payout-history"></div>
+          </div>
+          <div class="section-card" style="padding:18px;">
+            <div class="section-title" style="margin-bottom:12px;">Monthly Summary</div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Gross Revenue</span><span style="font-weight:600;">$8,420 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Platform Fee (2%)</span><span style="color:var(--red);">-$168.40</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Withdrawn</span><span style="color:var(--muted);">-$7,409.30</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;font-weight:700;"><span>Pending Balance</span><span style="color:var(--cyan);">842.30 USDC</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ PAGE: SETTINGS ══ -->
+    <div class="page animate-in" id="page-settings">
+      <div style="max-width:640px;">
+        <div class="settings-section">
+          <div class="settings-title">Store Information</div>
+          <div class="input-row"><label>Store Name</label><input type="text" value="Marché Soleil"/></div>
+          <div class="input-row"><label>Category</label>
+            <select><option>Food & Grocery</option><option>Restaurant</option><option>Electronics</option><option>Clothing</option><option>Pharmacy</option><option>Transport</option><option>School</option><option>Other</option></select>
+          </div>
+          <div class="input-row"><label>Address</label><input type="text" value="Rue des Miracles 12, Pétion-Ville"/></div>
+          <div class="input-row"><label>Phone</label><input type="text" value="+509 3412-8844"/></div>
+          <div class="input-row"><label>Description</label><textarea rows="3">Fresh produce, groceries, and household items — serving Pétion-Ville since 2018.</textarea></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-title">Payment Settings</div>
+          <div class="settings-row">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-bell"></i></div><div><div class="sr-label">Payment Notifications</div><div class="sr-sub">SMS + app alert on each payment</div></div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-receipt"></i></div><div><div class="sr-label">Auto-send Receipts</div><div class="sr-sub">Email receipt to customer</div></div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-cash"></i></div><div><div class="sr-label">Auto Payout</div><div class="sr-sub">Auto-withdraw weekly on Fridays</div></div></div>
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="settings-row">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-globe"></i></div><div><div class="sr-label">Public Store Page</div><div class="sr-sub">List on Tchotcho marketplace</div></div></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-title">Security</div>
+          <div class="settings-row" style="cursor:pointer;" onclick="showToast('info','PIN Change','Check your phone for a verification code')">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-lock"></i></div><div><div class="sr-label">Change Transaction PIN</div><div class="sr-sub">Last changed 14 days ago</div></div></div>
+            <i class="ti ti-chevron-right" style="color:var(--muted);"></i>
+          </div>
+          <div class="settings-row" style="cursor:pointer;">
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-device-mobile"></i></div><div><div class="sr-label">Two-Factor Authentication</div><div class="sr-sub">Enabled · SMS to +509 3412-8844</div></div></div>
+            <span class="pill pill-done">On</span>
+          </div>
+        </div>
+        <button class="btn btn-cyan" onclick="showToast('success','Settings Saved','Your store information has been updated')">Save Changes</button>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+
+<!-- ═══ MODAL: ADD PRODUCT ═══ -->
+<div class="overlay" id="product-overlay" onclick="closeProdModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title" id="prod-modal-title">Add New Product</div></div>
+      <button class="modal-close" onclick="document.getElementById('product-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <label>Product Emoji / Icon</label>
+        <div class="emoji-picker" id="emoji-picker"></div>
+      </div>
+      <div class="form-row"><label>Product Name</label><input type="text" id="p-name" placeholder="e.g. Fresh Mangoes (1 dozen)"/></div>
+      <div class="form-row"><label>Category</label>
+        <select id="p-cat"><option>🥬 Fresh Produce</option><option>🥩 Meat & Fish</option><option>🍳 Pantry</option><option>🧴 Household</option><option>📱 Electronics</option><option>👗 Clothing</option><option>💊 Medicine</option><option>Other</option></select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="form-row"><label>Price (USDC)</label><input type="number" id="p-price" placeholder="0.00" min="0" step="0.01" oninput="updateHTG()"/></div>
+        <div class="form-row"><label>Price (HTG)</label><input type="text" id="p-htg" placeholder="≈ 0 HTG" readonly style="background:#ffffff04;color:var(--muted);"/></div>
+      </div>
+      <div class="form-row"><label>Stock Available</label><input type="number" id="p-stock" placeholder="Enter quantity" min="0"/></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="document.getElementById('product-overlay').classList.remove('show')">Cancel</button>
+        <button class="btn btn-cyan" onclick="saveProduct()"><i class="ti ti-check"></i> Save Product</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ MODAL: PAYOUT ═══ -->
+<div class="overlay" id="payout-overlay" onclick="closePayoutModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Withdraw Funds</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Transfer your USDC balance</div></div>
+      <button class="modal-close" onclick="document.getElementById('payout-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="background:#00e67610;border:1px solid #00e67630;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:12px;color:var(--muted);">Available Balance</span>
+        <span style="font-size:20px;font-weight:700;color:var(--green);">842.30 USDC</span>
+      </div>
+      <div class="form-row">
+        <label>Amount to Withdraw (USDC)</label>
+        <input type="number" id="payout-amt" value="842.30" max="842.30" min="10" oninput="updatePayoutCalc()"/>
+      </div>
+      <div id="payout-calc" style="background:#ffffff06;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;">
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:var(--muted);">Platform fee (1%)</span><span id="pc-fee">-$8.42</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px;font-weight:700;"><span>You receive</span><span id="pc-net" style="color:var(--green);">833.88 USDC</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:var(--muted);">≈ HTG</span><span id="pc-htg" style="color:var(--muted);">108,791 HTG</span></div>
+      </div>
+      <div class="form-row"><label>Destination</label>
+        <select><option>🏦 BNC Bank ****4821</option><option>📱 MonCash +509 3412-8844</option><option>💵 Cash via Agent</option></select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="document.getElementById('payout-overlay').classList.remove('show')">Cancel</button>
+        <button class="btn btn-green" onclick="submitPayout()"><i class="ti ti-arrow-up-right"></i> Confirm Withdrawal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast">
+  <i class="ti" id="toast-icon"></i>
+  <div>
+    <div class="toast-title" id="toast-title"></div>
+    <div class="toast-msg" id="toast-msg"></div>
+  </div>
+</div>
+
+
+<style>
+.h-tab{padding:10px 18px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:.15s;}
+.h-tab.on{color:var(--cyan);border-bottom-color:var(--cyan);}
+</style>
+
+<script>
+const RATE = 130.5;
+
+// ── DATA ──
+const PAYMENTS = [
+  {id:'P001',name:'Marie Jean',handle:'@marie.j',color:'#ee5a24',avatar:'MJ',amt:45.00,items:'Rice 5kg, Beans 2kg',time:'10:48 AM',status:'completed',new:true},
+  {id:'P002',name:'Paul Desrosiers',handle:'@paul.d',color:'#0984e3',avatar:'PD',amt:18.50,items:'Tomatoes, Peppers',time:'10:31 AM',status:'completed',new:true},
+  {id:'P003',name:'Nadia Clervil',handle:'@nadia.c',color:'#6c5ce7',avatar:'NC',amt:72.00,items:'Chicken 3kg, Oil',time:'10:12 AM',status:'completed',new:false},
+  {id:'P004',name:'Rolph Pierre',handle:'@rolph.p',color:'#00b894',avatar:'RP',amt:12.00,items:'Bread x4, Butter',time:'9:55 AM',status:'completed',new:false},
+  {id:'P005',name:'Gladys Mentor',handle:'@gladys.m',color:'#e17055',avatar:'GM',amt:9.50,items:'Plantains, Limes',time:'9:40 AM',status:'pending',new:false},
+  {id:'P006',name:'Jean Remy',handle:'@jean.r',color:'#fd79a8',avatar:'JR',amt:28.00,items:'Phone top-up 500 HTG',time:'9:20 AM',status:'refunded',new:false},
+  {id:'P007',name:'Sophie Bernard',handle:'@sophie.b',color:'#0984e3',avatar:'SB',amt:55.50,items:'Weekly groceries',time:'Yesterday 4:30 PM',status:'completed',new:false},
+];
+
+const PRODUCTS = [
+  {emoji:'🍚',name:'White Rice (5kg)',cat:'Pantry',price:8.50,stock:42},
+  {emoji:'🫘',name:'Black Beans (2kg)',cat:'Fresh Produce',price:5.00,stock:28},
+  {emoji:'🐔',name:'Fresh Chicken (1kg)',cat:'Meat & Fish',price:7.00,stock:15},
+  {emoji:'🌽',name:'Sweet Corn (6 ears)',cat:'Fresh Produce',price:3.50,stock:60},
+  {emoji:'🥑',name:'Avocado (each)',cat:'Fresh Produce',price:1.00,stock:35},
+  {emoji:'🛢️',name:'Cooking Oil (1L)',cat:'Pantry',price:4.50,stock:22},
+  {emoji:'🍌',name:'Plantains (bunch)',cat:'Fresh Produce',price:2.00,stock:18},
+  {emoji:'📱',name:'Phone Top-up (500HTG)',cat:'Electronics',price:3.82,stock:999},
+];
+
+const EMOJIS = ['🛒','🍔','🥩','🥬','🍚','💊','👗','📱','🔧','🏠','🎓','🚗'];
+let selectedEmoji = '🛒';
+let editingProduct = null;
+
+const PAYOUT_HISTORY = [
+  {amt:1200,dest:'BNC ****4821',date:'Jun 14',ref:'PO-2218'},
+  {amt:980,dest:'BNC ****4821',date:'Jun 7',ref:'PO-2199'},
+  {amt:1540,dest:'MonCash',date:'May 31',ref:'PO-2184'},
+  {amt:760,dest:'BNC ****4821',date:'May 24',ref:'PO-2170'},
+];
+
+const TODAY_HOURS = [12,28,45,18,90,62,110,82,55,40,73,88];
+const TODAY_H_LABELS = ['8','9','10','11','12','1','2','3','4','5','6','7'];
+const WEEK_DATA = [620,480,810,720,1040,990,1284];
+const WEEK_LABELS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+// ── PAGE NAV ──
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.sb-nav a').forEach(a=>a.classList.remove('on'));
+  document.getElementById('page-'+name).classList.add('on');
+  if(el) el.classList.add('on');
+  const T = {overview:'Overview',payments:'Payments',products:'Products',analytics:'Analytics',payouts:'Payouts',settings:'Settings'};
+  document.getElementById('page-title').textContent = T[name]||name;
+  if(name==='payments') renderAllPayments('all');
+  if(name==='products') renderProducts();
+  if(name==='analytics') { renderBars('weekly-bars',WEEK_DATA,WEEK_LABELS); renderTopProducts(); }
+  if(name==='payouts') renderPayoutHistory();
+}
+
+// ── PAYMENT FEED ──
+function renderFeed() {
+  const el = document.getElementById('payment-feed');
+  el.innerHTML = PAYMENTS.slice(0,5).map(p=>`
+    <div class="pay-item">
+      ${p.new?'<div class="new-dot"></div>':'<div style="width:8px;flex-shrink:0;"></div>'}
+      <div class="pay-av" style="background:${p.color}">${p.avatar}</div>
+      <div class="pay-info">
+        <div class="pay-name">${p.name}</div>
+        <div class="pay-meta">${p.items}</div>
+      </div>
+      <div class="pay-right">
+        <div class="pay-amt">+${p.amt.toFixed(2)} USDC</div>
+        <div class="pay-time">${p.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── ALL PAYMENTS ──
+let currentFilter = 'all';
+function filterPayments(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.h-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderAllPayments(f);
+}
+function renderAllPayments(f) {
+  const items = f==='all' ? PAYMENTS : PAYMENTS.filter(p=>p.status===f);
+  const el = document.getElementById('all-payments');
+  if(!items.length){el.innerHTML='<div class="empty-state"><i class="ti ti-receipt"></i>No payments found</div>';return;}
+  const statusClass = {completed:'pill-done',pending:'pill-pend',refunded:'pill-fail'};
+  el.innerHTML = items.map(p=>`
+    <div class="pay-item">
+      <div class="pay-av" style="background:${p.color}">${p.avatar}</div>
+      <div class="pay-info">
+        <div class="pay-name">${p.name} <span style="font-size:11px;color:var(--muted);">${p.handle}</span></div>
+        <div class="pay-meta">${p.items} · REF: ${p.id}</div>
+      </div>
+      <div class="pay-right">
+        <div class="pay-amt" style="color:${p.status==='refunded'?'var(--red)':'var(--green)'}">
+          ${p.status==='refunded'?'-':'+'}${p.amt.toFixed(2)} USDC
+        </div>
+        <div class="pay-time">${p.time}</div>
+        <span class="pill ${statusClass[p.status]}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── PRODUCTS ──
+function renderProducts() {
+  const el = document.getElementById('product-grid');
+  el.innerHTML = PRODUCTS.map((p,i)=>`
+    <div class="product-card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-body">
+        <div class="product-name">${p.name}</div>
+        <div class="product-cat">${p.cat}</div>
+        <div class="product-price">${p.price.toFixed(2)} USDC</div>
+        <div class="product-htg">≈ ${Math.round(p.price*RATE).toLocaleString()} HTG</div>
+        <div class="product-footer">
+          <div class="product-stock">Stock: ${p.stock}</div>
+          <div class="product-actions">
+            <button class="btn btn-ghost btn-xs" onclick="editProduct(${i})"><i class="ti ti-pencil"></i></button>
+            <button class="btn btn-red btn-xs" onclick="deleteProduct(${i})"><i class="ti ti-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function editProduct(i) {
+  editingProduct = i;
+  const p = PRODUCTS[i];
+  document.getElementById('prod-modal-title').textContent = 'Edit Product';
+  document.getElementById('p-name').value = p.name;
+  document.getElementById('p-price').value = p.price;
+  document.getElementById('p-htg').value = '≈ '+Math.round(p.price*RATE).toLocaleString()+' HTG';
+  document.getElementById('p-stock').value = p.stock;
+  selectedEmoji = p.emoji;
+  renderEmojiPicker();
+  document.getElementById('product-overlay').classList.add('show');
+}
+function deleteProduct(i) {
+  const name = PRODUCTS[i].name;
+  PRODUCTS.splice(i,1);
+  renderProducts();
+  showToast('error','Product Removed',name+' was deleted from your catalog');
+}
+function saveProduct() {
+  const name = document.getElementById('p-name').value.trim();
+  const price = parseFloat(document.getElementById('p-price').value)||0;
+  const stock = parseInt(document.getElementById('p-stock').value)||0;
+  if(!name||!price){showToast('error','Missing fields','Name and price are required');return;}
+  if(editingProduct!==null) {
+    PRODUCTS[editingProduct]={...PRODUCTS[editingProduct], emoji:selectedEmoji, name, price, stock};
+    editingProduct=null;
+  } else {
+    PRODUCTS.push({emoji:selectedEmoji, name, cat:'Other', price, stock});
+  }
+  document.getElementById('product-overlay').classList.remove('show');
+  renderProducts();
+  showToast('success','Product Saved',name+' added to your catalog');
+}
+function openAddProduct() {
+  editingProduct=null;
+  document.getElementById('prod-modal-title').textContent='Add New Product';
+  document.getElementById('p-name').value='';
+  document.getElementById('p-price').value='';
+  document.getElementById('p-htg').value='';
+  document.getElementById('p-stock').value='';
+  selectedEmoji='🛒';
+  renderEmojiPicker();
+  showPage('products',document.querySelector('.sb-nav a:nth-child(3)'));
+  document.getElementById('product-overlay').classList.add('show');
+}
+function closeProdModal(e){if(e.target===document.getElementById('product-overlay'))document.getElementById('product-overlay').classList.remove('show');}
+function renderEmojiPicker(){
+  document.getElementById('emoji-picker').innerHTML=EMOJIS.map(e=>`<div class="emoji-btn${e===selectedEmoji?' on':''}" onclick="selEmoji(this,'${e}')">${e}</div>`).join('');
+}
+function selEmoji(el,e){selectedEmoji=e;document.querySelectorAll('.emoji-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+function updateHTG(){
+  const v=parseFloat(document.getElementById('p-price').value)||0;
+  document.getElementById('p-htg').value=v?'≈ '+Math.round(v*RATE).toLocaleString()+' HTG':'';
+}
+
+// ── BARS ──
+function renderBars(id, data, labels) {
+  const max=Math.max(...data);
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=data.map((v,i)=>`
+    <div class="bar-w">
+      <div class="bar-val" style="font-size:9px;color:var(--muted);">${v>=1000?(v/1000).toFixed(1)+'k':v}</div>
+      <div class="bar${id==='weekly-bars'?' alt':''}" style="height:${Math.max(4,(v/max)*100)*(id==='weekly-bars'?1.1:1)}%;"></div>
+      <div class="bar-lbl">${labels[i]}</div>
+    </div>
+  `).join('');
+}
+
+// ── TOP PRODUCTS ──
+function renderTopProducts() {
+  const tops = [
+    {emoji:'🍚',name:'White Rice (5kg)',rev:1240,orders:146},
+    {emoji:'🐔',name:'Fresh Chicken (1kg)',rev:980,orders:140},
+    {emoji:'🛢️',name:'Cooking Oil (1L)',rev:756,orders:168},
+    {emoji:'📱',name:'Phone Top-up',rev:612,orders:160},
+    {emoji:'🫘',name:'Black Beans (2kg)',rev:480,orders:96},
+  ];
+  const maxRev=tops[0].rev;
+  document.getElementById('top-products').innerHTML=tops.map((t,i)=>`
+    <div class="tp-row">
+      <div class="tp-rank">#${i+1}</div>
+      <span class="tp-emoji">${t.emoji}</span>
+      <div class="tp-info">
+        <div class="tp-name">${t.name}</div>
+        <div class="tp-count">${t.orders} orders</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${(t.rev/maxRev)*100}%;"></div></div>
+      </div>
+      <div class="tp-rev">$${t.rev}</div>
+    </div>
+  `).join('');
+}
+
+// ── PAYOUT HISTORY ──
+function renderPayoutHistory() {
+  document.getElementById('payout-history').innerHTML=PAYOUT_HISTORY.map(p=>`
+    <div class="pay-item">
+      <div class="tx-icon in" style="width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#00e67615;font-size:16px;flex-shrink:0;color:var(--green);">
+        <i class="ti ti-arrow-up-right"></i>
+      </div>
+      <div class="pay-info">
+        <div class="pay-name">${p.dest}</div>
+        <div class="pay-meta">REF: ${p.ref}</div>
+      </div>
+      <div class="pay-right">
+        <div class="pay-amt" style="color:var(--muted);">-${p.amt} USDC</div>
+        <div class="pay-time">${p.date}</div>
+        <span class="pill pill-done">Paid</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── PAYOUT MODAL ──
+function openPayoutModal(){document.getElementById('payout-overlay').classList.add('show');updatePayoutCalc();}
+function closePayoutModal(e){if(e.target===document.getElementById('payout-overlay'))document.getElementById('payout-overlay').classList.remove('show');}
+function updatePayoutCalc(){
+  const amt=parseFloat(document.getElementById('payout-amt').value)||0;
+  const fee=amt*0.01;
+  const net=amt-fee;
+  document.getElementById('pc-fee').textContent='-$'+fee.toFixed(2);
+  document.getElementById('pc-net').textContent=net.toFixed(2)+' USDC';
+  document.getElementById('pc-htg').textContent=(net*RATE).toLocaleString('en',{maximumFractionDigits:0})+' HTG';
+}
+function submitPayout(){
+  const amt=parseFloat(document.getElementById('payout-amt').value)||0;
+  if(!amt||amt<10){showToast('error','Invalid amount','Minimum payout is 10 USDC');return;}
+  document.getElementById('payout-overlay').classList.remove('show');
+  showToast('success','Payout Requested!',`${amt} USDC → bank transfer initiated`);
+}
+
+// ── METHOD SELECT ──
+function selMethod(el){
+  document.querySelectorAll('.method-card').forEach(m=>m.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ── QR AMOUNT ──
+function updateQRAmount(){
+  const v=parseFloat(document.getElementById('qr-amt').value)||0;
+  if(v) showToast('info','QR Updated',`QR now requests ${v.toFixed(2)} USDC from customer`);
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(type,title,msg){
+  const t=document.getElementById('toast');
+  const icons={success:'ti-circle-check',error:'ti-circle-x',info:'ti-info-circle'};
+  t.className='toast '+type;
+  document.getElementById('toast-icon').className='ti '+icons[type];
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── CLOCK ──
+function updateClock(){
+  const now=new Date();
+  document.getElementById('clock').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})+' · '+now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+updateClock();setInterval(updateClock,1000);
+
+// ── INIT ──
+renderFeed();
+renderEmojiPicker();
+renderBars('today-bars',TODAY_HOURS,TODAY_H_LABELS);
+
+// Simulate incoming payment after 12s
+setTimeout(()=>{
+  const newPay={id:'P_LIVE',name:'Claudette René',handle:'@claudette.r',color:'#00cec9',avatar:'CR',amt:22.00,items:'Avocado ×4, Plantains',time:'Just now',status:'completed',new:true};
+  PAYMENTS.unshift(newPay);
+  renderFeed();
+  document.getElementById('live-count').textContent='3 new';
+  document.getElementById('new-badge').textContent='3';
+  showToast('success','New Payment! +22.00 USDC','Claudette René · Avocado ×4, Plantains');
+},12000);
+
+// Mobile hamburger
+if(window.innerWidth<=860)document.getElementById('sidebar').classList.remove('open');
+</script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

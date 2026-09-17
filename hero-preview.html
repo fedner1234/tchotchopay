@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay Hero Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  /* ── NAV ── */
+  nav {
+    background: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky; top: 0; z-index: 100;
+    height: 64px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: linear-gradient(135deg, #e63946 45%, #1055CC 45%);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff;
+  }
+  .logo-name { font-size: 15px; font-weight: 700; color: #111; }
+  .logo-name span { color: #1055CC; }
+  .logo-tagline { font-size: 10px; color: #6b7280; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: #374151; font-size: 13px; text-decoration: none; font-weight: 500; }
+  .nav-links a:hover { color: #1055CC; }
+  .nav-btns { display: flex; align-items: center; gap: 10px; }
+  .btn-login {
+    border: 1.5px solid #1055CC; color: #1055CC; background: #fff;
+    padding: 7px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+  }
+  .btn-started {
+    background: #1055CC; color: #fff; border: none;
+    padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .lang { font-size: 13px; color: #374151; font-weight: 500; cursor: pointer; }
+
+  /* ── HERO ── */
+  .hero {
+    display: flex;
+    height: 560px;
+  }
+
+  /* LEFT */
+  .hero-left {
+    flex: 0 0 46%;
+    background: linear-gradient(155deg, #1055CC 0%, #0d46b0 55%, #0A1F6E 100%);
+    padding: 52px 44px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-left h1 {
+    font-size: 46px; font-weight: 800; color: #fff;
+    line-height: 1.08; letter-spacing: -1px; margin-bottom: 10px;
+  }
+  .hero-left h2 {
+    font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.88);
+    margin-bottom: 14px;
+  }
+  .hero-left p {
+    font-size: 14.5px; color: rgba(255,255,255,0.75);
+    line-height: 1.75; margin-bottom: 28px;
+  }
+  .cta-row { display: flex; gap: 12px; margin-bottom: 32px; }
+  .cta-primary {
+    background: #fff; color: #1055CC; border: none;
+    padding: 13px 24px; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cta-secondary {
+    background: transparent; color: #fff;
+    border: 2px solid rgba(255,255,255,0.55);
+    padding: 13px 24px; border-radius: 9px; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  .flags-row { display: flex; align-items: center; gap: 14px; }
+  .flag-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .flag-item .fi { font-size: 22px; }
+  .flag-item span { font-size: 9px; color: rgba(255,255,255,0.65); text-align: center; line-height: 1.3; }
+  .flag-div { width: 1px; height: 30px; background: rgba(255,255,255,0.2); }
+  .more-txt { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* RIGHT */
+  .hero-right {
+    flex: 1;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('images/caribbean-hero.jpg');
+    background-size: cover;
+    background-position: center center;
+    filter: brightness(0.82) saturate(1.1);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg,
+      rgba(10,31,110,0.5) 0%,
+      rgba(16,85,204,0.2) 40%,
+      transparent 70%);
+  }
+
+  /* ── PHONES ── */
+  /*
+    Container: 350px wide
+    Front phone: 200px, left:0  → covers 0–200px
+    Back phone:  175px, right:0 → covers 175–350px
+    Overlap: 200-175 = 25px only — back phone clearly visible to the right
+    Back phone leans RIGHT (+10°) so its top fans away from front phone
+  */
+  .phones-wrap {
+    position: absolute;
+    bottom: 48px;
+    left: 46%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 440px;
+    z-index: 4;
+  }
+
+  /* Front: Wallet — left, stands perfectly straight */
+  .phone-front-wrap {
+    position: absolute;
+    bottom: 0; left: 0;
+    z-index: 2;
+  }
+  /* Back: Send Money — leans RIGHT away from front phone */
+  .phone-back-wrap {
+    position: absolute;
+    bottom: 36px; right: 0;
+    z-index: 1;
+    transform: rotate(10deg);
+    transform-origin: bottom left;
+  }
+
+  /* Phone frame: silver background + padding = visible white/silver bezel
+     NO border + overflow:hidden (that's what was making it look black) */
+  .phone {
+    background: #3a3a3a;        /* light black / charcoal bezel */
+    border-radius: 32px 32px 0 0;
+    padding: 10px 10px 0 10px;  /* this padding IS the visible frame */
+    box-shadow: 0 -14px 44px rgba(0,0,0,0.22);
+  }
+  .phone-screen {
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+  }
+  .phone-front { width: 200px; }
+  .phone-back  { width: 175px; opacity: 0.93; }
+
+  /* Status bar */
+  .statusbar {
+    background: #f8fafc; padding: 6px 13px 5px;
+    display: flex; justify-content: space-between;
+    font-size: 9px; color: #64748b;
+    border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
+  }
+  /* App bar */
+  .appbar {
+    background: #fff; padding: 8px 12px;
+    display: flex; align-items: center; gap: 7px;
+    border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
+  }
+  .app-logo {
+    width: 20px; height: 20px; border-radius: 5px;
+    background: linear-gradient(135deg, #e63946 45%, #1055CC 45%);
+    font-size: 10px; color: #fff; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .app-name { font-size: 12px; font-weight: 700; color: #111; }
+  .app-name span { color: #1055CC; }
+
+  /* ── FRONT PHONE SCREEN ── */
+  .pscreen { display: flex; flex-direction: column; height: 390px; overflow: hidden; }
+
+  .wallet-card {
+    background: linear-gradient(135deg, #1055CC, #0A1F6E);
+    margin: 9px; border-radius: 14px; padding: 14px 16px; flex-shrink: 0;
+  }
+  .wc-label { font-size: 9px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .wc-amount { font-size: 26px; font-weight: 800; color: #fff; line-height: 1; }
+  .wc-currency { font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 600; margin-left: 3px; vertical-align: super; }
+  .wc-sub { font-size: 8.5px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* Quick actions — 4 icons */
+  .quick-actions {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 6px; padding: 10px 10px; flex-shrink: 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .qa-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .qa-icon {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: #eff6ff;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qa-icon svg { width: 15px; height: 15px; }
+  .qa-label { font-size: 8px; color: #475569; font-weight: 500; }
+
+  /* Transactions */
+  .txns { padding: 8px 10px; flex: 1; overflow: hidden; }
+  .txns-hdr { font-size: 8px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .txn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px; background: #f8fafc; border-radius: 8px; margin-bottom: 4px;
+  }
+  .txn-icon {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .txn-icon svg { width: 10px; height: 10px; }
+  .txn-info { flex: 1; min-width: 0; }
+  .txn-name { font-size: 9px; color: #1e293b; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .txn-date { font-size: 7px; color: #94a3b8; }
+  .txn-amt-pos { font-size: 9px; font-weight: 700; color: #059669; white-space: nowrap; }
+  .txn-amt-neg { font-size: 9px; font-weight: 700; color: #dc2626; white-space: nowrap; }
+
+  /* ── BACK PHONE SCREEN ── */
+  .bscreen { display: flex; flex-direction: column; height: 328px; overflow: hidden; }
+  .back-title { font-size: 12px; font-weight: 700; color: #111; padding: 9px 12px; border-bottom: 1px solid #f1f5f9; flex-shrink: 0; }
+  .bfield { padding: 0 11px; margin-bottom: 7px; flex-shrink: 0; }
+  .bfield-label { font-size: 9px; color: #64748b; margin-bottom: 3px; display: block; }
+  .bfield-val {
+    background: #f1f5f9; border-radius: 8px; padding: 8px 11px;
+    font-size: 11px; color: #1e293b;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .b-amt-row {
+    background: #f1f5f9; border-radius: 8px; padding: 9px 11px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .b-amt { font-size: 24px; font-weight: 800; color: #1e293b; }
+  .b-cur { font-size: 10px; color: #64748b; }
+  .b-rate { font-size: 8.5px; color: #64748b; padding: 4px 11px 9px; flex-shrink: 0; }
+  .b-btn {
+    background: linear-gradient(135deg, #1055CC, #0A1F6E);
+    margin: 0 11px; border-radius: 8px;
+    padding: 11px; text-align: center;
+    font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">T</div>
+    <div>
+      <div class="logo-name">Tchotcho <span>Pay</span></div>
+      <div class="logo-tagline">Money for the Caribbean</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#">How It Works</a>
+    <a href="#">Send Money</a>
+    <a href="#">Pay &amp; Shop</a>
+    <a href="#">Mobile Top-Up</a>
+    <a href="#">For Businesses</a>
+    <a href="#">Help</a>
+  </div>
+  <div class="nav-btns">
+    <button class="btn-login">Log In</button>
+    <button class="btn-started">Get Started</button>
+    <span class="lang">EN ▾</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- LEFT PANEL -->
+  <div class="hero-left">
+    <h1>Money for the<br>Caribbean.</h1>
+    <h2>Simple. Fast. Yours.</h2>
+    <p>Send money home. Hold digital dollars.<br>
+       Pay with your phone. Top up mobile.<br>
+       Cash out anytime.</p>
+    <div class="cta-row">
+      <button class="cta-primary">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Send Money
+      </button>
+      <button class="cta-secondary">Open Your Wallet</button>
+    </div>
+    <div class="flags-row">
+      <div class="flag-item"><span class="fi">🇭🇹</span><span>Haiti</span></div>
+      <div class="flag-item"><span class="fi">🇩🇴</span><span>Dominican<br>Republic</span></div>
+      <div class="flag-item"><span class="fi">🇯🇲</span><span>Jamaica</span></div>
+      <div class="flag-item"><span class="fi">🇧🇸</span><span>Bahamas</span></div>
+      <div class="flag-div"></div>
+      <div class="more-txt">More markets<br>coming soon</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="hero-right">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="phones-wrap">
+
+      <!-- FRONT: Wallet -->
+      <div class="phone-front-wrap">
+        <div class="phone phone-front">
+          <div class="phone-screen">
+          <div class="pscreen">
+            <div class="statusbar"><span>9:41</span><span>▮▮▮ ◀</span></div>
+            <div class="appbar">
+              <div class="app-logo">T</div>
+              <div class="app-name">Tchotcho <span>Pay</span></div>
+              <!-- bell icon -->
+              <svg style="margin-left:auto;width:13px;height:13px;color:#94a3b8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            </div>
+            <div class="wallet-card">
+              <div class="wc-label">Tchotcho Wallet</div>
+              <div>
+                <span class="wc-amount">500.00</span><span class="wc-currency">USDC</span>
+              </div>
+              <div class="wc-sub">Available Balance</div>
+            </div>
+            <div class="quick-actions">
+              <div class="qa-item">
+                <div class="qa-icon">
+                  <!-- send -->
+                  <svg fill="none" stroke="#1055CC" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </div>
+                <div class="qa-label">Send</div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-icon">
+                  <!-- receive -->
+                  <svg fill="none" stroke="#1055CC" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7l7 7 7-7"/></svg>
+                </div>
+                <div class="qa-label">Receive</div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-icon">
+                  <!-- top up / phone -->
+                  <svg fill="none" stroke="#1055CC" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+                </div>
+                <div class="qa-label">Top Up</div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-icon">
+                  <!-- cash out -->
+                  <svg fill="none" stroke="#1055CC" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/></svg>
+                </div>
+                <div class="qa-label">Cash Out</div>
+              </div>
+            </div>
+            <div class="txns">
+              <div class="txns-hdr">Recent</div>
+              <div class="txn">
+                <div class="txn-icon" style="background:#dcfce7">
+                  <svg fill="none" stroke="#059669" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 19V5m-7 7l7-7 7 7"/></svg>
+                </div>
+                <div class="txn-info">
+                  <div class="txn-name">From Jean Paul</div>
+                  <div class="txn-date">Today · 10:24 AM</div>
+                </div>
+                <span class="txn-amt-pos">+$200</span>
+              </div>
+              <div class="txn">
+                <div class="txn-icon" style="background:#fee2e2">
+                  <svg fill="none" stroke="#dc2626" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14m7-7l-7 7-7-7"/></svg>
+                </div>
+                <div class="txn-info">
+                  <div class="txn-name">QR · Supermarket</div>
+                  <div class="txn-date">Today · 12:12 PM</div>
+                </div>
+                <span class="txn-amt-neg">-$35</span>
+              </div>
+              <div class="txn">
+                <div class="txn-icon" style="background:#fee2e2">
+                  <svg fill="none" stroke="#dc2626" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14m7-7l-7 7-7-7"/></svg>
+                </div>
+                <div class="txn-info">
+                  <div class="txn-name">Digicel Top-Up</div>
+                  <div class="txn-date">Yesterday · 8:45 PM</div>
+                </div>
+                <span class="txn-amt-neg">-$10</span>
+              </div>
+            </div>
+          </div><!-- /pscreen -->
+          </div><!-- /phone-screen -->
+        </div>
+      </div>
+
+      <!-- BACK: Send Money -->
+      <div class="phone-back-wrap">
+        <div class="phone phone-back">
+          <div class="phone-screen">
+          <div class="bscreen">
+            <div class="statusbar"><span>9:41</span><span>▮▮▮</span></div>
+            <div class="back-title">← Send Money</div>
+            <div style="height:6px;flex-shrink:0"></div>
+            <div class="bfield">
+              <span class="bfield-label">To</span>
+              <div class="bfield-val"><span>🇭🇹 Haiti</span><span style="color:#94a3b8;font-size:9px">▾</span></div>
+            </div>
+            <div class="bfield">
+              <span class="bfield-label">Recipient</span>
+              <div class="bfield-val" style="color:#94a3b8;font-size:9px">Phone or username</div>
+            </div>
+            <div class="bfield">
+              <span class="bfield-label">You send</span>
+              <div class="b-amt-row">
+                <span class="b-amt">$100</span>
+                <span class="b-cur">USD ▾</span>
+              </div>
+            </div>
+            <div class="b-rate">They receive ≈ 13,500 HTG</div>
+            <div class="b-btn">Continue</div>
+          </div><!-- /bscreen -->
+          </div><!-- /phone-screen -->
+        </div>
+      </div>
+
+    </div><!-- /phones-wrap -->
+  </div><!-- /hero-right -->
+
+</section>
+</body>
+</html>

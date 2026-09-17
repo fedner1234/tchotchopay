@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tchotcho Pay Card — Visa Debit Card Powered by USDC</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Get your virtual Visa Debit card instantly. Spend your USDC balance anywhere Visa is accepted. Apple Pay and Google Pay supported. Physical card coming soon."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/card.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/card.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/card.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/card.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/card.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/card.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/card.html"/>
+  <meta property="og:title" content="Tchotcho Pay Card — Visa Debit Card Powered by USDC"/>
+  <meta property="og:description" content="Get your virtual Visa Debit card instantly. Spend your USDC balance anywhere Visa is accepted. Apple Pay and Google Pay supported. Physical card coming soon."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Tchotcho Pay Card — Visa Debit Card Powered by USDC"/>
+  <meta name="twitter:description" content="Get your virtual Visa Debit card instantly. Spend your USDC balance anywhere Visa is accepted. Apple Pay and Google Pay supported. Physical card coming soon."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    html { overflow-x: hidden; }
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+      --card-blue:#1055CC; --card-dark:#0A1F6E;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
+    .nav-name em{color:var(--cyan);font-style:normal;}
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+    @media(max-width:600px){.nav-links{display:none;}}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── HERO ── */
+    .hero{padding:120px 24px 60px;text-align:center;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(16,85,204,.12),transparent 70%);pointer-events:none;}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,174,239,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,174,239,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 20%,transparent 70%);}
+    .hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:5px 16px;border-radius:50px;font-size:.73rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:16px;}
+    .hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:560px;margin:0 auto 48px;}
+
+    /* ── CARD SHOWCASE ── */
+    .card-showcase{display:flex;align-items:center;justify-content:center;gap:80px;flex-wrap:wrap;margin-bottom:64px;}
+    .card-scene{perspective:1200px;cursor:pointer;}
+    .card-3d{width:360px;height:227px;position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,0,.2,1);}
+    .card-3d.flipped{transform:rotateY(180deg);}
+    .card-face{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;}
+    .card-front{background:linear-gradient(135deg,#1055CC 0%,#0A4BC4 40%,#0D62E8 70%,#1A8FFF 100%);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);}
+    .card-back{background:linear-gradient(135deg,#0A1F6E 0%,#0D40B8 50%,#1055CC 100%);transform:rotateY(180deg);box-shadow:0 30px 80px rgba(0,0,0,.5);}
+
+    /* CIRCUIT PATTERN */
+    .circuit{position:absolute;inset:0;opacity:.18;pointer-events:none;}
+
+    /* FRONT CARD CONTENT */
+    .cf-top{position:absolute;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:flex-start;}
+    .cf-brand-box{background:rgba(10,31,110,.65);border:1.5px solid rgba(255,255,255,.18);border-radius:10px;padding:8px 18px;text-align:center;backdrop-filter:blur(6px);}
+    .cf-brand-name{font-size:1.15rem;font-weight:900;color:#fff;letter-spacing:.05em;}
+    .cf-brand-sub{font-size:.55rem;color:rgba(255,255,255,.75);letter-spacing:.04em;margin-top:1px;}
+    .cf-chip-area{display:flex;align-items:center;gap:14px;position:absolute;top:68px;left:22px;}
+    .cf-chip{width:42px;height:34px;border-radius:5px;background:linear-gradient(135deg,#c8a832,#f0d060,#a87820,#e8c840);position:relative;overflow:hidden;}
+    .cf-chip::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(0,0,0,.3);}
+    .cf-chip::after{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.3);}
+    .cf-chip-line1{position:absolute;top:30%;left:0;right:0;height:1px;background:rgba(0,0,0,.2);}
+    .cf-chip-line2{position:absolute;top:70%;left:0;right:0;height:1px;background:rgba(0,0,0,.2);}
+    .cf-nfc{color:rgba(255,255,255,.85);font-size:1.4rem;letter-spacing:-6px;}
+    .cf-number{position:absolute;bottom:62px;left:22px;right:22px;font-size:1.35rem;font-weight:500;letter-spacing:.18em;color:#fff;font-family:'Courier New',monospace;text-shadow:0 1px 3px rgba(0,0,0,.3);}
+    .cf-bottom{position:absolute;bottom:18px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:flex-end;}
+    .cf-valid-label{font-size:.45rem;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;line-height:1.2;}
+    .cf-valid-date{font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.05em;}
+    .cf-name{font-size:.75rem;font-weight:600;letter-spacing:.12em;color:#fff;}
+    .cf-visa{display:flex;flex-direction:column;align-items:flex-end;}
+    .cf-visa-text{font-size:1.5rem;font-weight:900;color:#fff;font-style:italic;letter-spacing:-.02em;line-height:1;}
+    .cf-visa-debit{font-size:.5rem;letter-spacing:.15em;color:rgba(255,255,255,.7);text-align:right;margin-top:1px;}
+    .cf-virtual-badge{position:absolute;top:18px;right:22px;background:rgba(0,200,150,.2);border:1px solid rgba(0,200,150,.4);color:#00C896;font-size:.52rem;font-weight:800;padding:3px 8px;border-radius:50px;letter-spacing:.06em;text-transform:uppercase;}
+
+    /* BACK CARD CONTENT */
+    .cb-stripe{position:absolute;top:28px;left:0;right:0;height:46px;background:linear-gradient(180deg,#111,#1a1a1a,#111);}
+    .cb-sig-area{position:absolute;top:92px;left:20px;right:20px;}
+    .cb-sig-label{font-size:.55rem;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+    .cb-sig-strip{height:38px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 10px,rgba(255,255,255,.02) 10px,rgba(255,255,255,.02) 20px);border-radius:4px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;position:relative;overflow:hidden;}
+    .cb-sig-text{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.42rem;color:rgba(255,255,255,.15);letter-spacing:.05em;white-space:nowrap;overflow:hidden;width:calc(100% - 60px);}
+    .cb-cvv{font-size:1rem;font-weight:700;color:#111;background:rgba(255,255,255,.9);padding:2px 10px;border-radius:3px;position:relative;z-index:1;}
+    .cb-bottom{position:absolute;bottom:14px;left:20px;right:20px;display:flex;gap:16px;}
+    .cb-features{flex:1;display:flex;flex-direction:column;gap:8px;}
+    .cb-feat{display:flex;align-items:flex-start;gap:8px;}
+    .cb-feat-icon{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;margin-top:1px;}
+    .cb-feat-title{font-size:.6rem;font-weight:700;color:#fff;line-height:1.2;}
+    .cb-feat-sub{font-size:.48rem;color:rgba(255,255,255,.55);line-height:1.4;}
+    .cb-right{display:flex;flex-direction:column;align-items:center;gap:6px;border-left:1px solid rgba(255,255,255,.1);padding-left:14px;}
+    .cb-qr{width:52px;height:52px;background:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .cb-qr-inner{width:44px;height:44px;}
+    .cb-scan-text{font-size:.42rem;color:rgba(255,255,255,.5);text-align:center;}
+    .cb-site{font-size:.55rem;font-weight:700;color:rgba(255,255,255,.8);text-align:center;}
+    .cb-legal{position:absolute;bottom:2px;left:20px;right:20px;font-size:.38rem;color:rgba(255,255,255,.25);text-align:center;}
+
+    /* FLIP HINT */
+    .flip-hint{text-align:center;margin-top:14px;color:var(--gray);font-size:.78rem;display:flex;align-items:center;justify-content:center;gap:6px;}
+    .flip-hint i{font-size:.9rem;}
+
+    /* CARD INFO PANEL */
+    .card-info{max-width:400px;text-align:left;}
+    .card-type-tabs{display:flex;gap:10px;margin-bottom:28px;}
+    .type-tab{padding:10px 20px;border-radius:50px;border:1.5px solid rgba(0,174,239,.2);color:var(--gray);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;background:none;}
+    .type-tab.active{border-color:var(--cyan);color:var(--white);background:rgba(0,174,239,.1);}
+    .type-content{display:none;}
+    .type-content.active{display:block;}
+    .type-badge{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:14px;}
+    .badge-live{background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.3);color:var(--green);}
+    .badge-soon{background:rgba(247,183,49,.1);border:1px solid rgba(247,183,49,.25);color:var(--gold);}
+    .card-info h2{font-size:1.6rem;font-weight:900;margin-bottom:10px;line-height:1.2;}
+    .card-info p{color:var(--gray);font-size:.9rem;line-height:1.7;margin-bottom:22px;}
+    .card-perks{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+    .perk{display:flex;align-items:flex-start;gap:12px;}
+    .perk-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+    .perk-title{font-size:.88rem;font-weight:700;margin-bottom:2px;}
+    .perk-desc{font-size:.78rem;color:var(--gray);line-height:1.5;}
+    .card-cta{display:flex;gap:10px;flex-wrap:wrap;}
+    .btn-primary{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;padding:13px 28px;border-radius:50px;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s;font-family:inherit;}
+    .btn-primary:hover{opacity:.9;}
+    .btn-outline{background:none;border:1.5px solid rgba(0,174,239,.3);color:var(--cyan);padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;font-family:inherit;}
+    .btn-outline:hover{border-color:var(--cyan);background:rgba(0,174,239,.06);}
+
+    @media(max-width:860px){
+      .card-showcase{gap:40px;}
+      .card-info{text-align:center;}
+      .card-type-tabs{justify-content:center;}
+      .card-perks{text-align:left;}
+      .card-cta{justify-content:center;}
+    }
+    @media(max-width:500px){
+      .card-3d{width:300px;height:189px;}
+      .cf-number{font-size:1.05rem;bottom:52px;}
+      .cf-brand-name{font-size:.95rem;}
+      .cf-chip{width:34px;height:28px;}
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section{padding:80px 24px;background:rgba(10,31,110,.1);border-top:1px solid rgba(0,174,239,.07);}
+    .how-inner{max-width:900px;margin:0 auto;}
+    .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+    .section-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:8px;line-height:1.2;}
+    .section-sub{color:var(--gray);font-size:.9rem;line-height:1.6;margin-bottom:48px;}
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+    @media(max-width:760px){.steps-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:420px){.steps-grid{grid-template-columns:1fr;}}
+    .step-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:20px;padding:22px;position:relative;transition:border-color .2s;}
+    .step-card:hover{border-color:rgba(0,174,239,.25);}
+    .step-num{font-size:.7rem;font-weight:900;color:var(--cyan);opacity:.5;margin-bottom:10px;letter-spacing:.1em;}
+    .step-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px;}
+    .step-title{font-size:.92rem;font-weight:800;margin-bottom:6px;}
+    .step-desc{font-size:.78rem;color:var(--gray);line-height:1.6;}
+
+    /* ── FEATURES GRID ── */
+    .features-section{padding:80px 24px;}
+    .features-inner{max-width:1000px;margin:0 auto;}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    @media(max-width:700px){.feat-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:440px){.feat-grid{grid-template-columns:1fr;}}
+    .feat-card{background:rgba(10,31,110,.25);border:1px solid rgba(0,174,239,.1);border-radius:20px;padding:22px;transition:all .25s;}
+    .feat-card:hover{border-color:rgba(0,174,239,.22);transform:translateY(-3px);}
+    .feat-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;}
+    .feat-title{font-size:.92rem;font-weight:800;margin-bottom:6px;}
+    .feat-desc{font-size:.8rem;color:var(--gray);line-height:1.6;}
+
+    /* ── PHYSICAL COMING SOON ── */
+    .physical-section{padding:80px 24px;background:rgba(10,31,110,.12);border-top:1px solid rgba(0,174,239,.07);}
+    .physical-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:60px;flex-wrap:wrap;}
+    .physical-text{flex:1;min-width:280px;}
+    .physical-card-preview{flex-shrink:0;position:relative;}
+    .phys-card{width:300px;height:190px;border-radius:15px;background:linear-gradient(135deg,#1055CC,#0A4BC4,#1A8FFF);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden;opacity:.6;filter:blur(0);}
+    .phys-blur{position:absolute;inset:0;background:rgba(2,11,45,.5);border-radius:15px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+    .phys-soon-badge{background:rgba(247,183,49,.15);border:1.5px solid rgba(247,183,49,.4);color:var(--gold);font-size:.75rem;font-weight:800;padding:6px 18px;border-radius:50px;letter-spacing:.08em;text-transform:uppercase;}
+    .timeline-items{display:flex;flex-direction:column;gap:14px;margin-top:28px;}
+    .tl-item{display:flex;align-items:center;gap:12px;font-size:.84rem;}
+    .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .tl-done{background:var(--green);}
+    .tl-pending{background:rgba(143,168,204,.3);border:1.5px solid rgba(143,168,204,.2);}
+    .tl-active{background:var(--gold);}
+    @media(max-width:700px){.physical-inner{flex-direction:column;text-align:center;} .timeline-items{text-align:left;}}
+
+    /* ── CTA ── */
+    .cta-section{padding:80px 24px;text-align:center;}
+    .cta-inner{max-width:600px;margin:0 auto;}
+    .cta-section h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:12px;}
+    .cta-section h2 em{color:var(--cyan);font-style:normal;}
+    .cta-section p{color:var(--gray);margin-bottom:32px;line-height:1.7;}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
+    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="send.html" class="nav-link">Send Money</a>
+    <a href="card.html" class="nav-link" style="color:var(--cyan);">Card</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="login.html" class="nav-login">Log In</a>
+    <a href="signup.html" class="nav-link nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge reveal"><i class="ti ti-credit-card"></i> Tchotcho Pay Card</div>
+    <h1 class="reveal">Your money, <em>everywhere</em><br>you go</h1>
+    <p class="hero-sub reveal">Spend your USDC balance anywhere Visa is accepted. Virtual card available now — physical card coming soon.</p>
+
+    <!-- 3D CARD + INFO -->
+    <div class="card-showcase">
+
+      <!-- 3D CARD -->
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div class="card-scene" onclick="flipCard()" title="Click to flip">
+          <div class="card-3d" id="card3d">
+
+            <!-- FRONT -->
+            <div class="card-face card-front">
+              <!-- Circuit SVG -->
+              <svg class="circuit" viewBox="0 0 360 227" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 60 L40 60 L40 30 L80 30" stroke="#fff" stroke-width="2" fill="none"/>
+                <circle cx="80" cy="30" r="4" fill="#fff"/>
+                <path d="M360 80 L320 80 L320 50 L280 50" stroke="#fff" stroke-width="2" fill="none"/>
+                <circle cx="280" cy="50" r="4" fill="#fff"/>
+                <path d="M360 150 L300 150 L300 180 L260 180" stroke="#fff" stroke-width="2" fill="none"/>
+                <circle cx="260" cy="180" r="4" fill="#fff"/>
+                <path d="M80 227 L80 190 L120 190 L120 160" stroke="#fff" stroke-width="2" fill="none"/>
+                <path d="M0 140 L30 140 L30 170 L60 170 L60 190" stroke="#fff" stroke-width="1.5" fill="none"/>
+                <path d="M340 227 L340 200 L310 200 L310 170" stroke="#fff" stroke-width="1.5" fill="none"/>
+                <circle cx="310" cy="170" r="3" fill="#fff"/>
+              </svg>
+
+              <!-- Virtual badge -->
+              <div class="cf-virtual-badge">Virtual</div>
+
+              <!-- Brand box (top-left) -->
+              <div class="cf-top">
+                <div class="cf-brand-box">
+                  <div class="cf-brand-name">TCHOTCHO PAY</div>
+                  <div class="cf-brand-sub">lajan an nan men nou</div>
+                </div>
+              </div>
+
+              <!-- Chip + NFC -->
+              <div class="cf-chip-area">
+                <div class="cf-chip">
+                  <div class="cf-chip-line1"></div>
+                  <div class="cf-chip-line2"></div>
+                </div>
+                <div class="cf-nfc">)))</div>
+              </div>
+
+              <!-- Card number -->
+              <div class="cf-number">4000 1234 5678 9010</div>
+
+              <!-- Bottom row -->
+              <div class="cf-bottom">
+                <div>
+                  <div class="cf-valid-label">VALID<br>THRU</div>
+                  <div class="cf-valid-date">06/28</div>
+                </div>
+                <div class="cf-name" id="card-name-display">YOUR NAME</div>
+                <div class="cf-visa">
+                  <div class="cf-visa-text">VISA</div>
+                  <div class="cf-visa-debit">DEBIT</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div class="card-face card-back">
+              <!-- Circuit SVG -->
+              <svg class="circuit" viewBox="0 0 360 227" xmlns="http://www.w3.org/2000/svg">
+                <path d="M360 160 L300 160 L300 190 L250 190" stroke="#fff" stroke-width="2" fill="none"/>
+                <circle cx="250" cy="190" r="4" fill="#fff"/>
+                <path d="M0 180 L50 180 L50 210" stroke="#fff" stroke-width="1.5" fill="none"/>
+              </svg>
+
+              <!-- Magnetic stripe -->
+              <div class="cb-stripe"></div>
+
+              <!-- Signature + CVV -->
+              <div class="cb-sig-area">
+                <div class="cb-sig-label">Authorized Signature</div>
+                <div class="cb-sig-strip">
+                  <span class="cb-sig-text">PAY TCHOTCHO PAY TCHOTCHO PAY TCHOTCHO PAY TCHOTCHO PAY TCHOTCHO PAY TCHOTCHO PAY TCHOTCHO</span>
+                  <span class="cb-cvv">123</span>
+                </div>
+              </div>
+
+              <!-- Bottom section -->
+              <div class="cb-bottom">
+                <div class="cb-features">
+                  <div class="cb-feat">
+                    <div class="cb-feat-icon">💳</div>
+                    <div>
+                      <div class="cb-feat-title">Send Money</div>
+                      <div class="cb-feat-sub">Transfè lajan an Ayiti rapid ak an sekirite.</div>
+                    </div>
+                  </div>
+                  <div class="cb-feat">
+                    <div class="cb-feat-icon">🌐</div>
+                    <div>
+                      <div class="cb-feat-title">Hold USDC</div>
+                      <div class="cb-feat-sub">Sove epi jere USDC ou sou rezo Base.</div>
+                    </div>
+                  </div>
+                  <div class="cb-feat">
+                    <div class="cb-feat-icon">💰</div>
+                    <div>
+                      <div class="cb-feat-title">Spend Anywhere</div>
+                      <div class="cb-feat-sub">Itilize kat sa a sou tout sit ak magazen ki aksepte Visa.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cb-right">
+                  <!-- QR Code SVG -->
+                  <div class="cb-qr">
+                    <svg class="cb-qr-inner" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="2" width="16" height="16" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+                      <rect x="5" y="5" width="10" height="10" fill="#000"/>
+                      <rect x="26" y="2" width="16" height="16" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+                      <rect x="29" y="5" width="10" height="10" fill="#000"/>
+                      <rect x="2" y="26" width="16" height="16" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+                      <rect x="5" y="29" width="10" height="10" fill="#000"/>
+                      <rect x="26" y="26" width="4" height="4" fill="#000"/>
+                      <rect x="32" y="26" width="4" height="4" fill="#000"/>
+                      <rect x="26" y="32" width="4" height="4" fill="#000"/>
+                      <rect x="38" y="32" width="4" height="4" fill="#000"/>
+                      <rect x="32" y="38" width="4" height="4" fill="#000"/>
+                      <rect x="38" y="26" width="4" height="4" fill="#000"/>
+                    </svg>
+                  </div>
+                  <div class="cb-scan-text">Scan pou sipò</div>
+                  <div class="cb-site">tchotchopay.com</div>
+                </div>
+              </div>
+
+              <!-- Legal -->
+              <div class="cb-legal">This card is issued by our banking partner pursuant to a license from Visa U.S.A. Inc. &nbsp;|&nbsp; support@tchotchopay.com</div>
+            </div>
+
+          </div><!-- /card-3d -->
+        </div><!-- /card-scene -->
+        <div class="flip-hint"><i class="ti ti-rotate-clockwise"></i> Click card to see back</div>
+      </div>
+
+      <!-- INFO PANEL -->
+      <div class="card-info reveal">
+        <div class="card-type-tabs">
+          <button class="type-tab active" onclick="setType('virtual')">Virtual Card</button>
+          <button class="type-tab" onclick="setType('physical')">Physical Card</button>
+        </div>
+
+        <!-- Virtual -->
+        <div class="type-content active" id="type-virtual">
+          <div class="type-badge badge-live"><i class="ti ti-check"></i> Available Now</div>
+          <h2>Spend your USDC balance instantly</h2>
+          <p>Get a virtual Visa Debit card the moment you sign up. Use it online, in apps, or anywhere Apple Pay / Google Pay is accepted.</p>
+          <div class="card-perks">
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(0,200,150,.12);color:var(--green);"><i class="ti ti-bolt"></i></div>
+              <div>
+                <div class="perk-title">Instant Activation</div>
+                <div class="perk-desc">Card details available immediately after signup — no waiting for shipping.</div>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(0,174,239,.12);color:var(--cyan);"><i class="ti ti-device-mobile"></i></div>
+              <div>
+                <div class="perk-title">Apple Pay & Google Pay</div>
+                <div class="perk-desc">Add your card to your phone wallet and tap to pay anywhere in seconds.</div>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(16,85,204,.2);color:var(--light);"><i class="ti ti-lock"></i></div>
+              <div>
+                <div class="perk-title">Freeze & Unfreeze Anytime</div>
+                <div class="perk-desc">Instantly lock your card from the app if you ever lose your phone.</div>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(247,183,49,.1);color:var(--gold);"><i class="ti ti-coin"></i></div>
+              <div>
+                <div class="perk-title">USDC-Powered</div>
+                <div class="perk-desc">Spends directly from your USDC wallet — no conversion delays, no hidden fees.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-cta">
+            <a href="signup.html" class="btn-primary"><i class="ti ti-credit-card"></i> Get My Card</a>
+            <a href="pricing.html" class="btn-outline">See fees</a>
+          </div>
+        </div>
+
+        <!-- Physical -->
+        <div class="type-content" id="type-physical">
+          <div class="type-badge badge-soon"><i class="ti ti-clock"></i> Coming Soon</div>
+          <h2>A real card in your wallet</h2>
+          <p>The Tchotcho Pay physical Visa Debit card is coming. Tap, swipe, or insert at any store worldwide. Your USDC balance, in your pocket.</p>
+          <div class="card-perks">
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(247,183,49,.1);color:var(--gold);"><i class="ti ti-world"></i></div>
+              <div>
+                <div class="perk-title">Works Worldwide</div>
+                <div class="perk-desc">Accepted at 80+ million Visa merchants globally — including in Haiti and the Caribbean.</div>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(0,200,150,.12);color:var(--green);"><i class="ti ti-building-bank"></i></div>
+              <div>
+                <div class="perk-title">ATM Cash Withdrawals</div>
+                <div class="perk-desc">Withdraw cash in HTG or USD at any Visa-enabled ATM.</div>
+              </div>
+            </div>
+            <div class="perk">
+              <div class="perk-icon" style="background:rgba(247,183,49,.12);color:var(--gold);"><i class="ti ti-mail"></i></div>
+              <div>
+                <div class="perk-title">Join the Waitlist</div>
+                <div class="perk-desc">Sign up now and be first to receive your physical card when we ship.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-cta">
+            <a href="signup.html" class="btn-primary"><i class="ti ti-mail"></i> Join Waitlist</a>
+          </div>
+        </div>
+
+      </div><!-- /card-info -->
+    </div><!-- /card-showcase -->
+
+  </div><!-- /hero-inner -->
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-tag reveal"><i class="ti ti-list-numbers"></i> How It Works</div>
+    <h2 class="section-title reveal">From USDC to <em style="color:var(--cyan)">spending</em> in 4 steps</h2>
+    <p class="section-sub reveal">No bank account required. No waiting. Just your phone.</p>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon" style="background:rgba(0,174,239,.1);color:var(--cyan);"><i class="ti ti-user-plus"></i></div>
+        <div class="step-title">Sign Up</div>
+        <div class="step-desc">Create your Tchotcho Pay account in under 2 minutes. Verify your ID with a selfie.</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon" style="background:rgba(16,85,204,.15);color:var(--light);"><i class="ti ti-building-bank"></i></div>
+        <div class="step-title">Add Funds</div>
+        <div class="step-desc">Deposit via ACH (free), debit card (2%), or wire transfer. Funds convert to USDC instantly.</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon" style="background:rgba(0,200,150,.1);color:var(--green);"><i class="ti ti-credit-card"></i></div>
+        <div class="step-title">Get Your Card</div>
+        <div class="step-desc">Your virtual Visa card is ready immediately. Add to Apple Pay or Google Pay.</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">04</div>
+        <div class="step-icon" style="background:rgba(247,183,49,.1);color:var(--gold);"><i class="ti ti-shopping-bag"></i></div>
+        <div class="step-title">Spend Anywhere</div>
+        <div class="step-desc">Use online, in stores, or send money to family in Haiti — all from one balance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="features-inner">
+    <div class="section-tag reveal"><i class="ti ti-sparkles"></i> Card Features</div>
+    <h2 class="section-title reveal">Everything you need, nothing you don't</h2>
+    <p class="section-sub reveal">Built for the Haitian diaspora — and anyone who wants a smarter way to hold and spend money.</p>
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(0,200,150,.1);color:var(--green);"><i class="ti ti-bolt"></i></div>
+        <div class="feat-title">Instant Spending</div>
+        <div class="feat-desc">Spend from your USDC balance the moment you load funds. No delays, no holds.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(0,174,239,.1);color:var(--cyan);"><i class="ti ti-shield-check"></i></div>
+        <div class="feat-title">Visa Protected</div>
+        <div class="feat-desc">Full Visa Zero Liability protection. You're never responsible for unauthorized charges.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(247,183,49,.1);color:var(--gold);"><i class="ti ti-bell"></i></div>
+        <div class="feat-title">Real-Time Alerts</div>
+        <div class="feat-desc">Get an instant push notification every time your card is used — anywhere in the world.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(247,183,49,.1);color:var(--gold);"><i class="ti ti-repeat"></i></div>
+        <div class="feat-title">No Conversion Fees</div>
+        <div class="feat-desc">Your USDC balance spends as USD — no conversion fees when shopping in dollars.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(16,85,204,.15);color:var(--light);"><i class="ti ti-chart-line"></i></div>
+        <div class="feat-title">Spending History</div>
+        <div class="feat-desc">Every transaction logged instantly in your Tchotcho Pay app with merchant name and amount.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(255,76,106,.1);color:var(--red);"><i class="ti ti-lock"></i></div>
+        <div class="feat-title">Freeze Instantly</div>
+        <div class="feat-desc">One tap freezes your card from the app. Unfreeze just as fast when you need it again.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHYSICAL CARD COMING SOON -->
+<section class="physical-section">
+  <div class="physical-inner">
+    <div class="physical-text reveal">
+      <div class="section-tag"><i class="ti ti-clock"></i> Coming Soon</div>
+      <h2 class="section-title" style="margin-top:12px;">Physical card is on its way</h2>
+      <p style="color:var(--gray);font-size:.9rem;line-height:1.7;margin:12px 0 28px;">We're working with our banking partners to issue physical Visa Debit cards. Sign up now to be first in line when they're ready.</p>
+      <div class="timeline-items">
+        <div class="tl-item"><div class="tl-dot tl-done"></div> Virtual card launched ✓</div>
+        <div class="tl-item"><div class="tl-dot tl-done"></div> Apple Pay & Google Pay integration ✓</div>
+        <div class="tl-item"><div class="tl-dot tl-active"></div> <strong style="color:var(--gold)">Banking partner agreement</strong> — In progress</div>
+        <div class="tl-item"><div class="tl-dot tl-pending"></div> Physical card production</div>
+        <div class="tl-item"><div class="tl-dot tl-pending"></div> Shipping to U.S., Canada, France</div>
+        <div class="tl-item"><div class="tl-dot tl-pending"></div> Haiti distribution</div>
+      </div>
+    </div>
+    <div class="physical-card-preview reveal">
+      <div class="phys-card">
+        <!-- Circuit lines -->
+        <svg style="position:absolute;inset:0;opacity:.15" viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 50 L30 50 L30 25 L70 25" stroke="#fff" stroke-width="2" fill="none"/>
+          <circle cx="70" cy="25" r="3" fill="#fff"/>
+          <path d="M300 70 L270 70 L270 40 L240 40" stroke="#fff" stroke-width="2" fill="none"/>
+          <circle cx="240" cy="40" r="3" fill="#fff"/>
+        </svg>
+        <div style="position:absolute;top:16px;left:18px;">
+          <div style="font-size:.9rem;font-weight:900;letter-spacing:.08em;color:#fff;">TCHOTCHO PAY</div>
+          <div style="font-size:.42rem;color:rgba(255,255,255,.6);">lajan an nan men nou</div>
+        </div>
+        <div style="position:absolute;bottom:16px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:flex-end;">
+          <div style="font-size:.65rem;color:rgba(255,255,255,.7);letter-spacing:.15em;font-family:monospace;">•••• •••• •••• ••••</div>
+          <div style="font-size:1.1rem;font-weight:900;color:#fff;font-style:italic;">VISA</div>
+        </div>
+      </div>
+      <div class="phys-blur">
+        <div class="phys-soon-badge">Coming Soon</div>
+        <div style="font-size:.72rem;color:rgba(240,246,255,.4);margin-top:4px;">Sign up to reserve yours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-tag reveal" style="margin:0 auto 18px;"><i class="ti ti-credit-card"></i> Ready to start</div>
+    <h2 class="reveal">Get your virtual card <em>today</em></h2>
+    <p class="reveal">Sign up in minutes. No credit check, no bank account required. Your USDC wallet and virtual Visa card — ready instantly.</p>
+    <div class="cta-btns reveal">
+      <a href="signup.html" class="btn-primary" style="font-size:1rem;padding:15px 36px;"><i class="ti ti-credit-card"></i> Get My Card Now</a>
+      <a href="pricing.html" class="btn-outline" style="font-size:1rem;padding:14px 28px;">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-mini" style="background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:24px;text-align:center;">
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <a href="index.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Home</a>
+    <a href="card.html" style="color:#00AEEF;font-size:.8rem;text-decoration:none;">Card</a>
+    <a href="pricing.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Pricing</a>
+    <a href="security.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Security</a>
+    <a href="social.html">📲 Social Media</a>
+    <a href="faq.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">FAQ</a>
+    <a href="contact.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Contact</a>
+    <a href="signup.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Sign Up</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div style="font-size:.72rem;color:rgba(143,168,204,.35);">© 2026 Tchotcho Pay LLC — Visa Debit cards issued by our banking partner pursuant to a license from Visa U.S.A. Inc.</div>
+</div>
+
+<script>
+  // ── CARD FLIP ──
+  function flipCard() {
+    document.getElementById('card3d').classList.toggle('flipped');
+    const hint = document.querySelector('.flip-hint');
+    const isFlipped = document.getElementById('card3d').classList.contains('flipped');
+    hint.innerHTML = isFlipped
+      ? '<i class="ti ti-rotate-clockwise"></i> Click to see front'
+      : '<i class="ti ti-rotate-clockwise"></i> Click card to see back';
+  }
+
+  // ── CARD TYPE TABS ──
+  function setType(type) {
+    document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.type-content').forEach(c => c.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    document.getElementById('type-' + type).classList.add('active');
+  }
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+  <script src="lang.js"></script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>
