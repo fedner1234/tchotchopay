@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>TchotchoPay — Rechaj Kreyol</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:#020B2D;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif}
+
+.phone{width:390px;height:844px;background:#020B2D;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 36px}
+
+/* ── Scene base ── */
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 36px;opacity:0;transition:opacity 0.4s ease;pointer-events:none}
+.scene.active{opacity:1}
+
+.tag{font-size:13px;letter-spacing:2.5px;color:#00C896;text-transform:uppercase;margin-bottom:14px;text-align:center;font-weight:600}
+.headline{font-size:28px;font-weight:700;color:#fff;text-align:center;line-height:1.3;margin-bottom:12px}
+.sub{font-size:16px;color:#c8d0e0;text-align:center;line-height:1.5}
+.green{color:#00C896}
+.cyan{color:#00AEEF}
+.gold{color:#F7B731}
+
+/* ── Scene 1 ── */
+.phone-icon{font-size:72px;margin-bottom:18px;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.problem-card{background:#0A1F6E;border-radius:16px;padding:16px 20px;width:100%;margin-top:14px}
+.problem-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.problem-row:last-child{margin-bottom:0}
+.prob-label{font-size:15px;color:#8899bb;font-weight:500}
+.prob-val{font-size:17px;font-weight:700}
+.prob-bad{color:#ff6b6b}
+.prob-good{color:#00C896}
+
+/* ── Scene 2 ── */
+.form-card{background:#0A1F6E;border-radius:18px;padding:18px;width:100%;margin-top:12px}
+.field{margin-bottom:12px}
+.field-label{font-size:12px;color:#8899bb;margin-bottom:4px;font-weight:500}
+.field-val{font-size:17px;color:#fff;font-weight:600;background:#020B2D;border-radius:10px;padding:10px 12px}
+.network-badges{display:flex;gap:8px;margin-bottom:12px}
+.badge{flex:1;padding:10px;border-radius:12px;text-align:center;font-size:14px;font-weight:700}
+.badge-dg{background:rgba(255,80,0,0.15);border:2px solid #ff5000;color:#ff8c4a}
+.badge-nc{background:rgba(0,174,239,0.1);border:1px solid #334;color:#8899bb}
+.send-btn{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:12px;padding:14px;text-align:center;font-size:16px;color:#fff;font-weight:700;margin-top:6px}
+
+/* ── Scene 3 ── */
+.anim-wrap{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2.5px solid #1055CC}
+.av-recv{border-color:#00C896}
+.anim-line{flex:1;height:3px;background:linear-gradient(90deg,#1055CC,#00C896);border-radius:2px;position:relative}
+.anim-dot{width:14px;height:14px;border-radius:50%;background:#00AEEF;position:absolute;top:-5.5px;left:0;animation:slide 1.2s ease-in-out infinite}
+@keyframes slide{0%{left:0;opacity:1}80%{left:calc(100% - 14px);opacity:1}100%{left:calc(100% - 14px);opacity:0}}
+.amount-big{font-size:52px;font-weight:800;color:#00C896;margin-bottom:4px}
+.unit-label{font-size:16px;color:#8899bb;margin-bottom:10px}
+
+/* ── Scene 4 ── */
+.notif{background:#0A1F6E;border-radius:18px;padding:18px;width:100%;border-left:4px solid #00C896}
+.notif-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.notif-icon{font-size:26px}
+.notif-app{font-size:13px;color:#8899bb}
+.notif-title{font-size:16px;font-weight:700;color:#fff}
+.notif-body{font-size:14px;color:#c8d0e0;line-height:1.5}
+.badges-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.mini-badge{font-size:12px;padding:6px 12px;border-radius:20px;border:1px solid #334;color:#8899bb}
+.mini-badge.lit{border-color:#00C896;color:#00C896}
+
+/* ── Scene 5 ── */
+.compare{width:100%;margin-top:10px}
+.cmp-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid #1a2540}
+.cmp-row:last-child{border:none}
+.cmp-name{font-size:13px;color:#8899bb;width:90px;flex-shrink:0;font-weight:500}
+.cmp-bar-wrap{flex:1;background:#0A1F6E;border-radius:4px;height:10px;overflow:hidden}
+.cmp-bar{height:100%;border-radius:4px}
+.bar-bad{background:#ff6b6b}
+.bar-mid{background:#F7B731}
+.bar-good{background:#00C896}
+.cmp-pct{font-size:13px;font-weight:700;width:30px;text-align:right}
+.pct-bad{color:#ff6b6b}
+.pct-mid{color:#F7B731}
+.pct-good{color:#00C896}
+
+/* ── Scene 6 ── */
+.cta-box{background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(16,85,204,0.2));border:2px solid #00C896;border-radius:20px;padding:22px;width:100%;text-align:center;margin-top:12px}
+.cta-main{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-url{font-size:15px;color:#00AEEF;margin-bottom:14px}
+.cta-btn{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:14px;padding:14px;font-size:17px;font-weight:700;color:#fff}
+
+/* ── Progress bar ── */
+.progress-bar{position:absolute;bottom:0;left:0;height:4px;background:linear-gradient(90deg,#00C896,#00AEEF);transition:width 0.05s linear;border-radius:0 2px 2px 0}
+
+/* ── Countdown ── */
+#countdown{position:fixed;inset:0;background:rgba(2,11,45,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+#countdown .num{font-size:120px;font-weight:800;color:#00C896;line-height:1}
+#countdown .hint{font-size:17px;color:rgba(255,255,255,0.6);margin-top:16px;text-align:center;line-height:1.5}
+#countdown .logo{font-size:22px;font-weight:700;color:#fff;margin-bottom:40px;letter-spacing:0.5px}
+#countdown .logo span{color:#00C896}
+
+.watermark{position:absolute;bottom:16px;right:0;left:0;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+
+  <!-- Scene 1: Pwoblèm nan -->
+  <div class="scene active" id="s1">
+    <div class="phone-icon">📱</div>
+    <div class="tag">Pwoblèm nan</div>
+    <div class="headline">Fanmi ou Ayiti<br>bezwen kredi?</div>
+    <div class="problem-card">
+      <div class="problem-row"><span class="prob-label">Western Union</span><span class="prob-val prob-bad">−$8 frè</span></div>
+      <div class="problem-row"><span class="prob-label">Lòt sèvis</span><span class="prob-val prob-bad">Lent &amp; konplike</span></div>
+      <div class="problem-row"><span class="prob-label">TchotchoPay</span><span class="prob-val prob-good">$1 sèlman ✅</span></div>
+    </div>
+  </div>
+
+  <!-- Scene 2: Chwazi rezo -->
+  <div class="scene" id="s2">
+    <div class="tag">Rechaj Ayiti</div>
+    <div class="headline">Ouvri TchotchoPay.<br>Chwazi rezo a.</div>
+    <div class="network-badges">
+      <div class="badge badge-dg">Digicel</div>
+      <div class="badge badge-nc">Natcom</div>
+    </div>
+    <div class="form-card">
+      <div class="field"><div class="field-label">Nimewo telefòn</div><div class="field-val">+509 3712 ••••</div></div>
+      <div class="field"><div class="field-label">Kantite (USD)</div><div class="field-val green">$10.00</div></div>
+      <div class="send-btn">Voye Kredi →</div>
+    </div>
+  </div>
+
+  <!-- Scene 3: Ap voye -->
+  <div class="scene" id="s3">
+    <div class="tag">Ap voye...</div>
+    <div class="anim-wrap">
+      <div class="avatar">👤</div>
+      <div class="anim-line"><div class="anim-dot"></div></div>
+      <div class="avatar av-recv">🇭🇹</div>
+    </div>
+    <div class="amount-big">$10</div>
+    <div class="unit-label">Kredi Digicel</div>
+    <div class="sub">Resi an kèk segonn ⚡</div>
+  </div>
+
+  <!-- Scene 4: Kredi resi! -->
+  <div class="scene" id="s4">
+    <div class="tag">Ayiti — Digicel</div>
+    <div class="headline" style="font-size:22px">Fanmi ou resi kredi!</div>
+    <div class="notif">
+      <div class="notif-top">
+        <span class="notif-icon">📶</span>
+        <div>
+          <div class="notif-app">Digicel</div>
+          <div class="notif-title">Ou resi $10 kredi!</div>
+        </div>
+      </div>
+      <div class="notif-body">Depi TchotchoPay. Balans mete ajou ✅</div>
+    </div>
+    <div class="badges-row">
+      <div class="mini-badge lit">📞 Rele</div>
+      <div class="mini-badge lit">💬 Mesaj</div>
+      <div class="mini-badge lit">🌐 Entènèt</div>
+      <div class="mini-badge">📡 Data</div>
+    </div>
+    <div class="sub" style="margin-top:12px;font-size:14px">Pa bezwen bank.</div>
+  </div>
+
+  <!-- Scene 5: Poukisa TchotchoPay -->
+  <div class="scene" id="s5">
+    <div class="tag">Poukisa TchotchoPay</div>
+    <div class="headline">Sispann peye twòp</div>
+    <div class="compare">
+      <div class="cmp-row"><span class="cmp-name">Western Union</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-bad" style="width:85%"></div></div><span class="cmp-pct pct-bad">8%</span></div>
+      <div class="cmp-row"><span class="cmp-name">Lòt sèvis</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-mid" style="width:55%"></div></div><span class="cmp-pct pct-mid">5%</span></div>
+      <div class="cmp-row"><span class="cmp-name">TchotchoPay</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-good" style="width:12%"></div></div><span class="cmp-pct pct-good">1%</span></div>
+    </div>
+    <div class="sub" style="margin-top:22px">Kenbe plis lajan<br>nan men fanmi ou.</div>
+  </div>
+
+  <!-- Scene 6: CTA -->
+  <div class="scene" id="s6">
+    <div class="tag">TchotchoPay</div>
+    <div class="headline" style="font-size:32px;margin-bottom:6px">Voye kredi.<br><span class="green">Pa peye anpil.</span></div>
+    <div class="cta-box">
+      <div class="cta-main">Rechaje Digicel jodi a →</div>
+      <div class="cta-url">tchotchopay.com/topup</div>
+      <div class="cta-btn">Kòmanse Gratis</div>
+    </div>
+  </div>
+
+  <div class="progress-bar" id="pbar"></div>
+  <div class="watermark">tchotchopay.com</div>
+</div>
+
+<!-- Countdown -->
+<div id="countdown">
+  <div class="logo">Tchotcho<span>Pay</span></div>
+  <div class="num" id="cdNum">3</div>
+  <div class="hint">Prepare pou anrejistre<br>⌘+Shift+5 → Anrejistre Zòn Chwazi</div>
+</div>
+
+<script>
+const scenes = ['s1','s2','s3','s4','s5','s6'];
+const durations = [5, 5, 5, 6, 5, 4];
+let current = 0, elapsed = 0, timer = null;
+
+function showScene(i) {
+  scenes.forEach((s,idx) => document.getElementById(s).classList.toggle('active', idx===i));
+  current = i; elapsed = 0;
+}
+
+function tick() {
+  elapsed += 0.05;
+  document.getElementById('pbar').style.width = Math.min((elapsed/durations[current])*100,100)+'%';
+  if (elapsed >= durations[current]) {
+    const next = current + 1;
+    if (next >= scenes.length) { clearInterval(timer); return; }
+    showScene(next);
+  }
+}
+
+let count = 3;
+const cdNum = document.getElementById('cdNum');
+const cdOverlay = document.getElementById('countdown');
+
+const cdTimer = setInterval(() => {
+  count--;
+  if (count <= 0) {
+    clearInterval(cdTimer);
+    cdOverlay.style.display = 'none';
+    showScene(0);
+    timer = setInterval(tick, 50);
+  } else {
+    cdNum.textContent = count;
+  }
+}, 1000);
+</script>
+</body>
+</html>

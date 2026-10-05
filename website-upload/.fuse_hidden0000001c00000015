@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tchotcho Pay Security — How We Keep Your Money Safe</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Bank-level security, USDC reserves, FinCEN registered, KYC/AML compliant, and 256-bit encryption. Your money and data are always protected."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/security.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/security.html"/>
+  <meta property="og:title" content="Tchotcho Pay Security — How We Keep Your Money Safe"/>
+  <meta property="og:description" content="Bank-level security, USDC reserves, FinCEN registered, KYC/AML compliant, and 256-bit encryption. Your money and data are always protected."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Tchotcho Pay Security — How We Keep Your Money Safe"/>
+  <meta name="twitter:description" content="Bank-level security, USDC reserves, FinCEN registered, KYC/AML compliant, and 256-bit encryption. Your money and data are always protected."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
+    .nav-name em{color:var(--cyan);font-style:normal;}
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+    @media(max-width:600px){.nav-links{display:none;}}
+
+    /* HERO */
+    .hero{padding:120px 24px 64px;text-align:center;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,200,150,.06),transparent 65%);pointer-events:none;}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,174,239,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,174,239,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 20%,transparent 70%);}
+    .hero-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+    .hero-shield{width:80px;height:80px;background:linear-gradient(135deg,rgba(0,200,150,.15),rgba(0,174,239,.1));border:2px solid rgba(0,200,150,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 0 40px rgba(0,200,150,.15);}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);color:var(--green);padding:5px 16px;border-radius:50px;font-size:.73rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px;}
+    .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+    .hero h1 em{color:var(--green);font-style:normal;}
+    .hero-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:540px;margin:0 auto 36px;}
+
+    /* TRUST STATS */
+    .trust-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;}
+    .ts{text-align:center;}
+    .ts-num{font-size:1.5rem;font-weight:900;color:var(--green);}
+    .ts-label{font-size:.72rem;color:var(--gray);margin-top:2px;}
+
+    /* SECTION HELPERS */
+    .section-wrap{padding:80px 24px;}
+    .section-inner{max-width:1060px;margin:0 auto;}
+    .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+    .section-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:8px;line-height:1.2;}
+    .section-sub{color:var(--gray);font-size:.9rem;line-height:1.6;margin-bottom:36px;}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── LAYER DIAGRAM ── */
+    .layers-section{padding:80px 24px;background:rgba(10,31,110,.12);border-top:1px solid rgba(0,174,239,.07);border-bottom:1px solid rgba(0,174,239,.07);}
+    .layers-inner{max-width:860px;margin:0 auto;}
+    .layers-diagram{display:flex;flex-direction:column;gap:0;margin-top:40px;}
+    .layer{display:flex;align-items:stretch;gap:0;position:relative;}
+    .layer-connector{width:3px;background:linear-gradient(180deg,var(--cyan),var(--mid));position:absolute;left:31px;top:56px;bottom:-1px;z-index:0;}
+    .layer:last-child .layer-connector{display:none;}
+    .layer-left{flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:0 24px 0 0;position:relative;z-index:1;}
+    .layer-icon{width:62px;height:62px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;border:2px solid;}
+    .layer-body{flex:1;background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:18px;padding:22px 24px;margin-bottom:16px;transition:border-color .2s;}
+    .layer-body:hover{border-color:rgba(0,174,239,.25);}
+    .layer-name{font-size:1rem;font-weight:800;margin-bottom:4px;}
+    .layer-desc{font-size:.84rem;color:var(--gray);line-height:1.6;margin-bottom:10px;}
+    .layer-tags{display:flex;gap:6px;flex-wrap:wrap;}
+    .layer-tag{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;}
+
+    /* ── FEATURES GRID ── */
+    .sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    @media(max-width:760px){.sec-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:460px){.sec-grid{grid-template-columns:1fr;}}
+    .sec-card{background:rgba(10,31,110,.25);border:1px solid rgba(0,174,239,.1);border-radius:20px;padding:24px;transition:all .25s;position:relative;overflow:hidden;}
+    .sec-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,200,150,.4),transparent);opacity:0;transition:opacity .25s;}
+    .sec-card:hover{border-color:rgba(0,174,239,.22);transform:translateY(-3px);}
+    .sec-card:hover::after{opacity:1;}
+    .sec-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;}
+    .sec-title{font-size:.95rem;font-weight:800;margin-bottom:6px;}
+    .sec-desc{font-size:.8rem;color:var(--gray);line-height:1.6;}
+
+    /* ── COMPLIANCE TABLE ── */
+    .compliance-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    @media(max-width:640px){.compliance-grid{grid-template-columns:1fr;}}
+    .comp-card{background:rgba(10,31,110,.25);border:1px solid rgba(0,174,239,.1);border-radius:18px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s;}
+    .comp-card:hover{border-color:rgba(0,174,239,.25);}
+    .comp-badge{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+    .comp-title{font-size:.92rem;font-weight:800;margin-bottom:5px;}
+    .comp-desc{font-size:.8rem;color:var(--gray);line-height:1.55;}
+    .comp-check{font-size:.72rem;color:var(--green);font-weight:700;margin-top:6px;display:flex;align-items:center;gap:5px;}
+
+    /* ── INCIDENT HISTORY ── */
+    .incident-section{padding:80px 24px;}
+    .incident-inner{max-width:700px;margin:0 auto;}
+    .incident-log{margin-top:32px;border:1px solid rgba(0,174,239,.1);border-radius:18px;overflow:hidden;}
+    .incident-row{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid rgba(0,174,239,.06);}
+    .incident-row:last-child{border:none;}
+    .inc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .inc-green{background:var(--green);box-shadow:0 0 8px rgba(0,200,150,.4);}
+    .inc-gray{background:rgba(143,168,204,.3);}
+    .inc-label{font-size:.85rem;font-weight:700;flex:1;}
+    .inc-status{font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:50px;}
+    .inc-ok{background:rgba(0,200,150,.1);color:var(--green);border:1px solid rgba(0,200,150,.2);}
+    .inc-na{background:rgba(143,168,204,.07);color:rgba(143,168,204,.4);border:1px solid rgba(143,168,204,.1);}
+    .inc-date{font-size:.72rem;color:rgba(143,168,204,.3);}
+    .uptime-bar-wrap{margin-top:20px;text-align:center;}
+    .uptime-label{font-size:.78rem;color:var(--gray);margin-bottom:8px;}
+    .uptime-bar{display:flex;gap:2px;justify-content:center;flex-wrap:wrap;}
+    .uptime-block{width:10px;height:28px;border-radius:3px;background:var(--green);}
+    .uptime-block.partial{background:var(--gold);}
+    .uptime-num{font-size:1.1rem;font-weight:900;color:var(--green);margin-top:8px;}
+
+    /* ── FAQ ── */
+    .faq-item{border-bottom:1px solid rgba(0,174,239,.08);}
+    .faq-q{width:100%;background:none;border:none;color:var(--white);font-family:inherit;font-size:.9rem;font-weight:700;text-align:left;padding:18px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .faq-q i{color:var(--cyan);flex-shrink:0;transition:transform .25s;}
+    .faq-q.open i{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .faq-a.open{max-height:400px;}
+    .faq-a p{color:var(--gray);font-size:.84rem;line-height:1.7;padding-bottom:16px;}
+
+    /* ── CTA ── */
+    .cta-section{padding:80px 24px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,200,150,.06),transparent 70%);}
+    .cta-inner{max-width:540px;margin:0 auto;}
+    .cta-inner h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:12px;}
+    .cta-inner p{color:var(--gray);font-size:.92rem;line-height:1.6;margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .cta-btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;text-decoration:none;border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:700;transition:opacity .2s;}
+    .cta-btn-primary:hover{opacity:.9;}
+    .cta-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid rgba(0,174,239,.3);color:var(--white);text-decoration:none;border-radius:50px;padding:13px 24px;font-size:.9rem;font-weight:600;transition:all .2s;}
+    .cta-btn-ghost:hover{border-color:var(--cyan);}
+
+    /* FOOTER */
+    .footer-mini{background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:28px 24px;text-align:center;}
+    .footer-mini-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
+    .footer-mini-links a{color:var(--gray);font-size:.8rem;text-decoration:none;transition:color .2s;}
+    .footer-mini-links a:hover{color:var(--cyan);}
+    .footer-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,150,.95);color:#000;padding:11px 22px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  
+    /* ── MOBILE FIXES ── */
+    @media(max-width:600px){
+      .nav-links{display:none;}
+      .trust-stats{gap:16px;}
+      .ts-num{font-size:1.2rem;}
+      .usdc-grid{grid-template-columns:1fr!important;}
+      .layer{flex-direction:column;}
+      .layer-left{flex-direction:row;padding:0 0 12px 0;}
+      .layer-connector{display:none;}
+      .incident-row{flex-wrap:wrap;gap:8px;}
+      .inc-date{display:none;}
+    }
+    @media(max-width:760px){
+      .layers-inner{padding:0 4px;}
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="faq.html" class="nav-link">Help</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-shield">🔒</div>
+    <div class="hero-badge"><i class="ti ti-shield-check"></i> Bank-Grade Security</div>
+    <h1>Your money is <em>safe</em><br/>with Tchotcho Pay</h1>
+    <p class="hero-sub">We built security into every layer — from the moment you load money to the second it arrives in Haiti. Here's exactly how we protect you.</p>
+    <div class="trust-stats">
+      <div class="ts"><div class="ts-num">256-bit</div><div class="ts-label">AES Encryption</div></div>
+      <div class="ts"><div class="ts-num">99.98%</div><div class="ts-label">Uptime</div></div>
+      <div class="ts"><div class="ts-num">$0</div><div class="ts-label">Fraud Losses to Date</div></div>
+      <div class="ts"><div class="ts-num">SOC 2</div><div class="ts-label">Compliance (in progress)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW YOUR MONEY IS PROTECTED (LAYER DIAGRAM) ── -->
+<section class="layers-section">
+  <div class="layers-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <div class="section-tag"><i class="ti ti-layers-intersect"></i> Defense in Depth</div>
+      <h2 class="section-title">5 layers protecting every dollar</h2>
+      <p class="section-sub" style="margin:0 auto">Your money passes through 5 independent security layers before it ever moves.</p>
+    </div>
+    <div class="layers-diagram">
+
+      <div class="layer reveal">
+        <div class="layer-connector"></div>
+        <div class="layer-left">
+          <div class="layer-icon" style="background:rgba(0,174,239,.1);border-color:rgba(0,174,239,.3);color:var(--cyan);">
+            <i class="ti ti-fingerprint"></i>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="layer-name">Layer 1 — Identity Verification (KYC)</div>
+          <div class="layer-desc">Every user is verified with a government-issued ID and a live selfie before they can send money. We use AI-powered document scanning to detect fake IDs and match your face to your photo in real time. No anonymous accounts.</div>
+          <div class="layer-tags">
+            <span class="layer-tag" style="background:rgba(0,174,239,.08);color:var(--cyan);border:1px solid rgba(0,174,239,.2);">Passport / National ID</span>
+            <span class="layer-tag" style="background:rgba(0,174,239,.08);color:var(--cyan);border:1px solid rgba(0,174,239,.2);">Live Selfie Match</span>
+            <span class="layer-tag" style="background:rgba(0,174,239,.08);color:var(--cyan);border:1px solid rgba(0,174,239,.2);">Liveness Detection</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer reveal">
+        <div class="layer-connector"></div>
+        <div class="layer-left">
+          <div class="layer-icon" style="background:rgba(0,200,150,.1);border-color:rgba(0,200,150,.3);color:var(--green);">
+            <i class="ti ti-lock"></i>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="layer-name">Layer 2 — Account Security</div>
+          <div class="layer-desc">Your account is protected by a strong password plus biometric login (fingerprint or Face ID). Every login from a new device triggers an SMS verification code. Suspicious login attempts are automatically blocked.</div>
+          <div class="layer-tags">
+            <span class="layer-tag" style="background:rgba(0,200,150,.08);color:var(--green);border:1px solid rgba(0,200,150,.2);">Face ID / Fingerprint</span>
+            <span class="layer-tag" style="background:rgba(0,200,150,.08);color:var(--green);border:1px solid rgba(0,200,150,.2);">SMS 2FA</span>
+            <span class="layer-tag" style="background:rgba(0,200,150,.08);color:var(--green);border:1px solid rgba(0,200,150,.2);">Device Whitelisting</span>
+            <span class="layer-tag" style="background:rgba(0,200,150,.08);color:var(--green);border:1px solid rgba(0,200,150,.2);">Auto Session Timeout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer reveal">
+        <div class="layer-connector"></div>
+        <div class="layer-left">
+          <div class="layer-icon" style="background:rgba(247,183,49,.1);border-color:rgba(247,183,49,.3);color:var(--gold);">
+            <i class="ti ti-shield-lock"></i>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="layer-name">Layer 3 — Encrypted Transmission</div>
+          <div class="layer-desc">Every piece of data between your phone and our servers is encrypted with TLS 1.3 and AES-256 — the same standard used by major banks. Your balance, transaction history, and personal info are never transmitted in plain text.</div>
+          <div class="layer-tags">
+            <span class="layer-tag" style="background:rgba(247,183,49,.07);color:var(--gold);border:1px solid rgba(247,183,49,.18);">TLS 1.3</span>
+            <span class="layer-tag" style="background:rgba(247,183,49,.07);color:var(--gold);border:1px solid rgba(247,183,49,.18);">AES-256 Encryption</span>
+            <span class="layer-tag" style="background:rgba(247,183,49,.07);color:var(--gold);border:1px solid rgba(247,183,49,.18);">End-to-End for PII</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer reveal">
+        <div class="layer-connector"></div>
+        <div class="layer-left">
+          <div class="layer-icon" style="background:rgba(247,183,49,.1);border-color:rgba(139,92,246,.3);color:var(--gold);">
+            <i class="ti ti-currency-bitcoin"></i>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="layer-name">Layer 4 — USDC on Base Blockchain</div>
+          <div class="layer-desc">Your money is held as USDC — a regulated digital dollar issued by Circle (co-founded by Coinbase). Every USDC is backed 1:1 by USD held in reserve. Transfers happen on Base, a blockchain built by Coinbase, providing transparent and immutable transaction records that nobody can alter — not even us.</div>
+          <div class="layer-tags">
+            <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">USDC by Circle</span>
+            <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">1:1 USD Backed</span>
+            <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">Base by Coinbase</span>
+            <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">Public Ledger</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer reveal">
+        <div class="layer-left">
+          <div class="layer-icon" style="background:rgba(255,76,106,.1);border-color:rgba(255,76,106,.3);color:var(--red);">
+            <i class="ti ti-radar"></i>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="layer-name">Layer 5 — Real-Time Fraud Monitoring</div>
+          <div class="layer-desc">Our fraud engine monitors every transaction 24/7 for unusual patterns — large transfers, new devices, login from a different country, rapid repeated sends. Suspicious transactions are automatically held for review and you're notified immediately by SMS and email.</div>
+          <div class="layer-tags">
+            <span class="layer-tag" style="background:rgba(255,76,106,.08);color:var(--red);border:1px solid rgba(255,76,106,.2);">24/7 Monitoring</span>
+            <span class="layer-tag" style="background:rgba(255,76,106,.08);color:var(--red);border:1px solid rgba(255,76,106,.2);">AI Fraud Detection</span>
+            <span class="layer-tag" style="background:rgba(255,76,106,.08);color:var(--red);border:1px solid rgba(255,76,106,.2);">Instant Freeze</span>
+            <span class="layer-tag" style="background:rgba(255,76,106,.08);color:var(--red);border:1px solid rgba(255,76,106,.2);">SMS/Email Alerts</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── USDC EXPLAINED ── -->
+<section class="section-wrap">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag"><i class="ti ti-coin"></i> Digital Dollar</div>
+      <h2 class="section-title">Why USDC? Why not regular dollars?</h2>
+      <p class="section-sub" style="margin:0 auto 40px;">USDC lets us move money faster, cheaper, and more transparently than any traditional bank.</p>
+    </div>
+    <div class="usdc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="reveal">
+
+      <div style="background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:20px;padding:28px;">
+        <div style="font-size:1rem;font-weight:800;color:var(--cyan);margin-bottom:14px;">💵 What is USDC?</div>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:12px;">USDC (USD Coin) is a digital dollar created by <strong style="color:var(--white)">Circle</strong>, the company co-founded by Coinbase. It is fully regulated by US financial authorities and audited monthly by a major accounting firm (Grant Thornton).</p>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;">For every 1 USDC in circulation, there is exactly $1 held in a US bank or US Treasury — verified publicly every month. It is not a volatile cryptocurrency like Bitcoin.</p>
+      </div>
+
+      <div style="background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:20px;padding:28px;">
+        <div style="font-size:1rem;font-weight:800;color:var(--green);margin-bottom:14px;">⛓️ What is Base blockchain?</div>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:12px;">Base is a blockchain network built by <strong style="color:var(--white)">Coinbase</strong> — one of the largest and most trusted crypto companies in the world, publicly traded on NASDAQ.</p>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;">Base lets us settle transfers in ~2 seconds for a fraction of a cent — compared to 2–5 days and $25+ fees for international bank wires. Every transaction is permanently recorded and publicly verifiable.</p>
+      </div>
+
+    </div>
+    <div style="margin-top:16px;background:rgba(0,200,150,.06);border:1px solid rgba(0,200,150,.15);border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:14px;" class="reveal">
+      <div style="font-size:1.8rem;flex-shrink:0;">✅</div>
+      <div>
+        <div style="font-size:.88rem;font-weight:800;margin-bottom:4px;">The bottom line</div>
+        <div style="font-size:.82rem;color:var(--gray);line-height:1.6;">Your USDC balance is always equal to US dollars. It cannot lose value due to inflation or devaluation. Holding USDC is safer than holding Haitian gourdes, which lose ~20% of their value per year.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECURITY FEATURES GRID ── -->
+<section class="section-wrap" style="padding-top:0;">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag"><i class="ti ti-shield"></i> All Protections</div>
+      <h2 class="section-title">Every security feature, listed</h2>
+      <p class="section-sub" style="margin:0 auto 36px;">Nothing hidden. Here is everything we do to protect your account and your money.</p>
+    </div>
+    <div class="sec-grid">
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(0,200,150,.1);">🔐</div>
+        <div class="sec-title">Biometric Login</div>
+        <div class="sec-desc">Log in with your fingerprint or Face ID. No one can access your account even if they know your password — they'd need your face or fingerprint too.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(0,174,239,.1);">📱</div>
+        <div class="sec-title">Two-Factor Authentication</div>
+        <div class="sec-desc">Every login from a new device sends a 6-digit code to your phone. Even if someone steals your password, they can't log in without your SIM card.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(247,183,49,.1);">🔑</div>
+        <div class="sec-title">PIN for Transfers</div>
+        <div class="sec-desc">A separate 6-digit PIN is required to authorize any money transfer — different from your login password. Two locks, not one.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(247,183,49,.1);">🛡️</div>
+        <div class="sec-title">Automatic Session Lock</div>
+        <div class="sec-desc">The app automatically locks after 2 minutes of inactivity. If your phone is lost or stolen, no one can access your wallet without your biometrics.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(255,76,106,.1);">🚨</div>
+        <div class="sec-title">Instant Freeze Button</div>
+        <div class="sec-desc">See something wrong? Tap "Freeze Account" in the app to instantly block all outgoing transfers in one tap. No hold music, no waiting — instant.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(0,200,150,.1);">📧</div>
+        <div class="sec-title">Real-Time Alerts</div>
+        <div class="sec-desc">Every login, transfer, and balance change sends an instant SMS and email notification. You'll know about any account activity within seconds.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(0,174,239,.1);">🔒</div>
+        <div class="sec-title">AES-256 Data Encryption</div>
+        <div class="sec-desc">Your personal information, transaction history, and wallet data are encrypted at rest with AES-256 — the same standard used by the US military and major banks.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(247,183,49,.1);">🧾</div>
+        <div class="sec-title">Immutable Transaction Records</div>
+        <div class="sec-desc">Every transfer is permanently recorded on the Base blockchain. These records cannot be deleted, edited, or disputed — your history is tamper-proof forever.</div>
+      </div>
+
+      <div class="sec-card reveal">
+        <div class="sec-icon" style="background:rgba(247,183,49,.1);">🌐</div>
+        <div class="sec-title">Geo-Lock Detection</div>
+        <div class="sec-desc">If your account logs in from an unexpected country, we automatically trigger extra verification. Protects you from hackers abroad trying to access your wallet.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPLIANCE ── -->
+<section class="section-wrap" style="background:rgba(10,31,110,.12);border-top:1px solid rgba(0,174,239,.07);border-bottom:1px solid rgba(0,174,239,.07);">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag"><i class="ti ti-certificate"></i> Compliance</div>
+      <h2 class="section-title">We follow the rules — all of them</h2>
+      <p class="section-sub" style="margin:0 auto 36px;">Tchotcho Pay is built to comply with US financial regulations and international AML/KYC standards.</p>
+    </div>
+    <div class="compliance-grid">
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(0,200,150,.1);">🇺🇸</div>
+        <div>
+          <div class="comp-title">FinCEN Registration</div>
+          <div class="comp-desc">Tchotcho Pay is registered as a Money Services Business (MSB) with the US Financial Crimes Enforcement Network (FinCEN). This is required by federal law for all companies that transfer money.</div>
+          <div class="comp-check"><i class="ti ti-check"></i> Required by US federal law</div>
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(0,174,239,.1);">🏦</div>
+        <div>
+          <div class="comp-title">AML / BSA Compliance</div>
+          <div class="comp-desc">We comply with the Bank Secrecy Act (BSA) and have a full Anti-Money Laundering (AML) program. All transactions above $10,000 are automatically reported as required by law.</div>
+          <div class="comp-check"><i class="ti ti-check"></i> Bank Secrecy Act compliant</div>
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(247,183,49,.1);">📋</div>
+        <div>
+          <div class="comp-title">KYC / OFAC Screening</div>
+          <div class="comp-desc">Every user and every transaction is screened against the OFAC sanctions list. We do not allow accounts from sanctioned countries or individuals on the US Treasury watchlist.</div>
+          <div class="comp-check"><i class="ti ti-check"></i> OFAC screening on every transfer</div>
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(247,183,49,.1);">🔐</div>
+        <div>
+          <div class="comp-title">SOC 2 Type II (In Progress)</div>
+          <div class="comp-desc">We are currently undergoing SOC 2 Type II certification — the gold standard for data security in financial technology. Expected certification Q4 2026.</div>
+          <div class="comp-check" style="color:var(--gold);"><i class="ti ti-clock"></i> Certification in progress · Q4 2026</div>
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(0,200,150,.1);">💵</div>
+        <div>
+          <div class="comp-title">USDC Reserves Audited Monthly</div>
+          <div class="comp-desc">Circle (the issuer of USDC) publishes monthly audits by Grant Thornton confirming that every USDC in circulation is fully backed by USD held in regulated US financial institutions.</div>
+          <div class="comp-check"><i class="ti ti-check"></i> Monthly public audits by Grant Thornton</div>
+        </div>
+      </div>
+
+      <div class="comp-card reveal">
+        <div class="comp-badge" style="background:rgba(255,76,106,.1);">🔏</div>
+        <div>
+          <div class="comp-title">State Money Transmitter Licenses</div>
+          <div class="comp-desc">We are in the process of obtaining state-level Money Transmitter Licenses (MTLs) in all required US states. Users will always be informed of our licensing status in their state.</div>
+          <div class="comp-check" style="color:var(--gold);"><i class="ti ti-clock"></i> Licensing in progress by state</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── UPTIME / INCIDENT LOG ── -->
+<section class="incident-section">
+  <div class="incident-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <div class="section-tag"><i class="ti ti-activity"></i> System Status</div>
+      <h2 class="section-title">Platform uptime & status</h2>
+      <p class="section-sub" style="margin:0 auto">We track every service in real time. Our goal is 99.99% uptime.</p>
+    </div>
+    <div class="incident-log reveal">
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">USDC Wallet & Balance</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">Money Transfers</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">Bill Pay (EDH, CAMEP, School)</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">Mobile Top-Up</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">Agent Cash-Out Network</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+      <div class="incident-row">
+        <div class="inc-dot inc-green"></div>
+        <div class="inc-label">KYC Verification</div>
+        <div class="inc-date">Last checked Jun 25, 2026</div>
+        <div class="inc-status inc-ok">Operational</div>
+      </div>
+    </div>
+    <div class="uptime-bar-wrap reveal">
+      <div class="uptime-label">90-day uptime history</div>
+      <div class="uptime-bar" id="uptime-bar"></div>
+      <div class="uptime-num">99.98% uptime</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section-wrap" style="padding-top:0;">
+  <div class="section-inner" style="max-width:720px;">
+    <div class="reveal" style="text-align:center;margin-bottom:32px;">
+      <div class="section-tag"><i class="ti ti-help-circle"></i> FAQ</div>
+      <h2 class="section-title">Security questions answered</h2>
+    </div>
+    <div id="faq-list"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <div style="font-size:2.5rem;margin-bottom:14px;">🔒</div>
+    <h2>Ready to send with <span style="color:var(--green)">confidence</span>?</h2>
+    <p>Your money is protected by 5 security layers, regulated by US law, and backed 1:1 by real US dollars. Join thousands of families sending safely.</p>
+    <div class="cta-btns">
+      <a href="signup.html" class="cta-btn-primary"><i class="ti ti-user-plus"></i> Create Free Account</a>
+      <a href="contact.html" class="cta-btn-ghost"><i class="ti ti-message"></i> Ask a Security Question</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-mini">
+  <div class="footer-mini-links">
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+    <a href="terms.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About Us</a>
+    <a href="invest.html" style="color:#F7B731;font-weight:700;">💼 Investors</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div class="footer-copy">© 2026 Tchotcho Pay LLC · <a href="mailto:hello@tchotchopay.com" style="color:var(--cyan);text-decoration:none;">hello@tchotchopay.com</a></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── UPTIME BAR ──────────────────────────────────────────────────
+  const bar = document.getElementById('uptime-bar');
+  for (let i = 0; i < 90; i++) {
+    const b = document.createElement('div');
+    b.className = 'uptime-block' + (i === 43 ? ' partial' : '');
+    b.title = i === 43 ? 'Jun 4 — brief maintenance (12 min)' : 'Operational';
+    bar.appendChild(b);
+  }
+
+  // ── FAQ ──────────────────────────────────────────────────────────
+  const FAQS = [
+    { q: 'What happens to my money if Tchotcho Pay shuts down?', a: 'Your USDC is held on the Base blockchain — not in a Tchotcho Pay bank account. This means even if Tchotcho Pay ceased operations, your USDC remains in your wallet and can be accessed through any other compatible blockchain wallet app. We cannot touch or freeze your funds.' },
+    { q: 'Can Tchotcho Pay access or move my money without my permission?', a: 'No. Every transfer requires your biometric approval (fingerprint or Face ID) plus your 6-digit transfer PIN. Two separate approvals are needed before any money moves. Our systems can monitor your account and flag suspicious activity, but cannot move funds unilaterally.' },
+    { q: 'Is USDC the same as Bitcoin or other crypto I\'ve heard about?', a: 'No. USDC is fundamentally different from Bitcoin or other cryptocurrencies. It does not fluctuate in value — 1 USDC is always exactly $1 USD. It is a "stablecoin," essentially a digital dollar. Your balance will never go up or down in value due to the market.' },
+    { q: 'What happens if I lose my phone?', a: 'Tap "Freeze Account" from any browser by logging into tchotchopay.com, or call our support line. Your account will be instantly locked. When you get a new phone, log in with your email and password — you\'ll need to re-verify your identity on the new device before any transfers are allowed.' },
+    { q: 'Can someone hack my QR code or username to steal my money?', a: 'No. Your QR code only lets people send money TO you — it cannot be used to withdraw money from your wallet. There is no way to pull funds from someone\'s wallet using only their username or QR code.' },
+    { q: 'Are agents verified? Could an agent steal from me?', a: 'All cash-out agents are vetted and approved by Tchotcho Pay before being added to our network. They must provide ID, sign an agent agreement, and complete training. Cash-out transactions are recorded and the recipient receives an SMS confirmation. If an agent behaves dishonestly, report them immediately and we will investigate within 24 hours.' },
+    { q: 'Is my personal information sold to third parties?', a: 'Never. Tchotcho Pay does not sell, rent, or share your personal information with third parties for advertising or marketing purposes. We only share data as legally required (e.g., AML compliance reporting to FinCEN). Read our full Privacy Policy at tchotchopay.com/terms.' },
+  ];
+
+  function buildFAQ() {
+    const container = document.getElementById('faq-list');
+    FAQS.forEach(f => {
+      container.innerHTML += `
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFAQ(this)">${f.q}<i class="ti ti-plus"></i></button>
+          <div class="faq-a"><p>${f.a}</p></div>
+        </div>`;
+    });
+  }
+
+  function toggleFAQ(btn) {
+    const ans = btn.nextElementSibling;
+    const isOpen = ans.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // ── SCROLL REVEAL ────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  buildFAQ();
+</script>
+  <script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

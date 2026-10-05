@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00AEEF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#020B2D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00C896" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00C896" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00C896" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cardgrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A1F6E" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#0A1F6E" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="#020B2D"/>
+
+  <!-- Glow -->
+  <ellipse cx="540" cy="900" rx="450" ry="450" fill="url(#glow1)"/>
+
+  <!-- Logo -->
+  <text x="540" y="230" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">TchotchoPay</text>
+  <rect x="400" y="248" width="280" height="2" fill="url(#logoline)"/>
+  <text x="540" y="298" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#00C896" text-anchor="middle" letter-spacing="4">VOYE LAJAN</text>
+
+  <!-- Headline -->
+  <text x="540" y="450" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="white" text-anchor="middle">Sispann peye</text>
+  <text x="540" y="545" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="white" text-anchor="middle">twop <tspan fill="#00C896">fre!</tspan></text>
+
+  <!-- Card -->
+  <rect x="70" y="620" width="940" height="380" rx="44" fill="#0A1F6E" fill-opacity="0.85" stroke="white" stroke-opacity="0.08" stroke-width="1.5"/>
+
+  <!-- Row 1: Western Union -->
+  <line x1="130" y1="748" x2="950" y2="748" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="140" y="710" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="44" fill="#8899BB">Western Union</text>
+  <text x="940" y="710" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#FF6B6B" text-anchor="end">-$8 fre</text>
+
+  <!-- Row 2: MoneyGram -->
+  <line x1="130" y1="876" x2="950" y2="876" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="140" y="838" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="44" fill="#8899BB">MoneyGram</text>
+  <text x="940" y="838" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#FF6B6B" text-anchor="end">-$6 fre</text>
+
+  <!-- Row 3: TchotchoPay -->
+  <text x="140" y="966" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="44" fill="#8899BB">TchotchoPay</text>
+  <text x="940" y="966" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#00C896" text-anchor="end">$1 selman ✓</text>
+
+  <!-- Sub text -->
+  <text x="540" y="1085" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" fill="rgba(200,215,240,0.75)" text-anchor="middle">Voye $100 bay fanmi Ayiti</text>
+  <text x="540" y="1138" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" fill="rgba(200,215,240,0.75)" text-anchor="middle">pou $1 selman</text>
+
+  <!-- URL -->
+  <text x="540" y="1862" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#8899BB" fill-opacity="0.55" text-anchor="middle" letter-spacing="1">tchotchopay.com</text>
+</svg>

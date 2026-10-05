@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="glow4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F7B731" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#020B2D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoline4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F7B731" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#F7B731" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F7B731" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rewardbox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7B731" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#F7B731" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="nolimit" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F7B731" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#F7B731" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="#020B2D"/>
+
+  <!-- Glow -->
+  <ellipse cx="540" cy="900" rx="450" ry="450" fill="url(#glow4)"/>
+
+  <!-- Logo -->
+  <text x="540" y="230" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">TchotchoPay</text>
+  <rect x="400" y="248" width="280" height="2" fill="url(#logoline4)"/>
+  <text x="540" y="298" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#F7B731" text-anchor="middle" letter-spacing="4">REFERE YON ZANMI</text>
+
+  <!-- Headline -->
+  <text x="540" y="440" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle">Envite zanmi.</text>
+  <text x="540" y="530" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#F7B731" text-anchor="middle">Genyen lajan.</text>
+
+  <!-- Reward Box -->
+  <rect x="110" y="590" width="860" height="320" rx="50" fill="url(#rewardbox)" stroke="#F7B731" stroke-opacity="0.5" stroke-width="2.5"/>
+  <text x="540" y="658" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="2">POU CHAK ZANMI OU REFERE</text>
+  <text x="540" y="820" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="200" font-weight="700" fill="#F7B731" text-anchor="middle" dominant-baseline="auto">$10</text>
+  <text x="540" y="876" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" fill="white" text-anchor="middle">USDC nan bous ou</text>
+  <text x="540" y="928" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" fill="rgba(200,215,240,0.7)" text-anchor="middle">+ Zanmi ou resevwa $5 tou</text>
+
+  <!-- Divider -->
+  <line x1="110" y1="1000" x2="970" y2="1000" stroke="white" stroke-opacity="0.08" stroke-width="1.5"/>
+
+  <!-- Table Row 1 -->
+  <text x="130" y="1078" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" fill="#8899BB">1 zanmi</text>
+  <text x="950" y="1078" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#F7B731" text-anchor="end">$10</text>
+  <line x1="110" y1="1108" x2="970" y2="1108" stroke="white" stroke-opacity="0.07" stroke-width="1"/>
+
+  <!-- Table Row 2 -->
+  <text x="130" y="1186" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" fill="#8899BB">3 zanmi</text>
+  <text x="950" y="1186" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#F7B731" text-anchor="end">$30</text>
+  <line x1="110" y1="1216" x2="970" y2="1216" stroke="white" stroke-opacity="0.07" stroke-width="1"/>
+
+  <!-- Table Row 3 -->
+  <text x="130" y="1294" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" fill="#8899BB">10 zanmi</text>
+  <text x="950" y="1294" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#F7B731" text-anchor="end">$100</text>
+
+  <!-- No limit row -->
+  <rect x="70" y="1340" width="940" height="128" rx="36" fill="url(#nolimit)" stroke="#F7B731" stroke-opacity="0.4" stroke-width="1.5"/>
+  <text x="130" y="1416" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" fill="#F7B731">Limit referans:</text>
+  <text x="950" y="1416" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="50" font-weight="700" fill="#F7B731" text-anchor="end">San limit!</text>
+
+  <!-- URL -->
+  <text x="540" y="1862" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#8899BB" fill-opacity="0.5" text-anchor="middle">tchotchopay.com/refer</text>
+</svg>

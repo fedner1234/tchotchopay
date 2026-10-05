@@ -183,15 +183,43 @@ exports.handler = async (event) => {
   try {
     // ── CREATE INQUIRY ────────────────────────────────────────────
     // Returns an inquiry ID + session token for the embedded flow
+    // If the user already has a non-expired inquiry, resumes it.
+    // If expired/failed/declined, creates a fresh one.
     if (action === 'createInquiry') {
-      const { userId, email, firstName, lastName } = payload;
-      if (!userId) return { statusCode: 400, headers, body: JSON.stringify({ error: 'userId required' }) };
+      const { userId, email, firstName, lastName, existingInquiryId } = payload;
+      if (!userId || userId === 'demo-user') {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'Please complete account registration before starting ID verification.' }) };
+      }
 
+      // If a previous inquiry ID is passed, check if it can be resumed
+      if (existingInquiryId) {
+        try {
+          const existing = await personaRequest('GET', `/inquiries/${existingInquiryId}`);
+          const status = existing?.data?.attributes?.status;
+          // Resume only if still active
+          if (status && !['expired', 'failed', 'declined', 'completed', 'approved'].includes(status)) {
+            // Generate a new session token for the existing inquiry
+            const resumed = await personaRequest('POST', `/inquiries/${existingInquiryId}/generate-one-time-link`);
+            const sessionToken = resumed?.data?.attributes?.['session-token'] || null;
+            return {
+              statusCode: 200,
+              headers,
+              body: JSON.stringify({ inquiryId: existingInquiryId, sessionToken, templateId: PERSONA_TEMPLATE_ID, resumed: true }),
+            };
+          }
+          // Otherwise fall through and create a fresh inquiry
+        } catch (e) {
+          // Existing inquiry lookup failed — create fresh
+          console.log('Could not resume inquiry, creating fresh:', e.message);
+        }
+      }
+
+      // Create a brand new inquiry
       const data = await personaRequest('POST', '/inquiries', {
         data: {
           attributes: {
             'inquiry-template-id': PERSONA_TEMPLATE_ID,
-            'reference-id': userId,        // links back to your Supabase user
+            'reference-id': userId,
             fields: {
               ...(email      ? { 'email-address': email } : {}),
               ...(firstName  ? { 'name-first':    firstName } : {}),
@@ -206,7 +234,7 @@ exports.handler = async (event) => {
 
       // Save inquiry ID to Supabase immediately so we can track it
       if (inquiryId && userId) {
-        try { await supabaseUpdate(userId, { kyc_inquiry_id: inquiryId }); } catch(e) {}
+        try { await supabaseUpdate(userId, { kyc_inquiry_id: inquiryId, kyc_status: 'pending' }); } catch(e) {}
       }
 
       return {

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Tchotcho Pay — Support & Help</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Get help from the Tchotcho Pay team. Contact support, report an issue, or find answers to common questions about sending money to Haiti."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/contact.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/contact.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/contact.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/contact.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/contact.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/contact.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/contact.html"/>
+  <meta property="og:title" content="Contact Tchotcho Pay — Support & Help"/>
+  <meta property="og:description" content="Get help from the Tchotcho Pay team. Contact support, report an issue, or find answers to common questions about sending money to Haiti."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Contact Tchotcho Pay — Support & Help"/>
+  <meta name="twitter:description" content="Get help from the Tchotcho Pay team. Contact support, report an issue, or find answers to common questions about sending money to Haiti."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    html { overflow-x: hidden; }
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:12px;}
+    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 46px; width: auto; display: block; }
+    
+    
+    .nav-brand-name{font-weight:700;font-size:1rem;}
+    .nav-brand-name em{color:var(--cyan);font-style:normal;}
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:#1055CC;background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;}
+    .nav-cta:hover{opacity:.9;background:linear-gradient(135deg,var(--mid),var(--cyan))!important;}
+    @media(max-width:640px){.nav-links{display:none;}.nav-back-mobile{display:flex!important;}}
+    .nav-back-mobile{display:none;margin-left:auto;color:var(--gray);text-decoration:none;font-size:.82rem;align-items:center;gap:5px;}
+
+    /* ── HERO ── */
+    .hero{padding:120px 24px 56px;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,174,239,.1) 0%,transparent 70%);position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:60px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(0,174,239,.06),transparent 70%);pointer-events:none;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,174,239,.1);border:1px solid rgba(0,174,239,.3);color:var(--cyan);padding:6px 16px;border-radius:50px;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;}
+    .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero-sub{color:var(--gray);font-size:1rem;max-width:520px;margin:0 auto 32px;line-height:1.6;}
+
+    /* ── SEARCH BAR ── */
+    .search-wrap{max-width:560px;margin:0 auto 0;position:relative;}
+    .search-input{width:100%;background:rgba(10,31,110,.5);border:1.5px solid rgba(0,174,239,.3);border-radius:50px;color:var(--white);font-size:1rem;padding:16px 56px 16px 22px;font-family:inherit;outline:none;transition:border-color .2s;backdrop-filter:blur(8px);}
+    .search-input:focus{border-color:var(--cyan);}
+    .search-input::placeholder{color:rgba(143,168,204,.4);}
+    .search-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:42px;height:42px;background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:1rem;}
+
+    /* ── RESPONSE TIMES STRIP ── */
+    .resp-strip{max-width:960px;margin:0 auto;padding:48px 24px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    .resp-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:16px;padding:20px;text-align:center;}
+    .resp-icon{font-size:1.5rem;margin-bottom:8px;}
+    .resp-time{font-size:1.2rem;font-weight:900;color:var(--cyan);margin-bottom:4px;}
+    .resp-label{font-size:.75rem;color:var(--gray);}
+    @media(max-width:640px){.resp-strip{grid-template-columns:repeat(2,1fr);}}
+
+    /* ── MAIN ── */
+    .main-wrap{max-width:960px;margin:0 auto;padding:48px 24px 80px;display:grid;grid-template-columns:340px 1fr;gap:32px;align-items:start;}
+    @media(max-width:760px){.main-wrap{grid-template-columns:1fr;}}
+
+    /* ── LEFT: CATEGORIES ── */
+    .cat-section{}
+    .section-label{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+    .cat-list{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+    .cat-btn{display:flex;align-items:center;gap:12px;background:rgba(10,31,110,.35);border:1.5px solid rgba(0,174,239,.12);border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;color:var(--white);font-family:inherit;transition:all .2s;width:100%;}
+    .cat-btn:hover{border-color:rgba(0,174,239,.35);background:rgba(10,31,110,.5);}
+    .cat-btn.active{border-color:var(--cyan);background:rgba(0,174,239,.08);}
+    .cat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .cat-text .ct{font-size:.88rem;font-weight:700;margin-bottom:1px;}
+    .cat-text .cs{font-size:.72rem;color:var(--gray);}
+    .cat-arrow{margin-left:auto;color:var(--gray);font-size:.9rem;transition:transform .2s;}
+    .cat-btn.active .cat-arrow{color:var(--cyan);transform:translateX(3px);}
+
+    /* Quick links */
+    .quick-list{display:flex;flex-direction:column;gap:6px;}
+    .quick-link{display:flex;align-items:center;gap:8px;color:var(--gray);text-decoration:none;font-size:.82rem;padding:8px 10px;border-radius:10px;transition:all .2s;}
+    .quick-link:hover{color:var(--white);background:rgba(0,174,239,.06);}
+    .quick-link i{font-size:.85rem;color:var(--cyan);}
+
+    /* ── RIGHT: CONTACT FORM ── */
+    .contact-card{background:linear-gradient(135deg,rgba(10,31,110,.5),rgba(2,11,45,.8));border:1px solid rgba(0,174,239,.18);border-radius:24px;padding:36px;backdrop-filter:blur(8px);}
+    .form-tabs{display:flex;gap:6px;margin-bottom:28px;background:rgba(2,11,45,.5);border-radius:12px;padding:4px;}
+    .form-tab{flex:1;padding:10px 12px;text-align:center;border:none;background:none;color:var(--gray);font-size:.82rem;font-weight:700;cursor:pointer;border-radius:9px;font-family:inherit;transition:all .2s;}
+    .form-tab.active{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+
+    /* Tab panels */
+    .tab-panel{display:none;}
+    .tab-panel.active{display:block;animation:fadeUp .25s ease;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    .form-title{font-size:1.2rem;font-weight:800;margin-bottom:6px;}
+    .form-sub{color:var(--gray);font-size:.85rem;margin-bottom:22px;line-height:1.5;}
+
+    .field{margin-bottom:14px;}
+    .field label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:5px;}
+    .field input,.field select,.field textarea{width:100%;background:rgba(2,11,45,.7);border:1.5px solid rgba(0,174,239,.18);border-radius:12px;color:var(--white);font-size:.9rem;padding:13px 16px;font-family:inherit;outline:none;transition:border-color .2s;resize:none;}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);}
+    .field input::placeholder,.field textarea::placeholder{color:rgba(143,168,204,.3);}
+    .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238FA8CC' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:rgba(2,11,45,.7);padding-right:40px;cursor:pointer;}
+    .field select option{background:#0A1F6E;}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+    /* Priority badge */
+    .priority-row{display:flex;gap:8px;margin-bottom:14px;}
+    .pri-btn{flex:1;padding:9px 6px;border:1.5px solid rgba(0,174,239,.18);border-radius:10px;background:none;color:var(--gray);font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s;}
+    .pri-btn:hover{border-color:rgba(0,174,239,.4);}
+    .pri-btn.active{border-color:var(--cyan);background:rgba(0,174,239,.08);color:var(--cyan);}
+    .pri-btn.urgent.active{border-color:var(--red);background:rgba(255,76,106,.08);color:var(--red);}
+
+    /* File attach */
+    .attach-zone{border:1.5px dashed rgba(0,174,239,.25);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px;position:relative;}
+    .attach-zone:hover{border-color:var(--cyan);background:rgba(0,174,239,.04);}
+    .attach-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+    .attach-zone-text{font-size:.78rem;color:var(--gray);}
+    .attach-zone-text i{color:var(--cyan);margin-right:5px;}
+    .attached-file{display:none;align-items:center;gap:8px;background:rgba(0,200,150,.07);border:1px solid rgba(0,200,150,.2);border-radius:8px;padding:8px 12px;font-size:.78rem;color:var(--green);margin-bottom:10px;}
+    .attached-file i{flex-shrink:0;}
+
+    .btn-submit{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:15px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .15s;}
+    .btn-submit:hover{opacity:.9;transform:translateY(-1px);}
+    .btn-submit:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+
+    /* Success state */
+    .form-success{display:none;text-align:center;padding:20px 0;}
+    .form-success-icon{width:60px;height:60px;border-radius:50%;background:rgba(0,200,150,.12);border:2px solid var(--green);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;animation:popIn .4s ease;}
+    @keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+    .form-success-title{font-size:1.2rem;font-weight:800;color:var(--green);margin-bottom:6px;}
+    .form-success-sub{color:var(--gray);font-size:.85rem;line-height:1.5;margin-bottom:20px;}
+    .ticket-num{background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);border-radius:10px;padding:10px 16px;font-size:.82rem;color:var(--cyan);font-weight:700;margin-bottom:20px;display:inline-block;}
+
+    /* Chat tab */
+    .chat-options{display:flex;flex-direction:column;gap:12px;}
+    .chat-opt{display:flex;align-items:center;gap:14px;background:rgba(2,11,45,.5);border:1.5px solid rgba(0,174,239,.15);border-radius:16px;padding:16px 18px;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--white);}
+    .chat-opt:hover{border-color:rgba(0,174,239,.4);transform:translateX(3px);}
+    .chat-opt-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+    .chat-opt-info .co-title{font-size:.9rem;font-weight:700;margin-bottom:3px;}
+    .chat-opt-info .co-sub{font-size:.76rem;color:var(--gray);}
+    .chat-opt-badge{margin-left:auto;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:50px;flex-shrink:0;}
+    .badge-green{background:rgba(0,200,150,.15);color:var(--green);border:1px solid rgba(0,200,150,.25);}
+    .badge-gray{background:rgba(143,168,204,.1);color:var(--gray);border:1px solid rgba(143,168,204,.15);}
+    .badge-gold{background:rgba(247,183,49,.12);color:var(--gold);border:1px solid rgba(247,183,49,.2);}
+    .chat-hours{background:rgba(0,174,239,.05);border:1px solid rgba(0,174,239,.12);border-radius:12px;padding:14px;margin-top:16px;}
+    .hours-title{font-size:.78rem;font-weight:700;color:var(--cyan);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .hours-row{display:flex;justify-content:space-between;font-size:.78rem;padding:5px 0;border-bottom:1px solid rgba(0,174,239,.07);}
+    .hours-row:last-child{border:none;}
+    .hours-day{color:var(--gray);}
+    .hours-time{font-weight:700;}
+    .hours-time.closed{color:rgba(143,168,204,.4);}
+    .online-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* ── OFFICES ── */
+    .offices-section{max-width:960px;margin:0 auto;padding:0 24px 60px;}
+    .section-title{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+    .section-sub{color:var(--gray);font-size:.88rem;margin-bottom:24px;}
+    .offices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    @media(max-width:640px){.offices-grid{grid-template-columns:1fr;}}
+    .office-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:16px;padding:20px;transition:border-color .2s;}
+    .office-card:hover{border-color:rgba(0,174,239,.28);}
+    .office-flag{font-size:1.6rem;margin-bottom:10px;}
+    .office-city{font-size:1rem;font-weight:800;margin-bottom:4px;}
+    .office-type{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+    .office-detail{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:var(--gray);margin-bottom:6px;line-height:1.5;}
+    .office-detail i{color:var(--cyan);font-size:.82rem;flex-shrink:0;margin-top:1px;}
+
+    /* ── FAQ QUICK ── */
+    .faq-quick{max-width:960px;margin:0 auto;padding:0 24px 80px;}
+    .faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    @media(max-width:640px){.faq-grid{grid-template-columns:1fr;}}
+    .faq-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:14px;padding:18px;cursor:pointer;transition:all .2s;}
+    .faq-card:hover{border-color:rgba(0,174,239,.3);background:rgba(10,31,110,.5);}
+    .faq-q{font-size:.88rem;font-weight:700;margin-bottom:6px;display:flex;align-items:flex-start;gap:8px;}
+    .faq-q i{color:var(--cyan);flex-shrink:0;font-size:.95rem;margin-top:1px;}
+    .faq-a{font-size:.8rem;color:var(--gray);line-height:1.5;display:none;}
+    .faq-card.open .faq-a{display:block;}
+    .faq-card.open{border-color:rgba(0,174,239,.3);}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,150,.95);color:#000;padding:11px 22px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* Chat bubble (live chat demo) */
+    .chat-bubble{position:fixed;bottom:24px;right:24px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;box-shadow:0 4px 20px rgba(0,174,239,.4);z-index:1000;transition:transform .2s;}
+    .chat-bubble:hover{transform:scale(1.1);}
+    .chat-window{position:fixed;bottom:90px;right:24px;width:320px;background:rgba(10,31,110,.98);border:1px solid rgba(0,174,239,.25);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:1001;display:none;animation:slideUp .2s ease;}
+    @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .chat-window.open{display:block;}
+    .cw-header{background:linear-gradient(135deg,#0A1F6E,#1055CC);padding:16px 18px;display:flex;align-items:center;gap:10px;}
+    .cw-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--mid),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;flex-shrink:0;}
+    .cw-info .cw-name{font-size:.88rem;font-weight:700;}
+    .cw-info .cw-status{font-size:.7rem;color:var(--light);display:flex;align-items:center;gap:4px;}
+    .cw-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:1.1rem;}
+    .cw-messages{padding:14px;min-height:180px;max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;}
+    .msg{max-width:80%;font-size:.82rem;line-height:1.5;}
+    .msg.bot{align-self:flex-start;background:rgba(255,255,255,.07);border-radius:0 12px 12px 12px;padding:9px 12px;}
+    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--mid),var(--cyan));border-radius:12px 12px 0 12px;padding:9px 12px;}
+    .msg.typing{display:flex;gap:4px;align-items:center;padding:10px 14px;}
+    .tdot{width:6px;height:6px;border-radius:50%;background:var(--gray);animation:td .8s infinite;}
+    .tdot:nth-child(2){animation-delay:.15s;}
+    .tdot:nth-child(3){animation-delay:.3s;}
+    @keyframes td{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1);opacity:1}}
+    .cw-input-row{display:flex;gap:0;padding:10px 12px;border-top:1px solid rgba(0,174,239,.1);}
+    .cw-input{flex:1;background:rgba(2,11,45,.5);border:1px solid rgba(0,174,239,.15);border-radius:50px 0 0 50px;color:var(--white);padding:9px 14px;font-size:.82rem;font-family:inherit;outline:none;}
+    .cw-input::placeholder{color:rgba(143,168,204,.3);}
+    .cw-send{background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:0 50px 50px 0;padding:9px 14px;color:#fff;cursor:pointer;font-size:.9rem;}
+
+    @media(max-width:480px){.chat-window{width:calc(100% - 48px);right:24px;}}
+    @media(max-width:480px){.field-row{grid-template-columns:1fr;}}
+  .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
+    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  
+    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
+    html, body { overflow-x: hidden !important; max-width: 100% !important; }
+    * { box-sizing: border-box; }
+    img, video, iframe, table { max-width: 100%; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<!-- Hidden forms for Netlify Forms detection at deploy time -->
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="contact"/>
+  <input type="text" name="first-name"/>
+  <input type="text" name="last-name"/>
+  <input type="email" name="email"/>
+  <input type="text" name="topic"/>
+  <input type="text" name="priority"/>
+  <textarea name="message"></textarea>
+</form>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  </a>
+  <div class="nav-links">
+    <a href="social.html">📲 Social Media</a>
+    <a href="faq.html" class="nav-link">Help Center</a>
+    <a href="calculator.html" class="nav-link">Calculator</a>
+    <a href="p2p.html" class="nav-link" style="color:var(--cyan);font-weight:700;">⇄ P2P Trading</a>
+    <a href="login.html" class="nav-login">Log In</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started</a>
+  </div>
+  <a href="index.html" class="nav-back-mobile"><i class="ti ti-arrow-left"></i> Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-headset"></i> Support Team</div>
+  <h1>We're here to <em>help</em></h1>
+  <p class="hero-sub">Our support team speaks English, Haitian Creole, French, and Spanish. We're committed to resolving every issue fast.</p>
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="search-input" placeholder="Search for help… (e.g. 'send money', 'cash out')" onkeydown="if(event.key==='Enter')doSearch()"/>
+    <button class="search-btn" onclick="doSearch()"><i class="ti ti-search"></i></button>
+  </div>
+  <div id="search-results" style="max-width:560px;margin:10px auto 0;"></div>
+</section>
+
+<!-- RESPONSE TIMES -->
+<div class="resp-strip">
+  <div class="resp-card">
+    <div class="resp-icon">💬</div>
+    <div class="resp-time">&lt;2 min</div>
+    <div class="resp-label">Live Chat response</div>
+  </div>
+  <div class="resp-card">
+    <div class="resp-icon">📧</div>
+    <div class="resp-time">&lt;4 hrs</div>
+    <div class="resp-label">Email response</div>
+  </div>
+  <div class="resp-card">
+    <div class="resp-icon">📞</div>
+    <div class="resp-time">&lt;5 min</div>
+    <div class="resp-label">Phone wait time</div>
+  </div>
+  <div class="resp-card">
+    <div class="resp-icon">🌐</div>
+    <div class="resp-time">24/7</div>
+    <div class="resp-label">Always available</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+  <!-- LEFT: CATEGORIES -->
+  <div>
+    <p class="section-label">Browse by topic</p>
+    <div class="cat-list">
+      <button class="cat-btn active" onclick="setTab('message');setCategory(this,'send')">
+        <div class="cat-icon" style="background:rgba(0,174,239,.12)"><i class="ti ti-send" style="color:var(--cyan)"></i></div>
+        <div class="cat-text"><div class="ct">Send Money</div><div class="cs">Transfer issues, limits, speed</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'wallet')">
+        <div class="cat-icon" style="background:rgba(0,200,150,.1)"><i class="ti ti-wallet" style="color:var(--green)"></i></div>
+        <div class="cat-text"><div class="ct">Wallet & USDC</div><div class="cs">Balance, deposits, withdrawals</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'billpay')">
+        <div class="cat-icon" style="background:rgba(247,183,49,.1)"><i class="ti ti-file-invoice" style="color:var(--gold)"></i></div>
+        <div class="cat-text"><div class="ct">Bill Pay</div><div class="cs">EDH, school fees, CAMEP, internet</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'kyc')">
+        <div class="cat-icon" style="background:rgba(247,183,49,.1)"><i class="ti ti-shield-check" style="color:var(--gold)"></i></div>
+        <div class="cat-text"><div class="ct">Identity & KYC</div><div class="cs">Verification, limits, documents</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'merchant')">
+        <div class="cat-icon" style="background:rgba(0,174,239,.1)"><i class="ti ti-building-store" style="color:var(--cyan)"></i></div>
+        <div class="cat-text"><div class="ct">Merchants</div><div class="cs">Payments, QR codes, settlement</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'agent')">
+        <div class="cat-icon" style="background:rgba(0,200,150,.1)"><i class="ti ti-users" style="color:var(--green)"></i></div>
+        <div class="cat-text"><div class="ct">Agent Network</div><div class="cs">Cash-out, onboarding, zones</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+      <button class="cat-btn" onclick="setTab('message');setCategory(this,'other')">
+        <div class="cat-icon" style="background:rgba(143,168,204,.1)"><i class="ti ti-dots-circle-horizontal" style="color:var(--gray)"></i></div>
+        <div class="cat-text"><div class="ct">Other / General</div><div class="cs">Account, security, feedback</div></div>
+        <i class="ti ti-arrow-right cat-arrow"></i>
+      </button>
+    </div>
+
+    <p class="section-label">Quick links</p>
+    <div class="quick-list">
+      <a href="faq.html" class="quick-link"><i class="ti ti-help-circle"></i> Help Center / FAQ</a>
+      <a href="calculator.html" class="quick-link"><i class="ti ti-calculator"></i> Send Money Calculator</a>
+      <a href="topup.html" class="quick-link"><i class="ti ti-device-mobile"></i> Mobile Top-Up</a>
+      <a href="billpay.html" class="quick-link"><i class="ti ti-file-invoice"></i> Bill Pay</a>
+      <a href="terms.html" class="quick-link"><i class="ti ti-license"></i> Terms & Privacy Policy</a>
+      <a href="signup.html" class="quick-link"><i class="ti ti-user-plus"></i> Create an Account</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: CONTACT FORM -->
+  <div class="contact-card">
+    <!-- Tabs -->
+    <div class="form-tabs">
+      <button class="form-tab active" id="tab-message" onclick="setTab('message')"><i class="ti ti-message"></i> Send Message</button>
+      <button class="form-tab" id="tab-chat" onclick="setTab('chat')"><i class="ti ti-brand-whatsapp"></i> Live Chat</button>
+      <button class="form-tab" id="tab-phone" onclick="setTab('phone')"><i class="ti ti-phone"></i> Call Us</button>
+    </div>
+
+    <!-- MESSAGE TAB -->
+    <div class="tab-panel active" id="panel-message">
+      <div id="form-body">
+        <div class="form-title">Send us a message</div>
+        <p class="form-sub">We respond within 4 hours. For urgent issues, use Live Chat.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="cf-fname" placeholder="Jean" oninput="checkForm()"/>
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" id="cf-lname" placeholder="Dupont" oninput="checkForm()"/>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" id="cf-email" placeholder="you@email.com" oninput="checkForm()"/>
+        </div>
+        <div class="field">
+          <label>Topic</label>
+          <select id="cf-topic" onchange="checkForm()">
+            <option value="">Select a topic…</option>
+            <option value="send">Sending Money</option>
+            <option value="wallet">Wallet & USDC Balance</option>
+            <option value="billpay">Bill Pay</option>
+            <option value="topup">Mobile Top-Up</option>
+            <option value="kyc">Identity Verification (KYC)</option>
+            <option value="cashout">Cash Out / Withdrawal</option>
+            <option value="merchant">Merchant Account</option>
+            <option value="agent">Agent Network</option>
+            <option value="security">Account Security</option>
+            <option value="feedback">Feedback / Suggestion</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Priority</label>
+          <div class="priority-row">
+            <button class="pri-btn active" id="pri-normal" onclick="setPri('normal')">Normal</button>
+            <button class="pri-btn" id="pri-high" onclick="setPri('high')">High</button>
+            <button class="pri-btn urgent" id="pri-urgent" onclick="setPri('urgent')">🚨 Urgent</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Message</label>
+          <textarea id="cf-message" rows="4" placeholder="Describe your issue in detail. Include transaction IDs if applicable." oninput="checkForm()"></textarea>
+        </div>
+
+        <div class="attach-zone" id="attach-zone">
+          <input type="file" onchange="handleAttach(this)"/>
+          <div class="attach-zone-text"><i class="ti ti-paperclip"></i>Attach a screenshot or document (optional)</div>
+        </div>
+        <div class="attached-file" id="attached-file">
+          <i class="ti ti-file-check" style="color:var(--green)"></i>
+          <span id="attached-name"></span>
+          <span onclick="removeAttach()" style="margin-left:auto;cursor:pointer;color:var(--red);font-size:.75rem;">✕ Remove</span>
+        </div>
+
+        <button class="btn-submit" id="submit-btn" onclick="submitForm()" disabled>
+          <i class="ti ti-send"></i> Send Message
+        </button>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✓</div>
+        <div class="form-success-title">Message received!</div>
+        <p class="form-success-sub">We'll respond to your email within 4 hours. For urgent issues, start a live chat below.</p>
+        <div class="ticket-num" id="ticket-num">Ticket #—</div>
+        <button class="btn-submit" onclick="resetForm()"><i class="ti ti-plus"></i> Send Another Message</button>
+      </div>
+    </div>
+
+    <!-- CHAT TAB -->
+    <div class="tab-panel" id="panel-chat">
+      <div class="form-title">Live Chat & Messaging</div>
+      <p class="form-sub">Talk to a real person. Our agents speak English, Kreyòl, Français, and Español.</p>
+      <div class="chat-options">
+        <a class="chat-opt" onclick="openChat()">
+          <div class="chat-icon" style="background:rgba(0,200,150,.12);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">💬</div>
+          <div class="chat-opt-info">
+            <div class="co-title">Live Chat</div>
+            <div class="co-sub">Instant response · on this page</div>
+          </div>
+          <span class="chat-opt-badge badge-green"><span class="online-dot"></span> Online</span>
+        </a>
+        <a class="chat-opt" href="https://wa.me/15551234567" target="_blank">
+          <div class="chat-icon" style="background:rgba(37,211,102,.12);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div class="chat-opt-info">
+            <div class="co-title">WhatsApp Support</div>
+            <div class="co-sub">+1 (555) 123-4567</div>
+          </div>
+          <span class="chat-opt-badge badge-green">Available</span>
+        </a>
+        <a class="chat-opt" href="mailto:support@tchotchopay.com">
+          <div class="chat-icon" style="background:rgba(0,174,239,.12);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">✉️</div>
+          <div class="chat-opt-info">
+            <div class="co-title">Email Support</div>
+            <div class="co-sub">support@tchotchopay.com</div>
+          </div>
+          <span class="chat-opt-badge badge-gold">&lt;4 hrs</span>
+        </a>
+        <a class="chat-opt" href="mailto:business@tchotchopay.com">
+          <div class="chat-icon" style="background:rgba(247,183,49,.1);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🏢</div>
+          <div class="chat-opt-info">
+            <div class="co-title">Business / Merchant Email</div>
+            <div class="co-sub">business@tchotchopay.com</div>
+          </div>
+          <span class="chat-opt-badge badge-gray">B2B</span>
+        </a>
+      </div>
+
+      <div class="chat-hours">
+        <div class="hours-title"><span class="online-dot"></span> Live Support Hours (ET)</div>
+        <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">7:00 AM – 11:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">9:00 AM – 8:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Email & WhatsApp</span><span class="hours-time" style="color:var(--green)">24 / 7</span></div>
+      </div>
+    </div>
+
+    <!-- PHONE TAB -->
+    <div class="tab-panel" id="panel-phone">
+      <div class="form-title">Call Us</div>
+      <p class="form-sub">Speak directly with a support agent. Average wait time under 5 minutes.</p>
+      <div class="chat-options">
+        <a class="chat-opt" href="tel:+18005556789">
+          <div class="chat-icon" style="background:rgba(0,174,239,.1);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📞</div>
+          <div class="chat-opt-info">
+            <div class="co-title">US / Canada (Toll-Free)</div>
+            <div class="co-sub">+1-800-555-6789</div>
+          </div>
+          <span class="chat-opt-badge badge-green"><span class="online-dot"></span> Open</span>
+        </a>
+        <a class="chat-opt" href="tel:+33123456789">
+          <div class="chat-icon" style="background:rgba(0,174,239,.1);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📞</div>
+          <div class="chat-opt-info">
+            <div class="co-title">France Line</div>
+            <div class="co-sub">+33 1 23 45 67 89</div>
+          </div>
+          <span class="chat-opt-badge badge-green"><span class="online-dot"></span> Open</span>
+        </a>
+        <a class="chat-opt" href="tel:+50912345678">
+          <div class="chat-icon" style="background:rgba(0,200,150,.1);width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📞</div>
+          <div class="chat-opt-info">
+            <div class="co-title">Haiti Line 🇭🇹</div>
+            <div class="co-sub">+509 1234-5678</div>
+          </div>
+          <span class="chat-opt-badge badge-green"><span class="online-dot"></span> Open</span>
+        </a>
+      </div>
+      <div class="chat-hours" style="margin-top:16px;">
+        <div class="hours-title">📞 Phone Support Hours</div>
+        <div class="hours-row"><span class="hours-day">Mon – Fri</span><span class="hours-time">8:00 AM – 9:00 PM ET</span></div>
+        <div class="hours-row"><span class="hours-day">Weekends</span><span class="hours-time">10:00 AM – 6:00 PM ET</span></div>
+        <div class="hours-row"><span class="hours-day">Holidays</span><span class="hours-time closed">Limited availability</span></div>
+      </div>
+      <div style="background:rgba(0,174,239,.06);border:1px solid rgba(0,174,239,.15);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:.78rem;color:var(--gray);">
+        <i class="ti ti-info-circle" style="color:var(--cyan);margin-right:6px;"></i>
+        For account security, have your registered email and phone number ready when you call.
+      </div>
+    </div>
+
+  </div><!-- /contact-card -->
+</div><!-- /main-wrap -->
+
+<!-- OFFICES -->
+<div class="offices-section">
+  <h2 class="section-title">Our Offices</h2>
+  <p class="section-sub">Serving the Haitian diaspora across 3 continents.</p>
+  <div class="offices-grid">
+    <div class="office-card">
+      <div class="office-flag">🇺🇸</div>
+      <div class="office-city">Miami, Florida</div>
+      <div class="office-type">Headquarters</div>
+      <div class="office-detail"><i class="ti ti-map-pin"></i>1200 Brickell Ave, Suite 400<br/>Miami, FL 33131</div>
+      <div class="office-detail"><i class="ti ti-phone"></i>+1-800-555-6789</div>
+      <div class="office-detail"><i class="ti ti-clock"></i>Mon–Fri · 9 AM – 6 PM ET</div>
+    </div>
+    <div class="office-card">
+      <div class="office-flag">🇭🇹</div>
+      <div class="office-city">Port-au-Prince, Haiti</div>
+      <div class="office-type">Haiti Operations</div>
+      <div class="office-detail"><i class="ti ti-map-pin"></i>Route de Delmas 60<br/>Port-au-Prince, Haiti</div>
+      <div class="office-detail"><i class="ti ti-phone"></i>+509 1234-5678</div>
+      <div class="office-detail"><i class="ti ti-clock"></i>Mon–Sat · 8 AM – 5 PM HT</div>
+    </div>
+    <div class="office-card">
+      <div class="office-flag">🇫🇷</div>
+      <div class="office-city">Paris, France</div>
+      <div class="office-type">European Office</div>
+      <div class="office-detail"><i class="ti ti-map-pin"></i>15 Rue de la Paix<br/>75002 Paris, France</div>
+      <div class="office-detail"><i class="ti ti-phone"></i>+33 1 23 45 67 89</div>
+      <div class="office-detail"><i class="ti ti-clock"></i>Mon–Fri · 9 AM – 6 PM CET</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ QUICK -->
+<div class="faq-quick">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Quick answers to common questions. <a href="faq.html" style="color:var(--cyan);text-decoration:none;">View full Help Center →</a></p>
+  <div class="faq-grid" id="faq-grid"></div>
+</div>
+
+<!-- LIVE CHAT BUBBLE -->
+<button class="chat-bubble" onclick="toggleChat()" id="chat-bubble-btn" title="Live Chat">
+  <i class="ti ti-message-circle" id="chat-bubble-icon"></i>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="chat-window" id="chat-window">
+  <div class="cw-header">
+    <div class="cw-avatar">T</div>
+    <div class="cw-info">
+      <div class="cw-name">Marie — Tchotcho Support</div>
+      <div class="cw-status"><span class="online-dot"></span> Online now · responds instantly</div>
+    </div>
+    <button class="cw-close" onclick="toggleChat()"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="cw-messages" id="cw-messages"></div>
+  <div class="cw-input-row">
+    <input class="cw-input" id="cw-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button class="cw-send" onclick="sendChat()"><i class="ti ti-send"></i></button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="lang.js"></script>
+<script>
+  // ── TABS ──────────────────────────────────────────────────────────
+  function setTab(tab) {
+    ['message','chat','phone'].forEach(t => {
+      document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+      document.getElementById('panel-' + t).classList.toggle('active', t === tab);
+    });
+  }
+
+  // ── CATEGORIES ────────────────────────────────────────────────────
+  const CAT_TOPICS = {
+    send:'Sending Money', wallet:'Wallet & USDC Balance', billpay:'Bill Pay',
+    kyc:'Identity Verification (KYC)', merchant:'Merchant Account', agent:'Agent Network', other:'Other'
+  };
+
+  function setCategory(el, cat) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    const sel = document.getElementById('cf-topic');
+    if(sel) {
+      for(let i = 0; i < sel.options.length; i++) {
+        if(sel.options[i].value === cat) { sel.selectedIndex = i; break; }
+      }
+    }
+    checkForm();
+  }
+
+  // ── FORM ──────────────────────────────────────────────────────────
+  let priority = 'normal';
+
+  function setPri(p) {
+    priority = p;
+    ['normal','high','urgent'].forEach(x => {
+      const btn = document.getElementById('pri-' + x);
+      btn.classList.toggle('active', x === p);
+    });
+  }
+
+  function checkForm() {
+    const ok = val('cf-fname') && val('cf-email') && val('cf-topic') && val('cf-message');
+    document.getElementById('submit-btn').disabled = !ok;
+  }
+  function val(id) { const e = document.getElementById(id); return e && e.value.trim().length > 0; }
+
+  function handleAttach(input) {
+    if(!input.files[0]) return;
+    document.getElementById('attached-name').textContent = input.files[0].name;
+    document.getElementById('attached-file').style.display = 'flex';
+  }
+  function removeAttach() {
+    document.getElementById('attached-file').style.display = 'none';
+    document.getElementById('attached-name').textContent = '';
+  }
+
+  function submitForm() {
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span style="animation:spin 1s linear infinite;display:inline-block"><i class="ti ti-loader"></i></span> Sending…';
+    // Collect form values
+    const fname = document.getElementById('cf-fname').value.trim();
+    const lname = document.getElementById('cf-lname').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const topic = document.getElementById('cf-topic').value;
+    const message = document.getElementById('cf-message').value.trim();
+    // POST to Netlify Forms
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'contact',
+        'first-name': fname,
+        'last-name': lname,
+        'email': email,
+        'topic': topic,
+        'priority': priority,
+        'message': message
+      }).toString()
+    }).catch(() => {}).finally(() => {
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+      const tid = 'TCP-' + Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('ticket-num').textContent = 'Ticket #' + tid;
+    });
+  }
+
+  function resetForm() {
+    document.getElementById('form-body').style.display = 'block';
+    document.getElementById('form-success').style.display = 'none';
+    ['cf-fname','cf-lname','cf-email','cf-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('cf-topic').selectedIndex = 0;
+    setPri('normal');
+    removeAttach();
+    document.getElementById('submit-btn').disabled = true;
+    document.getElementById('submit-btn').innerHTML = '<i class="ti ti-send"></i> Send Message';
+  }
+
+  // ── SEARCH ────────────────────────────────────────────────────────
+  const SEARCH_INDEX = [
+    {q:'How do I send money to Haiti?', url:'faq.html'},
+    {q:'How long does a transfer take?', url:'faq.html'},
+    {q:'What is USDC?', url:'faq.html'},
+    {q:'How do I cash out in Haiti?', url:'faq.html'},
+    {q:'What are the fees for sending money?', url:'calculator.html'},
+    {q:'How do I top up a phone?', url:'topup.html'},
+    {q:'How do I pay an EDH bill?', url:'billpay.html'},
+    {q:'How do I verify my identity?', url:'signup.html'},
+    {q:'How do I become a merchant?', url:'merchant-signup.html'},
+    {q:'How do I become an agent?', url:'agent-signup.html'},
+    {q:'What is the exchange rate today?', url:'calculator.html'},
+    {q:'How do I add funds to my wallet?', url:'wallet-dashboard.html'},
+  ];
+
+  function doSearch() {
+    const q = document.getElementById('search-input').value.trim().toLowerCase();
+    const res = document.getElementById('search-results');
+    if(!q) { res.innerHTML = ''; return; }
+    const matches = SEARCH_INDEX.filter(item => item.q.toLowerCase().includes(q) || q.split(' ').some(w => item.q.toLowerCase().includes(w)));
+    if(!matches.length) {
+      res.innerHTML = `<div style="color:var(--gray);font-size:.82rem;padding:8px 0;">No results found. <a href="#" onclick="setTab('message');return false;" style="color:var(--cyan);">Contact support</a></div>`;
+    } else {
+      res.innerHTML = `<div style="background:rgba(10,31,110,.5);border:1px solid rgba(0,174,239,.2);border-radius:14px;overflow:hidden;margin-top:4px;">` +
+        matches.slice(0,5).map(m => `<a href="${m.url}" style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid rgba(0,174,239,.07);color:var(--white);text-decoration:none;font-size:.83rem;transition:background .15s;" onmouseover="this.style.background='rgba(0,174,239,.07)'" onmouseout="this.style.background=''"><i class="ti ti-search" style="color:var(--cyan);flex-shrink:0;"></i>${m.q}</a>`).join('') + `</div>`;
+    }
+  }
+
+  document.getElementById('search-input').addEventListener('input', () => {
+    if(document.getElementById('search-input').value.length >= 2) doSearch();
+    else document.getElementById('search-results').innerHTML = '';
+  });
+
+  // ── FAQ QUICK ────────────────────────────────────────────────────
+  const FAQS = [
+    { q:'How long does sending money to Haiti take?', a:'Transfers on Tchotcho Pay typically settle in under 2 minutes. Funds are sent as USDC digital dollars, which confirms almost instantly.' },
+    { q:'What is USDC and is it safe?', a:'USDC is a US Dollar-backed stablecoin — 1 USDC = $1 USD, always. It\'s issued by Circle, fully regulated, and audited monthly. Your funds are backed 1:1.' },
+    { q:'What fees does Tchotcho Pay charge?', a:'Debit card deposits: 2%. Credit card: 3%. ACH/Bank and Wire: Free. Cash-out in Haiti: 1%. Sending between Tchotcho Pay users: always Free.' },
+    { q:'How does someone in Haiti receive money?', a:'They get a Tchotcho Pay wallet. Funds arrive as USDC. They can keep it, send to family, pay bills, or cash out through local agents for HTG cash.' },
+    { q:'Can I pay EDH electricity bills?', a:'Yes! Tchotcho Pay supports EDH electricity, CAMEP water, school fees, internet (Natcom, Digicel), and government taxes — all from your USDC wallet.' },
+    { q:'How do I verify my identity (KYC)?', a:'During signup, upload a government ID (passport, driver\'s license, or national ID) plus a selfie. Verification typically completes in under 2 minutes.' },
+    { q:'Is my USDC safe? What about hacks?', a:'USDC funds are held , not in a bank. We use multi-sig wallets, 2FA, biometric verification, and military-grade encryption for all accounts.' },
+    { q:'Can I hold USDC as savings in Haiti?', a:'Yes — this is one of our best features. Instead of holding Haitian Gourdes that lose value, recipients can save in USDC (digital dollars) and earn 4.5% APY.' },
+  ];
+
+  document.getElementById('faq-grid').innerHTML = FAQS.map((f,i) => `
+    <div class="faq-card" onclick="toggleFAQ(${i})" id="faq-${i}">
+      <div class="faq-q"><i class="ti ti-help-circle"></i>${f.q}</div>
+      <div class="faq-a">${f.a}</div>
+    </div>`).join('');
+
+  function toggleFAQ(i) {
+    const card = document.getElementById('faq-' + i);
+    card.classList.toggle('open');
+  }
+
+  // ── LIVE CHAT ────────────────────────────────────────────────────
+  let chatOpen = false;
+  let chatGreeted = false;
+  const BOT_REPLIES = [
+    "I can help you with that! Could you share your account email or transaction ID so I can look into it?",
+    "Got it — let me check that for you. What country are you sending from?",
+    "Thanks for reaching out. Most transfers complete in under 2 minutes  instantly. Are you still seeing a pending status?",
+    "I understand. Let me escalate this to our Haiti team. Could you give me your registered phone number?",
+    "That's a great question! USDC always equals $1 USD — there's no price volatility. Your funds are fully backed.",
+    "For cash-out in Haiti, our agent network covers Port-au-Prince, Cap-Haïtien, Les Cayes, and 40+ other locations.",
+  ];
+  let replyIdx = 0;
+
+  function openChat() {
+    setTab('chat');
+    toggleChat();
+  }
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    const win = document.getElementById('chat-window');
+    const icon = document.getElementById('chat-bubble-icon');
+    win.classList.toggle('open', chatOpen);
+    icon.className = chatOpen ? 'ti ti-x' : 'ti ti-message-circle';
+    if(chatOpen && !chatGreeted) {
+      chatGreeted = true;
+      setTimeout(() => addMsg('bot','typing'), 400);
+      setTimeout(() => {
+        removeTyping();
+        addMsg('bot',"👋 Bonjou! I'm Marie from Tchotcho Pay support. How can I help you today?");
+      }, 1600);
+    }
+  }
+
+  function addMsg(type, text) {
+    const msgs = document.getElementById('cw-messages');
+    const div = document.createElement('div');
+    div.className = 'msg ' + type;
+    if(text === 'typing') {
+      div.className += ' typing';
+      div.id = 'typing-indicator';
+      div.innerHTML = '<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+    } else div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing-indicator');
+    if(t) t.remove();
+  }
+
+  function sendChat() {
+    const input = document.getElementById('cw-input');
+    const text = input.value.trim();
+    if(!text) return;
+    addMsg('user', text);
+    input.value = '';
+    setTimeout(() => addMsg('bot','typing'), 300);
+    setTimeout(() => {
+      removeTyping();
+      addMsg('bot', BOT_REPLIES[replyIdx % BOT_REPLIES.length]);
+      replyIdx++;
+    }, 1200 + Math.random() * 800);
+  }
+
+  // ── UTILS ──────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  const s = document.createElement('style');
+  s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(s);
+</script>
+
+<div style="background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:24px;text-align:center;">
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <a href="index.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Home</a>
+    <a href="calculator.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Calculator</a>
+    <a href="pricing.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Pricing</a>
+    <a href="security.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Security</a>
+    <a href="faq.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Help Center</a>
+    <a href="terms.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Terms &amp; Privacy</a>
+    <a href="signup.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Sign Up</a>
+  </div>
+  <div style="font-size:.72rem;color:rgba(143,168,204,.35);">&copy; 2026 Tchotcho Pay LLC</div>
+</div>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

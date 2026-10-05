@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay — Treasury Admin</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f14; color: #e8e8f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+  /* Login */
+  #loginScreen { text-align: center; }
+  .logo { font-size: 1.6rem; font-weight: 800; color: #7c5cfc; margin-bottom: 0.4rem; }
+  .logo span { color: #e8e8f0; }
+  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+  .login-box { background: #1a1a24; border: 1px solid #2a2a3a; border-radius: 16px; padding: 2rem; width: 340px; }
+  .login-box h2 { font-size: 1.1rem; margin-bottom: 1.5rem; color: #ccc; }
+  input[type="password"] {
+    width: 100%; padding: 0.75rem 1rem; background: #0f0f14; border: 1px solid #2a2a3a;
+    border-radius: 10px; color: #e8e8f0; font-size: 0.95rem; margin-bottom: 1rem; outline: none;
+  }
+  input[type="password"]:focus { border-color: #7c5cfc; }
+  .btn { width: 100%; padding: 0.75rem; background: #7c5cfc; color: #fff; border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn:hover { background: #6a4de8; }
+  .btn:disabled { background: #3a3a50; cursor: not-allowed; }
+  .btn-outline { background: transparent; border: 1px solid #7c5cfc; color: #7c5cfc; margin-top: 0.5rem; }
+  .btn-outline:hover { background: #7c5cfc22; }
+  .btn-danger { background: #e53e3e; }
+  .btn-danger:hover { background: #c53030; }
+  .error-msg { color: #fc8181; font-size: 0.85rem; margin-top: 0.5rem; }
+
+  /* Dashboard */
+  #dashboard { display: none; width: 100%; max-width: 680px; padding: 1.5rem; }
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+  .header .logo { font-size: 1.3rem; }
+  .logout-btn { background: transparent; border: 1px solid #2a2a3a; color: #888; padding: 0.4rem 0.9rem; border-radius: 8px; cursor: pointer; font-size: 0.82rem; }
+  .logout-btn:hover { border-color: #555; color: #ccc; }
+
+  /* Balance card */
+  .balance-card {
+    background: linear-gradient(135deg, #1e1e2e 0%, #1a1430 100%);
+    border: 1px solid #2a2a4a; border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; text-align: center;
+  }
+  .balance-label { color: #888; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .balance-amount { font-size: 3rem; font-weight: 800; color: #7c5cfc; line-height: 1; }
+  .balance-amount span { font-size: 1.4rem; color: #aaa; font-weight: 400; margin-left: 0.3rem; }
+  .balance-address { color: #555; font-size: 0.75rem; font-family: monospace; margin-top: 1rem; word-break: break-all; }
+  .balance-address strong { color: #888; }
+  .refresh-btn { margin-top: 1rem; background: transparent; border: 1px solid #2a2a4a; color: #7c5cfc; padding: 0.4rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.82rem; }
+  .refresh-btn:hover { background: #7c5cfc11; }
+
+  /* Withdraw form */
+  .card { background: #1a1a24; border: 1px solid #2a2a3a; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .card h3 { font-size: 1rem; color: #ccc; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+  label { display: block; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; margin-top: 1rem; }
+  label:first-of-type { margin-top: 0; }
+  input[type="text"], input[type="number"] {
+    width: 100%; padding: 0.75rem 1rem; background: #0f0f14; border: 1px solid #2a2a3a;
+    border-radius: 10px; color: #e8e8f0; font-size: 0.95rem; outline: none;
+  }
+  input[type="text"]:focus, input[type="number"]:focus { border-color: #7c5cfc; }
+  .quick-amounts { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+  .quick-btn { background: #0f0f14; border: 1px solid #2a2a3a; color: #aaa; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+  .quick-btn:hover { border-color: #7c5cfc; color: #7c5cfc; }
+  .withdraw-footer { display: flex; gap: 0.75rem; margin-top: 1.2rem; }
+  .withdraw-footer .btn { flex: 1; }
+
+  /* Status */
+  .status-box { border-radius: 12px; padding: 1rem 1.2rem; margin-top: 1rem; font-size: 0.88rem; display: none; }
+  .status-box.success { background: #1a2e1a; border: 1px solid #2d5a2d; color: #68d391; }
+  .status-box.error   { background: #2e1a1a; border: 1px solid #5a2d2d; color: #fc8181; }
+  .status-box.loading { background: #1a1e2e; border: 1px solid #2d3a5a; color: #90cdf4; }
+  .tx-id { font-family: monospace; font-size: 0.78rem; color: #888; margin-top: 0.3rem; word-break: break-all; }
+
+  /* Loading spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #ffffff44; border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<!-- Login screen -->
+<div id="loginScreen">
+  <div class="logo">tchotcho<span>pay</span></div>
+  <div class="subtitle">Treasury Management</div>
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <input type="password" id="secretInput" placeholder="Enter admin secret" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn" onclick="login()">Sign In</button>
+    <div id="loginError" class="error-msg"></div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard">
+  <div class="header">
+    <div class="logo">tchotcho<span>pay</span> <span style="font-size:0.7rem;color:#555;font-weight:400;">Treasury</span></div>
+    <button class="logout-btn" onclick="logout()">Sign out</button>
+  </div>
+
+  <!-- Balance -->
+  <div class="balance-card">
+    <div class="balance-label">Treasury Balance</div>
+    <div class="balance-amount" id="balanceAmt">—<span>USDC</span></div>
+    <div class="balance-address">
+      <strong>Arc wallet:</strong> 0xaaacb6cda737addcedea7dc9df7493950b023439
+    </div>
+    <button class="refresh-btn" onclick="loadBalance()">↻ Refresh</button>
+  </div>
+
+  <!-- Withdraw -->
+  <div class="card">
+    <h3>💸 Withdraw USDC</h3>
+    <label>Destination Address</label>
+    <input type="text" id="toAddress" placeholder="0x... or your Coinbase USDC address">
+
+    <label>Amount (USDC)</label>
+    <input type="number" id="withdrawAmt" placeholder="0.00" min="0" step="0.01">
+    <div class="quick-amounts">
+      <button class="quick-btn" onclick="setAmt(100)">$100</button>
+      <button class="quick-btn" onclick="setAmt(250)">$250</button>
+      <button class="quick-btn" onclick="setAmt(500)">$500</button>
+      <button class="quick-btn" onclick="setAmt(1000)">$1,000</button>
+      <button class="quick-btn" onclick="setAmtAll()">Max</button>
+    </div>
+
+    <div class="withdraw-footer">
+      <button class="btn btn-danger" id="withdrawBtn" onclick="withdraw()">Withdraw USDC</button>
+    </div>
+
+    <div id="withdrawStatus" class="status-box"></div>
+  </div>
+</div>
+
+<script>
+  let adminSecret = '';
+  let currentBalance = 0;
+
+  function login() {
+    const s = document.getElementById('secretInput').value.trim();
+    if (!s) { document.getElementById('loginError').textContent = 'Enter your admin secret.'; return; }
+    adminSecret = s;
+    document.getElementById('loginError').textContent = '';
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadBalance();
+  }
+
+  function logout() {
+    adminSecret = '';
+    document.getElementById('secretInput').value = '';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'block';
+  }
+
+  async function loadBalance() {
+    document.getElementById('balanceAmt').innerHTML = '<span style="font-size:1rem;color:#555">Loading…</span>';
+    try {
+      const res  = await fetch('/.netlify/functions/treasury-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adminSecret, action: 'getBalance' }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status === 403) { logout(); return; }
+        throw new Error(data.error);
+      }
+      currentBalance = data.balance.usdc;
+      document.getElementById('balanceAmt').innerHTML = `${currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}<span>USDC</span>`;
+    } catch (e) {
+      document.getElementById('balanceAmt').innerHTML = '<span style="font-size:1rem;color:#fc8181">Error loading balance</span>';
+    }
+  }
+
+  function setAmt(n) { document.getElementById('withdrawAmt').value = n; }
+  function setAmtAll() { document.getElementById('withdrawAmt').value = currentBalance; }
+
+  async function withdraw() {
+    const toAddress = document.getElementById('toAddress').value.trim();
+    const amount    = parseFloat(document.getElementById('withdrawAmt').value);
+    const statusBox = document.getElementById('withdrawStatus');
+    const btn       = document.getElementById('withdrawBtn');
+
+    if (!toAddress) { showStatus('error', 'Enter a destination address.'); return; }
+    if (!toAddress.startsWith('0x') || toAddress.length < 40) { showStatus('error', 'Invalid address — must start with 0x.'); return; }
+    if (!amount || amount <= 0) { showStatus('error', 'Enter a valid amount.'); return; }
+    if (amount > currentBalance) { showStatus('error', `Amount exceeds balance ($${currentBalance} USDC available).`); return; }
+
+    const confirmed = confirm(`Withdraw $${amount} USDC to:\n${toAddress}\n\nContinue?`);
+    if (!confirmed) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Sending…';
+    showStatus('loading', 'Submitting transfer to Circle…');
+
+    try {
+      const res  = await fetch('/.netlify/functions/treasury-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adminSecret, action: 'withdraw', toAddress, amount }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      showStatus('success', `✅ Withdrawal submitted! $${data.amount} USDC sent to ${data.toAddress.slice(0,10)}...`, data.transactionId);
+      document.getElementById('withdrawAmt').value = '';
+      setTimeout(loadBalance, 3000);
+    } catch (e) {
+      showStatus('error', `❌ ${e.message}`);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Withdraw USDC';
+    }
+  }
+
+  function showStatus(type, msg, txId) {
+    const box = document.getElementById('withdrawStatus');
+    box.className = `status-box ${type}`;
+    box.style.display = 'block';
+    box.innerHTML = msg + (txId ? `<div class="tx-id">TX: ${txId}</div>` : '');
+  }
+</script>
+</body>
+</html>

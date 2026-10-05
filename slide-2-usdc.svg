@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00AEEF" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#020B2D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoline2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00AEEF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00AEEF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00AEEF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="walletcard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1F6E"/>
+      <stop offset="100%" stop-color="#050E38"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="#020B2D"/>
+
+  <!-- Glow -->
+  <ellipse cx="540" cy="780" rx="450" ry="450" fill="url(#glow2)"/>
+
+  <!-- Logo -->
+  <text x="540" y="230" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">TchotchoPay</text>
+  <rect x="400" y="248" width="280" height="2" fill="url(#logoline2)"/>
+  <text x="540" y="298" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#00AEEF" text-anchor="middle" letter-spacing="4">KONT USDC</text>
+
+  <!-- Headline -->
+  <text x="540" y="450" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="white" text-anchor="middle">Kenbe <tspan fill="#00AEEF">dola ou</tspan>.</text>
+  <text x="540" y="545" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="white" text-anchor="middle">Pa goud ki devalye.</text>
+
+  <!-- Wallet Card -->
+  <rect x="70" y="630" width="940" height="440" rx="44" fill="url(#walletcard)" stroke="#00AEEF" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="130" y="700" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" fill="#00AEEF" letter-spacing="4">TCHOTCHOPAY WALLET</text>
+  <text x="130" y="748" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" fill="#8899BB">Balans USDC ou</text>
+  <text x="130" y="880" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="148" font-weight="700" fill="white">$500</text>
+  <text x="130" y="940" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="52" fill="#00AEEF">500.00 USDC</text>
+
+  <!-- Pills -->
+  <rect x="130" y="970" width="150" height="56" rx="28" fill="#00C896" fill-opacity="0.08" stroke="#00C896" stroke-opacity="0.4" stroke-width="1.5"/>
+  <text x="205" y="1006" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#00C896" text-anchor="middle">Estab</text>
+
+  <rect x="296" y="970" width="130" height="56" rx="28" fill="#00AEEF" fill-opacity="0.08" stroke="#00AEEF" stroke-opacity="0.4" stroke-width="1.5"/>
+  <text x="361" y="1006" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#00AEEF" text-anchor="middle">Base</text>
+
+  <rect x="442" y="970" width="110" height="56" rx="28" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.15" stroke-width="1.5"/>
+  <text x="497" y="1006" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="white" text-anchor="middle">24/7</text>
+
+  <!-- Equal statement -->
+  <text x="540" y="1160" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="58" font-weight="700" fill="white" text-anchor="middle">$1 USDC = <tspan fill="#00C896">$1.00</tspan> toujou</text>
+
+  <!-- Sub -->
+  <text x="540" y="1240" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" fill="rgba(200,215,240,0.7)" text-anchor="middle">HTG pedi -43% an 2023.</text>
+  <text x="540" y="1295" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" fill="rgba(200,215,240,0.7)" text-anchor="middle">USDC pa chanje.</text>
+
+  <!-- URL -->
+  <text x="540" y="1862" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#8899BB" fill-opacity="0.5" text-anchor="middle">tchotchopay.com/wallet</text>
+</svg>

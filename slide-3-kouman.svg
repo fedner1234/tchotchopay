@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="glow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0A55CC" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#020B2D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoline3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00C896" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00C896" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00C896" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1920" fill="#020B2D"/>
+
+  <!-- Glow -->
+  <ellipse cx="540" cy="900" rx="400" ry="400" fill="url(#glow3)"/>
+
+  <!-- Logo -->
+  <text x="540" y="230" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">TchotchoPay</text>
+  <rect x="400" y="248" width="280" height="2" fill="url(#logoline3)"/>
+  <text x="540" y="298" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#00C896" text-anchor="middle" letter-spacing="4">KÒMAN LI TRAVAY</text>
+
+  <!-- Headline -->
+  <text x="540" y="440" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle">Senp. Vit.</text>
+  <text x="540" y="530" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#00C896" text-anchor="middle">Fre ba.</text>
+
+  <!-- Step 1 -->
+  <rect x="70" y="600" width="940" height="176" rx="40" fill="#0A1F6E" fill-opacity="0.8" stroke="white" stroke-opacity="0.07" stroke-width="1.5"/>
+  <!-- Circle 1 -->
+  <circle cx="162" cy="688" r="44" fill="#0A55CC" fill-opacity="0.12" stroke="#0A55CC" stroke-width="3"/>
+  <text x="162" y="703" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#0A55CC" text-anchor="middle">1</text>
+  <text x="240" y="673" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="white">Mete Lajan</text>
+  <text x="240" y="720" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="32" fill="#8899BB">Kat debi, ACH, oswa bank</text>
+
+  <!-- Step 2 -->
+  <rect x="70" y="804" width="940" height="176" rx="40" fill="#0A1F6E" fill-opacity="0.8" stroke="white" stroke-opacity="0.07" stroke-width="1.5"/>
+  <circle cx="162" cy="892" r="44" fill="#00AEEF" fill-opacity="0.12" stroke="#00AEEF" stroke-width="3"/>
+  <text x="162" y="907" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#00AEEF" text-anchor="middle">2</text>
+  <text x="240" y="877" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="white">Konveti an <tspan fill="#00AEEF">USDC</tspan></text>
+  <text x="240" y="924" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="32" fill="#8899BB">Otomatik — prèske imedya</text>
+
+  <!-- Step 3 -->
+  <rect x="70" y="1008" width="940" height="176" rx="40" fill="#0A1F6E" fill-opacity="0.8" stroke="white" stroke-opacity="0.07" stroke-width="1.5"/>
+  <circle cx="162" cy="1096" r="44" fill="#00C896" fill-opacity="0.12" stroke="#00C896" stroke-width="3"/>
+  <text x="162" y="1111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#00C896" text-anchor="middle">3</text>
+  <text x="240" y="1081" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="white">Voye / Achte / Kache</text>
+  <text x="240" y="1128" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="32" fill="#8899BB">MonCash, NatCash, mache lokal</text>
+
+  <!-- Bottom text -->
+  <text x="540" y="1290" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="44" fill="rgba(200,215,240,0.75)" text-anchor="middle">Disponib 24/7 •</text>
+  <text x="540" y="1352" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="44" fill="rgba(200,215,240,0.75)" text-anchor="middle">Etazini, Kanada, Frans → Ayiti</text>
+
+  <!-- URL -->
+  <text x="540" y="1862" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#8899BB" fill-opacity="0.5" text-anchor="middle">tchotchopay.com</text>
+</svg>

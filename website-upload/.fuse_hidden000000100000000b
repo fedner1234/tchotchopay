@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tchotcho Pay — Terms of Service, Privacy Policy & Compliance</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Read the Tchotcho Pay Terms of Service, Privacy Policy, and AML/KYC Compliance Policy."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/terms.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/terms.html"/>
+  <meta property="og:title" content="Tchotcho Pay — Terms of Service, Privacy Policy & Compliance"/>
+  <meta property="og:description" content="Read the Tchotcho Pay Terms of Service, Privacy Policy, and AML/KYC Compliance Policy."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Tchotcho Pay — Terms of Service, Privacy Policy & Compliance"/>
+  <meta name="twitter:description" content="Read the Tchotcho Pay Terms of Service, Privacy Policy, and AML/KYC Compliance Policy."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+:root{
+  --navy:#020B2D;--blue:#0A1F6E;--mid:#1055CC;--cyan:#00AEEF;--light:#7FD4F7;
+  --white:#F0F6FF;--gray:#8FA8CC;--offwhite:#f0f6ff;--border:rgba(0,174,239,0.15);
+  --card:rgba(255,255,255,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--navy);color:var(--white);line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+.nav-logo-box{width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:9px;overflow:hidden;}
+.nav-logo-box img{width:100%;height:100%;object-fit:cover;}
+.nav-brand{font-size:1.05rem;font-weight:700;}
+.nav-brand em{color:var(--cyan);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;margin-left:auto;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:var(--white)!important;padding:8px 18px;border-radius:50px;font-weight:600;font-size:.85rem;}
+
+/* HERO */
+.legal-hero{
+  padding:110px 24px 48px;text-align:center;
+  background:linear-gradient(180deg,rgba(2,11,45,1) 0%,rgba(10,31,110,.25) 100%);
+  position:relative;overflow:hidden;
+}
+.legal-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 20%,rgba(0,174,239,.1),transparent 70%);pointer-events:none;}
+.legal-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,174,239,.1);border:1px solid rgba(0,174,239,.3);border-radius:50px;padding:5px 16px;font-size:.78rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
+.legal-hero h1{font-size:2.1rem;font-weight:900;margin-bottom:10px;}
+.legal-hero h1 em{color:var(--cyan);font-style:normal;}
+.legal-hero p{color:var(--gray);font-size:.92rem;max-width:520px;margin:0 auto;}
+
+/* TABS */
+.tab-bar{
+  display:flex;justify-content:center;gap:0;
+  max-width:680px;margin:36px auto 0;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:5px;
+}
+.tab-btn{
+  flex:1;padding:11px 16px;border:none;background:none;color:var(--gray);
+  font-size:.85rem;font-weight:600;cursor:pointer;border-radius:10px;transition:.2s;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.tab-btn.active{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+.tab-btn:hover:not(.active){color:var(--white);background:rgba(255,255,255,.05);}
+.tab-btn i{font-size:15px;}
+
+/* CONTENT */
+.legal-wrap{max-width:820px;margin:0 auto;padding:40px 24px 80px;}
+
+.legal-section{display:none;}
+.legal-section.active{display:block;}
+
+/* LAST UPDATED */
+.last-updated{
+  display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--gray);
+  background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;
+  padding:6px 12px;margin-bottom:28px;
+}
+
+/* SECTION PROSE */
+.legal-toc{
+  background:rgba(0,174,239,.05);border:1px solid var(--border);border-radius:12px;
+  padding:20px 24px;margin-bottom:32px;
+}
+.legal-toc h4{font-size:.8rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.legal-toc ol{margin-left:18px;}
+.legal-toc ol li{margin-bottom:5px;}
+.legal-toc ol li a{color:var(--cyan);text-decoration:none;font-size:.86rem;}
+.legal-toc ol li a:hover{text-decoration:underline;}
+
+.clause{margin-bottom:36px;scroll-margin-top:90px;}
+.clause h2{font-size:1.05rem;font-weight:800;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;}
+.clause h2 .cl-num{
+  width:26px;height:26px;border-radius:7px;background:rgba(0,174,239,.12);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;
+  color:var(--cyan);font-weight:900;flex-shrink:0;
+}
+.clause p{font-size:.9rem;color:rgba(255,255,255,.8);margin-bottom:12px;}
+.clause ul,.clause ol{margin:10px 0 12px 22px;}
+.clause ul li,.clause ol li{font-size:.9rem;color:rgba(255,255,255,.75);margin-bottom:6px;}
+.clause strong{color:var(--white);}
+.clause a{color:var(--cyan);text-decoration:none;}
+.clause a:hover{text-decoration:underline;}
+
+.highlight-box{
+  background:rgba(0,174,239,.07);border:1px solid rgba(0,174,239,.2);border-radius:10px;
+  padding:14px 18px;margin:14px 0;font-size:.86rem;color:var(--light);
+  display:flex;align-items:flex-start;gap:10px;
+}
+.highlight-box i{font-size:16px;flex-shrink:0;margin-top:1px;}
+.warn-box{background:rgba(255,215,64,.06);border-color:rgba(255,215,64,.2);color:#ffd740;}
+.warn-box i{color:#ffd740;}
+
+/* CONTACT CARD */
+.contact-card{
+  background:linear-gradient(135deg,rgba(16,85,204,.25),rgba(0,174,239,.1));
+  border:1px solid rgba(0,174,239,.2);border-radius:14px;padding:24px 28px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  margin-top:36px;
+}
+.contact-card h4{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.contact-card p{font-size:.85rem;color:var(--gray);}
+.contact-card a{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:50px;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;font-size:.85rem;font-weight:600;text-decoration:none;}
+.contact-card a:hover{opacity:.88;}
+
+/* FOOTER */
+footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 24px;}
+.footer-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+.footer-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:.85rem;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{color:var(--gray);font-size:.8rem;}
+
+@media(max-width:680px){
+  nav{padding:12px 16px;}
+  .nav-links{display:none;}
+  .legal-hero h1{font-size:1.6rem;}
+  .tab-bar{flex-direction:column;}
+  .tab-btn{border-radius:8px;}
+}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-box"><img src="logo.png" alt="T" onerror="this.style.display='none'"/></div>
+    <span class="nav-brand">Tchotcho<em>Pay</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="index.html#pricing">Fees</a></li>
+    <li><a href="pricing.html">Pricing</a>
+    <a href="security.html">Security</a>
+    <a href="faq.html">Help</a></li>
+    <li><a href="index.html#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="legal-badge"><i class="ti ti-scale"></i> Legal & Compliance</div>
+  <h1>Our <em>Legal</em> Documents</h1>
+  <p>Transparency is core to Tchotcho Pay. Please read these policies carefully — they govern your use of our platform.</p>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('tos',this)"><i class="ti ti-file-text"></i> Terms of Service</button>
+    <button class="tab-btn" onclick="showTab('privacy',this)"><i class="ti ti-lock"></i> Privacy Policy</button>
+    <button class="tab-btn" onclick="showTab('aml',this)"><i class="ti ti-shield-check"></i> AML & Compliance</button>
+  </div>
+</div>
+
+<div class="legal-wrap">
+
+  <!-- ══════════════════ TERMS OF SERVICE ══════════════════ -->
+  <div class="legal-section active" id="tos">
+    <div class="last-updated"><i class="ti ti-calendar"></i> Last updated: June 1, 2026</div>
+
+    <div class="legal-toc">
+      <h4>Table of Contents</h4>
+      <ol>
+        <li><a href="#tos-1">Acceptance of Terms</a></li>
+        <li><a href="#tos-2">Eligibility</a></li>
+        <li><a href="#tos-3">Account Registration & KYC</a></li>
+        <li><a href="#tos-4">Services Provided</a></li>
+        <li><a href="#tos-5">Fees & Charges</a></li>
+        <li><a href="#tos-6">Prohibited Activities</a></li>
+        <li><a href="#tos-7">USDC & Digital Assets</a></li>
+        <li><a href="#tos-8">Merchant & Agent Terms</a></li>
+        <li><a href="#tos-9">Limitation of Liability</a></li>
+        <li><a href="#tos-10">Termination</a></li>
+        <li><a href="#tos-11">Dispute Resolution</a></li>
+        <li><a href="#tos-12">Governing Law</a></li>
+      </ol>
+    </div>
+
+    <div class="clause" id="tos-1">
+      <h2><span class="cl-num">1</span> Acceptance of Terms</h2>
+      <p>By creating an account, accessing, or using the Tchotcho Pay platform, mobile application, or any related services (collectively, the <strong>"Services"</strong>), you agree to be bound by these Terms of Service (<strong>"Terms"</strong>) and all applicable laws and regulations.</p>
+      <p>If you do not agree to these Terms, you may not use the Services. These Terms constitute a legally binding agreement between you and <strong>Tchotcho Pay LLC</strong> (<strong>"Tchotcho Pay," "we," "us," or "our"</strong>).</p>
+      <div class="highlight-box"><i class="ti ti-info-circle"></i>We may update these Terms from time to time. Continued use of the Services after changes are posted constitutes your acceptance of the revised Terms. We will notify you of material changes via email or in-app notification.</div>
+    </div>
+
+    <div class="clause" id="tos-2">
+      <h2><span class="cl-num">2</span> Eligibility</h2>
+      <p>To use Tchotcho Pay, you must:</p>
+      <ul>
+        <li>Be at least <strong>18 years of age</strong></li>
+        <li>Be a legal resident or citizen of a country where the Services are available</li>
+        <li>Have the legal capacity to enter into a binding contract</li>
+        <li>Not be on any U.S., EU, or UN sanctions list</li>
+        <li>Not have a previously terminated Tchotcho Pay account unless reinstated by us</li>
+      </ul>
+      <p>Tchotcho Pay currently serves users in the <strong>United States, Canada, France</strong>, and recipients in <strong>Haiti</strong>. Use of the Services from unauthorized jurisdictions is prohibited.</p>
+    </div>
+
+    <div class="clause" id="tos-3">
+      <h2><span class="cl-num">3</span> Account Registration & KYC</h2>
+      <p>You must provide accurate, complete, and current information when creating your account. You are responsible for maintaining the confidentiality of your PIN and account credentials.</p>
+      <p>To unlock full platform features, you must complete our <strong>Know Your Customer (KYC)</strong> identity verification process, which may require:</p>
+      <ul>
+        <li>Government-issued photo ID (passport, national ID, driver's license)</li>
+        <li>Proof of address</li>
+        <li>Date of birth and legal name</li>
+        <li>A selfie or biometric verification</li>
+      </ul>
+      <p>We may request additional information at any time to comply with applicable laws. Failure to provide requested information may result in account suspension or termination.</p>
+      <div class="highlight-box warn-box"><i class="ti ti-alert-triangle"></i>Never share your PIN or one-time passcode (OTP) with anyone, including Tchotcho Pay employees. We will never ask for your PIN.</div>
+    </div>
+
+    <div class="clause" id="tos-4">
+      <h2><span class="cl-num">4</span> Services Provided</h2>
+      <p>Tchotcho Pay provides the following Services:</p>
+      <ul>
+        <li><strong>Money Transfer:</strong> Send USD-funded USDC to recipients in Haiti and other supported regions</li>
+        <li><strong>USDC Wallet:</strong> Hold, send, and receive USDC (USD Coin) on the Base blockchain</li>
+        <li><strong>Cash Out:</strong> Convert USDC to Haitian gourdes (HTG) via our agent network or local bank transfer</li>
+        <li><strong>Marketplace:</strong> Purchase goods and services from verified Haitian merchants using USDC</li>
+        <li><strong>P2P Payments:</strong> Send USDC to other Tchotcho Pay users by username, phone, or QR code</li>
+      </ul>
+      <p>We reserve the right to modify, suspend, or discontinue any Service at any time with reasonable notice.</p>
+    </div>
+
+    <div class="clause" id="tos-5">
+      <h2><span class="cl-num">5</span> Fees & Charges</h2>
+      <p>Tchotcho Pay charges fees for certain transactions. Current fees are:</p>
+      <ul>
+        <li><strong>Debit/Credit Card deposit:</strong> 2–3%</li>
+        <li><strong>ACH / Bank transfer deposit:</strong> 0.5–1%</li>
+        <li><strong>P2P transfers (user to user):</strong> Free</li>
+        <li><strong>Cash out via agent or bank:</strong> 1%</li>
+        <li><strong>Merchant processing fee:</strong> 1–2%</li>
+        <li><strong>FX conversion spread (USD ↔ HTG):</strong> ~0.5–1%</li>
+      </ul>
+      <p>All fees are disclosed before you confirm any transaction. We reserve the right to change our fee schedule with 30 days' written notice. Third-party fees (e.g., your card issuer's foreign transaction fees) are outside our control and are separate from Tchotcho Pay fees.</p>
+    </div>
+
+    <div class="clause" id="tos-6">
+      <h2><span class="cl-num">6</span> Prohibited Activities</h2>
+      <p>You agree NOT to use the Services for:</p>
+      <ul>
+        <li>Money laundering, terrorist financing, or any illegal financial activity</li>
+        <li>Fraud, phishing, or impersonating another person</li>
+        <li>Structuring transactions to evade reporting thresholds</li>
+        <li>Purchasing illegal goods or services</li>
+        <li>Sending funds to sanctioned individuals, entities, or countries</li>
+        <li>Unauthorized commercial use, scraping, or reverse engineering of the platform</li>
+        <li>Circumventing transaction limits or KYC requirements</li>
+        <li>Any activity that violates applicable local, national, or international law</li>
+      </ul>
+      <p>Violation of these prohibitions may result in immediate account suspension, fund freezes, and referral to law enforcement.</p>
+    </div>
+
+    <div class="clause" id="tos-7">
+      <h2><span class="cl-num">7</span> USDC & Digital Assets</h2>
+      <p>Tchotcho Pay uses <strong>USDC (USD Coin)</strong> on the <strong>Base blockchain</strong> for all internal transactions. USDC is a stablecoin pegged 1:1 to the US dollar and issued by Circle Internet Financial.</p>
+      <ul>
+        <li>USDC balances in your Tchotcho Pay wallet are maintained on the Base blockchain</li>
+        <li>Tchotcho Pay does not lend, invest, or use customer USDC balances</li>
+        <li>Blockchain transactions are <strong>irreversible</strong> once confirmed</li>
+        <li>Tchotcho Pay is not responsible for losses due to user error (e.g., sending to wrong address)</li>
+        <li>In the event of a blockchain network failure or congestion, we will make reasonable efforts to process your transaction but cannot guarantee timing</li>
+      </ul>
+      <div class="highlight-box"><i class="ti ti-info-circle"></i>USDC is not a security, investment product, or bank deposit. It is a digital representation of one US dollar. It does not earn interest or returns unless explicitly stated.</div>
+    </div>
+
+    <div class="clause" id="tos-8">
+      <h2><span class="cl-num">8</span> Merchant & Agent Terms</h2>
+      <p><strong>Merchants</strong> who join the Tchotcho Pay marketplace agree to:</p>
+      <ul>
+        <li>Provide accurate business information and valid identification</li>
+        <li>Only list legal goods and services</li>
+        <li>Honor all completed orders and purchases</li>
+        <li>Pay merchant processing fees (1–2%) on all transactions</li>
+        <li>Cooperate with dispute resolution processes</li>
+      </ul>
+      <p><strong>Cash Agents</strong> who join the agent network agree to:</p>
+      <ul>
+        <li>Maintain adequate HTG float to serve customers</li>
+        <li>Verify customer identity before each cash-out transaction</li>
+        <li>Never accept or disburse cash outside the Tchotcho Pay platform</li>
+        <li>Comply with all AML/KYC obligations</li>
+        <li>Be financially responsible for float management under the signed agent agreement</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="tos-9">
+      <h2><span class="cl-num">9</span> Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, TCHOTCHO PAY AND ITS OFFICERS, EMPLOYEES, PARTNERS, AND LICENSORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICES.</p>
+      <p>In no event shall Tchotcho Pay's total liability to you exceed the greater of:</p>
+      <ul>
+        <li>The amount of fees paid by you to Tchotcho Pay in the 90 days preceding the claim, or</li>
+        <li>One hundred US dollars ($100.00)</li>
+      </ul>
+      <p>This limitation applies regardless of the theory of liability and even if Tchotcho Pay has been advised of the possibility of such damages.</p>
+    </div>
+
+    <div class="clause" id="tos-10">
+      <h2><span class="cl-num">10</span> Termination</h2>
+      <p>We may suspend or terminate your account at any time for:</p>
+      <ul>
+        <li>Violation of these Terms</li>
+        <li>Suspected fraud, money laundering, or illegal activity</li>
+        <li>Failure to complete or maintain KYC requirements</li>
+        <li>Regulatory requirement or government order</li>
+        <li>Extended account inactivity (24+ months with zero balance)</li>
+      </ul>
+      <p>Upon termination, we will make reasonable efforts to allow you to withdraw any remaining USDC balance, unless prohibited by law or ongoing investigation. You may voluntarily close your account at any time by contacting support.</p>
+    </div>
+
+    <div class="clause" id="tos-11">
+      <h2><span class="cl-num">11</span> Dispute Resolution</h2>
+      <p>Any dispute arising from these Terms or your use of the Services shall first be addressed through our internal support team at <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a>.</p>
+      <p>If unresolved, disputes shall be submitted to <strong>binding arbitration</strong> under the rules of the American Arbitration Association (AAA). Arbitration shall be conducted in <strong>English</strong> in the State of <strong>Florida</strong>. You waive your right to participate in a class action lawsuit.</p>
+      <p>Notwithstanding the above, either party may seek injunctive relief in a court of competent jurisdiction.</p>
+    </div>
+
+    <div class="clause" id="tos-12">
+      <h2><span class="cl-num">12</span> Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the <strong>State of Florida, United States</strong>, without regard to its conflict of law principles.</p>
+      <p>If you have questions about these Terms, contact us at: <a href="mailto:legal@tchotchopay.com">legal@tchotchopay.com</a></p>
+    </div>
+
+    <div class="contact-card">
+      <div>
+        <h4>Questions about our Terms?</h4>
+        <p>Our legal team is available to assist with any questions.</p>
+      </div>
+      <a href="mailto:legal@tchotchopay.com"><i class="ti ti-mail"></i> legal@tchotchopay.com</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PRIVACY POLICY ══════════════════ -->
+  <div class="legal-section" id="privacy">
+    <div class="last-updated"><i class="ti ti-calendar"></i> Last updated: June 1, 2026</div>
+
+    <div class="highlight-box" style="margin-bottom:28px;"><i class="ti ti-info-circle"></i>Tchotcho Pay is committed to protecting your privacy. We do not sell your personal data to third parties for advertising purposes. This policy explains what we collect, why, and how we protect it.</div>
+
+    <div class="legal-toc">
+      <h4>Table of Contents</h4>
+      <ol>
+        <li><a href="#pp-1">Information We Collect</a></li>
+        <li><a href="#pp-2">How We Use Your Information</a></li>
+        <li><a href="#pp-3">How We Share Your Information</a></li>
+        <li><a href="#pp-4">Data Retention</a></li>
+        <li><a href="#pp-5">Your Rights & Choices</a></li>
+        <li><a href="#pp-6">Cookies & Tracking</a></li>
+        <li><a href="#pp-7">Children's Privacy</a></li>
+        <li><a href="#pp-8">International Transfers</a></li>
+        <li><a href="#pp-9">Security</a></li>
+        <li><a href="#pp-10">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <div class="clause" id="pp-1">
+      <h2><span class="cl-num">1</span> Information We Collect</h2>
+      <p><strong>Information you provide directly:</strong></p>
+      <ul>
+        <li>Full legal name, date of birth, nationality</li>
+        <li>Email address and phone number</li>
+        <li>Physical address</li>
+        <li>Government-issued ID documents and photos</li>
+        <li>Bank account or payout method details</li>
+        <li>Transaction history and payment details</li>
+      </ul>
+      <p><strong>Information collected automatically:</strong></p>
+      <ul>
+        <li>Device type, operating system, and app version</li>
+        <li>IP address and approximate location</li>
+        <li>App usage patterns and feature interactions</li>
+        <li>Crash reports and performance data</li>
+      </ul>
+      <p><strong>Information from third parties:</strong></p>
+      <ul>
+        <li>Identity verification data from our KYC provider</li>
+        <li>Fraud scoring from financial risk services</li>
+        <li>Sanctions and watchlist screening results</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="pp-2">
+      <h2><span class="cl-num">2</span> How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul>
+        <li><strong>Provide the Services:</strong> Process transactions, maintain your wallet, facilitate cash-outs</li>
+        <li><strong>Verify your identity:</strong> Complete KYC and prevent fraud</li>
+        <li><strong>Comply with legal obligations:</strong> AML reporting, sanctions screening, tax reporting</li>
+        <li><strong>Communicate with you:</strong> Transaction confirmations, support, security alerts</li>
+        <li><strong>Improve the platform:</strong> Analyze usage patterns, fix bugs, develop new features</li>
+        <li><strong>Prevent fraud:</strong> Detect unusual activity, protect users from unauthorized access</li>
+      </ul>
+      <p>We do <strong>not</strong> use your data to serve third-party advertisements or sell profiles to data brokers.</p>
+    </div>
+
+    <div class="clause" id="pp-3">
+      <h2><span class="cl-num">3</span> How We Share Your Information</h2>
+      <p>We only share your information in the following circumstances:</p>
+      <ul>
+        <li><strong>KYC/Identity verification providers:</strong> To verify your identity documents</li>
+        <li><strong>Payment processors:</strong> To process card deposits and bank transfers</li>
+        <li><strong>Blockchain infrastructure:</strong> Transaction data is recorded on the Base public blockchain — this is pseudonymous (wallet addresses, not names)</li>
+        <li><strong>Law enforcement and regulators:</strong> When required by law, subpoena, or court order</li>
+        <li><strong>AML/BSA reporting:</strong> FinCEN and other regulatory bodies as required</li>
+        <li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets, with prior notice to users</li>
+      </ul>
+      <p>We require all third-party service providers to maintain appropriate data security standards and only use your data for the specified purpose.</p>
+    </div>
+
+    <div class="clause" id="pp-4">
+      <h2><span class="cl-num">4</span> Data Retention</h2>
+      <p>We retain your personal information for as long as:</p>
+      <ul>
+        <li>Your account is active</li>
+        <li>Required by financial regulations (typically <strong>5 years</strong> after account closure under BSA requirements)</li>
+        <li>Necessary to resolve disputes or enforce our Terms</li>
+      </ul>
+      <p>After the retention period, your data is securely deleted or anonymized. Transaction records on the blockchain are public and permanent by nature of blockchain technology.</p>
+    </div>
+
+    <div class="clause" id="pp-5">
+      <h2><span class="cl-num">5</span> Your Rights & Choices</h2>
+      <p>Depending on your jurisdiction, you may have the following rights:</p>
+      <ul>
+        <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+        <li><strong>Correction:</strong> Request correction of inaccurate personal data</li>
+        <li><strong>Deletion:</strong> Request deletion of your data (subject to legal retention requirements)</li>
+        <li><strong>Portability:</strong> Receive your data in a machine-readable format</li>
+        <li><strong>Opt-out of marketing:</strong> Unsubscribe from marketing emails at any time via the link in any email</li>
+      </ul>
+      <p>To exercise any of these rights, contact <a href="mailto:privacy@tchotchopay.com">privacy@tchotchopay.com</a>. We will respond within 30 days.</p>
+      <div class="highlight-box warn-box"><i class="ti ti-alert-triangle"></i>Some data cannot be deleted due to legal retention requirements (e.g., AML/BSA transaction records). We will inform you if this applies to your request.</div>
+    </div>
+
+    <div class="clause" id="pp-6">
+      <h2><span class="cl-num">6</span> Cookies & Tracking</h2>
+      <p>Our website and app use cookies and similar technologies for:</p>
+      <ul>
+        <li><strong>Essential cookies:</strong> Required for login sessions and security (cannot be disabled)</li>
+        <li><strong>Analytics cookies:</strong> Help us understand how users interact with our platform (can be disabled)</li>
+        <li><strong>Performance cookies:</strong> Monitor app performance and error rates</li>
+      </ul>
+      <p>We do not use third-party advertising cookies or share browsing data with ad networks. You can manage cookie preferences in your browser settings or in-app privacy settings.</p>
+    </div>
+
+    <div class="clause" id="pp-7">
+      <h2><span class="cl-num">7</span> Children's Privacy</h2>
+      <p>Tchotcho Pay is not intended for users under the age of <strong>18</strong>. We do not knowingly collect personal information from minors. If we become aware that a user is under 18, we will immediately suspend the account and delete associated data.</p>
+      <p>If you believe a minor has created an account, please contact <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a>.</p>
+    </div>
+
+    <div class="clause" id="pp-8">
+      <h2><span class="cl-num">8</span> International Data Transfers</h2>
+      <p>Tchotcho Pay operates in multiple countries. Your data may be transferred to and processed in the <strong>United States</strong> and other countries where our service providers operate. When transferring data internationally, we use appropriate safeguards including:</p>
+      <ul>
+        <li>Standard contractual clauses approved by relevant data protection authorities</li>
+        <li>Adequacy decisions where applicable</li>
+        <li>Encryption in transit and at rest</li>
+      </ul>
+    </div>
+
+    <div class="clause" id="pp-9">
+      <h2><span class="cl-num">9</span> Security</h2>
+      <p>We implement industry-standard security measures to protect your data:</p>
+      <ul>
+        <li>AES-256 encryption for data at rest</li>
+        <li>TLS 1.3 encryption for data in transit</li>
+        <li>Multi-factor authentication for all internal systems</li>
+        <li>Regular penetration testing and security audits</li>
+        <li>Role-based access controls — employees only access data necessary for their role</li>
+        <li>Automated anomaly detection on all accounts</li>
+      </ul>
+      <p>In the event of a data breach affecting your personal information, we will notify you within 72 hours as required by applicable law.</p>
+    </div>
+
+    <div class="clause" id="pp-10">
+      <h2><span class="cl-num">10</span> Contact Us</h2>
+      <p>For privacy questions, data requests, or concerns, contact our Data Protection team:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:privacy@tchotchopay.com">privacy@tchotchopay.com</a></li>
+        <li><strong>Mail:</strong> Tchotcho Pay LLC, Privacy Officer, [Address], Florida, USA</li>
+        <li><strong>Response time:</strong> Within 30 days</li>
+      </ul>
+    </div>
+
+    <div class="contact-card">
+      <div>
+        <h4>Privacy questions?</h4>
+        <p>Our Data Protection Officer will respond within 30 days.</p>
+      </div>
+      <a href="mailto:privacy@tchotchopay.com"><i class="ti ti-mail"></i> privacy@tchotchopay.com</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════ AML & COMPLIANCE ══════════════════ -->
+  <div class="legal-section" id="aml">
+    <div class="last-updated"><i class="ti ti-calendar"></i> Last updated: June 1, 2026</div>
+
+    <div class="highlight-box" style="margin-bottom:28px;"><i class="ti ti-shield-check"></i>Tchotcho Pay is a registered Money Services Business (MSB) with FinCEN. We take our anti-money laundering obligations seriously and are committed to preventing financial crime.</div>
+
+    <div class="clause">
+      <h2><span class="cl-num">1</span> Our Regulatory Status</h2>
+      <p>Tchotcho Pay LLC is registered with the <strong>Financial Crimes Enforcement Network (FinCEN)</strong> as a Money Services Business (MSB), FinCEN Registration Number: [pending]. We comply with:</p>
+      <ul>
+        <li><strong>Bank Secrecy Act (BSA)</strong> — U.S. federal AML law</li>
+        <li><strong>USA PATRIOT Act</strong> — Customer identification and verification requirements</li>
+        <li><strong>OFAC regulations</strong> — Sanctions screening requirements</li>
+        <li><strong>State money transmission laws</strong> — Where applicable in operating states</li>
+        <li><strong>FATF recommendations</strong> — International AML standards</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">2</span> Customer Identification Program (CIP)</h2>
+      <p>As required by the USA PATRIOT Act, we collect and verify the identity of all customers before providing full account access. Our CIP requires:</p>
+      <ul>
+        <li>Legal name</li>
+        <li>Date of birth</li>
+        <li>Residential address</li>
+        <li>Identification number (passport, national ID, SSN for U.S. persons)</li>
+        <li>Government-issued photo ID verification</li>
+      </ul>
+      <p>Customers who do not complete verification are limited to reduced transaction thresholds and may not access all features.</p>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">3</span> Transaction Monitoring</h2>
+      <p>We use automated and manual systems to monitor transactions for suspicious activity, including:</p>
+      <ul>
+        <li><strong>Large cash transactions:</strong> Transactions exceeding $10,000 (Currency Transaction Reports filed with FinCEN)</li>
+        <li><strong>Structuring:</strong> Multiple transactions designed to avoid reporting thresholds</li>
+        <li><strong>Rapid movement of funds:</strong> Large amounts sent and immediately withdrawn</li>
+        <li><strong>Unusual geographic patterns:</strong> Transactions inconsistent with user profile</li>
+        <li><strong>Sanctions hits:</strong> Names or addresses matching OFAC SDN or blocked person lists</li>
+        <li><strong>PEP screening:</strong> Politically Exposed Person screening</li>
+      </ul>
+      <p>Flagged transactions may be held for up to <strong>72 hours</strong> for review. In cases of confirmed suspicious activity, we file a <strong>Suspicious Activity Report (SAR)</strong> with FinCEN.</p>
+      <div class="highlight-box warn-box"><i class="ti ti-alert-triangle"></i>Federal law prohibits us from notifying a customer that a SAR has been filed about them. If your transaction is held, it does not necessarily mean a SAR was filed.</div>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">4</span> Sanctions Compliance</h2>
+      <p>Tchotcho Pay screens all users and transactions against:</p>
+      <ul>
+        <li>OFAC Specially Designated Nationals (SDN) List</li>
+        <li>UN Security Council Consolidated List</li>
+        <li>EU Consolidated Financial Sanctions List</li>
+        <li>U.S. Commerce Department Entity List</li>
+      </ul>
+      <p>We do not process transactions involving sanctioned countries, entities, or individuals. Currently sanctioned jurisdictions include (but are not limited to): Cuba, Iran, North Korea, Syria, Russia (certain sectors), and the Crimea/Donetsk/Luhansk regions.</p>
+      <p>Accounts that match sanctions lists will be frozen immediately and reported to OFAC.</p>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">5</span> Reporting Obligations</h2>
+      <p>Tchotcho Pay is required to file the following reports with relevant authorities:</p>
+      <ul>
+        <li><strong>Currency Transaction Reports (CTRs):</strong> For cash transactions over $10,000</li>
+        <li><strong>Suspicious Activity Reports (SARs):</strong> For suspected money laundering, fraud, or other financial crimes</li>
+        <li><strong>FBAR (FinCEN 114):</strong> As applicable for foreign financial accounts</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">6</span> Agent & Merchant Compliance</h2>
+      <p>All Tchotcho Pay agents and merchants are subject to enhanced due diligence:</p>
+      <ul>
+        <li>Enhanced KYC verification including business registration documents</li>
+        <li>Signed AML compliance agreements</li>
+        <li>Ongoing transaction monitoring at the merchant/agent level</li>
+        <li>Regular compliance training provided by Tchotcho Pay</li>
+        <li>Immediate suspension for suspected AML violations</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">7</span> Record Keeping</h2>
+      <p>In compliance with BSA requirements, Tchotcho Pay retains the following records for a minimum of <strong>5 years</strong>:</p>
+      <ul>
+        <li>Customer identification and KYC documents</li>
+        <li>All transaction records including sender, recipient, amount, date, and method</li>
+        <li>CTRs and SARs filed</li>
+        <li>All AML compliance training records</li>
+        <li>Risk assessment documentation</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h2><span class="cl-num">8</span> Report Suspicious Activity</h2>
+      <p>If you suspect fraud, money laundering, or financial crime related to Tchotcho Pay — including activity by another user, merchant, or agent — please report it immediately:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:compliance@tchotchopay.com">compliance@tchotchopay.com</a></li>
+        <li><strong>In-app:</strong> Profile → Report an Issue → Suspicious Activity</li>
+      </ul>
+      <p>All reports are confidential. Tchotcho Pay does not retaliate against good-faith reporters.</p>
+    </div>
+
+    <div class="contact-card">
+      <div>
+        <h4>Compliance & Regulatory Inquiries</h4>
+        <p>Law enforcement and regulatory agencies may contact our Compliance Officer directly.</p>
+      </div>
+      <a href="mailto:compliance@tchotchopay.com"><i class="ti ti-mail"></i> compliance@tchotchopay.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-brand">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:7px;overflow:hidden;"><img src="logo.png" alt="T" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/></div>
+      <span style="font-weight:700;">Tchotcho<em style="color:var(--cyan);font-style:normal;">Pay</em></span>
+    </a>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+      <a href="terms.html" style="color:var(--cyan);">Terms & Privacy</a>
+      <a href="merchant-signup.html">Become a Merchant</a>
+      <a href="agent-signup.html">Become an Agent</a>
+    </nav>
+    
+  <div style="margin-top:14px;display:flex;gap:14px;justify-content:center;align-items:center;">
+    <a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener"
+       style="color:var(--gray);text-decoration:none;font-size:1.1rem;transition:.2s;"
+       onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='var(--gray)'"
+       title="Instagram">
+      <i class="ti ti-brand-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener"
+       style="color:var(--gray);text-decoration:none;font-size:1.1rem;transition:.2s;"
+       onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='var(--gray)'"
+       title="X / Twitter">
+      <i class="ti ti-brand-x"></i>
+    </a>
+  </div>
+        <p class="footer-copy">© 2026 Tchotcho Pay LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.legal-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Handle deep links like terms.html#privacy or terms.html#aml
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#','');
+  const tabMap = { 'privacy': 'privacy', 'aml': 'aml', 'tos': 'tos' };
+  if (tabMap[hash]) {
+    const btn = document.querySelectorAll('.tab-btn')[Object.keys(tabMap).indexOf(hash)];
+    if (btn) showTab(tabMap[hash], btn);
+  }
+});
+</script>
+<script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

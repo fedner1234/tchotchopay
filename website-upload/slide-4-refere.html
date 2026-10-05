@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1080px; height: 1920px;
+  background: #020B2D;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.glow { position: absolute; width: 900px; height: 900px; background: radial-gradient(circle, rgba(247,183,49,0.18) 0%, transparent 70%); top: 500px; left: 50%; transform: translateX(-50%); }
+.logo-area { margin-top: 110px; text-align: center; }
+.logo-text { font-size: 72px; font-weight: 700; color: #fff; letter-spacing: -1px; }
+.logo-line { width: 280px; height: 2px; background: linear-gradient(90deg, transparent, #F7B731, transparent); margin: 12px auto; }
+.tag { font-size: 28px; font-weight: 400; color: #F7B731; letter-spacing: 4px; text-transform: uppercase; }
+.headline { margin-top: 90px; text-align: center; font-size: 72px; font-weight: 700; color: #fff; line-height: 1.15; }
+.gold { color: #F7B731; }
+.reward-box {
+  margin-top: 90px;
+  width: 860px;
+  background: linear-gradient(135deg, rgba(247,183,49,0.18) 0%, rgba(247,183,49,0.06) 100%);
+  border: 2.5px solid rgba(247,183,49,0.5);
+  border-radius: 50px;
+  padding: 70px 60px;
+  text-align: center;
+}
+.reward-label { font-size: 30px; color: rgba(255,255,255,0.6); font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+.reward-amount { font-size: 200px; font-weight: 700; color: #F7B731; line-height: 0.9; margin: 20px 0; }
+.reward-per { font-size: 42px; color: #fff; font-weight: 400; }
+.reward-friend { font-size: 34px; color: rgba(200,215,240,0.7); font-weight: 400; margin-top: 16px; }
+.divider { width: 860px; height: 1.5px; background: rgba(255,255,255,0.08); margin: 70px 0; }
+.table { width: 940px; }
+.trow { display: flex; justify-content: space-between; align-items: center; padding: 36px 60px; }
+.trow + .trow { border-top: 1px solid rgba(255,255,255,0.07); }
+.trow-l { font-size: 42px; color: #8899BB; font-weight: 400; }
+.trow-r { font-size: 50px; font-weight: 700; color: #F7B731; }
+.no-limit {
+  width: 940px; margin-top: 20px;
+  background: linear-gradient(90deg, rgba(247,183,49,0.15), rgba(247,183,49,0.05));
+  border: 1.5px solid rgba(247,183,49,0.4);
+  border-radius: 36px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 36px 60px;
+}
+.url { position: absolute; bottom: 72px; font-size: 30px; color: rgba(136,153,187,0.5); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="logo-area">
+  <div class="logo-text">TchotchoPay</div>
+  <div class="logo-line"></div>
+  <div class="tag">Refere yon Zanmi</div>
+</div>
+<div class="headline">Envite zanmi.<br><span class="gold">Genyen lajan.</span></div>
+<div class="reward-box">
+  <div class="reward-label">Pou chak zanmi ou refere</div>
+  <div class="reward-amount">$10</div>
+  <div class="reward-per">USDC nan bous ou</div>
+  <div class="reward-friend">+ Zanmi ou resevwa $5 tou</div>
+</div>
+<div class="divider"></div>
+<div class="table">
+  <div class="trow">
+    <span class="trow-l">1 zanmi</span><span class="trow-r">$10</span>
+  </div>
+  <div class="trow">
+    <span class="trow-l">3 zanmi</span><span class="trow-r">$30</span>
+  </div>
+  <div class="trow">
+    <span class="trow-l">10 zanmi</span><span class="trow-r">$100</span>
+  </div>
+</div>
+<div class="no-limit">
+  <span class="trow-l" style="color:#F7B731">Limit referans:</span>
+  <span class="trow-r">San limit!</span>
+</div>
+<div class="url">tchotchopay.com/refer</div>
+</body>
+</html>

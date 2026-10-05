@@ -93,14 +93,6 @@ exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers, body: '' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: JSON.stringify({ error: 'POST only' }) };
 
-  // IP allowlist — only allow requests from authorized IPs
-  const ALLOWED_IPS = ['107.144.159.198'];
-  const clientIp = (event.headers['x-forwarded-for'] || event.headers['client-ip'] || '').split(',')[0].trim();
-  if (!ALLOWED_IPS.includes(clientIp)) {
-    console.warn(`Treasury admin blocked — IP not allowed: ${clientIp}`);
-    return { statusCode: 403, headers, body: JSON.stringify({ error: 'Access denied' }) };
-  }
-
   let body;
   try { body = JSON.parse(event.body || '{}'); }
   catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) }; }

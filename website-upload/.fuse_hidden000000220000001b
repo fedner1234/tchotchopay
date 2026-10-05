@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tchotcho Pay FAQ — Frequently Asked Questions</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Answers to common questions about sending money to Haiti, USDC wallets, fees, cash-out options, security, and the Tchotcho Pay app."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/faq.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/faq.html"/>
+  <meta property="og:title" content="Tchotcho Pay FAQ — Frequently Asked Questions"/>
+  <meta property="og:description" content="Answers to common questions about sending money to Haiti, USDC wallets, fees, cash-out options, security, and the Tchotcho Pay app."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Tchotcho Pay FAQ — Frequently Asked Questions"/>
+  <meta name="twitter:description" content="Answers to common questions about sending money to Haiti, USDC wallets, fees, cash-out options, security, and the Tchotcho Pay app."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+:root{
+  --navy:#020B2D;--blue:#0A1F6E;--mid:#1055CC;--cyan:#00AEEF;--light:#7FD4F7;
+  --white:#F0F6FF;--gray:#8FA8CC;--offwhite:#f0f6ff;--border:rgba(0,174,239,0.15);
+  --card:rgba(255,255,255,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--navy);color:var(--white);line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+.nav-logo-box{width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:9px;overflow:hidden;}
+.nav-logo-box img{width:100%;height:100%;object-fit:cover;}
+.nav-brand{font-size:1.05rem;font-weight:700;}
+.nav-brand em{color:var(--cyan);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;margin-left:auto;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:var(--white)!important;padding:8px 18px;border-radius:50px;font-weight:600;font-size:.85rem;}
+
+/* HERO */
+.help-hero{
+  padding:120px 24px 60px;text-align:center;
+  background:linear-gradient(180deg,rgba(2,11,45,1) 0%,rgba(10,31,110,.3) 100%);
+  position:relative;overflow:hidden;
+}
+.help-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(0,174,239,.12),transparent 70%);pointer-events:none;}
+.help-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,174,239,.1);border:1px solid rgba(0,174,239,.3);border-radius:50px;padding:5px 16px;font-size:.78rem;font-weight:700;color:var(--cyan);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;}
+.help-title{font-size:2.4rem;font-weight:900;margin-bottom:14px;line-height:1.15;}
+.help-title em{color:var(--cyan);font-style:normal;}
+.help-sub{font-size:1rem;color:var(--gray);max-width:500px;margin:0 auto 32px;}
+
+/* SEARCH */
+.search-wrap{max-width:520px;margin:0 auto;position:relative;}
+.search-wrap input{
+  width:100%;padding:16px 20px 16px 52px;border-radius:50px;
+  background:rgba(255,255,255,.07);border:1.5px solid var(--border);
+  color:var(--white);font-size:1rem;outline:none;font-family:inherit;transition:.2s;
+}
+.search-wrap input:focus{border-color:var(--cyan);background:rgba(255,255,255,.1);}
+.search-wrap input::placeholder{color:var(--gray);}
+.search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:20px;pointer-events:none;}
+.search-results{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:#0d1832;border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;display:none;z-index:10;
+}
+.search-results.show{display:block;}
+.sr-item{padding:12px 18px;cursor:pointer;font-size:.9rem;border-bottom:1px solid var(--border);transition:.15s;display:flex;align-items:center;gap:10px;}
+.sr-item:last-child{border-bottom:none;}
+.sr-item:hover{background:rgba(0,174,239,.08);color:var(--cyan);}
+.sr-item i{font-size:15px;color:var(--gray);}
+
+/* QUICK LINKS */
+.quick-links{max-width:900px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.ql-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 16px;text-align:center;cursor:pointer;text-decoration:none;
+  color:var(--white);transition:.2s;
+}
+.ql-card:hover{border-color:rgba(0,174,239,.5);background:rgba(0,174,239,.07);transform:translateY(-2px);}
+.ql-icon{font-size:28px;display:block;margin-bottom:10px;}
+.ql-label{font-size:.85rem;font-weight:600;}
+.ql-count{font-size:.75rem;color:var(--gray);margin-top:3px;}
+
+/* MAIN LAYOUT */
+.help-body{max-width:1000px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start;}
+.help-sidebar{position:sticky;top:80px;}
+.help-sidebar ul{list-style:none;}
+.help-sidebar ul li{margin-bottom:2px;}
+.help-sidebar ul li a{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;text-decoration:none;font-size:.85rem;color:var(--gray);transition:.15s;border-left:2px solid transparent;}
+.help-sidebar ul li a:hover{color:var(--white);background:rgba(255,255,255,.05);}
+.help-sidebar ul li a.active{color:var(--cyan);background:rgba(0,174,239,.08);border-left-color:var(--cyan);}
+.help-sidebar ul li a i{font-size:15px;}
+
+/* SECTIONS */
+.help-section{margin-bottom:52px;scroll-margin-top:90px;}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.section-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.section-title{font-size:1.15rem;font-weight:800;}
+
+/* FAQ ITEMS */
+.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:.2s;}
+.faq-item:hover{border-color:rgba(0,174,239,.3);}
+.faq-q{
+  padding:16px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  font-size:.9rem;font-weight:600;user-select:none;gap:12px;
+  background:var(--card);transition:background .15s;
+}
+.faq-q:hover{background:rgba(0,174,239,.05);}
+.faq-q.open{color:var(--cyan);}
+.faq-chevron{font-size:16px;color:var(--gray);transition:transform .25s;flex-shrink:0;}
+.faq-q.open .faq-chevron{transform:rotate(180deg);color:var(--cyan);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;
+  font-size:.88rem;color:var(--gray);line-height:1.75;
+  background:rgba(0,174,239,.03);
+}
+.faq-a.open{max-height:800px;padding:14px 18px 18px;}
+.faq-a a{color:var(--cyan);text-decoration:none;}
+.faq-a a:hover{text-decoration:underline;}
+.faq-a ul{margin:10px 0 0 18px;}
+.faq-a ul li{margin-bottom:5px;}
+.faq-a .note{
+  margin-top:12px;padding:10px 14px;border-radius:8px;font-size:.82rem;
+  background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--light);
+  display:flex;align-items:flex-start;gap:8px;
+}
+.faq-a .note i{font-size:15px;flex-shrink:0;margin-top:1px;}
+.faq-a .warn{background:rgba(255,215,64,.07);border-color:rgba(255,215,64,.2);color:#ffd740;}
+.faq-a .warn i{color:#ffd740;}
+
+/* CONTACT BAR */
+.contact-bar{
+  background:linear-gradient(135deg,rgba(16,85,204,.3),rgba(0,174,239,.15));
+  border:1px solid rgba(0,174,239,.25);border-radius:16px;
+  padding:28px 32px;text-align:center;margin-bottom:20px;
+}
+.contact-bar h3{font-size:1.1rem;font-weight:700;margin-bottom:6px;}
+.contact-bar p{font-size:.88rem;color:var(--gray);margin-bottom:18px;}
+.contact-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.contact-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:50px;font-size:.85rem;font-weight:600;text-decoration:none;transition:.15s;}
+.contact-btn-primary{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+.contact-btn-primary:hover{opacity:.88;}
+.contact-btn-ghost{border:1.5px solid rgba(0,174,239,.4);color:var(--cyan);}
+.contact-btn-ghost:hover{background:rgba(0,174,239,.08);}
+
+/* FOOTER */
+footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 24px;}
+.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+.footer-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:.85rem;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{color:var(--gray);font-size:.8rem;}
+
+/* HIGHLIGHT */
+.hl{background:rgba(0,174,239,.15);border-radius:3px;padding:1px 4px;color:var(--cyan);}
+
+/* RESPONSIVE */
+@media(max-width:760px){
+  .nav-links{display:none;}
+  .help-body{grid-template-columns:1fr;}
+  .help-sidebar{display:none;}
+  .quick-links{grid-template-columns:repeat(2,1fr);}
+  .help-title{font-size:1.7rem;}
+  nav{padding:12px 16px;}
+}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-box"><img src="logo.png" alt="T" onerror="this.style.display='none'"/></div>
+    <span class="nav-brand">Tchotcho<em>Pay</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="index.html#pricing">Fees</a></li>
+    <li><a href="pricing.html">Pricing</a>
+    <a href="security.html">Security</a>
+    <a href="faq.html" style="color:var(--cyan);">Help</a></li>
+    <li><a href="index.html#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="help-hero">
+  <div class="help-badge"><i class="ti ti-help-circle"></i> Help Center</div>
+  <h1 class="help-title">How can we <em>help you?</em></h1>
+  <p class="help-sub">Find answers to common questions about sending money, cashing out, your wallet, and more.</p>
+  <div class="search-wrap">
+    <i class="ti ti-search search-icon"></i>
+    <input type="text" id="search-input" placeholder="Search for answers..." oninput="doSearch()" onclick="doSearch()"/>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <a class="ql-card" href="#sending">
+    <span class="ql-icon">💸</span>
+    <div class="ql-label">Sending Money</div>
+    <div class="ql-count">8 articles</div>
+  </a>
+  <a class="ql-card" href="#cashout">
+    <span class="ql-icon">💵</span>
+    <div class="ql-label">Cash Out</div>
+    <div class="ql-count">6 articles</div>
+  </a>
+  <a class="ql-card" href="#account">
+    <span class="ql-icon">👤</span>
+    <div class="ql-label">My Account & KYC</div>
+    <div class="ql-count">7 articles</div>
+  </a>
+  <a class="ql-card" href="#usdc">
+    <span class="ql-icon">🪙</span>
+    <div class="ql-label">USDC & Wallet</div>
+    <div class="ql-count">6 articles</div>
+  </a>
+  <a class="ql-card" href="#marketplace">
+    <span class="ql-icon">🛒</span>
+    <div class="ql-label">Marketplace</div>
+    <div class="ql-count">5 articles</div>
+  </a>
+  <a class="ql-card" href="#fees">
+    <span class="ql-icon">💳</span>
+    <div class="ql-label">Fees & Limits</div>
+    <div class="ql-count">5 articles</div>
+  </a>
+  <a class="ql-card" href="#security">
+    <span class="ql-icon">🔒</span>
+    <div class="ql-label">Security</div>
+    <div class="ql-count">6 articles</div>
+  </a>
+  <a class="ql-card" href="#troubleshoot">
+    <span class="ql-icon">🛠️</span>
+    <div class="ql-label">Troubleshooting</div>
+    <div class="ql-count">5 articles</div>
+  </a>
+</div>
+
+<!-- MAIN BODY -->
+<div class="help-body">
+
+  <!-- SIDEBAR -->
+  <aside class="help-sidebar">
+    <ul>
+      <li><a href="#sending" class="active"><i class="ti ti-send"></i> Sending Money</a></li>
+      <li><a href="#cashout"><i class="ti ti-cash"></i> Cash Out</a></li>
+      <li><a href="#account"><i class="ti ti-user-circle"></i> Account & KYC</a></li>
+      <li><a href="#usdc"><i class="ti ti-currency-dollar"></i> USDC & Wallet</a></li>
+      <li><a href="#marketplace"><i class="ti ti-building-store"></i> Marketplace</a></li>
+      <li><a href="#fees"><i class="ti ti-receipt"></i> Fees & Limits</a></li>
+      <li><a href="#security"><i class="ti ti-shield-check"></i> Security</a></li>
+      <li><a href="#troubleshoot"><i class="ti ti-tool"></i> Troubleshooting</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- SENDING -->
+    <div class="help-section" id="sending">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,174,239,.12);"><i class="ti ti-send" style="color:var(--cyan);"></i></div>
+        <div class="section-title">Sending Money</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I send money to someone in Haiti? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Open the Tchotcho Pay app, tap <strong>Send</strong>, and search for the recipient by username, phone number, or scan their QR code. Enter the amount in USDC (or USD — we convert automatically), review the details, and confirm with your PIN. The recipient receives USDC in their wallet instantly.
+          <div class="note"><i class="ti ti-info-circle"></i>Transfers between Tchotcho Pay users are always free. Fees only apply when loading funds or cashing out.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How fast does the money arrive? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Transfers between Tchotcho Pay wallets are <strong>instant</strong> — typically under 5 seconds. This is because both sender and receiver are on the same platform; money moves as USDC on the Base blockchain with near-zero latency. There are no bank processing delays.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I send to someone who doesn't have a Tchotcho Pay account? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Yes. You can send money via a link — the recipient receives an SMS or email with a claim link. They'll need to create a Tchotcho Pay account (takes 2 minutes) to receive the funds. Unclaimed transfers are returned to your wallet after 7 days.
+          <div class="note warn"><i class="ti ti-alert-triangle"></i>Make sure the phone number or email is correct before sending. We cannot reverse a completed transfer.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What currencies can I send? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">You fund your account in <strong>USD</strong> (via card, ACH, or wire). Tchotcho Pay automatically converts to <strong>USDC</strong> (USD Coin) on the Base blockchain. The recipient sees USDC in their wallet. When they cash out in Haiti, USDC is converted to <strong>HTG (Haitian gourdes)</strong> at the current market rate.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Is there a minimum or maximum amount I can send? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Minimum transfer:</strong> $1 USDC</li>
+            <li><strong>Maximum single transfer:</strong> $500 USDC (unverified) · $5,000 USDC (KYC verified)</li>
+            <li><strong>Daily limit:</strong> $200 USDC (unverified) · $5,000 USDC (KYC verified)</li>
+          </ul>
+          <div class="note"><i class="ti ti-info-circle"></i>Complete KYC verification to unlock higher limits. See <a href="#account">Account & KYC</a>.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I load money into my Tchotcho Pay account? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">You can fund your account four ways:
+          <ul>
+            <li><strong>Debit or credit card</strong> — 2–3% fee, instant</li>
+            <li><strong>ACH bank transfer</strong> — lower fee, 1–3 business days</li>
+            <li><strong>Wire transfer</strong> — for larger amounts, 1 business day</li>
+            <li><strong>Receive from another user</strong> — always free</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I cancel a transfer after sending? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Transfers between Tchotcho Pay wallets are <strong>instant and irreversible</strong> — just like handing someone cash. Always double-check the recipient and amount before confirming with your PIN. If you sent to the wrong person, contact them directly to request a return. If fraud is involved, contact <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a> immediately.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I schedule a recurring transfer? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Recurring transfers (weekly, monthly) are coming soon. In the meantime, you can manually send whenever you need to — the process takes under 30 seconds once your account is set up.</div>
+      </div>
+    </div>
+
+    <!-- CASH OUT -->
+    <div class="help-section" id="cashout">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,230,118,.1);"><i class="ti ti-cash" style="color:#00e676;"></i></div>
+        <div class="section-title">Cash Out</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How does cashing out work in Haiti? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">There are three ways to cash out in Haiti:
+          <ul>
+            <li><strong>Agent network</strong> — Visit a Tchotcho Pay cash agent near you. Show them your QR code, they verify your identity, give you HTG cash, and your USDC is deducted. Takes 2–5 minutes.</li>
+            <li><strong>Local bank transfer</strong> — We transfer HTG directly to your Haitian bank account. Same-day to next-day.</li>
+            <li><strong>Keep as USDC</strong> — Hold your balance in your wallet as a digital dollar savings account. No cash-out needed.</li>
+          </ul>
+          <div class="note"><i class="ti ti-info-circle"></i>A 1% cash-out fee applies to agent and bank withdrawals. Keeping USDC in your wallet is always free.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I find a cash agent near me? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">In the app, tap <strong>Cash Out → Find Agent</strong> to see a map of verified agents in your area. Each agent shows their zone, operating hours, and maximum cash-out amount. You can also filter by distance or city.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is the HTG exchange rate? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">The USDC → HTG rate is pulled from live market data and updated every hour. The current rate is displayed in the app before you confirm any cash-out. We apply a small FX spread (typically 0.5–1%) on top of the mid-market rate. You'll always see the exact HTG amount you'll receive before confirming.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Is there a maximum cash-out amount per day? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Unverified account:</strong> $200 USDC per day</li>
+            <li><strong>KYC verified:</strong> $5,000 USDC per day</li>
+            <li><strong>Individual agent limit:</strong> Up to $500 USDC per transaction (varies by agent)</li>
+          </ul>
+          For larger amounts, you can split across multiple agents or use a bank transfer which has higher limits.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What if the agent doesn't have enough HTG cash? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">The app shows each agent's current maximum payout capacity. If an agent can't fulfill your request, your USDC is not deducted — you simply choose another agent or switch to a bank transfer. Agent float is replenished regularly throughout the day.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I cash out to a MonCash account? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">MonCash integration is coming soon. Currently, cash-out options are: Tchotcho Pay agent (HTG cash), local bank transfer (HTG), or keeping USDC in your wallet. We'll announce MonCash support via the app and email.</div>
+      </div>
+
+    </div>
+
+    <!-- ACCOUNT & KYC -->
+    <div class="help-section" id="account">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-user-circle" style="color:#b388ff;"></i></div>
+        <div class="section-title">My Account & KYC</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is KYC and why do I need it? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a"><strong>KYC</strong> stands for Know Your Customer — it's a standard identity verification process required by financial regulations to prevent fraud and money laundering. Completing KYC unlocks higher transfer and cash-out limits, and is required for business accounts. The process takes about 3–5 minutes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What documents do I need for KYC? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">You'll need one of the following:
+          <ul>
+            <li>Haitian National ID Card (front and back)</li>
+            <li>Passport (photo page)</li>
+            <li>Driver's License (front and back)</li>
+            <li>Permanent Resident Card</li>
+          </ul>
+          Documents must be valid (not expired) and clearly readable. Blurry or cropped images will be rejected.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How long does KYC approval take? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Most KYC reviews are completed within <strong>15 minutes to 2 hours</strong> during business hours. In some cases it may take up to 24 hours. You'll receive a push notification and email when your verification is complete. You can continue using the app at lower limits while you wait.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">My KYC was rejected. What do I do? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Common reasons for rejection:
+          <ul>
+            <li>Blurry or dark photo of the ID</li>
+            <li>Expired document</li>
+            <li>Name on document doesn't match account info</li>
+            <li>Document type not accepted</li>
+          </ul>
+          Re-upload clear, well-lit photos of a valid document. If you continue to have issues, contact <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I change my phone number or email? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Go to <strong>Profile → Settings → Account Info</strong>. Changing your phone number requires re-verification via OTP. Email changes are confirmed via a link sent to your new address. For security, some changes may require KYC re-verification.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I reset my PIN? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">On the login screen, tap <strong>Forgot PIN</strong>. We'll send a 6-digit OTP to your registered phone number. Enter the OTP, then create a new 6-digit PIN. If you no longer have access to your phone number, contact support.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I close my account? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">You can close your account by emailing <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a>. Before closing, you must withdraw or transfer any remaining USDC balance. We retain transaction records for 5 years as required by financial regulations.
+          <div class="note warn"><i class="ti ti-alert-triangle"></i>Account closure is permanent and cannot be undone.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- USDC & WALLET -->
+    <div class="help-section" id="usdc">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,174,239,.1);"><i class="ti ti-currency-dollar" style="color:var(--cyan);"></i></div>
+        <div class="section-title">USDC & Your Wallet</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is USDC? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a"><strong>USDC (USD Coin)</strong> is a digital dollar — a stablecoin pegged 1:1 to the US dollar, meaning 1 USDC always equals $1. It's issued by Circle, backed by actual US dollar reserves, and runs on the blockchain. Unlike cryptocurrencies like Bitcoin, USDC does not fluctuate in value. It's safe to hold as digital savings.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Why does Tchotcho Pay use USDC instead of regular USD? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">USDC on the Base blockchain enables:
+          <ul>
+            <li><strong>Instant settlement</strong> — no waiting 1–3 days for bank wires</li>
+            <li><strong>Near-zero fees</strong> — Base network fees are fractions of a cent</li>
+            <li><strong>24/7 operation</strong> — no bank hours or holiday closures</li>
+            <li><strong>Dollar savings</strong> — recipients in Haiti can hold USDC instead of gourdes, protecting against inflation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Is my USDC safe? What if Tchotcho Pay shuts down? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Your USDC is backed 1:1 by US dollars held in reserve by Circle (the USDC issuer). Tchotcho Pay does not use customer funds for lending or investments. In the unlikely event Tchotcho Pay were to shut down, you would be given advance notice and time to withdraw your balance.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I earn interest on my USDC? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Yield on USDC savings is on our product roadmap. Currently, your USDC balance does not earn interest but holds its dollar value. We'll announce savings features via email when available.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Can I send USDC to an external wallet (MetaMask, Coinbase, etc.)? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">External wallet withdrawals are coming in a future update. Currently, USDC can be transferred to other Tchotcho Pay users, spent at merchants, or cashed out to HTG via agents or bank transfer.
+          <div class="note"><i class="ti ti-info-circle"></i>This is intentional — it keeps the platform focused on the remittance and marketplace use case. External withdrawal will be available in a later release.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What blockchain does Tchotcho Pay use? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Tchotcho Pay uses the <strong>Base</strong> network — a Layer 2 blockchain built by Coinbase on top of Ethereum. Base offers:
+          <ul>
+            <li>Transaction fees under $0.01</li>
+            <li>Settlement in ~2 seconds</li>
+            <li>High security inherited from Ethereum</li>
+            <li>USDC natively supported</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MARKETPLACE -->
+    <div class="help-section" id="marketplace">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(247,183,49,.1);"><i class="ti ti-building-store" style="color:#F7B731;"></i></div>
+        <div class="section-title">Marketplace</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is the Tchotcho Pay marketplace? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">The marketplace is a built-in shopping feature inside the app where verified Haitian merchants list their products and services. You can buy food, groceries, phone top-ups, school fees, transport, and more — paying directly with your USDC wallet. No cash needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I pay a merchant? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Three ways:
+          <ul>
+            <li><strong>QR code</strong> — Scan the merchant's Tchotcho Pay QR code in the app</li>
+            <li><strong>In-app search</strong> — Find the merchant by name or handle and tap Pay</li>
+            <li><strong>Marketplace</strong> — Browse listings and add to cart, pay at checkout</li>
+          </ul>
+          All payments are instant and confirmed by both parties via push notification.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Is there a fee to buy from merchants? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a"><strong>Buyers pay zero fees.</strong> The merchant pays a 1–2% platform fee on their end. The price you see is the price you pay.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What if a merchant doesn't deliver my order? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Contact the merchant first through the in-app chat. If the issue isn't resolved within 48 hours, you can open a dispute through <strong>Transaction History → Dispute</strong>. Our support team will review and may issue a refund if the merchant is at fault. Merchants with repeated disputes are removed from the platform.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I become a merchant? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Visit our <a href="merchant-signup.html">Merchant Sign-up page</a> to apply. You'll need a government ID, business address, and payout method. Most applications are approved within 24–48 hours. There's no setup fee.</div>
+      </div>
+
+    </div>
+
+    <!-- FEES -->
+    <div class="help-section" id="fees">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-receipt" style="color:#ffd740;"></i></div>
+        <div class="section-title">Fees & Limits</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q open" onclick="toggle(this)">What are all of Tchotcho Pay's fees? <i class="ti ti-chevron-down faq-chevron" style="transform:rotate(180deg);color:var(--cyan);"></i></div>
+        <div class="faq-a open" style="max-height:800px;padding:14px 18px 18px;">
+          <table style="width:100%;border-collapse:collapse;font-size:.85rem;">
+            <thead><tr style="border-bottom:1px solid rgba(0,174,239,.2);">
+              <th style="padding:8px 0;text-align:left;color:var(--gray);">Action</th>
+              <th style="padding:8px 0;text-align:right;color:var(--gray);">Fee</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">Card deposit (debit/credit)</td><td style="text-align:right;font-weight:600;">2–3%</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">ACH / bank transfer deposit</td><td style="text-align:right;font-weight:600;">0.5–1%</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">P2P transfer (user to user)</td><td style="text-align:right;font-weight:600;color:#00e676;">Free</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">Cash out via agent (HTG)</td><td style="text-align:right;font-weight:600;">1%</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">Bank transfer withdrawal (HTG)</td><td style="text-align:right;font-weight:600;">1%</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">Marketplace purchases (buyer)</td><td style="text-align:right;font-weight:600;color:#00e676;">Free</td></tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.06);"><td style="padding:9px 0;">Merchant payment processing</td><td style="text-align:right;font-weight:600;">1–2%</td></tr>
+              <tr><td style="padding:9px 0;">USD ↔ HTG FX conversion</td><td style="text-align:right;font-weight:600;">~0.5–1% spread</td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:14px;"><i class="ti ti-info-circle"></i>All fees are shown clearly before you confirm any transaction. No hidden charges.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What are the transfer limits? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Unverified account:</strong> $200/day · $500 single transfer</li>
+            <li><strong>KYC verified:</strong> $5,000/day · $5,000 single transfer</li>
+            <li><strong>Business/Merchant account:</strong> Higher limits available on request</li>
+          </ul>
+          Limits reset at midnight (Eastern Time) each day.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Why was I charged more than the stated fee? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">If your card issuer charges a foreign transaction fee (typically 1–3%), that is separate from Tchotcho Pay's fee and charged by your bank. Check with your card provider. Tchotcho Pay only charges the fee shown in the app at the time of the transaction.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Are there fees for keeping money in my wallet? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a"><strong>No.</strong> There are no holding fees, inactivity fees, or monthly account fees. Your USDC balance is yours to keep as long as you want.</div>
+      </div>
+
+    </div>
+
+    <!-- SECURITY -->
+    <div class="help-section" id="security">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(0,230,118,.1);"><i class="ti ti-shield-check" style="color:#00e676;"></i></div>
+        <div class="section-title">Security</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How does Tchotcho Pay protect my money? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li><strong>6-digit PIN</strong> required for every transaction</li>
+            <li><strong>End-to-end encryption</strong> on all communications</li>
+            <li><strong>Biometric login</strong> (Face ID / fingerprint) supported</li>
+            <li><strong>AML monitoring</strong> — unusual activity is flagged and held for review</li>
+            <li><strong>KYC verification</strong> on all accounts before full access</li>
+            <li><strong>USDC reserves</strong> backed 1:1 by Circle — funds are not lent or invested</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">I think my account has been compromised. What should I do? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Act immediately:
+          <ul>
+            <li>Open the app → Profile → <strong>Freeze Account</strong> (instant, blocks all outgoing transactions)</li>
+            <li>Change your PIN from a trusted device</li>
+            <li>Email <a href="mailto:security@tchotchopay.com">security@tchotchopay.com</a> with details</li>
+          </ul>
+          <div class="note warn"><i class="ti ti-alert-triangle"></i>Never share your PIN or OTP with anyone — including Tchotcho Pay staff. We will never ask for your PIN.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is two-factor authentication (2FA)? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">2FA adds a second layer of security. After entering your PIN, we send a one-time code (OTP) to your registered phone number for high-value transactions. You can enable 2FA for all logins in <strong>Profile → Security → Two-Factor Authentication</strong>.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Does Tchotcho Pay sell my personal data? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a"><strong>No.</strong> Tchotcho Pay does not sell, rent, or share your personal information with third parties for advertising purposes. We share data only as required by law (e.g., AML reporting) or with licensed KYC verification providers. See our <a href="#">Privacy Policy</a> for full details.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Is Tchotcho Pay regulated? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Tchotcho Pay operates as a Money Services Business (MSB) and complies with FinCEN regulations, AML/BSA requirements, and applicable financial laws. We conduct KYC on all users and file Suspicious Activity Reports (SARs) when required by law.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What is Tchotcho Pay's AML policy? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">We use automated transaction monitoring to flag unusual patterns including large rapid transfers, structuring (multiple small transfers to avoid limits), and transfers to high-risk regions. Flagged transactions may be held for up to 72 hours pending review. Users found in violation of AML policies will have their accounts suspended and reported to authorities.</div>
+      </div>
+
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div class="help-section" id="troubleshoot">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(247,183,49,.1);"><i class="ti ti-tool" style="color:#F7B731;"></i></div>
+        <div class="section-title">Troubleshooting</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">My transfer is stuck or pending. What do I do? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Transfers usually complete in under 10 seconds. If a transfer shows "pending" for more than 5 minutes:
+          <ul>
+            <li>Check your internet connection</li>
+            <li>Refresh the app (pull down on the home screen)</li>
+            <li>Check <strong>Transaction History</strong> — it may have completed without showing a notification</li>
+          </ul>
+          If still stuck after 15 minutes, contact <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a> with the transaction ID.
+          <div class="note"><i class="ti ti-info-circle"></i>During peak times or Base network congestion, transfers may take up to 60 seconds.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">My card deposit failed. Why? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Common reasons:
+          <ul>
+            <li>Card issuer blocked the transaction (call your bank)</li>
+            <li>Insufficient funds on the card</li>
+            <li>Card flagged as international transaction — enable international payments with your bank</li>
+            <li>Prepaid cards are not accepted</li>
+            <li>Card details entered incorrectly</li>
+          </ul>
+          Try a different card or use ACH bank transfer instead.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">I can't log in to my account. <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li>Make sure you're using the correct phone number</li>
+            <li>If you forgot your PIN, tap <strong>Forgot PIN</strong> on the login screen</li>
+            <li>If your OTP isn't arriving, check for SMS blocking or try after 60 seconds</li>
+            <li>If your account is suspended, you'll see a message — contact support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">The app is crashing or not loading. <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">
+          <ul>
+            <li>Force-close the app and reopen</li>
+            <li>Check for app updates in the App Store or Google Play</li>
+            <li>Restart your phone</li>
+            <li>Ensure you have a stable internet connection</li>
+            <li>Uninstall and reinstall the app (your account data is cloud-saved)</li>
+          </ul>
+          If the issue persists, email <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a> with your device model and OS version.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">I sent money to the wrong person. Can I get it back? <i class="ti ti-chevron-down faq-chevron"></i></div>
+        <div class="faq-a">Transfers are instant and irreversible by design. Your first step is to contact the recipient and ask them to send it back. If you believe you were defrauded, report it to <a href="mailto:support@tchotchopay.com">support@tchotchopay.com</a> immediately with the transaction details. We cannot force a reversal but will investigate and may suspend the recipient's account if fraud is confirmed.</div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-bar">
+      <h3>Still have questions?</h3>
+      <p>Our support team is available 8AM – 8PM EST, Monday through Saturday.</p>
+      <div class="contact-buttons">
+        <a href="mailto:support@tchotchopay.com" class="contact-btn contact-btn-primary"><i class="ti ti-mail"></i> Email Support</a>
+        <a href="#" onclick="showChat()" class="contact-btn contact-btn-ghost"><i class="ti ti-message-circle"></i> Live Chat</a>
+        <a href="index.html#waitlist" class="contact-btn contact-btn-ghost"><i class="ti ti-brand-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-brand">
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:7px;overflow:hidden;"><img src="logo.png" alt="T" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/></div>
+      <span style="font-weight:700;">Tchotcho<em style="color:var(--cyan);font-style:normal;">Pay</em></span>
+    </a>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Fees</a>
+      <a href="merchant-signup.html">Become a Merchant</a>
+      <a href="agent-signup.html">Become an Agent</a>
+      <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+    </nav>
+    
+  <div style="margin-top:14px;display:flex;gap:14px;justify-content:center;align-items:center;">
+    <a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener"
+       style="color:var(--gray);text-decoration:none;font-size:1.1rem;transition:.2s;"
+       onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='var(--gray)'"
+       title="Instagram">
+      <i class="ti ti-brand-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener"
+       style="color:var(--gray);text-decoration:none;font-size:1.1rem;transition:.2s;"
+       onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='var(--gray)'"
+       title="X / Twitter">
+      <i class="ti ti-brand-x"></i>
+    </a>
+  </div>
+        <p class="footer-copy">© 2026 Tchotcho Pay. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// ── ACCORDION ──
+function toggle(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // close all in same section
+  const section = btn.closest('.help-section');
+  section.querySelectorAll('.faq-q.open').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.classList.remove('open');
+    q.nextElementSibling.style.maxHeight = '';
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
+// ── SEARCH ──
+const ALL_QA = [];
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q').textContent.trim().replace('keyboard_arrow_down','').trim();
+  const a = item.querySelector('.faq-a').textContent.trim().substring(0, 120);
+  const section = item.closest('.help-section').id;
+  ALL_QA.push({ q, a, section, el: item });
+});
+
+function doSearch() {
+  const val = document.getElementById('search-input').value.toLowerCase().trim();
+  const box = document.getElementById('search-results');
+  if (!val || val.length < 2) { box.classList.remove('show'); return; }
+  const matches = ALL_QA.filter(qa => qa.q.toLowerCase().includes(val) || qa.a.toLowerCase().includes(val)).slice(0, 6);
+  if (!matches.length) {
+    box.innerHTML = '<div class="sr-item" style="color:var(--gray);cursor:default;"><i class="ti ti-search-off"></i> No results found for "'+val+'"</div>';
+  } else {
+    box.innerHTML = matches.map(m => `<div class="sr-item" onclick="jumpTo('${m.section}',this,'${m.q.substring(0,40)}')"><i class="ti ti-arrow-right"></i>${m.q}</div>`).join('');
+  }
+  box.classList.add('show');
+}
+
+function jumpTo(sectionId, el, q) {
+  document.getElementById('search-results').classList.remove('show');
+  document.getElementById('search-input').value = '';
+  const section = document.getElementById(sectionId);
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // find and open the matching question
+  setTimeout(() => {
+    section.querySelectorAll('.faq-q').forEach(btn => {
+      if (btn.textContent.trim().includes(q.substring(0, 30))) {
+        if (!btn.classList.contains('open')) toggle(btn);
+      }
+    });
+  }, 400);
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-wrap')) {
+    document.getElementById('search-results').classList.remove('show');
+  }
+});
+
+// ── SIDEBAR ACTIVE ──
+const sections = document.querySelectorAll('.help-section');
+const navLinks = document.querySelectorAll('.help-sidebar a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+function showChat() {
+  alert('Live chat is coming soon! Email support@tchotchopay.com for now.');
+}
+</script>
+<script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

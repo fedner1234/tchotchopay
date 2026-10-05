@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TchotchoPay — Design Sample</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: #111; background: #fff; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #0a1f6e; padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .logo-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, #1a73e8, #00d4aa);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: #fff; font-size: 16px;
+  }
+  .nav-logo span { color: #fff; font-weight: 700; font-size: 18px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: #fff; }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-login { color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .btn-started {
+    background: #00d4aa; color: #fff; border: none;
+    padding: 10px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 700; cursor: pointer;
+  }
+
+  /* ── PROMO BANNER ── */
+  .promo-banner {
+    background: linear-gradient(90deg, #00d4aa, #1a73e8);
+    text-align: center; padding: 12px 20px;
+    font-size: 14px; font-weight: 600; color: #fff;
+  }
+  .promo-banner span { background: rgba(255,255,255,0.25); border-radius: 20px; padding: 2px 12px; margin-left: 10px; font-size: 13px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0a1f6e 0%, #0e2d9e 50%, #0a1f6e 100%);
+    padding: 80px 40px 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: end;
+    overflow: hidden; min-height: 600px;
+  }
+  .hero-left { padding-bottom: 80px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 6px 16px;
+    color: #00d4aa; font-size: 13px; font-weight: 600; margin-bottom: 28px;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; background: #00d4aa; border-radius: 50%; }
+  .hero h1 {
+    font-size: 56px; font-weight: 900; color: #fff;
+    line-height: 1.1; margin-bottom: 20px;
+  }
+  .hero h1 em { color: #00d4aa; font-style: normal; }
+  .hero p {
+    color: rgba(255,255,255,0.7); font-size: 18px;
+    line-height: 1.6; margin-bottom: 36px; max-width: 440px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+  .btn-primary {
+    background: #00d4aa; color: #fff; padding: 16px 32px;
+    border-radius: 10px; font-size: 16px; font-weight: 700;
+    cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(0,212,170,0.35);
+  }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1); color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 16px 32px; border-radius: 10px;
+    font-size: 16px; font-weight: 600; cursor: pointer;
+  }
+  .hero-stats { display: flex; gap: 36px; }
+  .stat-item { }
+  .stat-num { font-size: 28px; font-weight: 900; color: #fff; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .hero-flags { display: flex; gap: 10px; margin-top: 20px; align-items: center; }
+  .flag { font-size: 24px; }
+  .flag-label { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+  /* Hero phone */
+  .hero-right {
+    display: flex; justify-content: center; align-items: flex-end;
+    position: relative;
+  }
+  .phone-wrap {
+    position: relative; width: 280px;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5));
+  }
+  .phone-outer {
+    background: #1a1a2e; border-radius: 40px;
+    padding: 12px; border: 2px solid rgba(255,255,255,0.15);
+  }
+  .phone-screen {
+    background: linear-gradient(160deg, #0f1b45, #1a2a60);
+    border-radius: 30px; padding: 20px; overflow: hidden;
+  }
+  .phone-balance { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .phone-amount { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+  .phone-usdc { font-size: 12px; color: #00d4aa; font-weight: 600; margin-bottom: 20px; }
+  .phone-actions { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 20px; }
+  .phone-action { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 4px; text-align: center; }
+  .phone-action .icon { font-size: 18px; margin-bottom: 3px; }
+  .phone-action .lbl { font-size: 9px; color: rgba(255,255,255,0.6); }
+  .phone-tx-title { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .phone-tx { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .phone-tx:last-child { border-bottom: none; }
+  .tx-left { display: flex; gap: 8px; align-items: center; }
+  .tx-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+  .tx-name { font-size: 11px; color: #fff; font-weight: 600; }
+  .tx-date { font-size: 10px; color: rgba(255,255,255,0.4); }
+  .tx-amount { font-size: 12px; font-weight: 700; }
+  .pos { color: #00d4aa; }
+  .neg { color: rgba(255,255,255,0.7); }
+
+  /* Glow orbs behind phone */
+  .orb1 {
+    position: absolute; width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 70%);
+    top: -60px; right: -60px; border-radius: 50%; pointer-events: none;
+  }
+  .orb2 {
+    position: absolute; width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26,115,232,0.2) 0%, transparent 70%);
+    bottom: 40px; left: -40px; border-radius: 50%; pointer-events: none;
+  }
+
+  /* ── EXCHANGE TICKER ── */
+  .ticker {
+    background: #0e2d9e; padding: 14px 40px;
+    display: flex; gap: 48px; align-items: center; overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .ticker-item { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+  .ticker-pair { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); }
+  .ticker-rate { font-size: 15px; font-weight: 800; color: #fff; }
+  .ticker-change { font-size: 12px; color: #00d4aa; font-weight: 600; }
+  .ticker-sep { color: rgba(255,255,255,0.15); font-size: 20px; }
+
+  /* ── SOCIAL PROOF ── */
+  .social-proof {
+    background: #f8f9ff; padding: 64px 40px;
+    text-align: center;
+  }
+  .proof-label { font-size: 13px; font-weight: 700; color: #1a73e8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .proof-title { font-size: 36px; font-weight: 900; color: #111; margin-bottom: 12px; }
+  .proof-sub { font-size: 17px; color: #666; margin-bottom: 52px; }
+  .testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .testimonial {
+    background: #fff; border-radius: 16px; padding: 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    text-align: left; position: relative;
+  }
+  .testimonial::before {
+    content: '"'; font-size: 80px; color: #e8edff;
+    position: absolute; top: 10px; right: 20px;
+    font-family: Georgia, serif; line-height: 1;
+  }
+  .stars { color: #f5a623; font-size: 16px; margin-bottom: 14px; }
+  .testimonial p { font-size: 15px; color: #444; line-height: 1.65; margin-bottom: 20px; }
+  .t-author { display: flex; align-items: center; gap: 12px; }
+  .t-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; font-size: 16px;
+  }
+  .t-name { font-weight: 700; font-size: 14px; color: #111; }
+  .t-location { font-size: 12px; color: #888; }
+  .proof-numbers { display: flex; justify-content: center; gap: 64px; margin-top: 52px; padding-top: 52px; border-top: 1px solid #e8ecff; }
+  .proof-num .big { font-size: 42px; font-weight: 900; color: #0a1f6e; }
+  .proof-num .lbl { font-size: 15px; color: #888; margin-top: 4px; }
+
+  /* ── FEATURES ── */
+  .features { padding: 80px 40px; background: #fff; }
+  .section-label { font-size: 13px; font-weight: 700; color: #1a73e8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .section-title { font-size: 40px; font-weight: 900; color: #0a1f6e; margin-bottom: 12px; }
+  .section-sub { font-size: 17px; color: #666; margin-bottom: 52px; max-width: 540px; }
+  .features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+  .feature-card {
+    background: #f8f9ff; border-radius: 20px; padding: 32px 24px;
+    border: 1.5px solid transparent; transition: all 0.2s;
+  }
+  .feature-card:hover { border-color: #1a73e8; background: #fff; box-shadow: 0 8px 32px rgba(26,115,232,0.12); }
+  .feature-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 20px;
+  }
+  .feature-card h3 { font-size: 18px; font-weight: 800; color: #0a1f6e; margin-bottom: 10px; }
+  .feature-card p { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+  .feature-stat { font-size: 13px; font-weight: 700; color: #1a73e8; }
+
+  /* ── SEND MONEY DEMO ── */
+  .send-demo {
+    background: linear-gradient(135deg, #0a1f6e, #0e2d9e);
+    padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .send-demo-left .section-title { color: #fff; }
+  .send-demo-left .section-sub { color: rgba(255,255,255,0.65); }
+  .send-demo-left .section-label { color: #00d4aa; }
+  .steps { display: flex; flex-direction: column; gap: 24px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; }
+  .step-num {
+    width: 36px; height: 36px; min-width: 36px;
+    border-radius: 50%; background: rgba(0,212,170,0.15);
+    border: 2px solid #00d4aa;
+    display: flex; align-items: center; justify-content: center;
+    color: #00d4aa; font-weight: 800; font-size: 14px;
+  }
+  .step-text h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .step-text p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .send-widget {
+    background: #fff; border-radius: 24px; padding: 32px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  }
+  .widget-title { font-size: 18px; font-weight: 800; color: #0a1f6e; margin-bottom: 24px; }
+  .widget-row { margin-bottom: 16px; }
+  .widget-label { font-size: 12px; font-weight: 600; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .widget-input {
+    background: #f4f6ff; border: 2px solid #e8ecff;
+    border-radius: 12px; padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .widget-input .amount { font-size: 24px; font-weight: 800; color: #0a1f6e; }
+  .widget-input .currency {
+    background: #0a1f6e; color: #fff; border-radius: 8px;
+    padding: 6px 12px; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .widget-arrow { text-align: center; color: #ccc; font-size: 22px; margin: 8px 0; }
+  .widget-receive {
+    background: linear-gradient(135deg, #00d4aa15, #1a73e815);
+    border: 2px solid #00d4aa30; border-radius: 12px;
+    padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .widget-receive .amount { font-size: 28px; font-weight: 900; color: #0a1f6e; }
+  .widget-receive .currency { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #444; }
+  .widget-meta { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+  .meta-item { font-size: 13px; color: #888; }
+  .meta-item span { color: #0a1f6e; font-weight: 700; }
+  .meta-item .green { color: #00d4aa; }
+  .send-btn {
+    width: 100%; background: linear-gradient(90deg, #00d4aa, #1a73e8);
+    color: #fff; border: none; border-radius: 12px;
+    padding: 16px; font-size: 16px; font-weight: 800;
+    cursor: pointer; margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0,212,170,0.3);
+  }
+
+  /* ── CARD SECTION ── */
+  .card-section {
+    background: #080c1a; padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .card-left .section-label { color: #00d4aa; }
+  .card-left .section-title { color: #fff; }
+  .card-left .section-sub { color: rgba(255,255,255,0.6); }
+  .card-perks { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .perk { display: flex; gap: 14px; align-items: flex-start; }
+  .perk-icon { font-size: 22px; margin-top: 2px; }
+  .perk h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .perk p { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .card-options { display: flex; gap: 16px; margin-top: 36px; }
+  .card-option {
+    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .card-option.active { border-color: #00d4aa; background: rgba(0,212,170,0.08); }
+  .card-option .opt-badge { font-size: 11px; font-weight: 700; color: #00d4aa; margin-bottom: 4px; }
+  .card-option .opt-name { font-size: 14px; font-weight: 700; color: #fff; }
+  .card-option .opt-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .card-right { display: flex; justify-content: center; align-items: center; position: relative; }
+  /* 3D card */
+  .card-3d {
+    width: 380px; height: 240px;
+    background: linear-gradient(135deg, #1a73e8 0%, #0a1f6e 60%, #00d4aa 100%);
+    border-radius: 24px;
+    padding: 28px 32px;
+    position: relative; overflow: hidden;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transform: perspective(800px) rotateY(-8deg) rotateX(4deg);
+    transition: transform 0.3s;
+  }
+  .card-3d:hover { transform: perspective(800px) rotateY(-3deg) rotateX(2deg); }
+  .card-shimmer {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+    border-radius: 24px;
+  }
+  .card-chip {
+    width: 44px; height: 34px; background: linear-gradient(135deg, #f5d060, #c8a020);
+    border-radius: 6px; margin-bottom: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 5px;
+  }
+  .chip-line { background: rgba(0,0,0,0.15); border-radius: 2px; }
+  .card-number { font-size: 17px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 3px; margin-bottom: 20px; font-family: monospace; }
+  .card-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .card-holder-label { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .card-holder-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+  .card-expiry-label { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .card-expiry { font-size: 14px; font-weight: 700; color: #fff; }
+  .card-logo { font-size: 28px; font-weight: 900; color: #fff; opacity: 0.9; text-align: right; }
+  .card-network { font-size: 11px; color: rgba(255,255,255,0.6); text-align: right; margin-top: 2px; }
+  .card-glow {
+    position: absolute; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 60%);
+    top: -150px; right: -150px; pointer-events: none; border-radius: 50%;
+  }
+
+  /* ── SECURITY ── */
+  .security { background: #f8f9ff; padding: 80px 40px; text-align: center; }
+  .security-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+  .security-item { padding: 28px 20px; }
+  .security-icon { font-size: 36px; margin-bottom: 14px; }
+  .security-item h4 { font-size: 15px; font-weight: 800; color: #0a1f6e; margin-bottom: 8px; }
+  .security-item p { font-size: 13px; color: #777; line-height: 1.5; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: linear-gradient(135deg, #0a1f6e, #00d4aa);
+    padding: 80px 40px; text-align: center;
+  }
+  .final-cta h2 { font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 16px; }
+  .final-cta p { font-size: 18px; color: rgba(255,255,255,0.75); margin-bottom: 40px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; }
+  .btn-white {
+    background: #fff; color: #0a1f6e;
+    padding: 16px 36px; border-radius: 10px;
+    font-size: 16px; font-weight: 800; cursor: pointer; border: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .btn-outline-white {
+    background: transparent; color: #fff;
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 16px 36px; border-radius: 10px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #06091a; padding: 60px 40px 32px;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+  .footer-brand .logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .footer-brand .logo-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg,#1a73e8,#00d4aa); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 16px; }
+  .footer-brand span { color: #fff; font-weight: 700; font-size: 18px; }
+  .footer-brand p { font-size: 13px; line-height: 1.6; max-width: 220px; }
+  .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+  .social-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.07); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; }
+  .footer-col h5 { color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.45); font-size: 13px; margin-bottom: 10px; text-decoration: none; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 12px; }
+  .footer-bottom .badges { display: flex; gap: 10px; }
+  .badge { background: rgba(255,255,255,0.07); border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); }
+
+  /* ── MOBILE RESPONSIVE ── */
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-actions .btn-login { display: none; }
+    .btn-started { padding: 8px 16px; font-size: 13px; }
+
+    /* Promo banner */
+    .promo-banner { font-size: 12px; padding: 10px 16px; }
+    .promo-banner span { display: none; }
+
+    /* Hero */
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 48px 20px 0;
+      gap: 0;
+      min-height: auto;
+    }
+    .hero-left { padding-bottom: 40px; }
+    .hero h1 { font-size: 36px; }
+    .hero p { font-size: 15px; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+    .hero-stats { gap: 20px; }
+    .stat-num { font-size: 22px; }
+    .hero-right { padding-bottom: 0; justify-content: center; margin-top: 32px; }
+    .phone-wrap { width: 240px; }
+    .phone-amount { font-size: 26px; }
+
+    /* Ticker */
+    .ticker { gap: 24px; padding: 12px 20px; overflow-x: auto; }
+    .ticker-sep { display: none; }
+
+    /* Social proof */
+    .social-proof { padding: 48px 20px; }
+    .proof-title { font-size: 26px; }
+    .testimonials { grid-template-columns: 1fr; gap: 16px; }
+    .proof-numbers { flex-wrap: wrap; gap: 32px; justify-content: center; }
+    .proof-num .big { font-size: 32px; }
+
+    /* Features */
+    .features { padding: 48px 20px; }
+    .section-title { font-size: 28px; }
+    .features-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature-card { padding: 20px 16px; }
+
+    /* Send demo */
+    .send-demo {
+      grid-template-columns: 1fr;
+      padding: 48px 20px;
+      gap: 40px;
+    }
+    .send-demo-left .section-title { font-size: 28px; }
+    .send-widget { padding: 24px 20px; }
+    .widget-input .amount { font-size: 20px; }
+    .widget-receive .amount { font-size: 24px; }
+    .widget-meta { flex-direction: column; gap: 6px; }
+
+    /* Card section */
+    .card-section {
+      grid-template-columns: 1fr;
+      padding: 48px 20px;
+      gap: 40px;
+    }
+    .card-left .section-title { font-size: 28px; }
+    .card-right { order: -1; }
+    .card-3d {
+      width: 100%;
+      max-width: 340px;
+      height: 210px;
+      transform: perspective(800px) rotateY(-4deg) rotateX(2deg);
+      padding: 22px 24px;
+    }
+    .card-number { font-size: 14px; letter-spacing: 2px; }
+    .card-options { flex-direction: column; gap: 12px; }
+
+    /* Security */
+    .security { padding: 48px 20px; }
+    .security-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Final CTA */
+    .final-cta { padding: 60px 20px; }
+    .final-cta h2 { font-size: 30px; }
+    .final-cta p { font-size: 15px; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .btn-white, .btn-outline-white { width: 100%; max-width: 300px; }
+
+    /* Footer */
+    footer { padding: 48px 20px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-bottom .badges { flex-wrap: wrap; justify-content: center; }
+  }
+
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 30px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .security-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 16px; }
+    .ticker { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  🎉 Launch offer: Send your first $50 with zero fees — limited time only!
+  <span>Get started →</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">T</div>
+    <span>TchotchoPay</span>
+  </div>
+  <div class="nav-links">
+    <a href="#">Send Money</a>
+    <a href="#">Wallet</a>
+    <a href="#">Mobile Top-Up</a>
+    <a href="#">Pay & Shop</a>
+    <a href="#">For Business</a>
+    <a href="#">Help</a>
+  </div>
+  <div class="nav-actions">
+    <span class="btn-login">Log In</span>
+    <button class="btn-started">Get Started →</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      Now live in Haiti, DR, Jamaica & Bahamas
+    </div>
+    <h1>Money for the<br/><em>Caribbean.</em><br/>Simple. Fast.</h1>
+    <p>Send money home faster and cheaper than Western Union. Hold USDC, pay with your phone, and cash out anywhere.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary">Send Money → </button>
+      <button class="btn-secondary">Open Your Wallet</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">2 min</div>
+        <div class="stat-label">Avg. delivery time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1–3%</div>
+        <div class="stat-label">Total fees</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Always available</div>
+      </div>
+    </div>
+    <div class="hero-flags" style="margin-top:28px">
+      <span class="flag">🇭🇹</span>
+      <span class="flag">🇩🇴</span>
+      <span class="flag">🇯🇲</span>
+      <span class="flag">🇧🇸</span>
+      <span class="flag-label">+ More coming soon</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="orb1"></div>
+    <div class="orb2"></div>
+    <div class="phone-wrap">
+      <div class="phone-outer">
+        <div class="phone-screen">
+          <div class="phone-balance">Wallet Balance</div>
+          <div class="phone-amount">$500.00</div>
+          <div class="phone-usdc">✦ USDC · Base Network</div>
+          <div class="phone-actions">
+            <div class="phone-action"><div class="icon">📤</div><div class="lbl">Send</div></div>
+            <div class="phone-action"><div class="icon">📥</div><div class="lbl">Receive</div></div>
+            <div class="phone-action"><div class="icon">📱</div><div class="lbl">Top Up</div></div>
+            <div class="phone-action"><div class="icon">🛍️</div><div class="lbl">Pay QR</div></div>
+          </div>
+          <div class="phone-tx-title">Recent Transactions</div>
+          <div class="phone-tx">
+            <div class="tx-left">
+              <div class="tx-avatar" style="background:#1a73e8">M</div>
+              <div><div class="tx-name">Marie · Haiti</div><div class="tx-date">Today, 9:41 AM</div></div>
+            </div>
+            <div class="tx-amount pos">+$200</div>
+          </div>
+          <div class="phone-tx">
+            <div class="tx-left">
+              <div class="tx-avatar" style="background:#e84040">S</div>
+              <div><div class="tx-name">Supermarket Pay</div><div class="tx-date">Yesterday</div></div>
+            </div>
+            <div class="tx-amount neg">-$12.50</div>
+          </div>
+          <div class="phone-tx">
+            <div class="tx-left">
+              <div class="tx-avatar" style="background:#00d4aa">D</div>
+              <div><div class="tx-name">Mobile Top-Up</div><div class="tx-date">Sep 15</div></div>
+            </div>
+            <div class="tx-amount neg">-$10.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE EXCHANGE TICKER -->
+<div class="ticker">
+  <div class="ticker-item">
+    <span class="ticker-pair">USD → HTG</span>
+    <span class="ticker-rate">135.00</span>
+    <span class="ticker-change">↑ Live rate</span>
+  </div>
+  <span class="ticker-sep">|</span>
+  <div class="ticker-item">
+    <span class="ticker-pair">USDC → USD</span>
+    <span class="ticker-rate">1.00</span>
+    <span class="ticker-change">= Stable</span>
+  </div>
+  <span class="ticker-sep">|</span>
+  <div class="ticker-item">
+    <span class="ticker-pair">Transfer fee</span>
+    <span class="ticker-rate">from 1%</span>
+    <span class="ticker-change">vs 5–7% Wire</span>
+  </div>
+  <span class="ticker-sep">|</span>
+  <div class="ticker-item">
+    <span class="ticker-pair">Settlement</span>
+    <span class="ticker-rate">~2 min</span>
+    <span class="ticker-change">Base blockchain</span>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof">
+  <div class="proof-label">Real people. Real results.</div>
+  <h2 class="proof-title">Families trust TchotchoPay</h2>
+  <p class="proof-sub">Thousands of people across the diaspora send money home every day.</p>
+
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"I sent $200 to my mom in Port-au-Prince and she got it in under 3 minutes. Western Union was taking 2 days and charging me $15. Never going back."</p>
+      <div class="t-author">
+        <div class="t-avatar" style="background:#1a73e8">JB</div>
+        <div>
+          <div class="t-name">Jean-Baptiste M.</div>
+          <div class="t-location">🇺🇸 Miami, FL → 🇭🇹 Port-au-Prince</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"My daughter keeps her savings in USDC so they don't lose value against the gourde. She buys groceries, pays electricity — all from her phone. Life-changing."</p>
+      <div class="t-author">
+        <div class="t-avatar" style="background:#00d4aa">MC</div>
+        <div>
+          <div class="t-name">Marie-Claire D.</div>
+          <div class="t-location">🇫🇷 Paris → 🇭🇹 Cap-Haïtien</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"As an agent I make 1% on every cash out. Last month I earned over $400 just helping my neighborhood. TchotchoPay gave me a real side business."</p>
+      <div class="t-author">
+        <div class="t-avatar" style="background:#e84040">RP</div>
+        <div>
+          <div class="t-name">Roseline P. — Cash Agent</div>
+          <div class="t-location">🇭🇹 Pétion-Ville, Haiti</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof-numbers">
+    <div class="proof-num">
+      <div class="big">50K+</div>
+      <div class="lbl">Active users</div>
+    </div>
+    <div class="proof-num">
+      <div class="big">$12M+</div>
+      <div class="lbl">Transferred to date</div>
+    </div>
+    <div class="proof-num">
+      <div class="big">4.9★</div>
+      <div class="lbl">App store rating</div>
+    </div>
+    <div class="proof-num">
+      <div class="big">2 min</div>
+      <div class="lbl">Avg. delivery</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Everything you need</div>
+  <h2 class="section-title">One app. Six superpowers.</h2>
+  <p class="section-sub">From sending money to saving in digital dollars — TchotchoPay does what traditional banks can't.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#e8f0ff">💸</div>
+      <h3>Send Money</h3>
+      <p>Transfer to Haiti and across the Caribbean in minutes, not days.</p>
+      <div class="feature-stat">From 1% · Settles in ~2 min</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#e8fff9">💰</div>
+      <h3>USDC Wallet</h3>
+      <p>Hold digital dollars that don't lose value. Save in USD, spend anywhere.</p>
+      <div class="feature-stat">1 USDC = $1.00 always</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#fff0e8">📱</div>
+      <h3>Mobile Top-Up</h3>
+      <p>Top up any Haitian or Caribbean phone number in seconds from anywhere.</p>
+      <div class="feature-stat">Digicel · Natcom · More</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#ffe8ee">🛒</div>
+      <h3>Marketplace</h3>
+      <p>Pay local merchants, buy food, pay school fees — all without cash.</p>
+      <div class="feature-stat">1–2% merchant fee</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEND MONEY DEMO -->
+<section class="send-demo">
+  <div class="send-demo-left">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Send money in 4 simple steps</h2>
+    <p class="section-sub">No bank account required on the receiving end. Just a phone number.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h4>Load money</h4>
+          <p>Debit card, ACH bank transfer, or wire — your choice.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h4>Converts to USDC on Base</h4>
+          <p>Near-instant, ultra-low fees on the Base blockchain.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h4>Recipient gets their wallet credited</h4>
+          <p>They get a notification and see funds instantly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h4>They choose what to do</h4>
+          <p>Keep USDC, buy products, pay bills, or cash out to HTG.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="send-widget">
+    <div class="widget-title">Send to Haiti</div>
+    <div class="widget-row">
+      <div class="widget-label">You send</div>
+      <div class="widget-input">
+        <span class="amount">100.00</span>
+        <span class="currency">🇺🇸 USD ▾</span>
+      </div>
+    </div>
+    <div class="widget-arrow">↓</div>
+    <div class="widget-row">
+      <div class="widget-label">Recipient receives</div>
+      <div class="widget-receive">
+        <span class="amount">13,500</span>
+        <span class="currency">🇭🇹 HTG</span>
+      </div>
+    </div>
+    <div class="widget-meta">
+      <div class="meta-item">Transfer fee: <span>$1.00</span></div>
+      <div class="meta-item">Rate: <span>1 USD = 135 HTG</span></div>
+      <div class="meta-item">Delivery: <span class="green">⚡ ~2 min</span></div>
+    </div>
+    <button class="send-btn">Send Money Now →</button>
+  </div>
+</section>
+
+<!-- VISA CARD -->
+<section class="card-section">
+  <div class="card-left">
+    <div class="section-label">TchotchoPay Card</div>
+    <h2 class="section-title">Spend your USDC anywhere Visa is accepted</h2>
+    <p class="section-sub">A real Visa debit card backed by your USDC balance. Use it online, in-store, or add to Apple Pay & Google Pay.</p>
+    <div class="card-perks">
+      <div class="perk">
+        <div class="perk-icon">⚡</div>
+        <div>
+          <h4>Virtual card in 2 minutes</h4>
+          <p>Get your virtual card immediately — no waiting, no paperwork.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">📱</div>
+        <div>
+          <h4>Apple Pay & Google Pay ready</h4>
+          <p>Add to your wallet and tap to pay at any contactless terminal.</p>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🔒</div>
+        <div>
+          <h4>You control your money</h4>
+          <p>Freeze, unfreeze, and set spending limits — all from the app.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-options">
+      <div class="card-option active">
+        <div class="opt-badge">● Available now</div>
+        <div class="opt-name">Virtual Card</div>
+        <div class="opt-sub">Ready in 2 min</div>
+      </div>
+      <div class="card-option">
+        <div class="opt-badge" style="color:#f5a623">◎ Coming soon</div>
+        <div class="opt-name">Physical Card</div>
+        <div class="opt-sub">Join waitlist</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-right">
+    <div class="card-glow"></div>
+    <div class="card-3d">
+      <div class="card-shimmer"></div>
+      <div class="card-chip">
+        <div class="chip-line"></div>
+        <div class="chip-line"></div>
+        <div class="chip-line"></div>
+        <div class="chip-line"></div>
+      </div>
+      <div class="card-number">4000  1234  5678  9010</div>
+      <div class="card-bottom">
+        <div>
+          <div class="card-holder-label">Card Holder</div>
+          <div class="card-holder-name">YOUR NAME</div>
+          <div style="margin-top:8px">
+            <div class="card-expiry-label">Expires</div>
+            <div class="card-expiry">06/28</div>
+          </div>
+        </div>
+        <div>
+          <div class="card-logo">VISA</div>
+          <div class="card-network">Debit · USDC Backed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="security">
+  <div class="section-label">Security</div>
+  <h2 class="section-title" style="font-size:36px;color:#0a1f6e;margin-bottom:10px">Your Security Is Our Priority</h2>
+  <p style="color:#888;font-size:16px;margin-bottom:48px">Industry-standard encryption and compliance to keep your money safe.</p>
+  <div class="security-grid">
+    <div class="security-item">
+      <div class="security-icon">🔐</div>
+      <h4>AES-256 Encryption</h4>
+      <p>Your data is encrypted at rest and in transit using bank-grade security.</p>
+    </div>
+    <div class="security-item">
+      <div class="security-icon">🪪</div>
+      <h4>Identity Verification</h4>
+      <p>KYC powered by Persona — every user is verified to prevent fraud.</p>
+    </div>
+    <div class="security-item">
+      <div class="security-icon">🛡️</div>
+      <h4>Transaction Monitoring</h4>
+      <p>Real-time alerts and AI-powered fraud detection on every transaction.</p>
+    </div>
+    <div class="security-item">
+      <div class="security-icon">💬</div>
+      <h4>24/7 Support</h4>
+      <p>Our team is here whenever you need help — by chat, email, or phone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Ready to move money smarter?</h2>
+  <p>Join thousands who trust TchotchoPay to support their loved ones — and do more across the Caribbean.</p>
+  <div class="cta-buttons">
+    <button class="btn-white">Open Your Wallet →</button>
+    <button class="btn-outline-white">Send Money Now</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <div class="logo-icon">T</div>
+        <span>TchotchoPay</span>
+      </div>
+      <p>Money for the Caribbean. Simple. Fast. Yours.</p>
+      <div class="footer-social">
+        <div class="social-icon">📘</div>
+        <div class="social-icon">📸</div>
+        <div class="social-icon">🐦</div>
+        <div class="social-icon">▶️</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <a href="#">Send Money</a>
+      <a href="#">Wallet</a>
+      <a href="#">Mobile Top-Up</a>
+      <a href="#">Pay & Shop</a>
+      <a href="#">TchotchoPay Card</a>
+    </div>
+    <div class="footer-col">
+      <h5>For Business</h5>
+      <a href="#">Cash Agent</a>
+      <a href="#">Merchant Portal</a>
+      <a href="#">Merchant Solutions</a>
+      <a href="#">Developer API</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#">Help Center</a>
+      <a href="#">FAQ</a>
+      <a href="#">Security</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 TchotchoPay. All rights reserved. · <span>🇺🇸 EN</span></p>
+    <div class="badges">
+      <span class="badge">🔐 SSL Secured</span>
+      <span class="badge">✓ KYC Verified</span>
+      <span class="badge">Base Blockchain</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

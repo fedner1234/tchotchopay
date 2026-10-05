@@ -1,0 +1,7 @@
+.npm-cache/
+.netlify/
+netlify/
+node_modules/
+*.zip
+deploy-log.txt
+deploy.command

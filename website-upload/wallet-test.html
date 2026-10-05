@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TchotchoPay — Wallet Test (Base Sepolia)</title>
+
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+    .badge {
+      background: #fbbf24;
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 900; color: #fff;
+    }
+    .logo-name { font-size: 24px; font-weight: 800; color: #fff; }
+    h1 { font-size: 14px; color: #64748b; margin-bottom: 32px; }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 28px;
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    #connectBtn {
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #connectBtn:hover { background: #1d4ed8; }
+    #connectBtn:disabled { background: #1e3a8a; cursor: not-allowed; }
+
+    #walletInfo { display: none; }
+    .address-box {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #94a3b8;
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+    .balance-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #0f172a;
+    }
+    .balance-row:last-child { border-bottom: none; }
+    .token-name { font-size: 14px; font-weight: 600; }
+    .token-sub  { font-size: 12px; color: #64748b; }
+    .token-amount { font-size: 18px; font-weight: 800; color: #34d399; }
+
+    label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 6px; }
+    input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #e2e8f0;
+      font-size: 14px;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    input:focus { border-color: #2563eb; }
+    #sendBtn {
+      width: 100%;
+      background: #10b981;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #sendBtn:disabled { background: #064e3b; cursor: not-allowed; }
+
+    .status {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+    .status.success { color: #34d399; border: 1px solid #065f46; }
+    .status.error   { color: #f87171; border: 1px solid #7f1d1d; }
+    .status.info    { color: #93c5fd; border: 1px solid #1e3a8a; }
+
+    .faucet-tip {
+      background: #1e3a8a;
+      border: 1px solid #2563eb;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 13px;
+      max-width: 420px;
+      width: 100%;
+      line-height: 1.6;
+    }
+    .faucet-tip a { color: #60a5fa; }
+    .faucet-tip strong { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <div class="badge">🧪 TESTNET — BASE SEPOLIA</div>
+  <div class="logo">
+    <div class="logo-mark">T</div>
+    <span class="logo-name">TchotchoPay</span>
+  </div>
+  <h1>Live Wallet Test — No Real Money</h1>
+
+  <!-- CONNECT CARD -->
+  <div class="card">
+    <div class="card-title">Your Wallet</div>
+    <button id="connectBtn" onclick="connectWallet()">🔗 Connect with Coinbase Wallet</button>
+
+    <div id="walletInfo">
+      <div class="address-box" id="walletAddress">0x…</div>
+      <div class="balance-row">
+        <div><div class="token-name">💵 USDC</div><div class="token-sub">USD Coin (Testnet)</div></div>
+        <div class="token-amount" id="usdcBalance">0.00</div>
+      </div>
+      <div class="balance-row">
+        <div><div class="token-name">⛽ ETH</div><div class="token-sub">For gas fees</div></div>
+        <div class="token-amount" id="ethBalance">0.0000</div>
+      </div>
+      <button onclick="refreshBalances()" style="margin-top:12px;background:none;border:1px solid #334155;color:#94a3b8;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:12px;">↺ Refresh</button>
+    </div>
+  </div>
+
+  <!-- SEND CARD -->
+  <div class="card" id="sendCard" style="display:none;">
+    <div class="card-title">Send Test USDC</div>
+    <label>Recipient Address</label>
+    <input type="text" id="recipientAddr" placeholder="0x... (Base Sepolia address)" />
+    <label>Amount (USDC)</label>
+    <input type="number" id="sendAmount" placeholder="1.00" min="0.01" step="0.01" />
+    <button id="sendBtn" onclick="sendUSDC()">Send USDC →</button>
+    <div class="status" id="sendStatus"></div>
+  </div>
+
+  <!-- FAUCET TIP -->
+  <div class="faucet-tip">
+    <strong>💧 Need test USDC?</strong><br>
+    Go to <a href="https://portal.cdp.coinbase.com/entity_f78f72de-1323-5bb2-be30-0ff501fcae82/onchain-tools/faucet?project=8571cf48-eb39-429d-a73e-1bc4ab81b871&network=base-sepolia&token=USDC" target="_blank">Coinbase CDP Faucet</a>,
+    paste your wallet address, and get up to <strong>10 USDC/day</strong> free (testnet only).
+  </div>
+
+  <script type="module">
+    // Coinbase Wallet SDK v4 + ethers v6 — both via jsdelivr ESM (cdn.jsdelivr.net is in CSP)
+    import { createCoinbaseWalletSDK } from 'https://cdn.jsdelivr.net/npm/@coinbase/wallet-sdk@4.3.0/+esm';
+    import { BrowserProvider, formatEther, formatUnits, parseUnits, Contract } from 'https://cdn.jsdelivr.net/npm/ethers@6.7.0/+esm';
+
+    const USDC_ADDRESS = '0x036CbD53842c5426634e7929541eC2318f3dCF7e';
+    const CHAIN_ID = 84532; // Base Sepolia
+
+    const ERC20_ABI = [
+      'function balanceOf(address) view returns (uint256)',
+      'function transfer(address to, uint256 value) returns (bool)',
+      'function decimals() view returns (uint8)'
+    ];
+
+    let eip1193Provider, userAddress, ethersProvider, signer;
+
+    // Expose to window so onclick= attributes work
+    window.connectWallet = async function() {
+      const btn = document.getElementById('connectBtn');
+      btn.disabled = true;
+      btn.textContent = 'Connecting…';
+
+      try {
+        const sdk = createCoinbaseWalletSDK({
+          appName: 'TchotchoPay',
+          appLogoUrl: 'https://tchotchopay.com/logo.png',
+          appChainIds: [CHAIN_ID],
+        });
+
+        eip1193Provider = sdk.getProvider();
+        const accounts = await eip1193Provider.request({ method: 'eth_requestAccounts' });
+        userAddress = accounts[0];
+
+        // Switch to Base Sepolia if needed
+        try {
+          await eip1193Provider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x' + CHAIN_ID.toString(16) }],
+          });
+        } catch (_) { /* already on correct chain or user cancelled */ }
+
+        ethersProvider = new BrowserProvider(eip1193Provider);
+        signer = await ethersProvider.getSigner();
+
+        document.getElementById('walletAddress').textContent = userAddress;
+        document.getElementById('walletInfo').style.display = 'block';
+        document.getElementById('sendCard').style.display = 'block';
+        btn.textContent = '✓ Connected';
+
+        await window.refreshBalances();
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '🔗 Connect with Coinbase Wallet';
+        showStatus('sendStatus', 'error', '❌ ' + err.message);
+      }
+    };
+
+    window.refreshBalances = async function() {
+      if (!userAddress || !ethersProvider) return;
+      try {
+        const ethBal = await ethersProvider.getBalance(userAddress);
+        document.getElementById('ethBalance').textContent =
+          parseFloat(formatEther(ethBal)).toFixed(4);
+
+        const usdc = new Contract(USDC_ADDRESS, ERC20_ABI, ethersProvider);
+        const usdcBal = await usdc.balanceOf(userAddress);
+        document.getElementById('usdcBalance').textContent =
+          parseFloat(formatUnits(usdcBal, 6)).toFixed(2);
+      } catch (e) {
+        console.error('Balance error:', e);
+      }
+    };
+
+    window.sendUSDC = async function() {
+      const to = document.getElementById('recipientAddr').value.trim();
+      const amount = document.getElementById('sendAmount').value.trim();
+      const btn = document.getElementById('sendBtn');
+
+      if (!to || !to.startsWith('0x')) return showStatus('sendStatus', 'error', 'Enter a valid 0x address');
+      if (!amount || parseFloat(amount) <= 0) return showStatus('sendStatus', 'error', 'Enter amount > 0');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      showStatus('sendStatus', 'info', '⏳ Signing transaction…');
+
+      try {
+        const usdc = new Contract(USDC_ADDRESS, ERC20_ABI, signer);
+        const tx = await usdc.transfer(to, parseUnits(amount, 6));
+        showStatus('sendStatus', 'info', '⏳ Waiting for confirmation…');
+        await tx.wait();
+        showStatus('sendStatus', 'success',
+          `✅ Sent! <a href="https://sepolia.basescan.org/tx/${tx.hash}" target="_blank" style="color:#34d399">${tx.hash.slice(0,20)}…</a>`);
+        await window.refreshBalances();
+      } catch (err) {
+        showStatus('sendStatus', 'error', '❌ ' + err.message);
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Send USDC →';
+    };
+
+    function showStatus(id, type, msg) {
+      const el = document.getElementById(id);
+      el.className = 'status ' + type;
+      el.innerHTML = msg;
+      el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

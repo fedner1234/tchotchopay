@@ -1,0 +1,73 @@
+functionsDirectory = "/Users/fednerfrancois/Claude/Projects/tchotchopay/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+headersOrigin = "config"
+plugins = []
+redirects = []
+
+[build]
+publish = "/Users/fednerfrancois/Claude/Projects/tchotchopay/website-upload"
+publishOrigin = "config"
+functions = "/Users/fednerfrancois/Claude/Projects/tchotchopay/netlify/functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+node_bundler = "esbuild"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+X-XSS-Protection = "1; mode=block"
+Content-Security-Policy = "default-src 'self';\n      script-src 'self' 'unsafe-inline' cdn.jsdelivr.net cdnjs.cloudflare.com challenges.cloudflare.com connect.facebook.net https://js.stripe.com https://www.googletagmanager.com https://esm.sh https://cdn.withpersona.com https://cdn.plaid.com;\n      style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com;\n      font-src 'self' fonts.gstatic.com cdn.jsdelivr.net data:;\n      img-src 'self' data: https: blob:;\n      connect-src 'self' https://api.tchotchopay.com https://*.netlify.app https://*.reloadly.com https://auth.reloadly.com https://api.stripe.com https://m.stripe.com https://www.google-analytics.com https://region1.google-analytics.com https://api.cdp.coinbase.com https://api.developer.coinbase.com https://esm.sh https://sepolia.base.org https://sepolia.basescan.org https://keys.coinbase.com wss://keys.coinbase.com https://*.base.org https://withpersona.com https://*.withpersona.com https://production.plaid.com https://sandbox.plaid.com https://*.plaid.com https://challenges.cloudflare.com;\n      frame-src https://js.stripe.com https://hooks.stripe.com https://keys.coinbase.com https://withpersona.com https://*.withpersona.com https://*.plaid.com https://challenges.cloudflare.com;\n      object-src 'none';\n      base-uri 'self';\n      form-action 'self' https://api.netlify.com;\n      upgrade-insecure-requests;"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), accelerometer=(), gyroscope=()"
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Resource-Policy = "same-origin"
+
+[[headers]]
+for = "/.netlify/functions/*"
+
+[headers.values]
+Cache-Control = "no-store, no-cache, must-revalidate"
+
+[[headers]]
+for = "/*.css"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/*.js"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/*.png"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/*.jpg"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"

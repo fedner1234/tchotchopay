@@ -1,6 +1,10 @@
 .env
 .env.*
 node_modules/
+
+# Coinbase CDP private key — never commit this
+my api.json
+*.api.json
 .DS_Store
 .npm-cache/
 *.zip

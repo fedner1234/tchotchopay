@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>You're on the Waitlist — Tchotcho Pay</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Thanks for joining the Tchotcho Pay waitlist! We'll email you the moment we launch with early access and a welcome bonus."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/thankyou.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/thankyou.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/thankyou.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/thankyou.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/thankyou.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/thankyou.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/thankyou.html"/>
+  <meta property="og:title" content="You're on the Waitlist — Tchotcho Pay"/>
+  <meta property="og:description" content="Thanks for joining the Tchotcho Pay waitlist! We'll email you the moment we launch with early access and a welcome bonus."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="You're on the Waitlist — Tchotcho Pay"/>
+  <meta name="twitter:description" content="Thanks for joining the Tchotcho Pay waitlist! We'll email you the moment we launch with early access and a welcome bonus."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+    html { overflow-x: hidden; }
+:root{
+  --navy:#020B2D;--blue:#0A1F6E;--mid:#1055CC;--cyan:#00AEEF;--light:#7FD4F7;
+  --white:#F0F6FF;--gray:#8FA8CC;--border:rgba(0,174,239,0.15);--card:rgba(255,255,255,0.04);
+  --green:#00e676;--gold:#ffd740;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;overflow-x:hidden;}
+
+/* NAV */
+nav{display:flex;align-items:center;padding:16px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:28px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+
+.nav-logo-box img{width:100%;height:100%;object-fit:cover;}
+.nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 46px; width: auto; display: block; }
+
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;margin-left:auto;}
+.nav-links a{color:#374151;text-decoration:none;font-size:.88rem;transition:color .2s;}
+.nav-links a:hover{color:#1055CC;}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px;position:relative;overflow:hidden;}
+
+/* BG GLOW */
+main::before{
+  content:'';position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,174,239,.12) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* CONFETTI PARTICLES */
+.particle{
+  position:absolute;border-radius:3px;opacity:0;
+  animation:confetti 4s ease-in forwards;
+  pointer-events:none;
+}
+@keyframes confetti{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+
+/* CARD */
+.ty-card{
+  max-width:580px;width:100%;text-align:center;position:relative;z-index:1;
+}
+
+/* CHECK ANIMATION */
+.check-wrap{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(0,230,118,.15),rgba(0,174,239,.15));
+  border:2px solid rgba(0,230,118,.4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  animation:popIn .6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popIn{0%{transform:scale(0);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.check-wrap i{font-size:42px;color:var(--green);animation:fadeIn .4s .4s both;}
+@keyframes fadeIn{from{opacity:0;transform:scale(.5);}to{opacity:1;transform:scale(1);}}
+
+/* HEADLINE */
+.ty-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.25);
+  border-radius:50px;padding:5px 16px;font-size:.78rem;font-weight:700;
+  color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;
+  animation:slideUp .5s .2s both;
+}
+.ty-card h1{font-size:2.2rem;font-weight:900;line-height:1.15;margin-bottom:12px;animation:slideUp .5s .3s both;}
+.ty-card h1 em{color:var(--cyan);font-style:normal;}
+.ty-card>p{color:var(--gray);font-size:.95rem;margin-bottom:32px;animation:slideUp .5s .4s both;line-height:1.7;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* POSITION BOX */
+.position-box{
+  background:linear-gradient(135deg,rgba(16,85,204,.3),rgba(0,174,239,.12));
+  border:1px solid rgba(0,174,239,.3);border-radius:16px;
+  padding:22px 28px;margin-bottom:28px;display:flex;align-items:center;gap:20px;
+  animation:slideUp .5s .5s both;
+}
+.pos-number{
+  font-size:2.6rem;font-weight:900;color:var(--cyan);line-height:1;
+  font-variant-numeric:tabular-nums;
+  min-width:80px;text-align:center;
+}
+.pos-number span{display:block;font-size:.7rem;font-weight:600;color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+.pos-divider{width:1px;height:48px;background:rgba(0,174,239,.2);}
+.pos-text{flex:1;text-align:left;}
+.pos-text strong{display:block;font-size:.95rem;font-weight:700;margin-bottom:4px;}
+.pos-text p{font-size:.82rem;color:var(--gray);line-height:1.55;}
+
+/* PROGRESS STRIP */
+.waitlist-bar{
+  background:rgba(255,255,255,.06);border-radius:50px;height:10px;
+  margin:0 0 8px;overflow:hidden;
+}
+.waitlist-fill{
+  height:100%;background:linear-gradient(90deg,var(--mid),var(--cyan));
+  border-radius:50px;width:0%;transition:width 1.4s ease;
+}
+.waitlist-caption{font-size:.78rem;color:var(--gray);text-align:right;margin-bottom:28px;}
+.waitlist-caption strong{color:var(--cyan);}
+
+/* SHARE */
+.share-section{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:24px;margin-bottom:24px;animation:slideUp .5s .65s both;
+}
+.share-section h3{font-size:.95rem;font-weight:700;margin-bottom:6px;}
+.share-section p{font-size:.82rem;color:var(--gray);margin-bottom:16px;}
+.share-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.share-btn{
+  flex:1;min-width:110px;display:flex;align-items:center;justify-content:center;
+  gap:7px;padding:10px 14px;border-radius:10px;font-size:.82rem;font-weight:600;
+  cursor:pointer;border:1.5px solid;font-family:inherit;transition:.2s;text-decoration:none;
+}
+.share-wa{border-color:#25d366;color:#25d366;background:rgba(37,211,102,.08);}
+.share-wa:hover{background:rgba(37,211,102,.16);}
+.share-tw{border-color:#1DA1F2;color:#1DA1F2;background:rgba(29,161,242,.08);}
+.share-tw:hover{background:rgba(29,161,242,.16);}
+.share-fb{border-color:#4267B2;color:#7b9eef;background:rgba(66,103,178,.08);}
+.share-fb:hover{background:rgba(66,103,178,.16);}
+.share-cp{border-color:var(--gray);color:var(--gray);background:rgba(255,255,255,.04);}
+.share-cp:hover{background:rgba(255,255,255,.08);color:var(--white);}
+
+/* REFER BOX */
+.refer-box{
+  background:linear-gradient(135deg,rgba(255,215,64,.08),rgba(247,183,49,.05));
+  border:1px solid rgba(255,215,64,.25);border-radius:16px;
+  padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;gap:16px;
+  animation:slideUp .5s .75s both;
+}
+.refer-icon{font-size:2rem;flex-shrink:0;}
+.refer-text{flex:1;text-align:left;}
+.refer-text strong{display:block;font-size:.92rem;margin-bottom:3px;}
+.refer-text p{font-size:.8rem;color:var(--gray);}
+.refer-btn{
+  background:linear-gradient(135deg,#b8860b,var(--gold));color:#000;
+  padding:10px 18px;border-radius:50px;font-size:.82rem;font-weight:800;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;transition:.15s;
+}
+.refer-btn:hover{opacity:.88;}
+
+/* TIMELINE */
+.timeline{text-align:left;margin-bottom:32px;animation:slideUp .5s .8s both;}
+.timeline h3{font-size:.9rem;font-weight:700;margin-bottom:16px;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;}
+.tl-item{display:flex;gap:14px;margin-bottom:18px;}
+.tl-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:0;}
+.tl-dot{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.tl-dot.done{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+.tl-dot.upcoming{background:rgba(255,255,255,.06);border:1.5px solid var(--border);color:var(--gray);}
+.tl-line{flex:1;width:1px;background:rgba(0,174,239,.15);margin:3px 0;}
+.tl-content{padding-top:4px;padding-bottom:4px;}
+.tl-content strong{display:block;font-size:.88rem;font-weight:700;margin-bottom:2px;}
+.tl-content p{font-size:.8rem;color:var(--gray);}
+
+/* BACK BTN */
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;
+  border:1.5px solid rgba(0,174,239,.3);color:var(--gray);font-size:.88rem;font-weight:600;
+  text-decoration:none;transition:.2s;animation:slideUp .5s .9s both;
+}
+.back-btn:hover{border-color:rgba(0,174,239,.6);color:var(--white);}
+
+/* FOOTER */
+footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:28px 24px;text-align:center;}
+footer a{color:var(--gray);text-decoration:none;font-size:.82rem;margin:0 10px;transition:color .2s;}
+footer a:hover{color:var(--white);}
+footer p{color:var(--gray);font-size:.78rem;margin-top:10px;}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:28px;right:28px;z-index:9999;
+  background:#0d2045;border:1px solid rgba(0,174,239,.3);border-radius:12px;
+  padding:12px 18px;display:flex;align-items:center;gap:10px;
+  font-size:.86rem;font-weight:600;color:var(--white);
+  transform:translateY(80px);opacity:0;transition:.35s;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{color:var(--green);font-size:16px;}
+
+@media(max-width:600px){
+  nav{padding:12px 16px;
+      border-bottom: 2px solid #D21034;
+    }.nav-links{display:none;}
+  .ty-card h1{font-size:1.7rem;}
+  .position-box{flex-direction:column;gap:12px;text-align:center;}
+  .pos-divider{width:60px;height:1px;}
+  .pos-text{text-align:center;}
+  .refer-box{flex-direction:column;text-align:center;}
+  .refer-text{text-align:center;}
+  .share-btns{grid-template-columns:1fr 1fr;}
+}
+.nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
+    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  
+    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
+    html, body { overflow-x: hidden !important; max-width: 100% !important; }
+    * { box-sizing: border-box; }
+    img, video, iframe, table { max-width: 100%; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="faq.html">Help</a></li>
+    <li><a href="referral.html">Refer & Earn</a></li>
+      <a href="login.html" class="nav-login">Log In</a>
+    <a href="signup.html" class="nav-cta">Get Started</a>
+  </ul>
+</nav>
+
+<main id="main-area">
+  <div class="ty-card">
+    <div class="check-wrap"><i class="ti ti-check"></i></div>
+
+    <div class="ty-badge"><i class="ti ti-star"></i> You're in!</div>
+    <h1>Welcome to <em>Tchotcho Pay</em></h1>
+    <p>You've secured your spot on the early access waitlist. We're building something special for the Haitian community — you'll be among the first to know when we launch.</p>
+
+    <!-- POSITION BOX -->
+    <div class="position-box">
+      <div class="pos-number" id="pos-num">—<span>your position</span></div>
+      <div class="pos-divider"></div>
+      <div class="pos-text">
+        <strong>🎉 You joined the waitlist!</strong>
+        <p>Move up the list by referring friends below. Each referral bumps you up 5 spots and earns you $5 USDC when we launch.</p>
+      </div>
+    </div>
+
+    <!-- WAITLIST PROGRESS -->
+    <div class="waitlist-bar"><div class="waitlist-fill" id="wl-fill"></div></div>
+    <div class="waitlist-caption">Early access slots: <strong id="slots-filled">1,847</strong> / 3,000 reserved</div>
+
+    <!-- SHARE -->
+    <div class="share-section">
+      <h3>📣 Spread the word</h3>
+      <p>Share with your network — each friend who joins moves you <strong>5 spots higher</strong> on the waitlist.</p>
+      <div class="share-btns">
+        <a class="share-btn share-wa" href="#" onclick="shareWA();return false;"><i class="ti ti-brand-whatsapp"></i> WhatsApp</a>
+        <a class="share-btn share-tw" href="#" onclick="shareTW();return false;"><i class="ti ti-brand-x"></i> Twitter/X</a>
+        <a class="share-btn share-fb" href="#" onclick="shareFB();return false;"><i class="ti ti-brand-facebook"></i> Facebook</a>
+        <a class="share-btn share-cp" href="#" onclick="copyLink();return false;"><i class="ti ti-link"></i> Copy Link</a>
+      </div>
+    </div>
+
+    <!-- REFERRAL BONUS -->
+    <div class="refer-box">
+      <div class="refer-icon">🪙</div>
+      <div class="refer-text">
+        <strong>Refer friends, earn $5 USDC each</strong>
+        <p>When we launch, every successful referral pays you $5 USDC directly to your wallet. No cap on earnings.</p>
+      </div>
+      <a href="referral.html" class="refer-btn">Get My Link →</a>
+    </div>
+
+    <!-- WHAT'S NEXT TIMELINE -->
+    <div class="timeline">
+      <h3>What happens next</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot done"><i class="ti ti-check"></i></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <strong>✅ You joined the waitlist</strong>
+          <p>Spot secured. You'll receive a confirmation email shortly.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot upcoming"><i class="ti ti-mail"></i></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <strong>Welcome email incoming</strong>
+          <p>Check your inbox for your referral link and early access details. Check spam if you don't see it.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot upcoming"><i class="ti ti-device-mobile"></i></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <strong>Early access invites go out</strong>
+          <p>We'll roll out access in batches starting with the top of the waitlist. Higher position = earlier access.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot upcoming"><i class="ti ti-rocket"></i></div>
+        </div>
+        <div class="tl-content">
+          <strong>Full launch</strong>
+          <p>Tchotcho Pay goes live for everyone. Your $5 USDC referral bonuses are credited to your wallet on day one.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-btn"><i class="ti ti-arrow-left"></i> Back to Homepage</a>
+  </div>
+</main>
+
+<div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg">Link copied!</span></div>
+
+<footer>
+  <a href="index.html">Home</a>
+  <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+  <a href="referral.html">Refer & Earn</a>
+  <a href="terms.html">Terms & Privacy</a>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <p>© 2026 Tchotcho Pay LLC. All rights reserved.</p>
+</footer>
+
+<script>
+// ── POSITION NUMBER ──
+// Simulate waitlist position from URL param or random
+function getParam(key){
+  return new URLSearchParams(window.location.search).get(key);
+}
+const name = getParam('name');
+const rawPos = parseInt(getParam('pos')) || Math.floor(Math.random() * 800) + 1200;
+const pos = rawPos;
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Animate number counting up
+  let count = Math.max(pos - 300, 100);
+  const el = document.getElementById('pos-num');
+  const interval = setInterval(() => {
+    count += Math.ceil((pos - count) / 10);
+    el.innerHTML = '#' + count.toLocaleString() + '<span>your position</span>';
+    if (count >= pos) {
+      el.innerHTML = '#' + pos.toLocaleString() + '<span>your position</span>';
+      clearInterval(interval);
+    }
+  }, 40);
+
+  // Waitlist bar
+  setTimeout(() => {
+    document.getElementById('wl-fill').style.width = '61.6%';
+  }, 500);
+
+  // Confetti
+  launchConfetti();
+});
+
+// ── CONFETTI ──
+function launchConfetti(){
+  const colors = ['#00AEEF','#00e676','#ffd740','#F7B731','#b388ff','#fff'];
+  const container = document.getElementById('main-area');
+  for(let i = 0; i < 60; i++){
+    setTimeout(()=>{
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.cssText = `
+        left:${Math.random()*100}%;
+        top:0;
+        width:${6+Math.random()*8}px;
+        height:${6+Math.random()*8}px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        animation-duration:${2.5+Math.random()*2}s;
+        animation-delay:${Math.random()*1.5}s;
+        border-radius:${Math.random()>.5?'50%':'3px'};
+      `;
+      container.appendChild(p);
+      setTimeout(()=>p.remove(), 5000);
+    }, i * 40);
+  }
+}
+
+// ── SHARE ──
+const shareURL = 'https://tchotchopay.com/join?ref=EARLY';
+const shareMsg = encodeURIComponent("I just joined the Tchotcho Pay waitlist — a new way to send money to Haiti instantly with super low fees. Get early access here: " + shareURL);
+
+function shareWA(){ window.open('https://wa.me/?text='+shareMsg,'_blank'); }
+function shareTW(){ window.open('https://twitter.com/intent/tweet?text='+shareMsg,'_blank'); }
+function shareFB(){ window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(shareURL),'_blank'); }
+function copyLink(){
+  navigator.clipboard.writeText(shareURL).then(()=>showToast('Link copied to clipboard!'));
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+</script>
+<script src="lang.js"></script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

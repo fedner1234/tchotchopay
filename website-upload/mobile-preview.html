@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay Mobile App Preview</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #0B0F19;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+h1 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: .04em;
+}
+.subtitle { color: rgba(255,255,255,.4); font-size: 14px; margin-bottom: 30px; }
+
+/* TAB SWITCHER */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  background: #161F30;
+  border-radius: 16px;
+  padding: 6px;
+}
+.tab-btn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,.45);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+.tab-btn.active {
+  background: #0052FF;
+  color: #fff;
+}
+
+/* PHONE FRAME */
+.phone-wrap {
+  position: relative;
+  width: 390px;
+}
+.phone-frame {
+  width: 390px;
+  height: 780px;
+  background: #111827;
+  border-radius: 48px;
+  border: 8px solid #2A3548;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 40px 120px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
+}
+/* notch */
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 28px;
+  background: #111827;
+  border-radius: 0 0 20px 20px;
+  z-index: 100;
+}
+
+/* SCREEN */
+.screen {
+  width: 100%; height: 100%;
+  background: #0B0F19;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+}
+.screen::-webkit-scrollbar { display: none; }
+.screen-content {
+  padding: 56px 20px 20px;
+  min-height: 100%;
+}
+
+/* --- HOME SCREEN --- */
+.home-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.home-greeting { color:#fff; font-size:18px; font-weight:700; }
+.home-network { color:rgba(255,255,255,.4); font-size:12px; margin-top:3px; }
+.notif-btn { width:38px; height:38px; border-radius:50%; background:#161F30; border:1px solid #27354E; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+
+.balance-card { background:#161F30; border-radius:20px; padding:22px; border:1px solid #27354E; margin-bottom:24px; }
+.bal-header { display:flex; justify-content:space-between; align-items:center; }
+.bal-label { color:rgba(255,255,255,.4); font-size:13px; font-weight:500; }
+.eye-btn { color:rgba(255,255,255,.4); font-size:16px; cursor:pointer; background:none; border:none; }
+.bal-amount { color:#fff; font-size:34px; font-weight:800; margin-top:12px; }
+.bal-amount span { font-size:18px; color:#0052FF; }
+.bal-htg { color:#00C087; font-size:15px; font-weight:600; margin-top:4px; }
+.bal-tag { display:inline-flex; align-items:center; gap:6px; background:#222F46; padding:5px 10px; border-radius:10px; margin-top:14px; }
+.pulse { width:8px; height:8px; border-radius:50%; background:#00C087; }
+.bal-tag-txt { color:rgba(255,255,255,.45); font-size:11px; font-weight:600; }
+
+.actions { display:flex; justify-content:space-between; margin-bottom:24px; }
+.action { display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; }
+.action-icon { width:54px; height:54px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.action-lbl { color:#fff; font-size:12px; font-weight:600; }
+
+.section-title { color:#fff; font-size:16px; font-weight:700; margin-bottom:14px; }
+.tx { display:flex; align-items:center; background:#161F30; padding:14px; border-radius:14px; margin-bottom:10px; border:1px solid #27354E; gap:12px; }
+.tx-badge { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; flex-shrink:0; }
+.tx-info { flex:1; }
+.tx-title { color:#fff; font-size:14px; font-weight:600; }
+.tx-sub { color:rgba(255,255,255,.35); font-size:11px; margin-top:3px; }
+.tx-amt { text-align:right; }
+.tx-neg { color:#fff; font-size:13px; font-weight:700; }
+.tx-pos { color:#00C087; font-size:13px; font-weight:700; }
+
+/* --- SEND SCREEN --- */
+.send-title { color:#fff; font-size:20px; font-weight:700; margin-bottom:20px; }
+.method-tabs { display:flex; background:#161F30; border-radius:12px; padding:4px; margin-bottom:22px; gap:3px; }
+.m-tab { flex:1; padding:9px 0; text-align:center; border-radius:8px; border:none; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; background:transparent; color:rgba(255,255,255,.4); transition:.2s; }
+.m-tab.mc { background:#E60000; color:#fff; }
+.m-tab.nc { background:#FF6600; color:#fff; }
+.m-tab.base { background:#0052FF; color:#fff; }
+
+.inp-box { background:#161F30; border-radius:14px; padding:16px; margin-bottom:14px; border:1px solid #27354E; }
+.inp-lbl { color:rgba(255,255,255,.4); font-size:12px; margin-bottom:8px; }
+.inp-row { display:flex; justify-content:space-between; align-items:center; }
+.inp-amount { background:none; border:none; color:#fff; font-size:28px; font-weight:800; width:70%; outline:none; font-family:inherit; }
+.inp-currency { color:#fff; font-size:16px; font-weight:600; }
+.inp-convert { color:#00C087; font-size:12px; margin-top:8px; font-weight:500; }
+.inp-field { background:none; border:none; color:#fff; font-size:15px; outline:none; width:100%; font-family:inherit; }
+
+.summary { background:#222F46; border-radius:12px; padding:14px; margin-bottom:16px; }
+.sum-row { display:flex; justify-content:space-between; margin-bottom:7px; }
+.sum-row:last-child { margin-bottom:0; }
+.sum-key { color:rgba(255,255,255,.4); font-size:12px; }
+.sum-val { color:#fff; font-size:12px; font-weight:600; }
+
+.send-btn { background:#0052FF; border:none; border-radius:14px; padding:16px; width:100%; color:#fff; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; margin-top:8px; }
+
+/* --- CARD SCREEN --- */
+.card-title { color:#fff; font-size:20px; font-weight:700; margin-bottom:20px; }
+.visa-card { height:190px; background:linear-gradient(135deg,#0A1F6E,#1055CC,#0D62E8); border-radius:20px; padding:22px; border:1px solid rgba(255,255,255,.15); margin-bottom:24px; position:relative; overflow:hidden; transition:.3s; }
+.visa-card.frozen { opacity:.45; }
+.vc-cc1 { position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.06); }
+.vc-cc2 { position:absolute; bottom:-70px; left:-40px; width:160px; height:160px; border-radius:50%; background:rgba(0,174,239,.08); }
+.vc-inner { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+.vc-top { display:flex; justify-content:space-between; }
+.vc-brand { color:rgba(255,255,255,.6); font-size:12px; font-weight:900; letter-spacing:.12em; }
+.vc-chip { width:40px; height:28px; background:linear-gradient(135deg,#d4af37,#f5d87a,#d4af37); border-radius:6px; }
+.vc-visa { font-size:16px; font-weight:900; font-style:italic; color:rgba(255,255,255,.92); }
+.vc-num { color:#fff; font-size:17px; font-weight:700; letter-spacing:.18em; text-align:center; }
+.vc-foot { display:flex; justify-content:space-between; align-items:flex-end; }
+.vc-lbl { color:rgba(255,255,255,.5); font-size:9px; font-weight:700; }
+.vc-val { color:#fff; font-size:12px; font-weight:700; margin-top:2px; }
+
+.controls { display:flex; flex-direction:column; gap:10px; }
+.ctrl { display:flex; justify-content:space-between; align-items:center; background:#161F30; padding:16px; border-radius:14px; border:1px solid #27354E; }
+.ctrl-left { display:flex; align-items:center; gap:12px; }
+.ctrl-icon { font-size:18px; }
+.ctrl-txt { color:#fff; font-size:14px; font-weight:600; }
+.toggle { position:relative; width:44px; height:24px; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; inset:0; background:#27354E; border-radius:24px; cursor:pointer; transition:.3s; }
+.toggle-slider::before { content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.3s; }
+input:checked + .toggle-slider { background:#0052FF; }
+input:checked + .toggle-slider.red { background:#E60000; }
+input:checked + .toggle-slider::before { transform:translateX(20px); }
+
+.info-box { display:flex; align-items:center; gap:12px; background:#161F30; padding:16px; border-radius:14px; border:1px solid #27354E; margin-top:14px; }
+.info-icon { font-size:22px; }
+.info-title { color:#fff; font-size:13px; font-weight:600; }
+.info-sub { color:rgba(255,255,255,.35); font-size:11px; margin-top:3px; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: absolute; bottom:0; left:0; right:0;
+  height: 60px;
+  background: #161F30;
+  border-top: 1px solid #27354E;
+  display: flex;
+  align-items: center;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 8px 0;
+}
+.nav-icon { font-size: 20px; }
+.nav-lbl { font-size: 10px; font-weight: 600; }
+.nav-item.active .nav-lbl { color: #00C087; }
+.nav-item:not(.active) .nav-lbl { color: rgba(255,255,255,.35); }
+</style>
+</head>
+<body>
+<h1>TchotchoPay Mobile App</h1>
+<p class="subtitle">Interactive preview — click the tabs to switch screens</p>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showScreen('home', this)">🏠 Home</button>
+  <button class="tab-btn" onclick="showScreen('send', this)">💸 Send</button>
+  <button class="tab-btn" onclick="showScreen('card', this)">💳 Card</button>
+</div>
+
+<div class="phone-wrap">
+  <div class="phone-frame">
+
+    <!-- ===== HOME SCREEN ===== -->
+    <div class="screen" id="screen-home">
+      <div class="screen-content">
+        <div class="home-header">
+          <div>
+            <div class="home-greeting">Bonjou, Jean 👋</div>
+            <div class="home-network">Base L2 Network</div>
+          </div>
+          <div class="notif-btn">🔔</div>
+        </div>
+
+        <div class="balance-card">
+          <div class="bal-header">
+            <span class="bal-label">Total Available Balance</span>
+            <button class="eye-btn" onclick="toggleBalance()">👁</button>
+          </div>
+          <div class="bal-amount" id="bal-usdc">$1,240.50 <span>USDC</span></div>
+          <div class="bal-htg" id="bal-htg">≈ 164,466.25 HTG</div>
+          <div class="bal-tag">
+            <div class="pulse"></div>
+            <span class="bal-tag-txt">Base L2 • Low Fees</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="action" onclick="showScreen('send', null)">
+            <div class="action-icon" style="background:#0052FF;">📤</div>
+            <span class="action-lbl">Send</span>
+          </div>
+          <div class="action">
+            <div class="action-icon" style="background:#222F46;">📥</div>
+            <span class="action-lbl">Receive</span>
+          </div>
+          <div class="action">
+            <div class="action-icon" style="background:#222F46;">➕</div>
+            <span class="action-lbl">Add Cash</span>
+          </div>
+          <div class="action" onclick="showScreen('card', null)">
+            <div class="action-icon" style="background:#222F46;">💳</div>
+            <span class="action-lbl">Card</span>
+          </div>
+        </div>
+
+        <div class="section-title">Recent Transactions</div>
+        <div class="tx">
+          <div class="tx-badge" style="background:#FFECEC; color:#E60000;">MC</div>
+          <div class="tx-info">
+            <div class="tx-title">Sent to MonCash</div>
+            <div class="tx-sub">+509 3712-3456 • Complete</div>
+          </div>
+          <div class="tx-amt">
+            <div class="tx-neg">- $50.00</div>
+            <div class="tx-sub">-6,625 HTG</div>
+          </div>
+        </div>
+        <div class="tx">
+          <div class="tx-badge" style="background:#EBF4FF; color:#0052FF;">USDC</div>
+          <div class="tx-info">
+            <div class="tx-title">Received from 0x8a...4f</div>
+            <div class="tx-sub">2 mins ago</div>
+          </div>
+          <div class="tx-amt">
+            <div class="tx-pos">+ $250.00</div>
+            <div class="tx-sub">+33,125 HTG</div>
+          </div>
+        </div>
+        <div class="tx">
+          <div class="tx-badge" style="background:#FFF3E0; color:#FF6600;">NC</div>
+          <div class="tx-info">
+            <div class="tx-title">Sent to NatCash</div>
+            <div class="tx-sub">+509 4821-7890 • Complete</div>
+          </div>
+          <div class="tx-amt">
+            <div class="tx-neg">- $30.00</div>
+            <div class="tx-sub">-3,975 HTG</div>
+          </div>
+        </div>
+      </div>
+      <div style="height:60px;"></div><!-- spacer for nav -->
+    </div>
+
+    <!-- ===== SEND SCREEN ===== -->
+    <div class="screen" id="screen-send" style="display:none;">
+      <div class="screen-content">
+        <div class="send-title">Send Money to Haiti</div>
+
+        <div class="method-tabs">
+          <button class="m-tab mc" id="mt-mc" onclick="setMethod('mc')">MonCash</button>
+          <button class="m-tab" id="mt-nc" onclick="setMethod('nc')">NatCash</button>
+          <button class="m-tab" id="mt-base" onclick="setMethod('base')">Base USDC</button>
+        </div>
+
+        <div class="inp-box">
+          <div class="inp-lbl">You send</div>
+          <div class="inp-row">
+            <input class="inp-amount" type="number" placeholder="0.00" id="send-amount" oninput="calcHtg()" value="50">
+            <span class="inp-currency">USDC</span>
+          </div>
+          <div class="inp-convert" id="htg-calc">Recipient gets: ~6,625.00 HTG</div>
+        </div>
+
+        <div class="inp-box">
+          <div class="inp-lbl" id="recip-lbl">Recipient's Haiti Phone Number</div>
+          <input class="inp-field" placeholder="+509 3XXX XXXX" id="recip-input">
+        </div>
+
+        <div class="summary">
+          <div class="sum-row"><span class="sum-key">Platform Fee</span><span class="sum-val">$0.50 USDC</span></div>
+          <div class="sum-row"><span class="sum-key">Network Speed</span><span class="sum-val">Instant (&lt; 5 sec)</span></div>
+          <div class="sum-row"><span class="sum-key">Delivery</span><span class="sum-val" id="delivery-lbl">MonCash</span></div>
+        </div>
+
+        <button class="send-btn" onclick="confirmSend()">Transfer Now →</button>
+      </div>
+      <div style="height:60px;"></div>
+    </div>
+
+    <!-- ===== CARD SCREEN ===== -->
+    <div class="screen" id="screen-card" style="display:none;">
+      <div class="screen-content">
+        <div class="card-title">TchotchoPay Card</div>
+
+        <div class="visa-card" id="visa-card">
+          <div class="vc-cc1"></div>
+          <div class="vc-cc2"></div>
+          <div class="vc-inner">
+            <div class="vc-top">
+              <span class="vc-brand">TCHOTCHOPAY</span>
+              <div class="vc-chip"></div>
+              <span class="vc-visa">VISA</span>
+            </div>
+            <div class="vc-num" id="card-num">•••• •••• •••• 4920</div>
+            <div class="vc-foot">
+              <div>
+                <div class="vc-lbl">CARDHOLDER</div>
+                <div class="vc-val">SOPHIE JOSEPH</div>
+              </div>
+              <div>
+                <div class="vc-lbl">EXP</div>
+                <div class="vc-val">09/28</div>
+              </div>
+              <div>
+                <div class="vc-lbl">CVV</div>
+                <div class="vc-val" id="card-cvv">•••</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="ctrl">
+            <div class="ctrl-left">
+              <span class="ctrl-icon">👁</span>
+              <span class="ctrl-txt">Show Details & CVV</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" onchange="toggleDetails(this)">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-left">
+              <span class="ctrl-icon">🔒</span>
+              <span class="ctrl-txt">Freeze Card</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" onchange="toggleFreeze(this)">
+              <span class="toggle-slider red"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-icon">✅</div>
+          <div>
+            <div class="info-title">Funded with Base USDC</div>
+            <div class="info-sub">Spend anywhere Visa is accepted online — worldwide.</div>
+          </div>
+        </div>
+      </div>
+      <div style="height:60px;"></div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+      <button class="nav-item active" id="nav-home" onclick="showScreen('home', null)">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-lbl">Home</span>
+      </button>
+      <button class="nav-item" id="nav-send" onclick="showScreen('send', null)">
+        <span class="nav-icon">📤</span>
+        <span class="nav-lbl">Send</span>
+      </button>
+      <button class="nav-item" id="nav-card" onclick="showScreen('card', null)">
+        <span class="nav-icon">💳</span>
+        <span class="nav-lbl">Card</span>
+      </button>
+    </div>
+
+  </div><!-- /phone-frame -->
+</div><!-- /phone-wrap -->
+
+<script>
+const screens = ['home','send','card'];
+let balVisible = true;
+
+function showScreen(name, btnEl) {
+  screens.forEach(s => {
+    document.getElementById('screen-'+s).style.display = (s===name) ? 'block' : 'none';
+    document.getElementById('nav-'+s).classList.toggle('active', s===name);
+  });
+  // Update top tabs if clicked from there
+  if (btnEl) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      b.classList.toggle('active', ['home','send','card'][i]===name);
+    });
+  } else {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      b.classList.toggle('active', ['home','send','card'][i]===name);
+    });
+  }
+}
+
+function toggleBalance() {
+  balVisible = !balVisible;
+  document.getElementById('bal-usdc').innerHTML = balVisible ? '$1,240.50 <span>USDC</span>' : '•••••• <span>USDC</span>';
+  document.getElementById('bal-htg').textContent = balVisible ? '≈ 164,466.25 HTG' : '••••••••';
+}
+
+// ── Live exchange rate ────────────────────────────────────────────
+let htgRate = 132.5; // default; overwritten by API
+
+async function loadLiveRate() {
+  try {
+    const r = await fetch('https://tchotchopay.com/.netlify/functions/exchange-rates');
+    const j = await r.json();
+    if (j.success && j.data.rates.HTG) {
+      htgRate = j.data.rates.HTG;
+      // update balance display
+      document.getElementById('bal-htg').textContent = '≈ ' + (1240.50 * htgRate).toLocaleString('en-US',{maximumFractionDigits:2}) + ' HTG';
+      // update HTG calc if amount already typed
+      calcHtg();
+    }
+  } catch(e) { /* keep static fallback */ }
+}
+loadLiveRate();
+
+let curMethod = 'mc';
+function setMethod(m) {
+  curMethod = m;
+  ['mc','nc','base'].forEach(x => {
+    const el = document.getElementById('mt-'+x);
+    el.className = 'm-tab' + (x===m ? ' '+x : '');
+  });
+  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USDC'};
+  const placeholderMap = {mc:'+509 3XXX XXXX', nc:'+509 4XXX XXXX', base:'0x... or name.base.eth'};
+  const recipLbl = {mc:"Recipient's Haiti Phone Number", nc:"Recipient's Haiti Phone Number", base:"Recipient Base Wallet / ENS"};
+  document.getElementById('delivery-lbl').textContent = lblMap[m];
+  document.getElementById('recip-input').placeholder = placeholderMap[m];
+  document.getElementById('recip-lbl').textContent = recipLbl[m];
+}
+
+function calcHtg() {
+  const amt = parseFloat(document.getElementById('send-amount').value) || 0;
+  const htg = (amt * htgRate).toLocaleString('en-US',{maximumFractionDigits:2});
+  document.getElementById('htg-calc').textContent = 'Recipient gets: ~' + htg + ' HTG';
+}
+
+function confirmSend() {
+  const amt = document.getElementById('send-amount').value || '0';
+  const recip = document.getElementById('recip-input').value || 'recipient';
+  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USDC'};
+  alert('✅ Confirm Transfer\n\nSend ' + amt + ' USDC to ' + recip + ' via ' + lblMap[curMethod] + '?\n\n(Tap OK to simulate confirmation)');
+}
+
+let detailsOn = false;
+function toggleDetails(el) {
+  detailsOn = el.checked;
+  document.getElementById('card-num').textContent = detailsOn ? '4242  8821  9012  4920' : '••••  ••••  ••••  4920';
+  document.getElementById('card-cvv').textContent = detailsOn ? '382' : '•••';
+}
+
+function toggleFreeze(el) {
+  document.getElementById('visa-card').classList.toggle('frozen', el.checked);
+}
+</script>
+</body>
+</html>

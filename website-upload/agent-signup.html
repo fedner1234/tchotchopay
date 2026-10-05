@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Become a Tchotcho Pay Cash Agent — Earn 1% Commission</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Earn commission helping customers cash out in Haiti. Receive float in USDC, dispense HTG, and earn 1% on every transaction you process."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/agent-signup.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/agent-signup.html"/>
+  <meta property="og:title" content="Become a Tchotcho Pay Cash Agent — Earn 1% Commission"/>
+  <meta property="og:description" content="Earn commission helping customers cash out in Haiti. Receive float in USDC, dispense HTG, and earn 1% on every transaction you process."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Become a Tchotcho Pay Cash Agent — Earn 1% Commission"/>
+  <meta name="twitter:description" content="Earn commission helping customers cash out in Haiti. Receive float in USDC, dispense HTG, and earn 1% on every transaction you process."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+    html { overflow-x: hidden; }
+:root{
+  --bg:#07091a;--panel:#0d1120;--card:#111827;--border:#1e2a40;
+  --cyan:#00e5ff;--cyan2:#00b4cc;--green:#00e676;--red:#ff5252;--orange:#F7B731;--yellow:#ffd740;
+  --txt:#e8eaf6;--muted:#8899aa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;}
+
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;padding:14px 28px;display:flex;align-items:center;gap:14px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+
+.nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 46px; width: auto; display: block; }
+
+.nav-back{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:13px;transition:.15s;}
+.nav-back:hover{color:var(--txt);}
+
+.page-wrap{min-height:100vh;padding:80px 0 60px;display:flex;align-items:flex-start;justify-content:center;}
+.page-inner{width:100%;max-width:680px;padding:0 20px;}
+
+.progress-wrap{margin:32px 0 28px;}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.progress-label-left{font-size:12px;color:var(--muted);}
+.progress-label-right{font-size:12px;font-weight:700;color:var(--cyan);}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--cyan2),var(--cyan));border-radius:2px;transition:.4s;}
+.steps-row{display:flex;gap:0;margin-top:10px;}
+.step-dot{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.step-dot-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);transition:.3s;}
+.step-dot-circle.done{background:var(--cyan);border-color:var(--cyan);color:#000;}
+.step-dot-circle.active{border-color:var(--cyan);color:var(--cyan);}
+.step-dot-lbl{font-size:9px;color:var(--muted);text-align:center;}
+
+.form-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:20px;}
+.step-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,180,204,.15));border:1px solid rgba(0,229,255,.3);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;}
+.step-title{font-size:20px;font-weight:800;margin-bottom:6px;}
+.step-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+
+.form-group{margin-bottom:18px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px;font-weight:500;}
+label span.req{color:var(--cyan);}
+input,select,textarea{width:100%;padding:11px 14px;background:#ffffff08;border:1px solid var(--border);border-radius:9px;color:var(--txt);font-size:14px;outline:none;font-family:inherit;transition:.2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan);background:#00e5ff05;}
+input::placeholder,textarea::placeholder{color:var(--muted);}
+select option{background:var(--panel);}
+textarea{resize:vertical;min-height:90px;}
+.input-with-icon{position:relative;}
+.input-with-icon i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none;}
+.input-with-icon input{padding-left:38px;}
+
+/* ZONE GRID */
+.zone-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.zone-btn{padding:10px 12px;border-radius:9px;background:#ffffff06;border:1px solid var(--border);cursor:pointer;font-size:12px;font-weight:500;color:var(--muted);transition:.15s;display:flex;align-items:center;gap:8px;}
+.zone-btn:hover,.zone-btn.on{background:rgba(0,229,255,.08);border-color:rgba(0,229,255,.4);color:var(--cyan);}
+.zone-btn i{font-size:14px;}
+
+/* EXPERIENCE OPTIONS */
+.exp-card{padding:12px 14px;background:#ffffff06;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.exp-card:hover,.exp-card.on{background:rgba(0,229,255,.07);border-color:rgba(0,229,255,.35);}
+.exp-radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted);flex-shrink:0;position:relative;transition:.15s;}
+.exp-radio::after{content:'';position:absolute;inset:2px;border-radius:50%;background:var(--cyan);opacity:0;transition:.15s;}
+.exp-card.on .exp-radio{border-color:var(--cyan);}
+.exp-card.on .exp-radio::after{opacity:1;}
+.exp-icon{font-size:20px;flex-shrink:0;}
+.exp-info{flex:1;}
+.exp-name{font-size:13px;font-weight:600;}
+.exp-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:22px;text-align:center;cursor:pointer;transition:.2s;margin-top:6px;}
+.upload-zone:hover,.upload-zone.has-file{border-color:var(--cyan);background:rgba(0,229,255,.04);}
+.upload-zone i{font-size:26px;color:var(--muted);display:block;margin-bottom:7px;}
+.upload-zone.has-file i{color:var(--cyan);}
+.upload-label{font-size:13px;color:var(--muted);}
+.upload-zone.has-file .upload-label{color:var(--cyan);font-weight:600;}
+.upload-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+
+/* INFO BOX */
+.info-box{background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:12px;color:var(--muted);line-height:1.7;}
+.info-box strong{color:var(--cyan);}
+
+/* FLOAT SELECTOR */
+.float-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;}
+.float-opt{padding:12px;border-radius:9px;background:#ffffff06;border:1px solid var(--border);cursor:pointer;text-align:center;transition:.15s;}
+.float-opt:hover,.float-opt.on{background:rgba(0,229,255,.08);border-color:rgba(0,229,255,.4);}
+.float-val{font-size:16px;font-weight:800;color:var(--cyan);}
+.float-lbl{font-size:10px;color:var(--muted);margin-top:2px;}
+.float-earn{font-size:10px;color:var(--green);margin-top:4px;}
+
+/* REVIEW */
+.review-section{margin-bottom:14px;}
+.review-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;}
+.review-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.review-row:last-child{border-bottom:none;}
+.review-val{font-weight:600;text-align:right;}
+
+/* TERMS */
+.terms-box{background:#ffffff05;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;color:var(--muted);max-height:130px;overflow-y:auto;line-height:1.7;margin-bottom:14px;}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;cursor:pointer;}
+.checkbox-row input[type=checkbox]{width:16px;height:16px;margin-top:1px;accent-color:var(--cyan);flex-shrink:0;}
+.checkbox-row span{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* ACTIONS */
+.form-actions{display:flex;gap:10px;margin-top:8px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:inherit;text-decoration:none;}
+.btn-primary{background:linear-gradient(135deg,var(--cyan2),var(--cyan));color:#000;}
+.btn-primary:hover{opacity:.88;}
+.btn-back{background:#ffffff0d;color:var(--txt);border:1px solid var(--border);}
+.btn-back:hover{background:#ffffff18;}
+.btn-full{width:100%;justify-content:center;}
+
+/* HERO */
+.signup-hero{text-align:center;padding:32px 0 0;}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.3);border-radius:50px;padding:5px 16px;font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px;}
+.hero-title{font-size:28px;font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-title em{color:var(--cyan);font-style:normal;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:460px;margin:0 auto 8px;line-height:1.6;}
+.hero-perks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px;}
+.hero-perk{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.hero-perk i{color:var(--cyan);font-size:14px;}
+
+/* SUCCESS */
+.success-card{background:var(--panel);border:1px solid rgba(0,229,255,.2);border-radius:16px;padding:40px 32px;text-align:center;margin-top:32px;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(0,229,255,.15),rgba(0,180,204,.15));display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;}
+.success-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.success-sub{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto 24px;line-height:1.6;}
+.success-steps{text-align:left;background:#ffffff05;border-radius:10px;padding:16px;margin-bottom:24px;}
+.success-step{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:13px;}
+.ss-num{width:20px;height:20px;border-radius:50%;background:rgba(0,229,255,.15);color:var(--cyan);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:2px;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media(max-width:600px){.form-row-2{grid-template-columns:1fr;}.zone-grid{grid-template-columns:1fr;}.float-opts{grid-template-columns:1fr 1fr;}.form-card{padding:22px 18px;}}
+
+    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
+    html, body { overflow-x: hidden !important; max-width: 100% !important; }
+    * { box-sizing: border-box; }
+    img, video, iframe, table { max-width: 100%; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+</head>
+<body>
+<!-- Hidden Netlify form for bot detection -->
+<form name="agent-application" netlify netlify-honeypot="bot-field" hidden>
+  <input name="first-name"/><input name="last-name"/><input name="email"/>
+  <input name="phone"/><input name="city"/><input name="zone"/>
+  <input name="float-size"/><input name="doc-type"/>
+</form>
+
+<nav class="topnav">
+  <a href="index.html" class="nav-brand">
+    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  </a>
+  <span style="font-size:12px;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.3);padding:3px 10px;border-radius:20px;color:var(--cyan);font-weight:600;">Agent Application</span>
+  <a class="nav-back" href="index.html#business"><i class="ti ti-arrow-left"></i> Back</a>
+</nav>
+
+<div class="page-wrap">
+<div class="page-inner">
+
+  <div class="signup-hero" id="hero-block">
+    <div class="hero-badge">💼 Cash Agent Program</div>
+    <h1 class="hero-title">Earn commission helping<br/>your community <em>cash out</em></h1>
+    <p class="hero-sub">Become a Tchotcho Pay cash agent in your neighborhood. Process USDC-to-HTG withdrawals and earn 1% on every transaction.</p>
+    <div class="hero-perks">
+      <div class="hero-perk"><i class="ti ti-check"></i>1% per transaction</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>Float provided by us</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>Zero fraud risk</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>Dashboard included</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap" style="display:none;">
+    <div class="progress-label">
+      <span class="progress-label-left" id="step-label">Step 1 of 5</span>
+      <span class="progress-label-right" id="step-name">Personal Info</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:20%;"></div></div>
+    <div class="steps-row" id="steps-row"></div>
+  </div>
+
+  <!-- STEP 0: INTRO -->
+  <div id="step-0">
+    <div class="form-card" style="margin-top:24px;">
+      <div class="info-box">
+        <strong>How agent float works:</strong> Tchotcho Pay deposits USDC into your agent wallet. When a customer wants to cash out, you give them HTG from your own cash on hand, and we debit the USDC from your float. You earn <strong>1% commission</strong> on each transaction. You never risk your own money beyond your cash float.
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--cyan);">1%</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Per transaction</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--green);">30 min</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Float top-up speed</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--yellow);">$0</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Sign-up fee</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--cyan);">24/7</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">On your schedule</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="startSignup()"><i class="ti ti-arrow-right"></i> Apply Now</button>
+      <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted);">Application reviewed within 48 hours · Must be 18+ and based in Haiti</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: PERSONAL INFO -->
+  <div id="step-1" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">👤</div>
+      <div class="step-title">Personal information</div>
+      <div class="step-sub">Tell us about yourself. All agents must be 18+ and currently living in Haiti.</div>
+
+      <div class="form-row-2">
+        <div class="form-group"><label>First Name <span class="req">*</span></label><input type="text" id="a-first" placeholder="Jean"/></div>
+        <div class="form-group"><label>Last Name <span class="req">*</span></label><input type="text" id="a-last" placeholder="Baptiste"/></div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group"><label>Date of Birth <span class="req">*</span></label><input type="date" id="a-dob"/></div>
+        <div class="form-group"><label>Gender</label>
+          <select id="a-gender"><option>Prefer not to say</option><option>Male</option><option>Female</option></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number <span class="req">*</span></label>
+        <div class="input-with-icon"><i class="ti ti-phone"></i>
+          <input type="tel" id="a-phone" placeholder="+509 3412-8844"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address <span class="req">*</span></label>
+        <div class="input-with-icon"><i class="ti ti-mail"></i>
+          <input type="email" id="a-email" placeholder="your@email.com"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Home Address in Haiti <span class="req">*</span></label>
+        <input type="text" id="a-addr" placeholder="Street address, neighborhood"/>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group"><label>City / Area</label>
+          <select id="a-city">
+            <option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option>
+            <option>Tabarre</option><option>Carrefour</option><option>Cite Soleil</option>
+            <option>Cap-Haïtien</option><option>Gonaïves</option><option>Saint-Marc</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>National ID Number <span class="req">*</span></label>
+          <input type="text" id="a-nid" placeholder="Enter ID number"/>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: ZONE & LOCATION -->
+  <div id="step-2" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">📍</div>
+      <div class="step-title">Your operating zone</div>
+      <div class="step-sub">Where will you be accepting customers? You'll only receive cash-out requests from customers in your zone.</div>
+
+      <div class="form-group">
+        <label>Primary Zone / Neighborhood <span class="req">*</span></label>
+        <div class="zone-grid" id="zone-grid">
+          <div class="zone-btn" onclick="selZone(this,'Pétion-Ville')"><i class="ti ti-map-pin"></i>Pétion-Ville</div>
+          <div class="zone-btn" onclick="selZone(this,'Delmas')"><i class="ti ti-map-pin"></i>Delmas</div>
+          <div class="zone-btn" onclick="selZone(this,'Carrefour')"><i class="ti ti-map-pin"></i>Carrefour</div>
+          <div class="zone-btn" onclick="selZone(this,'Tabarre')"><i class="ti ti-map-pin"></i>Tabarre</div>
+          <div class="zone-btn" onclick="selZone(this,'Cite Soleil')"><i class="ti ti-map-pin"></i>Cite Soleil</div>
+          <div class="zone-btn" onclick="selZone(this,'Croix-des-Bouquets')"><i class="ti ti-map-pin"></i>Croix-des-Bouquets</div>
+          <div class="zone-btn" onclick="selZone(this,'Cap-Haïtien')"><i class="ti ti-map-pin"></i>Cap-Haïtien</div>
+          <div class="zone-btn" onclick="selZone(this,'Gonaïves')"><i class="ti ti-map-pin"></i>Gonaïves</div>
+          <div class="zone-btn" onclick="selZone(this,'Saint-Marc')"><i class="ti ti-map-pin"></i>Saint-Marc</div>
+          <div class="zone-btn" onclick="selZone(this,'Jacmel')"><i class="ti ti-map-pin"></i>Jacmel</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Specific Street / Landmark</label>
+        <input type="text" id="a-landmark" placeholder="e.g. Near Marché Hyppolite, Rue des Miracles"/>
+      </div>
+
+      <div class="form-group">
+        <label>Do you have a fixed physical location?</label>
+        <div class="exp-card on" id="loc-yes" onclick="selLoc(this,'yes')">
+          <div class="exp-radio"></div>
+          <div class="exp-icon">🏪</div>
+          <div class="exp-info"><div class="exp-name">Yes — I have a shop or stall</div><div class="exp-sub">Customers come to me</div></div>
+        </div>
+        <div class="exp-card" id="loc-no" onclick="selLoc(this,'no')">
+          <div class="exp-radio"></div>
+          <div class="exp-icon">🚶</div>
+          <div class="exp-info"><div class="exp-name">No — I operate on the move</div><div class="exp-sub">I go to customers in my zone</div></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Operating Hours</label>
+        <div class="form-row-2">
+          <div><label style="margin-bottom:4px;">From</label><input type="time" id="a-open" value="08:00"/></div>
+          <div><label style="margin-bottom:4px;">To</label><input type="time" id="a-close" value="18:00"/></div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(1)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: EXPERIENCE & FLOAT -->
+  <div id="step-3" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">💰</div>
+      <div class="step-title">Experience & float level</div>
+      <div class="step-sub">Help us understand your background and choose your starting float amount.</div>
+
+      <div class="form-group">
+        <label>Do you currently do any money-related work?</label>
+        <div class="exp-card on" id="exp-yes" onclick="selExp(this,'yes')">
+          <div class="exp-radio"></div>
+          <div class="exp-icon">✅</div>
+          <div class="exp-info"><div class="exp-name">Yes — I already handle cash or transfers</div><div class="exp-sub">MonCash agent, informal exchange, etc.</div></div>
+        </div>
+        <div class="exp-card" id="exp-no" onclick="selExp(this,'no')">
+          <div class="exp-radio"></div>
+          <div class="exp-icon">🆕</div>
+          <div class="exp-info"><div class="exp-name">No — This will be new for me</div><div class="exp-sub">We'll provide training resources</div></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Brief background <span style="font-size:11px;color:var(--muted);">(optional)</span></label>
+        <textarea id="a-bio" placeholder="Tell us about your business experience, why you want to be an agent, and why you'd be a good fit for your zone..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Starting Float Amount <span class="req">*</span></label>
+        <div class="info-box" style="margin-bottom:10px;">
+          Your float is the USDC we deposit into your agent account. Choose based on how many customers you expect daily. You can request more anytime.
+        </div>
+        <div class="float-opts" id="float-opts">
+          <div class="float-opt" onclick="selFloat(this,500)">
+            <div class="float-val">$500</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">~$5/day</div>
+          </div>
+          <div class="float-opt on" onclick="selFloat(this,1000)">
+            <div class="float-val">$1,000</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">~$10/day</div>
+          </div>
+          <div class="float-opt" onclick="selFloat(this,2000)">
+            <div class="float-val">$2,000</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">~$20/day</div>
+          </div>
+          <div class="float-opt" onclick="selFloat(this,5000)">
+            <div class="float-val">$5,000</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">~$50/day</div>
+          </div>
+          <div class="float-opt" onclick="selFloat(this,10000)">
+            <div class="float-val">$10,000</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">~$100/day</div>
+          </div>
+          <div class="float-opt" onclick="selFloat(this,0,'custom')">
+            <div class="float-val">Custom</div>
+            <div class="float-lbl">USDC float</div>
+            <div class="float-earn">Discuss with team</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(2)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(4)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: ID UPLOAD -->
+  <div id="step-4" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">🪪</div>
+      <div class="step-title">Identity verification</div>
+      <div class="step-sub">Upload a government-issued ID. Agents are required to pass KYC before receiving any float.</div>
+
+      <div class="form-group">
+        <label>ID Document Type <span class="req">*</span></label>
+        <select id="a-doc-type">
+          <option>National ID Card (Haiti)</option>
+          <option>Passport</option>
+          <option>Driver's License</option>
+          <option>Permanent Resident Card</option>
+        </select>
+      </div>
+
+      <!-- Hidden file inputs -->
+      <input type="file" id="file-af" accept="image/*,application/pdf" style="display:none" onchange="handleFile('af',this)"/>
+      <input type="file" id="file-ab" accept="image/*,application/pdf" style="display:none" onchange="handleFile('ab',this)"/>
+      <input type="file" id="file-as" accept="image/*" style="display:none" onchange="handleFile('as',this)"/>
+
+      <div class="form-group">
+        <label>ID Front <span class="req">*</span></label>
+        <div class="upload-zone" id="a-front-zone" onclick="document.getElementById('file-af').click()">
+          <i class="ti ti-camera" id="af-icon"></i>
+          <div class="upload-label" id="af-label">Click to upload front of ID</div>
+          <div class="upload-sub">JPG, PNG or PDF · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>ID Back <span class="req">*</span></label>
+        <div class="upload-zone" id="a-back-zone" onclick="document.getElementById('file-ab').click()">
+          <i class="ti ti-camera" id="ab-icon"></i>
+          <div class="upload-label" id="ab-label">Click to upload back of ID</div>
+          <div class="upload-sub">JPG, PNG or PDF · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Selfie with ID <span class="req">*</span></label>
+        <div class="upload-zone" id="a-selfie-zone" onclick="document.getElementById('file-as').click()">
+          <i class="ti ti-user-circle" id="as-icon"></i>
+          <div class="upload-label" id="as-label">Click to upload selfie holding your ID</div>
+          <div class="upload-sub">Face must be clearly visible · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(3)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" id="a-docs-next" disabled onclick="goStep(5)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: REVIEW & SUBMIT -->
+  <div id="step-5" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">📋</div>
+      <div class="step-title">Review your application</div>
+      <div class="step-sub">Please confirm your details. Our team will review your application within 48 hours.</div>
+
+      <div class="review-section">
+        <div class="review-title">Personal</div>
+        <div class="review-row"><span style="color:var(--muted);">Name</span><span class="review-val" id="rv-name">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Phone</span><span class="review-val" id="rv-phone">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">City</span><span class="review-val" id="rv-city">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <div class="review-title">Operation</div>
+        <div class="review-row"><span style="color:var(--muted);">Zone</span><span class="review-val" id="rv-zone">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Hours</span><span class="review-val" id="rv-hours">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Requested Float</span><span class="review-val" id="rv-float" style="color:var(--cyan);">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <div class="review-title">Documents</div>
+        <div class="review-row"><span style="color:var(--muted);">ID Type</span><span class="review-val" id="rv-doctype">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">ID Front</span><span class="review-val" style="color:var(--green);">✓ Uploaded</span></div>
+        <div class="review-row"><span style="color:var(--muted);">ID Back</span><span class="review-val" style="color:var(--green);">✓ Uploaded</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Selfie with ID</span><span class="review-val" style="color:var(--green);">✓ Uploaded</span></div>
+      </div>
+
+      <div class="terms-box">
+        <strong>Tchotcho Pay Agent Agreement</strong><br/><br/>
+        As a Tchotcho Pay Cash Agent, you agree to: (1) Only process withdrawals for verified Tchotcho Pay users via the official Agent Dashboard. (2) Maintain your float securely and report any discrepancies within 24 hours. (3) Display Tchotcho Pay branding at your operating location. (4) Not charge customers additional fees beyond the platform rate. (5) Process requests within your stated operating hours. Agents earn 1% commission on all successfully processed transactions. Tchotcho Pay may suspend or terminate agent status for violations including but not limited to fraud, extended inactivity, or customer complaints.
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="a-agree-terms" onchange="updateSubmit()"/>
+        <span>I agree to the <a href="#" style="color:var(--cyan);">Agent Terms of Service</a> and <a href="#" style="color:var(--cyan);">Privacy Policy</a></span>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="a-agree-kyc" onchange="updateSubmit()"/>
+        <span>I authorize Tchotcho Pay to verify my identity and conduct a background check</span>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="a-agree-float" onchange="updateSubmit()"/>
+        <span>I understand that float funds remain the property of Tchotcho Pay and must be accounted for at all times</span>
+      </label>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(4)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" id="a-submit-btn" disabled onclick="submitApplication()">
+          <i class="ti ti-send"></i> Submit Application
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6: SUCCESS -->
+  <div id="step-6" style="display:none;">
+    <div class="success-card">
+      <div class="success-icon">🤝</div>
+      <h2 class="success-title">Application Received!</h2>
+      <p class="success-sub">Thanks, <strong id="success-name">Agent</strong>! Your agent application is under review. We'll contact you at your registered phone number within <strong>48 hours</strong>.</p>
+      <div class="success-steps">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:10px;">What happens next</div>
+        <div class="success-step"><div class="ss-num">1</div><span>Our team reviews your application and verifies your ID (24–48 hrs)</span></div>
+        <div class="success-step"><div class="ss-num">2</div><span>You receive a call or SMS from our agent onboarding team</span></div>
+        <div class="success-step"><div class="ss-num">3</div><span>We deploy your starting float to your Tchotcho Agent wallet</span></div>
+        <div class="success-step"><div class="ss-num">4</div><span>You go live and start earning 1% on every transaction</span></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="agent-dashboard.html" target="_blank" class="btn btn-primary"><i class="ti ti-layout-dashboard"></i> Preview Agent Dashboard</a>
+        <a href="index.html" class="btn btn-back">Back to Home</a>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:var(--muted);">Questions? Email <a href="mailto:agents@tchotchopay.com" style="color:var(--cyan);">agents@tchotchopay.com</a></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+const STEPS_META=[
+  {label:'Personal Info',pct:20},
+  {label:'Zone',pct:40},
+  {label:'Experience',pct:60},
+  {label:'Identity',pct:80},
+  {label:'Review',pct:100},
+];
+let currentStep=0;
+let selectedZone='';
+let selectedFloat=1000;
+let uploading={};
+let afUp=false,abUp=false,asUp=false;
+
+function startSignup(){
+  document.getElementById('hero-block').style.display='none';
+  document.getElementById('step-0').style.display='none';
+  document.getElementById('progress-wrap').style.display='block';
+  goStep(1);
+}
+
+function goStep(n){
+  [1,2,3,4,5,6].forEach(i=>{
+    const el=document.getElementById('step-'+i);
+    if(el) el.style.display='none';
+  });
+  currentStep=n;
+  const el=document.getElementById('step-'+n);
+  if(el) el.style.display='block';
+  if(n<=5){
+    const meta=STEPS_META[n-1];
+    document.getElementById('step-label').textContent='Step '+n+' of 5';
+    document.getElementById('step-name').textContent=meta.label;
+    document.getElementById('progress-fill').style.width=meta.pct+'%';
+    renderDots(n);
+  }
+  if(n===5) fillReview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderDots(active){
+  const names=['Personal','Zone','Exp.','ID','Review'];
+  document.getElementById('steps-row').innerHTML=names.map((n,i)=>{
+    const num=i+1;
+    const cls=num<active?'done':num===active?'active':'';
+    return `<div class="step-dot"><div class="step-dot-circle ${cls}">${num<active?'✓':num}</div><div class="step-dot-lbl">${n}</div></div>`;
+  }).join('');
+}
+
+function selZone(el,zone){
+  document.querySelectorAll('.zone-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  selectedZone=zone;
+}
+
+function selLoc(el,v){
+  ['loc-yes','loc-no'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  el.classList.add('on');
+}
+
+function selExp(el,v){
+  ['exp-yes','exp-no'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  el.classList.add('on');
+}
+
+function selFloat(el,amt,custom){
+  document.querySelectorAll('.float-opt').forEach(o=>o.classList.remove('on'));
+  el.classList.add('on');
+  selectedFloat=custom?'custom':amt;
+}
+
+function handleFile(side, input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 5 * 1024 * 1024){
+    alert('File is too large. Maximum size is 5MB.');
+    input.value = '';
+    return;
+  }
+  const zoneId={af:'a-front-zone',ab:'a-back-zone',as:'a-selfie-zone'}[side];
+  const zone=document.getElementById(zoneId);
+  const icon=document.getElementById(side+'-icon');
+  const lbl=document.getElementById(side+'-label');
+  zone.classList.add('has-file');
+  icon.className='ti ti-circle-check';
+  icon.style.color='var(--cyan)';
+  icon.style.animation='';
+  const labels={af:'ID front uploaded ✓',ab:'ID back uploaded ✓',as:'Selfie uploaded ✓'};
+  lbl.textContent=labels[side]+' ('+file.name+')';
+  if(side==='af') afUp=true;
+  if(side==='ab') abUp=true;
+  if(side==='as') asUp=true;
+  if(afUp&&abUp&&asUp) document.getElementById('a-docs-next').removeAttribute('disabled');
+}
+
+function fillReview(){
+  const first=document.getElementById('a-first').value;
+  const last=document.getElementById('a-last').value;
+  document.getElementById('rv-name').textContent=[first,last].filter(Boolean).join(' ')||'—';
+  document.getElementById('rv-phone').textContent=document.getElementById('a-phone').value||'—';
+  document.getElementById('rv-city').textContent=document.getElementById('a-city').value||'—';
+  document.getElementById('rv-zone').textContent=selectedZone||'—';
+  const open=document.getElementById('a-open').value;
+  const close=document.getElementById('a-close').value;
+  document.getElementById('rv-hours').textContent=open&&close?open+' – '+close:'—';
+  document.getElementById('rv-float').textContent=selectedFloat==='custom'?'Custom (discuss)':'$'+selectedFloat.toLocaleString()+' USDC';
+  document.getElementById('rv-doctype').textContent=document.getElementById('a-doc-type').value||'—';
+}
+
+function updateSubmit(){
+  const ok=document.getElementById('a-agree-terms').checked&&document.getElementById('a-agree-kyc').checked&&document.getElementById('a-agree-float').checked;
+  document.getElementById('a-submit-btn')[ok?'removeAttribute':'setAttribute']('disabled','true');
+}
+
+async function submitApplication(){
+  const btn = document.getElementById('a-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader"></i> Submitting…';
+
+  const first = document.getElementById('a-first').value || '';
+  const last  = document.getElementById('a-last').value  || '';
+  const email = document.getElementById('a-email').value || '';
+  const phone = document.getElementById('a-phone').value || '';
+  const city  = document.getElementById('a-city').value  || '';
+  const zone  = selectedZone   || '';
+  const float = selectedFloat  || '';
+  const docType = document.getElementById('a-doc-type')?.value || '';
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name':  'agent-application',
+        'first-name': first,
+        'last-name':  last,
+        'email':      email,
+        'phone':      phone,
+        'city':       city,
+        'zone':       zone,
+        'float-size': String(float),
+        'doc-type':   docType,
+      }).toString(),
+    });
+  } catch(e) {
+    console.error('Form submit error:', e);
+  }
+
+  document.getElementById('success-name').textContent = first || 'Agent';
+  document.getElementById('progress-wrap').style.display='none';
+  [1,2,3,4,5].forEach(i=>{const el=document.getElementById('step-'+i);if(el)el.style.display='none';});
+  document.getElementById('step-6').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+<script src="lang.js"></script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

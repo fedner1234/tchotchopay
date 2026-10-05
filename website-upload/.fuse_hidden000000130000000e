@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tchotcho Pay — Admin Console</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+:root{
+  --bg:#060810;--panel:#0b0e1a;--card:#0f1322;--card2:#131829;
+  --border:#1a2035;--border2:#222840;
+  --cyan:#00e5ff;--cyan2:#00b4cc;
+  --green:#00e676;--yellow:#ffd740;--red:#ff4444;--orange:#F7B731;;
+  --txt:#dde4f0;--muted:#6677aa;--muted2:#8899bb;
+  --sidebar:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;font-size:13px;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar);min-height:100vh;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;}
+.sb-header{padding:16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.sb-logo-box{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#0a1f6e,var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;flex-shrink:0;}
+.sb-brand{font-size:13px;font-weight:700;color:var(--txt);}
+.sb-brand-sub{font-size:10px;color:var(--red);font-weight:700;letter-spacing:.05em;}
+.sb-admin-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:rgba(255,68,68,.15);color:var(--red);border:1px solid rgba(255,68,68,.3);letter-spacing:.05em;margin-top:2px;}
+
+.sb-nav{flex:1;padding:8px 0;overflow-y:auto;}
+.sb-section{padding:10px 14px 4px;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
+.sb-link{display:flex;align-items:center;gap:9px;padding:8px 14px;color:var(--muted2);text-decoration:none;font-size:12px;font-weight:500;transition:.15s;cursor:pointer;border-left:2px solid transparent;position:relative;}
+.sb-link:hover{color:var(--txt);background:#ffffff06;}
+.sb-link.on{color:var(--cyan);background:#00e5ff0d;border-left-color:var(--cyan);}
+.sb-link i{font-size:16px;flex-shrink:0;}
+.sb-link .nb{margin-left:auto;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;background:var(--red);color:#fff;}
+.sb-link .nb.yellow{background:var(--yellow);color:#000;}
+.sb-link .nb.orange{background:var(--orange);}
+
+.sb-bottom{padding:10px 14px;border-top:1px solid var(--border);}
+.sb-user-row{display:flex;align-items:center;gap:8px;padding:8px 0;}
+.sb-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6b6b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.sb-uname{font-size:12px;font-weight:600;}
+.sb-urole{font-size:10px;color:var(--muted);}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;}
+.topbar{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:12px;}
+.tb-title{font-size:15px;font-weight:700;}
+.tb-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.tb-clock{font-size:11px;color:var(--muted);}
+.alert-bar{background:rgba(255,68,68,.1);border-bottom:1px solid rgba(255,68,68,.2);padding:8px 24px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--red);}
+.alert-bar i{font-size:15px;}
+.alert-bar strong{font-weight:700;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:.15s;font-family:inherit;}
+.btn-cyan{background:var(--cyan);color:#000;}
+.btn-cyan:hover{background:var(--cyan2);}
+.btn-ghost{background:#ffffff0d;color:var(--txt);border:1px solid var(--border);}
+.btn-ghost:hover{background:#ffffff18;}
+.btn-red{background:rgba(255,68,68,.15);color:var(--red);border:1px solid rgba(255,68,68,.3);}
+.btn-red:hover{background:rgba(255,68,68,.25);}
+.btn-green{background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.25);}
+.btn-green:hover{background:rgba(0,230,118,.2);}
+.btn-yellow{background:rgba(255,215,64,.12);color:var(--yellow);border:1px solid rgba(255,215,64,.25);}
+.btn-sm{padding:4px 10px;font-size:11px;}
+.btn-xs{padding:3px 8px;font-size:10px;border-radius:5px;}
+
+/* CONTENT */
+.content{padding:20px 24px;flex:1;}
+.page{display:none;}
+.page.on{display:block;}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px;}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.kpi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.kpi-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.kpi-change{font-size:10px;display:flex;align-items:center;gap:2px;}
+.kpi-val{font-size:20px;font-weight:800;line-height:1;}
+.kpi-lbl{font-size:10px;color:var(--muted);margin-top:4px;}
+.up{color:var(--green);}
+.dn{color:var(--red);}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 320px;gap:16px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.col{display:flex;flex-direction:column;gap:16px;}
+
+/* SECTION CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:16px;}
+.card-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:13px;font-weight:700;}
+.card-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+.count-chip{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;}
+.chip-red{background:rgba(255,68,68,.15);color:var(--red);border:1px solid rgba(255,68,68,.3);}
+.chip-yellow{background:rgba(255,215,64,.12);color:var(--yellow);border:1px solid rgba(255,215,64,.25);}
+.chip-cyan{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
+.chip-green{background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.25);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);background:var(--card2);}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#ffffff04;}
+.tbl-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+.tbl-user{display:flex;align-items:center;gap:8px;}
+.tbl-name{font-size:12px;font-weight:600;}
+.tbl-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+.pill{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;display:inline-block;letter-spacing:.03em;}
+.pill-green{background:rgba(0,230,118,.12);color:var(--green);}
+.pill-red{background:rgba(255,68,68,.12);color:var(--red);}
+.pill-yellow{background:rgba(255,215,64,.12);color:var(--yellow);}
+.pill-cyan{background:rgba(0,229,255,.12);color:var(--cyan);}
+.pill-muted{background:#ffffff0d;color:var(--muted);}
+.pill-orange{background:rgba(247,183,49,.12);color:var(--orange);}
+.pill-purple{background:rgba(247,183,49,.12);color:var(--gold);}
+
+/* FLAG ITEM */
+.flag-item{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;}
+.flag-item:last-child{border-bottom:none;}
+.flag-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.flag-content{flex:1;}
+.flag-title{font-size:12px;font-weight:600;}
+.flag-meta{font-size:10px;color:var(--muted);margin-top:3px;}
+.flag-actions{display:flex;gap:6px;margin-top:6px;}
+.flag-right{text-align:right;flex-shrink:0;}
+.flag-amt{font-size:13px;font-weight:700;color:var(--red);}
+.flag-time{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* MINI BARS */
+.bars{display:flex;align-items:flex-end;gap:4px;height:70px;padding:8px 16px 0;}
+.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.bar{width:100%;border-radius:3px 3px 0 0;min-height:3px;transition:.4s;}
+.bar.cyan{background:linear-gradient(to top,var(--cyan2),var(--cyan));}
+.bar.green{background:linear-gradient(to top,#00b248,var(--green));}
+.bar.red{background:linear-gradient(to top,#c62828,var(--red));}
+.bar-l{font-size:8px;color:var(--muted);}
+
+/* KYC ITEM */
+.kyc-item{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.kyc-item:last-child{border-bottom:none;}
+.kyc-doc{width:34px;height:42px;border-radius:4px;background:#ffffff0d;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.kyc-info{flex:1;}
+.kyc-name{font-size:12px;font-weight:600;}
+.kyc-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+.kyc-actions{display:flex;gap:6px;}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);}
+.tab{padding:9px 16px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;}
+.tab.on{color:var(--cyan);border-bottom-color:var(--cyan);}
+
+/* SEARCH BAR */
+.search-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);}
+.search-bar input{flex:1;background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--txt);font-size:12px;outline:none;font-family:inherit;}
+.search-bar input:focus{border-color:var(--cyan);}
+.search-bar select{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--txt);font-size:11px;outline:none;font-family:inherit;}
+.search-bar select option{background:var(--panel);}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:#00000095;z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s;}
+.overlay.show{opacity:1;pointer-events:all;}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:14px;width:480px;max-width:95vw;overflow:hidden;transform:translateY(16px);transition:.2s;}
+.overlay.show .modal{transform:translateY(0);}
+.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-size:14px;font-weight:700;}
+.modal-close{width:26px;height:26px;border-radius:5px;background:#ffffff10;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:var(--muted);font-size:15px;transition:.15s;}
+.modal-close:hover{background:#ffffff20;color:var(--txt);}
+.modal-body{padding:18px 20px;}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+.detail-row:last-child{border-bottom:none;}
+.dr-label{font-size:11px;color:var(--muted);}
+.dr-val{font-size:12px;font-weight:600;}
+.modal-actions{display:flex;gap:8px;margin-top:16px;}
+.modal-actions .btn{flex:1;justify-content:center;}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;min-width:260px;transform:translateY(16px);opacity:0;pointer-events:none;transition:.3s;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{font-size:18px;}
+.toast.success i{color:var(--green);}
+.toast.error i{color:var(--red);}
+.toast.info i{color:var(--cyan);}
+.toast.warn i{color:var(--yellow);}
+.toast-title{font-size:12px;font-weight:700;}
+.toast-msg{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* STATUS TOGGLE */
+.status-dot{display:inline-flex;align-items:center;gap:5px;font-size:11px;}
+.status-dot::before{content:'';width:6px;height:6px;border-radius:50%;}
+.status-dot.active::before{background:var(--green);box-shadow:0 0 6px var(--green);}
+.status-dot.suspended::before{background:var(--red);}
+.status-dot.pending::before{background:var(--yellow);}
+
+/* VOLUME RING (fake) */
+.ring-wrap{padding:16px;text-align:center;}
+.ring-val{font-size:22px;font-weight:800;color:var(--cyan);}
+.ring-lbl{font-size:10px;color:var(--muted);margin-top:2px;}
+.ring-row{display:flex;justify-content:space-around;margin-top:10px;}
+.ring-stat{text-align:center;}
+.ring-stat-v{font-size:14px;font-weight:700;}
+.ring-stat-l{font-size:9px;color:var(--muted);}
+
+/* MISC */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ffffff18;border-radius:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.animate-in{animation:fadeIn .25s ease both;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+@media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr);}.grid2{grid-template-columns:1fr;}.grid3{grid-template-columns:1fr 1fr;}}
+@media(max-width:860px){.main{margin-left:0;}.kpi-row{grid-template-columns:repeat(2,1fr);}}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar">
+  <div class="sb-header">
+    <div class="sb-logo-box">T</div>
+    <div>
+      <div class="sb-brand">Tchotcho<span style="color:var(--cyan);">Pay</span></div>
+      <div class="sb-admin-badge">ADMIN CONSOLE</div>
+    </div>
+  </div>
+
+  <div class="sb-nav">
+    <div class="sb-section">Operations</div>
+    <a class="sb-link on" onclick="showPage('overview',this)"><i class="ti ti-layout-dashboard"></i>Overview</a>
+    <a class="sb-link" onclick="showPage('transactions',this)"><i class="ti ti-arrows-exchange"></i>Transactions <span class="nb yellow" id="nb-tx">3</span></a>
+    <a class="sb-link" onclick="showPage('flags',this)"><i class="ti ti-alert-triangle"></i>Compliance Flags <span class="nb" id="nb-flags">5</span></a>
+    <div class="sb-section">Users</div>
+    <a class="sb-link" onclick="showPage('users',this)"><i class="ti ti-users"></i>All Users</a>
+    <a class="sb-link" onclick="showPage('kyc',this)"><i class="ti ti-id-badge"></i>KYC Review <span class="nb orange" id="nb-kyc">7</span></a>
+    <a class="sb-link" onclick="showPage('agents',this)"><i class="ti ti-building-bank"></i>Cash Agents</a>
+    <a class="sb-link" onclick="showPage('merchants',this)"><i class="ti ti-building-store"></i>Merchants</a>
+    <div class="sb-section">Finance</div>
+    <a class="sb-link" onclick="showPage('revenue',this)"><i class="ti ti-chart-line"></i>Revenue</a>
+    <a class="sb-link" onclick="showPage('payouts',this)"><i class="ti ti-cash"></i>Payout Queue <span class="nb yellow" id="nb-pay">4</span></a>
+    <div class="sb-section">System</div>
+    <a class="sb-link" onclick="showPage('settings',this)"><i class="ti ti-settings"></i>Platform Settings</a>
+    <a class="sb-link" onclick="showPage('logs',this)"><i class="ti ti-terminal"></i>Audit Logs</a>
+  </div>
+
+  <div class="sb-bottom">
+    <div class="sb-user-row">
+      <div class="sb-av">AF</div>
+      <div>
+        <div class="sb-uname">Admin Fedner</div>
+        <div class="sb-urole">Super Admin</div>
+      </div>
+      <i class="ti ti-logout" style="margin-left:auto;color:var(--muted);cursor:pointer;font-size:16px;" onclick="showToast('info','Signed out','Redirecting...')"></i>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- Alert Bar -->
+  <div class="alert-bar" id="alert-bar">
+    <i class="ti ti-alert-triangle" style="animation:pulse 1.5s infinite;"></i>
+    <strong>5 compliance flags</strong> require immediate review — 2 transactions auto-held pending investigation.
+    <a onclick="showPage('flags',document.querySelector('.sb-link:nth-child(7)'))" style="margin-left:8px;color:var(--red);cursor:pointer;font-weight:700;text-decoration:underline;">Review now →</a>
+    <i class="ti ti-x" style="margin-left:auto;cursor:pointer;" onclick="document.getElementById('alert-bar').style.display='none'"></i>
+  </div>
+
+  <div class="topbar">
+    <div>
+      <div class="tb-title" id="page-title">Platform Overview</div>
+      <div class="tb-sub" id="page-sub">Real-time · All data as of <span id="clock">—</span></div>
+    </div>
+    <div class="tb-right">
+      <button class="btn btn-ghost btn-sm" onclick="showToast('info','Report exported','CSV downloading...')"><i class="ti ti-download"></i> Export</button>
+      <button class="btn btn-red btn-sm" onclick="showPage('flags',document.querySelector('.sb-link:nth-child(7)'))"><i class="ti ti-alert-triangle"></i> 5 Flags</button>
+      <button class="btn btn-ghost" style="padding:7px 9px;" onclick="showToast('info','Notifications','3 new system alerts')">
+        <i class="ti ti-bell" style="font-size:15px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ OVERVIEW ══ -->
+    <div class="page on animate-in" id="page-overview">
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon" style="background:rgba(0,229,255,.12);"><i class="ti ti-users" style="color:var(--cyan);font-size:15px;"></i></div>
+            <span class="kpi-change up"><i class="ti ti-trending-up" style="font-size:10px;"></i> +12%</span>
+          </div>
+          <div class="kpi-val">14,832</div>
+          <div class="kpi-lbl">Total Users</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon" style="background:rgba(0,230,118,.12);"><i class="ti ti-currency-dollar" style="color:var(--green);font-size:15px;"></i></div>
+            <span class="kpi-change up"><i class="ti ti-trending-up" style="font-size:10px;"></i> +24%</span>
+          </div>
+          <div class="kpi-val">$94,210</div>
+          <div class="kpi-lbl">Volume Today (USDC)</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-arrows-exchange" style="color:var(--yellow);font-size:15px;"></i></div>
+            <span class="kpi-change up"><i class="ti ti-trending-up" style="font-size:10px;"></i> +8%</span>
+          </div>
+          <div class="kpi-val">2,148</div>
+          <div class="kpi-lbl">Transactions Today</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-coins" style="color:var(--gold);font-size:15px;"></i></div>
+            <span class="kpi-change up"><i class="ti ti-trending-up" style="font-size:10px;"></i> +18%</span>
+          </div>
+          <div class="kpi-val">$2,840</div>
+          <div class="kpi-lbl">Platform Revenue Today</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon" style="background:rgba(255,68,68,.1);"><i class="ti ti-alert-triangle" style="color:var(--red);font-size:15px;"></i></div>
+            <span class="kpi-change dn"><i class="ti ti-trending-up" style="font-size:10px;"></i> +2</span>
+          </div>
+          <div class="kpi-val">5</div>
+          <div class="kpi-lbl">Active Compliance Flags</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+
+        <!-- Transaction Feed -->
+        <div>
+          <div class="card">
+            <div class="card-head">
+              <div><div class="card-title">Live Transaction Feed</div><div class="card-sub">Updating every 30s</div></div>
+              <div style="display:flex;gap:6px;">
+                <span class="count-chip chip-cyan">2,148 today</span>
+                <button class="btn btn-ghost btn-sm" onclick="showPage('transactions',document.querySelector('.sb-link:nth-child(5)'))">View All</button>
+              </div>
+            </div>
+            <table class="tbl" id="tx-feed">
+              <thead><tr><th>User</th><th>Type</th><th>Amount</th><th>Status</th><th>Time</th><th></th></tr></thead>
+              <tbody id="tx-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- Volume Chart -->
+          <div class="card">
+            <div class="card-head"><div class="card-title">7-Day Volume</div><div style="font-size:10px;color:var(--muted);">USDC processed</div></div>
+            <div class="bars" id="vol-bars" style="height:80px;padding:12px 16px 0;"></div>
+            <div style="display:flex;gap:16px;padding:10px 16px 14px;flex-wrap:wrap;">
+              <div><div style="font-size:14px;font-weight:700;color:var(--cyan);">$623,400</div><div style="font-size:9px;color:var(--muted);">7-day volume</div></div>
+              <div><div style="font-size:14px;font-weight:700;color:var(--green);">$18,702</div><div style="font-size:9px;color:var(--muted);">7-day revenue</div></div>
+              <div><div style="font-size:14px;font-weight:700;color:var(--yellow);">14,210</div><div style="font-size:9px;color:var(--muted);">transactions</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col">
+          <!-- Platform Health -->
+          <div class="card">
+            <div class="card-head"><div class="card-title">Platform Health</div></div>
+            <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;color:var(--muted);">API Uptime</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:99.8%;background:var(--green);border-radius:2px;"></div></div>
+                  <span style="font-size:11px;font-weight:700;color:var(--green);">99.8%</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;color:var(--muted);">Base RPC</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:100%;background:var(--green);border-radius:2px;"></div></div>
+                  <span style="font-size:11px;font-weight:700;color:var(--green);">Online</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;color:var(--muted);">KYC Provider</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:100%;background:var(--green);border-radius:2px;"></div></div>
+                  <span style="font-size:11px;font-weight:700;color:var(--green);">Online</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;color:var(--muted);">FX Rate Feed</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:100%;background:var(--green);border-radius:2px;"></div></div>
+                  <span style="font-size:11px;font-weight:700;color:var(--green);">Online</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:11px;color:var(--muted);">Circle USDC Bridge</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:98%;background:var(--yellow);border-radius:2px;"></div></div>
+                  <span style="font-size:11px;font-weight:700;color:var(--yellow);">Degraded</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Agents -->
+          <div class="card">
+            <div class="card-head"><div class="card-title">Top Agents Today</div></div>
+            <div id="top-agents"></div>
+          </div>
+
+          <!-- KYC Queue Snapshot -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">KYC Queue</div>
+              <span class="count-chip chip-yellow">7 pending</span>
+            </div>
+            <div style="padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;"><span style="color:var(--muted);">Awaiting Review</span><span style="font-weight:700;color:var(--yellow);">7</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;"><span style="color:var(--muted);">Approved Today</span><span style="font-weight:700;color:var(--green);">23</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;"><span style="color:var(--muted);">Rejected Today</span><span style="font-weight:700;color:var(--red);">4</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;"><span style="color:var(--muted);">Avg Review Time</span><span style="font-weight:700;">8 min</span></div>
+              <button class="btn btn-yellow" style="width:100%;justify-content:center;margin-top:4px;" onclick="showPage('kyc',document.querySelector('.sb-link:nth-child(10)'))"><i class="ti ti-id-badge"></i> Review KYC Queue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ TRANSACTIONS ══ -->
+    <div class="page animate-in" id="page-transactions">
+      <div class="card">
+        <div class="tabs">
+          <div class="tab on" onclick="filterTx('all',this)">All</div>
+          <div class="tab" onclick="filterTx('transfer',this)">Transfers</div>
+          <div class="tab" onclick="filterTx('cashout',this)">Cash Outs</div>
+          <div class="tab" onclick="filterTx('topup',this)">Top-ups</div>
+          <div class="tab" onclick="filterTx('flagged',this)">Flagged <span style="background:var(--red);color:#fff;font-size:9px;padding:1px 5px;border-radius:8px;margin-left:4px;">3</span></div>
+        </div>
+        <div class="search-bar">
+          <i class="ti ti-search" style="color:var(--muted);font-size:14px;"></i>
+          <input type="text" placeholder="Search by user, TX ID, or amount..." id="tx-search" oninput="filterTxSearch()"/>
+          <select id="tx-status-filter" onchange="filterTxSearch()">
+            <option value="">All Statuses</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+            <option value="held">Held</option>
+            <option value="failed">Failed</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('info','Exported','Downloading CSV...')"><i class="ti ti-download"></i></button>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>TX ID</th><th>From</th><th>To / Method</th><th>Type</th><th>Amount</th><th>Fee</th><th>Status</th><th>Time</th><th></th></tr></thead>
+          <tbody id="all-tx-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ══ COMPLIANCE FLAGS ══ -->
+    <div class="page animate-in" id="page-flags">
+      <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;">
+        <div class="card">
+          <div class="card-head">
+            <div><div class="card-title">Active Compliance Flags</div><div class="card-sub">AML / fraud risk alerts</div></div>
+            <span class="count-chip chip-red">5 open</span>
+          </div>
+          <div id="flags-list"></div>
+        </div>
+        <div class="col">
+          <div class="card" style="padding:16px;">
+            <div class="card-title" style="margin-bottom:12px;">Flag Summary</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">High-risk transactions</span><span style="color:var(--red);font-weight:700;">2</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">Velocity checks failed</span><span style="color:var(--orange);font-weight:700;">2</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">Unusual pattern</span><span style="color:var(--yellow);font-weight:700;">1</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;"><span style="color:var(--muted);">Total amount held</span><span style="font-weight:700;color:var(--cyan);">$4,820</span></div>
+            </div>
+          </div>
+          <div class="card" style="padding:16px;">
+            <div class="card-title" style="margin-bottom:10px;">Quick Actions</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button class="btn btn-red" style="width:100%;justify-content:center;" onclick="showToast('warn','Action required','Select a specific flag to take action')"><i class="ti ti-player-pause"></i> Hold All Flagged</button>
+              <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="showToast('info','Report','Generating SAR report...')"><i class="ti ti-file-report"></i> Generate SAR Report</button>
+              <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="showToast('info','Exported','Flag log downloaded')"><i class="ti ti-download"></i> Export Flag Log</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ USERS ══ -->
+    <div class="page animate-in" id="page-users">
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">All Users</div><div class="card-sub">14,832 total</div></div>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('info','Exported','Downloading user CSV...')"><i class="ti ti-download"></i> Export</button>
+        </div>
+        <div class="search-bar">
+          <i class="ti ti-search" style="color:var(--muted);font-size:14px;"></i>
+          <input type="text" placeholder="Search by name, handle, phone, or email..."/>
+          <select>
+            <option>All KYC Status</option><option>Verified</option><option>Pending</option><option>Rejected</option>
+          </select>
+          <select>
+            <option>All Users</option><option>Active</option><option>Suspended</option>
+          </select>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>User</th><th>Handle</th><th>KYC</th><th>Balance</th><th>Joined</th><th>Last Active</th><th>Status</th><th></th></tr></thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ══ KYC REVIEW ══ -->
+    <div class="page animate-in" id="page-kyc">
+      <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;">
+        <div class="card">
+          <div class="card-head">
+            <div><div class="card-title">KYC Submissions</div><div class="card-sub">Review and approve identity documents</div></div>
+            <span class="count-chip chip-yellow">7 pending</span>
+          </div>
+          <div id="kyc-list"></div>
+        </div>
+        <div class="col">
+          <div class="card" style="padding:16px;">
+            <div class="card-title" style="margin-bottom:10px;">Review Stats</div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:11px;">
+              <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">Approved today</span><span style="color:var(--green);font-weight:700;">23</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">Rejected today</span><span style="color:var(--red);font-weight:700;">4</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);"><span style="color:var(--muted);">Avg review time</span><span style="font-weight:700;">8 min</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;"><span style="color:var(--muted);">Approval rate</span><span style="font-weight:700;color:var(--cyan);">85.2%</span></div>
+            </div>
+          </div>
+          <div class="card" style="padding:16px;">
+            <div class="card-title" style="margin-bottom:8px;">Accepted Documents</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.8;">
+              ✓ National ID Card (Haiti)<br/>
+              ✓ Passport<br/>
+              ✓ Driver's License<br/>
+              ✓ Permanent Resident Card<br/>
+              ✗ Expired documents<br/>
+              ✗ Selfies without ID
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ AGENTS ══ -->
+    <div class="page animate-in" id="page-agents">
+      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,229,255,.1);"><i class="ti ti-building-bank" style="color:var(--cyan);font-size:14px;"></i></div></div><div class="kpi-val">148</div><div class="kpi-lbl">Active Agents</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,230,118,.1);"><i class="ti ti-cash" style="color:var(--green);font-size:14px;"></i></div></div><div class="kpi-val">$42,800</div><div class="kpi-lbl">Total Float Deployed</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-arrows-exchange" style="color:var(--yellow);font-size:14px;"></i></div></div><div class="kpi-val">1,240</div><div class="kpi-lbl">Cash-outs Today</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-coins" style="color:var(--gold);font-size:14px;"></i></div></div><div class="kpi-val">$1,240</div><div class="kpi-lbl">Agent Commissions Today</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">All Cash Agents</div><div style="display:flex;gap:6px;"><button class="btn btn-cyan btn-sm" onclick="showToast('info','Coming soon','Agent onboarding form')"><i class="ti ti-plus"></i> Add Agent</button></div></div>
+        <table class="tbl">
+          <thead><tr><th>Agent</th><th>Zone</th><th>Float Balance</th><th>Tx Today</th><th>Commission</th><th>Rating</th><th>Status</th><th></th></tr></thead>
+          <tbody id="agents-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ══ MERCHANTS ══ -->
+    <div class="page animate-in" id="page-merchants">
+      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(247,183,49,.1);"><i class="ti ti-building-store" style="color:var(--orange);font-size:14px;"></i></div></div><div class="kpi-val">312</div><div class="kpi-lbl">Verified Merchants</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,230,118,.1);"><i class="ti ti-currency-dollar" style="color:var(--green);font-size:14px;"></i></div></div><div class="kpi-val">$38,400</div><div class="kpi-lbl">Merchant GMV Today</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,229,255,.1);"><i class="ti ti-shopping-cart" style="color:var(--cyan);font-size:14px;"></i></div></div><div class="kpi-val">908</div><div class="kpi-lbl">Orders Today</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-coins" style="color:var(--gold);font-size:14px;"></i></div></div><div class="kpi-val">$614</div><div class="kpi-lbl">Merchant Fees Today</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">All Merchants</div><div style="display:flex;gap:6px;"><button class="btn btn-cyan btn-sm" onclick="showToast('info','Coming soon','Merchant onboarding form')"><i class="ti ti-plus"></i> Add Merchant</button></div></div>
+        <table class="tbl">
+          <thead><tr><th>Store</th><th>Category</th><th>Revenue Today</th><th>Orders</th><th>Pending Payout</th><th>Status</th><th></th></tr></thead>
+          <tbody id="merchants-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ══ REVENUE ══ -->
+    <div class="page animate-in" id="page-revenue">
+      <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
+        <div class="kpi"><div class="kpi-val" style="color:var(--green);">$2,840</div><div class="kpi-lbl">Revenue Today</div></div>
+        <div class="kpi"><div class="kpi-val">$18,702</div><div class="kpi-lbl">Revenue This Week</div></div>
+        <div class="kpi"><div class="kpi-val">$74,280</div><div class="kpi-lbl">Revenue This Month</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--cyan);">$543,047</div><div class="kpi-lbl">Projected Year 3</div></div>
+      </div>
+      <div class="grid3">
+        <div class="card" style="padding:16px;">
+          <div class="card-title" style="margin-bottom:12px;">Revenue by Source</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;"><span style="color:var(--muted);">Card deposit fees (2–3%)</span><span style="font-weight:700;color:var(--cyan);">$1,240 · 44%</span></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:44%;background:var(--cyan);border-radius:2px;"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">Cash-out fees (1%)</span><span style="font-weight:700;color:var(--green);">$840 · 30%</span></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:30%;background:var(--green);border-radius:2px;"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">Merchant fees (1–2%)</span><span style="font-weight:700;color:var(--orange);">$614 · 22%</span></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:22%;background:var(--orange);border-radius:2px;"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">FX spread</span><span style="font-weight:700;color:var(--gold);">$146 · 4%</span></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:4%;background:var(--gold);border-radius:2px;"></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title">Weekly Revenue</div></div>
+          <div class="bars" id="rev-bars" style="height:100px;padding:14px 16px 0;"></div>
+          <div style="padding:6px 16px 12px;"></div>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="card-title" style="margin-bottom:12px;">Financial Milestones</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:11px;">
+            <div style="display:flex;align-items:center;gap:8px;"><i class="ti ti-circle-check" style="color:var(--green);font-size:14px;"></i><span>Break-even: Year 2 Q2 <span style="color:var(--green);font-weight:700;">✓ On track</span></span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><i class="ti ti-circle-check" style="color:var(--muted);font-size:14px;"></i><span>Year 1 Revenue Target: <span style="color:var(--yellow);font-weight:700;">$979K goal</span></span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><i class="ti ti-circle-check" style="color:var(--muted);font-size:14px;"></i><span>Year 3 Net Profit: <span style="color:var(--cyan);font-weight:700;">$543K projected</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ PAYOUTS ══ -->
+    <div class="page animate-in" id="page-payouts">
+      <div class="card">
+        <div class="card-head">
+          <div><div class="card-title">Merchant Payout Queue</div><div class="card-sub">Pending approval before release</div></div>
+          <div style="display:flex;gap:6px;">
+            <span class="count-chip chip-yellow">4 pending · $3,182 total</span>
+            <button class="btn btn-green btn-sm" onclick="showToast('success','Approved','All payouts sent to processing')"><i class="ti ti-check"></i> Approve All</button>
+          </div>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>Merchant</th><th>Amount</th><th>Method</th><th>Fee</th><th>Net</th><th>Requested</th><th>Status</th><th></th></tr></thead>
+          <tbody id="payouts-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="page animate-in" id="page-settings">
+      <div style="max-width:600px;">
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-head"><div class="card-title">Fee Configuration</div></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
+              <div><div style="font-size:12px;font-weight:600;">Card Deposit Fee</div><div style="font-size:10px;color:var(--muted);">Charged to sender on card funding</div></div>
+              <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="2.5%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
+              <div><div style="font-size:12px;font-weight:600;">Cash-out Fee</div><div style="font-size:10px;color:var(--muted);">Charged on agent withdrawals</div></div>
+              <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="1.0%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
+              <div><div style="font-size:12px;font-weight:600;">Merchant Fee</div><div style="font-size:10px;color:var(--muted);">Charged on merchant payments</div></div>
+              <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="1.5%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
+              <div><div style="font-size:12px;font-weight:600;">HTG/USDC Rate</div><div style="font-size:10px;color:var(--muted);">Live rate from feed · Auto-updated</div></div>
+              <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="130.5" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--cyan);font-size:12px;text-align:center;outline:none;" readonly/><span style="font-size:10px;color:var(--muted);">auto</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-head"><div class="card-title">Transaction Limits</div></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px;font-size:11px;">
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Max single transfer</span><span style="font-weight:700;">$500 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (unverified)</span><span style="font-weight:700;">$200 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (KYC verified)</span><span style="font-weight:700;">$5,000 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Agent max float</span><span style="font-weight:700;">$10,000 USDC</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div class="card-title">Danger Zone</div></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px;">
+            <button class="btn btn-red" onclick="showToast('warn','Confirm required','This will halt all outbound transactions')"><i class="ti ti-player-pause"></i> Pause All Outbound Transactions</button>
+            <button class="btn btn-ghost" onclick="showToast('warn','Confirm required','This will lock platform access for all users')"><i class="ti ti-lock"></i> Emergency Platform Lock</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ LOGS ══ -->
+    <div class="page animate-in" id="page-logs">
+      <div class="card">
+        <div class="card-head"><div class="card-title">Audit Log</div><div style="font-size:10px;color:var(--muted);">All admin actions tracked</div></div>
+        <table class="tbl">
+          <thead><tr><th>Timestamp</th><th>Admin</th><th>Action</th><th>Target</th><th>IP</th></tr></thead>
+          <tbody id="logs-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ USER DETAIL MODAL ═══ -->
+<div class="overlay" id="user-modal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="um-title">User Detail</div>
+      <button class="modal-close" onclick="document.getElementById('user-modal').classList.remove('show')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--card2);border-radius:9px;margin-bottom:14px;">
+        <div class="tbl-av" id="um-av" style="width:40px;height:40px;font-size:14px;border-radius:50%;"></div>
+        <div><div style="font-size:14px;font-weight:700;" id="um-name">—</div><div style="font-size:11px;color:var(--muted);margin-top:2px;" id="um-handle">—</div></div>
+        <span id="um-status" class="pill pill-green" style="margin-left:auto;">Active</span>
+      </div>
+      <div id="um-details"></div>
+      <div class="modal-actions">
+        <button class="btn btn-red" onclick="suspendUser()"><i class="ti ti-ban"></i> Suspend</button>
+        <button class="btn btn-yellow" onclick="showToast('info','Reset','Password reset link sent')"><i class="ti ti-key"></i> Reset PIN</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('user-modal').classList.remove('show')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="ti" id="toast-icon"></i>
+  <div><div class="toast-title" id="toast-title"></div><div class="toast-msg" id="toast-msg"></div></div>
+</div>
+
+<script>
+// ── DATA ──
+const RATE = 130.5;
+
+const TX_DATA = [
+  {id:'TCH-9901',from:'Marie Jean',to:'Claudette René',type:'transfer',amt:45,fee:.45,status:'completed',time:'10:52 AM',flagged:false},
+  {id:'TCH-9900',from:'Rolph Pierre',to:'Agent AG-2047',type:'cashout',amt:250,fee:2.50,status:'completed',time:'10:48 AM',flagged:false},
+  {id:'TCH-9899',from:'Unknown',to:'Multiple',type:'transfer',amt:2400,fee:24,status:'held',time:'10:40 AM',flagged:true},
+  {id:'TCH-9898',from:'Nadia Clervil',to:'Marché Soleil',type:'merchant',amt:72,fee:.72,status:'completed',time:'10:31 AM',flagged:false},
+  {id:'TCH-9897',from:'Jean Remy',to:'Agent AG-1102',type:'cashout',amt:180,fee:1.80,status:'completed',time:'10:22 AM',flagged:false},
+  {id:'TCH-9896',from:'Suspicious Account',to:'Offshore',type:'transfer',amt:1800,fee:18,status:'held',time:'10:10 AM',flagged:true},
+  {id:'TCH-9895',from:'Paul Desrosiers',to:'Sophie Bernard',type:'transfer',amt:30,fee:.30,status:'completed',time:'9:55 AM',flagged:false},
+  {id:'TCH-9894',from:'Gladys Mentor',to:'Agent AG-0088',type:'cashout',amt:95,fee:.95,status:'failed',time:'9:40 AM',flagged:false},
+];
+
+const USERS_DATA = [
+  {name:'Marie Jean',handle:'@marie.j',color:'#ee5a24',av:'MJ',kyc:'verified',balance:245,joined:'Jan 12 2026',last:'Today',status:'active'},
+  {name:'Paul Desrosiers',handle:'@paul.d',color:'#0984e3',av:'PD',kyc:'verified',balance:80,joined:'Feb 3 2026',last:'Today',status:'active'},
+  {name:'Nadia Clervil',handle:'@nadia.c',color:'#6c5ce7',av:'NC',kyc:'verified',balance:412,joined:'Nov 20 2025',last:'Today',status:'active'},
+  {name:'Jean Remy',handle:'@jean.r',color:'#fd79a8',av:'JR',kyc:'pending',balance:0,joined:'Jun 20 2026',last:'Today',status:'active'},
+  {name:'Suspicious Account',handle:'@anon.x',color:'#636e72',av:'SA',kyc:'rejected',balance:1800,joined:'Jun 22 2026',last:'Today',status:'suspended'},
+  {name:'Sophie Bernard',handle:'@sophie.b',color:'#0984e3',av:'SB',kyc:'verified',balance:155,joined:'Mar 8 2026',last:'Yesterday',status:'active'},
+  {name:'Max Louis',handle:'@max.l',color:'#00b894',av:'ML',kyc:'verified',balance:310,joined:'Oct 15 2025',last:'2 days ago',status:'active'},
+  {name:'Claudette René',handle:'@claudette.r',color:'#00cec9',av:'CR',kyc:'pending',balance:22,joined:'Jun 23 2026',last:'Today',status:'active'},
+];
+
+const FLAGS = [
+  {id:'FL-001',title:'Large transfer to unverified wallet',user:'Suspicious Account (@anon.x)',amt:2400,type:'High Risk',risk:'red',time:'10:40 AM',detail:'Transfer of $2,400 USDC to an unverified external address. Account created 1 day ago. Flagged by AML model.'},
+  {id:'FL-002',title:'Unusual cash-out velocity',user:'Unknown sender',amt:1800,type:'High Risk',risk:'red',time:'10:10 AM',detail:'3 cash-out requests in 8 minutes, totaling $1,800 USDC. Exceeds velocity threshold.'},
+  {id:'FL-003',title:'Multiple failed KYC attempts',user:'Jean Remy (@jean.r)',amt:0,type:'Velocity',risk:'orange',time:'9:20 AM',detail:'User failed KYC identity check 3 times in 24 hours with different document images.'},
+  {id:'FL-004',title:'Repeated small transfers (structuring)',user:'Max Louis (@max.l)',amt:990,type:'Velocity',risk:'orange',time:'8:45 AM',detail:'9 transfers of $110 each over 2 hours. Pattern consistent with structuring.'},
+  {id:'FL-005',title:'New account with high balance load',user:'Claudette René (@claudette.r)',amt:620,type:'Pattern',risk:'yellow',time:'8:00 AM',detail:'Account created today, immediately loaded $620 via credit card. Low-risk but flagged for review.'},
+];
+
+const KYC_DATA = [
+  {name:'Claudette René',handle:'@claudette.r',av:'CR',color:'#00cec9',doc:'National ID',submitted:'Jun 23 · 9:00 AM',country:'Haiti'},
+  {name:'Jean Remy',handle:'@jean.r',av:'JR',color:'#fd79a8',doc:'Passport',submitted:'Jun 23 · 8:50 AM',country:'France'},
+  {name:'Rose Hyppolite',handle:'@rose.h',av:'RH',color:'#a29bfe',doc:'Driver License',submitted:'Jun 22 · 4:30 PM',country:'USA'},
+  {name:'Bernard Luxama',handle:'@bernard.l',av:'BL',color:'#fdcb6e',doc:'National ID',submitted:'Jun 22 · 3:10 PM',country:'Haiti'},
+  {name:'Esther Joseph',handle:'@esther.j',av:'EJ',color:'#e17055',doc:'Passport',submitted:'Jun 22 · 1:45 PM',country:'Canada'},
+  {name:'Marc Dorvil',handle:'@marc.d',av:'MD',color:'#74b9ff',doc:'National ID',submitted:'Jun 22 · 11:00 AM',country:'Haiti'},
+  {name:'Lucie Pierre',handle:'@lucie.p',av:'LP',color:'#55efc4',doc:'Resident Card',submitted:'Jun 22 · 9:30 AM',country:'USA'},
+];
+
+const AGENTS_DATA = [
+  {name:'Jean Baptiste',id:'AG-2047',zone:'Pétion-Ville',float:1240,tx:17,commission:18.40,rating:'4.9',status:'active'},
+  {name:'Rosa Clément',id:'AG-1102',zone:'Delmas 33',float:820,tx:22,commission:24.10,rating:'4.8',status:'active'},
+  {name:'Pierre Lubin',id:'AG-0088',zone:'Cite Soleil',float:340,tx:9,commission:9.50,rating:'4.6',status:'active'},
+  {name:'Marie Faure',id:'AG-0341',zone:'Carrefour',float:1800,tx:31,commission:38.20,rating:'5.0',status:'active'},
+  {name:'Robert Vixamar',id:'AG-0502',zone:'Tabarre',float:120,tx:4,commission:4.20,rating:'4.4',status:'suspended'},
+];
+
+const MERCHANTS_DATA = [
+  {name:'Marché Soleil',cat:'Food & Grocery',rev:1284,orders:47,pending:842,status:'active'},
+  {name:'TechZone Haiti',cat:'Electronics',rev:880,orders:12,pending:680,status:'active'},
+  {name:'Pharmacy Lumière',cat:'Pharmacy',rev:420,orders:38,pending:310,status:'active'},
+  {name:'École Moderne',cat:'Education',rev:240,orders:8,pending:240,status:'active'},
+  {name:'Boulangerie Reve',cat:'Food',rev:180,orders:54,pending:0,status:'suspended'},
+];
+
+const PAYOUTS_DATA = [
+  {merchant:'Marché Soleil',amt:842.30,method:'BNC ****4821',fee:8.42,net:833.88,req:'Today 9:00 AM',status:'pending'},
+  {merchant:'TechZone Haiti',amt:680.00,method:'MonCash',fee:10.20,net:669.80,req:'Today 8:30 AM',status:'pending'},
+  {merchant:'Pharmacy Lumière',amt:310.00,method:'BNC ****8801',fee:3.10,net:306.90,req:'Yesterday 5:00 PM',status:'pending'},
+  {merchant:'École Moderne',amt:350.00,method:'Cash Agent',fee:3.50,net:346.50,req:'Yesterday 4:00 PM',status:'pending'},
+];
+
+const LOGS_DATA = [
+  {time:'10:41 AM',admin:'Admin Fedner',action:'Held transaction',target:'TCH-9899 — $2,400',ip:'192.168.1.4'},
+  {time:'10:10 AM',admin:'Admin Fedner',action:'Held transaction',target:'TCH-9896 — $1,800',ip:'192.168.1.4'},
+  {time:'9:20 AM',admin:'Ops Maria',action:'KYC Rejected',target:'Jean Remy @jean.r',ip:'192.168.1.7'},
+  {time:'9:15 AM',admin:'Ops Maria',action:'KYC Approved',target:'Marie Jean @marie.j',ip:'192.168.1.7'},
+  {time:'8:50 AM',admin:'Admin Fedner',action:'Agent Suspended',target:'Robert Vixamar AG-0502',ip:'192.168.1.4'},
+  {time:'8:30 AM',admin:'Ops Maria',action:'Payout Approved',target:'Marché Soleil $842.30',ip:'192.168.1.7'},
+  {time:'Yesterday 5:10 PM',admin:'Admin Fedner',action:'Fee Updated',target:'Card deposit 2.5%',ip:'192.168.1.4'},
+];
+
+const VOL_DATA = [48200,62100,54800,71400,88300,96700,94210];
+const VOL_LABELS = ['M','T','W','T','F','S','S'];
+const REV_DATA = [1446,1863,1644,2142,2649,2901,2840];
+
+// ── PAGE NAV ──
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.sb-link').forEach(a=>a.classList.remove('on'));
+  document.getElementById('page-'+name).classList.add('on');
+  if(el) el.classList.add('on');
+  const T={overview:'Platform Overview',transactions:'Transactions',flags:'Compliance Flags',users:'User Management',kyc:'KYC Review',agents:'Cash Agents',merchants:'Merchants',revenue:'Revenue',payouts:'Payout Queue',settings:'Platform Settings',logs:'Audit Logs'};
+  document.getElementById('page-title').textContent=T[name]||name;
+  if(name==='transactions') renderAllTx();
+  if(name==='users') renderUsers();
+  if(name==='kyc') renderKYC();
+  if(name==='agents') renderAgents();
+  if(name==='merchants') renderMerchants();
+  if(name==='payouts') renderPayouts();
+  if(name==='logs') renderLogs();
+  if(name==='flags') renderFlags();
+  if(name==='revenue') renderBars('rev-bars',REV_DATA,VOL_LABELS,true);
+}
+
+// ── RENDER TX FEED ──
+function renderTxFeed() {
+  const statusPill = {completed:'pill-green',held:'pill-red',pending:'pill-yellow',failed:'pill-muted'};
+  document.getElementById('tx-tbody').innerHTML = TX_DATA.slice(0,6).map(t=>`
+    <tr>
+      <td><span style="font-family:monospace;font-size:11px;color:var(--muted);">${t.id}</span>${t.flagged?'<span class="pill pill-red" style="margin-left:4px;">⚑ HOLD</span>':''}</td>
+      <td><span style="font-size:12px;">${t.from}</span></td>
+      <td><span style="font-size:12px;">${t.to}</span></td>
+      <td><span class="pill pill-cyan">${t.type}</span></td>
+      <td style="font-weight:700;">$${t.amt.toFixed(2)}</td>
+      <td style="color:var(--muted);">$${t.fee.toFixed(2)}</td>
+      <td><span class="pill ${statusPill[t.status]}">${t.status}</span></td>
+      <td style="color:var(--muted);font-size:11px;">${t.time}</td>
+      <td><button class="btn btn-ghost btn-xs" onclick="showToast('info','TX ${t.id}','Amount: $${t.amt} · Status: ${t.status}')"><i class="ti ti-eye"></i></button></td>
+    </tr>
+  `).join('');
+}
+
+// ── ALL TX ──
+let txFilter='all';
+function filterTx(f, el) {
+  txFilter=f;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderAllTx();
+}
+function filterTxSearch() { renderAllTx(); }
+function renderAllTx() {
+  const search=(document.getElementById('tx-search')||{}).value?.toLowerCase()||'';
+  const sf=(document.getElementById('tx-status-filter')||{}).value||'';
+  const statusPill={completed:'pill-green',held:'pill-red',pending:'pill-yellow',failed:'pill-muted'};
+  let items=TX_DATA;
+  if(txFilter==='flagged') items=items.filter(t=>t.flagged);
+  else if(txFilter!=='all') items=items.filter(t=>t.type===txFilter);
+  if(sf) items=items.filter(t=>t.status===sf);
+  if(search) items=items.filter(t=>t.id.toLowerCase().includes(search)||t.from.toLowerCase().includes(search)||t.to.toLowerCase().includes(search));
+  document.getElementById('all-tx-tbody').innerHTML=items.map(t=>`
+    <tr>
+      <td><span style="font-family:monospace;font-size:11px;color:var(--muted);">${t.id}</span>${t.flagged?'<span class="pill pill-red" style="margin-left:4px;">⚑</span>':''}</td>
+      <td>${t.from}</td><td>${t.to}</td>
+      <td><span class="pill pill-cyan">${t.type}</span></td>
+      <td style="font-weight:700;">$${t.amt.toFixed(2)}</td>
+      <td style="color:var(--muted);">$${t.fee.toFixed(2)}</td>
+      <td><span class="pill ${statusPill[t.status]}">${t.status}</span></td>
+      <td style="color:var(--muted);font-size:11px;">${t.time}</td>
+      <td><div style="display:flex;gap:4px;">
+        ${t.status==='held'?`<button class="btn btn-green btn-xs" onclick="releaseTx('${t.id}',this)">Release</button><button class="btn btn-red btn-xs" onclick="showToast('warn','TX Blocked','${t.id} permanently blocked')">Block</button>`:`<button class="btn btn-ghost btn-xs" onclick="showToast('info','View','${t.id} details')"><i class="ti ti-eye"></i></button>`}
+      </div></td>
+    </tr>
+  `).join('');
+}
+function releaseTx(id,btn) {
+  const row=btn.closest('tr');
+  row.querySelectorAll('td')[6].innerHTML='<span class="pill pill-green">completed</span>';
+  row.querySelectorAll('td')[8].innerHTML='<button class="btn btn-ghost btn-xs"><i class="ti ti-eye"></i></button>';
+  showToast('success','TX Released',id+' is now cleared for processing');
+}
+
+// ── FLAGS ──
+const riskColors={red:'var(--red)',orange:'var(--orange)',yellow:'var(--yellow)'};
+function renderFlags() {
+  document.getElementById('flags-list').innerHTML=FLAGS.map((f,i)=>`
+    <div class="flag-item">
+      <div class="flag-dot" style="background:${riskColors[f.risk]};box-shadow:0 0 6px ${riskColors[f.risk]}40;animation:pulse 2s infinite;"></div>
+      <div class="flag-content">
+        <div class="flag-title">${f.title}</div>
+        <div class="flag-meta">${f.user} · ${f.detail.substring(0,80)}...</div>
+        <div class="flag-actions">
+          <button class="btn btn-red btn-xs" onclick="resolveFlag(this,${i},'hold')"><i class="ti ti-player-pause"></i> Hold</button>
+          <button class="btn btn-green btn-xs" onclick="resolveFlag(this,${i},'clear')"><i class="ti ti-check"></i> Clear</button>
+          <button class="btn btn-ghost btn-xs" onclick="showToast('info','Flag ${f.id}','${f.detail.substring(0,60)}...')"><i class="ti ti-eye"></i> Detail</button>
+        </div>
+      </div>
+      <div class="flag-right">
+        ${f.amt?`<div class="flag-amt">$${f.amt.toFixed(2)}</div>`:''}
+        <div class="flag-time">${f.time}</div>
+        <span class="pill ${f.risk==='red'?'pill-red':f.risk==='orange'?'pill-orange':'pill-yellow'}">${f.type}</span>
+      </div>
+    </div>
+  `).join('');
+}
+function resolveFlag(btn,i,action) {
+  const item=btn.closest('.flag-item');
+  item.style.opacity='.4';
+  item.style.pointerEvents='none';
+  showToast(action==='hold'?'warn':'success',action==='hold'?'Transaction Held':'Flag Cleared',`Flag FL-00${i+1} resolved`);
+  setTimeout(()=>item.remove(),600);
+}
+
+// ── USERS ──
+function renderUsers() {
+  const kycPill={verified:'pill-green',pending:'pill-yellow',rejected:'pill-red'};
+  document.getElementById('users-tbody').innerHTML=USERS_DATA.map((u,i)=>`
+    <tr style="cursor:pointer;" onclick="openUserModal(${i})">
+      <td><div class="tbl-user"><div class="tbl-av" style="background:${u.color}">${u.av}</div><div><div class="tbl-name">${u.name}</div></div></div></td>
+      <td style="color:var(--muted);font-size:11px;">${u.handle}</td>
+      <td><span class="pill ${kycPill[u.kyc]}">${u.kyc}</span></td>
+      <td style="font-weight:600;">$${u.balance}</td>
+      <td style="color:var(--muted);font-size:11px;">${u.joined}</td>
+      <td style="color:var(--muted);font-size:11px;">${u.last}</td>
+      <td><span class="status-dot ${u.status}">${u.status}</span></td>
+      <td><button class="btn btn-ghost btn-xs" onclick="event.stopPropagation();openUserModal(${i})"><i class="ti ti-eye"></i></button></td>
+    </tr>
+  `).join('');
+}
+let activeUserIdx=null;
+function openUserModal(i) {
+  activeUserIdx=i;
+  const u=USERS_DATA[i];
+  document.getElementById('um-title').textContent='User: '+u.name;
+  document.getElementById('um-av').style.background=u.color;
+  document.getElementById('um-av').textContent=u.av;
+  document.getElementById('um-name').textContent=u.name;
+  document.getElementById('um-handle').textContent=u.handle;
+  const kycPill={verified:'pill-green',pending:'pill-yellow',rejected:'pill-red'};
+  document.getElementById('um-status').className='pill '+(u.status==='active'?'pill-green':'pill-red');
+  document.getElementById('um-status').textContent=u.status;
+  document.getElementById('um-details').innerHTML=`
+    <div class="detail-row"><span class="dr-label">KYC Status</span><span class="dr-val"><span class="pill ${kycPill[u.kyc]}">${u.kyc}</span></span></div>
+    <div class="detail-row"><span class="dr-label">USDC Balance</span><span class="dr-val" style="color:var(--cyan);">$${u.balance} USDC</span></div>
+    <div class="detail-row"><span class="dr-label">HTG Equivalent</span><span class="dr-val">${(u.balance*RATE).toLocaleString()} HTG</span></div>
+    <div class="detail-row"><span class="dr-label">Account Created</span><span class="dr-val">${u.joined}</span></div>
+    <div class="detail-row"><span class="dr-label">Last Active</span><span class="dr-val">${u.last}</span></div>
+    <div class="detail-row"><span class="dr-label">Account Status</span><span class="dr-val"><span class="status-dot ${u.status}">${u.status}</span></span></div>
+  `;
+  document.getElementById('user-modal').classList.add('show');
+}
+function suspendUser() {
+  if(activeUserIdx===null) return;
+  USERS_DATA[activeUserIdx].status='suspended';
+  document.getElementById('um-status').className='pill pill-red';
+  document.getElementById('um-status').textContent='suspended';
+  renderUsers();
+  showToast('warn','User Suspended',USERS_DATA[activeUserIdx].name+' has been suspended');
+}
+
+// ── KYC ──
+function renderKYC() {
+  document.getElementById('kyc-list').innerHTML=KYC_DATA.map((k,i)=>`
+    <div class="kyc-item">
+      <div class="kyc-doc">${k.doc==='Passport'?'🛂':k.doc==='Driver License'?'🪪':k.doc==='Resident Card'?'💳':'🪪'}</div>
+      <div class="kyc-info">
+        <div class="kyc-name">${k.name} <span style="font-size:10px;color:var(--muted);">${k.handle}</span></div>
+        <div class="kyc-meta">${k.doc} · ${k.country} · Submitted ${k.submitted}</div>
+      </div>
+      <div class="kyc-actions">
+        <button class="btn btn-ghost btn-xs" onclick="showToast('info','Document','Simulated: opening ID preview for ${k.name}')"><i class="ti ti-eye"></i></button>
+        <button class="btn btn-green btn-xs" onclick="approveKYC(this,'${k.name}')"><i class="ti ti-check"></i> Approve</button>
+        <button class="btn btn-red btn-xs" onclick="rejectKYC(this,'${k.name}')"><i class="ti ti-x"></i> Reject</button>
+      </div>
+    </div>
+  `).join('');
+}
+function approveKYC(btn,name) {
+  btn.closest('.kyc-item').style.opacity='.4';
+  btn.closest('.kyc-item').style.pointerEvents='none';
+  showToast('success','KYC Approved',name+' is now verified');
+  setTimeout(()=>btn.closest('.kyc-item').remove(),500);
+}
+function rejectKYC(btn,name) {
+  btn.closest('.kyc-item').style.opacity='.4';
+  btn.closest('.kyc-item').style.pointerEvents='none';
+  showToast('error','KYC Rejected',name+' — ID document rejected');
+  setTimeout(()=>btn.closest('.kyc-item').remove(),500);
+}
+
+// ── AGENTS ──
+function renderAgents() {
+  document.getElementById('agents-tbody').innerHTML=AGENTS_DATA.map(a=>`
+    <tr>
+      <td><div class="tbl-user"><div class="tbl-av" style="background:linear-gradient(135deg,var(--cyan),var(--cyan2));">${a.name.split(' ').map(n=>n[0]).join('')}</div><div><div class="tbl-name">${a.name}</div><div style="font-size:10px;color:var(--muted);">${a.id}</div></div></div></td>
+      <td style="font-size:11px;">${a.zone}</td>
+      <td style="font-weight:700;color:var(--cyan);">${a.float.toLocaleString()} USDC</td>
+      <td style="font-weight:600;">${a.tx}</td>
+      <td style="color:var(--green);font-weight:600;">$${a.commission.toFixed(2)}</td>
+      <td style="color:var(--yellow);">${a.rating}★</td>
+      <td><span class="status-dot ${a.status}">${a.status}</span></td>
+      <td><div style="display:flex;gap:4px;">
+        <button class="btn btn-ghost btn-xs" onclick="showToast('info','Agent ${a.id}','Float: ${a.float} USDC · Tx: ${a.tx} today')"><i class="ti ti-eye"></i></button>
+        ${a.status==='active'?`<button class="btn btn-red btn-xs" onclick="showToast('warn','Agent suspended','${a.name} temporarily suspended')">Suspend</button>`:`<button class="btn btn-green btn-xs" onclick="showToast('success','Restored','${a.name} is now active')">Restore</button>`}
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+// ── MERCHANTS ──
+function renderMerchants() {
+  document.getElementById('merchants-tbody').innerHTML=MERCHANTS_DATA.map(m=>`
+    <tr>
+      <td><div class="tbl-user"><div class="tbl-av" style="background:linear-gradient(135deg,#F7B731,#ff6b6b);">🏪</div><div class="tbl-name">${m.name}</div></div></td>
+      <td style="font-size:11px;color:var(--muted);">${m.cat}</td>
+      <td style="font-weight:700;color:var(--green);">$${m.rev.toLocaleString()}</td>
+      <td>${m.orders}</td>
+      <td style="font-weight:600;color:var(--cyan);">${m.pending?'$'+m.pending.toFixed(2):'—'}</td>
+      <td><span class="status-dot ${m.status}">${m.status}</span></td>
+      <td><div style="display:flex;gap:4px;">
+        <button class="btn btn-ghost btn-xs" onclick="showToast('info','${m.name}','Revenue: $${m.rev} today · ${m.orders} orders')"><i class="ti ti-eye"></i></button>
+        ${m.pending?`<button class="btn btn-green btn-xs" onclick="showToast('success','Payout sent','$${m.pending} released to ${m.name}')">Pay Out</button>`:''}
+      </div></td>
+    </tr>
+  `).join('');
+}
+
+// ── PAYOUTS ──
+function renderPayouts() {
+  document.getElementById('payouts-tbody').innerHTML=PAYOUTS_DATA.map((p,i)=>`
+    <tr>
+      <td><div class="tbl-name">${p.merchant}</div></td>
+      <td style="font-weight:700;">$${p.amt.toFixed(2)}</td>
+      <td style="font-size:11px;color:var(--muted);">${p.method}</td>
+      <td style="color:var(--red);">-$${p.fee.toFixed(2)}</td>
+      <td style="font-weight:700;color:var(--green);">$${p.net.toFixed(2)}</td>
+      <td style="font-size:11px;color:var(--muted);">${p.req}</td>
+      <td><span class="pill pill-yellow">${p.status}</span></td>
+      <td><div style="display:flex;gap:4px;">
+        <button class="btn btn-green btn-xs" onclick="approvePayout(this,'${p.merchant}','$${p.net.toFixed(2)}')">Approve</button>
+        <button class="btn btn-red btn-xs" onclick="showToast('error','Rejected','${p.merchant} payout rejected')">Reject</button>
+      </div></td>
+    </tr>
+  `).join('');
+}
+function approvePayout(btn,name,amt) {
+  const row=btn.closest('tr');
+  row.querySelectorAll('td')[6].innerHTML='<span class="pill pill-green">approved</span>';
+  row.querySelectorAll('td')[7].innerHTML='<span style="font-size:10px;color:var(--muted);">Sent</span>';
+  showToast('success','Payout Approved',name+' · '+amt+' released');
+}
+
+// ── LOGS ──
+function renderLogs() {
+  document.getElementById('logs-tbody').innerHTML=LOGS_DATA.map(l=>`
+    <tr>
+      <td style="font-size:11px;color:var(--muted);">${l.time}</td>
+      <td style="font-size:12px;font-weight:600;">${l.admin}</td>
+      <td><span class="pill pill-cyan">${l.action}</span></td>
+      <td style="font-size:11px;">${l.target}</td>
+      <td style="font-size:10px;color:var(--muted);font-family:monospace;">${l.ip}</td>
+    </tr>
+  `).join('');
+}
+
+// ── TOP AGENTS ──
+function renderTopAgents() {
+  const top=[{n:'Marie Faure',z:'Carrefour',tx:31,earn:'$38.20'},{n:'Rosa Clément',z:'Delmas 33',tx:22,earn:'$24.10'},{n:'Jean Baptiste',z:'Pétion-Ville',tx:17,earn:'$18.40'}];
+  document.getElementById('top-agents').innerHTML=top.map((a,i)=>`
+    <div style="padding:9px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;${i===2?'border-bottom:none;':''}">
+      <div style="width:20px;font-size:11px;font-weight:700;color:var(--muted);">#${i+1}</div>
+      <div style="flex:1;"><div style="font-size:12px;font-weight:600;">${a.n}</div><div style="font-size:10px;color:var(--muted);">${a.z}</div></div>
+      <div style="text-align:right;"><div style="font-size:12px;font-weight:700;color:var(--green);">${a.earn}</div><div style="font-size:10px;color:var(--muted);">${a.tx} tx</div></div>
+    </div>
+  `).join('');
+}
+
+// ── BARS ──
+function renderBars(id, data, labels, green) {
+  const max=Math.max(...data);
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.innerHTML=data.map((v,i)=>`
+    <div class="bw">
+      <div class="bar-l" style="font-size:8px;color:var(--muted);margin-bottom:2px;">${v>=1000?'$'+(v/1000).toFixed(0)+'k':'$'+v}</div>
+      <div class="bar ${green?'green':'cyan'}" style="height:${Math.max(4,(v/max)*100)*(el.clientHeight||80)/100}px;"></div>
+      <div class="bar-l">${labels[i]}</div>
+    </div>
+  `).join('');
+}
+
+// ── TOAST ──
+let toastT;
+function showToast(type,title,msg) {
+  const t=document.getElementById('toast');
+  const icons={success:'ti-circle-check',error:'ti-circle-x',info:'ti-info-circle',warn:'ti-alert-triangle'};
+  t.className='toast '+type;
+  document.getElementById('toast-icon').className='ti '+icons[type];
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── CLOCK ──
+function tick(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+tick();setInterval(tick,1000);
+
+// ── INIT ──
+renderTxFeed();
+renderTopAgents();
+renderBars('vol-bars',VOL_DATA,VOL_LABELS,false);
+renderFlags();
+
+// Live feed: new suspicious tx after 18s
+setTimeout(()=>{
+  TX_DATA.unshift({id:'TCH-9902',from:'New User',to:'External Wallet',type:'transfer',amt:3100,fee:31,status:'held',time:'Just now',flagged:true});
+  renderTxFeed();
+  FLAGS.unshift({id:'FL-NEW',title:'Very large transfer from new account',user:'New User',amt:3100,type:'High Risk',risk:'red',time:'Just now',detail:'$3,100 transfer from an account created 2 hours ago to an unverified external wallet.'});
+  document.getElementById('nb-flags').textContent=parseInt(document.getElementById('nb-flags').textContent)+1;
+  showToast('error','New Compliance Flag!','$3,100 transfer auto-held — new account to unknown wallet');
+},18000);
+</script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

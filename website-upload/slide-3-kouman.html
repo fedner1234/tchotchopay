@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1080px; height: 1920px;
+  background: #020B2D;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.glow { position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(10,85,204,0.2) 0%, transparent 70%); top: 500px; left: 50%; transform: translateX(-50%); }
+.logo-area { margin-top: 110px; text-align: center; }
+.logo-text { font-size: 72px; font-weight: 700; color: #fff; letter-spacing: -1px; }
+.logo-line { width: 280px; height: 2px; background: linear-gradient(90deg, transparent, #00C896, transparent); margin: 12px auto; }
+.tag { font-size: 28px; font-weight: 400; color: #00C896; letter-spacing: 4px; text-transform: uppercase; }
+.headline { margin-top: 80px; text-align: center; font-size: 72px; font-weight: 700; color: #fff; line-height: 1.15; }
+.steps { margin-top: 80px; width: 940px; display: flex; flex-direction: column; gap: 28px; }
+.step {
+  background: rgba(10,31,110,0.8);
+  border: 1.5px solid rgba(255,255,255,0.07);
+  border-radius: 40px;
+  padding: 44px 52px;
+  display: flex; align-items: center; gap: 44px;
+}
+.num {
+  width: 88px; height: 88px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 46px; font-weight: 700;
+  flex-shrink: 0;
+}
+.n1 { border: 3px solid #0A55CC; color: #0A55CC; background: rgba(10,85,204,0.12); }
+.n2 { border: 3px solid #00AEEF; color: #00AEEF; background: rgba(0,174,239,0.12); }
+.n3 { border: 3px solid #00C896; color: #00C896; background: rgba(0,200,150,0.12); }
+.step-content {}
+.step-title { font-size: 46px; font-weight: 700; color: #fff; }
+.step-sub { font-size: 32px; color: #8899BB; font-weight: 400; margin-top: 8px; }
+.c1 { color: #0A55CC; }
+.c2 { color: #00AEEF; }
+.c3 { color: #00C896; }
+.bottom { margin-top: 64px; text-align: center; font-size: 44px; color: rgba(200,215,240,0.75); font-weight: 400; line-height: 1.4; }
+.url { position: absolute; bottom: 72px; font-size: 30px; color: rgba(136,153,187,0.5); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="logo-area">
+  <div class="logo-text">TchotchoPay</div>
+  <div class="logo-line"></div>
+  <div class="tag">Kòman li Travay</div>
+</div>
+<div class="headline">Senp. Vit.<br><span style="color:#00C896">Fre ba.</span></div>
+<div class="steps">
+  <div class="step">
+    <div class="num n1">1</div>
+    <div class="step-content">
+      <div class="step-title">Mete Lajan</div>
+      <div class="step-sub">Kat debi, ACH, oswa bank</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num n2">2</div>
+    <div class="step-content">
+      <div class="step-title">Konveti an <span class="c2">USDC</span></div>
+      <div class="step-sub">Otomatik — prèske imedya</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num n3">3</div>
+    <div class="step-content">
+      <div class="step-title">Voye / Achte / Kache</div>
+      <div class="step-sub">MonCash, NatCash, mache lokal</div>
+    </div>
+  </div>
+</div>
+<div class="bottom">Disponib 24/7 •<br>Etazini, Kanada, Frans → Ayiti</div>
+<div class="url">tchotchopay.com</div>
+</body>
+</html>

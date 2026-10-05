@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Money to Haiti Calculator — See Exactly What You Pay</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Kalkile konbyen fanmi ou resevwa ann Ayiti. Compare ACH, debit card, and wire fees vs Western Union & Remitly. Real-time HTG exchange rates for voye lajan Ayiti."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/calculator.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/calculator.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/calculator.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/calculator.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/calculator.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/calculator.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/calculator.html"/>
+  <meta property="og:title" content="Send Money to Haiti Calculator — See Exactly What You Pay"/>
+  <meta property="og:description" content="Calculate exactly how much your recipient gets in HTG. Compare ACH, debit card, and wire transfer fees. Real-time exchange rates."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Send Money to Haiti Calculator — See Exactly What You Pay"/>
+  <meta name="twitter:description" content="Calculate exactly how much your recipient gets in HTG. Compare ACH, debit card, and wire transfer fees. Real-time exchange rates."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    html { overflow-x: hidden; }
+    :root {
+      --navy: #020B2D; --blue: #0A1F6E; --mid: #1055CC;
+      --cyan: #00AEEF; --light: #7FD4F7; --gray: #8FA8CC;
+      --white: #F0F6FF; --green: #00C896; --red: #FF4C6A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--navy); color: var(--white); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; overflow-x:hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      display: flex; align-items: center; padding: 14px 32px;
+      background: #fff;  backdrop-filter: blur(12px);
+      border-bottom: 2px solid #D21034; gap: 16px;
+    }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 46px; width: auto; display: block; }
+    
+    
+    
+    
+    .nav-back { margin-left: auto; color: #374151; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .nav-back:hover { color: #1055CC; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 130px 24px 60px;
+      text-align: center;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,174,239,0.12) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,174,239,0.12); border: 1px solid rgba(0,174,239,0.3);
+      color: var(--cyan); padding: 6px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+    .hero h1 em { color: var(--cyan); font-style: normal; }
+    .hero p { color: var(--gray); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+
+    /* ── CALCULATOR CARD ── */
+    .calc-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    .calc-card {
+      background: linear-gradient(135deg, rgba(10,31,110,0.6), rgba(2,11,45,0.8));
+      border: 1px solid rgba(0,174,239,0.2);
+      border-radius: 24px; padding: 40px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Amount row */
+    .amount-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-bottom: 8px; }
+    .input-group { display: flex; flex-direction: column; gap: 6px; }
+    .input-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--gray);
+    }
+    .amount-field {
+      display: flex; align-items: center;
+      background: rgba(2,11,45,0.7); border: 1.5px solid rgba(0,174,239,0.25);
+      border-radius: 14px; overflow: hidden; transition: border-color .2s;
+    }
+    .amount-field:focus-within { border-color: var(--cyan); }
+    .currency-prefix {
+      padding: 0 14px; font-size: 1.1rem; font-weight: 700;
+      color: var(--cyan); white-space: nowrap; user-select: none;
+    }
+    .amount-input {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--white); font-size: 1.6rem; font-weight: 700;
+      padding: 16px 16px 16px 0; font-family: inherit; width: 100%;
+    }
+    .amount-input::placeholder { color: rgba(143,168,204,0.4); }
+
+    /* Method selector */
+    .method-selector { display: flex; flex-direction: column; gap: 6px; }
+    .method-select {
+      background: rgba(2,11,45,0.7); border: 1.5px solid rgba(0,174,239,0.25);
+      border-radius: 14px; color: var(--white); font-size: 0.92rem; font-weight: 600;
+      padding: 16px 14px; font-family: inherit; cursor: pointer; outline: none;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238FA8CC' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 40px; transition: border-color .2s;
+    }
+    .method-select:focus { border-color: var(--cyan); }
+    .method-select option { background: #0A1F6E; color: var(--white); }
+
+    /* Quick amounts */
+    .quick-amounts { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 28px; }
+    .quick-btn {
+      padding: 7px 16px; border-radius: 50px; border: 1.5px solid rgba(0,174,239,0.3);
+      background: none; color: var(--gray); font-size: 0.83rem; font-weight: 700;
+      cursor: pointer; transition: all .18s; font-family: inherit;
+    }
+    .quick-btn:hover, .quick-btn.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,174,239,0.08); }
+
+    /* Divider */
+    .calc-divider { border: none; border-top: 1px solid rgba(0,174,239,0.12); margin: 24px 0; }
+
+    /* Breakdown */
+    .breakdown { display: flex; flex-direction: column; gap: 0; }
+    .breakdown-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 13px 0; border-bottom: 1px solid rgba(0,174,239,0.07);
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-label { display: flex; align-items: center; gap: 8px; color: var(--gray); font-size: 0.9rem; }
+    .breakdown-label i { font-size: 1rem; color: var(--cyan); opacity: .7; }
+    .breakdown-value { font-weight: 700; font-size: 0.95rem; color: var(--white); }
+    .breakdown-value.fee { color: #FF9F43; }
+    .breakdown-value.rate { color: var(--light); }
+    .info-tip {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 15px; height: 15px; border-radius: 50%;
+      border: 1px solid rgba(143,168,204,0.4); color: var(--gray);
+      font-size: 0.6rem; cursor: help; position: relative;
+    }
+    .info-tip:hover::after {
+      content: attr(data-tip);
+      position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+      background: #0A1F6E; border: 1px solid rgba(0,174,239,0.3);
+      color: var(--white); font-size: 0.75rem; font-weight: 400;
+      padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+      pointer-events: none; z-index: 10;
+    }
+
+    /* Total recipient */
+    .total-box {
+      background: linear-gradient(135deg, rgba(0,174,239,0.1), rgba(0,200,150,0.08));
+      border: 1.5px solid rgba(0,174,239,0.3);
+      border-radius: 16px; padding: 24px 28px; margin-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .total-label { color: var(--gray); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+    .total-amount { font-size: 2.4rem; font-weight: 900; color: var(--green); line-height: 1; }
+    .total-currency { font-size: 1rem; font-weight: 700; color: var(--light); margin-left: 6px; }
+    .total-sub { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+    .cta-btn {
+      background: linear-gradient(135deg, var(--mid), var(--cyan));
+      color: var(--white); border: none; border-radius: 50px;
+      padding: 16px 32px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; font-family: inherit; white-space: nowrap;
+      transition: opacity .2s, transform .15s; display: flex; align-items: center; gap: 8px;
+    }
+    .cta-btn:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* Speed badge */
+    .speed-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.3);
+      color: var(--green); padding: 5px 12px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700; margin-top: 8px;
+    }
+
+    /* Recipient currency tabs */
+    .rcv-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .rcv-tab {
+      padding: 8px 18px; border-radius: 50px; border: 1.5px solid rgba(0,174,239,0.25);
+      background: none; color: var(--gray); font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all .18s; font-family: inherit;
+    }
+    .rcv-tab.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,174,239,0.1); }
+    .rcv-tab:hover:not(.active) { border-color: rgba(0,174,239,0.5); color: var(--light); }
+
+    /* Rate ticker */
+    .rate-ticker {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(0,174,239,0.06); border: 1px solid rgba(0,174,239,0.15);
+      border-radius: 12px; padding: 10px 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 6px;
+    }
+    .rate-ticker span { font-size: 0.82rem; color: var(--gray); }
+    .rate-ticker strong { color: var(--cyan); }
+    .rate-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* Compare table */
+    .compare-section { margin-top: 48px; }
+    .compare-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .compare-sub { color: var(--gray); font-size: 0.9rem; margin-bottom: 24px; }
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th {
+      text-align: left; padding: 12px 16px; font-size: 0.78rem;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--gray); border-bottom: 1px solid rgba(0,174,239,0.12);
+    }
+    .compare-table td {
+      padding: 14px 16px; font-size: 0.9rem;
+      border-bottom: 1px solid rgba(0,174,239,0.07);
+    }
+    .compare-table tr.highlight { background: rgba(0,174,239,0.05); }
+    .compare-table tr.highlight td:first-child { color: var(--cyan); font-weight: 700; }
+    .compare-table .val-good { color: var(--green); font-weight: 700; }
+    .compare-table .val-bad { color: #FF9F43; }
+    .compare-table .val-gray { color: var(--gray); }
+    .winner-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(0,200,150,0.15); border: 1px solid rgba(0,200,150,0.3);
+      color: var(--green); padding: 3px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 700;
+    }
+
+    /* Trust bar */
+    .trust-bar {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      margin-top: 48px; padding: 24px;
+      background: rgba(10,31,110,0.3); border-radius: 16px;
+      border: 1px solid rgba(0,174,239,0.1);
+    }
+    .trust-item { display: flex; align-items: center; gap: 8px; color: var(--gray); font-size: 0.85rem; }
+    .trust-item i { color: var(--cyan); font-size: 1.1rem; }
+
+    /* Section label */
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,174,239,0.15); }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .calc-card { padding: 24px 20px; }
+      .amount-row { grid-template-columns: 1fr; }
+      .total-box { flex-direction: column; align-items: flex-start; }
+      .total-amount { font-size: 2rem; }
+      nav { padding: 12px 16px; gap: 10px;
+      border-bottom: 2px solid #D21034;
+    }
+      .compare-table th:nth-child(3), .compare-table td:nth-child(3) { display: none; }
+    }
+  
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+  
+    @media(max-width:600px){
+      .nav-links{display:none;}
+      .calc-grid{grid-template-columns:1fr!important;}
+      .method-grid{grid-template-columns:1fr 1fr!important;}
+      .hero h1{font-size:1.8rem;}
+    }
+  .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
+    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  
+    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
+    html, body { overflow-x: hidden !important; max-width: 100% !important; }
+    * { box-sizing: border-box; }
+    img, video, iframe, table { max-width: 100%; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- GA4 Consent Mode: default denied until user accepts -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LKXNGW0JJ5');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"TchotchoPay Send Money Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://tchotchopay.com/calculator.html","description":"Calculate exactly how much your recipient in Haiti will receive. Compare fees and exchange rates for sending USD to HTG.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  </a>
+    <div class="nav-links">
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="faq.html" class="nav-link">Help</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="login.html" class="nav-login">Log In</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-calculator"></i> <span id="badge-text">Send Money Calculator</span></div>
+  <h1 id="hero-title">See exactly <em>how much</em> arrives</h1>
+  <p id="hero-sub">No hidden fees. Real exchange rates. Know what your family receives before you send.</p>
+</section>
+
+<!-- CALCULATOR -->
+<div class="calc-wrap">
+  <div class="calc-card">
+
+    <!-- Rate ticker -->
+    <div class="rate-ticker">
+      <div class="rate-dot"></div>
+      <span id="ticker-label">Live rate:</span>
+      <strong id="ticker-rate">1 USDC = 130.50 HTG</strong>
+      <span>·</span>
+      <span id="ticker-updated">Updated just now</span>
+    </div>
+
+    <!-- You send -->
+    <div class="section-label" id="send-label">You Send</div>
+    <div class="amount-row">
+      <div class="input-group">
+        <div class="amount-field">
+          <span class="currency-prefix">$</span>
+          <input class="amount-input" type="number" id="send-amount" value="200" min="10" max="10000" step="1" placeholder="0" oninput="calculate()" />
+        </div>
+        <div id="send-hint" style="font-size:.78rem;color:var(--gray);margin-top:4px;">Min $10 · Max $10,000 per transfer</div>
+      </div>
+      <div class="method-selector">
+        <div class="input-label" id="method-label">Payment Method</div>
+        <select class="method-select" id="method-select" onchange="calculate()">
+          <option value="bank">🏦 Bank / ACH — Free</option>
+          <option value="debit" selected>💳 Debit Card — 2%</option>
+          <option value="credit">💳 Credit Card — 3%</option>
+          <option value="wire">🔁 Wire Transfer — Free</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Quick amounts -->
+    <div class="quick-amounts" id="quick-amounts">
+      <button class="quick-btn" onclick="setAmount(50)">$50</button>
+      <button class="quick-btn" onclick="setAmount(100)">$100</button>
+      <button class="quick-btn active" onclick="setAmount(200)">$200</button>
+      <button class="quick-btn" onclick="setAmount(500)">$500</button>
+      <button class="quick-btn" onclick="setAmount(1000)">$1,000</button>
+    </div>
+
+    <hr class="calc-divider" />
+
+    <!-- Recipient gets in -->
+    <div class="section-label" id="rcv-label">Recipient Gets In</div>
+    <div class="rcv-tabs">
+      <button class="rcv-tab" onclick="setRcv('usdc',this)" id="tab-usdc">USDC</button>
+      <button class="rcv-tab active" onclick="setRcv('htg',this)" id="tab-htg">🇭🇹 HTG (Gourdes)</button>
+      <button class="rcv-tab" onclick="setRcv('usd',this)" id="tab-usd">🇺🇸 USD</button>
+    </div>
+
+    <!-- Breakdown -->
+    <div class="breakdown" id="breakdown">
+      <div class="breakdown-row">
+        <span class="breakdown-label"><i class="ti ti-send"></i> <span id="lbl-you-send">Amount You Send</span></span>
+        <span class="breakdown-value" id="val-you-send">$200.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">
+          <i class="ti ti-credit-card"></i>
+          <span id="lbl-method-fee">Payment Method Fee</span>
+          <span class="info-tip" data-tip="Fee charged by your payment provider">?</span>
+        </span>
+        <span class="breakdown-value fee" id="val-method-fee">−$4.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">
+          <i class="ti ti-coins"></i>
+          <span id="lbl-fx">Exchange Rate</span>
+        </span>
+        <span class="breakdown-value rate" id="val-fx">1 USDC = 130.50 HTG</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">
+          <i class="ti ti-arrows-exchange"></i>
+          <span id="lbl-usdc">USDC Converted</span>
+        </span>
+        <span class="breakdown-value" id="val-usdc">196.00 USDC</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="breakdown-label">
+          <i class="ti ti-clock"></i>
+          <span id="lbl-speed">Transfer Speed</span>
+        </span>
+        <span class="breakdown-value" style="color:var(--green)" id="val-speed">~2 minutes</span>
+      </div>
+    </div>
+
+    <!-- Total box -->
+    <div class="total-box">
+      <div>
+        <div class="total-label" id="rcv-total-label">Recipient Receives</div>
+        <div>
+          <span class="total-amount" id="total-amount">26,178</span>
+          <span class="total-currency" id="total-currency">HTG</span>
+        </div>
+        <div class="total-sub" id="total-sub">≈ $196.00 USD value</div>
+        <div class="speed-badge"><i class="ti ti-bolt"></i> <span id="speed-badge-text">Arrives in ~2 minutes</span></div>
+      </div>
+      <button class="cta-btn" onclick="window.location.href='index.html#waitlist'">
+        <i class="ti ti-send"></i> <span id="cta-text">Send Money Now</span>
+      </button>
+    </div>
+
+  </div><!-- /calc-card -->
+
+  <!-- Compare section -->
+  <div class="compare-section">
+    <div class="compare-title" id="cmp-title">Compare the savings</div>
+    <p class="compare-sub" id="cmp-sub">See how much more your family receives with Tchotcho Pay vs. traditional services.</p>
+    <table class="compare-table" id="compare-table">
+      <thead>
+        <tr>
+          <th id="th-provider">Provider</th>
+          <th id="th-fee">Fee</th>
+          <th id="th-rate">Rate</th>
+          <th id="th-receives">They Receive</th>
+          <th id="th-speed">Speed</th>
+        </tr>
+      </thead>
+      <tbody id="compare-body">
+        <!-- filled by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="trust-bar">
+    <div class="trust-item"><i class="ti ti-lock"></i> <span id="trust1">Bank-grade encryption</span></div>
+    <div class="trust-item"><i class="ti ti-shield-check"></i> <span id="trust2">Licensed & compliant</span></div>
+    <div class="trust-item"><i class="ti ti-clock-24"></i> <span id="trust3">24/7 transfers</span></div>
+    <div class="trust-item"><i class="ti ti-currency-dollar"></i> <span id="trust4">No hidden fees</span></div>
+    <div class="trust-item"><i class="ti ti-star"></i> <span id="trust5">Real exchange rates</span></div>
+  </div>
+
+</div><!-- /calc-wrap -->
+
+<script>
+  // ── RATES & FEES ──────────────────────────────────────────────────
+  const RATES = {
+    htg:  { rate: 130.50, symbol: 'HTG',  flag: '🇭🇹', name: 'Haitian Gourdes' },
+    usdc: { rate: 1,      symbol: 'USDC', flag: '💰', name: 'USDC' },
+    usd:  { rate: 1,      symbol: 'USD',  flag: '🇺🇸', name: 'US Dollars' },
+  };
+
+  const METHODS = {
+    bank:   { fee: 0,    label: 'Bank / ACH',     speed: '~2 minutes' },
+    debit:  { fee: 0.02, label: 'Debit Card',      speed: '~2 minutes' },
+    credit: { fee: 0.03, label: 'Credit Card',     speed: '~2 minutes' },
+    wire:   { fee: 0,    label: 'Wire Transfer',   speed: '~4 hours' },
+  };
+
+  const COMPETITORS = [
+    { name: 'Tchotcho Pay', feeUSD: 0, feeCard: 0.02, rate: 130.50, speed: '~2 min', highlight: true },
+    { name: 'Western Union', feeUSD: 5.00, feeCard: 0, rate: 125.00, speed: '1–3 days' },
+    { name: 'MoneyGram',    feeUSD: 4.99, feeCard: 0, rate: 126.00, speed: '1–2 days' },
+    { name: 'Remitly',      feeUSD: 3.99, feeCard: 0, rate: 128.00, speed: 'Minutes–hours' },
+    { name: 'Wise',         feeUSD: 0,    feeCard: 0.006, rate: 130.10, speed: '1–2 days' },
+  ];
+
+  let currentRcv = 'htg';
+  let currentMethod = 'debit';
+
+  function fmt(n, dec=2) { return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+
+  function calculate() {
+    const amount = parseFloat(document.getElementById('send-amount').value) || 0;
+    currentMethod = document.getElementById('method-select').value;
+    const method = METHODS[currentMethod];
+    const rcvData = RATES[currentRcv];
+
+    // Fee
+    const fee = method.fee * amount;
+    const afterFee = amount - fee;
+
+    // USDC is 1:1 USD
+    const usdc = afterFee;
+
+    // Convert
+    let received, totalLabel, totalCurrency;
+    if (currentRcv === 'htg') {
+      received = usdc * rcvData.rate;
+      totalCurrency = 'HTG';
+    } else if (currentRcv === 'usdc') {
+      received = usdc;
+      totalCurrency = 'USDC';
+    } else {
+      received = usdc;
+      totalCurrency = 'USD';
+    }
+
+    // Update UI
+    document.getElementById('val-you-send').textContent = '$' + fmt(amount);
+    document.getElementById('val-method-fee').textContent = fee > 0 ? '−$' + fmt(fee) : 'Free';
+    document.getElementById('val-method-fee').style.color = fee > 0 ? '#FF9F43' : 'var(--green)';
+    document.getElementById('val-fx').textContent = currentRcv === 'htg' ? '1 USDC = 130.50 HTG' : '1 USDC = 1 USD';
+    document.getElementById('val-usdc').textContent = fmt(usdc) + ' USDC';
+    document.getElementById('val-speed').textContent = method.speed;
+
+    document.getElementById('total-amount').textContent = fmt(received, currentRcv === 'htg' ? 0 : 2);
+    document.getElementById('total-currency').textContent = totalCurrency;
+
+    const subVal = currentRcv === 'htg' ? '≈ $' + fmt(usdc) + ' USD value' : '';
+    document.getElementById('total-sub').textContent = subVal;
+    document.getElementById('speed-badge-text').textContent = i18n('arrives_in') + ' ' + method.speed;
+
+    // Update ticker
+    document.getElementById('ticker-rate').textContent = '1 USDC = 130.50 HTG';
+
+    // Compare table
+    renderCompare(amount);
+
+    // Quick btn active
+    document.querySelectorAll('.quick-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.textContent.replace(/[$,]/g,'')) === amount);
+    });
+  }
+
+  function renderCompare(amount) {
+    const currentMethod = document.getElementById('method-select').value;
+    const isCash = currentMethod === 'bank' || currentMethod === 'wire';
+    const tbody = document.getElementById('compare-body');
+    tbody.innerHTML = '';
+
+    // Tchotcho card fee same as user selection; others use their own fee structure
+    let tchotchoFee = METHODS[currentMethod].fee * amount;
+    let tchotchoUsdc = amount - tchotchoFee;
+    let tchotchoHTG = tchotchoUsdc * 130.50;
+
+    const rows = [
+      { name: 'Tchotcho Pay', fee: tchotchoFee, htg: tchotchoHTG, speed: METHODS[currentMethod].speed, highlight: true },
+      { name: 'Western Union', fee: 5.00, htg: (amount - 5.00) * 125.00, speed: '1–3 days' },
+      { name: 'MoneyGram',    fee: 4.99, htg: (amount - 4.99) * 126.00, speed: '1–2 days' },
+      { name: 'Remitly',      fee: 3.99, htg: (amount - 3.99) * 128.00, speed: 'Minutes' },
+      { name: 'Wise',         fee: amount * 0.006, htg: (amount - amount*0.006) * 130.10, speed: '1–2 days' },
+    ].filter(r => r.htg > 0);
+
+    // Sort by htg descending
+    rows.sort((a,b) => b.htg - a.htg);
+
+    rows.forEach((r, idx) => {
+      const tr = document.createElement('tr');
+      if (r.highlight) tr.className = 'highlight';
+      const saving = r.highlight ? '' : `<span style="font-size:.75rem;color:var(--red)">−${fmt(tchotchoHTG - r.htg, 0)} HTG</span>`;
+      tr.innerHTML = `
+        <td>${r.name}${r.highlight ? ' <span class="winner-badge">✓ Best</span>' : ''}</td>
+        <td class="${r.highlight ? 'val-good' : 'val-bad'}">${r.fee === 0 ? 'Free' : '$'+fmt(r.fee)}</td>
+        <td class="val-gray">${r.highlight ? '130.50' : r.name === 'Western Union' ? '125.00' : r.name === 'MoneyGram' ? '126.00' : r.name === 'Remitly' ? '128.00' : '130.10'} HTG/USD</td>
+        <td class="${r.highlight ? 'val-good' : ''}">${fmt(r.htg, 0)} HTG ${saving}</td>
+        <td class="${r.highlight ? 'val-good' : 'val-gray'}">${r.speed}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function setAmount(val) {
+    document.getElementById('send-amount').value = val;
+    calculate();
+  }
+
+  function setRcv(type, btn) {
+    currentRcv = type;
+    document.querySelectorAll('.rcv-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Show/hide fx row
+    document.getElementById('val-fx').closest('.breakdown-row').style.display = type === 'usdc' ? 'none' : 'flex';
+    calculate();
+  }
+
+  // ── MULTILINGUAL ─────────────────────────────────────────────────
+  const LANG = {
+    en: {
+      page_title: 'Send Money Calculator — Tchotcho Pay',
+      badge: 'Send Money Calculator',
+      title: 'See exactly <em>how much</em> arrives',
+      subtitle: 'No hidden fees. Real exchange rates. Know what your family receives before you send.',
+      back_label: 'Back to Home',
+      ticker_label: 'Live rate:',
+      ticker_updated: 'Updated just now',
+      send_label: 'You Send',
+      method_label: 'Payment Method',
+      send_hint: 'Min $10 · Max $10,000 per transfer',
+      rcv_label: 'Recipient Gets In',
+      lbl_you_send: 'Amount You Send',
+      lbl_method_fee: 'Payment Method Fee',
+      lbl_fx: 'Exchange Rate',
+      lbl_usdc: 'USDC Converted',
+      lbl_speed: 'Transfer Speed',
+      rcv_total_label: 'Recipient Receives',
+      cta_text: 'Send Money Now',
+      arrives_in: 'Arrives in',
+      cmp_title: 'Compare the savings',
+      cmp_sub: 'See how much more your family receives with Tchotcho Pay vs. traditional services.',
+      th_provider: 'Provider', th_fee: 'Fee', th_rate: 'Rate', th_receives: 'They Receive', th_speed: 'Speed',
+      trust1: 'Bank-grade encryption', trust2: 'Licensed & compliant',
+      trust3: '24/7 transfers', trust4: 'No hidden fees', trust5: 'Real exchange rates',
+    },
+    ht: {
+      page_title: 'Kalkikatè Voye Lajan — Tchotcho Pay',
+      badge: 'Kalkikatè Voye Lajan',
+      title: 'Wè egzakteman <em>konbyen</em> ki rive',
+      subtitle: 'Pa gen frè kache. To echanj reyèl. Konnen sa fanmi ou resevwa anvan ou voye.',
+      back_label: 'Retounen Lakay',
+      ticker_label: 'To dirèk:',
+      ticker_updated: 'Mizajou kounye a',
+      send_label: 'Ou Voye',
+      method_label: 'Metòd Pèman',
+      send_hint: 'Min $10 · Max $10,000 pou chak transfè',
+      rcv_label: 'Benefisyè Resevwa An',
+      lbl_you_send: 'Montan Ou Voye',
+      lbl_method_fee: 'Frè Metòd Pèman',
+      lbl_fx: 'To Echanj',
+      lbl_usdc: 'USDC Konvèti',
+      lbl_speed: 'Vitès Transfè',
+      rcv_total_label: 'Benefisyè Resevwa',
+      cta_text: 'Voye Lajan Kounye a',
+      arrives_in: 'Rive nan',
+      cmp_title: 'Konpare ekonomi yo',
+      cmp_sub: 'Wè konbyen plis fanmi ou resevwa ak Tchotcho Pay vs. sèvis tradisyonèl.',
+      th_provider: 'Founisè', th_fee: 'Frè', th_rate: 'To', th_receives: 'Yo Resevwa', th_speed: 'Vitès',
+      trust1: 'Chifre nivo bank', trust2: 'Lisansye & konfòm',
+      trust3: 'Transfè 24/7', trust4: 'Pa gen frè kache', trust5: 'To echanj reyèl',
+    },
+    fr: {
+      page_title: 'Calculateur d\'Envoi — Tchotcho Pay',
+      badge: 'Calculateur d\'Envoi',
+      title: 'Voyez exactement <em>combien</em> arrive',
+      subtitle: 'Aucuns frais cachés. Taux de change réels. Sachez ce que reçoit votre famille avant d\'envoyer.',
+      back_label: 'Retour à l\'Accueil',
+      ticker_label: 'Taux en direct :',
+      ticker_updated: 'Mis à jour à l\'instant',
+      send_label: 'Vous Envoyez',
+      method_label: 'Moyen de Paiement',
+      send_hint: 'Min 10 $ · Max 10 000 $ par transfert',
+      rcv_label: 'Le Bénéficiaire Reçoit En',
+      lbl_you_send: 'Montant Envoyé',
+      lbl_method_fee: 'Frais de Paiement',
+      lbl_fx: 'Taux de Change',
+      lbl_usdc: 'USDC Converti',
+      lbl_speed: 'Vitesse de Transfert',
+      rcv_total_label: 'Le Bénéficiaire Reçoit',
+      cta_text: 'Envoyer Maintenant',
+      arrives_in: 'Arrive en',
+      cmp_title: 'Comparez les économies',
+      cmp_sub: 'Voyez combien de plus votre famille reçoit avec Tchotcho Pay vs. les services traditionnels.',
+      th_provider: 'Prestataire', th_fee: 'Frais', th_rate: 'Taux', th_receives: 'Ils Reçoivent', th_speed: 'Vitesse',
+      trust1: 'Chiffrement bancaire', trust2: 'Agréé & conforme',
+      trust3: 'Transferts 24h/7j', trust4: 'Aucuns frais cachés', trust5: 'Taux de change réels',
+    },
+    es: {
+      page_title: 'Calculadora de Envío — Tchotcho Pay',
+      badge: 'Calculadora de Envío',
+      title: 'Ve exactamente <em>cuánto</em> llega',
+      subtitle: 'Sin tarifas ocultas. Tipos de cambio reales. Sabe cuánto recibe tu familia antes de enviar.',
+      back_label: 'Volver al Inicio',
+      ticker_label: 'Tasa en vivo:',
+      ticker_updated: 'Actualizado ahora',
+      send_label: 'Tú Envías',
+      method_label: 'Método de Pago',
+      send_hint: 'Mín $10 · Máx $10,000 por transferencia',
+      rcv_label: 'El Beneficiario Recibe En',
+      lbl_you_send: 'Monto que Envías',
+      lbl_method_fee: 'Comisión de Pago',
+      lbl_fx: 'Tipo de Cambio',
+      lbl_usdc: 'USDC Convertido',
+      lbl_speed: 'Velocidad de Transferencia',
+      rcv_total_label: 'El Beneficiario Recibe',
+      cta_text: 'Enviar Dinero Ahora',
+      arrives_in: 'Llega en',
+      cmp_title: 'Compara los ahorros',
+      cmp_sub: 'Ve cuánto más recibe tu familia con Tchotcho Pay vs. servicios tradicionales.',
+      th_provider: 'Proveedor', th_fee: 'Tarifa', th_rate: 'Tasa', th_receives: 'Reciben', th_speed: 'Velocidad',
+      trust1: 'Cifrado bancario', trust2: 'Licenciado y en cumplimiento',
+      trust3: 'Transferencias 24/7', trust4: 'Sin tarifas ocultas', trust5: 'Tipos de cambio reales',
+    },
+  };
+
+  let activeLang = localStorage.getItem('tchotcho_lang') || 'en';
+
+  function i18n(key) { return (LANG[activeLang] || LANG.en)[key] || key; }
+
+  function applyLang(lang) {
+    activeLang = lang;
+    localStorage.setItem('tchotcho_lang', lang);
+    const t = LANG[lang] || LANG.en;
+    document.title = t.page_title;
+    document.getElementById('badge-text').textContent = t.badge;
+    document.getElementById('hero-title').innerHTML = t.title;
+    document.getElementById('hero-sub').textContent = t.subtitle;
+    document.getElementById('back-label').textContent = t.back_label;
+    document.getElementById('ticker-label').textContent = t.ticker_label;
+    document.getElementById('ticker-updated').textContent = t.ticker_updated;
+    document.getElementById('send-label').childNodes[0].textContent = t.send_label;
+    document.getElementById('method-label').textContent = t.method_label;
+    document.getElementById('send-hint').textContent = t.send_hint;
+    document.getElementById('rcv-label').childNodes[0].textContent = t.rcv_label;
+    document.getElementById('lbl-you-send').textContent = t.lbl_you_send;
+    document.getElementById('lbl-method-fee').textContent = t.lbl_method_fee;
+    document.getElementById('lbl-fx').textContent = t.lbl_fx;
+    document.getElementById('lbl-usdc').textContent = t.lbl_usdc;
+    document.getElementById('lbl-speed').textContent = t.lbl_speed;
+    document.getElementById('rcv-total-label').textContent = t.rcv_total_label;
+    document.getElementById('cta-text').textContent = t.cta_text;
+    document.getElementById('cmp-title').textContent = t.cmp_title;
+    document.getElementById('cmp-sub').textContent = t.cmp_sub;
+    document.getElementById('th-provider').textContent = t.th_provider;
+    document.getElementById('th-fee').textContent = t.th_fee;
+    document.getElementById('th-rate').textContent = t.th_rate;
+    document.getElementById('th-receives').textContent = t.th_receives;
+    document.getElementById('th-speed').textContent = t.th_speed;
+    document.getElementById('trust1').textContent = t.trust1;
+    document.getElementById('trust2').textContent = t.trust2;
+    document.getElementById('trust3').textContent = t.trust3;
+    document.getElementById('trust4').textContent = t.trust4;
+    document.getElementById('trust5').textContent = t.trust5;
+    // update lang switcher buttons
+    document.querySelectorAll('.tc-lang-btn').forEach(btn => {
+      const active = btn.dataset.lang === lang;
+      btn.style.background = active ? 'linear-gradient(135deg,#1055CC,#00AEEF)' : 'none';
+      btn.style.color = active ? '#fff' : '#8FA8CC';
+    });
+    calculate();
+  }
+
+  // Inject lang switcher into nav
+  window.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('nav');
+    const sw = document.createElement('div');
+    sw.style.cssText = 'display:flex;gap:3px;align-items:center;background:#0A1F6E;border:1.5px solid rgba(0,174,239,0.5);border-radius:50px;padding:3px;margin-left:8px;flex-shrink:0;';
+    ['EN','HT','FR','ES'].forEach(code => {
+      const btn = document.createElement('button');
+      btn.className = 'tc-lang-btn';
+      btn.dataset.lang = code.toLowerCase();
+      btn.textContent = code;
+      btn.onclick = () => applyLang(code.toLowerCase());
+      btn.style.cssText = 'padding:5px 10px;border-radius:50px;border:none;background:none;color:#8FA8CC;font-size:.76rem;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;';
+      sw.appendChild(btn);
+    });
+    // Insert before the back link
+    const backLink = nav.querySelector('.nav-back');
+    nav.insertBefore(sw, backLink);
+    applyLang(activeLang);
+  });
+</script>
+
+<div class="footer-mini" style="background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:24px;text-align:center;">
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <a href="index.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Home</a>
+    <a href="calculator.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Calculator</a>
+    <a href="pricing.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Pricing</a>
+    <a href="security.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Security</a>
+    <a href="faq.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Help Center</a>
+    <a href="contact.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Contact</a>
+    <a href="signup.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Sign Up</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div style="font-size:.72rem;color:rgba(143,168,204,.35);">© 2026 Tchotcho Pay LLC · <a href="social.html" style="color:var(--cyan);">📲 Social Media</a> · <a href="mailto:hello@tchotchopay.com" style="color:#00AEEF;text-decoration:none;">hello@tchotchopay.com</a></div>
+</div>
+  <script src="lang.js"></script>
+<script src="chat-widget.js" defer></script>
+<script src="cookie-consent.js" defer></script>
+</body>
+</html>

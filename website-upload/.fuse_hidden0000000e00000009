@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tchotcho Pay Pricing — Low Fees, No Surprises</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Send money to Haiti for less. ACH deposits free, debit card 2%, cash-out 1%. No hidden fees. Compare us to Western Union, MoneyGram, and Remitly."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/pricing.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/pricing.html"/>
+  <meta property="og:title" content="Tchotcho Pay Pricing — Low Fees, No Surprises"/>
+  <meta property="og:description" content="Send money to Haiti for less. ACH deposits free, debit card 2%, cash-out 1%. No hidden fees. Compare us to Western Union, MoneyGram, and Remitly."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Tchotcho Pay Pricing — Low Fees, No Surprises"/>
+  <meta name="twitter:description" content="Send money to Haiti for less. ACH deposits free, debit card 2%, cash-out 1%. No hidden fees. Compare us to Western Union, MoneyGram, and Remitly."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
+    .nav-name em{color:var(--cyan);font-style:normal;}
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+    @media(max-width:600px){.nav-links{display:none;}}
+
+    /* HERO */
+    .hero{padding:130px 24px 60px;text-align:center;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(0,174,239,.07),transparent 65%);pointer-events:none;}
+    .hero-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);color:var(--green);padding:5px 16px;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px;}
+    .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:520px;margin:0 auto 32px;}
+    .hero-compare{display:inline-flex;align-items:center;gap:24px;background:rgba(10,31,110,.4);border:1px solid rgba(0,174,239,.2);border-radius:50px;padding:12px 28px;font-size:.85rem;color:var(--gray);}
+    .hero-compare strong{color:var(--white);}
+    .hero-compare .arrow{color:var(--cyan);}
+
+    /* TOGGLE */
+    .toggle-wrap{display:flex;justify-content:center;margin:48px 0 32px;}
+    .toggle-group{display:flex;background:rgba(10,31,110,.5);border:1px solid rgba(0,174,239,.2);border-radius:50px;padding:4px;gap:4px;}
+    .toggle-btn{padding:9px 22px;border-radius:50px;border:none;background:none;color:var(--gray);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .25s;font-family:inherit;}
+    .toggle-btn.active{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+
+    /* PLANS GRID */
+    .plans-section{padding:0 24px 80px;}
+    .plans-inner{max-width:1000px;margin:0 auto;}
+    .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    @media(max-width:760px){.plans-grid{grid-template-columns:1fr;}}
+
+    .plan-card{background:rgba(10,31,110,.25);border:1.5px solid rgba(0,174,239,.12);border-radius:24px;padding:28px;position:relative;transition:all .3s;}
+    .plan-card:hover{border-color:rgba(0,174,239,.3);transform:translateY(-4px);}
+    .plan-card.featured{border-color:var(--cyan);background:rgba(10,31,110,.45);box-shadow:0 0 0 1px rgba(0,174,239,.15),0 20px 60px rgba(0,0,0,.3);}
+    .plan-popular{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;font-size:.7rem;font-weight:800;padding:5px 16px;border-radius:50px;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase;}
+    .plan-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .plan-name{font-size:1rem;font-weight:800;margin-bottom:4px;}
+    .plan-desc{font-size:.8rem;color:var(--gray);margin-bottom:18px;line-height:1.5;}
+    .plan-price{margin-bottom:20px;}
+    .plan-price-num{font-size:2.4rem;font-weight:900;}
+    .plan-price-num em{font-size:1rem;font-weight:500;color:var(--gray);font-style:normal;margin-left:2px;}
+    .plan-price-note{font-size:.72rem;color:rgba(143,168,204,.4);margin-top:2px;}
+    .plan-btn{width:100%;padding:11px;border-radius:50px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:center;text-decoration:none;display:block;font-family:inherit;border:none;margin-bottom:20px;}
+    .plan-btn-outline{background:none;border:1.5px solid rgba(0,174,239,.3);color:var(--cyan);}
+    .plan-btn-outline:hover{border-color:var(--cyan);background:rgba(0,174,239,.06);}
+    .plan-btn-primary{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+    .plan-btn-primary:hover{opacity:.9;}
+    .plan-divider{border:none;border-top:1px solid rgba(0,174,239,.08);margin-bottom:18px;}
+    .plan-features{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .plan-features li{display:flex;align-items:flex-start;gap:9px;font-size:.82rem;color:rgba(240,246,255,.75);line-height:1.4;}
+    .plan-features li i{color:var(--green);flex-shrink:0;margin-top:1px;font-size:.9rem;}
+    .plan-features li.no i{color:rgba(143,168,204,.3);}
+    .plan-features li.no{color:rgba(143,168,204,.3);}
+
+    /* FEE TABLE */
+    .fee-section{padding:0 24px 80px;}
+    .fee-inner{max-width:900px;margin:0 auto;}
+    .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+    .section-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:8px;}
+    .section-sub{color:var(--gray);font-size:.9rem;line-height:1.6;margin-bottom:36px;}
+
+    .fee-category{margin-bottom:40px;}
+    .fee-cat-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .fee-cat-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+    .fee-cat-title{font-size:1rem;font-weight:800;}
+    .fee-cat-desc{font-size:.78rem;color:var(--gray);}
+    .fee-table{width:100%;border-collapse:collapse;background:rgba(10,31,110,.2);border-radius:16px;overflow:hidden;border:1px solid rgba(0,174,239,.1);}
+    .fee-table th{background:rgba(10,31,110,.5);padding:11px 16px;text-align:left;font-size:.73rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;}
+    .fee-table td{padding:12px 16px;font-size:.84rem;border-bottom:1px solid rgba(0,174,239,.05);}
+    .fee-table tr:last-child td{border-bottom:none;}
+    .fee-table tr:hover td{background:rgba(0,174,239,.03);}
+    .fee-amount{font-weight:800;color:var(--white);}
+    .fee-free{color:var(--green);font-weight:800;}
+    .fee-note{font-size:.72rem;color:var(--gray);}
+    .fee-badge{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:50px;}
+    .badge-free{background:rgba(0,200,150,.1);color:var(--green);border:1px solid rgba(0,200,150,.2);}
+    .badge-low{background:rgba(0,174,239,.1);color:var(--cyan);border:1px solid rgba(0,174,239,.2);}
+    .badge-standard{background:rgba(247,183,49,.08);color:var(--gold);border:1px solid rgba(247,183,49,.15);}
+
+    /* COMPARISON */
+    .compare-section{padding:0 24px 80px;}
+    .compare-inner{max-width:900px;margin:0 auto;}
+    .compare-table{width:100%;border-collapse:collapse;background:rgba(10,31,110,.2);border-radius:16px;overflow:hidden;border:1px solid rgba(0,174,239,.1);}
+    .compare-table th{padding:14px 16px;text-align:center;font-size:.8rem;font-weight:700;}
+    .compare-table th:first-child{text-align:left;}
+    .compare-table th.th-us{background:linear-gradient(135deg,rgba(16,85,204,.4),rgba(0,174,239,.2));color:var(--cyan);}
+    .compare-table th.th-other{background:rgba(10,31,110,.4);color:var(--gray);}
+    .compare-table td{padding:13px 16px;font-size:.84rem;border-bottom:1px solid rgba(0,174,239,.05);text-align:center;}
+    .compare-table td:first-child{text-align:left;color:var(--gray);font-weight:600;}
+    .compare-table tr:last-child td{border-bottom:none;}
+    .compare-table tr:hover td{background:rgba(0,174,239,.02);}
+    .ct-good{color:var(--green);font-weight:800;}
+    .ct-bad{color:rgba(143,168,204,.4);}
+    .ct-check{color:var(--green);font-size:1.1rem;}
+    .ct-x{color:rgba(143,168,204,.3);font-size:1.1rem;}
+
+    /* EXAMPLE CALC */
+    .calc-section{padding:0 24px 80px;}
+    .calc-inner{max-width:900px;margin:0 auto;}
+    .calc-card{background:rgba(10,31,110,.3);border:1.5px solid rgba(0,174,239,.15);border-radius:24px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+    @media(max-width:640px){.calc-card{grid-template-columns:1fr;}}
+    .calc-slider-wrap{margin-bottom:20px;}
+    .calc-label{font-size:.78rem;color:var(--gray);margin-bottom:8px;font-weight:600;}
+    .calc-amount-display{font-size:2.4rem;font-weight:900;color:var(--cyan);margin-bottom:12px;}
+    input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:rgba(0,174,239,.15);outline:none;}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--cyan);cursor:pointer;box-shadow:0 0 10px rgba(0,174,239,.4);}
+    .calc-method{display:flex;flex-direction:column;gap:8px;}
+    .calc-method-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1.5px solid rgba(0,174,239,.15);background:none;cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;color:var(--white);}
+    .calc-method-btn.selected{border-color:var(--cyan);background:rgba(0,174,239,.08);}
+    .calc-method-btn .mb-icon{font-size:.95rem;width:28px;text-align:center;}
+    .calc-method-btn .mb-name{font-size:.82rem;font-weight:700;flex:1;}
+    .calc-method-btn .mb-fee{font-size:.75rem;font-weight:700;}
+    .calc-result{background:rgba(2,11,45,.5);border:1px solid rgba(0,174,239,.15);border-radius:16px;padding:20px;}
+    .calc-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(0,174,239,.06);font-size:.84rem;}
+    .calc-row:last-child{border:none;padding-top:12px;}
+    .calc-row-label{color:var(--gray);}
+    .calc-row-val{font-weight:700;}
+    .calc-total-row .calc-row-label{font-size:.9rem;font-weight:700;color:var(--white);}
+    .calc-total-row .calc-row-val{font-size:1.2rem;color:var(--green);}
+    .calc-save-note{margin-top:10px;font-size:.72rem;color:rgba(143,168,204,.4);text-align:center;}
+
+    /* FAQ */
+    .faq-section{padding:0 24px 80px;}
+    .faq-inner{max-width:700px;margin:0 auto;}
+    .faq-item{border-bottom:1px solid rgba(0,174,239,.08);}
+    .faq-q{width:100%;background:none;border:none;color:var(--white);font-family:inherit;font-size:.9rem;font-weight:700;text-align:left;padding:18px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .faq-q i{color:var(--cyan);flex-shrink:0;transition:transform .25s;font-size:.9rem;}
+    .faq-q.open i{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .faq-a.open{max-height:300px;}
+    .faq-a p{color:var(--gray);font-size:.84rem;line-height:1.7;padding-bottom:16px;}
+
+    /* CTA */
+    .cta-section{padding:80px 24px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,174,239,.07),transparent 70%);}
+    .cta-inner{max-width:540px;margin:0 auto;}
+    .cta-inner h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:12px;}
+    .cta-inner p{color:var(--gray);font-size:.92rem;line-height:1.6;margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .cta-btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;text-decoration:none;border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:700;transition:opacity .2s;}
+    .cta-btn-primary:hover{opacity:.9;}
+    .cta-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid rgba(0,174,239,.3);color:var(--white);text-decoration:none;border-radius:50px;padding:13px 24px;font-size:.9rem;font-weight:600;transition:all .2s;}
+    .cta-btn-ghost:hover{border-color:var(--cyan);}
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,150,.95);color:#000;padding:11px 22px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* FOOTER */
+    .footer-mini{background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:28px 24px;text-align:center;}
+    .footer-mini-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
+    .footer-mini-links a{color:var(--gray);font-size:.8rem;text-decoration:none;transition:color .2s;}
+    .footer-mini-links a:hover{color:var(--cyan);}
+    .footer-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
+  
+    /* ── MOBILE FIXES ── */
+    @media(max-width:600px){
+      .nav-links{display:none;}
+      .hero-compare{flex-direction:column;gap:8px;border-radius:16px;text-align:center;padding:14px 20px;}
+      .hero-compare .arrow{display:none;}
+      .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+      .compare-table{min-width:560px;}
+      .fee-table{font-size:.76rem;}
+      .fee-table th,.fee-table td{padding:9px 10px;}
+      .calc-card{padding:20px;}
+      .plans-grid{grid-template-columns:1fr!important;}
+    }
+    @media(max-width:760px){
+      .hero-compare{flex-wrap:wrap;gap:10px;padding:12px 16px;}
+      .fee-cat-header{flex-direction:column;align-items:flex-start;}
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="calculator.html" class="nav-link">Calculator</a>
+    <a href="faq.html" class="nav-link">Help</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><i class="ti ti-check"></i> No Hidden Fees — Ever</div>
+    <h1>Simple, <em>transparent</em> pricing</h1>
+    <p class="hero-sub">No surprise charges. No confusing tiers. Know exactly what you pay before you send — always lower than banks and traditional remittance companies.</p>
+    <div class="hero-compare">
+      <span>Western Union <strong>~5%</strong></span>
+      <span class="arrow">→</span>
+      <span>Tchotcho Pay <strong style="color:var(--green)">~1%</strong></span>
+      <span class="arrow" style="color:var(--gray)">→</span>
+      <span>You save <strong style="color:var(--gold)">up to 80%</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN TOGGLE -->
+<div class="toggle-wrap">
+  <div class="toggle-group">
+    <button class="toggle-btn active" onclick="setView('personal')">Personal</button>
+    <button class="toggle-btn" onclick="setView('business')">Business</button>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section class="plans-section">
+  <div class="plans-inner">
+
+    <!-- PERSONAL PLANS -->
+    <div id="view-personal">
+      <div class="plans-grid">
+
+        <!-- Free -->
+        <div class="plan-card reveal">
+          <div class="plan-icon" style="background:rgba(0,174,239,.1);">🆓</div>
+          <div class="plan-name">Free</div>
+          <div class="plan-desc">Everything you need to send money home and pay bills.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$0<em>/mo</em></div>
+            <div class="plan-price-note">No credit card required</div>
+          </div>
+          <a href="signup.html" class="plan-btn plan-btn-outline">Get Started Free</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> USDC wallet (digital dollar)</li>
+            <li><i class="ti ti-check"></i> Send money to Haiti</li>
+            <li><i class="ti ti-check"></i> Receive from anywhere</li>
+            <li><i class="ti ti-check"></i> Pay Haiti bills (EDH, school, CAMEP)</li>
+            <li><i class="ti ti-check"></i> Phone top-up (Digicel & Natcom)</li>
+            <li><i class="ti ti-check"></i> QR code payments</li>
+            <li><i class="ti ti-check"></i> Transaction history</li>
+            <li class="no"><i class="ti ti-minus"></i> Priority support</li>
+            <li class="no"><i class="ti ti-minus"></i> Higher transfer limits</li>
+            <li class="no"><i class="ti ti-minus"></i> 4.5% APY savings</li>
+          </ul>
+        </div>
+
+        <!-- Plus — Featured -->
+        <div class="plan-card featured reveal">
+          <div class="plan-popular">Most Popular</div>
+          <div class="plan-icon" style="background:rgba(0,174,239,.12);">⭐</div>
+          <div class="plan-name">Plus</div>
+          <div class="plan-desc">Higher limits, savings account, and faster withdrawals for active senders.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$4.99<em>/mo</em></div>
+            <div class="plan-price-note">or $49/year — save 18%</div>
+          </div>
+          <a href="signup.html" class="plan-btn plan-btn-primary">Start Plus Free (30 days)</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> Everything in Free</li>
+            <li><i class="ti ti-check"></i> <strong>4.5% APY</strong> savings account</li>
+            <li><i class="ti ti-check"></i> Send up to <strong>$2,000/day</strong></li>
+            <li><i class="ti ti-check"></i> <strong>Faster cash-out</strong> (same day)</li>
+            <li><i class="ti ti-check"></i> 0% card deposit fee (first $500/mo)</li>
+            <li><i class="ti ti-check"></i> Priority customer support</li>
+            <li><i class="ti ti-check"></i> Savings goals & auto-save</li>
+            <li><i class="ti ti-check"></i> Instant agent payouts</li>
+            <li><i class="ti ti-check"></i> Monthly statement export</li>
+            <li><i class="ti ti-check"></i> Referral bonus: $10 per invite</li>
+          </ul>
+        </div>
+
+        <!-- Family -->
+        <div class="plan-card reveal">
+          <div class="plan-icon" style="background:rgba(247,183,49,.1);">👨‍👩‍👧‍👦</div>
+          <div class="plan-name">Family</div>
+          <div class="plan-desc">One plan covers up to 5 family members in Haiti and abroad.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$9.99<em>/mo</em></div>
+            <div class="plan-price-note">Up to 5 accounts — $2/person</div>
+          </div>
+          <a href="signup.html" class="plan-btn plan-btn-outline">Start Family Plan</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> Everything in Plus</li>
+            <li><i class="ti ti-check"></i> Up to <strong>5 linked accounts</strong></li>
+            <li><i class="ti ti-check"></i> Shared family wallet option</li>
+            <li><i class="ti ti-check"></i> Send up to <strong>$5,000/day</strong></li>
+            <li><i class="ti ti-check"></i> Family bill-pay manager</li>
+            <li><i class="ti ti-check"></i> Group savings goals</li>
+            <li><i class="ti ti-check"></i> Dedicated account manager</li>
+            <li><i class="ti ti-check"></i> No card deposit fees</li>
+            <li><i class="ti ti-check"></i> Annual savings summary (tax)</li>
+            <li><i class="ti ti-check"></i> Referral bonus: $15 per invite</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BUSINESS PLANS -->
+    <div id="view-business" style="display:none;">
+      <div class="plans-grid">
+
+        <!-- Merchant -->
+        <div class="plan-card reveal">
+          <div class="plan-icon" style="background:rgba(0,200,150,.1);">🏪</div>
+          <div class="plan-name">Merchant</div>
+          <div class="plan-desc">Accept USDC payments at your store, restaurant, or market.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$0<em>/mo</em></div>
+            <div class="plan-price-note">Pay only transaction fees</div>
+          </div>
+          <a href="merchant-signup.html" class="plan-btn plan-btn-outline">Apply as Merchant</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> QR code payment terminal</li>
+            <li><i class="ti ti-check"></i> 1.5% transaction fee</li>
+            <li><i class="ti ti-check"></i> Instant USDC settlement</li>
+            <li><i class="ti ti-check"></i> Sales dashboard</li>
+            <li><i class="ti ti-check"></i> Customer receipt by SMS</li>
+            <li><i class="ti ti-check"></i> Listed in Tchotcho marketplace</li>
+            <li class="no"><i class="ti ti-minus"></i> Multiple staff accounts</li>
+            <li class="no"><i class="ti ti-minus"></i> Inventory management</li>
+          </ul>
+        </div>
+
+        <!-- Business Pro -->
+        <div class="plan-card featured reveal">
+          <div class="plan-popular">Best for Businesses</div>
+          <div class="plan-icon" style="background:rgba(0,174,239,.1);">💼</div>
+          <div class="plan-name">Business Pro</div>
+          <div class="plan-desc">Full-featured business account for SMEs, importers, and NGOs.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$29<em>/mo</em></div>
+            <div class="plan-price-note">or $290/year — 2 months free</div>
+          </div>
+          <a href="merchant-signup.html" class="plan-btn plan-btn-primary">Start Business Pro</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> Everything in Merchant</li>
+            <li><i class="ti ti-check"></i> Reduced fee: <strong>1% per transaction</strong></li>
+            <li><i class="ti ti-check"></i> Up to <strong>10 staff accounts</strong></li>
+            <li><i class="ti ti-check"></i> Bulk payouts to employees</li>
+            <li><i class="ti ti-check"></i> Invoice & payment links</li>
+            <li><i class="ti ti-check"></i> Inventory management</li>
+            <li><i class="ti ti-check"></i> Daily cash-out to HTG</li>
+            <li><i class="ti ti-check"></i> Monthly financial reports</li>
+            <li><i class="ti ti-check"></i> API access</li>
+            <li><i class="ti ti-check"></i> Dedicated support line</li>
+          </ul>
+        </div>
+
+        <!-- Agent -->
+        <div class="plan-card reveal">
+          <div class="plan-icon" style="background:rgba(247,183,49,.1);">🏦</div>
+          <div class="plan-name">Cash-Out Agent</div>
+          <div class="plan-desc">Earn commissions by helping people cash out in HTG across Haiti.</div>
+          <div class="plan-price">
+            <div class="plan-price-num">$0<em>/mo</em></div>
+            <div class="plan-price-note">Earn 0.5% commission per payout</div>
+          </div>
+          <a href="agent-signup.html" class="plan-btn plan-btn-outline">Become an Agent</a>
+          <hr class="plan-divider"/>
+          <ul class="plan-features">
+            <li><i class="ti ti-check"></i> 0.5% commission per cash-out</li>
+            <li><i class="ti ti-check"></i> Agent dashboard & reporting</li>
+            <li><i class="ti ti-check"></i> QR scanner app</li>
+            <li><i class="ti ti-check"></i> Daily settlement to your wallet</li>
+            <li><i class="ti ti-check"></i> Listed on agent finder map</li>
+            <li><i class="ti ti-check"></i> Free training & onboarding</li>
+            <li><i class="ti ti-check"></i> Customer support priority</li>
+            <li><i class="ti ti-check"></i> Bonus for high-volume months</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEE BREAKDOWN -->
+<section class="fee-section">
+  <div class="fee-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <div class="section-tag"><i class="ti ti-receipt"></i> Full Fee Schedule</div>
+      <h2 class="section-title">Every fee — nothing hidden</h2>
+      <p class="section-sub" style="margin:0 auto;">We believe in full transparency. Here is every fee, exactly as it applies.</p>
+    </div>
+
+    <!-- Deposits -->
+    <div class="fee-category reveal">
+      <div class="fee-cat-header">
+        <div class="fee-cat-icon" style="background:rgba(0,174,239,.1);">💳</div>
+        <div>
+          <div class="fee-cat-title">Loading Money (Deposits)</div>
+          <div class="fee-cat-desc">How to add funds to your Tchotcho Wallet</div>
+        </div>
+      </div>
+      <table class="fee-table">
+        <tr><th>Method</th><th>Fee</th><th>Speed</th><th>Limits</th></tr>
+        <tr>
+          <td>Bank Transfer (ACH)</td>
+          <td><span class="fee-free">Free</span></td>
+          <td>1–3 business days</td>
+          <td class="fee-note">Up to $10,000/transfer</td>
+        </tr>
+        <tr>
+          <td>Wire Transfer</td>
+          <td><span class="fee-free">Free</span> <span class="fee-note">(your bank may charge)</span></td>
+          <td>Same day</td>
+          <td class="fee-note">Up to $50,000/transfer</td>
+        </tr>
+        <tr>
+          <td>Debit Card</td>
+          <td><span class="fee-amount">2%</span></td>
+          <td>Instant</td>
+          <td class="fee-note">Up to $2,000/day</td>
+        </tr>
+        <tr>
+          <td>Credit Card</td>
+          <td><span class="fee-amount">3%</span></td>
+          <td>Instant</td>
+          <td class="fee-note">Up to $1,000/day</td>
+        </tr>
+        <tr>
+          <td>Crypto (USDC on Base)</td>
+          <td><span class="fee-free">Free</span></td>
+          <td>~2 minutes</td>
+          <td class="fee-note">No limit</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Transfers -->
+    <div class="fee-category reveal">
+      <div class="fee-cat-header">
+        <div class="fee-cat-icon" style="background:rgba(0,200,150,.1);">📤</div>
+        <div>
+          <div class="fee-cat-title">Sending Money</div>
+          <div class="fee-cat-desc">Transfer fees when sending to Haiti or other users</div>
+        </div>
+      </div>
+      <table class="fee-table">
+        <tr><th>Transfer Type</th><th>Fee</th><th>Speed</th><th>Notes</th></tr>
+        <tr>
+          <td>Send to Tchotcho user</td>
+          <td><span class="fee-free">Free</span></td>
+          <td>Instant</td>
+          <td class="fee-note">Both users must have Tchotcho accounts</td>
+        </tr>
+        <tr>
+          <td>Send to Haiti wallet</td>
+          <td><span class="fee-amount">0.5%</span> <span class="fee-badge badge-low">Low</span></td>
+          <td>~2 minutes</td>
+          <td class="fee-note">Min $0.50 fee</td>
+        </tr>
+        <tr>
+          <td>International transfer (other countries)</td>
+          <td><span class="fee-amount">1%</span></td>
+          <td>~5 minutes</td>
+          <td class="fee-note">Based on USDC market rate</td>
+        </tr>
+        <tr>
+          <td>QR code payment</td>
+          <td><span class="fee-free">Free</span></td>
+          <td>Instant</td>
+          <td class="fee-note">At any Tchotcho merchant</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Cash Out -->
+    <div class="fee-category reveal">
+      <div class="fee-cat-header">
+        <div class="fee-cat-icon" style="background:rgba(247,183,49,.1);">💵</div>
+        <div>
+          <div class="fee-cat-title">Cash Out in Haiti</div>
+          <div class="fee-cat-desc">Convert USDC to Haitian Gourdes (HTG)</div>
+        </div>
+      </div>
+      <table class="fee-table">
+        <tr><th>Method</th><th>Fee</th><th>Speed</th><th>Available</th></tr>
+        <tr>
+          <td>Agent cash-out (HTG)</td>
+          <td><span class="fee-amount">1%</span> <span class="fee-badge badge-low">Low</span></td>
+          <td>On the spot</td>
+          <td class="fee-note">300+ agents nationwide</td>
+        </tr>
+        <tr>
+          <td>Local bank account (Haiti)</td>
+          <td><span class="fee-amount">1%</span></td>
+          <td>1–2 business days</td>
+          <td class="fee-note">All major Haiti banks</td>
+        </tr>
+        <tr>
+          <td>MonCash / NatCash withdrawal</td>
+          <td><span class="fee-amount">1%</span></td>
+          <td>~10 minutes</td>
+          <td class="fee-note">Linked mobile wallet</td>
+        </tr>
+        <tr>
+          <td>Keep as USDC (no cash-out)</td>
+          <td><span class="fee-free">Free</span></td>
+          <td>—</td>
+          <td class="fee-note">Earn 4.5% APY (Plus plan)</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Other -->
+    <div class="fee-category reveal">
+      <div class="fee-cat-header">
+        <div class="fee-cat-icon" style="background:rgba(247,183,49,.1);">📋</div>
+        <div>
+          <div class="fee-cat-title">Other Services</div>
+          <div class="fee-cat-desc">Marketplace, bill pay, top-up, and more</div>
+        </div>
+      </div>
+      <table class="fee-table">
+        <tr><th>Service</th><th>Fee</th><th>Notes</th><th>&nbsp;</th></tr>
+        <tr>
+          <td>Bill pay (EDH, school, CAMEP, etc.)</td>
+          <td><span class="fee-free">Free</span></td>
+          <td class="fee-note">Pay any Haiti utility directly</td>
+          <td><span class="fee-badge badge-free">Free</span></td>
+        </tr>
+        <tr>
+          <td>Mobile top-up (Digicel / Natcom)</td>
+          <td><span class="fee-free">Free</span></td>
+          <td class="fee-note">Any amount $5–$50</td>
+          <td><span class="fee-badge badge-free">Free</span></td>
+        </tr>
+        <tr>
+          <td>Merchant QR payment</td>
+          <td><span class="fee-amount">1–1.5%</span> <em style="font-size:.7rem;color:var(--gray)">(charged to merchant)</em></td>
+          <td class="fee-note">Free for the buyer</td>
+          <td><span class="fee-badge badge-low">Merchant pays</span></td>
+        </tr>
+        <tr>
+          <td>Currency exchange (USD ↔ HTG)</td>
+          <td><span class="fee-amount">~0.5% spread</span></td>
+          <td class="fee-note">Rate shown before confirmation</td>
+          <td><span class="fee-badge badge-low">Transparent</span></td>
+        </tr>
+        <tr>
+          <td>Account creation</td>
+          <td><span class="fee-free">Free</span></td>
+          <td class="fee-note">Always free</td>
+          <td><span class="fee-badge badge-free">Free</span></td>
+        </tr>
+        <tr>
+          <td>KYC verification</td>
+          <td><span class="fee-free">Free</span></td>
+          <td class="fee-note">Required for transfers over $500</td>
+          <td><span class="fee-badge badge-free">Free</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <div class="section-tag"><i class="ti ti-scale"></i> Comparison</div>
+      <h2 class="section-title">How we compare</h2>
+      <p class="section-sub" style="margin:0 auto;">Sending $200 to Haiti — what does each company actually charge?</p>
+    </div>
+    <div class="compare-wrap"><table class="compare-table reveal">
+      <tr>
+        <th></th>
+        <th class="th-us">Tchotcho Pay</th>
+        <th class="th-other">Western Union</th>
+        <th class="th-other">MoneyGram</th>
+        <th class="th-other">Remitly</th>
+      </tr>
+      <tr>
+        <td>Transfer fee on $200</td>
+        <td class="ct-good">$1.00</td>
+        <td class="ct-bad">$9.99</td>
+        <td class="ct-bad">$8.99</td>
+        <td class="ct-bad">$3.99</td>
+      </tr>
+      <tr>
+        <td>Exchange rate spread</td>
+        <td class="ct-good">~0.5%</td>
+        <td class="ct-bad">~3–5%</td>
+        <td class="ct-bad">~3–4%</td>
+        <td class="ct-bad">~2–3%</td>
+      </tr>
+      <tr>
+        <td>HTG received on $200</td>
+        <td class="ct-good">~25,960 HTG</td>
+        <td class="ct-bad">~23,800 HTG</td>
+        <td class="ct-bad">~24,100 HTG</td>
+        <td class="ct-bad">~24,800 HTG</td>
+      </tr>
+      <tr>
+        <td>Transfer speed</td>
+        <td class="ct-good">~2 minutes</td>
+        <td class="ct-bad">Minutes–hours</td>
+        <td class="ct-bad">Minutes–hours</td>
+        <td class="ct-bad">Minutes–3 days</td>
+      </tr>
+      <tr>
+        <td>Cash out in Haiti</td>
+        <td><span class="ct-check">✓</span> 300+ agents</td>
+        <td><span class="ct-check">✓</span> Agents</td>
+        <td><span class="ct-check">✓</span> Agents</td>
+        <td class="ct-bad">Limited</td>
+      </tr>
+      <tr>
+        <td>Bill pay in Haiti</td>
+        <td><span class="ct-check">✓</span> Free</td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+      </tr>
+      <tr>
+        <td>USDC savings account</td>
+        <td><span class="ct-check">✓</span> 4.5% APY</td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+      </tr>
+      <tr>
+        <td>Mobile top-up</td>
+        <td><span class="ct-check">✓</span> Free</td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+        <td class="ct-bad"><span class="ct-x">✗</span></td>
+      </tr>
+      <tr>
+        <td>Available 24/7</td>
+        <td><span class="ct-check">✓</span></td>
+        <td><span class="ct-check">✓</span></td>
+        <td><span class="ct-check">✓</span></td>
+        <td><span class="ct-check">✓</span></td>
+      </tr>
+    </table></div>
+    <p style="text-align:center;font-size:.72rem;color:rgba(143,168,204,.3);margin-top:12px;">Rates estimated as of June 2026. Competitor fees may vary. All figures approximate.</p>
+  </div>
+</section>
+
+<!-- FEE CALCULATOR -->
+<section class="calc-section">
+  <div class="calc-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <div class="section-tag"><i class="ti ti-calculator"></i> Fee Calculator</div>
+      <h2 class="section-title">Calculate your exact cost</h2>
+    </div>
+    <div class="calc-card reveal">
+      <div>
+        <div class="calc-slider-wrap">
+          <div class="calc-label">Amount to send</div>
+          <div class="calc-amount-display" id="calc-display">$200</div>
+          <input type="range" id="calc-slider" min="10" max="2000" step="10" value="200" oninput="updateCalc()"/>
+          <div style="display:flex;justify-content:space-between;font-size:.7rem;color:rgba(143,168,204,.3);margin-top:4px;"><span>$10</span><span>$2,000</span></div>
+        </div>
+        <div class="calc-label" style="margin-bottom:8px;">Deposit method</div>
+        <div class="calc-method">
+          <button class="calc-method-btn selected" onclick="selectMethod(this,'bank',0)" data-fee="0">
+            <span class="mb-icon">🏦</span>
+            <span class="mb-name">Bank Transfer</span>
+            <span class="mb-fee" style="color:var(--green)">Free</span>
+          </button>
+          <button class="calc-method-btn" onclick="selectMethod(this,'debit',0.02)" data-fee="0.02">
+            <span class="mb-icon">💳</span>
+            <span class="mb-name">Debit Card</span>
+            <span class="mb-fee" style="color:var(--gold)">2%</span>
+          </button>
+          <button class="calc-method-btn" onclick="selectMethod(this,'credit',0.03)" data-fee="0.03">
+            <span class="mb-icon">💳</span>
+            <span class="mb-name">Credit Card</span>
+            <span class="mb-fee" style="color:var(--gold)">3%</span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="calc-result">
+          <div class="calc-row"><span class="calc-row-label">Send amount</span><span class="calc-row-val" id="cr-send">$200.00</span></div>
+          <div class="calc-row"><span class="calc-row-label">Deposit fee</span><span class="calc-row-val" id="cr-deposit" style="color:var(--green)">$0.00 (Free)</span></div>
+          <div class="calc-row"><span class="calc-row-label">Transfer fee</span><span class="calc-row-val" id="cr-transfer">$1.00</span></div>
+          <div class="calc-row"><span class="calc-row-label">Exchange rate</span><span class="calc-row-val" id="cr-rate">130.50 HTG/USD</span></div>
+          <div class="calc-row calc-total-row"><span class="calc-row-label">Recipient receives</span><span class="calc-row-val" id="cr-total">26,100 HTG</span></div>
+        </div>
+        <div class="calc-save-note" id="cr-save">vs. Western Union: you save ~$8.99 in fees</div>
+        <div style="margin-top:14px;">
+          <a href="calculator.html" style="display:flex;align-items:center;justify-content:center;gap:6px;color:var(--cyan);font-size:.82rem;font-weight:700;text-decoration:none;"><i class="ti ti-external-link"></i> Open full calculator with live rates</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:36px;">
+      <div class="section-tag"><i class="ti ti-help-circle"></i> FAQ</div>
+      <h2 class="section-title">Fee questions answered</h2>
+    </div>
+    <div id="faq-list"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2>Start sending for <span style="color:var(--green)">less</span> today</h2>
+    <p>Create your free account in under 3 minutes. No credit card required. First transfer fee-free.</p>
+    <div class="cta-btns">
+      <a href="signup.html" class="cta-btn-primary"><i class="ti ti-user-plus"></i> Create Free Account</a>
+      <a href="calculator.html" class="cta-btn-ghost"><i class="ti ti-calculator"></i> Try the Calculator</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-mini">
+  <div class="footer-mini-links">
+    <a href="index.html">Home</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="app.html">Get the App</a>
+    <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Privacy</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div class="footer-copy">© 2026 Tchotcho Pay LLC · <a href="mailto:hello@tchotchopay.com" style="color:var(--cyan);text-decoration:none;">hello@tchotchopay.com</a></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── PLAN TOGGLE ────────────────────────────────────────────────────
+  function setView(v) {
+    document.getElementById('view-personal').style.display = v === 'personal' ? 'block' : 'none';
+    document.getElementById('view-business').style.display = v === 'business' ? 'block' : 'none';
+    document.querySelectorAll('.toggle-btn').forEach((b, i) => {
+      b.classList.toggle('active', (i === 0 && v === 'personal') || (i === 1 && v === 'business'));
+    });
+  }
+
+  // ── FEE CALCULATOR ─────────────────────────────────────────────────
+  let depositFee = 0;
+  const RATE = 130.50;
+  const TRANSFER_RATE = 0.005;
+  const WU_FEE = 9.99;
+
+  function selectMethod(btn, name, fee) {
+    document.querySelectorAll('.calc-method-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    depositFee = fee;
+    updateCalc();
+  }
+
+  function updateCalc() {
+    const amt = parseInt(document.getElementById('calc-slider').value);
+    const depFee = amt * depositFee;
+    const transferFee = Math.max(0.50, amt * TRANSFER_RATE);
+    const received = (amt - transferFee) * RATE;
+    const saved = WU_FEE + (amt * 0.035) - (depFee + transferFee + (amt * 0.005));
+
+    document.getElementById('calc-display').textContent = '$' + amt;
+    document.getElementById('cr-send').textContent = '$' + amt.toFixed(2);
+    document.getElementById('cr-deposit').textContent = depFee === 0 ? '$0.00 (Free)' : '$' + depFee.toFixed(2);
+    document.getElementById('cr-deposit').style.color = depFee === 0 ? 'var(--green)' : 'var(--gold)';
+    document.getElementById('cr-transfer').textContent = '$' + transferFee.toFixed(2);
+    document.getElementById('cr-rate').textContent = RATE.toFixed(2) + ' HTG/USD';
+    document.getElementById('cr-total').textContent = Math.round(received).toLocaleString() + ' HTG';
+    document.getElementById('cr-save').textContent =
+      saved > 0
+        ? `vs. Western Union: you save ~$${saved.toFixed(2)} in fees`
+        : 'Already the cheapest option available.';
+  }
+
+  // ── FAQ ────────────────────────────────────────────────────────────
+  const FAQS = [
+    { q: 'Are there really no hidden fees?', a: 'Yes. Every fee is shown on this page and again at checkout before you confirm any transaction. If the total cost doesn\'t match what\'s listed here, contact us immediately.' },
+    { q: 'Why do card deposits cost more than bank transfers?', a: 'Debit and credit card networks charge Tchotcho Pay interchange fees (2–3%) that we pass through at cost. Bank transfers (ACH) are much cheaper — often free — so we can offer them at no charge.' },
+    { q: 'Is the 0.5% transfer fee on top of the deposit fee?', a: 'Yes. For example: sending $100 via debit card = $2 deposit fee + $0.50 transfer fee = $2.50 total. Via bank transfer = $0 deposit fee + $0.50 transfer fee = $0.50 total.' },
+    { q: 'What exchange rate do you use for HTG?', a: 'We use the live mid-market USDC/HTG rate with a ~0.5% spread. The rate shown at checkout is the rate you get — it\'s locked for 60 seconds while you confirm.' },
+    { q: 'Is the Plus plan worth it?', a: 'If you send money regularly (even once a month), yes. The 4.5% APY savings alone can offset the $4.99/month cost. Plus you get faster cash-out, higher limits, and priority support.' },
+    { q: 'Can I cancel or downgrade my plan anytime?', a: 'Yes. You can downgrade from Plus or Family to Free at any time from your account settings. No cancellation fees, no contracts.' },
+    { q: 'Are merchant fees charged to the buyer or the seller?', a: 'Merchant fees (1–1.5%) are always charged to the merchant, never the buyer. Buying with your Tchotcho Wallet at a merchant is always free for you.' },
+    { q: 'How do I know if an agent is charging the right rate?', a: 'All cash-out fees are fixed by Tchotcho Pay (1%). Agents are not allowed to add extra charges. If an agent tries to charge more, report it to us immediately at hello@tchotchopay.com.' },
+  ];
+
+  function buildFAQ() {
+    const container = document.getElementById('faq-list');
+    FAQS.forEach((f, i) => {
+      container.innerHTML += `
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFAQ(this)">
+            ${f.q}
+            <i class="ti ti-plus"></i>
+          </button>
+          <div class="faq-a"><p>${f.a}</p></div>
+        </div>`;
+    });
+  }
+
+  function toggleFAQ(btn) {
+    const ans = btn.nextElementSibling;
+    const isOpen = ans.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // ── SCROLL REVEAL ──────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── TOAST ──────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // Init
+  buildFAQ();
+  updateCalc();
+</script>
+  <script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

@@ -45,16 +45,17 @@
     nav {
       position:fixed; top:0; left:0; right:0; z-index:9999;
       display:flex; align-items:center; padding:14px 32px;
-      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
+      background: #fff;  backdrop-filter:blur(12px);
+      border-bottom: 2px solid #D21034; gap:16px;
     }
-    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
-    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
-    .nav-logo img { width:100%; height:100%; object-fit:cover; }
-    .nav-brand span { font-weight:700; font-size:1rem; }
-    .nav-brand em { color:var(--cyan); font-style:normal; }
-    .nav-back { margin-left:auto; color:var(--gray); text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
-    .nav-back:hover { color:var(--white); }
+    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-img { height: 46px; width: auto; display: block; }
+    
+    
+    
+    
+    .nav-back { margin-left:auto; color: #374151; text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
+    .nav-back:hover { color: #1055CC; }
 
     /* ── HERO ── */
     .hero {
@@ -273,18 +274,25 @@
     .reveal-right.visible { opacity:1; transform:none; }
 
     @media(max-width:580px) {
-      nav { padding:12px 16px; }
+      nav { padding:12px 16px;
+      border-bottom: 2px solid #D21034;
+    }
       .hero h1 { font-size:1.9rem; }
       section, .story-section, .timeline-section { padding:56px 20px; }
       .join-card { padding:36px 24px; }
     }
   
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color:var(--gray,#8FA8CC);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
     .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
+  
+    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
+    html, body { overflow-x: hidden !important; max-width: 100% !important; }
+    * { box-sizing: border-box; }
+    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -327,8 +335,7 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'" /></div>
-    <span>Tchotcho<em>Pay</em></span>
+    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
   </a>
     <div class="nav-links">
     <a href="pricing.html" class="nav-link">Pricing</a>
@@ -958,24 +965,8 @@
     document.documentElement.lang = lang;
   }
 
-  // Inject lang switcher into nav
-  window.addEventListener('DOMContentLoaded', () => {
-    const nav = document.querySelector('nav');
-    const sw = document.createElement('div');
-    sw.style.cssText = 'display:flex;gap:3px;align-items:center;background:#0A1F6E;border:1.5px solid rgba(0,174,239,0.5);border-radius:50px;padding:3px;margin-left:8px;flex-shrink:0;';
-    ['EN','HT','FR','ES'].forEach(code => {
-      const btn = document.createElement('button');
-      btn.className = 'tc-lang-btn';
-      btn.dataset.lang = code.toLowerCase();
-      btn.textContent = code;
-      btn.onclick = () => applyLang(code.toLowerCase());
-      btn.style.cssText = 'padding:5px 10px;border-radius:50px;border:none;background:none;color:#8FA8CC;font-size:.76rem;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;';
-      sw.appendChild(btn);
-    });
-    const backLink = nav.querySelector('.nav-back');
-    nav.insertBefore(sw, backLink);
-    applyLang(activeLang);
-  });
+  // lang.js handles switcher injection — apply language on load
+  window.addEventListener('DOMContentLoaded', () => { applyLang(activeLang); });
 </script>
 <script src="chat-widget.js" defer></script>
 <script src="cookie-consent.js" defer></script>

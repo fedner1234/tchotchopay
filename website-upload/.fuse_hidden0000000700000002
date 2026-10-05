@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Haiti Bill Pay — Pay EDH, Natcom & More from Anywhere</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Pay electricity (EDH), water, internet, and other Haiti utility bills directly from your USDC wallet. Fast, secure, and fee-free for Tchotcho Pay users."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/billpay.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/billpay.html"/>
+  <meta property="og:title" content="Haiti Bill Pay — Pay EDH, Natcom & More from Anywhere"/>
+  <meta property="og:description" content="Pay electricity (EDH), water, internet, and other Haiti utility bills directly from your USDC wallet. Fast, secure, and fee-free for Tchotcho Pay users."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Haiti Bill Pay — Pay EDH, Natcom & More from Anywhere"/>
+  <meta name="twitter:description" content="Pay electricity (EDH), water, internet, and other Haiti utility bills directly from your USDC wallet. Fast, secure, and fee-free for Tchotcho Pay users."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+      --edh:#F7B731; --school:#8B5CF6; --water:#00AEEF;
+      --internet:#00C896; --phone:#E20613; --tax:#FF7043;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,0.2);gap:16px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-brand span{font-weight:700;font-size:1rem;}
+    .nav-brand em{color:var(--cyan);font-style:normal;}
+    .nav-back{margin-left:auto;color:var(--gray);text-decoration:none;font-size:.85rem;display:flex;align-items:center;gap:6px;transition:color .2s;white-space:nowrap;}
+    .nav-back:hover{color:var(--white);}
+
+    /* ── HERO ── */
+    .hero{padding:116px 24px 48px;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,174,239,0.1) 0%,transparent 70%);}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,174,239,0.12);border:1px solid rgba(0,174,239,0.3);color:var(--cyan);padding:6px 16px;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px;}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:12px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero p{color:var(--gray);font-size:1rem;max-width:500px;margin:0 auto;}
+
+    /* ── HOW IT WORKS ── */
+    .how-strip{max-width:960px;margin:0 auto;padding:0 24px 40px;}
+    .how-steps{display:flex;justify-content:center;gap:0;flex-wrap:wrap;}
+    .how-step{display:flex;align-items:center;gap:10px;padding:0 20px;}
+    .how-step:not(:last-child)::after{content:'→';color:var(--cyan);font-size:1.1rem;margin-left:12px;}
+    .hs-num{width:38px;height:38px;border-radius:50%;background:rgba(0,174,239,0.1);border:1.5px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--cyan);flex-shrink:0;font-size:.88rem;}
+    .hs-text .ht{font-weight:700;font-size:.88rem;margin-bottom:1px;}
+    .hs-text .hs{color:var(--gray);font-size:.75rem;}
+
+    /* ── PAGE WRAP ── */
+    .page-wrap{max-width:960px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start;}
+    @media(max-width:740px){.page-wrap{grid-template-columns:1fr;}.phone-preview{display:none;}}
+
+    /* ── FLOW CARD ── */
+    .flow-card{background:linear-gradient(135deg,rgba(10,31,110,0.55),rgba(2,11,45,0.8));border:1px solid rgba(0,174,239,0.2);border-radius:24px;padding:36px;backdrop-filter:blur(8px);}
+
+    /* Steps bar */
+    .steps-bar{display:flex;align-items:center;margin-bottom:32px;}
+    .step-dot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:var(--gray);flex-shrink:0;transition:all .3s;}
+    .step-dot.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,174,239,0.1);}
+    .step-dot.done{border-color:var(--green);background:var(--green);color:#000;}
+    .step-line{flex:1;height:2px;background:rgba(0,174,239,0.15);transition:background .3s;}
+    .step-line.done{background:var(--green);}
+
+    /* Panels */
+    .panel{display:none;}
+    .panel.active{display:block;}
+    .panel-title{font-size:1.1rem;font-weight:800;margin-bottom:6px;}
+    .panel-sub{color:var(--gray);font-size:.88rem;margin-bottom:22px;}
+
+    /* Bill category grid */
+    .bill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px;}
+    .bill-card{border:2px solid rgba(0,174,239,0.15);border-radius:16px;padding:18px 12px;cursor:pointer;text-align:center;transition:all .2s;background:rgba(2,11,45,0.5);position:relative;overflow:hidden;}
+    .bill-card:hover{border-color:rgba(0,174,239,0.4);transform:translateY(-2px);}
+    .bill-card.selected{border-color:var(--cyan);background:rgba(0,174,239,0.08);}
+    .bill-card.selected::after{content:'✓';position:absolute;top:8px;right:10px;color:var(--cyan);font-size:.85rem;font-weight:800;}
+    .bill-icon{font-size:1.8rem;margin-bottom:8px;}
+    .bill-name{font-size:.8rem;font-weight:700;margin-bottom:2px;}
+    .bill-desc{font-size:.68rem;color:var(--gray);}
+
+    /* Input styles */
+    .input-label{font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+    .text-input{width:100%;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.22);border-radius:12px;color:var(--white);font-size:.95rem;font-weight:600;padding:14px 16px;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:16px;}
+    .text-input:focus{border-color:var(--cyan);}
+    .text-input::placeholder{color:rgba(143,168,204,0.35);}
+    .select-input{width:100%;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.22);border-radius:12px;color:var(--white);font-size:.92rem;font-weight:600;padding:14px 16px;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:16px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238FA8CC' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:rgba(2,11,45,0.7);padding-right:40px;cursor:pointer;}
+    .select-input:focus{border-color:var(--cyan);}
+    .select-input option{background:#0A1F6E;}
+
+    /* Amount grid */
+    .amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+    .amount-card{border:1.5px solid rgba(0,174,239,0.18);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;}
+    .amount-card:hover{border-color:rgba(0,174,239,0.45);}
+    .amount-card.selected{border-color:var(--cyan);background:rgba(0,174,239,0.09);}
+    .ac-usd{font-size:1.1rem;font-weight:800;}
+    .ac-htg{font-size:.68rem;color:var(--gray);margin-top:2px;}
+    .amount-custom{display:flex;align-items:center;gap:0;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.22);border-radius:12px;overflow:hidden;margin-bottom:20px;transition:border-color .2s;}
+    .amount-custom:focus-within{border-color:var(--cyan);}
+    .ac-prefix{padding:0 14px;font-size:1.1rem;font-weight:700;color:var(--cyan);}
+    .ac-input{flex:1;background:none;border:none;outline:none;color:var(--white);font-size:1.1rem;font-weight:700;padding:13px 8px 13px 0;font-family:inherit;}
+    .ac-input::placeholder{color:rgba(143,168,204,.3);}
+
+    /* Summary */
+    .summary-box{background:rgba(2,11,45,.6);border:1px solid rgba(0,174,239,.14);border-radius:16px;padding:18px;margin-bottom:18px;}
+    .sum-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,174,239,.07);font-size:.88rem;}
+    .sum-row:last-child{border:none;}
+    .sum-label{color:var(--gray);}
+    .sum-val{font-weight:700;}
+    .sum-val.cyan{color:var(--cyan);}
+    .sum-val.green{color:var(--green);}
+
+    /* Wallet bar */
+    .wallet-bar{display:flex;align-items:center;justify-content:space-between;background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);border-radius:12px;padding:11px 16px;margin-bottom:18px;flex-wrap:wrap;gap:6px;}
+    .wb-left{display:flex;align-items:center;gap:8px;font-size:.85rem;}
+    .wb-left i{color:var(--green);}
+    .wb-val{font-weight:800;color:var(--green);}
+
+    /* Buttons */
+    .btn-primary{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:15px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .15s;}
+    .btn-primary:hover{opacity:.9;transform:translateY(-1px);}
+    .btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+    .btn-secondary{width:100%;background:none;border:1.5px solid rgba(0,174,239,.28);color:var(--gray);border-radius:50px;padding:12px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;margin-top:10px;transition:all .2s;}
+    .btn-secondary:hover{border-color:var(--cyan);color:var(--white);}
+
+    /* Success */
+    .success-wrap{text-align:center;padding:16px 0;}
+    .success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,200,150,.15);border:2px solid var(--green);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;animation:popIn .4s ease;}
+    @keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+    .success-title{font-size:1.3rem;font-weight:800;color:var(--green);margin-bottom:6px;}
+    .success-sub{color:var(--gray);font-size:.88rem;margin-bottom:20px;line-height:1.5;}
+    .receipt-box{background:rgba(0,200,150,.05);border:1px solid rgba(0,200,150,.18);border-radius:14px;padding:18px;text-align:left;margin-bottom:20px;}
+    .receipt-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,174,239,.06);font-size:.85rem;}
+    .receipt-row:last-child{border:none;}
+    .receipt-label{color:var(--gray);}
+    .receipt-val{font-weight:700;}
+    .confetti-row{font-size:1.3rem;margin-bottom:12px;letter-spacing:4px;}
+
+    /* Field error */
+    .field-error{color:var(--red);font-size:.75rem;margin-top:-10px;margin-bottom:12px;display:none;}
+    .field-error.show{display:block;}
+
+    /* Info tip box */
+    .info-box{background:rgba(0,174,239,.06);border:1px solid rgba(0,174,239,.15);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:.8rem;color:var(--gray);display:flex;gap:8px;align-items:flex-start;}
+    .info-box i{color:var(--cyan);font-size:1rem;flex-shrink:0;margin-top:1px;}
+
+    /* Phone preview */
+    .phone-preview{position:sticky;top:100px;}
+    .phone-shell{width:240px;margin:0 auto;background:linear-gradient(160deg,#0d1f4e,#050e28);border:2px solid rgba(0,174,239,.3);border-radius:38px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+    .phone-notch{width:72px;height:20px;background:#000;border-radius:12px;margin:0 auto 10px;}
+    .phone-screen{background:#0a1428;border-radius:26px;overflow:hidden;min-height:460px;}
+    .ps-header{background:linear-gradient(135deg,#0A1F6E,#1055CC);padding:14px;text-align:center;}
+    .ps-header-label{font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:2px;}
+    .ps-header-title{font-size:1rem;font-weight:800;}
+    .ps-body{padding:14px;}
+    .ps-bill-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+    .ps-bill-icon{font-size:1.2rem;}
+    .ps-bill-info .ps-bill-name{font-size:.82rem;font-weight:700;}
+    .ps-bill-info .ps-bill-acct{font-size:.68rem;color:rgba(255,255,255,.4);}
+    .ps-amount-disp{text-align:center;padding:14px 0 10px;}
+    .ps-amount-disp .ps-lbl{font-size:.68rem;color:rgba(255,255,255,.4);margin-bottom:2px;}
+    .ps-amount-disp .ps-amt{font-size:1.8rem;font-weight:900;color:var(--cyan);}
+    .ps-amount-disp .ps-htg{font-size:.72rem;color:rgba(255,255,255,.4);}
+    .ps-fee-row{display:flex;justify-content:space-between;font-size:.72rem;padding:6px 4px;border-top:1px solid rgba(255,255,255,.05);}
+    .ps-fee-row .ps-fee-label{color:rgba(255,255,255,.35);}
+    .ps-fee-row .ps-fee-val{font-weight:700;color:var(--green);}
+    .ps-pay-btn{display:block;width:100%;background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff;border:none;border-radius:50px;padding:11px;font-size:.85rem;font-weight:700;cursor:pointer;text-align:center;margin-top:12px;}
+    .ps-status-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(0,200,150,.15);border:1px solid rgba(0,200,150,.3);color:var(--green);border-radius:50px;padding:4px 10px;font-size:.7rem;font-weight:700;margin-bottom:8px;}
+    .ps-status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* Popular bills section */
+    .popular-section{margin:0 0 60px;}
+    .popular-title{font-size:1.2rem;font-weight:800;margin-bottom:5px;text-align:center;}
+    .popular-sub{color:var(--gray);font-size:.88rem;text-align:center;margin-bottom:22px;}
+    .popular-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+    .pop-card{background:rgba(10,31,110,.4);border:1px solid rgba(0,174,239,.15);border-radius:16px;padding:18px;cursor:pointer;transition:all .2s;}
+    .pop-card:hover{border-color:var(--cyan);transform:translateY(-2px);}
+    .pop-card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+    .pop-card-icon{font-size:1.4rem;}
+    .pop-card-name{font-size:.88rem;font-weight:700;}
+    .pop-card-badge{padding:2px 8px;border-radius:50px;font-size:.65rem;font-weight:700;margin-left:auto;}
+    .pop-card-desc{font-size:.78rem;color:var(--gray);margin-bottom:10px;}
+    .pop-card-btn{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:9px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;}
+
+    /* Savings bar */
+    .savings-strip{max-width:960px;margin:0 auto 48px;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .saving-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:16px;padding:20px;text-align:center;}
+    .saving-icon{font-size:1.5rem;margin-bottom:8px;}
+    .saving-num{font-size:1.4rem;font-weight:900;color:var(--green);margin-bottom:4px;}
+    .saving-label{font-size:.78rem;color:var(--gray);}
+    @media(max-width:580px){.savings-strip{grid-template-columns:1fr;}.bill-grid{grid-template-columns:repeat(2,1fr);}.how-step:not(:last-child)::after{content:'';}.how-steps{flex-direction:column;align-items:flex-start;padding-left:20px;}.popular-grid{grid-template-columns:1fr;}.nav{padding:12px 16px;}.flow-card{padding:22px 16px;}}
+  
+    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
+    .nav-link{color:var(--gray,#8FA8CC);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
+    .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'"/></div>
+    <span>Tchotcho<em>Pay</em></span>
+  </a>
+    <div class="nav-links">
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="faq.html" class="nav-link">Help</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="signup.html" class="nav-cta nav-link">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-file-invoice"></i> <span id="badge-text">Bill Pay</span></div>
+  <h1 id="hero-title">Pay Haiti bills with <em>USDC</em></h1>
+  <p id="hero-sub">Electricity, school fees, internet, water — pay any Haitian bill instantly from anywhere in the world. No bank required.</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-strip">
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="hs-num">1</div>
+      <div class="hs-text"><div class="ht" id="hs1t">Select Bill</div><div class="hs" id="hs1s">Pick the service</div></div>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">2</div>
+      <div class="hs-text"><div class="ht" id="hs2t">Account Info</div><div class="hs" id="hs2s">Enter reference #</div></div>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">3</div>
+      <div class="hs-text"><div class="ht" id="hs3t">Choose Amount</div><div class="hs" id="hs3s">Pay in USDC</div></div>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">4</div>
+      <div class="hs-text"><div class="ht" id="hs4t">Done!</div><div class="hs" id="hs4s">Instant delivery</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="page-wrap">
+
+  <!-- FLOW CARD -->
+  <div class="flow-card">
+    <!-- Steps indicator -->
+    <div class="steps-bar">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3">3</div>
+      <div class="step-line" id="line3"></div>
+      <div class="step-dot" id="dot4">4</div>
+    </div>
+
+    <!-- STEP 1: Select bill type -->
+    <div class="panel active" id="panel1">
+      <div class="panel-title" id="p1-title">What bill are you paying?</div>
+      <div class="panel-sub" id="p1-sub">Select the service you want to pay for in Haiti.</div>
+      <div class="bill-grid">
+        <div class="bill-card" onclick="selectBill('edh',this)" id="bill-edh">
+          <div class="bill-icon">⚡</div>
+          <div class="bill-name" id="bn-edh">EDH Electricity</div>
+          <div class="bill-desc" id="bd-edh">Électricité d'Haïti</div>
+        </div>
+        <div class="bill-card" onclick="selectBill('school',this)" id="bill-school">
+          <div class="bill-icon">🎓</div>
+          <div class="bill-name" id="bn-school">School Fees</div>
+          <div class="bill-desc" id="bd-school">Primary, secondary, university</div>
+        </div>
+        <div class="bill-card" onclick="selectBill('internet',this)" id="bill-internet">
+          <div class="bill-icon">📡</div>
+          <div class="bill-name" id="bn-internet">Internet</div>
+          <div class="bill-desc" id="bd-internet">Natcom, Digicel, Access Haiti</div>
+        </div>
+        <div class="bill-card" onclick="selectBill('water',this)" id="bill-water">
+          <div class="bill-icon">💧</div>
+          <div class="bill-name" id="bn-water">Water (CAMEP)</div>
+          <div class="bill-desc" id="bd-water">CAMEP / EPPLS</div>
+        </div>
+        <div class="bill-card" onclick="selectBill('tax',this)" id="bill-tax">
+          <div class="bill-icon">🏛️</div>
+          <div class="bill-name" id="bn-tax">Gov. Taxes & Fees</div>
+          <div class="bill-desc" id="bd-tax">DGI, MCI, customs</div>
+        </div>
+        <div class="bill-card" onclick="selectBill('other',this)" id="bill-other">
+          <div class="bill-icon">📋</div>
+          <div class="bill-name" id="bn-other">Other Bills</div>
+          <div class="bill-desc" id="bd-other">Insurance, rent, services</div>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn1" onclick="goStep(2)" disabled>
+        <i class="ti ti-arrow-right"></i> <span id="btn1-text">Continue</span>
+      </button>
+    </div>
+
+    <!-- STEP 2: Account Info -->
+    <div class="panel" id="panel2">
+      <div class="panel-title" id="p2-title">Account Details</div>
+      <div class="panel-sub" id="p2-sub">Enter the account or reference number for the bill.</div>
+
+      <!-- EDH fields -->
+      <div id="fields-edh">
+        <div class="input-label" id="lbl-acct-number">Account Number</div>
+        <input class="text-input" id="edh-account" type="text" placeholder="e.g. 4521-0087-1234" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-subscriber">Subscriber Name</div>
+        <input class="text-input" id="edh-name" type="text" placeholder="Name on the EDH account" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-zone">Zone / Department</div>
+        <select class="select-input" id="edh-zone" onchange="validateStep2()">
+          <option value="">Select zone…</option>
+          <option>Port-au-Prince (Ouest)</option>
+          <option>Cap-Haïtien (Nord)</option>
+          <option>Les Cayes (Sud)</option>
+          <option>Jacmel (Sud-Est)</option>
+          <option>Gonaïves (Artibonite)</option>
+          <option>Miragoâne (Nippes)</option>
+          <option>Fort-Liberté (Nord-Est)</option>
+        </select>
+        <div class="info-box"><i class="ti ti-info-circle"></i><span id="edh-info">Your EDH account number is found on your electricity bill statement or meter card.</span></div>
+      </div>
+
+      <!-- School fields -->
+      <div id="fields-school" style="display:none">
+        <div class="input-label" id="lbl-school-name">School Name</div>
+        <input class="text-input" id="school-name" type="text" placeholder="e.g. Collège Saint-Pierre" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-student-id">Student ID / Reference</div>
+        <input class="text-input" id="student-id" type="text" placeholder="Student ID or enrollment number" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-grade">Grade / Level</div>
+        <select class="select-input" id="school-grade" onchange="validateStep2()">
+          <option value="">Select level…</option>
+          <option>Primaire (Elementary)</option>
+          <option>Secondaire – 1ère à 3ème</option>
+          <option>Secondaire – 4ème à Philo</option>
+          <option>Université / Faculté</option>
+        </select>
+      </div>
+
+      <!-- Internet fields -->
+      <div id="fields-internet" style="display:none">
+        <div class="input-label" id="lbl-provider">Provider</div>
+        <select class="select-input" id="isp-provider" onchange="validateStep2()">
+          <option value="">Select provider…</option>
+          <option>Natcom</option>
+          <option>Digicel Business</option>
+          <option>Access Haiti</option>
+          <option>Eko Internet</option>
+        </select>
+        <div class="input-label" id="lbl-acct-ref">Account / Contract Number</div>
+        <input class="text-input" id="isp-account" type="text" placeholder="e.g. NAT-00123456" oninput="validateStep2()"/>
+      </div>
+
+      <!-- Water fields -->
+      <div id="fields-water" style="display:none">
+        <div class="input-label" id="lbl-water-acct">CAMEP Account Number</div>
+        <input class="text-input" id="water-account" type="text" placeholder="e.g. CAM-0087-4521" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-water-zone">Zone</div>
+        <select class="select-input" id="water-zone" onchange="validateStep2()">
+          <option value="">Select zone…</option>
+          <option>Port-au-Prince</option>
+          <option>Pétion-Ville</option>
+          <option>Delmas</option>
+          <option>Carrefour</option>
+          <option>Tabarre</option>
+        </select>
+      </div>
+
+      <!-- Tax fields -->
+      <div id="fields-tax" style="display:none">
+        <div class="input-label" id="lbl-tax-type">Tax / Fee Type</div>
+        <select class="select-input" id="tax-type" onchange="validateStep2()">
+          <option value="">Select type…</option>
+          <option>DGI – Patente</option>
+          <option>DGI – Impôt sur revenu</option>
+          <option>MCI – Business License</option>
+          <option>Customs Duty</option>
+          <option>Municipal Fee</option>
+        </select>
+        <div class="input-label" id="lbl-nif">NIF (Tax ID)</div>
+        <input class="text-input" id="tax-nif" type="text" placeholder="e.g. 123-456-7890-A" oninput="validateStep2()"/>
+      </div>
+
+      <!-- Other fields -->
+      <div id="fields-other" style="display:none">
+        <div class="input-label" id="lbl-service-name">Service / Company Name</div>
+        <input class="text-input" id="other-service" type="text" placeholder="e.g. AIC Insurance" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-ref-number">Reference Number</div>
+        <input class="text-input" id="other-ref" type="text" placeholder="Policy or account number" oninput="validateStep2()"/>
+        <div class="input-label" id="lbl-bill-desc">Description</div>
+        <input class="text-input" id="other-desc" type="text" placeholder="What this payment is for" oninput="validateStep2()"/>
+      </div>
+
+      <div class="field-error" id="step2-error">Please fill in all required fields.</div>
+      <button class="btn-primary" id="btn2" onclick="goStep(3)" disabled>
+        <i class="ti ti-arrow-right"></i> <span id="btn2-text">Continue</span>
+      </button>
+      <button class="btn-secondary" onclick="goStep(1)" id="back2-text">← Back</button>
+    </div>
+
+    <!-- STEP 3: Amount -->
+    <div class="panel" id="panel3">
+      <div class="panel-title" id="p3-title">Choose Amount</div>
+      <div class="panel-sub" id="p3-sub">Select a preset amount or enter a custom value. Paid in USDC from your wallet.</div>
+
+      <div class="amount-grid" id="amount-grid">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="input-label" id="lbl-custom">Or enter custom amount</div>
+      <div class="amount-custom">
+        <span class="ac-prefix">$</span>
+        <input class="ac-input" type="number" id="custom-amount" placeholder="0.00" min="1" step="1" oninput="selectCustom(this.value)"/>
+      </div>
+
+      <div class="wallet-bar">
+        <div class="wb-left"><i class="ti ti-wallet"></i> <span id="wallet-label">Wallet Balance</span></div>
+        <span class="wb-val">485.20 USDC</span>
+      </div>
+
+      <div class="summary-box" id="step3-summary" style="display:none">
+        <div class="sum-row"><span class="sum-label" id="sl-bill">Bill Type</span><span class="sum-val" id="sv-bill">—</span></div>
+        <div class="sum-row"><span class="sum-label" id="sl-ref">Reference</span><span class="sum-val" id="sv-ref">—</span></div>
+        <div class="sum-row"><span class="sum-label" id="sl-amount">Amount</span><span class="sum-val cyan" id="sv-amount">—</span></div>
+        <div class="sum-row"><span class="sum-label" id="sl-htg">HTG Value</span><span class="sum-val" id="sv-htg">—</span></div>
+        <div class="sum-row"><span class="sum-label" id="sl-fee">Processing Fee</span><span class="sum-val green">Free</span></div>
+        <div class="sum-row"><span class="sum-label" id="sl-total">Total</span><span class="sum-val cyan" id="sv-total">—</span></div>
+      </div>
+
+      <button class="btn-primary" id="btn3" onclick="doPay()" disabled>
+        <i class="ti ti-bolt"></i> <span id="btn3-text">Pay Bill Now</span>
+      </button>
+      <button class="btn-secondary" onclick="goStep(2)" id="back3-text">← Back</button>
+    </div>
+
+    <!-- STEP 4: Success -->
+    <div class="panel" id="panel4">
+      <div class="success-wrap">
+        <div class="confetti-row">🎉 ✅ 💸 🏠 🇭🇹</div>
+        <div class="success-icon">✓</div>
+        <div class="success-title" id="s-title">Bill Paid!</div>
+        <div class="success-sub" id="s-sub">Your payment has been processed and confirmed. The service provider has been notified.</div>
+        <div class="receipt-box" id="receipt-box"></div>
+        <button class="btn-primary" onclick="resetFlow()">
+          <i class="ti ti-plus"></i> <span id="pay-another-text">Pay Another Bill</span>
+        </button>
+        <button class="btn-secondary" onclick="window.location.href='wallet-dashboard.html'">
+          <span id="go-wallet-text">View in Wallet</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /flow-card -->
+
+  <!-- PHONE PREVIEW -->
+  <div class="phone-preview">
+    <div class="phone-shell">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="ps-header">
+          <div class="ps-header-label" id="ps-label">Bill Pay</div>
+          <div class="ps-header-title" id="ps-bill-title">⚡ EDH Electricity</div>
+        </div>
+        <div class="ps-body">
+          <div style="margin-bottom:10px;">
+            <div class="ps-status-badge"><div class="ps-status-dot"></div> Live</div>
+          </div>
+          <div class="ps-bill-row">
+            <div class="ps-bill-icon" id="ps-icon">⚡</div>
+            <div class="ps-bill-info">
+              <div class="ps-bill-name" id="ps-name">EDH Electricity</div>
+              <div class="ps-bill-acct" id="ps-acct">Acct: 4521-0087-1234</div>
+            </div>
+          </div>
+          <!-- Mini amount picker -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:10px;">
+            <div style="border:1px solid rgba(0,174,239,.2);border-radius:8px;padding:6px 3px;text-align:center;cursor:pointer;" onclick="psSelectAmt(this,'$20')"><div style="font-size:.82rem;font-weight:800;">$20</div><div style="font-size:.6rem;color:var(--gray);">2,610 HTG</div></div>
+            <div style="border:1.5px solid #00AEEF;border-radius:8px;padding:6px 3px;text-align:center;background:rgba(0,174,239,.1);cursor:pointer;" id="ps-selected-amt" onclick="psSelectAmt(this,'$50')"><div style="font-size:.82rem;font-weight:800;color:#00AEEF;">$50</div><div style="font-size:.6rem;color:#7FD4F7;">6,525 HTG</div></div>
+            <div style="border:1px solid rgba(0,174,239,.2);border-radius:8px;padding:6px 3px;text-align:center;cursor:pointer;" onclick="psSelectAmt(this,'$100')"><div style="font-size:.82rem;font-weight:800;">$100</div><div style="font-size:.6rem;color:var(--gray);">13,050 HTG</div></div>
+          </div>
+          <div class="ps-amount-disp">
+            <div class="ps-lbl" id="ps-paying-label">Paying</div>
+            <div class="ps-amt" id="ps-amount-big">$50.00</div>
+            <div class="ps-htg" id="ps-htg-val">≈ 6,525 HTG</div>
+          </div>
+          <div class="ps-fee-row">
+            <span class="ps-fee-label" id="ps-fee-label">Processing Fee</span>
+            <span class="ps-fee-val" id="ps-fee-val">Free</span>
+          </div>
+          <div class="ps-fee-row">
+            <span class="ps-fee-label" id="ps-speed-label">Delivery</span>
+            <span class="ps-fee-val" style="color:var(--cyan);">Instant</span>
+          </div>
+          <button class="ps-pay-btn" id="ps-pay-btn">Pay Bill →</button>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--gray);font-size:.72rem;margin-top:10px;" id="preview-label">Live interactive preview</p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- SAVINGS STRIP -->
+<div class="savings-strip">
+  <div class="saving-card">
+    <div class="saving-icon">💰</div>
+    <div class="saving-num" id="save1-num">0%</div>
+    <div class="saving-label" id="save1-label">Processing fee — always free</div>
+  </div>
+  <div class="saving-card">
+    <div class="saving-icon">⚡</div>
+    <div class="saving-num" id="save2-num">~10 sec</div>
+    <div class="saving-label" id="save2-label">Payment confirmed instantly</div>
+  </div>
+  <div class="saving-card">
+    <div class="saving-icon">🌍</div>
+    <div class="saving-num" id="save3-num">24/7</div>
+    <div class="saving-label" id="save3-label">Pay from anywhere, anytime</div>
+  </div>
+</div>
+
+<!-- POPULAR BILLS -->
+<div style="max-width:960px;margin:0 auto;padding:0 24px 80px;">
+  <div class="popular-section">
+    <h2 class="popular-title" id="pop-title">Popular Bill Payments</h2>
+    <p class="popular-sub" id="pop-sub">One-tap payments for the most common Haiti bills.</p>
+    <div class="popular-grid" id="popular-grid"></div>
+  </div>
+</div>
+
+<script src="lang.js"></script>
+<script>
+  // ── DATA ──────────────────────────────────────────────────────────
+  const BILL_TYPES = {
+    edh:     { label:'EDH Electricity', icon:'⚡', color:'var(--gold)',   colorRgb:'247,183,49' },
+    school:  { label:'School Fees',     icon:'🎓', color:'var(--gold)', colorRgb:'139,92,246' },
+    internet:{ label:'Internet',        icon:'📡', color:'var(--green)',  colorRgb:'0,200,150'  },
+    water:   { label:'Water (CAMEP)',   icon:'💧', color:'var(--cyan)',   colorRgb:'0,174,239'  },
+    tax:     { label:'Gov. Taxes',      icon:'🏛️', color:'var(--red)',   colorRgb:'255,112,67'  },
+    other:   { label:'Other Bills',     icon:'📋', color:'var(--gray)',  colorRgb:'143,168,204' },
+  };
+
+  const AMOUNTS_BY_TYPE = {
+    edh:     [20,50,100,200,300,500],
+    school:  [50,100,200,300,500,1000],
+    internet:[10,20,30,50,75,100],
+    water:   [15,25,50,100,150,200],
+    tax:     [50,100,200,500,1000,2000],
+    other:   [25,50,100,200,500,1000],
+  };
+
+  const POPULAR = [
+    { type:'edh',     preset:50,  desc:'Monthly electricity bill for a typical household in Port-au-Prince.' },
+    { type:'school',  preset:200, desc:'Semester school fees for primary or secondary school students.' },
+    { type:'internet',preset:30,  desc:'Monthly internet plan — Natcom or Access Haiti home broadband.' },
+    { type:'water',   preset:25,  desc:'Monthly CAMEP water bill for a household in the metro area.' },
+    { type:'school',  preset:500, desc:'University semester tuition at State University of Haiti (UEH).' },
+    { type:'edh',     preset:100, desc:'High-usage electricity month — business or large household.' },
+  ];
+
+  let selectedBill = null;
+  let selectedAmount = null;
+
+  // ── BILL SELECT ───────────────────────────────────────────────────
+  function selectBill(type, el) {
+    selectedBill = type;
+    document.querySelectorAll('.bill-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btn1').disabled = false;
+    // Update preview
+    const bt = BILL_TYPES[type];
+    document.getElementById('ps-bill-title').textContent = bt.icon + ' ' + bt.label;
+    document.getElementById('ps-icon').textContent = bt.icon;
+    document.getElementById('ps-name').textContent = bt.label;
+  }
+
+  // ── STEP 2 VALIDATION ─────────────────────────────────────────────
+  function validateStep2() {
+    let valid = false;
+    const t = selectedBill;
+    if(t==='edh')      valid = v('edh-account') && v('edh-name') && v('edh-zone');
+    else if(t==='school')   valid = v('school-name') && v('student-id') && v('school-grade');
+    else if(t==='internet') valid = v('isp-provider') && v('isp-account');
+    else if(t==='water')    valid = v('water-account') && v('water-zone');
+    else if(t==='tax')      valid = v('tax-type') && v('tax-nif');
+    else if(t==='other')    valid = v('other-service') && v('other-ref');
+    document.getElementById('btn2').disabled = !valid;
+    if(valid) {
+      // Update preview account
+      let ref = '';
+      if(t==='edh') ref = 'Acct: ' + document.getElementById('edh-account').value;
+      else if(t==='school') ref = 'ID: ' + document.getElementById('student-id').value;
+      else if(t==='internet') ref = document.getElementById('isp-account').value;
+      else if(t==='water') ref = 'Acct: ' + document.getElementById('water-account').value;
+      else if(t==='tax') ref = document.getElementById('tax-nif').value;
+      else ref = document.getElementById('other-ref').value;
+      document.getElementById('ps-acct').textContent = ref;
+    }
+  }
+  function v(id) { return document.getElementById(id) && document.getElementById(id).value.trim().length > 0; }
+
+  // ── BUILD AMOUNTS ─────────────────────────────────────────────────
+  function buildAmounts() {
+    const amts = AMOUNTS_BY_TYPE[selectedBill] || [25,50,100,200,300,500];
+    const grid = document.getElementById('amount-grid');
+    selectedAmount = null;
+    document.getElementById('btn3').disabled = true;
+    document.getElementById('step3-summary').style.display = 'none';
+    document.getElementById('custom-amount').value = '';
+    grid.innerHTML = amts.map(a => `
+      <div class="amount-card" onclick="selectAmount(${a}, this)">
+        <div class="ac-usd">$${a}</div>
+        <div class="ac-htg">${(a*130.50).toLocaleString('en-US',{maximumFractionDigits:0})} HTG</div>
+      </div>`).join('');
+  }
+
+  function selectAmount(usd, el) {
+    selectedAmount = usd;
+    document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('custom-amount').value = '';
+    updateSummary(usd);
+  }
+
+  function selectCustom(val) {
+    const usd = parseFloat(val);
+    if(usd > 0) {
+      selectedAmount = usd;
+      document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
+      updateSummary(usd);
+    } else {
+      selectedAmount = null;
+      document.getElementById('btn3').disabled = true;
+      document.getElementById('step3-summary').style.display = 'none';
+    }
+  }
+
+  function updateSummary(usd) {
+    document.getElementById('btn3').disabled = false;
+    const bt = BILL_TYPES[selectedBill];
+    const ref = getRef();
+    const htg = (usd * 130.50).toLocaleString('en-US',{maximumFractionDigits:0});
+    document.getElementById('sv-bill').textContent = bt.icon + ' ' + bt.label;
+    document.getElementById('sv-ref').textContent = ref;
+    document.getElementById('sv-amount').textContent = `$${parseFloat(usd).toFixed(2)} USDC`;
+    document.getElementById('sv-htg').textContent = htg + ' HTG';
+    document.getElementById('sv-total').textContent = `$${parseFloat(usd).toFixed(2)} USDC`;
+    document.getElementById('step3-summary').style.display = 'block';
+    // Update preview
+    document.getElementById('ps-amount-big').textContent = `$${parseFloat(usd).toFixed(2)}`;
+    document.getElementById('ps-htg-val').textContent = `≈ ${htg} HTG`;
+  }
+
+  function getRef() {
+    const t = selectedBill;
+    if(t==='edh') return document.getElementById('edh-account').value || '—';
+    if(t==='school') return document.getElementById('school-name').value || '—';
+    if(t==='internet') return document.getElementById('isp-account').value || '—';
+    if(t==='water') return document.getElementById('water-account').value || '—';
+    if(t==='tax') return document.getElementById('tax-nif').value || '—';
+    if(t==='other') return document.getElementById('other-service').value || '—';
+    return '—';
+  }
+
+  // ── STEPS ─────────────────────────────────────────────────────────
+  function goStep(n) {
+    if(n===2) {
+      // Show correct fields
+      ['edh','school','internet','water','tax','other'].forEach(t => {
+        document.getElementById('fields-'+t).style.display = t===selectedBill ? 'block' : 'none';
+      });
+    }
+    if(n===3) buildAmounts();
+
+    for(let i=1;i<=4;i++) {
+      document.getElementById('panel'+i).classList.toggle('active', i===n);
+      const dot = document.getElementById('dot'+i);
+      dot.classList.remove('active','done');
+      if(i<n) { dot.classList.add('done'); dot.textContent='✓'; }
+      else if(i===n) { dot.classList.add('active'); dot.textContent=i; }
+      else dot.textContent=i;
+    }
+    for(let i=1;i<=3;i++) document.getElementById('line'+i).classList.toggle('done', i<n);
+  }
+
+  // ── PAY ───────────────────────────────────────────────────────────
+  function doPay() {
+    const btn = document.getElementById('btn3');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Processing…';
+    setTimeout(() => {
+      showSuccess();
+      btn.innerHTML = '<i class="ti ti-bolt"></i> <span id="btn3-text">Pay Bill Now</span>';
+      btn.disabled = false;
+    }, 1800);
+  }
+
+  function showSuccess() {
+    goStep(4);
+    const bt = BILL_TYPES[selectedBill];
+    const ref = getRef();
+    const usd = selectedAmount;
+    const htg = (usd * 130.50).toLocaleString('en-US',{maximumFractionDigits:0});
+    const now = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    const txId = 'TP' + Math.random().toString(36).slice(2,10).toUpperCase();
+    document.getElementById('receipt-box').innerHTML = `
+      <div class="receipt-row"><span class="receipt-label">Bill Type</span><span class="receipt-val">${bt.icon} ${bt.label}</span></div>
+      <div class="receipt-row"><span class="receipt-label">Reference</span><span class="receipt-val">${ref}</span></div>
+      <div class="receipt-row"><span class="receipt-label">Amount Paid</span><span class="receipt-val" style="color:var(--cyan)">$${parseFloat(usd).toFixed(2)} USDC</span></div>
+      <div class="receipt-row"><span class="receipt-label">HTG Equivalent</span><span class="receipt-val">${htg} HTG</span></div>
+      <div class="receipt-row"><span class="receipt-label">Processing Fee</span><span class="receipt-val" style="color:var(--green)">Free</span></div>
+      <div class="receipt-row"><span class="receipt-label">Confirmed At</span><span class="receipt-val" style="color:var(--green)">✓ ${now}</span></div>
+      <div class="receipt-row"><span class="receipt-label">Transaction ID</span><span class="receipt-val" style="font-size:.78rem;color:var(--gray)">${txId}</span></div>`;
+  }
+
+  function resetFlow() {
+    selectedBill = null;
+    selectedAmount = null;
+    document.querySelectorAll('.bill-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('btn1').disabled = true;
+    document.getElementById('step3-summary').style.display = 'none';
+    document.getElementById('custom-amount').value = '';
+    goStep(1);
+  }
+
+  // ── POPULAR BILLS ─────────────────────────────────────────────────
+  function buildPopular() {
+    document.getElementById('popular-grid').innerHTML = POPULAR.map(p => {
+      const bt = BILL_TYPES[p.type];
+      return `<div class="pop-card">
+        <div class="pop-card-top">
+          <div class="pop-card-icon">${bt.icon}</div>
+          <div class="pop-card-name">${bt.label}</div>
+          <span class="pop-card-badge" style="background:rgba(${bt.colorRgb},.15);color:${bt.color};border:1px solid rgba(${bt.colorRgb},.3)">$${p.preset}</span>
+        </div>
+        <div class="pop-card-desc">${p.desc}</div>
+        <button class="pop-card-btn" onclick="quickPay('${p.type}',${p.preset})">Pay $${p.preset} Now</button>
+      </div>`;
+    }).join('');
+  }
+
+  function quickPay(type, amount) {
+    selectBill(type, document.getElementById('bill-'+type));
+    goStep(2);
+    window._quickAmt = amount;
+  }
+
+  const _origBuild = buildAmounts;
+  buildAmounts = function() {
+    _origBuild();
+    if(window._quickAmt) {
+      const amts = AMOUNTS_BY_TYPE[selectedBill];
+      const idx = amts.indexOf(window._quickAmt);
+      if(idx >= 0) {
+        const cards = document.querySelectorAll('.amount-card');
+        if(cards[idx]) selectAmount(window._quickAmt, cards[idx]);
+      }
+      window._quickAmt = null;
+    }
+  };
+
+  // ── PHONE PREVIEW ─────────────────────────────────────────────────
+  function psSelectAmt(el, usdStr) {
+    document.querySelectorAll('.phone-screen [onclick^="psSelectAmt"]').forEach(p => {
+      p.style.border = '1px solid rgba(0,174,239,.2)';
+      p.style.background = 'none';
+      p.querySelector('div').style.color = '';
+    });
+    el.style.border = '1.5px solid #00AEEF';
+    el.style.background = 'rgba(0,174,239,.1)';
+    el.querySelector('div').style.color = '#00AEEF';
+    const usd = parseFloat(usdStr.replace('$',''));
+    document.getElementById('ps-amount-big').textContent = usdStr;
+    document.getElementById('ps-htg-val').textContent = `≈ ${(usd*130.5).toLocaleString('en-US',{maximumFractionDigits:0})} HTG`;
+  }
+
+  // ── SPIN ──────────────────────────────────────────────────────────
+  const styleEl = document.createElement('style');
+  styleEl.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(styleEl);
+
+  // ── INIT ──────────────────────────────────────────────────────────
+  buildPopular();
+
+  // Lang switcher injection (inline — lang.js also handles secondary pages)
+  window.addEventListener('DOMContentLoaded', () => {
+    const lang = localStorage.getItem('tchotcho_lang') || 'en';
+    const nav = document.querySelector('nav');
+    const sw = document.createElement('div');
+    sw.style.cssText = 'display:flex;gap:3px;align-items:center;background:#0A1F6E;border:1.5px solid rgba(0,174,239,0.5);border-radius:50px;padding:3px;margin-left:8px;flex-shrink:0;';
+    ['EN','HT','FR','ES'].forEach(code => {
+      const btn = document.createElement('button');
+      btn.className = 'tc-lang-btn';
+      btn.dataset.lang = code.toLowerCase();
+      btn.textContent = code;
+      btn.style.cssText = 'padding:5px 10px;border-radius:50px;border:none;background:none;color:#8FA8CC;font-size:.76rem;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;';
+      if(btn.dataset.lang === lang) { btn.style.background='linear-gradient(135deg,#1055CC,#00AEEF)'; btn.style.color='#fff'; }
+      btn.onclick = () => {
+        localStorage.setItem('tchotcho_lang', btn.dataset.lang);
+        location.reload();
+      };
+      sw.appendChild(btn);
+    });
+    nav.insertBefore(sw, nav.querySelector('.nav-back'));
+  });
+</script>
+
+<div class="footer-mini" style="background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:24px;text-align:center;">
+  <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;">
+    <a href="index.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Home</a>
+    <a href="calculator.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Calculator</a>
+    <a href="pricing.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Pricing</a>
+    <a href="security.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Security</a>
+    <a href="faq.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Help Center</a>
+    <a href="contact.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Contact</a>
+    <a href="signup.html" style="color:#8FA8CC;font-size:.8rem;text-decoration:none;">Sign Up</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div style="font-size:.72rem;color:rgba(143,168,204,.35);">© 2026 Tchotcho Pay LLC · <a href="social.html" style="color:var(--cyan);">📲 Social Media</a> · <a href="mailto:hello@tchotchopay.com" style="color:#00AEEF;text-decoration:none;">hello@tchotchopay.com</a></div>
+</div>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

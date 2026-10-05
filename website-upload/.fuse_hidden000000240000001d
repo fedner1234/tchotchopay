@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tchotcho Pay — Sign Up</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#060d24;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 48px}
+
+/* ── PAGE HEADER ── */
+.page-header{text-align:center;margin-bottom:24px}
+.page-header h1{color:#fff;font-size:1.4rem;font-weight:800;letter-spacing:-0.02em}
+.page-header h1 em{color:#00AEEF;font-style:normal}
+.page-header p{color:#8FA8CC;font-size:0.85rem;margin-top:5px}
+
+/* ── PHONE SHELL ── */
+.phone{width:300px;background:#020B2D;border-radius:40px;overflow:hidden;border:7px solid #0d1020;box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(0,174,239,0.12)}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 4px;color:rgba(255,255,255,0.4);font-size:11px}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{padding:8px 20px 4px}
+.progress-steps{display:flex;gap:4px}
+.ps{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1);transition:background 0.4s}
+.ps.done{background:#00AEEF}
+.ps.active{background:linear-gradient(90deg,#00AEEF,#7FD4F7);animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%,100%{opacity:1}50%{opacity:0.7}}
+.step-label{font-size:10px;color:rgba(255,255,255,0.35);text-align:right;margin-top:4px;padding-right:2px}
+
+/* ── SCREENS ── */
+.screen{display:none;flex-direction:column;min-height:590px}
+.screen.on{display:flex}
+
+/* ── TRANSITIONS ── */
+.screen{animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ── SHARED COMPONENTS ── */
+.scr-body{flex:1;padding:16px 20px;display:flex;flex-direction:column}
+.scr-icon{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,rgba(16,85,204,0.5),rgba(0,174,239,0.4));display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;border:1px solid rgba(0,174,239,0.2)}
+.scr-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.2}
+.scr-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 14px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:14px;font-family:inherit;outline:none;transition:border-color 0.2s,background 0.2s;-webkit-appearance:none}
+.field input::placeholder{color:rgba(255,255,255,0.25)}
+.field input:focus,.field select:focus{border-color:#00AEEF;background:rgba(0,174,239,0.06)}
+.field select option{background:#0a1f6e;color:#fff}
+.phone-row{display:flex;gap:8px}
+.country-code{width:88px;flex-shrink:0;padding:13px 10px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:14px;font-family:inherit;outline:none;text-align:center;cursor:pointer;transition:border-color 0.2s}
+.country-code:focus{border-color:#00AEEF}
+.btn-main{width:100%;padding:15px;border-radius:50px;border:none;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.18s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:auto}
+.btn-main.blue{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff;box-shadow:0 6px 24px rgba(0,174,239,0.3)}
+.btn-main.blue:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-main.green{background:linear-gradient(135deg,#16a34a,#00C896);color:#fff;box-shadow:0 6px 24px rgba(34,212,94,0.3)}
+.btn-main.ghost{background:transparent;color:rgba(255,255,255,0.5);border:1.5px solid rgba(255,255,255,0.12);margin-top:8px}
+.btn-main.ghost:hover{border-color:rgba(255,255,255,0.3);color:#fff}
+.error-msg{font-size:12px;color:#FF4C6A;margin-top:6px;display:none}
+.error-msg.show{display:block}
+
+/* ── SPLASH ── */
+.splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;text-align:center;background:linear-gradient(180deg,#020B2D 0%,#041560 50%,#020B2D 100%);position:relative;overflow:hidden}
+.splash::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(0,174,239,0.15),transparent)}
+.splash-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,174,239,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,174,239,0.04) 1px,transparent 1px);background-size:40px 40px}
+.splash-logo{width:96px;height:96px;border-radius:24px;background:linear-gradient(135deg,#0a1f6e,#00aeef);padding:3px;box-shadow:0 0 48px rgba(0,174,239,0.45);margin-bottom:24px;position:relative;z-index:1;animation:floatY 3s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.splash-logo-inner{width:100%;height:100%;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#0a1f6e,#1055cc)}
+.splash-logo-inner img{width:100%;height:100%;object-fit:cover}
+.splash-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.03em;margin-bottom:8px;position:relative;z-index:1}
+.splash-title em{color:#00AEEF;font-style:normal}
+.splash-tagline{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;max-width:220px;margin-bottom:32px;position:relative;z-index:1}
+.splash-features{display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:28px;position:relative;z-index:1}
+.splash-feat{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border:0.5px solid rgba(0,174,239,0.15);border-radius:12px;padding:10px 14px;text-align:left}
+.splash-feat i{font-size:18px;color:#00AEEF;flex-shrink:0}
+.splash-feat span{font-size:12px;color:rgba(255,255,255,0.65);font-weight:500}
+.splash-btns{display:flex;flex-direction:column;gap:8px;width:100%;position:relative;z-index:1}
+.splash-login{font-size:12px;color:rgba(255,255,255,0.4);margin-top:12px;position:relative;z-index:1}
+.splash-login a{color:#00AEEF;text-decoration:none;font-weight:600}
+
+/* ── OTP ── */
+.otp-row{display:flex;gap:8px;margin:8px 0 20px;justify-content:center}
+.otp-box{width:42px;height:52px;border-radius:12px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);color:#fff;font-size:22px;font-weight:700;text-align:center;font-family:inherit;outline:none;transition:border-color 0.2s}
+.otp-box:focus{border-color:#00AEEF;background:rgba(0,174,239,0.08)}
+.otp-box.filled{border-color:rgba(0,174,239,0.5)}
+.otp-resend{font-size:12px;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:8px}
+.otp-resend a{color:#00AEEF;text-decoration:none;font-weight:600;cursor:pointer}
+.otp-hint{background:rgba(0,174,239,0.08);border:0.5px solid rgba(0,174,239,0.2);border-radius:10px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:16px}
+.otp-hint strong{color:#00AEEF}
+
+/* ── KYC ── */
+.kyc-upload{border:2px dashed rgba(0,174,239,0.3);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:14px;background:rgba(0,174,239,0.04)}
+.kyc-upload:hover{border-color:rgba(0,174,239,0.6);background:rgba(0,174,239,0.08)}
+.kyc-upload.done{border-color:#00C896;background:rgba(34,212,94,0.06);border-style:solid}
+.kyc-upload i{font-size:28px;color:#00AEEF;margin-bottom:8px;display:block}
+.kyc-upload.done i{color:#00C896}
+.kyc-upload p{font-size:12px;color:rgba(255,255,255,0.5)}
+.kyc-upload strong{font-size:13px;color:#fff;display:block;margin-bottom:4px}
+.doc-types{display:flex;gap:6px;margin-bottom:14px}
+.doc-type{flex:1;padding:8px 4px;background:rgba(255,255,255,0.05);border:1.5px solid transparent;border-radius:10px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);cursor:pointer;transition:all 0.15s}
+.doc-type.sel{border-color:#00AEEF;background:rgba(0,174,239,0.1);color:#fff}
+.kyc-note{font-size:11px;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:6px;margin-bottom:16px}
+.kyc-note i{font-size:14px;color:#00AEEF;flex-shrink:0}
+
+/* ── PAYMENT METHOD ── */
+.pay-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.pay-opt{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.05);border-radius:14px;cursor:pointer;border:1.5px solid transparent;transition:all 0.15s}
+.pay-opt.sel{border-color:#00AEEF;background:rgba(0,174,239,0.08)}
+.pay-opt:hover:not(.sel){background:rgba(255,255,255,0.08)}
+.pay-opt-icon{width:40px;height:40px;border-radius:12px;background:#0D2580;display:flex;align-items:center;justify-content:center;font-size:20px;color:#00AEEF;flex-shrink:0}
+.pay-opt-info{flex:1}
+.pay-opt-name{font-size:13px;font-weight:700;color:#fff}
+.pay-opt-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.pay-opt-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:50px}
+.badge-free{background:rgba(34,212,94,0.15);color:#00C896}
+.badge-fee{background:rgba(0,174,239,0.15);color:#00AEEF}
+.card-form{background:rgba(255,255,255,0.04);border-radius:14px;padding:14px;margin-bottom:14px;display:none}
+.card-form.show{display:block}
+.card-row{display:flex;gap:8px}
+.card-row .field{flex:1}
+
+/* ── PIN ── */
+.pin-display{display:flex;gap:12px;justify-content:center;margin:16px 0 20px}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.2s}
+.pin-dot.filled{background:#00AEEF;transform:scale(1.15)}
+.pin-numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.pin-key{padding:16px;text-align:center;font-size:20px;font-weight:600;color:#fff;cursor:pointer;background:#020B2D;transition:background 0.1s;user-select:none}
+.pin-key:active{background:rgba(0,174,239,0.18)}
+.pin-key.del{color:#00AEEF}
+.pin-hint{font-size:11px;color:rgba(255,255,255,0.35);text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:16px}
+.pin-hint i{font-size:13px;color:#00AEEF}
+
+/* ── SUCCESS ── */
+.success-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;text-align:center}
+.success-ring{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#00C896);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;margin-bottom:20px;box-shadow:0 0 40px rgba(34,212,94,0.4);animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.success-title{font-size:24px;font-weight:800;color:#fff;margin-bottom:8px}
+.success-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:220px;margin-bottom:24px}
+.wallet-preview{background:linear-gradient(135deg,#0A1F6E,#1055CC);border-radius:18px;padding:18px;width:100%;margin-bottom:20px;text-align:left;position:relative;overflow:hidden}
+.wallet-preview::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(0,174,239,0.15)}
+.wp-label{font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.wp-balance{font-size:28px;font-weight:800;color:#fff;line-height:1}
+.wp-usdc{font-size:11px;color:#00AEEF;font-weight:600;margin-top:4px}
+.wp-row{display:flex;justify-content:space-between;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.4)}
+.confetti{position:absolute;pointer-events:none;font-size:20px;animation:confettiFall 2s ease-out forwards}
+@keyframes confettiFall{from{transform:translateY(-20px) rotate(0deg);opacity:1}to{transform:translateY(80px) rotate(360deg);opacity:0}}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Tchotcho<em>Pay</em> — Sign Up</h1>
+  <p>Interactive onboarding prototype · 8 steps</p>
+</div>
+
+<div class="phone">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span><i class="ti ti-wifi"></i>&nbsp;<i class="ti ti-battery-2"></i></span>
+  </div>
+
+  <!-- progress bar (hidden on splash) -->
+  <div class="progress-wrap" id="progress-wrap" style="display:none">
+    <div class="progress-steps" id="progress-steps"></div>
+    <div class="step-label" id="step-label">Step 1 of 7</div>
+  </div>
+
+  <!-- ═══ 0: SPLASH ═══ -->
+  <div class="screen on" id="s0">
+    <div class="splash">
+      <div class="splash-grid"></div>
+      <div class="splash-logo">
+        <div class="splash-logo-inner">
+          <img src="logo.png" alt="Tchotcho Pay" onerror="this.style.background='linear-gradient(135deg,#0a1f6e,#1055cc)'"/>
+        </div>
+      </div>
+      <div class="splash-title">Tchotcho<em>Pay</em></div>
+      <div class="splash-tagline">Send money to Haiti. Save in USDC. Shop local — all in one app.</div>
+      <div class="splash-features">
+        <div class="splash-feat"><i class="ti ti-send"></i><span>Send money in seconds — anywhere</span></div>
+        <div class="splash-feat"><i class="ti ti-coin"></i><span>USDC wallet on Base blockchain</span></div>
+        <div class="splash-feat"><i class="ti ti-shopping-cart"></i><span>Haitian marketplace built in</span></div>
+      </div>
+      <div class="splash-btns">
+        <button class="btn-main blue" onclick="nextStep()"><i class="ti ti-user-plus"></i> Create Account</button>
+        <button class="btn-main ghost" onclick="goApp()"><i class="ti ti-login"></i> Sign In</button>
+      </div>
+      <div class="splash-login">Already have an account? <a onclick="goApp()">Sign in</a></div>
+    </div>
+  </div>
+
+  <!-- ═══ 1: PHONE NUMBER ═══ -->
+  <div class="screen" id="s1">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-device-mobile" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title">What's your phone number?</div>
+      <div class="scr-sub">We'll send a verification code. We never share your number.</div>
+
+      <div class="field">
+        <label>Country</label>
+        <select id="country-select" onchange="updateCode()">
+          <option value="+1" data-flag="🇺🇸">🇺🇸 United States (+1)</option>
+          <option value="+1" data-flag="🇨🇦">🇨🇦 Canada (+1)</option>
+          <option value="+509" data-flag="🇭🇹">🇭🇹 Haiti (+509)</option>
+          <option value="+33" data-flag="🇫🇷">🇫🇷 France (+33)</option>
+          <option value="+44" data-flag="🇬🇧">🇬🇧 United Kingdom (+44)</option>
+          <option value="+1-809" data-flag="🇩🇴">🇩🇴 Dominican Republic (+1-809)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Phone number</label>
+        <div class="phone-row">
+          <input class="country-code" id="cc-display" value="+1" readonly/>
+          <input type="tel" id="phone-input" placeholder="(305) 555-0142" inputmode="tel" oninput="validatePhone()"/>
+        </div>
+        <div class="error-msg" id="phone-err">Please enter a valid phone number</div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:12px 14px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px">
+        <i class="ti ti-lock" style="font-size:15px;color:#00AEEF;flex-shrink:0"></i>
+        Your data is encrypted and never sold to third parties.
+      </div>
+
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;margin-bottom:16px">
+        By continuing, you agree to Tchotcho Pay's <a href="#" style="color:#00AEEF;text-decoration:none">Terms of Service</a> and <a href="#" style="color:#00AEEF;text-decoration:none">Privacy Policy</a>.
+      </div>
+
+      <button class="btn-main blue" onclick="submitPhone()"><i class="ti ti-arrow-right"></i> Send Code</button>
+    </div>
+  </div>
+
+  <!-- ═══ 2: OTP ═══ -->
+  <div class="screen" id="s2">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-message-dots" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title">Enter the code</div>
+      <div class="scr-sub" id="otp-sub">We sent a 6-digit code to <strong style="color:#fff">+1 (305) 555-0142</strong></div>
+
+      <div class="otp-hint">Demo hint: enter any 6 digits — use <strong>123456</strong> to auto-fill</div>
+
+      <div class="otp-row">
+        <input class="otp-box" id="o0" maxlength="1" inputmode="numeric" oninput="otpInput(this,0)"/>
+        <input class="otp-box" id="o1" maxlength="1" inputmode="numeric" oninput="otpInput(this,1)"/>
+        <input class="otp-box" id="o2" maxlength="1" inputmode="numeric" oninput="otpInput(this,2)"/>
+        <input class="otp-box" id="o3" maxlength="1" inputmode="numeric" oninput="otpInput(this,3)"/>
+        <input class="otp-box" id="o4" maxlength="1" inputmode="numeric" oninput="otpInput(this,4)"/>
+        <input class="otp-box" id="o5" maxlength="1" inputmode="numeric" oninput="otpInput(this,5)"/>
+      </div>
+
+      <div class="otp-resend" id="otp-resend-row">Didn't get it? <a onclick="resendOTP()">Resend code</a> · <span id="otp-timer">0:30</span></div>
+      <div class="error-msg" id="otp-err">Incorrect code. Try again.</div>
+
+      <div style="flex:1"></div>
+      <button class="btn-main blue" onclick="submitOTP()"><i class="ti ti-check"></i> Verify</button>
+      <button class="btn-main ghost" onclick="prevStep()"><i class="ti ti-arrow-left"></i> Change number</button>
+    </div>
+  </div>
+
+  <!-- ═══ 3: PERSONAL INFO ═══ -->
+  <div class="screen" id="s3">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-user" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title">Tell us about yourself</div>
+      <div class="scr-sub">We need this to set up your account and comply with financial regulations.</div>
+
+      <div class="field">
+        <label>First name</label>
+        <input type="text" id="fname" placeholder="Marie" autocomplete="given-name"/>
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input type="text" id="lname" placeholder="Jean" autocomplete="family-name"/>
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" id="email" placeholder="marie@example.com" autocomplete="email"/>
+      </div>
+      <div class="field">
+        <label>Date of birth</label>
+        <input type="date" id="dob" style="color-scheme:dark"/>
+      </div>
+      <div class="error-msg" id="info-err">Please fill in all fields</div>
+
+      <div style="flex:1"></div>
+      <button class="btn-main blue" onclick="submitInfo()"><i class="ti ti-arrow-right"></i> Continue</button>
+    </div>
+  </div>
+
+  <!-- ═══ 4: KYC ═══ -->
+  <div class="screen" id="s4">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-id" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title">Verify your identity</div>
+      <div class="scr-sub">Required to send money internationally. Takes about 2 minutes.</div>
+
+      <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Document type</div>
+      <div class="doc-types">
+        <div class="doc-type sel" onclick="selDoc(this,'passport')">🛂 Passport</div>
+        <div class="doc-type" onclick="selDoc(this,'id')">🪪 Nat. ID</div>
+        <div class="doc-type" onclick="selDoc(this,'license')">🚗 License</div>
+      </div>
+
+      <div class="kyc-upload" id="kyc-front" onclick="fakeUpload('front')">
+        <i class="ti ti-cloud-upload"></i>
+        <strong>Front of document</strong>
+        <p>Tap to take a photo or upload</p>
+      </div>
+      <div class="kyc-upload" id="kyc-back" onclick="fakeUpload('back')">
+        <i class="ti ti-cloud-upload"></i>
+        <strong>Back of document</strong>
+        <p>Tap to take a photo or upload</p>
+      </div>
+
+      <div class="kyc-note">
+        <i class="ti ti-shield-lock"></i>
+        Your ID is encrypted and only used for identity verification. It's never stored permanently.
+      </div>
+
+      <div id="kyc-processing" style="display:none;text-align:center;padding:12px;background:rgba(0,174,239,0.08);border-radius:12px;margin-bottom:14px;font-size:12px;color:#00AEEF;font-weight:600">
+        <i class="ti ti-loader" style="animation:spin 1s linear infinite;display:inline-block"></i> Verifying documents...
+      </div>
+      @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+      <div style="flex:1"></div>
+      <button class="btn-main blue" id="kyc-btn" onclick="submitKYC()"><i class="ti ti-arrow-right"></i> Submit for Review</button>
+    </div>
+  </div>
+
+  <!-- ═══ 5: KYC PROCESSING ═══ -->
+  <div class="screen" id="s5">
+    <div class="success-wrap">
+      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#0A1F6E,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;margin-bottom:20px;box-shadow:0 0 32px rgba(0,174,239,0.3)">
+        <i class="ti ti-shield-check"></i>
+      </div>
+      <div class="success-title" style="font-size:20px">Identity Verified ✓</div>
+      <div class="success-sub">Your documents have been reviewed. You're approved to send money internationally.</div>
+
+      <div style="width:100%;background:rgba(255,255,255,0.04);border-radius:14px;padding:14px;margin-bottom:20px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(34,212,94,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:14px;color:#00C896"></i></div>
+            <span style="color:rgba(255,255,255,0.7)">Identity documents reviewed</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(34,212,94,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:14px;color:#00C896"></i></div>
+            <span style="color:rgba(255,255,255,0.7)">KYC/AML check passed</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(34,212,94,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:14px;color:#00C896"></i></div>
+            <span style="color:rgba(255,255,255,0.7)">Sending limits unlocked</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,174,239,0.08);border:0.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px;font-size:12px;color:rgba(255,255,255,0.5);width:100%;margin-bottom:20px;text-align:left">
+        <div style="font-weight:700;color:#00AEEF;margin-bottom:4px">Your limits</div>
+        Send up to <strong style="color:#fff">$1,000/day</strong> · <strong style="color:#fff">$10,000/month</strong>
+      </div>
+
+      <button class="btn-main blue" onclick="nextStep()" style="width:100%"><i class="ti ti-arrow-right"></i> Add Payment Method</button>
+    </div>
+  </div>
+
+  <!-- ═══ 6: PAYMENT METHOD ═══ -->
+  <div class="screen" id="s6">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-credit-card" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title">Add a payment method</div>
+      <div class="scr-sub">How will you load money into Tchotcho Pay?</div>
+
+      <div class="pay-opts">
+        <div class="pay-opt sel" onclick="selPay(this,'card')">
+          <div class="pay-opt-icon"><i class="ti ti-credit-card"></i></div>
+          <div class="pay-opt-info">
+            <div class="pay-opt-name">Debit or Credit Card</div>
+            <div class="pay-opt-desc">Visa, Mastercard, Amex</div>
+          </div>
+          <div class="pay-opt-badge badge-fee">2–3%</div>
+        </div>
+        <div class="pay-opt" onclick="selPay(this,'bank')">
+          <div class="pay-opt-icon"><i class="ti ti-building-bank"></i></div>
+          <div class="pay-opt-info">
+            <div class="pay-opt-name">Bank Account (ACH)</div>
+            <div class="pay-opt-desc">U.S. checking or savings</div>
+          </div>
+          <div class="pay-opt-badge badge-free">Lower fee</div>
+        </div>
+        <div class="pay-opt" onclick="selPay(this,'wire')">
+          <div class="pay-opt-icon"><i class="ti ti-transfer"></i></div>
+          <div class="pay-opt-info">
+            <div class="pay-opt-name">Wire Transfer</div>
+            <div class="pay-opt-desc">International wire</div>
+          </div>
+          <div class="pay-opt-badge badge-fee">Varies</div>
+        </div>
+      </div>
+
+      <!-- Card form -->
+      <div class="card-form show" id="card-form">
+        <div class="field" style="margin-bottom:10px">
+          <label>Card number</label>
+          <input type="tel" id="card-num" placeholder="1234 5678 9012 3456" inputmode="numeric" oninput="fmtCard(this)" maxlength="19"/>
+        </div>
+        <div class="card-row">
+          <div class="field" style="margin-bottom:0">
+            <label>Expiry</label>
+            <input type="tel" id="card-exp" placeholder="MM/YY" inputmode="numeric" maxlength="5" oninput="fmtExp(this)"/>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>CVV</label>
+            <input type="tel" id="card-cvv" placeholder="•••" inputmode="numeric" maxlength="4"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank form -->
+      <div class="card-form" id="bank-form">
+        <div class="field" style="margin-bottom:10px">
+          <label>Routing number</label>
+          <input type="tel" id="routing" placeholder="021000021" inputmode="numeric" maxlength="9"/>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Account number</label>
+          <input type="tel" id="account" placeholder="123456789" inputmode="numeric"/>
+        </div>
+      </div>
+
+      <div style="flex:1"></div>
+      <button class="btn-main blue" onclick="submitPayment()"><i class="ti ti-arrow-right"></i> Save & Continue</button>
+      <button class="btn-main ghost" onclick="nextStep()">Skip for now</button>
+    </div>
+  </div>
+
+  <!-- ═══ 7: CREATE PIN ═══ -->
+  <div class="screen" id="s7">
+    <div class="scr-body">
+      <div class="scr-icon"><i class="ti ti-lock" style="font-size:28px;color:#00AEEF"></i></div>
+      <div class="scr-title" id="pin-title">Create your 6-digit PIN</div>
+      <div class="scr-sub" id="pin-sub">You'll use this PIN to approve transactions in the app.</div>
+
+      <div class="pin-display" id="pin-display">
+        <div class="pin-dot" id="pd0"></div>
+        <div class="pin-dot" id="pd1"></div>
+        <div class="pin-dot" id="pd2"></div>
+        <div class="pin-dot" id="pd3"></div>
+        <div class="pin-dot" id="pd4"></div>
+        <div class="pin-dot" id="pd5"></div>
+      </div>
+
+      <div class="pin-hint"><i class="ti ti-fingerprint"></i> You can also use Face ID or fingerprint after setup</div>
+
+      <div class="pin-numpad">
+        <div class="pin-key" onclick="pinTap('1')">1</div><div class="pin-key" onclick="pinTap('2')">2</div><div class="pin-key" onclick="pinTap('3')">3</div>
+        <div class="pin-key" onclick="pinTap('4')">4</div><div class="pin-key" onclick="pinTap('5')">5</div><div class="pin-key" onclick="pinTap('6')">6</div>
+        <div class="pin-key" onclick="pinTap('7')">7</div><div class="pin-key" onclick="pinTap('8')">8</div><div class="pin-key" onclick="pinTap('9')">9</div>
+        <div class="pin-key" style="opacity:0;cursor:default"></div>
+        <div class="pin-key" onclick="pinTap('0')">0</div>
+        <div class="pin-key del" onclick="pinDel()"><i class="ti ti-backspace"></i></div>
+      </div>
+
+      <div class="error-msg" id="pin-err" style="text-align:center;margin-bottom:8px">PINs don't match. Try again.</div>
+    </div>
+  </div>
+
+  <!-- ═══ 8: SUCCESS ═══ -->
+  <div class="screen" id="s8">
+    <div class="success-wrap" id="success-wrap">
+      <div class="success-ring">🎉</div>
+      <div class="success-title">You're all set!</div>
+      <div class="success-sub" id="success-name-sub">Welcome to Tchotcho Pay, Marie! Your wallet is ready.</div>
+
+      <div class="wallet-preview">
+        <div class="wp-label">Tchotcho Wallet</div>
+        <div class="wp-balance">$0.00</div>
+        <div class="wp-usdc">0.00 USDC · Base Network</div>
+        <div class="wp-row">
+          <span id="success-handle">@marie.jean</span>
+          <span style="color:#00C896">● Active</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border-radius:12px;padding:11px 14px;font-size:12px">
+          <i class="ti ti-send" style="font-size:18px;color:#00AEEF;width:24px;flex-shrink:0"></i>
+          <span style="color:rgba(255,255,255,0.6)">Send money to Haiti in seconds</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border-radius:12px;padding:11px 14px;font-size:12px">
+          <i class="ti ti-shopping-cart" style="font-size:18px;color:#00AEEF;width:24px;flex-shrink:0"></i>
+          <span style="color:rgba(255,255,255,0.6)">Shop the Haitian marketplace with USDC</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border-radius:12px;padding:11px 14px;font-size:12px">
+          <i class="ti ti-piggy-bank" style="font-size:18px;color:#00AEEF;width:24px;flex-shrink:0"></i>
+          <span style="color:rgba(255,255,255,0.6)">Save in digital dollars, safe from inflation</span>
+        </div>
+      </div>
+
+      <button class="btn-main green" onclick="goApp()" style="width:100%"><i class="ti ti-arrow-right"></i> Go to My Wallet</button>
+    </div>
+  </div>
+
+</div><!-- /phone -->
+
+<script>
+// ── STATE ──
+let currentStep = 0;
+let totalSteps = 7;
+let pinStr = '';
+let pinConfirmStr = '';
+let pinPhase = 1; // 1=create, 2=confirm
+let selectedDoc = 'passport';
+let selectedPay = 'card';
+let kycFront = false, kycBack = false;
+let otpTimerInterval = null;
+let otpSecondsLeft = 30;
+let userFirstName = '';
+
+// ── STEPS ──
+const STEPS = [null,'s1','s2','s3','s4','s5','s6','s7','s8'];
+
+function showStep(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  const id = n === 0 ? 's0' : STEPS[n];
+  if (id) document.getElementById(id).classList.add('on');
+
+  const wrap = document.getElementById('progress-wrap');
+  const label = document.getElementById('step-label');
+  const steps = document.getElementById('progress-steps');
+
+  if (n === 0 || n === 8) {
+    wrap.style.display = 'none';
+  } else {
+    wrap.style.display = 'block';
+    label.textContent = `Step ${n} of ${totalSteps}`;
+    steps.innerHTML = '';
+    for (let i = 1; i <= totalSteps; i++) {
+      const ps = document.createElement('div');
+      ps.className = 'ps' + (i < n ? ' done' : i === n ? ' active' : '');
+      steps.appendChild(ps);
+    }
+  }
+  currentStep = n;
+}
+
+function nextStep() { showStep(currentStep + 1); }
+function prevStep() { showStep(currentStep - 1); }
+
+// ── PHONE ──
+function updateCode() {
+  const sel = document.getElementById('country-select');
+  document.getElementById('cc-display').value = sel.value;
+}
+
+function validatePhone() {
+  const v = document.getElementById('phone-input').value.replace(/\D/g,'');
+  return v.length >= 7;
+}
+
+function submitPhone() {
+  if (!validatePhone()) {
+    document.getElementById('phone-err').classList.add('show');
+    return;
+  }
+  document.getElementById('phone-err').classList.remove('show');
+  const num = document.getElementById('cc-display').value + ' ' + document.getElementById('phone-input').value;
+  document.getElementById('otp-sub').innerHTML = `We sent a 6-digit code to <strong style="color:#fff">${num}</strong>`;
+  startOTPTimer();
+  nextStep();
+}
+
+// ── OTP ──
+function otpInput(el, idx) {
+  el.classList.toggle('filled', el.value !== '');
+  if (el.value && idx < 5) document.getElementById('o'+(idx+1)).focus();
+  // auto-check when all filled
+  const code = getOTP();
+  if (code.length === 6) setTimeout(() => submitOTP(), 200);
+}
+
+function getOTP() {
+  return [0,1,2,3,4,5].map(i => document.getElementById('o'+i).value).join('');
+}
+
+function submitOTP() {
+  const code = getOTP();
+  if (code.length < 6) return;
+  // In demo accept any 6 digits
+  document.getElementById('otp-err').classList.remove('show');
+  clearInterval(otpTimerInterval);
+  nextStep();
+}
+
+function resendOTP() {
+  for (let i = 0; i < 6; i++) {
+    const el = document.getElementById('o'+i);
+    el.value = ''; el.classList.remove('filled');
+  }
+  document.getElementById('o0').focus();
+  otpSecondsLeft = 30;
+  startOTPTimer();
+}
+
+function startOTPTimer() {
+  clearInterval(otpTimerInterval);
+  otpSecondsLeft = 30;
+  updateTimer();
+  otpTimerInterval = setInterval(() => {
+    otpSecondsLeft--;
+    updateTimer();
+    if (otpSecondsLeft <= 0) clearInterval(otpTimerInterval);
+  }, 1000);
+}
+
+function updateTimer() {
+  document.getElementById('otp-timer').textContent =
+    '0:' + String(otpSecondsLeft).padStart(2,'0');
+}
+
+// ── PERSONAL INFO ──
+function submitInfo() {
+  const f = document.getElementById('fname').value.trim();
+  const l = document.getElementById('lname').value.trim();
+  const e = document.getElementById('email').value.trim();
+  const d = document.getElementById('dob').value;
+  if (!f || !l || !e || !d) {
+    document.getElementById('info-err').classList.add('show');
+    return;
+  }
+  document.getElementById('info-err').classList.remove('show');
+  userFirstName = f;
+  const handle = '@' + f.toLowerCase() + '.' + l.toLowerCase().replace(/\s/g,'');
+  document.getElementById('success-handle').textContent = handle;
+  document.getElementById('success-name-sub').textContent =
+    `Welcome to Tchotcho Pay, ${f}! Your wallet is ready.`;
+  nextStep();
+}
+
+// ── KYC ──
+function selDoc(el, type) {
+  document.querySelectorAll('.doc-type').forEach(d => d.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedDoc = type;
+  kycFront = false; kycBack = false;
+  resetUpload('kyc-front','Front of document','Tap to take a photo or upload');
+  resetUpload('kyc-back','Back of document','Tap to take a photo or upload');
+}
+
+function resetUpload(id, title, sub) {
+  const el = document.getElementById(id);
+  el.classList.remove('done');
+  el.innerHTML = `<i class="ti ti-cloud-upload"></i><strong>${title}</strong><p>${sub}</p>`;
+}
+
+function fakeUpload(side) {
+  const id = 'kyc-' + side;
+  const el = document.getElementById(id);
+  el.innerHTML = `<i class="ti ti-loader" style="animation:spin 1s linear infinite;display:inline-block"></i><strong>Uploading...</strong><p>Please wait</p>`;
+  setTimeout(() => {
+    el.classList.add('done');
+    el.innerHTML = `<i class="ti ti-check"></i><strong>${side === 'front' ? 'Front' : 'Back'} uploaded ✓</strong><p>Clear photo detected</p>`;
+    if (side === 'front') kycFront = true; else kycBack = true;
+  }, 1200);
+}
+
+function submitKYC() {
+  if (!kycFront || !kycBack) {
+    document.getElementById('kyc-processing').style.display = 'none';
+    // animate upload buttons to hint
+    ['kyc-front','kyc-back'].forEach(id => {
+      if (!document.getElementById(id).classList.contains('done')) {
+        document.getElementById(id).style.borderColor = '#FF4C6A';
+        setTimeout(() => document.getElementById(id).style.borderColor = '', 1000);
+      }
+    });
+    return;
+  }
+  document.getElementById('kyc-processing').style.display = 'block';
+  document.getElementById('kyc-btn').disabled = true;
+  setTimeout(() => nextStep(), 2000);
+}
+
+// ── PAYMENT ──
+function selPay(el, type) {
+  document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedPay = type;
+  document.getElementById('card-form').classList.toggle('show', type === 'card');
+  document.getElementById('bank-form').classList.toggle('show', type === 'bank');
+}
+
+function fmtCard(el) {
+  let v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+
+function fmtExp(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
+  el.value = v;
+}
+
+function submitPayment() { nextStep(); }
+
+// ── PIN ──
+function pinTap(d) {
+  const str = pinPhase === 1 ? pinStr : pinConfirmStr;
+  if (str.length >= 6) return;
+  if (pinPhase === 1) { pinStr += d; } else { pinConfirmStr += d; }
+  updatePinDisplay();
+  const len = pinPhase === 1 ? pinStr.length : pinConfirmStr.length;
+  if (len === 6) setTimeout(checkPin, 300);
+}
+
+function pinDel() {
+  if (pinPhase === 1) pinStr = pinStr.slice(0,-1);
+  else pinConfirmStr = pinConfirmStr.slice(0,-1);
+  updatePinDisplay();
+}
+
+function updatePinDisplay() {
+  const len = pinPhase === 1 ? pinStr.length : pinConfirmStr.length;
+  for (let i = 0; i < 6; i++) {
+    document.getElementById('pd'+i).classList.toggle('filled', i < len);
+  }
+}
+
+function checkPin() {
+  if (pinPhase === 1) {
+    if (pinStr.length === 6) {
+      pinPhase = 2;
+      pinConfirmStr = '';
+      document.getElementById('pin-title').textContent = 'Confirm your PIN';
+      document.getElementById('pin-sub').textContent = 'Enter your PIN again to confirm.';
+      document.getElementById('pin-err').classList.remove('show');
+      updatePinDisplay();
+    }
+  } else {
+    if (pinConfirmStr === pinStr) {
+      document.getElementById('pin-err').classList.remove('show');
+      nextStep();
+      spawnConfetti();
+    } else {
+      document.getElementById('pin-err').classList.add('show');
+      pinConfirmStr = '';
+      updatePinDisplay();
+      // shake
+      const disp = document.getElementById('pin-display');
+      disp.style.animation = 'shake 0.4s ease';
+      setTimeout(() => disp.style.animation = '', 400);
+    }
+  }
+}
+
+// ── CONFETTI ──
+function spawnConfetti() {
+  const wrap = document.getElementById('success-wrap');
+  const emojis = ['🎉','✨','🌟','💫','🎊'];
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = (20 + Math.random() * 60) + '%';
+      el.style.top = (10 + Math.random() * 30) + '%';
+      el.style.animationDelay = (Math.random() * 0.5) + 's';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      wrap.style.position = 'relative';
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), 2500);
+    }, i * 100);
+  }
+}
+
+// ── GO TO APP ──
+function goApp() { window.open('app-mockup.html', '_blank'); }
+
+// add shake keyframe dynamically
+const style = document.createElement('style');
+style.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}';
+document.head.appendChild(style);
+
+// init
+showStep(0);
+</script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

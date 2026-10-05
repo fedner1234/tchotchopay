@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tchotcho Pay — Send Money. Save Smart. Shop Local.</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #020B2D;
+      --blue:   #0A1F6E;
+      --mid:    #1055CC;
+      --cyan:   #00AEEF;
+      --light:  #7FD4F7;
+      --white:  #F0F6FF;
+      --offwhite: #F0F6FF;
+      --gray:   #8FA8CC;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-border: rgba(0,174,239,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(2, 11, 45, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,174,239,0.2);
+    }
+
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--white); flex-shrink: 0;
+    }
+    .nav-logo {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #0A1F6E, #00AEEF);
+      border-radius: 9px; overflow: hidden;
+    }
+    .nav-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .nav-brand span { font-size: 1.15rem; font-weight: 700; }
+    .nav-brand span em { color: var(--cyan); font-style: normal; }
+
+    /* CENTER: nav text links */
+    .nav-links {
+      display: flex; align-items: center; gap: 24px; list-style: none;
+    }
+    .nav-links a { color: var(--gray); text-decoration: none; font-size: 0.88rem; white-space: nowrap; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--mid), var(--cyan));
+      color: var(--white) !important; padding: 9px 20px; border-radius: 50px;
+      font-weight: 600; font-size: 0.85rem;
+    }
+
+    /* RIGHT: lang switcher — floats independently, always on top */
+    .lang-switcher {
+      position: fixed;
+      top: 12px;
+      right: 24px;
+      z-index: 99999;
+      display: flex; align-items: center; gap: 3px;
+      background: #0A1F6E;
+      border: 2px solid #00AEEF;
+      border-radius: 50px; padding: 4px;
+      box-shadow: 0 2px 16px rgba(0,174,239,0.4);
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      color: #ffffff; font-size: 0.82rem; font-weight: 800;
+      padding: 6px 13px; border-radius: 50px;
+      font-family: inherit; letter-spacing: 0.05em;
+      transition: background 0.18s;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #1055CC, #00AEEF);
+    }
+    .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.15); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(0,174,239,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(16,85,204,0.25) 0%, transparent 60%),
+        linear-gradient(180deg, #020B2D 0%, #040D30 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,174,239,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,174,239,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,174,239,0.12);
+      border: 1px solid rgba(0,174,239,0.35);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 0.82rem; color: var(--cyan); font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.4); }
+    }
+
+    .hero-logo-wrap {
+      width: 120px; height: 120px; margin: 0 auto 32px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #0a1f6e 0%, #00aeef 100%);
+      padding: 3px;
+      box-shadow: 0 0 60px rgba(0,174,239,0.4);
+    }
+    .hero-logo-inner { width: 100%; height: 100%; border-radius: 26px; overflow: hidden; }
+    .hero-logo-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .hero h1 .accent { color: var(--cyan); }
+
+    .hero p {
+      font-size: 1.15rem; color: var(--gray); max-width: 600px;
+      margin: 0 auto 40px; line-height: 1.7;
+    }
+
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; padding: 16px 36px; border-radius: 50px;
+      background: linear-gradient(135deg, var(--mid) 0%, var(--cyan) 100%);
+      color: var(--white); font-weight: 700; font-size: 1rem;
+      text-decoration: none; letter-spacing: -0.01em;
+      box-shadow: 0 8px 32px rgba(0,174,239,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,174,239,0.5); }
+
+    .btn-secondary {
+      display: inline-block; padding: 16px 36px; border-radius: 50px;
+      border: 1.5px solid rgba(0,174,239,0.4);
+      color: var(--cyan); font-weight: 600; font-size: 1rem;
+      text-decoration: none; background: transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(0,174,239,0.1); border-color: var(--cyan); }
+
+    .stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-top: 64px; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--white); }
+    .stat-num span { color: var(--cyan); }
+    .stat-label { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── SHARED ── */
+    section { padding: 96px 24px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-sub { color: var(--gray); font-size: 1.05rem; max-width: 540px; }
+
+    /* ── FEATURES ── */
+    .features { background: linear-gradient(180deg, #020B2D 0%, #030F38 100%); }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 32px;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px); border-color: rgba(0,174,239,0.5);
+      box-shadow: 0 8px 40px rgba(0,174,239,0.15);
+    }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(16,85,204,0.5), rgba(0,174,239,0.4));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+      border: 1px solid rgba(0,174,239,0.2);
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { color: var(--gray); font-size: 0.93rem; line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works { background: #030F38; }
+    .hiw-header { max-width: 560px; }
+    .steps { margin-top: 64px; display: flex; flex-direction: column; }
+    .step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 32px; padding: 40px 0;
+      border-bottom: 1px solid rgba(0,174,239,0.12); align-items: start;
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num-col { display: flex; flex-direction: column; align-items: center; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--mid), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; font-weight: 800; color: var(--white);
+      box-shadow: 0 0 24px rgba(0,174,239,0.4); flex-shrink: 0;
+    }
+    .step-connector {
+      width: 2px; flex: 1; min-height: 60px;
+      background: linear-gradient(180deg, rgba(0,174,239,0.4), rgba(0,174,239,0.05));
+      margin-top: 10px;
+    }
+    .step:last-child .step-connector { display: none; }
+    .step-body { padding-top: 12px; }
+    .step-body h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
+    .step-body p { color: var(--gray); font-size: 0.97rem; margin-bottom: 16px; line-height: 1.7; }
+    .step-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: rgba(0,174,239,0.1); border: 1px solid rgba(0,174,239,0.25);
+      border-radius: 50px; padding: 4px 14px; font-size: 0.8rem; color: var(--light);
+    }
+    .flow-example {
+      margin-top: 20px; background: rgba(0,174,239,0.07);
+      border: 1px solid rgba(0,174,239,0.2); border-radius: 14px; padding: 20px 24px;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .flow-step {
+      background: rgba(16,85,204,0.4); border-radius: 8px; padding: 8px 14px;
+      font-size: 0.85rem; color: var(--white); font-weight: 600;
+    }
+    .flow-arrow { color: var(--cyan); font-size: 1.1rem; font-weight: 700; }
+
+    /* ── MARKETPLACE ── */
+    .marketplace { background: linear-gradient(135deg, #020B2D 0%, #04123F 50%, #020B2D 100%); }
+    .marketplace-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .market-items { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .market-item {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 20px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.92rem; font-weight: 600; transition: border-color 0.2s;
+    }
+    .market-item:hover { border-color: rgba(0,174,239,0.5); }
+    .market-item span:first-child { font-size: 1.4rem; }
+    .market-visual {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(0,174,239,0.2);
+      border-radius: 24px; padding: 36px; text-align: center;
+    }
+    .wallet-card {
+      background: linear-gradient(135deg, #0A1F6E 0%, #00AEEF 100%);
+      border-radius: 20px; padding: 28px; margin-bottom: 20px; text-align: left;
+      box-shadow: 0 16px 48px rgba(0,174,239,0.3);
+    }
+    .wallet-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .wallet-balance { font-size: 2.2rem; font-weight: 800; }
+    .wallet-balance small { font-size: 1rem; font-weight: 500; opacity: 0.8; }
+    .wallet-meta { display: flex; justify-content: space-between; margin-top: 20px; font-size: 0.83rem; opacity: 0.8; }
+    .wallet-actions { display: flex; gap: 12px; }
+    .w-action {
+      flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 12px; font-size: 0.8rem; text-align: center;
+      color: var(--white); font-weight: 600;
+    }
+
+    /* ── PRICING ── */
+    .pricing { background: #020B2D; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 56px; }
+    .price-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .price-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,174,239,0.15); }
+    .price-card.featured {
+      background: linear-gradient(135deg, rgba(16,85,204,0.3), rgba(0,174,239,0.15));
+      border-color: rgba(0,174,239,0.5);
+    }
+    .price-icon { font-size: 1.8rem; margin-bottom: 14px; }
+    .price-card h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); margin-bottom: 8px; }
+    .price-amount { font-size: 1.9rem; font-weight: 800; color: var(--cyan); margin-bottom: 8px; }
+    .price-card p { color: var(--gray); font-size: 0.87rem; line-height: 1.6; }
+
+    /* ── WHY ── */
+    .why { background: linear-gradient(135deg, #030F38, #020B2D); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 56px; }
+    .compare-table { border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,174,239,0.2); }
+    .compare-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      padding: 14px 20px; border-bottom: 1px solid rgba(0,174,239,0.1); font-size: 0.9rem;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row.header { background: rgba(0,174,239,0.12); font-weight: 700; font-size: 0.8rem; color: var(--gray); }
+    .check { color: #00C896; font-size: 1.1rem; }
+    .cross { color: #FF4C6A; font-size: 1.1rem; }
+    .why-points { display: flex; flex-direction: column; gap: 20px; }
+    .why-point {
+      display: flex; gap: 16px; align-items: start;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 20px;
+    }
+    .why-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .why-point h4 { font-weight: 700; margin-bottom: 4px; font-size: 1rem; }
+    .why-point p { color: var(--gray); font-size: 0.87rem; }
+
+    /* ── CTA ── */
+    .cta {
+      background: linear-gradient(135deg, #0A1F6E 0%, #041766 50%, #020B2D 100%);
+      text-align: center; padding: 96px 24px;
+      position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,174,239,0.15), transparent);
+    }
+    .cta-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .cta p { color: var(--gray); font-size: 1.05rem; margin-bottom: 40px; }
+    .cta-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+    .cta-form input {
+      flex: 1; padding: 14px 20px; border-radius: 50px;
+      border: 1.5px solid rgba(0,174,239,0.35);
+      background: rgba(255,255,255,0.07); color: var(--white); font-size: 0.95rem; outline: none;
+    }
+    .cta-form input::placeholder { color: var(--gray); }
+    .cta-form input:focus { border-color: var(--cyan); }
+    .cta-form button {
+      padding: 14px 28px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--mid), var(--cyan));
+      color: var(--white); font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; transition: opacity 0.2s; font-family: inherit;
+    }
+    .cta-form button:hover { opacity: 0.88; }
+    .cta-note { color: var(--gray); font-size: 0.8rem; margin-top: 14px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #010818; border-top: 1px solid rgba(0,174,239,0.12); padding: 48px 24px;
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+    .footer-logo { width: 34px; height: 34px; border-radius: 8px; overflow: hidden; }
+    .footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .footer-brand span { font-weight: 700; font-size: 1rem; }
+    .footer-brand em { color: var(--cyan); font-style: normal; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gray); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { color: var(--gray); font-size: 0.82rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .marketplace-inner { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .stats { gap: 20px; }
+      .step { grid-template-columns: 56px 1fr; gap: 14px; }
+      .step-num { width: 44px; height: 44px; font-size: 1rem; }
+      .cta-form { flex-direction: column; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <!-- LEFT: brand -->
+    <a href="#" class="nav-brand">
+      <div class="nav-logo">
+        <img src="logo.png" alt="Tchotcho Pay Logo" onerror="this.style.display='none'" />
+      </div>
+      <span>Tchotcho<em>Pay</em></span>
+    </a>
+
+    <!-- CENTER: nav links (hidden on small screens) -->
+    <ul class="nav-links">
+      <li><a href="#how" data-i18n="nav_how">How It Works</a></li>
+      <li><a href="#marketplace" data-i18n="nav_market">Marketplace</a></li>
+      <li><a href="#pricing" data-i18n="nav_fees">Fees</a></li>
+      <li><a href="#why" data-i18n="nav_why">Why Us</a></li>
+      <li><a href="#waitlist" class="nav-cta" data-i18n="nav_cta">Join Waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- Language switcher — fixed independently so it's ALWAYS visible -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ht')">HT</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="hero_badge">Now in Beta — Powered by Secure Transfer</div>
+
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-inner">
+          <img src="logo.png" alt="Tchotcho Pay" onerror="this.style.background='linear-gradient(135deg,#0a1f6e,#00aeef)'" />
+        </div>
+      </div>
+
+      <h1>
+        <span data-i18n="hero_h1_line1">Send Money to Haiti.</span><br/>
+        <span class="accent" data-i18n="hero_h1_line2">Faster. Cheaper. Smarter.</span>
+      </h1>
+      <p data-i18n="hero_sub">
+        Tchotcho Pay combines USDC  instantly secure digital network with a Haitian marketplace,
+        digital savings account, and peer-to-peer payments — all in one app.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#waitlist" class="btn-primary" data-i18n="btn_join">Join the Waitlist</a>
+        <a href="#how" class="btn-secondary" data-i18n="btn_how">See How It Works</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">&lt;<span>1%</span></div>
+          <div class="stat-label" data-i18n="stat_fee">Secure Digital Network Fee</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>~</span>Instant</div>
+          <div class="stat-label" data-i18n="stat_speed">Settlement</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>24</span>/7</div>
+          <div class="stat-label" data-i18n="stat_available">Available</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>$</span>0</div>
+          <div class="stat-label" data-i18n="stat_p2p">P2P Transfers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-label" data-i18n="feat_label">Everything in One App</div>
+      <h2 class="section-title" data-i18n="feat_title">More than a remittance company</h2>
+      <p class="section-sub" data-i18n="feat_sub">Tchotcho Pay is a complete financial platform built for the Haitian diaspora and local communities.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💸</div>
+          <h3 data-i18n="f1_title">Money Transfer</h3>
+          <p data-i18n="f1_desc">Send from anywhere — U.S., Canada, France — to Haiti in seconds via ACH, debit/credit card, or wire transfer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🪙</div>
+          <h3 data-i18n="f2_title">USDC Wallet</h3>
+          <p data-i18n="f2_desc">Hold digital dollars that never lose value to inflation. Your USDC is always 1:1 with USD.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⛓️</div>
+          <h3 data-i18n="f3_title">Secure Transfer</h3>
+          <p data-i18n="f3_desc">Built on Coinbase's secure network — near-zero fees, near-instant finality, and fully transparent transactions.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <h3 data-i18n="f4_title">Haitian Marketplace</h3>
+          <p data-i18n="f4_desc">Buy food, electricity, phone top-ups, school fees, and more from local merchants — no cash needed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3 data-i18n="f5_title">Peer-to-Peer Payments</h3>
+          <p data-i18n="f5_desc">Send to friends and family by username, phone number, or QR code. Internal transfers are free.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏦</div>
+          <h3 data-i18n="f6_title">Digital Dollar Savings</h3>
+          <p data-i18n="f6_desc">Keep savings in USDC instead of gourdes. Protect against HTG inflation while staying accessible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="container">
+      <div class="hiw-header">
+        <div class="section-label" data-i18n="hiw_label">Step by Step</div>
+        <h2 class="section-title" data-i18n="hiw_title">How Tchotcho Pay Works</h2>
+        <p class="section-sub" data-i18n="hiw_sub">From loading funds to spending in Haiti — the full journey in 6 steps.</p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s1_title">Load Money</h3>
+            <p data-i18n="s1_desc">Users in the U.S., Canada, France, or anywhere can fund their Tchotcho Pay account with multiple methods.</p>
+            <div class="step-tags">
+              <span class="tag" data-i18n="s1_t1">ACH Bank Transfer</span>
+              <span class="tag" data-i18n="s1_t2">Debit Card</span>
+              <span class="tag" data-i18n="s1_t3">Credit Card</span>
+              <span class="tag" data-i18n="s1_t4">Wire Transfer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s2_title">Convert to USDC  instantly</h3>
+            <p data-i18n="s2_desc">Your USD is automatically converted to USDC  instantly secure digital network — near-instant settlement, ultra-low fees, available 24/7. No bank hours, no delays.</p>
+            <div class="step-tags">
+              <span class="tag" data-i18n="s2_t1">Instant Settlement</span>
+              <span class="tag" data-i18n="s2_t2">Low Fees</span>
+              <span class="tag" data-i18n="s2_t3">Digital Dollars</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s3_title">Credit Your Tchotcho Wallet</h3>
+            <p data-i18n="s3_desc">Every user gets a personal wallet with USDC balance, transaction history, and a QR code for quick payments.</p>
+            <div class="flow-example">
+              <div class="flow-step" data-i18n="flow1">John sends $100</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step" data-i18n="flow2">Marie receives 100 USDC</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step" data-i18n="flow3">Marie decides what to do</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">4</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s4_title">Shop the Haitian Marketplace</h3>
+            <p data-i18n="s4_desc">Spend USDC directly with local merchants — food, electricity, phone top-ups, school fees, transportation. Like MonCash meets Cash App, built for Haiti.</p>
+            <div class="step-tags">
+              <span class="tag" data-i18n="m1">🍽️ Food</span>
+              <span class="tag" data-i18n="m2">⚡ Electricity</span>
+              <span class="tag" data-i18n="m3">📱 Phone Top-ups</span>
+              <span class="tag" data-i18n="m4">🎓 School Fees</span>
+              <span class="tag" data-i18n="m5">🚌 Transport</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">5</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s5_title">Send to Friends &amp; Family</h3>
+            <p data-i18n="s5_desc">Transfer money instantly inside Tchotcho Pay — always free. Three easy ways to send.</p>
+            <div class="step-tags">
+              <span class="tag">@Username</span>
+              <span class="tag" data-i18n="s5_t2">📞 Phone Number</span>
+              <span class="tag" data-i18n="s5_t3">📷 QR Code</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-col"><div class="step-num">6</div><div class="step-connector"></div></div>
+          <div class="step-body">
+            <h3 data-i18n="s6_title">Cash Out or Save</h3>
+            <p data-i18n="s6_desc">Recipients in Haiti can withdraw to a local bank, use an agent network, convert to Haitian gourdes — or keep their USDC as a stable savings account, safe from HTG inflation.</p>
+            <div class="step-tags">
+              <span class="tag" data-i18n="s6_t1">Local Bank</span>
+              <span class="tag" data-i18n="s6_t2">Cash Agent</span>
+              <span class="tag" data-i18n="s6_t3">Convert to HTG</span>
+              <span class="tag" data-i18n="s6_t4">Keep as USDC</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETPLACE -->
+  <section class="marketplace" id="marketplace">
+    <div class="container">
+      <div class="marketplace-inner">
+        <div>
+          <div class="section-label" data-i18n="mkt_label">Built for Haiti</div>
+          <h2 class="section-title" data-i18n="mkt_title">A marketplace that works without cash</h2>
+          <p class="section-sub" data-i18n="mkt_sub">Buy everyday essentials directly from your USDC wallet — no conversion, no fees, no friction.</p>
+          <div class="market-items">
+            <div class="market-item"><span>🍽️</span> <span data-i18n="m1b">Food</span></div>
+            <div class="market-item"><span>⚡</span> <span data-i18n="m2b">Electricity</span></div>
+            <div class="market-item"><span>📱</span> <span data-i18n="m3b">Phone Top-ups</span></div>
+            <div class="market-item"><span>🎓</span> <span data-i18n="m4b">School Fees</span></div>
+            <div class="market-item"><span>🚌</span> <span data-i18n="m5b">Transportation</span></div>
+            <div class="market-item"><span>🏪</span> <span data-i18n="m6b">Local Merchants</span></div>
+          </div>
+        </div>
+        <div class="market-visual">
+          <div class="wallet-card">
+            <div class="wallet-label" data-i18n="w_label">Tchotcho Wallet</div>
+            <div class="wallet-balance"><small>USDC </small>250.00</div>
+            <div class="wallet-meta">
+              <span>@marie.haiti</span>
+              <span>Secure Network</span>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <div class="w-action" data-i18n="w_send">📤 Send</div>
+            <div class="w-action" data-i18n="w_receive">📥 Receive</div>
+            <div class="w-action" data-i18n="w_shop">🛒 Shop</div>
+            <div class="w-action" data-i18n="w_cash">💵 Cash Out</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-label" data-i18n="p_label">Transparent Pricing</div>
+      <h2 class="section-title" data-i18n="p_title">Simple, fair fees</h2>
+      <p class="section-sub" data-i18n="p_sub">No hidden charges. Most transfers inside Tchotcho Pay are completely free.</p>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-icon">💳</div>
+          <h3 data-i18n="p1_label">Card Deposit</h3>
+          <div class="price-amount">2–3%</div>
+          <p data-i18n="p1_desc">Debit or credit card funding. ACH bank transfers are lower cost.</p>
+        </div>
+        <div class="price-card">
+          <div class="price-icon">🤝</div>
+          <h3 data-i18n="p2_label">P2P Transfers</h3>
+          <div class="price-amount">$0</div>
+          <p data-i18n="p2_desc">Send to any Tchotcho Pay user — completely free, always.</p>
+        </div>
+        <div class="price-card featured">
+          <div class="price-icon">💵</div>
+          <h3 data-i18n="p3_label">Cash Out</h3>
+          <div class="price-amount">1%</div>
+          <p data-i18n="p3_desc">Withdraw to local bank or agent network in Haiti.</p>
+        </div>
+        <div class="price-card">
+          <div class="price-icon">🏪</div>
+          <h3 data-i18n="p4_label">Merchant Fee</h3>
+          <div class="price-amount">1–2%</div>
+          <p data-i18n="p4_desc">Merchants pay a small fee — buyers pay nothing extra.</p>
+        </div>
+        <div class="price-card">
+          <div class="price-icon">💱</div>
+          <h3 data-i18n="p5_label">FX Spread</h3>
+          <div class="price-amount" data-i18n="p5_amt">Small</div>
+          <p data-i18n="p5_desc">Competitive spread when converting USD ↔ HTG.</p>
+        </div>
+        <div class="price-card">
+          <div class="price-icon">⭐</div>
+          <h3 data-i18n="p6_label">Premium Account</h3>
+          <div class="price-amount" data-i18n="p6_amt">Coming</div>
+          <p data-i18n="p6_desc">Higher limits, faster withdrawals, and business tools for merchants.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="section-label" data-i18n="why_label">The Difference</div>
+      <h2 class="section-title" data-i18n="why_title">Why Tchotcho Pay wins</h2>
+      <div class="why-grid">
+        <div>
+          <div class="compare-table">
+            <div class="compare-row header">
+              <span data-i18n="tbl_feature">Feature</span>
+              <span data-i18n="tbl_others">Others</span>
+              <span>Tchotcho</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r1">Transfer Fees</span><span>4–9%</span><span class="check">≤3%</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r2">Settlement Speed</span><span data-i18n="tbl_r2a">1–3 days</span><span class="check" data-i18n="tbl_r2b">Instant</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r3">USDC Savings</span><span class="cross">✗</span><span class="check">✓</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r4">P2P Free Transfers</span><span class="cross">✗</span><span class="check">✓</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r5">Built-in Marketplace</span><span class="cross">✗</span><span class="check">✓</span>
+            </div>
+            <div class="compare-row">
+              <span data-i18n="tbl_r6">Available 24/7</span><span class="cross">✗</span><span class="check">✓</span>
+            </div>
+          </div>
+        </div>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-icon">🛡️</div>
+            <div>
+              <h4 data-i18n="wp1_t">USDC = Stable Savings</h4>
+              <p data-i18n="wp1_d">Unlike gourdes, USDC holds its value. Recipients can save in digital dollars and withdraw anytime.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-icon">⛓️</div>
+            <div>
+              <h4 data-i18n="wp2_t">Secure Transfer = Lowest Fees</h4>
+              <p data-i18n="wp2_d">Traditional remittance companies pay SWIFT or card networks. We settle  instantly for a fraction of the cost.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-icon">🌍</div>
+            <div>
+              <h4 data-i18n="wp3_t">Built for Haitian Communities</h4>
+              <p data-i18n="wp3_d">Every feature — marketplace, agent cashouts, HTG conversion — is designed around how Haiti actually works.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-icon">📱</div>
+            <div>
+              <h4 data-i18n="wp4_t">One App for Everything</h4>
+              <p data-i18n="wp4_d">No more juggling Western Union, MonCash, and a bank app. Send, save, spend, and cash out from one place.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="waitlist">
+    <div class="cta-content">
+      <div class="section-label" style="color:var(--cyan); margin-bottom:16px;" data-i18n="cta_label">Early Access</div>
+      <h2 data-i18n="cta_title">Be the first to use Tchotcho Pay</h2>
+      <p data-i18n="cta_sub">Join thousands of Haitian diaspora members waiting for a smarter way to send money home.</p>
+      <form class="cta-form" onsubmit="handleWaitlist(event)">
+        <input type="email" data-i18n-placeholder="cta_placeholder" placeholder="Enter your email address" required />
+        <button type="submit" data-i18n="cta_btn">Join Now</button>
+      </form>
+      <p class="cta-note" data-i18n="cta_note">No spam. We'll only contact you when we launch. 🇭🇹</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-brand">
+        <div class="footer-logo">
+          <img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'" />
+        </div>
+        <span>Tchotcho<em>Pay</em></span>
+      </a>
+      <nav class="footer-links">
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#how" data-i18n="nav_how">How It Works</a>
+        <a href="#marketplace" data-i18n="nav_market">Marketplace</a>
+        <a href="#pricing" data-i18n="nav_fees">Fees</a>
+        <a href="#why" data-i18n="nav_why">About</a>
+        <a href="#waitlist" data-i18n="nav_cta">Join Waitlist</a>
+      </nav>
+      <p class="footer-copy">© 2026 Tchotcho Pay.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── TRANSLATIONS ──────────────────────────────────────────────
+    const translations = {
+      en: {
+        nav_how: "How It Works",
+        nav_market: "Marketplace",
+        nav_fees: "Fees",
+        nav_why: "Why Us",
+        nav_cta: "Join Waitlist",
+        nav_features: "Features",
+
+        hero_badge: "Now in Beta — Powered by Secure Transfer",
+        hero_h1_line1: "Send Money to Haiti.",
+        hero_h1_line2: "Faster. Cheaper. Smarter.",
+        hero_sub: "Tchotcho Pay combines USDC  instantly secure digital network with a Haitian marketplace, digital savings account, and peer-to-peer payments — all in one app.",
+        btn_join: "Join the Waitlist",
+        btn_how: "See How It Works",
+
+        stat_fee: "Secure Digital Network Fee",
+        stat_speed: "Settlement",
+        stat_available: "Available",
+        stat_p2p: "P2P Transfers",
+
+        feat_label: "Everything in One App",
+        feat_title: "More than a remittance company",
+        feat_sub: "Tchotcho Pay is a complete financial platform built for the Haitian diaspora and local communities.",
+        f1_title: "Money Transfer",
+        f1_desc: "Send from anywhere — U.S., Canada, France — to Haiti in seconds via ACH, debit/credit card, or wire transfer.",
+        f2_title: "USDC Wallet",
+        f2_desc: "Hold digital dollars that never lose value to inflation. Your USDC is always 1:1 with USD.",
+        f3_title: "Secure Transfer",
+        f3_desc: "Built on Coinbase's secure network — near-zero fees, near-instant finality, and fully transparent transactions.",
+        f4_title: "Haitian Marketplace",
+        f4_desc: "Buy food, electricity, phone top-ups, school fees, and more from local merchants — no cash needed.",
+        f5_title: "Peer-to-Peer Payments",
+        f5_desc: "Send to friends and family by username, phone number, or QR code. Internal transfers are free.",
+        f6_title: "Digital Dollar Savings",
+        f6_desc: "Keep savings in USDC instead of gourdes. Protect against HTG inflation while staying accessible.",
+
+        hiw_label: "Step by Step",
+        hiw_title: "How Tchotcho Pay Works",
+        hiw_sub: "From loading funds to spending in Haiti — the full journey in 6 steps.",
+        s1_title: "Load Money",
+        s1_desc: "Users in the U.S., Canada, France, or anywhere can fund their Tchotcho Pay account with multiple methods.",
+        s1_t1: "ACH Bank Transfer", s1_t2: "Debit Card", s1_t3: "Credit Card", s1_t4: "Wire Transfer",
+        s2_title: "Convert to USDC  instantly",
+        s2_desc: "Your USD is automatically converted to USDC  instantly secure digital network — near-instant settlement, ultra-low fees, available 24/7. No bank hours, no delays.",
+        s2_t1: "Instant Settlement", s2_t2: "Low Fees", s2_t3: "Digital Dollars",
+        s3_title: "Credit Your Tchotcho Wallet",
+        s3_desc: "Every user gets a personal wallet with USDC balance, transaction history, and a QR code for quick payments.",
+        flow1: "John sends $100", flow2: "Marie receives 100 USDC", flow3: "Marie decides what to do",
+        s4_title: "Shop the Haitian Marketplace",
+        s4_desc: "Spend USDC directly with local merchants — food, electricity, phone top-ups, school fees, transportation. Like MonCash meets Cash App, built for Haiti.",
+        m1: "🍽️ Food", m2: "⚡ Electricity", m3: "📱 Phone Top-ups", m4: "🎓 School Fees", m5: "🚌 Transport",
+        s5_title: "Send to Friends & Family",
+        s5_desc: "Transfer money instantly inside Tchotcho Pay — always free. Three easy ways to send.",
+        s5_t2: "📞 Phone Number", s5_t3: "📷 QR Code",
+        s6_title: "Cash Out or Save",
+        s6_desc: "Recipients in Haiti can withdraw to a local bank, use an agent network, convert to Haitian gourdes — or keep their USDC as a stable savings account, safe from HTG inflation.",
+        s6_t1: "Local Bank", s6_t2: "Cash Agent", s6_t3: "Convert to HTG", s6_t4: "Keep as USDC",
+
+        mkt_label: "Built for Haiti",
+        mkt_title: "A marketplace that works without cash",
+        mkt_sub: "Buy everyday essentials directly from your USDC wallet — no conversion, no fees, no friction.",
+        m1b: "Food", m2b: "Electricity", m3b: "Phone Top-ups", m4b: "School Fees", m5b: "Transportation", m6b: "Local Merchants",
+        w_label: "Tchotcho Wallet", w_send: "📤 Send", w_receive: "📥 Receive", w_shop: "🛒 Shop", w_cash: "💵 Cash Out",
+
+        p_label: "Transparent Pricing",
+        p_title: "Simple, fair fees",
+        p_sub: "No hidden charges. Most transfers inside Tchotcho Pay are completely free.",
+        p1_label: "Card Deposit", p1_desc: "Debit or credit card funding. ACH bank transfers are lower cost.",
+        p2_label: "P2P Transfers", p2_desc: "Send to any Tchotcho Pay user — completely free, always.",
+        p3_label: "Cash Out", p3_desc: "Withdraw to local bank or agent network in Haiti.",
+        p4_label: "Merchant Fee", p4_desc: "Merchants pay a small fee — buyers pay nothing extra.",
+        p5_label: "FX Spread", p5_amt: "Small", p5_desc: "Competitive spread when converting USD ↔ HTG.",
+        p6_label: "Premium Account", p6_amt: "Coming", p6_desc: "Higher limits, faster withdrawals, and business tools for merchants.",
+
+        why_label: "The Difference",
+        why_title: "Why Tchotcho Pay wins",
+        tbl_feature: "Feature", tbl_others: "Others",
+        tbl_r1: "Transfer Fees", tbl_r2: "Settlement Speed", tbl_r2a: "1–3 days", tbl_r2b: "Instant",
+        tbl_r3: "USDC Savings", tbl_r4: "P2P Free Transfers", tbl_r5: "Built-in Marketplace", tbl_r6: "Available 24/7",
+        wp1_t: "USDC = Stable Savings", wp1_d: "Unlike gourdes, USDC holds its value. Recipients can save in digital dollars and withdraw anytime.",
+        wp2_t: "Secure Transfer = Lowest Fees", wp2_d: "Traditional remittance companies pay SWIFT or card networks. We settle  instantly for a fraction of the cost.",
+        wp3_t: "Built for Haitian Communities", wp3_d: "Every feature — marketplace, agent cashouts, HTG conversion — is designed around how Haiti actually works.",
+        wp4_t: "One App for Everything", wp4_d: "No more juggling Western Union, MonCash, and a bank app. Send, save, spend, and cash out from one place.",
+
+        cta_label: "Early Access",
+        cta_title: "Be the first to use Tchotcho Pay",
+        cta_sub: "Join thousands of Haitian diaspora members waiting for a smarter way to send money home.",
+        cta_placeholder: "Enter your email address",
+        cta_btn: "Join Now",
+        cta_note: "No spam. We'll only contact you when we launch. 🇭🇹",
+        success_msg: "✓ You're on the list!",
+        success_placeholder: "Thanks! We'll be in touch.",
+      },
+
+      ht: {
+        nav_how: "Kijan Li Mache",
+        nav_market: "Maché a",
+        nav_fees: "Frè",
+        nav_why: "Poukisa Nou",
+        nav_cta: "Enskri Kounye a",
+        nav_features: "Karakteristik",
+
+        hero_badge: "Nan Beta Kounye a — Sou Secure Digital Network Base",
+        hero_h1_line1: "Voye Lajan Ayiti.",
+        hero_h1_line2: "Pi Vit. Pi Bon Mache. Pi Entèlijan.",
+        hero_sub: "Tchotcho Pay konbine USDC sou secure digital network Base ak yon maché ayisyen, kont epay nimerik, ak pèman peer-to-peer — tout nan yon sèl aplikasyon.",
+        btn_join: "Enskri Kounye a",
+        btn_how: "Wè Kijan Li Mache",
+
+        stat_fee: "Frè Secure Digital Network",
+        stat_speed: "Règleman",
+        stat_available: "Disponib",
+        stat_p2p: "Transfè P2P",
+
+        feat_label: "Tout Bagay Nan Yon Sèl Aplikasyon",
+        feat_title: "Pi plis pase yon konpayi remitans",
+        feat_sub: "Tchotcho Pay se yon platfòm finansye konplè ki bati pou dyaspora ayisyen ak kominote lokal yo.",
+        f1_title: "Transfè Lajan",
+        f1_desc: "Voye depi nenpòt kote — Etazini, Kanada, Frans — ale Ayiti an segonn via ACH, kat debi/kredi, oswa vire lajan.",
+        f2_title: "Pòtfèy USDC",
+        f2_desc: "Kenbe dola nimerik ki pa janm pèdi valè akòz enflayon. USDC ou a toujou 1:1 ak dola ameriken.",
+        f3_title: "Secure Digital Network Base",
+        f3_desc: "Bati sou rezo Base Coinbase — frè prèske zewo, finalizasyon prèske imedyat, ak tranzaksyon transparan.",
+        f4_title: "Maché Ayisyen",
+        f4_desc: "Achte manje, kouran, rechaj telefòn, frè lekòl, ak plis nan machann lokal yo — san lajan kach.",
+        f5_title: "Pèman Peer-to-Peer",
+        f5_desc: "Voye bay zanmi ak fanmi pa non itilizatè, nimewo telefòn, oswa kòd QR. Transfè entèn yo gratis.",
+        f6_title: "Epay Dola Nimerik",
+        f6_desc: "Kenbe epay nan USDC olye goud. Pwoteje kont enflayon HTG pandan ou rete aksesib.",
+
+        hiw_label: "Etap pa Etap",
+        hiw_title: "Kijan Tchotcho Pay Mache",
+        hiw_sub: "De chaje fon pou depanse Ayiti — vwayaj konplè a nan 6 etap.",
+        s1_title: "Chaje Lajan",
+        s1_desc: "Itilizatè nan Etazini, Kanada, Frans, oswa nenpòt kote ka finanse kont Tchotcho Pay yo ak plizyè metòd.",
+        s1_t1: "Transfè Labank ACH", s1_t2: "Kat Debi", s1_t3: "Kat Kredi", s1_t4: "Vire Lajan",
+        s2_title: "Konvèti an USDC sou Base",
+        s2_desc: "Dola ou a otomatikman konvèti an USDC sou secure digital network Base — règleman prèske imedyat, frè ultra-ba, disponib 24/7. Pa gen orè labank, pa gen reta.",
+        s2_t1: "Règleman Imedyat", s2_t2: "Frè Ba", s2_t3: "Dola Nimerik",
+        s3_title: "Kredite Pòtfèy Tchotcho Ou",
+        s3_desc: "Chak itilizatè resevwa yon pòtfèy pèsonèl ak balans USDC, istwa tranzaksyon, ak yon kòd QR pou pèman rapid.",
+        flow1: "Jan voye $100", flow2: "Mari resevwa 100 USDC", flow3: "Mari deside sa pou fè",
+        s4_title: "Achte nan Maché Ayisyen an",
+        s4_desc: "Depanse USDC dirèkteman ak machann lokal — manje, kouran, rechaj telefòn, frè lekòl, transpò. Tankou MonCash rankontre Cash App, bati pou Ayiti.",
+        m1: "🍽️ Manje", m2: "⚡ Kouran", m3: "📱 Rechaj Telefòn", m4: "🎓 Frè Lekòl", m5: "🚌 Transpò",
+        s5_title: "Voye Bay Zanmi & Fanmi",
+        s5_desc: "Transfere lajan imedyatman nan Tchotcho Pay — toujou gratis. Twa fason fasil pou voye.",
+        s5_t2: "📞 Nimewo Telefòn", s5_t3: "📷 Kòd QR",
+        s6_title: "Retire Lajan oswa Ekonomize",
+        s6_desc: "Benefisyè Ayiti ka retire nan yon labank lokal, itilize rezo ajan, konvèti an goud — oswa kenbe USDC yo kòm kont epay estab, pwoteje kont enflayon HTG.",
+        s6_t1: "Labank Lokal", s6_t2: "Ajan Kach", s6_t3: "Konvèti an HTG", s6_t4: "Kenbe kòm USDC",
+
+        mkt_label: "Bati Pou Ayiti",
+        mkt_title: "Yon maché ki mache san lajan kach",
+        mkt_sub: "Achte pwodui chak jou dirèkteman nan pòtfèy USDC ou — san konvèsyon, san frè, san friksyon.",
+        m1b: "Manje", m2b: "Kouran", m3b: "Rechaj Telefòn", m4b: "Frè Lekòl", m5b: "Transpò", m6b: "Machann Lokal",
+        w_label: "Pòtfèy Tchotcho", w_send: "📤 Voye", w_receive: "📥 Resevwa", w_shop: "🛒 Achte", w_cash: "💵 Retire",
+
+        p_label: "Pri Transparan",
+        p_title: "Frè senp ak jis",
+        p_sub: "Pa gen frè kache. Pifò transfè nan Tchotcho Pay yo totalman gratis.",
+        p1_label: "Depo Kat", p1_desc: "Finansman kat debi oswa kredi. Transfè labank ACH koute mwens.",
+        p2_label: "Transfè P2P", p2_desc: "Voye bay nenpòt itilizatè Tchotcho Pay — totalman gratis, toujou.",
+        p3_label: "Retire Lajan", p3_desc: "Retire nan labank lokal oswa rezo ajan Ayiti.",
+        p4_label: "Frè Machann", p4_desc: "Machann yo peye yon ti frè — achetè yo pa peye anyen anplis.",
+        p5_label: "Diferans Echanj", p5_amt: "Ti Kras", p5_desc: "Diferans konpetitif lè konvèti USD ↔ HTG.",
+        p6_label: "Kont Premium", p6_amt: "Alavni", p6_desc: "Limit pi wo, retrè pi rapid, ak zouti pou komès.",
+
+        why_label: "La Diferans",
+        why_title: "Poukisa Tchotcho Pay Genyen",
+        tbl_feature: "Karakteristik", tbl_others: "Lòt Yo",
+        tbl_r1: "Frè Transfè", tbl_r2: "Vitès Règleman", tbl_r2a: "1–3 jou", tbl_r2b: "Imedyat",
+        tbl_r3: "Epay USDC", tbl_r4: "Transfè P2P Gratis", tbl_r5: "Maché Entegre", tbl_r6: "Disponib 24/7",
+        wp1_t: "USDC = Epay Estab", wp1_d: "Kontrèman ak goud, USDC kenbe valè li. Benefisyè ka ekonomize nan dola nimerik epi retire nenpòt ki lè.",
+        wp2_t: "Secure Digital Network Base = Frè Pi Ba", wp2_d: "Konpayi remitans tradisyonèl peye SWIFT oswa rezo kat. Nou regle sou Base pou yon ti fraksyon pri a.",
+        wp3_t: "Bati Pou Kominote Ayisyen", wp3_d: "Chak karakteristik — maché, retrè ajan, konvèsyon HTG — konseye baze sou fason Ayiti travay vrèman.",
+        wp4_t: "Yon Aplikasyon Pou Tout Bagay", wp4_d: "Pa janm ap jere Western Union, MonCash, ak yon aplikasyon labank. Voye, ekonomize, depanse, epi retire nan yon sèl kote.",
+
+        cta_label: "Aksè Bonè",
+        cta_title: "Soyez premye pou itilize Tchotcho Pay",
+        cta_sub: "Rantre nan dè milye manm dyaspora ayisyen k ap tann yon fason pi entèlijan pou voye lajan lakay.",
+        cta_placeholder: "Antre adrès imèl ou",
+        cta_btn: "Enskri Kounye a",
+        cta_note: "Pa gen spam. Nou pral kontakte ou sèlman lè nou lanse. 🇭🇹",
+        success_msg: "✓ Ou sou lis la!",
+        success_placeholder: "Mèsi! Nou pral kontakte ou.",
+      },
+
+      es: {
+        nav_how: "Cómo Funciona",
+        nav_market: "Mercado",
+        nav_fees: "Tarifas",
+        nav_why: "Por Qué Nosotros",
+        nav_cta: "Unirse a Lista",
+        nav_features: "Características",
+
+        hero_badge: "Ahora en Beta — Impulsado por Secure Transfer",
+        hero_h1_line1: "Envía Dinero a Haití.",
+        hero_h1_line2: "Más Rápido. Más Barato. Más Inteligente.",
+        hero_sub: "Tchotcho Pay combina USDC en secure digital network Base con un mercado haitiano, cuenta de ahorro digital y pagos entre personas — todo en una sola app.",
+        btn_join: "Únete a la Lista",
+        btn_how: "Ver Cómo Funciona",
+
+        stat_fee: "Comisión Secure Digital Network",
+        stat_speed: "Liquidación",
+        stat_available: "Disponible",
+        stat_p2p: "Transferencias P2P",
+
+        feat_label: "Todo en Una Sola App",
+        feat_title: "Más que una empresa de remesas",
+        feat_sub: "Tchotcho Pay es una plataforma financiera completa construida para la diáspora haitiana y las comunidades locales.",
+        f1_title: "Transferencia de Dinero",
+        f1_desc: "Envía desde cualquier lugar — EE.UU., Canadá, Francia — a Haití en segundos vía ACH, tarjeta débito/crédito o transferencia bancaria.",
+        f2_title: "Billetera USDC",
+        f2_desc: "Mantén dólares digitales que nunca pierden valor por la inflación. Tu USDC siempre vale 1:1 con el dólar.",
+        f3_title: "Secure Digital Network Base",
+        f3_desc: "Construido sobre la red Base de Coinbase — tarifas casi cero, finalidad casi instantánea y transacciones totalmente transparentes.",
+        f4_title: "Mercado Haitiano",
+        f4_desc: "Compra comida, electricidad, recargas de teléfono, cuotas escolares y más a comerciantes locales — sin efectivo.",
+        f5_title: "Pagos Entre Personas",
+        f5_desc: "Envía a amigos y familiares por nombre de usuario, teléfono o código QR. Las transferencias internas son gratis.",
+        f6_title: "Ahorro en Dólares Digitales",
+        f6_desc: "Guarda tus ahorros en USDC en vez de gourdes. Protégete de la inflación del HTG y accede cuando quieras.",
+
+        hiw_label: "Paso a Paso",
+        hiw_title: "Cómo Funciona Tchotcho Pay",
+        hiw_sub: "Desde cargar fondos hasta gastar en Haití — el recorrido completo en 6 pasos.",
+        s1_title: "Cargar Dinero",
+        s1_desc: "Usuarios en EE.UU., Canadá, Francia o cualquier lugar pueden financiar su cuenta con múltiples métodos.",
+        s1_t1: "Transferencia ACH", s1_t2: "Tarjeta Débito", s1_t3: "Tarjeta Crédito", s1_t4: "Transferencia Bancaria",
+        s2_title: "Convertir a USDC en Base",
+        s2_desc: "Tu USD se convierte automáticamente a USDC en secure digital network Base — liquidación casi instantánea, tarifas mínimas, disponible 24/7. Sin horarios bancarios, sin retrasos.",
+        s2_t1: "Liquidación Instantánea", s2_t2: "Tarifas Bajas", s2_t3: "Dólares Digitales",
+        s3_title: "Acreditar Tu Billetera Tchotcho",
+        s3_desc: "Cada usuario recibe una billetera personal con saldo USDC, historial de transacciones y un código QR para pagos rápidos.",
+        flow1: "John envía $100", flow2: "Marie recibe 100 USDC", flow3: "Marie decide qué hacer",
+        s4_title: "Comprar en el Mercado Haitiano",
+        s4_desc: "Gasta USDC directamente con comerciantes locales — comida, electricidad, recargas, cuotas escolares, transporte. Como MonCash meets Cash App, hecho para Haití.",
+        m1: "🍽️ Comida", m2: "⚡ Electricidad", m3: "📱 Recargas", m4: "🎓 Cuotas Escolares", m5: "🚌 Transporte",
+        s5_title: "Enviar a Amigos y Familia",
+        s5_desc: "Transfiere dinero al instante dentro de Tchotcho Pay — siempre gratis. Tres formas fáciles de enviar.",
+        s5_t2: "📞 Número de Teléfono", s5_t3: "📷 Código QR",
+        s6_title: "Retirar o Ahorrar",
+        s6_desc: "Los receptores en Haití pueden retirar a un banco local, usar una red de agentes, convertir a gourdes — o mantener su USDC como cuenta de ahorro estable.",
+        s6_t1: "Banco Local", s6_t2: "Agente de Efectivo", s6_t3: "Convertir a HTG", s6_t4: "Mantener en USDC",
+
+        mkt_label: "Hecho para Haití",
+        mkt_title: "Un mercado que funciona sin efectivo",
+        mkt_sub: "Compra productos de uso diario directamente desde tu billetera USDC — sin conversión, sin tarifas, sin fricción.",
+        m1b: "Comida", m2b: "Electricidad", m3b: "Recargas", m4b: "Cuotas Escolares", m5b: "Transporte", m6b: "Comerciantes Locales",
+        w_label: "Billetera Tchotcho", w_send: "📤 Enviar", w_receive: "📥 Recibir", w_shop: "🛒 Comprar", w_cash: "💵 Retirar",
+
+        p_label: "Precios Transparentes",
+        p_title: "Tarifas simples y justas",
+        p_sub: "Sin cargos ocultos. La mayoría de las transferencias dentro de Tchotcho Pay son completamente gratis.",
+        p1_label: "Depósito con Tarjeta", p1_desc: "Financiamiento con tarjeta débito o crédito. Las transferencias ACH son más económicas.",
+        p2_label: "Transferencias P2P", p2_desc: "Envía a cualquier usuario de Tchotcho Pay — completamente gratis, siempre.",
+        p3_label: "Retiro de Efectivo", p3_desc: "Retira a banco local o red de agentes en Haití.",
+        p4_label: "Comisión Comerciante", p4_desc: "Los comerciantes pagan una pequeña tarifa — los compradores no pagan nada extra.",
+        p5_label: "Diferencial FX", p5_amt: "Mínimo", p5_desc: "Diferencial competitivo al convertir USD ↔ HTG.",
+        p6_label: "Cuenta Premium", p6_amt: "Próximamente", p6_desc: "Límites más altos, retiros más rápidos y herramientas para negocios.",
+
+        why_label: "La Diferencia",
+        why_title: "Por Qué Gana Tchotcho Pay",
+        tbl_feature: "Característica", tbl_others: "Otros",
+        tbl_r1: "Tarifas de Envío", tbl_r2: "Velocidad", tbl_r2a: "1–3 días", tbl_r2b: "Instantáneo",
+        tbl_r3: "Ahorro en USDC", tbl_r4: "Transferencias P2P Gratis", tbl_r5: "Mercado Integrado", tbl_r6: "Disponible 24/7",
+        wp1_t: "USDC = Ahorro Estable", wp1_d: "A diferencia de las gourdes, el USDC mantiene su valor. Los receptores pueden ahorrar en dólares digitales y retirar cuando quieran.",
+        wp2_t: "Secure Digital Network Base = Tarifas Mínimas", wp2_d: "Las empresas de remesas tradicionales pagan SWIFT o redes de tarjetas. Nosotros liquidamos en Base a una fracción del costo.",
+        wp3_t: "Hecho para Comunidades Haitianas", wp3_d: "Cada función — mercado, retiros por agente, conversión HTG — está diseñada alrededor de cómo funciona Haití realmente.",
+        wp4_t: "Una App para Todo", wp4_d: "No más malabares con Western Union, MonCash y una app bancaria. Envía, ahorra, gasta y retira desde un solo lugar.",
+
+        cta_label: "Acceso Anticipado",
+        cta_title: "Sé el primero en usar Tchotcho Pay",
+        cta_sub: "Únete a miles de miembros de la diáspora haitiana esperando una forma más inteligente de enviar dinero a casa.",
+        cta_placeholder: "Ingresa tu correo electrónico",
+        cta_btn: "Únete Ahora",
+        cta_note: "Sin spam. Solo te contactaremos cuando lancemos. 🇭🇹",
+        success_msg: "✓ ¡Estás en la lista!",
+        success_placeholder: "¡Gracias! Estaremos en contacto.",
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+
+      // update all text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.placeholder = t[key];
+      });
+
+      // update button states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+      });
+
+      // update html lang attribute
+      document.documentElement.lang = lang === 'ht' ? 'ht' : lang;
+    }
+
+    function handleWaitlist(e) {
+      e.preventDefault();
+      const t = translations[currentLang];
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      btn.textContent = t.success_msg;
+      btn.style.background = 'linear-gradient(135deg, #16a34a, #00C896)';
+      input.value = '';
+      input.placeholder = t.success_placeholder;
+      input.disabled = true;
+    }
+
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = id ? document.getElementById(id) : null;
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tchotcho Pay — Agent Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+:root {
+  --bg:      #07091a;
+  --panel:   #0d1120;
+  --card:    #111827;
+  --border:  #1e2a40;
+  --cyan:    #00e5ff;
+  --cyan2:   #00b4cc;
+  --green:   #00e676;
+  --yellow:  #ffd740;
+  --red:     #ff5252;
+  --orange:  #F7B731;
+  --txt:     #e8eaf6;
+  --muted:   #8899aa;
+  --sidebar: 240px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;display:flex;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar);min-height:100vh;background:var(--panel);
+  border-right:1px solid var(--border);display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;z-index:100;
+}
+.sb-brand{
+  padding:20px 16px 16px;border-bottom:1px solid var(--border);
+}
+.sb-logo{display:flex;align-items:center;gap:10px;}
+.sb-logo img{width:34px;height:34px;border-radius:8px;object-fit:contain;}
+.sb-logo-txt{font-size:15px;font-weight:700;color:var(--cyan);letter-spacing:.5px;}
+.sb-logo-sub{font-size:10px;color:var(--muted);margin-top:1px;}
+
+.sb-agent{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+}
+.sb-agent-row{display:flex;align-items:center;gap:10px;}
+.sb-av{
+  width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#000;flex-shrink:0;
+}
+.sb-name{font-size:13px;font-weight:600;color:var(--txt);}
+.sb-id{font-size:11px;color:var(--muted);margin-top:2px;}
+.sb-badge{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;
+  background:#00e67620;color:var(--green);border:1px solid #00e67640;
+}
+.sb-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
+
+.sb-nav{flex:1;padding:10px 0;}
+.sb-nav a{
+  display:flex;align-items:center;gap:10px;padding:10px 16px;
+  color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;
+  transition:.15s;cursor:pointer;border-left:3px solid transparent;
+}
+.sb-nav a:hover{color:var(--txt);background:#ffffff08;}
+.sb-nav a.on{color:var(--cyan);background:#00e5ff10;border-left-color:var(--cyan);}
+.sb-nav a i{font-size:17px;}
+.sb-nav a .badge-pill{
+  margin-left:auto;background:var(--red);color:#fff;font-size:10px;
+  font-weight:700;padding:1px 6px;border-radius:20px;
+}
+
+.sb-bottom{padding:12px 16px;border-top:1px solid var(--border);}
+.sb-bottom a{
+  display:flex;align-items:center;gap:10px;color:var(--muted);
+  text-decoration:none;font-size:13px;padding:8px 0;cursor:pointer;transition:.15s;
+}
+.sb-bottom a:hover{color:var(--txt);}
+.sb-bottom a i{font-size:17px;}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh;}
+
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:14px 28px;display:flex;align-items:center;gap:16px;
+}
+.topbar-title{font-size:17px;font-weight:700;color:var(--txt);}
+.topbar-sub{font-size:12px;color:var(--muted);margin-top:1px;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.topbar-time{font-size:12px;color:var(--muted);}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+  border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;
+  border:none;transition:.15s;text-decoration:none;
+}
+.btn-cyan{background:var(--cyan);color:#000;}
+.btn-cyan:hover{background:var(--cyan2);}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan);}
+.btn-outline:hover{background:#00e5ff10;}
+.btn-ghost{background:#ffffff0d;color:var(--txt);border:1px solid var(--border);}
+.btn-ghost:hover{background:#ffffff18;}
+.btn-red{background:#ff525220;color:var(--red);border:1px solid #ff525240;}
+.btn-red:hover{background:#ff525235;}
+.btn-green{background:#00e67620;color:var(--green);border:1px solid #00e67640;}
+.btn-green:hover{background:#00e67635;}
+
+/* ── CONTENT ── */
+.content{padding:24px 28px;flex:1;}
+
+/* ── FLOAT BANNER ── */
+.float-banner{
+  background:linear-gradient(135deg,#0a1628,#112240);
+  border:1px solid var(--border);border-radius:14px;
+  padding:20px 24px;margin-bottom:24px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.float-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.float-icon i{font-size:26px;color:#000;}
+.float-info{flex:1;}
+.float-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.float-amount{font-size:30px;font-weight:700;color:var(--cyan);line-height:1;}
+.float-htg{font-size:13px;color:var(--muted);margin-top:4px;}
+.float-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.float-warning{
+  width:100%;padding:8px 12px;border-radius:8px;
+  background:#F7B73115;border:1px solid #F7B73130;
+  color:var(--orange);font-size:12px;display:flex;align-items:center;gap:8px;display:none;
+}
+.float-warning.show{display:flex;}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:16px 18px;
+}
+.stat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.stat-icon i{font-size:18px;}
+.stat-val{font-size:22px;font-weight:700;line-height:1;}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;}
+.stat-delta{font-size:11px;margin-top:6px;display:flex;align-items:center;gap:4px;}
+.up{color:var(--green);}
+.dn{color:var(--red);}
+
+/* ── SECTIONS ── */
+.sections{display:grid;grid-template-columns:1fr 360px;gap:20px;}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.section-head{
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.section-title{font-size:14px;font-weight:700;}
+.section-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.section-count{
+  background:#00e5ff18;color:var(--cyan);font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:20px;
+}
+
+/* ── QUEUE ── */
+.queue-list{}
+.q-item{
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;transition:.15s;cursor:pointer;
+}
+.q-item:last-child{border-bottom:none;}
+.q-item:hover{background:#ffffff05;}
+.q-item.urgent .q-dot{background:var(--red);}
+.q-item.normal .q-dot{background:var(--yellow);}
+.q-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.q-av{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:700;font-size:13px;color:#000;flex-shrink:0;
+}
+.q-info{flex:1;min-width:0;}
+.q-name{font-size:13px;font-weight:600;}
+.q-meta{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.q-right{text-align:right;}
+.q-amt{font-size:14px;font-weight:700;color:var(--cyan);}
+.q-time{font-size:10px;color:var(--muted);margin-top:2px;}
+.q-actions{display:flex;gap:6px;margin-top:6px;justify-content:flex-end;}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;}
+
+.empty-state{
+  padding:40px;text-align:center;color:var(--muted);font-size:13px;
+}
+.empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.4;}
+
+/* ── RIGHT COLUMN ── */
+.right-col{display:flex;flex-direction:column;gap:20px;}
+
+/* ── EARNINGS ── */
+.earn-item{
+  padding:12px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.earn-item:last-child{border-bottom:none;}
+.earn-label{font-size:13px;}
+.earn-val{font-size:14px;font-weight:700;color:var(--green);}
+
+/* ── MINI CHART ── */
+.mini-bars{
+  padding:16px 18px;display:flex;align-items:flex-end;gap:6px;height:90px;
+}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bar{
+  width:100%;border-radius:4px 4px 0 0;
+  background:linear-gradient(to top,var(--cyan2),var(--cyan));min-height:4px;
+  transition:.4s;
+}
+.bar-lbl{font-size:9px;color:var(--muted);}
+
+/* ── TX HISTORY ── */
+.tx-item{
+  padding:12px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.tx-item:last-child{border-bottom:none;}
+.tx-icon{
+  width:34px;height:34px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:16px;flex-shrink:0;
+}
+.tx-icon.out{background:#00e67615;color:var(--green);}
+.tx-icon.in{background:#00e5ff15;color:var(--cyan);}
+.tx-info{flex:1;}
+.tx-name{font-size:13px;font-weight:500;}
+.tx-ref{font-size:11px;color:var(--muted);}
+.tx-right{text-align:right;}
+.tx-amt{font-size:13px;font-weight:700;}
+.tx-time{font-size:10px;color:var(--muted);}
+.pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block;}
+.pill-done{background:#00e67620;color:var(--green);}
+.pill-pend{background:#ffd74020;color:var(--yellow);}
+
+/* ── MODAL ── */
+.overlay{
+  position:fixed;inset:0;background:#00000088;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:.2s;
+}
+.overlay.show{opacity:1;pointer-events:all;}
+.modal{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;
+  width:420px;max-width:95vw;overflow:hidden;
+  transform:translateY(20px);transition:.2s;
+}
+.overlay.show .modal{transform:translateY(0);}
+.modal-head{
+  padding:18px 22px 14px;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;justify-content:space-between;
+}
+.modal-title{font-size:16px;font-weight:700;}
+.modal-close{
+  width:28px;height:28px;border-radius:6px;background:#ffffff10;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:none;color:var(--muted);font-size:16px;transition:.15s;
+}
+.modal-close:hover{background:#ffffff20;color:var(--txt);}
+.modal-body{padding:22px;}
+.modal-customer{
+  display:flex;align-items:center;gap:14px;padding:14px;
+  background:#ffffff06;border-radius:12px;margin-bottom:18px;
+}
+.modal-av{
+  width:48px;height:48px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:700;font-size:18px;color:#000;flex-shrink:0;
+}
+.modal-cname{font-size:15px;font-weight:700;}
+.modal-cinfo{font-size:12px;color:var(--muted);margin-top:3px;}
+.modal-rows{}
+.modal-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.modal-row:last-child{border-bottom:none;}
+.mr-label{font-size:12px;color:var(--muted);}
+.mr-val{font-size:13px;font-weight:600;}
+.mr-val.big{font-size:20px;color:var(--cyan);}
+.modal-pin{
+  margin:16px 0;padding:12px;background:#00e5ff08;border-radius:10px;
+  border:1px solid #00e5ff20;text-align:center;
+}
+.modal-pin-lbl{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.modal-pin-code{font-size:28px;font-weight:700;letter-spacing:8px;color:var(--cyan);}
+.modal-actions{display:flex;gap:10px;margin-top:18px;}
+.modal-actions .btn{flex:1;justify-content:center;}
+.pin-input{
+  margin:16px 0;
+}
+.pin-input label{font-size:12px;color:var(--muted);margin-bottom:6px;display:block;}
+.pin-input input{
+  width:100%;padding:10px 14px;background:#ffffff08;border:1px solid var(--border);
+  border-radius:8px;color:var(--txt);font-size:15px;letter-spacing:4px;
+  text-align:center;outline:none;
+}
+.pin-input input:focus{border-color:var(--cyan);}
+
+/* ── TOPUP MODAL ── */
+.topup-amounts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px;}
+.ta-btn{
+  padding:8px 16px;border-radius:8px;background:#ffffff08;border:1px solid var(--border);
+  color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;transition:.15s;
+}
+.ta-btn:hover,.ta-btn.on{background:#00e5ff15;border-color:var(--cyan);color:var(--cyan);}
+.custom-input{
+  width:100%;padding:10px 14px;background:#ffffff08;border:1px solid var(--border);
+  border-radius:8px;color:var(--txt);font-size:15px;outline:none;margin-bottom:14px;
+}
+.custom-input:focus{border-color:var(--cyan);}
+.topup-note{font-size:11px;color:var(--muted);margin-bottom:14px;}
+
+/* ── NOTIFICATION TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  padding:14px 18px;display:flex;align-items:center;gap:12px;
+  min-width:280px;max-width:360px;
+  transform:translateY(20px);opacity:0;pointer-events:none;transition:.3s;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast i{font-size:20px;}
+.toast.success i{color:var(--green);}
+.toast.error i{color:var(--red);}
+.toast.info i{color:var(--cyan);}
+.toast-txt{}
+.toast-title{font-size:13px;font-weight:700;}
+.toast-msg{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* ── PAGE VIEWS ── */
+.page{display:none;}
+.page.on{display:block;}
+
+/* ── TABS (History) ── */
+.h-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);}
+.h-tab{
+  padding:10px 18px;font-size:12px;font-weight:600;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;transition:.15s;
+}
+.h-tab.on{color:var(--cyan);border-bottom-color:var(--cyan);}
+
+/* ── PROFILE ── */
+.profile-header{
+  padding:24px;text-align:center;border-bottom:1px solid var(--border);
+}
+.p-av{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 12px;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#000;
+}
+.p-name{font-size:18px;font-weight:700;}
+.p-id{font-size:12px;color:var(--muted);margin-top:4px;}
+.p-zone{font-size:12px;color:var(--cyan);margin-top:6px;}
+.p-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0;margin-top:0;}
+.p-stat{padding:14px;text-align:center;border-right:1px solid var(--border);}
+.p-stat:last-child{border-right:none;}
+.p-stat-val{font-size:18px;font-weight:700;color:var(--cyan);}
+.p-stat-lbl{font-size:10px;color:var(--muted);margin-top:3px;}
+.settings-list{}
+.settings-row{
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.settings-row:last-child{border-bottom:none;}
+.sr-left{display:flex;align-items:center;gap:10px;}
+.sr-icon{width:32px;height:32px;border-radius:8px;background:#ffffff08;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sr-label{font-size:13px;}
+.sr-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.toggle{
+  width:38px;height:20px;background:var(--border);border-radius:20px;
+  position:relative;cursor:pointer;transition:.2s;
+}
+.toggle.on{background:var(--cyan);}
+.toggle::after{
+  content:'';position:absolute;width:14px;height:14px;border-radius:50%;
+  background:#fff;top:3px;left:3px;transition:.2s;
+}
+.toggle.on::after{left:21px;}
+
+/* ── ANIMATIONS ── */
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.animate-in{animation:fadeIn .3s ease both;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:2px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1200px){
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .sections{grid-template-columns:1fr;}
+}
+@media(max-width:860px){
+  .sidebar{transform:translateX(-100%);transition:.25s;}
+  .sidebar.open{transform:none;}
+  .main{margin-left:0;}
+  .topbar{padding:12px 16px;}
+  .content{padding:16px;}
+  .float-banner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-brand">
+    <div class="sb-logo">
+      <img src="logo.png" alt="T" onerror="this.style.background='#00e5ff';this.innerHTML='<span style=font-weight:700;color:#000;font-size:14px;>T</span>'"/>
+      <div>
+        <div class="sb-logo-txt">Tchotcho Pay</div>
+        <div class="sb-logo-sub">Agent Portal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-agent">
+    <div class="sb-agent-row">
+      <div class="sb-av">JB</div>
+      <div>
+        <div class="sb-name">Jean Baptiste</div>
+        <div class="sb-id">Agent #AG-2047</div>
+      </div>
+    </div>
+    <div class="sb-badge"><span></span>Online</div>
+  </div>
+
+  <div class="sb-nav">
+    <a class="on" onclick="showPage('dashboard',this)"><i class="ti ti-layout-dashboard"></i>Dashboard <span class="badge-pill" id="badge-pending">3</span></a>
+    <a onclick="showPage('history',this)"><i class="ti ti-history"></i>Transaction History</a>
+    <a onclick="showPage('float',this)"><i class="ti ti-wallet"></i>Float & Earnings</a>
+    <a onclick="showPage('profile',this)"><i class="ti ti-user-circle"></i>My Profile</a>
+  </div>
+
+  <div class="sb-bottom">
+    <a onclick="showToast('info','Support','Chat support is available 8AM–8PM EST')"><i class="ti ti-headset"></i>Help & Support</a>
+    <a onclick="showToast('info','Logging out','Redirecting to login...')"><i class="ti ti-logout"></i>Sign Out</a>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="btn btn-ghost" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none;padding:6px 10px;" id="hamburger">
+      <i class="ti ti-menu-2" style="font-size:18px;"></i>
+    </button>
+    <div>
+      <div class="topbar-title" id="page-title">Dashboard</div>
+      <div class="topbar-sub" id="page-sub">Pétion-Ville, Port-au-Prince · Zone 4</div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-time" id="clock">—</div>
+      <button class="btn btn-cyan" onclick="openTopup()"><i class="ti ti-plus"></i> Request Float</button>
+      <button class="btn btn-ghost" style="padding:8px 10px;" onclick="showToast('info','Notifications','You have 2 new alerts')">
+        <i class="ti ti-bell" style="font-size:16px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ CONTENT ═══ -->
+  <div class="content">
+
+    <!-- ── PAGE: DASHBOARD ── -->
+    <div class="page on animate-in" id="page-dashboard">
+
+      <!-- Float Banner -->
+      <div class="float-banner">
+        <div class="float-icon"><i class="ti ti-currency-dollar"></i></div>
+        <div class="float-info">
+          <div class="float-label">Current Float Balance</div>
+          <div class="float-amount" id="float-display">1,240.50 USDC</div>
+          <div class="float-htg" id="float-htg">≈ 161,885 HTG</div>
+        </div>
+        <div class="float-actions">
+          <button class="btn btn-outline" onclick="openTopup()"><i class="ti ti-plus"></i> Top Up Float</button>
+          <button class="btn btn-ghost" onclick="showToast('info','Float history','View in Float & Earnings')"><i class="ti ti-chart-line"></i> View History</button>
+        </div>
+        <div class="float-warning" id="float-warning">
+          <i class="ti ti-alert-triangle"></i>
+          Low float balance — you may not be able to process large withdrawals. Request a top-up now.
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#00e5ff15;"><i class="ti ti-arrows-exchange" style="color:var(--cyan);"></i></div>
+          <div class="stat-val" id="stat-tx">17</div>
+          <div class="stat-lbl">Transactions Today</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> +3 vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#00e67615;"><i class="ti ti-coins" style="color:var(--green);"></i></div>
+          <div class="stat-val" id="stat-earn">$18.40</div>
+          <div class="stat-lbl">Commission Earned Today</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> +$2.10 vs yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#ffd74015;"><i class="ti ti-cash" style="color:var(--yellow);"></i></div>
+          <div class="stat-val" id="stat-htg">183,200</div>
+          <div class="stat-lbl">HTG Dispensed Today</div>
+          <div class="stat-delta up"><i class="ti ti-trending-up"></i> On track</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:#ff525215;"><i class="ti ti-clock" style="color:var(--red);"></i></div>
+          <div class="stat-val" id="stat-queue">3</div>
+          <div class="stat-lbl">Pending Requests</div>
+          <div class="stat-delta dn"><i class="ti ti-alert-circle"></i> Needs attention</div>
+        </div>
+      </div>
+
+      <!-- Sections -->
+      <div class="sections">
+
+        <!-- Pending Queue -->
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <div class="section-title">Pending Withdrawal Requests</div>
+              <div class="section-sub">Tap a request to process it</div>
+            </div>
+            <span class="section-count" id="queue-count">3 pending</span>
+          </div>
+
+          <div class="queue-list" id="queue-list"></div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+
+          <!-- Today's Earnings Breakdown -->
+          <div class="section-card">
+            <div class="section-head">
+              <div class="section-title">Today's Earnings</div>
+            </div>
+            <div class="earn-item"><span class="earn-label">Withdrawal fees (1%)</span><span class="earn-val">$14.20</span></div>
+            <div class="earn-item"><span class="earn-label">Merchant facilitator</span><span class="earn-val">$2.80</span></div>
+            <div class="earn-item"><span class="earn-label">Bonus (volume)</span><span class="earn-val">$1.40</span></div>
+            <div class="earn-item" style="border-top:1px solid var(--border);padding-top:10px;">
+              <span class="earn-label" style="font-weight:600;">Total</span>
+              <span class="earn-val" style="font-size:16px;">$18.40</span>
+            </div>
+          </div>
+
+          <!-- Weekly Volume Chart -->
+          <div class="section-card">
+            <div class="section-head">
+              <div class="section-title">Weekly Volume</div>
+              <div style="font-size:11px;color:var(--muted);">USDC processed</div>
+            </div>
+            <div class="mini-bars" id="mini-bars"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="section-card" style="margin-top:20px;">
+        <div class="section-head">
+          <div>
+            <div class="section-title">Recent Activity</div>
+            <div class="section-sub">Last 5 completed transactions</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="showPage('history',document.querySelector('.sb-nav a:nth-child(2)'))">
+            View All <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+        <div id="recent-list"></div>
+      </div>
+
+    </div><!-- /page-dashboard -->
+
+
+    <!-- ── PAGE: HISTORY ── -->
+    <div class="page animate-in" id="page-history">
+      <div class="section-card">
+        <div class="h-tabs">
+          <div class="h-tab on" onclick="filterHistory('all',this)">All</div>
+          <div class="h-tab" onclick="filterHistory('cashout',this)">Cash Outs</div>
+          <div class="h-tab" onclick="filterHistory('topup',this)">Float Top-ups</div>
+        </div>
+        <div id="history-list"></div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: FLOAT ── -->
+    <div class="page animate-in" id="page-float">
+      <div class="sections">
+        <div class="section-card">
+          <div class="section-head"><div class="section-title">Float Movement</div></div>
+          <div class="mini-bars" id="float-chart" style="height:120px;padding:20px 18px;"></div>
+          <div style="border-top:1px solid var(--border);">
+            <div class="earn-item"><span class="earn-label">Opening Balance (Mon)</span><span class="earn-val" style="color:var(--muted);">2,000 USDC</span></div>
+            <div class="earn-item"><span class="earn-label">Total Disbursed This Week</span><span class="earn-val" style="color:var(--red);">-1,840 USDC</span></div>
+            <div class="earn-item"><span class="earn-label">Top-ups Received</span><span class="earn-val" style="color:var(--green);">+1,080 USDC</span></div>
+            <div class="earn-item"><span class="earn-label">Current Balance</span><span class="earn-val" style="font-size:16px;">1,240.50 USDC</span></div>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="section-card">
+            <div class="section-head"><div class="section-title">Commission Summary</div></div>
+            <div class="earn-item"><span class="earn-label">This Week</span><span class="earn-val">$87.30</span></div>
+            <div class="earn-item"><span class="earn-label">This Month</span><span class="earn-val">$312.80</span></div>
+            <div class="earn-item"><span class="earn-label">All Time</span><span class="earn-val">$1,840.00</span></div>
+            <div style="padding:12px 18px;">
+              <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="showToast('info','Coming soon','Commission payouts will be released weekly')">
+                <i class="ti ti-cash"></i> Request Payout
+              </button>
+            </div>
+          </div>
+          <div class="section-card">
+            <div class="section-head"><div class="section-title">Top-up Requests</div></div>
+            <div class="tx-item">
+              <div class="tx-icon in"><i class="ti ti-arrow-down-left"></i></div>
+              <div class="tx-info">
+                <div class="tx-name">Float Top-up</div>
+                <div class="tx-ref">REF #TU-4412</div>
+              </div>
+              <div class="tx-right">
+                <div class="tx-amt" style="color:var(--green);">+500 USDC</div>
+                <div class="tx-time">Today 8:30 AM</div>
+                <span class="pill pill-done">Credited</span>
+              </div>
+            </div>
+            <div class="tx-item">
+              <div class="tx-icon in"><i class="ti ti-arrow-down-left"></i></div>
+              <div class="tx-info">
+                <div class="tx-name">Float Top-up</div>
+                <div class="tx-ref">REF #TU-4389</div>
+              </div>
+              <div class="tx-right">
+                <div class="tx-amt" style="color:var(--green);">+580 USDC</div>
+                <div class="tx-time">Yesterday 2:15 PM</div>
+                <span class="pill pill-done">Credited</span>
+              </div>
+            </div>
+            <div style="padding:12px 18px;">
+              <button class="btn btn-cyan" style="width:100%;justify-content:center;" onclick="openTopup()">
+                <i class="ti ti-plus"></i> Request Float Top-up
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: PROFILE ── -->
+    <div class="page animate-in" id="page-profile">
+      <div class="sections">
+        <div class="section-card">
+          <div class="profile-header">
+            <div class="p-av">JB</div>
+            <div class="p-name">Jean Baptiste</div>
+            <div class="p-id">Agent ID: AG-2047 · @jeanbaptiste</div>
+            <div class="p-zone"><i class="ti ti-map-pin"></i> Pétion-Ville, Zone 4</div>
+          </div>
+          <div class="p-stats" style="border-bottom:1px solid var(--border);">
+            <div class="p-stat">
+              <div class="p-stat-val">847</div>
+              <div class="p-stat-lbl">Total Transactions</div>
+            </div>
+            <div class="p-stat">
+              <div class="p-stat-val">$1,840</div>
+              <div class="p-stat-lbl">Total Earned</div>
+            </div>
+            <div class="p-stat" style="border-right:none;">
+              <div class="p-stat-val">4.9★</div>
+              <div class="p-stat-lbl">Agent Rating</div>
+            </div>
+          </div>
+          <div class="settings-list">
+            <div class="settings-row">
+              <div class="sr-left">
+                <div class="sr-icon"><i class="ti ti-bell"></i></div>
+                <div><div class="sr-label">Push Notifications</div><div class="sr-sub">New withdrawal alerts</div></div>
+              </div>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="settings-row">
+              <div class="sr-left">
+                <div class="sr-icon"><i class="ti ti-volume"></i></div>
+                <div><div class="sr-label">Sound Alerts</div><div class="sr-sub">Play sound on new request</div></div>
+              </div>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="settings-row">
+              <div class="sr-left">
+                <div class="sr-icon"><i class="ti ti-moon"></i></div>
+                <div><div class="sr-label">Auto-offline at 9PM</div><div class="sr-sub">Stop receiving requests at night</div></div>
+              </div>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="settings-row">
+              <div class="sr-left">
+                <div class="sr-icon"><i class="ti ti-lock"></i></div>
+                <div><div class="sr-label">Change PIN</div><div class="sr-sub">Update your 4-digit confirmation PIN</div></div>
+              </div>
+              <i class="ti ti-chevron-right" style="color:var(--muted);"></i>
+            </div>
+            <div class="settings-row">
+              <div class="sr-left">
+                <div class="sr-icon"><i class="ti ti-file-description"></i></div>
+                <div><div class="sr-label">Documents & KYC</div><div class="sr-sub">View your agent agreement</div></div>
+              </div>
+              <i class="ti ti-chevron-right" style="color:var(--muted);"></i>
+            </div>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="section-card" style="padding:20px;">
+            <div class="section-title" style="margin-bottom:14px;">Agent Zone Coverage</div>
+            <div style="background:#ffffff06;border-radius:10px;padding:14px;font-size:13px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <i class="ti ti-map-pin" style="color:var(--cyan);"></i>
+                <span>Pétion-Ville, Port-au-Prince</span>
+              </div>
+              <div style="color:var(--muted);font-size:12px;line-height:1.6;">
+                Zone 4 · Covers Rue Lamartinière, Blvd Jean-Jacques Dessalines, and surrounding streets within 1km radius.
+              </div>
+            </div>
+            <div style="margin-top:14px;font-size:13px;color:var(--muted);">Max single withdrawal: <strong style="color:var(--txt);">$500 USDC</strong></div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Daily limit: <strong style="color:var(--txt);">$5,000 USDC</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+
+<!-- ═══ MODAL: PROCESS WITHDRAWAL ═══ -->
+<div class="overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Process Withdrawal</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Verify customer identity before processing</div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-customer">
+        <div class="modal-av" id="m-av" style="background:linear-gradient(135deg,#ff6b6b,#ee5a24)">MR</div>
+        <div>
+          <div class="modal-cname" id="m-name">Marie Roseline</div>
+          <div class="modal-cinfo" id="m-info">@marie.roseline · TP verified</div>
+        </div>
+        <span class="pill pill-done" style="margin-left:auto;"><i class="ti ti-shield-check"></i> KYC Verified</span>
+      </div>
+
+      <div class="modal-rows">
+        <div class="modal-row">
+          <span class="mr-label">USDC Amount</span>
+          <span class="mr-val big" id="m-usdc">100.00 USDC</span>
+        </div>
+        <div class="modal-row">
+          <span class="mr-label">HTG Equivalent</span>
+          <span class="mr-val" id="m-htg">≈ 13,050 HTG</span>
+        </div>
+        <div class="modal-row">
+          <span class="mr-label">Cash Out Method</span>
+          <span class="mr-val" id="m-method">Cash (HTG)</span>
+        </div>
+        <div class="modal-row">
+          <span class="mr-label">Your Commission (1%)</span>
+          <span class="mr-val" style="color:var(--green);" id="m-fee">$1.00</span>
+        </div>
+        <div class="modal-row">
+          <span class="mr-label">Request Time</span>
+          <span class="mr-val" id="m-time" style="color:var(--muted);">2 min ago</span>
+        </div>
+      </div>
+
+      <div class="modal-pin">
+        <div class="modal-pin-lbl">Verification Code (show customer to verify)</div>
+        <div class="modal-pin-code" id="m-pin">4 8 2 7</div>
+      </div>
+
+      <div class="pin-input">
+        <label>Enter your 4-digit Agent PIN to confirm</label>
+        <input type="password" maxlength="4" id="agent-pin-input" placeholder="••••" oninput="if(this.value.length===4)document.getElementById('m-confirm').removeAttribute('disabled'); else document.getElementById('m-confirm').setAttribute('disabled','true');" />
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-red" onclick="rejectWithdrawal()"><i class="ti ti-x"></i> Reject</button>
+        <button class="btn btn-green" id="m-confirm" disabled onclick="confirmWithdrawal()"><i class="ti ti-check"></i> Confirm & Dispense</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: FLOAT TOP-UP ═══ -->
+<div class="overlay" id="topup-overlay" onclick="closeTopupModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Request Float Top-up</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Funds will be credited within 30 minutes</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('topup-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Select amount</div>
+      <div class="topup-amounts">
+        <div class="ta-btn" onclick="selectTopup(this,'500')">500 USDC</div>
+        <div class="ta-btn" onclick="selectTopup(this,'1000')">1,000 USDC</div>
+        <div class="ta-btn" onclick="selectTopup(this,'2000')">2,000 USDC</div>
+        <div class="ta-btn" onclick="selectTopup(this,'5000')">5,000 USDC</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Or enter custom amount</div>
+      <input class="custom-input" type="number" id="topup-amount" placeholder="Enter USDC amount" min="100" max="10000" />
+      <div class="topup-note">Current balance: 1,240.50 USDC · Minimum request: 100 USDC</div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="document.getElementById('topup-overlay').classList.remove('show')">Cancel</button>
+        <button class="btn btn-cyan" onclick="submitTopup()"><i class="ti ti-arrow-up"></i> Submit Request</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast">
+  <i class="ti" id="toast-icon"></i>
+  <div class="toast-txt">
+    <div class="toast-title" id="toast-title"></div>
+    <div class="toast-msg" id="toast-msg"></div>
+  </div>
+</div>
+
+
+<script>
+// ── DATA ──
+const RATE = 130.5; // HTG per USDC
+let floatBalance = 1240.50;
+
+const QUEUE = [
+  { id:'Q001', name:'Marie Roseline', handle:'@marie.roseline', avatar:'MR', color:'#ee5a24',
+    usdc:100, method:'Cash (HTG)', time:'2 min ago', urgent:true, pin:'4827' },
+  { id:'Q002', name:'Pierre Louis', handle:'@pierre.louis', avatar:'PL', color:'#0984e3',
+    usdc:250, method:'Cash (HTG)', time:'8 min ago', urgent:false, pin:'9312' },
+  { id:'Q003', name:'Claudette Miriam', handle:'@claudette.m', avatar:'CM', color:'#6c5ce7',
+    usdc:50, method:'Local Bank', time:'15 min ago', urgent:false, pin:'7645' },
+];
+
+const HISTORY = [
+  { id:'TX001', name:'Joseph Marcelin',  type:'cashout', amt:150, time:'10:42 AM', status:'done', ref:'TCH-8812' },
+  { id:'TX002', name:'Nathalie Pierre',   type:'cashout', amt:80,  time:'10:15 AM', status:'done', ref:'TCH-8807' },
+  { id:'TX003', name:'Renold Baptiste',   type:'cashout', amt:200, time:'9:50 AM',  status:'done', ref:'TCH-8799' },
+  { id:'TX004', name:'Float Top-up',      type:'topup',   amt:500, time:'8:30 AM',  status:'done', ref:'TU-4412' },
+  { id:'TX005', name:'Lucie Desrosiers',  type:'cashout', amt:75,  time:'8:20 AM',  status:'done', ref:'TCH-8794' },
+  { id:'TX006', name:'Max Louis',         type:'cashout', amt:320, time:'Yesterday 4:12 PM', status:'done', ref:'TCH-8780' },
+  { id:'TX007', name:'Float Top-up',      type:'topup',   amt:580, time:'Yesterday 2:15 PM', status:'done', ref:'TU-4389' },
+  { id:'TX008', name:'Sophia Germain',    type:'cashout', amt:100, time:'Yesterday 11:00 AM', status:'done', ref:'TCH-8772' },
+];
+
+const WEEK = [120,280,430,310,520,670,184]; // Mon–Sun USDC processed
+const WEEK_LABELS = ['M','T','W','T','F','S','Su'];
+
+let activeRequest = null;
+
+// ── PAGE NAVIGATION ──
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.sb-nav a').forEach(a=>a.classList.remove('on'));
+  document.getElementById('page-'+name).classList.add('on');
+  if(el) el.classList.add('on');
+  const titles = { dashboard:'Dashboard', history:'Transaction History', float:'Float & Earnings', profile:'My Profile' };
+  document.getElementById('page-title').textContent = titles[name]||name;
+  if(name==='history') renderHistory('all');
+  if(name==='float') renderFloatChart();
+}
+
+// ── RENDER QUEUE ──
+function renderQueue() {
+  const list = document.getElementById('queue-list');
+  if(QUEUE.length===0){
+    list.innerHTML = `<div class="empty-state"><i class="ti ti-circle-check"></i>No pending requests — all clear!</div>`;
+    document.getElementById('queue-count').textContent = '0 pending';
+    document.getElementById('stat-queue').textContent = '0';
+    document.getElementById('badge-pending').textContent = '0';
+    document.getElementById('badge-pending').style.display='none';
+    return;
+  }
+  document.getElementById('queue-count').textContent = QUEUE.length+' pending';
+  document.getElementById('stat-queue').textContent = QUEUE.length;
+  document.getElementById('badge-pending').textContent = QUEUE.length;
+  document.getElementById('badge-pending').style.display='';
+
+  list.innerHTML = QUEUE.map((q,i)=>`
+    <div class="q-item ${q.urgent?'urgent':'normal'}" onclick="openModal(${i})">
+      <div class="q-dot"></div>
+      <div class="q-av" style="background:${q.color}">${q.avatar}</div>
+      <div class="q-info">
+        <div class="q-name">${q.name}</div>
+        <div class="q-meta">${q.handle} · ${q.method}</div>
+      </div>
+      <div class="q-right">
+        <div class="q-amt">${q.usdc} USDC</div>
+        <div class="q-time">${q.time}</div>
+        <div class="q-actions" onclick="event.stopPropagation()">
+          <button class="btn btn-red btn-xs" onclick="rejectDirect(${i})">Reject</button>
+          <button class="btn btn-green btn-xs" onclick="openModal(${i})">Process</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER RECENT ──
+function renderRecent() {
+  const list = document.getElementById('recent-list');
+  list.innerHTML = HISTORY.slice(0,5).map(t=>`
+    <div class="tx-item">
+      <div class="tx-icon ${t.type==='topup'?'in':'out'}">
+        <i class="ti ${t.type==='topup'?'ti-arrow-down-left':'ti-arrow-up-right'}"></i>
+      </div>
+      <div class="tx-info">
+        <div class="tx-name">${t.name}</div>
+        <div class="tx-ref">${t.ref}</div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amt" style="color:${t.type==='topup'?'var(--green)':'var(--txt)'}">
+          ${t.type==='topup'?'+':''}${t.amt} USDC
+        </div>
+        <div class="tx-time">${t.time}</div>
+        <span class="pill pill-done">Completed</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER HISTORY ──
+let currentFilter = 'all';
+function filterHistory(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.h-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderHistory(f);
+}
+function renderHistory(f) {
+  const list = document.getElementById('history-list');
+  const items = f==='all' ? HISTORY : HISTORY.filter(t=>t.type===f);
+  list.innerHTML = items.map(t=>`
+    <div class="tx-item">
+      <div class="tx-icon ${t.type==='topup'?'in':'out'}">
+        <i class="ti ${t.type==='topup'?'ti-arrow-down-left':'ti-arrow-up-right'}"></i>
+      </div>
+      <div class="tx-info">
+        <div class="tx-name">${t.name}</div>
+        <div class="tx-ref">REF: ${t.ref}</div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amt" style="color:${t.type==='topup'?'var(--green)':'var(--txt)'}">
+          ${t.type==='topup'?'+':'-'}${t.amt} USDC
+        </div>
+        <div class="tx-time">${t.time}</div>
+        <span class="pill pill-done">Completed</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER BARS ──
+function renderBars(containerId, data, labels) {
+  const max = Math.max(...data);
+  const el = document.getElementById(containerId);
+  el.innerHTML = data.map((v,i)=>`
+    <div class="bar-wrap">
+      <div class="bar" style="height:${Math.max(6,(v/max)*100)*(containerId==='float-chart'?1.1:1)}%;"></div>
+      <div class="bar-lbl">${labels[i]}</div>
+    </div>
+  `).join('');
+}
+function renderFloatChart() {
+  renderBars('float-chart', [2000,1640,1280,960,1460,1240], ['M','T','W','T','F','S']);
+}
+
+// ── MODAL ──
+function openModal(idx) {
+  activeRequest = idx;
+  const q = QUEUE[idx];
+  document.getElementById('m-av').textContent = q.avatar;
+  document.getElementById('m-av').style.background = `linear-gradient(135deg,${q.color},${q.color}aa)`;
+  document.getElementById('m-name').textContent = q.name;
+  document.getElementById('m-info').textContent = q.handle+' · TP verified';
+  document.getElementById('m-usdc').textContent = q.usdc.toFixed(2)+' USDC';
+  document.getElementById('m-htg').textContent = '≈ '+(q.usdc*RATE).toLocaleString()+' HTG';
+  document.getElementById('m-method').textContent = q.method;
+  document.getElementById('m-fee').textContent = '$'+(q.usdc*0.01).toFixed(2);
+  document.getElementById('m-time').textContent = q.time;
+  document.getElementById('m-pin').textContent = q.pin.split('').join(' ');
+  document.getElementById('agent-pin-input').value = '';
+  document.getElementById('m-confirm').setAttribute('disabled','true');
+  document.getElementById('modal-overlay').classList.add('show');
+}
+function closeModal(e) {
+  if(e.target===document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('show');
+  activeRequest = null;
+}
+function confirmWithdrawal() {
+  const pin = document.getElementById('agent-pin-input').value;
+  if(pin !== '1234' && pin.length === 4) {
+    // Accept any 4-digit PIN for demo
+    const q = QUEUE[activeRequest];
+    floatBalance -= q.usdc;
+    HISTORY.unshift({ id:'TX'+Date.now(), name:q.name, type:'cashout', amt:q.usdc, time:'Just now', status:'done', ref:'TCH-'+Math.floor(9000+Math.random()*999) });
+    QUEUE.splice(activeRequest,1);
+    closeModalDirect();
+    renderQueue();
+    renderRecent();
+    updateFloatDisplay();
+    const stat = parseInt(document.getElementById('stat-tx').textContent)||0;
+    document.getElementById('stat-tx').textContent = stat+1;
+    showToast('success','Payment Processed!',`${q.usdc} USDC → ${q.name} dispensed successfully`);
+  }
+}
+function rejectWithdrawal() {
+  if(activeRequest===null) return;
+  const q = QUEUE[activeRequest];
+  QUEUE.splice(activeRequest,1);
+  closeModalDirect();
+  renderQueue();
+  showToast('error','Request Rejected',`${q.name}'s withdrawal was declined`);
+}
+function rejectDirect(i) {
+  const q = QUEUE[i];
+  QUEUE.splice(i,1);
+  renderQueue();
+  showToast('error','Request Rejected',`${q.name}'s withdrawal was declined`);
+}
+
+// ── TOPUP ──
+function openTopup() {
+  document.getElementById('topup-overlay').classList.add('show');
+}
+function closeTopupModal(e) {
+  if(e.target===document.getElementById('topup-overlay'))
+    document.getElementById('topup-overlay').classList.remove('show');
+}
+function selectTopup(el, val) {
+  document.querySelectorAll('.ta-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('topup-amount').value = val;
+}
+function submitTopup() {
+  const amt = parseFloat(document.getElementById('topup-amount').value);
+  if(!amt || amt<100){ showToast('error','Invalid amount','Minimum top-up is 100 USDC'); return; }
+  document.getElementById('topup-overlay').classList.remove('show');
+  showToast('success','Top-up Requested!',`${amt} USDC will be credited within 30 minutes`);
+}
+
+// ── FLOAT DISPLAY ──
+function updateFloatDisplay() {
+  document.getElementById('float-display').textContent = floatBalance.toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2})+' USDC';
+  document.getElementById('float-htg').textContent = '≈ '+(floatBalance*RATE).toLocaleString('en',{maximumFractionDigits:0})+' HTG';
+  if(floatBalance < 300) {
+    document.getElementById('float-warning').classList.add('show');
+  }
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(type, title, msg) {
+  const t = document.getElementById('toast');
+  const icons = { success:'ti-circle-check', error:'ti-circle-x', info:'ti-info-circle' };
+  t.className = 'toast '+type;
+  document.getElementById('toast-icon').className = 'ti '+icons[type];
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})
+    +' · '+now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── INIT ──
+renderQueue();
+renderRecent();
+renderBars('mini-bars', WEEK, WEEK_LABELS);
+updateFloatDisplay();
+
+// Simulate new request after 20s
+setTimeout(()=>{
+  QUEUE.push({
+    id:'Q004', name:'Rosena Mathurin', handle:'@rosena.m', avatar:'RM', color:'#00b894',
+    usdc:175, method:'Cash (HTG)', time:'Just now', urgent:true, pin:'2291'
+  });
+  renderQueue();
+  showToast('info','New Withdrawal Request!','Rosena Mathurin wants to cash out 175 USDC');
+}, 20000);
+
+// Mobile hamburger
+if(window.innerWidth<=860) document.getElementById('hamburger').style.display='flex';
+window.addEventListener('resize',()=>{
+  document.getElementById('hamburger').style.display = window.innerWidth<=860?'flex':'none';
+});
+</script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

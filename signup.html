@@ -857,39 +857,48 @@
     document.getElementById('persona-start-wrap').style.display = 'none';
     document.getElementById('persona-loading').style.display = 'block';
 
-    // Get userId from sessionStorage (set during register step)
-    const userId    = sessionStorage.getItem('tp_user_id') || 'demo-user';
+    // Require a real userId — don't allow anonymous KYC
+    const userId = sessionStorage.getItem('tp_user_id');
+    if (!userId) {
+      showPersonaFailed('Session expired. Please go back to Step 1 and create your account first.');
+      return;
+    }
     const email     = document.getElementById('email')?.value || '';
     const firstName = document.getElementById('fname')?.value || '';
     const lastName  = document.getElementById('lname')?.value || '';
 
+    // Pass any previously stored inquiry ID so the backend can try to resume it
+    // (if expired/failed, the backend will create a fresh one automatically)
+    const existingInquiryId = (() => { try { return sessionStorage.getItem('tp_persona_inquiry_id'); } catch(e) { return null; } })();
+
     try {
-      // Create Persona inquiry via our Netlify function
+      // Create (or resume) a Persona inquiry via our Netlify function
       const res = await fetch('/.netlify/functions/persona-kyc', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'createInquiry', userId, email, firstName, lastName }),
+        body: JSON.stringify({ action: 'createInquiry', userId, email, firstName, lastName, existingInquiryId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Could not start verification');
-      if (!data.sessionToken && !data.templateId) throw new Error('Verification service not configured');
+      if (!data.inquiryId) throw new Error('Verification service did not return an inquiry. Check PERSONA_API_KEY and PERSONA_TEMPLATE_ID in Netlify.');
 
       personaInquiryId = data.inquiryId;
+      try { sessionStorage.setItem('tp_persona_inquiry_id', data.inquiryId); } catch(e) {}
 
-      // Load Persona embedded SDK and launch
+      // Load Persona embedded SDK
       if (!window.Persona) {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
           s.src = 'https://cdn.withpersona.com/dist/persona-v4.8.0.js';
           s.onload = resolve;
-          s.onerror = reject;
+          s.onerror = () => reject(new Error('Failed to load Persona SDK. Check your internet connection.'));
           document.head.appendChild(s);
         });
       }
 
       document.getElementById('persona-loading').style.display = 'none';
 
-      // Use sessionToken mode if available, otherwise fall back to templateId + referenceId
+      // Use sessionToken if we have one, otherwise fall back to templateId
       const clientConfig = data.sessionToken
         ? { inquiryId: data.inquiryId, sessionToken: data.sessionToken }
         : { templateId: data.templateId, referenceId: userId,
@@ -897,29 +906,36 @@
 
       personaClient = new Persona.Client({
         ...clientConfig,
-        onReady:    () => personaClient.open(),
+        onReady: () => personaClient.open(),
         onComplete: ({ inquiryId }) => {
           personaInquiryId = inquiryId;
-          // Store so dashboard can pick it up for a status re-check
           try { sessionStorage.setItem('tp_persona_inquiry_id', inquiryId); } catch(e) {}
-          // Show success immediately — don't block the UI on the API call
           document.getElementById('persona-loading').style.display = 'none';
           document.getElementById('persona-success').style.display = 'block';
           showToast('✅ Identity verified!');
-          // Update Supabase in the background (non-blocking)
           checkPersonaStatus(inquiryId);
         },
-        onCancel:   () => {
+        onCancel: () => {
+          // User closed the widget — let them try again
           document.getElementById('persona-loading').style.display = 'none';
           document.getElementById('persona-start-wrap').style.display = 'block';
           btn.disabled = false;
+          // Clear the stored inquiry ID so next attempt creates a fresh one
+          try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
+          personaInquiryId = null;
         },
-        onError:    (err) => {
-          showPersonaFailed(err?.message || 'Verification error. Please try again.');
+        onError: (err) => {
+          console.error('Persona widget error:', err);
+          const msg = err?.message || err?.code || 'Verification error. Please try again.';
+          showPersonaFailed(msg);
+          // Clear stored inquiry so retry starts fresh
+          try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
+          personaInquiryId = null;
         },
       });
 
     } catch (err) {
+      console.error('Persona KYC start error:', err);
       showPersonaFailed(err.message);
     }
   }
@@ -953,6 +969,10 @@
   }
 
   function retryPersonaKYC() {
+    // Clear any stored inquiry so we always create a fresh one on retry
+    try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
+    personaInquiryId = null;
+    personaClient    = null;
     document.getElementById('persona-failed').style.display = 'none';
     document.getElementById('persona-start-wrap').style.display = 'block';
     document.getElementById('btn-start-kyc').disabled = false;

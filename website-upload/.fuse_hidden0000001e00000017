@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Receive Money in Haiti — Tchotcho Pay</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Expecting a transfer from family abroad? Get a free Tchotcho Pay wallet to receive USDC instantly, pay bills, top up your phone, and cash out in HTG at 300+ agents."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/recipient.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/recipient.html"/>
+  <meta property="og:title" content="Receive Money in Haiti — Tchotcho Pay"/>
+  <meta property="og:description" content="Expecting a transfer from family abroad? Get a free Tchotcho Pay wallet to receive USDC instantly, pay bills, top up your phone, and cash out in HTG at 300+ agents."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Receive Money in Haiti — Tchotcho Pay"/>
+  <meta name="twitter:description" content="Expecting a transfer from family abroad? Get a free Tchotcho Pay wallet to receive USDC instantly, pay bills, top up your phone, and cash out in HTG at 300+ agents."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731; --gold:#F7B731;
+      --ht-blue:#003087; --ht-red:#CE1126;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:13px 28px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.18);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
+    .nav-name em{color:var(--cyan);font-style:normal;}
+    .haiti-badge{display:flex;align-items:center;gap:5px;background:rgba(206,17,38,.12);border:1px solid rgba(206,17,38,.25);border-radius:50px;padding:4px 12px;font-size:.72rem;font-weight:700;color:#ff6b7a;margin-left:8px;}
+    .lang-row{display:flex;gap:4px;margin-left:auto;}
+    .lang-btn{padding:5px 10px;border-radius:50px;border:none;background:none;color:var(--gray);font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;}
+    .lang-btn.active{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;}
+    .nav-cta-btn{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:8px 18px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;margin-left:8px;white-space:nowrap;}
+    @media(max-width:600px){.haiti-badge{display:none;}.nav-cta-btn{padding:7px 12px;font-size:.76rem;}}
+
+    /* ── HAITI FLAG STRIPE ── */
+    .flag-stripe{height:5px;background:linear-gradient(90deg,var(--ht-blue) 50%,var(--ht-red) 50%);}
+
+    /* ── HERO ── */
+    .hero{padding:110px 24px 64px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(0,48,135,.3) 0%,rgba(0,174,239,.06) 40%,transparent 70%);}
+    .hero::before{content:'🇭🇹';font-size:120px;position:absolute;top:80px;right:5%;opacity:.06;pointer-events:none;line-height:1;}
+    .hero::after{content:'🇭🇹';font-size:120px;position:absolute;top:80px;left:5%;opacity:.06;pointer-events:none;line-height:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(206,17,38,.1);border:1px solid rgba(206,17,38,.3);color:#ff8a95;padding:6px 16px;border-radius:50px;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px;}
+    .hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.1;margin-bottom:16px;}
+    .hero h1 em{color:var(--cyan);font-style:normal;}
+    .hero-sub{color:var(--gray);font-size:1rem;max-width:560px;margin:0 auto 12px;line-height:1.6;}
+    .hero-sub-ht{color:rgba(127,212,247,.7);font-size:.9rem;max-width:560px;margin:0 auto 32px;line-height:1.6;font-style:italic;}
+
+    /* Rate live ticker */
+    .rate-ticker{display:inline-flex;align-items:center;gap:10px;background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.22);border-radius:50px;padding:9px 20px;margin-bottom:32px;}
+    .ticker-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .ticker-text{font-size:.85rem;font-weight:700;color:var(--green);}
+    .ticker-rate{font-size:1.1rem;font-weight:900;color:var(--white);}
+
+    /* Hero CTA */
+    .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-hero-primary{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:14px 32px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s,transform .15s;}
+    .btn-hero-primary:hover{opacity:.9;transform:translateY(-2px);}
+    .btn-hero-outline{background:none;border:1.5px solid rgba(0,174,239,.4);color:var(--white);border-radius:50px;padding:14px 28px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;}
+    .btn-hero-outline:hover{border-color:var(--cyan);background:rgba(0,174,239,.06);}
+
+    /* ── TRUST BAR ── */
+    .trust-bar{background:rgba(10,31,110,.4);border-top:1px solid rgba(0,174,239,.1);border-bottom:1px solid rgba(0,174,239,.1);padding:18px 24px;}
+    .trust-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
+    .trust-item{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:var(--gray);white-space:nowrap;}
+    .trust-item i{color:var(--green);font-size:.95rem;}
+
+    /* ── SECTION WRAPPER ── */
+    .section{max-width:960px;margin:0 auto;padding:64px 24px;}
+    .section-center{text-align:center;}
+    .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+    .section-title{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;margin-bottom:10px;line-height:1.2;}
+    .section-sub{color:var(--gray);font-size:.92rem;line-height:1.6;max-width:560px;margin:0 auto 36px;}
+
+    /* ── HOW TO RECEIVE ── */
+    .receive-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;}
+    @media(max-width:680px){.receive-grid{grid-template-columns:1fr;}}
+    .steps-list{display:flex;flex-direction:column;gap:0;}
+    .step-item{display:flex;gap:16px;position:relative;padding-bottom:28px;}
+    .step-item:last-child{padding-bottom:0;}
+    .step-item:not(:last-child)::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(0,174,239,.4),rgba(0,174,239,.05));}
+    .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--mid),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;flex-shrink:0;position:relative;z-index:1;}
+    .step-body .sb-title{font-size:.95rem;font-weight:800;margin-bottom:4px;}
+    .step-body .sb-sub{font-size:.82rem;color:var(--gray);line-height:1.5;}
+    .step-body .sb-sub em{color:var(--cyan);font-style:normal;font-weight:700;}
+
+    /* Phone mockup */
+    .phone-demo{width:220px;margin:0 auto;}
+    .phone-shell{background:linear-gradient(160deg,#0d1f4e,#050e28);border:2px solid rgba(0,174,239,.3);border-radius:38px;padding:12px;box-shadow:0 24px 64px rgba(0,0,0,.5);}
+    .phone-notch{width:68px;height:18px;background:#000;border-radius:12px;margin:0 auto 8px;}
+    .phone-screen{background:#080f1f;border-radius:26px;overflow:hidden;min-height:420px;}
+    .ps-topbar{background:linear-gradient(135deg,#0A1F6E,#020B2D);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;}
+    .ps-tb-title{font-size:.8rem;font-weight:800;}
+    .ps-tb-notif{width:22px;height:22px;border-radius:50%;background:rgba(0,174,239,.15);display:flex;align-items:center;justify-content:center;font-size:.65rem;}
+    .ps-hero-card{background:linear-gradient(135deg,#0A1F6E,#1055CC);margin:10px;border-radius:16px;padding:14px;position:relative;overflow:hidden;}
+    .ps-hero-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(0,174,239,.1);}
+    .ps-lbl{font-size:.6rem;color:rgba(255,255,255,.4);margin-bottom:2px;}
+    .ps-big{font-size:1.4rem;font-weight:900;color:var(--cyan);}
+    .ps-htg{font-size:.65rem;color:rgba(255,255,255,.4);margin-bottom:10px;}
+    .ps-actions{display:flex;gap:6px;}
+    .ps-act{flex:1;background:rgba(255,255,255,.08);border-radius:8px;padding:7px 4px;text-align:center;cursor:pointer;}
+    .ps-act-icon{font-size:.9rem;margin-bottom:2px;}
+    .ps-act-label{font-size:.55rem;color:rgba(255,255,255,.5);}
+    .ps-tx-section{padding:10px 12px 0;}
+    .ps-tx-label{font-size:.62rem;font-weight:700;color:var(--cyan);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+    .ps-tx{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+    .ps-tx:last-child{border:none;}
+    .ps-tx-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .ps-tx-info{flex:1;}
+    .ps-tx-name{font-size:.72rem;font-weight:700;}
+    .ps-tx-date{font-size:.6rem;color:rgba(255,255,255,.35);}
+    .ps-tx-amt{font-size:.78rem;font-weight:800;}
+    .ps-tx-amt.green{color:var(--green);}
+    .ps-tx-amt.red{color:var(--red);}
+
+    /* ── WHAT YOU CAN DO ── */
+    .can-do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    @media(max-width:640px){.can-do-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:420px){.can-do-grid{grid-template-columns:1fr;}}
+    .can-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:18px;padding:22px 18px;transition:all .25s;cursor:default;}
+    .can-card:hover{border-color:rgba(0,174,239,.3);transform:translateY(-3px);}
+    .can-icon{font-size:2rem;margin-bottom:12px;}
+    .can-title{font-size:.95rem;font-weight:800;margin-bottom:6px;}
+    .can-desc{font-size:.78rem;color:var(--gray);line-height:1.5;}
+    .can-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.2);color:var(--green);border-radius:50px;padding:3px 9px;font-size:.65rem;font-weight:700;margin-top:10px;}
+
+    /* ── SAVINGS HIGHLIGHT ── */
+    .savings-split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+    @media(max-width:680px){.savings-split{grid-template-columns:1fr;}}
+    .savings-card-big{background:linear-gradient(135deg,rgba(10,31,110,.7),rgba(2,11,45,.9));border:1px solid rgba(0,174,239,.2);border-radius:24px;padding:28px;position:relative;overflow:hidden;}
+    .savings-card-big::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,150,.12),transparent 70%);}
+    .sc-apy{font-size:3rem;font-weight:900;color:var(--green);line-height:1;}
+    .sc-apy-label{font-size:.8rem;color:var(--gray);margin-bottom:16px;}
+    .sc-bar-wrap{margin-bottom:16px;}
+    .sc-bar-label{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px;}
+    .sc-bar-label .left{color:var(--gray);}
+    .sc-bar-label .right{color:var(--green);font-weight:700;}
+    .sc-bar{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
+    .sc-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--mid),var(--green));}
+    .sc-compare{display:flex;flex-direction:column;gap:8px;}
+    .sc-cmp-row{display:flex;align-items:center;gap:10px;font-size:.8rem;}
+    .sc-cmp-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .sc-cmp-name{flex:1;color:var(--gray);}
+    .sc-cmp-rate{font-weight:700;}
+    .sc-cmp-rate.winner{color:var(--green);}
+    .sc-cmp-rate.loser{color:rgba(143,168,204,.5);}
+    .savings-right-text .st-title{font-size:1.4rem;font-weight:900;margin-bottom:10px;}
+    .savings-right-text .st-title em{color:var(--cyan);font-style:normal;}
+    .savings-right-text p{color:var(--gray);font-size:.88rem;line-height:1.7;margin-bottom:14px;}
+    .savings-bullets{display:flex;flex-direction:column;gap:10px;}
+    .sb-bullet{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;}
+    .sb-bullet i{color:var(--green);flex-shrink:0;margin-top:2px;}
+
+    /* ── AGENT FINDER ── */
+    .agent-section{background:rgba(10,31,110,.25);border:1px solid rgba(0,174,239,.1);border-radius:24px;padding:36px;}
+    .agent-search-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+    .agent-search{flex:1;min-width:200px;background:rgba(2,11,45,.7);border:1.5px solid rgba(0,174,239,.2);border-radius:50px;color:var(--white);padding:12px 20px;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s;}
+    .agent-search:focus{border-color:var(--cyan);}
+    .agent-search::placeholder{color:rgba(143,168,204,.35);}
+    .agent-filter{background:rgba(2,11,45,.7);border:1.5px solid rgba(0,174,239,.18);border-radius:50px;color:var(--white);padding:12px 16px;font-size:.82rem;font-family:inherit;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;padding-right:32px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238FA8CC' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-color:rgba(2,11,45,.7);}
+    .agent-filter option{background:#0A1F6E;}
+    .agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+    .agent-card{background:rgba(2,11,45,.6);border:1px solid rgba(0,174,239,.12);border-radius:14px;padding:16px;transition:border-color .2s;}
+    .agent-card:hover{border-color:rgba(0,174,239,.3);}
+    .ac-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+    .ac-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .ac-name{font-size:.88rem;font-weight:700;margin-bottom:2px;}
+    .ac-zone{font-size:.72rem;color:var(--gray);}
+    .ac-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+    .ac-badge{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:50px;}
+    .badge-open{background:rgba(0,200,150,.12);color:var(--green);border:1px solid rgba(0,200,150,.22);}
+    .badge-cash{background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);}
+    .badge-usdc{background:rgba(0,174,239,.1);color:var(--cyan);border:1px solid rgba(0,174,239,.2);}
+    .ac-addr{font-size:.72rem;color:var(--gray);display:flex;align-items:center;gap:5px;margin-bottom:8px;}
+    .ac-addr i{color:var(--cyan);font-size:.75rem;}
+    .ac-btn{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:9px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;}
+
+    /* ── COMPARISON TABLE ── */
+    .compare-wrap{overflow-x:auto;}
+    .compare-table{width:100%;border-collapse:collapse;min-width:480px;}
+    .compare-table th{padding:12px 16px;text-align:left;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);border-bottom:1px solid rgba(0,174,239,.1);}
+    .compare-table td{padding:13px 16px;font-size:.85rem;border-bottom:1px solid rgba(0,174,239,.06);}
+    .compare-table tr:last-child td{border:none;}
+    .compare-table tr.winner-row td{background:rgba(0,200,150,.05);}
+    .compare-table tr.winner-row td:first-child{border-left:3px solid var(--green);}
+    .winner-badge{background:var(--green);color:#000;font-size:.62rem;font-weight:900;padding:2px 7px;border-radius:50px;margin-left:6px;}
+    .htg-val{color:var(--green);font-weight:800;}
+    .htg-val.dim{color:rgba(143,168,204,.5);}
+    .fee-val{font-weight:700;}
+    .fee-val.free{color:var(--green);}
+    .fee-val.expensive{color:var(--red);}
+    .speed-fast{color:var(--cyan);font-weight:700;}
+
+    /* ── APP DOWNLOAD ── */
+    .app-section{text-align:center;padding:64px 24px;background:linear-gradient(135deg,rgba(10,31,110,.4),rgba(2,11,45,.8));border-top:1px solid rgba(0,174,239,.08);border-bottom:1px solid rgba(0,174,239,.08);}
+    .app-phones{display:flex;gap:16px;justify-content:center;align-items:flex-end;margin:28px 0;}
+    .app-store-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .store-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(10,31,110,.6);border:1.5px solid rgba(0,174,239,.3);border-radius:14px;padding:12px 22px;cursor:pointer;text-decoration:none;color:var(--white);transition:all .2s;}
+    .store-btn:hover{border-color:var(--cyan);transform:translateY(-2px);}
+    .store-btn-icon{font-size:1.5rem;}
+    .store-btn-text .sbt-sub{font-size:.65rem;color:var(--gray);}
+    .store-btn-text .sbt-name{font-size:.9rem;font-weight:700;}
+    .qr-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,174,239,.06);border:1px solid rgba(0,174,239,.15);border-radius:14px;padding:12px 16px;margin-top:16px;}
+    .qr-box{width:56px;height:56px;background:var(--white);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+    .qr-box svg{width:48px;height:48px;}
+    .qr-text{text-align:left;font-size:.78rem;color:var(--gray);}
+    .qr-text strong{display:block;color:var(--white);font-size:.85rem;margin-bottom:2px;}
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    @media(max-width:640px){.testimonials-grid{grid-template-columns:1fr;}}
+    .testimonial-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:18px;padding:22px;}
+    .tc-stars{color:var(--gold);font-size:.85rem;margin-bottom:10px;}
+    .tc-quote{font-size:.83rem;color:var(--gray);line-height:1.6;margin-bottom:14px;font-style:italic;}
+    .tc-author{display:flex;align-items:center;gap:10px;}
+    .tc-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;flex-shrink:0;}
+    .tc-name{font-size:.82rem;font-weight:700;}
+    .tc-city{font-size:.7rem;color:var(--gray);}
+
+    /* ── SCROLL REVEAL ── */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,150,.95);color:#000;padding:11px 22px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* ── FOOTER ── */
+    .footer-mini{background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:32px 24px;text-align:center;}
+    .footer-mini-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+    .footer-mini-links a{color:var(--gray);font-size:.8rem;text-decoration:none;transition:color .2s;}
+    .footer-mini-links a:hover{color:var(--cyan);}
+    .footer-mini-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- Haiti flag stripe -->
+<div class="flag-stripe"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="haiti-badge">🇭🇹 Ayiti</div>
+  <div class="lang-row">
+    <button class="lang-btn" onclick="setLang('ht')" id="lb-ht">Kreyòl</button>
+    <button class="lang-btn active" onclick="setLang('en')" id="lb-en">English</button>
+    <button class="lang-btn" onclick="setLang('fr')" id="lb-fr">Français</button>
+  </div>
+  <a href="signup.html" class="nav-cta-btn">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🇭🇹 For People in Haiti</div>
+  <h1 id="hero-title">Receive money from abroad<br/>in <em>minutes, not days</em></h1>
+  <p class="hero-sub" id="hero-sub">Your family sends money. You receive USDC — digital dollars that don't lose value. Pay bills, shop, cash out, or save. All from your phone.</p>
+  <p class="hero-sub-ht" id="hero-sub-ht">"Fanmi ou voye lajan. Ou resevwa dola dijital. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou."</p>
+  <div class="rate-ticker">
+    <div class="ticker-dot"></div>
+    <span class="ticker-text">Live rate today:</span>
+    <span class="ticker-rate" id="live-rate">1 USDC = 130.50 HTG</span>
+  </div>
+  <div class="hero-ctas">
+    <a href="signup.html" class="btn-hero-primary"><i class="ti ti-download"></i> <span id="cta-main">Create Free Wallet</span></a>
+    <a href="#agent-finder" class="btn-hero-outline"><i class="ti ti-map-pin"></i> <span id="cta-agent">Find Agent Near You</span></a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><i class="ti ti-circle-check"></i> <span id="t1">No bank account needed</span></div>
+    <div class="trust-item"><i class="ti ti-circle-check"></i> <span id="t2">Cash out in HTG anytime</span></div>
+    <div class="trust-item"><i class="ti ti-circle-check"></i> <span id="t3">Pay EDH, CAMEP & school fees</span></div>
+    <div class="trust-item"><i class="ti ti-circle-check"></i> <span id="t4">Save in digital dollars (4.5% APY)</span></div>
+    <div class="trust-item"><i class="ti ti-circle-check"></i> <span id="t5">Works on any smartphone</span></div>
+  </div>
+</div>
+
+<!-- HOW TO RECEIVE -->
+<div class="section">
+  <div class="section-center reveal">
+    <div class="section-tag"><i class="ti ti-bolt"></i> <span id="how-tag">How It Works</span></div>
+    <h2 class="section-title" id="how-title">Get your money in 4 easy steps</h2>
+    <p class="section-sub" id="how-sub">No complicated steps. No bank required. Just a smartphone and a free Tchotcho Pay account.</p>
+  </div>
+  <div class="receive-grid">
+    <div class="steps-list reveal">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="sb-title" id="s1t">Download the app & create wallet</div>
+          <div class="sb-sub" id="s1s">Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a <em>USDC wallet</em> on Base blockchain.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="sb-title" id="s2t">Share your username or QR code</div>
+          <div class="sb-sub" id="s2s">Tell your family abroad your Tchotcho Pay username or show your QR code. They send from the US, Canada, or France — it arrives in <em>under 2 minutes</em>.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="sb-title" id="s3t">Receive USDC — digital dollars</div>
+          <div class="sb-sub" id="s3s">Funds arrive as <em>USDC</em> — 1 USDC always equals $1 USD. No exchange risk. You see your balance in your wallet instantly with HTG equivalent shown live.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="sb-title" id="s4t">Spend, save, or cash out</div>
+          <div class="sb-sub" id="s4s">Pay EDH bills, top up phone, buy from merchants, send to family — or <em>cash out HTG</em> through a local agent in your city. Your choice, your control.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Phone mockup -->
+    <div class="phone-demo reveal">
+      <div class="phone-shell">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-topbar">
+            <div class="ps-tb-title">Tchotcho Pay</div>
+            <div class="ps-tb-notif"><i class="ti ti-bell" style="font-size:.65rem;color:var(--cyan)"></i></div>
+          </div>
+          <div style="padding:10px;">
+            <div style="font-size:.62rem;color:rgba(255,255,255,.35);margin-bottom:3px;">Bonjou, Marie 👋</div>
+            <div class="ps-hero-card">
+              <div class="ps-lbl">Wallet Balance</div>
+              <div class="ps-big">$185.50 USDC</div>
+              <div class="ps-htg">≈ 24,207 HTG</div>
+              <div class="ps-actions">
+                <div class="ps-act"><div class="ps-act-icon">📤</div><div class="ps-act-label">Send</div></div>
+                <div class="ps-act"><div class="ps-act-icon">📥</div><div class="ps-act-label">Receive</div></div>
+                <div class="ps-act"><div class="ps-act-icon">💸</div><div class="ps-act-label">Cash Out</div></div>
+                <div class="ps-act"><div class="ps-act-icon">⚡</div><div class="ps-act-label">Bills</div></div>
+              </div>
+            </div>
+            <div class="ps-tx-section">
+              <div class="ps-tx-label">Recent</div>
+              <div class="ps-tx">
+                <div class="ps-tx-ico" style="background:rgba(0,200,150,.12);">📥</div>
+                <div class="ps-tx-info"><div class="ps-tx-name">From: Jean (USA)</div><div class="ps-tx-date">Today · 2:14 PM</div></div>
+                <div class="ps-tx-amt green">+$100</div>
+              </div>
+              <div class="ps-tx">
+                <div class="ps-tx-ico" style="background:rgba(247,183,49,.1);">⚡</div>
+                <div class="ps-tx-info"><div class="ps-tx-name">EDH Electricity</div><div class="ps-tx-date">Yesterday</div></div>
+                <div class="ps-tx-amt red">-$45</div>
+              </div>
+              <div class="ps-tx">
+                <div class="ps-tx-ico" style="background:rgba(247,183,49,.1);">🎓</div>
+                <div class="ps-tx-info"><div class="ps-tx-name">School Fees</div><div class="ps-tx-date">Jun 18</div></div>
+                <div class="ps-tx-amt red">-$80</div>
+              </div>
+              <div class="ps-tx">
+                <div class="ps-tx-ico" style="background:rgba(0,174,239,.1);">📡</div>
+                <div class="ps-tx-info"><div class="ps-tx-name">Natcom Internet</div><div class="ps-tx-date">Jun 15</div></div>
+                <div class="ps-tx-amt red">-$20</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU CAN DO -->
+<div style="background:rgba(10,31,110,.15);border-top:1px solid rgba(0,174,239,.07);border-bottom:1px solid rgba(0,174,239,.07);">
+  <div class="section">
+    <div class="section-center reveal">
+      <div class="section-tag"><i class="ti ti-apps"></i> <span id="cando-tag">Everything You Can Do</span></div>
+      <h2 class="section-title" id="cando-title">Your wallet does it all</h2>
+      <p class="section-sub" id="cando-sub">One app for everything you need. Pay bills, buy groceries, send to family — no cash needed.</p>
+    </div>
+    <div class="can-do-grid">
+      <div class="can-card reveal">
+        <div class="can-icon">⚡</div>
+        <div class="can-title" id="cd1t">Pay EDH Electricity</div>
+        <div class="can-desc" id="cd1d">Pay your Électricité d'Haïti bill directly from your USDC wallet. Instant confirmation — no queues, no agents needed.</div>
+        <div class="can-tag"><i class="ti ti-bolt"></i> Instant</div>
+      </div>
+      <div class="can-card reveal">
+        <div class="can-icon">🎓</div>
+        <div class="can-title" id="cd2t">School Fees</div>
+        <div class="can-desc" id="cd2d">Pay school and university fees for your children. Works for all levels — primaire, secondaire, and university.</div>
+        <div class="can-tag"><i class="ti ti-circle-check"></i> No ATM needed</div>
+      </div>
+      <div class="can-card reveal">
+        <div class="can-icon">💧</div>
+        <div class="can-title" id="cd3t">CAMEP Water Bill</div>
+        <div class="can-desc" id="cd3d">Pay your CAMEP or EPPLS water bill without leaving home. No more standing in line.</div>
+        <div class="can-tag"><i class="ti ti-circle-check"></i> No ATM needed</div>
+      </div>
+      <div class="can-card reveal">
+        <div class="can-icon">📱</div>
+        <div class="can-title" id="cd4t">Phone Top-Up</div>
+        <div class="can-desc" id="cd4d">Top up Digicel or Natcom for yourself or anyone in Haiti. Works from anywhere in the world.</div>
+        <div class="can-tag"><i class="ti ti-bolt"></i> Instant</div>
+      </div>
+      <div class="can-card reveal">
+        <div class="can-icon">🛒</div>
+        <div class="can-title" id="cd5t">Shop at Local Merchants</div>
+        <div class="can-desc" id="cd5d">Scan QR codes at participating stores and restaurants. Pay in USDC — merchants receive HTG.</div>
+        <div class="can-tag"><i class="ti ti-qrcode"></i> Scan & Pay</div>
+      </div>
+      <div class="can-card reveal">
+        <div class="can-icon">💵</div>
+        <div class="can-title" id="cd6t">Cash Out in HTG</div>
+        <div class="can-desc" id="cd6d">Convert USDC to Haitian Gourdes at any local agent. Get cash in hand in Port-au-Prince, Cap-Haïtien, Les Cayes, and 40+ cities.</div>
+        <div class="can-tag"><i class="ti ti-cash"></i> 40+ cities</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SAVINGS HIGHLIGHT -->
+<div class="section">
+  <div class="savings-split">
+    <div class="savings-card-big reveal">
+      <div class="sc-apy">4.5%</div>
+      <div class="sc-apy-label">Annual Percentage Yield on USDC savings</div>
+      <div style="margin-bottom:20px;">
+        <div style="font-size:.8rem;color:var(--gray);margin-bottom:6px;">$500 USDC after 1 year</div>
+        <div style="font-size:1.4rem;font-weight:900;color:var(--green);">$522.50 USDC</div>
+      </div>
+      <div class="sc-bar-wrap">
+        <div class="sc-bar-label"><span class="left">Haitian Gourde (HTG)</span><span class="right loser" style="color:var(--red)">–20% / year inflation</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:10%;background:var(--red);opacity:.5;"></div></div>
+      </div>
+      <div class="sc-bar-wrap">
+        <div class="sc-bar-label"><span class="left">US Dollar cash (under mattress)</span><span class="right" style="color:var(--gray)">0%</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:20%;background:var(--gray);opacity:.4;"></div></div>
+      </div>
+      <div class="sc-bar-wrap">
+        <div class="sc-bar-label"><span class="left">USDC in Tchotcho Pay savings</span><span class="right" style="color:var(--green)">+4.5% APY</span></div>
+        <div class="sc-bar"><div class="sc-bar-fill" style="width:90%;"></div></div>
+      </div>
+    </div>
+    <div class="savings-right-text reveal">
+      <div class="section-tag"><i class="ti ti-piggy-bank"></i> <span id="save-tag">USDC Savings</span></div>
+      <div class="st-title" id="save-title">Stop losing money to <em>inflation</em></div>
+      <p id="save-p1">The Haitian Gourde loses 15–25% of its value every year. If you save in HTG, your money shrinks. If you save under your mattress in USD, you earn nothing.</p>
+      <p id="save-p2">With Tchotcho Pay, your balance is in USDC — always worth $1 USD — and earns 4.5% per year automatically. Just hold it in your Savings goal.</p>
+      <div class="savings-bullets">
+        <div class="sb-bullet"><i class="ti ti-circle-check"></i> <span id="sb1">No minimum balance required</span></div>
+        <div class="sb-bullet"><i class="ti ti-circle-check"></i> <span id="sb2">Withdraw any time — no lock-up period</span></div>
+        <div class="sb-bullet"><i class="ti ti-circle-check"></i> <span id="sb3">1 USDC = $1 USD — always stable</span></div>
+        <div class="sb-bullet"><i class="ti ti-circle-check"></i> <span id="sb4">Set savings goals: house, school, emergency fund</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AGENT FINDER -->
+<div style="background:rgba(10,31,110,.15);border-top:1px solid rgba(0,174,239,.07);border-bottom:1px solid rgba(0,174,239,.07);">
+  <div class="section" id="agent-finder">
+    <div class="section-center reveal">
+      <div class="section-tag"><i class="ti ti-map-pin"></i> <span id="agent-tag">Agent Network</span></div>
+      <h2 class="section-title" id="agent-title">Cash out near you</h2>
+      <p class="section-sub" id="agent-sub">300+ agents across Haiti. Show up with your app, get HTG cash in minutes. No ID needed beyond your Tchotcho Pay QR code.</p>
+    </div>
+    <div class="agent-section reveal">
+      <div class="agent-search-row">
+        <input class="agent-search" type="text" id="agent-search-input" placeholder="Search by city or agent name…" oninput="filterAgents()"/>
+        <select class="agent-filter" id="agent-dept" onchange="filterAgents()">
+          <option value="">All Departments</option>
+          <option>Ouest</option>
+          <option>Nord</option>
+          <option>Sud</option>
+          <option>Artibonite</option>
+          <option>Sud-Est</option>
+          <option>Nord-Est</option>
+          <option>Nippes</option>
+          <option>Nord-Ouest</option>
+        </select>
+      </div>
+      <div class="agents-grid" id="agents-grid"></div>
+      <div style="text-align:center;margin-top:20px;">
+        <p style="color:var(--gray);font-size:.8rem;" id="agent-count-text">Showing all agents</p>
+        <a href="agent-signup.html" style="color:var(--cyan);font-size:.82rem;text-decoration:none;margin-top:6px;display:inline-block;" id="become-agent-link">Become an agent in your community →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="section">
+  <div class="section-center reveal">
+    <div class="section-tag"><i class="ti ti-table"></i> <span id="cmp-tag">Side by Side</span></div>
+    <h2 class="section-title" id="cmp-title">How much does your family really send?</h2>
+    <p class="section-sub" id="cmp-sub">When $100 is sent from the US — how many HTG do you actually receive?</p>
+  </div>
+  <div class="compare-wrap reveal">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th id="th-service">Service</th>
+          <th id="th-fee">Fee on $100</th>
+          <th id="th-rate">Exchange Rate</th>
+          <th id="th-htg">HTG You Receive</th>
+          <th id="th-speed">Speed</th>
+        </tr>
+      </thead>
+      <tbody id="compare-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div style="background:rgba(10,31,110,.15);border-top:1px solid rgba(0,174,239,.07);">
+  <div class="section">
+    <div class="section-center reveal">
+      <div class="section-tag">⭐ <span id="test-tag">Real Users</span></div>
+      <h2 class="section-title" id="test-title">Haitians trust Tchotcho Pay</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote" id="tc1q">"Manman m voye $200 depi Miyami. Mwen resevwa yo nan mwens pase 2 minit. Mwen peye EDH ak lekòl pitit mwen menm jou."</div>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:rgba(0,200,150,.15);color:var(--green);">M</div>
+          <div><div class="tc-name">Marie-Rose D.</div><div class="tc-city">Port-au-Prince, Ouest</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote" id="tc2q">"Anvan, mwen te peye 8% komisyon chak fwa. Kounye a ak Tchotcho Pay, frè a sèlman 1%. Mwen ekonomize plis lajan chak mwa."</div>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:rgba(0,174,239,.15);color:var(--cyan);">J</div>
+          <div><div class="tc-name">Jean-Claude P.</div><div class="tc-city">Cap-Haïtien, Nord</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote" id="tc3q">"Mwen kenbe USDC mwen pandan 6 mwa. Li pa t pèdi valè tankou goud. Se kòm si mwen te gen lajan dola vrè nan men m."</div>
+        <div class="tc-author">
+          <div class="tc-avatar" style="background:rgba(247,183,49,.15);color:var(--gold);">N</div>
+          <div><div class="tc-name">Nadège B.</div><div class="tc-city">Les Cayes, Sud</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP DOWNLOAD -->
+<div class="app-section">
+  <div class="section-tag" style="margin:0 auto 16px;display:inline-flex;"><i class="ti ti-device-mobile"></i> Mobile App</div>
+  <h2 class="section-title" id="app-title">Get Tchotcho Pay on your phone</h2>
+  <p style="color:var(--gray);font-size:.88rem;max-width:440px;margin:0 auto 24px;line-height:1.6;" id="app-sub">Free to download. Works on Android and iPhone. No data plan required for basic features.</p>
+  <div class="app-store-btns">
+    <a href="#" class="store-btn" onclick="showToast('Android app coming soon!')">
+      <div class="store-btn-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76a1.5 1.5 0 0 1-.68-.17c-.42-.24-.5-.68-.5-1.08V1.49c0-.4.08-.84.5-1.08.42-.23.84-.05 1.14.17l18 10.5a1.5 1.5 0 0 1 0 2.84l-18 10.5c-.15.09-.3.34-.46.34z" fill="#00C896"/></svg>
+      </div>
+      <div class="store-btn-text"><div class="sbt-sub">Get it on</div><div class="sbt-name">Google Play</div></div>
+    </a>
+    <a href="#" class="store-btn" onclick="showToast('iOS app coming soon!')">
+      <div class="store-btn-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      </div>
+      <div class="store-btn-text"><div class="sbt-sub">Download on the</div><div class="sbt-name">App Store</div></div>
+    </a>
+  </div>
+  <div class="qr-badge" style="margin:0 auto;">
+    <div class="qr-box">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#020B2D">
+        <rect x="2" y="2" width="18" height="18"/><rect x="28" y="2" width="18" height="18"/>
+        <rect x="2" y="28" width="18" height="18"/>
+        <rect x="5" y="5" width="12" height="12" fill="white"/><rect x="31" y="5" width="12" height="12" fill="white"/>
+        <rect x="5" y="31" width="12" height="12" fill="white"/>
+        <rect x="8" y="8" width="6" height="6" fill="#020B2D"/><rect x="34" y="8" width="6" height="6" fill="#020B2D"/>
+        <rect x="8" y="34" width="6" height="6" fill="#020B2D"/>
+        <rect x="28" y="28" width="4" height="4"/><rect x="34" y="28" width="4" height="4"/>
+        <rect x="40" y="28" width="6" height="6"/><rect x="28" y="34" width="6" height="4"/>
+        <rect x="36" y="36" width="4" height="4"/><rect x="42" y="34" width="4" height="8"/>
+        <rect x="22" y="2" width="4" height="4"/><rect x="22" y="8" width="4" height="4"/>
+        <rect x="22" y="14" width="4" height="4"/><rect x="22" y="20" width="4" height="4"/>
+        <rect x="2" y="22" width="4" height="4"/><rect x="8" y="22" width="4" height="4"/>
+        <rect x="14" y="22" width="4" height="4"/>
+      </svg>
+    </div>
+    <div class="qr-text"><strong>Scan to download</strong>Points your camera at this code</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-mini">
+  <div class="footer-mini-links">
+    <a href="index.html">Home</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="billpay.html">Bill Pay</a>
+    <a href="topup.html">Top-Up</a>
+    <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
+    <a href="faq.html">Help Center</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms</a>
+    <a href="agent-signup.html">Become an Agent</a>
+  </div>
+  
+  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
+  <div class="footer-mini-copy">© 2026 Tchotcho Pay LLC · Serving Haiti and the Haitian Diaspora · 🇭🇹</div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── AGENTS DATA ────────────────────────────────────────────────────
+  const AGENTS = [
+    { name:'MonCash Delmas 33', zone:'Port-au-Prince', dept:'Ouest', addr:'Rue Chériez, Delmas 33', hours:'7AM–8PM', icon:'💰', cash:true, usdc:true },
+    { name:'Haiti Cash Express', zone:'Pétion-Ville', dept:'Ouest', addr:'Rue Grégoire #12, Pétion-Ville', hours:'8AM–9PM', icon:'🏪', cash:true, usdc:true },
+    { name:'Tchotcho Agent Tabarre', zone:'Tabarre', dept:'Ouest', addr:'Cité Soleil Route Nationale #1', hours:'7AM–7PM', icon:'💳', cash:true, usdc:false },
+    { name:'Cap Transfert Nord', zone:'Cap-Haïtien', dept:'Nord', addr:'Rue 17-H, Cap-Haïtien', hours:'8AM–6PM', icon:'🏦', cash:true, usdc:true },
+    { name:'Nord Agent Plus', zone:'Cap-Haïtien', dept:'Nord', addr:'Bld Carenage, en face Katedral', hours:'7AM–7PM', icon:'💰', cash:true, usdc:true },
+    { name:'Les Cayes Centre', zone:'Les Cayes', dept:'Sud', addr:'Rue Geffrard #8, Les Cayes', hours:'8AM–5PM', icon:'🏪', cash:true, usdc:false },
+    { name:'Gonaïves Money Hub', zone:'Gonaïves', dept:'Artibonite', addr:'Place d\'Armes, Gonaïves', hours:'7AM–6PM', icon:'💳', cash:true, usdc:true },
+    { name:'Jacmel Agent Kasav', zone:'Jacmel', dept:'Sud-Est', addr:'Rue Sainte-Anne, Jacmel', hours:'8AM–6PM', icon:'💰', cash:true, usdc:false },
+    { name:'Carrefour Rapid Cash', zone:'Carrefour', dept:'Ouest', addr:'Route de Carrefour #55', hours:'7AM–8PM', icon:'🏦', cash:true, usdc:true },
+    { name:'Miragoâne Transfer', zone:'Miragoâne', dept:'Nippes', addr:'Place Nationale, Miragoâne', hours:'8AM–5PM', icon:'🏪', cash:true, usdc:false },
+    { name:'Fort-Liberté Agent', zone:'Fort-Liberté', dept:'Nord-Est', addr:'Bld Estimé #3, Fort-Liberté', hours:'8AM–5PM', icon:'💰', cash:true, usdc:true },
+    { name:'Delmas 75 Cash Point', zone:'Port-au-Prince', dept:'Ouest', addr:'Delmas 75, près Sogebank', hours:'7AM–9PM', icon:'💳', cash:true, usdc:true },
+  ];
+
+  let agentFilter = '';
+  let deptFilter = '';
+
+  function filterAgents() {
+    agentFilter = document.getElementById('agent-search-input').value.toLowerCase();
+    deptFilter = document.getElementById('agent-dept').value;
+    renderAgents();
+  }
+
+  function renderAgents() {
+    const filtered = AGENTS.filter(a => {
+      const matchText = !agentFilter || a.name.toLowerCase().includes(agentFilter) || a.zone.toLowerCase().includes(agentFilter);
+      const matchDept = !deptFilter || a.dept === deptFilter;
+      return matchText && matchDept;
+    });
+    document.getElementById('agents-grid').innerHTML = filtered.length ? filtered.map(a => `
+      <div class="agent-card">
+        <div class="ac-top">
+          <div class="ac-icon" style="background:rgba(0,174,239,.1)">${a.icon}</div>
+          <div><div class="ac-name">${a.name}</div><div class="ac-zone">${a.zone} · ${a.dept}</div></div>
+        </div>
+        <div class="ac-badges">
+          <span class="ac-badge badge-open">Open ${a.hours}</span>
+          ${a.cash ? '<span class="ac-badge badge-cash">HTG Cash</span>' : ''}
+          ${a.usdc ? '<span class="ac-badge badge-usdc">USDC</span>' : ''}
+        </div>
+        <div class="ac-addr"><i class="ti ti-map-pin"></i>${a.addr}</div>
+        <button class="ac-btn" onclick="showToast('Directions opening…')"><i class="ti ti-map-2"></i> Get Directions</button>
+      </div>`).join('') : `<div style="color:var(--gray);font-size:.85rem;padding:20px;text-align:center;grid-column:1/-1;">No agents found. <a href="contact.html" style="color:var(--cyan)">Contact us</a> to find one near you.</div>`;
+    document.getElementById('agent-count-text').textContent = `Showing ${filtered.length} of ${AGENTS.length} agents`;
+  }
+
+  // ── COMPARISON TABLE ───────────────────────────────────────────────
+  const COMPARE = [
+    { name:'Tchotcho Pay', flag:'🇭🇹', fee:'$1.00', feeClass:'free', rate:'130.50 HTG', htg:'12,949 HTG', htgClass:'htg-val', speed:'~2 min', winner:true },
+    { name:'Western Union', flag:'💛', fee:'$5.99', feeClass:'expensive', rate:'128.10 HTG', htg:'12,001 HTG', htgClass:'htg-val dim', speed:'1–3 days', winner:false },
+    { name:'MoneyGram', flag:'🔵', fee:'$4.99', feeClass:'expensive', rate:'127.80 HTG', htg:'12,068 HTG', htgClass:'htg-val dim', speed:'1–2 days', winner:false },
+    { name:'Remitly', flag:'🟠', fee:'$3.99', feeClass:'', rate:'128.50 HTG', htg:'12,165 HTG', htgClass:'htg-val dim', speed:'3–5 days', winner:false },
+    { name:'Wise', flag:'🟢', fee:'$2.50', feeClass:'', rate:'129.00 HTG', htg:'12,478 HTG', htgClass:'htg-val dim', speed:'Same day', winner:false },
+  ];
+
+  document.getElementById('compare-tbody').innerHTML = COMPARE.map(c => `
+    <tr${c.winner ? ' class="winner-row"' : ''}>
+      <td>${c.flag} ${c.name}${c.winner ? '<span class="winner-badge">Best</span>' : ''}</td>
+      <td><span class="fee-val ${c.feeClass}">${c.fee}</span></td>
+      <td>${c.rate}</td>
+      <td><span class="${c.htgClass}">${c.htg}</span></td>
+      <td><span${c.winner ? ' class="speed-fast"' : ''}>${c.speed}</span></td>
+    </tr>`).join('');
+
+  // ── LANG ───────────────────────────────────────────────────────────
+  const TRANSLATIONS = {
+    en: {
+      'hero-title': 'Receive money from abroad<br/>in <em>minutes, not days</em>',
+      'hero-sub': 'Your family sends money. You receive USDC — digital dollars that don\'t lose value. Pay bills, shop, cash out, or save. All from your phone.',
+      'hero-sub-ht': '"Fanmi ou voye lajan. Ou resevwa dola dijital. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou."',
+      'cta-main':'Create Free Wallet','cta-agent':'Find Agent Near You',
+      't1':'No bank account needed','t2':'Cash out in HTG anytime','t3':'Pay EDH, CAMEP & school fees','t4':'Save in digital dollars (4.5% APY)','t5':'Works on any smartphone',
+      'how-title':'Get your money in 4 easy steps','how-sub':'No complicated steps. No bank required. Just a smartphone and a free Tchotcho Pay account.',
+      's1t':'Download the app & create wallet','s1s':'Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a USDC wallet on Base blockchain.',
+      's2t':'Share your username or QR code','s2s':'Tell your family abroad your Tchotcho Pay username or show your QR code. They send from the US, Canada, or France — it arrives in under 2 minutes.',
+      's3t':'Receive USDC — digital dollars','s3s':'Funds arrive as USDC — 1 USDC always equals $1 USD. No exchange risk. You see your balance in your wallet instantly with HTG equivalent shown live.',
+      's4t':'Spend, save, or cash out','s4s':'Pay EDH bills, top up phone, buy from merchants, send to family — or cash out HTG through a local agent in your city. Your choice, your control.',
+      'cando-title':'Your wallet does it all','cando-sub':'One app for everything you need. Pay bills, buy groceries, send to family — no cash needed.',
+      'cd1t':'Pay EDH Electricity','cd1d':'Pay your Électricité d\'Haïti bill directly from your USDC wallet. Instant confirmation — no queues, no agents needed.',
+      'cd2t':'School Fees','cd2d':'Pay school and university fees for your children. Works for all levels — primaire, secondaire, and university.',
+      'cd3t':'CAMEP Water Bill','cd3d':'Pay your CAMEP or EPPLS water bill without leaving home. No more standing in line.',
+      'cd4t':'Phone Top-Up','cd4d':'Top up Digicel or Natcom for yourself or anyone in Haiti. Works from anywhere in the world.',
+      'cd5t':'Shop at Local Merchants','cd5d':'Scan QR codes at participating stores and restaurants. Pay in USDC — merchants receive HTG.',
+      'cd6t':'Cash Out in HTG','cd6d':'Convert USDC to Haitian Gourdes at any local agent. Get cash in hand in Port-au-Prince, Cap-Haïtien, Les Cayes, and 40+ cities.',
+      'save-title':'Stop losing money to <em>inflation</em>','save-p1':'The Haitian Gourde loses 15–25% of its value every year. If you save in HTG, your money shrinks. If you save under your mattress in USD, you earn nothing.','save-p2':'With Tchotcho Pay, your balance is in USDC — always worth $1 USD — and earns 4.5% per year automatically. Just hold it in your Savings goal.',
+      'sb1':'No minimum balance required','sb2':'Withdraw any time — no lock-up period','sb3':'1 USDC = $1 USD — always stable','sb4':'Set savings goals: house, school, emergency fund',
+      'agent-title':'Cash out near you','agent-sub':'300+ agents across Haiti. Show up with your app, get HTG cash in minutes.',
+      'cmp-title':'How much does your family really send?','cmp-sub':'When $100 is sent from the US — how many HTG do you actually receive?',
+      'test-title':'Haitians trust Tchotcho Pay',
+      'tc1q':'"My mom sent $200 from Miami. I received it in less than 2 minutes. I paid EDH and my kid\'s school fees the same day."',
+      'tc2q':'"Before, I was paying 8% commission every time. Now with Tchotcho Pay, the fee is only 1%. I save more money every month."',
+      'tc3q':'"I kept my USDC for 6 months. It didn\'t lose value like the gourde. It\'s like holding real dollar bills in my hand."',
+      'app-title':'Get Tchotcho Pay on your phone','app-sub':'Free to download. Works on Android and iPhone. No data plan required for basic features.',
+    },
+    ht: {
+      'hero-title': 'Resevwa lajan depi lòt bò<br/>nan <em>minit, pa jou</em>',
+      'hero-sub': 'Fanmi ou voye lajan. Ou resevwa USDC — dola dijital ki pa pèdi valè. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou.',
+      'hero-sub-ht': '"Se Tchotcho Pay ki fè l fasil. Yon minit pou resevwa, yon segonn pou peye."',
+      'cta-main':'Kreye Bous Gratis','cta-agent':'Jwenn Ajan Pre Ou',
+      't1':'Pa bezwen kont bank','t2':'Kache nan HTG nenpòt ki lè','t3':'Peye EDH, CAMEP ak frè lekòl','t4':'Ekonomize nan dola dijital (4.5% APY)','t5':'Travay sou nenpòt ki telefòn',
+      'how-title':'Resevwa lajan ou nan 4 etap fasil','how-sub':'Pa gen etap konplike. Pa gen bank obligatwa. Jis yon telefòn ak yon kont Tchotcho Pay gratis.',
+      's1t':'Telechaje app la & kreye bous ou','s1s':'Enskrisyon gratis nan mwens pase 3 minit. Pa bezwen kont bank — jis yon nimewo telefòn ak yon ID. Ou jwenn yon bous USDC sou Base blockchain.',
+      's2t':'Pataje non itilizatè ou oswa kòd QR ou','s2s':'Di fanmi ou lòt bò non Tchotcho Pay ou oswa montre kòd QR ou. Yo voye depi USA, Kanada, oswa Lafrans — li rive nan mwens pase 2 minit.',
+      's3t':'Resevwa USDC — dola dijital','s3s':'Lajan an rive kòm USDC — 1 USDC toujou egal $1 USD. Pa gen risk echanj. Ou wè balans ou nan bous ou yon segonn ak ekilivan HTG ki montre an dirèk.',
+      's4t':'Depanse, ekonomize, oswa kache','s4s':'Peye fakti EDH, rechaje telefòn, achte nan komèsan, voye bay fanmi — oswa kache HTG atravè yon ajan lokal nan vil ou. Ou chwazi, ou kontwole.',
+      'cando-title':'Bous ou fè tout bagay','cando-sub':'Yon sèl app pou tout sa ou bezwen. Peye fakti, achte manje, voye bay fanmi — pa bezwen kach.',
+      'cd1t':'Peye Elektrisite EDH','cd1d':'Peye fakti EDH ou dirèkteman depi bous USDC ou. Konfirmasyon yon segonn — pa gen file, pa gen ajan obligatwa.',
+      'cd2t':'Frè Lekòl','cd2d':'Peye frè lekòl ak inivèsite pou pitit ou. Travay pou tout nivo — primè, segondè, ak inivèsite.',
+      'cd3t':'Fakti Dlo CAMEP','cd3d':'Peye fakti CAMEP oswa EPPLS ou san ou pa kite kay ou. Pa gen plis file.',
+      'cd4t':'Rechaje Telefòn','cd4d':'Rechaje Digicel oswa Natcom pou ou menm oswa nenpòt moun ann Ayiti. Travay depi nenpòt kote nan lemonn.',
+      'cd5t':'Achte nan Komèsan Lokal','cd5d':'Eskane kòd QR nan boutik ak restoran ki patisipe. Peye an USDC — komèsan resevwa HTG.',
+      'cd6t':'Kache nan HTG','cd6d':'Konvèti USDC an Goud Ayisyen nan nenpòt ajan lokal. Jwenn kash nan men ou nan Pòtoprens, Okap, Okay, ak plis pase 40 vil.',
+      'save-title':'Sispann pèdi lajan nan <em>enflasyon</em>','save-p1':'Goud Ayisyen pèdi 15–25% valè l chak ane. Si ou ekonomize nan HTG, lajan ou ap rètresi. Si ou mete l anba matla an USD, ou pa touche anyen.','save-p2':'Ak Tchotcho Pay, balans ou an USDC — toujou vo $1 USD — epi li touche 4.5% pa ane otomatikman. Jis kenbe l nan Objektif Epay ou.',
+      'sb1':'Pa gen balans minimòm obligatwa','sb2':'Retire nenpòt ki lè — pa gen peryòd blokaj','sb3':'1 USDC = $1 USD — toujou estab','sb4':'Fikse objektif epay: kay, lekòl, fon ijans',
+      'agent-title':'Kache pre ou','agent-sub':'300+ ajan nan tout Ayiti. Parèt ak app ou, jwenn kash HTG nan kèlke minit.',
+      'cmp-title':'Konbyen fanmi ou vrèman voye?','cmp-sub':'Lè $100 voye depi USA — konbyen HTG ou vrèman resevwa?',
+      'test-title':'Ayisyen fè konfyans Tchotcho Pay',
+      'tc1q':'"Manman m voye $200 depi Miyami. Mwen resevwa yo nan mwens pase 2 minit. Mwen peye EDH ak lekòl pitit mwen menm jou."',
+      'tc2q':'"Anvan, mwen te peye 8% komisyon chak fwa. Kounye a ak Tchotcho Pay, frè a sèlman 1%. Mwen ekonomize plis lajan chak mwa."',
+      'tc3q':'"Mwen kenbe USDC mwen pandan 6 mwa. Li pa t pèdi valè tankou goud. Se kòm si mwen te gen lajan dola vrè nan men m."',
+      'app-title':'Telechaje Tchotcho Pay sou telefòn ou','app-sub':'Gratis pou telechaje. Travay sou Android ak iPhone. Pa bezwen plan done pou fonksyon debaz.',
+    },
+    fr: {
+      'hero-title': 'Recevez de l\'argent de l\'étranger<br/>en <em>minutes, pas en jours</em>',
+      'hero-sub': 'Votre famille envoie de l\'argent. Vous recevez des USDC — des dollars numériques qui ne perdent pas de valeur. Payez des factures, faites vos achats, retirez en HTG ou épargnez. Tout depuis votre téléphone.',
+      'hero-sub-ht': '"Fanmi ou voye lajan. Ou resevwa dola dijital. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou."',
+      'cta-main':'Créer un Portefeuille Gratuit','cta-agent':'Trouver un Agent Près de Vous',
+      't1':'Aucun compte bancaire requis','t2':'Retrait en HTG à tout moment','t3':'Payez EDH, CAMEP & frais scolaires','t4':'Épargnez en dollars numériques (4,5% APY)','t5':'Fonctionne sur tout smartphone',
+      'how-title':'Recevez votre argent en 4 étapes simples','how-sub':'Pas d\'étapes compliquées. Aucune banque requise. Juste un smartphone et un compte Tchotcho Pay gratuit.',
+      's1t':'Téléchargez l\'app & créez votre portefeuille','s1s':'Inscription gratuite en moins de 3 minutes. Pas de compte bancaire requis — juste un numéro de téléphone et une pièce d\'identité.',
+      's2t':'Partagez votre nom d\'utilisateur ou QR code','s2s':'Donnez à votre famille à l\'étranger votre nom Tchotcho Pay ou montrez votre QR code. Ils envoient depuis les USA, Canada ou France — ça arrive en moins de 2 minutes.',
+      's3t':'Recevez des USDC — dollars numériques','s3s':'Les fonds arrivent en USDC — 1 USDC = toujours $1 USD. Aucun risque de change. Vous voyez votre solde instantanément avec l\'équivalent HTG en direct.',
+      's4t':'Dépensez, épargnez ou retirez','s4s':'Payez EDH, rechargez un téléphone, achetez chez des commerçants, envoyez à la famille — ou retirez en HTG via un agent local.',
+      'cando-title':'Votre portefeuille fait tout','cando-sub':'Une seule app pour tout ce dont vous avez besoin.',
+      'cd1t':'Payer la facture EDH','cd1d':'Payez votre facture d\'électricité directement depuis votre portefeuille USDC. Confirmation instantanée.',
+      'cd2t':'Frais scolaires','cd2d':'Payez les frais d\'école et d\'université pour vos enfants. Tous niveaux acceptés.',
+      'cd3t':'Facture d\'eau CAMEP','cd3d':'Payez votre facture CAMEP sans quitter votre domicile.',
+      'cd4t':'Recharge téléphonique','cd4d':'Rechargez Digicel ou Natcom pour vous ou n\'importe qui en Haïti.',
+      'cd5t':'Shopping chez les commerçants locaux','cd5d':'Scannez les QR codes dans les boutiques et restaurants participants.',
+      'cd6t':'Retrait en HTG','cd6d':'Convertissez vos USDC en Gourdes haïtiennes auprès d\'un agent local dans plus de 40 villes.',
+      'save-title':'Arrêtez de perdre de l\'argent à cause de l\'<em>inflation</em>','save-p1':'La Gourde haïtienne perd 15 à 25% de sa valeur chaque année.','save-p2':'Avec Tchotcho Pay, votre solde est en USDC — toujours à $1 USD — et rapporte 4,5% par an automatiquement.',
+      'sb1':'Aucun solde minimum requis','sb2':'Retrait à tout moment — sans période de blocage','sb3':'1 USDC = $1 USD — toujours stable','sb4':'Fixez des objectifs d\'épargne : maison, école, fonds d\'urgence',
+      'agent-title':'Retrait près de chez vous','agent-sub':'300+ agents à travers Haïti.',
+      'cmp-title':'Combien votre famille envoie-t-elle vraiment?','cmp-sub':'Quand 100$ sont envoyés depuis les USA — combien de HTG recevez-vous vraiment?',
+      'test-title':'Les Haïtiens font confiance à Tchotcho Pay',
+      'tc1q':'"Ma mère a envoyé $200 depuis Miami. Je les ai reçus en moins de 2 minutes. J\'ai payé EDH et les frais scolaires le même jour."',
+      'tc2q':'"Avant, je payais 8% de commission à chaque fois. Maintenant avec Tchotcho Pay, les frais sont seulement de 1%."',
+      'tc3q':'"J\'ai gardé mes USDC pendant 6 mois. Ils n\'ont pas perdu de valeur comme la gourde."',
+      'app-title':'Téléchargez Tchotcho Pay sur votre téléphone','app-sub':'Gratuit à télécharger. Fonctionne sur Android et iPhone.',
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    ['lb-en','lb-ht','lb-fr'].forEach(id => document.getElementById(id).classList.remove('active'));
+    document.getElementById('lb-' + lang).classList.add('active');
+    const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+    Object.entries(t).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = val;
+    });
+    localStorage.setItem('tchotcho_lang', lang);
+  }
+
+  // Apply stored lang on load
+  const storedLang = localStorage.getItem('tchotcho_lang');
+  if(storedLang && TRANSLATIONS[storedLang]) setLang(storedLang);
+  else setLang('en');
+
+  // ── SCROLL REVEAL ─────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── TOAST ──────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  // ── LIVE RATE TICKER ───────────────────────────────────────────────
+  function updateRate() {
+    const base = 130.50;
+    const jitter = (Math.random() - 0.5) * 0.3;
+    const rate = (base + jitter).toFixed(2);
+    document.getElementById('live-rate').textContent = `1 USDC = ${rate} HTG`;
+  }
+  setInterval(updateRate, 8000);
+
+  // ── INIT ───────────────────────────────────────────────────────────
+  renderAgents();
+</script>
+  <script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

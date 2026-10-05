@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Become a Tchotcho Pay Merchant — Accept USDC Payments</title>
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Accept digital payments at your business in Haiti. List products on the Haitian marketplace and get paid in USDC instantly. Only 1–2% transaction fee."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://tchotchopay.com/merchant-signup.html"/>
+  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tchotchopay.com/merchant-signup.html"/>
+  <meta property="og:title" content="Become a Tchotcho Pay Merchant — Accept USDC Payments"/>
+  <meta property="og:description" content="Accept digital payments at your business in Haiti. List products on the Haitian marketplace and get paid in USDC instantly. Only 1–2% transaction fee."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Tchotcho Pay"/>
+  <meta property="og:locale" content="en_US"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@TchotchoPay"/>
+  <meta name="twitter:title" content="Become a Tchotcho Pay Merchant — Accept USDC Payments"/>
+  <meta name="twitter:description" content="Accept digital payments at your business in Haiti. List products on the Haitian marketplace and get paid in USDC instantly. Only 1–2% transaction fee."/>
+  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+:root{
+  --bg:#07091a;--panel:#0d1120;--card:#111827;--border:#1e2a40;
+  --cyan:#00e5ff;--cyan2:#00b4cc;--green:#00e676;--red:#ff5252;--orange:#F7B731;--yellow:#ffd740;
+  --txt:#e8eaf6;--muted:#8899aa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;}
+
+/* ── TOP BAR ── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(7,9,26,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:14px 28px;display:flex;align-items:center;gap:14px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-box{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0a1f6e,var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;}
+.nav-brand{font-size:15px;font-weight:700;color:var(--txt);}
+.nav-brand em{color:var(--cyan);font-style:normal;}
+.nav-back{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:13px;transition:.15s;}
+.nav-back:hover{color:var(--txt);}
+
+/* ── LAYOUT ── */
+.page-wrap{min-height:100vh;padding:80px 0 60px;display:flex;align-items:flex-start;justify-content:center;}
+.page-inner{width:100%;max-width:680px;padding:0 20px;}
+
+/* ── PROGRESS ── */
+.progress-wrap{margin:32px 0 28px;}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.progress-label-left{font-size:12px;color:var(--muted);}
+.progress-label-right{font-size:12px;font-weight:700;color:var(--cyan);}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;}
+.progress-fill{height:100%;background:linear-gradient(to right,var(--cyan2),var(--cyan));border-radius:2px;transition:.4s;}
+.steps-row{display:flex;gap:0;margin-top:10px;}
+.step-dot{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.step-dot-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--muted);transition:.3s;}
+.step-dot-circle.done{background:var(--cyan);border-color:var(--cyan);color:#000;}
+.step-dot-circle.active{border-color:var(--cyan);color:var(--cyan);}
+.step-dot-lbl{font-size:9px;color:var(--muted);text-align:center;}
+
+/* ── CARD ── */
+.form-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:20px;}
+.step-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(247,183,49,.2),rgba(255,107,107,.2));border:1px solid rgba(247,183,49,.3);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;}
+.step-title{font-size:20px;font-weight:800;margin-bottom:6px;}
+.step-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+
+/* ── FORM ELEMENTS ── */
+.form-group{margin-bottom:18px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px;font-weight:500;}
+label span.req{color:var(--orange);}
+input,select,textarea{
+  width:100%;padding:11px 14px;background:#ffffff08;
+  border:1px solid var(--border);border-radius:9px;
+  color:var(--txt);font-size:14px;outline:none;font-family:inherit;
+  transition:.2s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan);background:#00e5ff05;}
+input::placeholder,textarea::placeholder{color:var(--muted);}
+select option{background:var(--panel);}
+textarea{resize:vertical;min-height:90px;}
+.input-with-icon{position:relative;}
+.input-with-icon i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none;}
+.input-with-icon input{padding-left:38px;}
+
+/* ── CATEGORY GRID ── */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;}
+.cat-btn{
+  padding:10px 8px;border-radius:10px;background:#ffffff06;
+  border:1px solid var(--border);cursor:pointer;text-align:center;
+  font-size:12px;font-weight:500;color:var(--muted);transition:.15s;
+}
+.cat-btn:hover,.cat-btn.on{background:rgba(247,183,49,.1);border-color:rgba(247,183,49,.5);color:var(--orange);}
+.cat-btn span{display:block;font-size:20px;margin-bottom:4px;}
+
+/* ── UPLOAD ZONE ── */
+.upload-zone{
+  border:2px dashed var(--border);border-radius:10px;padding:24px;
+  text-align:center;cursor:pointer;transition:.2s;margin-top:6px;
+}
+.upload-zone:hover,.upload-zone.has-file{border-color:var(--orange);background:rgba(247,183,49,.04);}
+.upload-zone i{font-size:28px;color:var(--muted);display:block;margin-bottom:8px;}
+.upload-zone.has-file i{color:var(--orange);}
+.upload-label{font-size:13px;color:var(--muted);}
+.upload-zone.has-file .upload-label{color:var(--orange);font-weight:600;}
+.upload-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* ── PAYOUT METHODS ── */
+.method-card{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+  background:#ffffff06;border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:.15s;margin-bottom:8px;
+}
+.method-card:hover,.method-card.on{border-color:var(--orange);background:rgba(247,183,49,.07);}
+.method-radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted);flex-shrink:0;position:relative;transition:.15s;}
+.method-radio::after{content:'';position:absolute;inset:2px;border-radius:50%;background:var(--orange);opacity:0;transition:.15s;}
+.method-card.on .method-radio{border-color:var(--orange);}
+.method-card.on .method-radio::after{opacity:1;}
+.method-icon{font-size:20px;flex-shrink:0;}
+.method-info{flex:1;}
+.method-name{font-size:13px;font-weight:600;}
+.method-sub{font-size:11px;color:var(--muted);}
+.method-extra{margin-top:10px;display:none;}
+.method-extra.show{display:block;}
+
+/* ── REVIEW BOX ── */
+.review-section{margin-bottom:16px;}
+.review-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;}
+.review-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.review-row:last-child{border-bottom:none;}
+.review-val{font-weight:600;text-align:right;}
+
+/* ── TERMS ── */
+.terms-box{
+  background:#ffffff05;border:1px solid var(--border);border-radius:10px;
+  padding:14px;font-size:12px;color:var(--muted);max-height:140px;overflow-y:auto;line-height:1.7;margin-bottom:14px;
+}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;cursor:pointer;}
+.checkbox-row input[type=checkbox]{width:16px;height:16px;margin-top:1px;accent-color:var(--orange);flex-shrink:0;}
+.checkbox-row span{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* ── ACTIONS ── */
+.form-actions{display:flex;gap:10px;margin-top:8px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:inherit;}
+.btn-primary{background:linear-gradient(135deg,#F7B731,#ff6b6b);color:#fff;}
+.btn-primary:hover{opacity:.88;}
+.btn-back{background:#ffffff0d;color:var(--txt);border:1px solid var(--border);}
+.btn-back:hover{background:#ffffff18;}
+.btn-full{width:100%;justify-content:center;}
+
+/* ── SUCCESS ── */
+.success-card{background:var(--panel);border:1px solid rgba(0,230,118,.3);border-radius:16px;padding:40px 32px;text-align:center;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(247,183,49,.2),rgba(255,107,107,.2));display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;}
+.success-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.success-sub{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto 24px;line-height:1.6;}
+.success-steps{text-align:left;background:#ffffff05;border-radius:10px;padding:16px;margin-bottom:24px;}
+.success-step{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:13px;}
+.ss-num{width:20px;height:20px;border-radius:50%;background:rgba(247,183,49,.2);color:var(--orange);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+/* ── HERO ── */
+.signup-hero{
+  text-align:center;padding:32px 0 0;
+}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(247,183,49,.1);border:1px solid rgba(247,183,49,.3);border-radius:50px;padding:5px 16px;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px;}
+.hero-title{font-size:28px;font-weight:900;line-height:1.2;margin-bottom:10px;}
+.hero-title em{color:var(--orange);font-style:normal;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:460px;margin:0 auto 8px;line-height:1.6;}
+.hero-perks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px;padding-bottom:4px;}
+.hero-perk{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.hero-perk i{color:var(--orange);font-size:14px;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ffffff20;border-radius:2px;}
+@media(max-width:600px){.form-row-2{grid-template-columns:1fr;}.cat-grid{grid-template-columns:repeat(2,1fr);}.form-card{padding:22px 18px;}}
+</style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1331702829081068');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-box">T</div>
+    <span class="nav-brand">Tchotcho<em>Pay</em></span>
+  </a>
+  <span style="font-size:12px;color:var(--muted);background:rgba(247,183,49,.1);border:1px solid rgba(247,183,49,.3);padding:3px 10px;border-radius:20px;color:var(--orange);font-weight:600;">Merchant Sign-up</span>
+  <a class="nav-back" href="index.html#business"><i class="ti ti-arrow-left"></i> Back</a>
+</nav>
+
+<div class="page-wrap">
+<div class="page-inner">
+
+  <!-- Hero (step 0 only) -->
+  <div class="signup-hero" id="hero-block">
+    <div class="hero-badge">🏪 Merchant Partner Program</div>
+    <h1 class="hero-title">Grow your business<br/>with <em>Tchotcho Pay</em></h1>
+    <p class="hero-sub">Accept digital payments, list your products on our Haitian marketplace, and get paid in USDC — within hours.</p>
+    <div class="hero-perks">
+      <div class="hero-perk"><i class="ti ti-check"></i>$0 setup fee</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>1–2% merchant fee only</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>Payouts in &lt;2 hours</div>
+      <div class="hero-perk"><i class="ti ti-check"></i>QR code payments</div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progress-wrap" style="display:none;">
+    <div class="progress-label">
+      <span class="progress-label-left" id="step-label">Step 1 of 5</span>
+      <span class="progress-label-right" id="step-name">Business Info</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:20%;"></div></div>
+    <div class="steps-row" id="steps-row"></div>
+  </div>
+
+  <!-- STEP 0: INTRO -->
+  <div id="step-0">
+    <div class="form-card" style="margin-top:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--orange);">$0</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Setup fee</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--orange);">1–2%</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Per transaction</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--cyan);">&lt;2 hrs</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Payout speed</div>
+        </div>
+        <div style="background:#ffffff06;border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:var(--green);">24/7</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Always accepting</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="startSignup()"><i class="ti ti-arrow-right"></i> Start Application</button>
+      <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted);">Takes about 5 minutes · You'll need a government-issued ID</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: BUSINESS INFO -->
+  <div id="step-1" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">🏪</div>
+      <div class="step-title">Tell us about your business</div>
+      <div class="step-sub">Basic information about your store or business.</div>
+
+      <div class="form-group">
+        <label>Business / Store Name <span class="req">*</span></label>
+        <input type="text" id="biz-name" placeholder="e.g. Marché Soleil" />
+      </div>
+
+      <div class="form-group">
+        <label>Business Category <span class="req">*</span></label>
+        <div class="cat-grid" id="cat-grid">
+          <div class="cat-btn" onclick="selCat(this,'Food & Grocery')"><span>🛒</span>Food & Grocery</div>
+          <div class="cat-btn" onclick="selCat(this,'Restaurant')"><span>🍽️</span>Restaurant</div>
+          <div class="cat-btn" onclick="selCat(this,'Electronics')"><span>📱</span>Electronics</div>
+          <div class="cat-btn" onclick="selCat(this,'Clothing')"><span>👗</span>Clothing</div>
+          <div class="cat-btn" onclick="selCat(this,'Pharmacy')"><span>💊</span>Pharmacy</div>
+          <div class="cat-btn" onclick="selCat(this,'Transport')"><span>🚗</span>Transport</div>
+          <div class="cat-btn" onclick="selCat(this,'Education')"><span>🎓</span>Education</div>
+          <div class="cat-btn" onclick="selCat(this,'Phone Top-ups')"><span>📶</span>Phone Top-ups</div>
+          <div class="cat-btn" onclick="selCat(this,'Other')"><span>🏠</span>Other</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Business Address in Haiti <span class="req">*</span></label>
+        <input type="text" id="biz-addr" placeholder="e.g. Rue des Miracles 12, Pétion-Ville" />
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>City / Area</label>
+          <select id="biz-city">
+            <option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option>
+            <option>Tabarre</option><option>Carrefour</option><option>Cite Soleil</option>
+            <option>Cap-Haïtien</option><option>Gonaïves</option><option>Saint-Marc</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Business Phone</label>
+          <input type="tel" id="biz-phone" placeholder="+509 3412-8844" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Business Email (for receipts & alerts)</label>
+        <div class="input-with-icon">
+          <i class="ti ti-mail"></i>
+          <input type="email" id="biz-email" placeholder="store@email.com" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(2)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: OWNER INFO -->
+  <div id="step-2" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">👤</div>
+      <div class="step-title">Owner information</div>
+      <div class="step-sub">We need to verify who is responsible for this business account.</div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="owner-first" placeholder="Jean" />
+        </div>
+        <div class="form-group">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" id="owner-last" placeholder="Baptiste" />
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="date" id="owner-dob" />
+        </div>
+        <div class="form-group">
+          <label>Nationality</label>
+          <select id="owner-nat">
+            <option>Haitian</option><option>American</option><option>Canadian</option>
+            <option>French</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Personal Phone Number <span class="req">*</span></label>
+        <div class="input-with-icon">
+          <i class="ti ti-phone"></i>
+          <input type="tel" id="owner-phone" placeholder="+509 3412-8844" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>National ID / Passport Number <span class="req">*</span></label>
+        <input type="text" id="owner-id" placeholder="Enter your ID number" />
+      </div>
+
+      <div class="form-group">
+        <label>Home Address</label>
+        <input type="text" id="owner-addr" placeholder="Your personal address" />
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(1)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(3)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: DOCUMENTS -->
+  <div id="step-3" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">🪪</div>
+      <div class="step-title">Upload documents</div>
+      <div class="step-sub">Upload a clear photo of your government-issued ID. Business registration is optional but helps speed up approval.</div>
+
+      <div class="form-group">
+        <label>ID Document Type <span class="req">*</span></label>
+        <select id="doc-type" onchange="updateDocLabel()">
+          <option value="national-id">National ID Card (Haiti)</option>
+          <option value="passport">Passport</option>
+          <option value="drivers-license">Driver's License</option>
+          <option value="resident-card">Permanent Resident Card</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label id="doc-front-label">ID Front <span class="req">*</span></label>
+        <div class="upload-zone" id="doc-front-zone" onclick="fakeUpload('front')">
+          <i class="ti ti-camera" id="front-icon"></i>
+          <div class="upload-label" id="front-label">Click to upload front of ID</div>
+          <div class="upload-sub">JPG, PNG or PDF · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>ID Back <span class="req">*</span></label>
+        <div class="upload-zone" id="doc-back-zone" onclick="fakeUpload('back')">
+          <i class="ti ti-camera" id="back-icon"></i>
+          <div class="upload-label" id="back-label">Click to upload back of ID</div>
+          <div class="upload-sub">JPG, PNG or PDF · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Business Registration Certificate <span style="font-size:11px;color:var(--muted);">(optional — speeds up review)</span></label>
+        <div class="upload-zone" id="biz-reg-zone" onclick="fakeUpload('biz')">
+          <i class="ti ti-file-text" id="biz-icon"></i>
+          <div class="upload-label" id="biz-reg-label">Click to upload business certificate</div>
+          <div class="upload-sub">Patente, CFPB, or official registration · Max 5MB</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(2)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(4)" id="docs-next" disabled>Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: PAYOUT -->
+  <div id="step-4" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">💸</div>
+      <div class="step-title">How do you want to get paid?</div>
+      <div class="step-sub">Choose where your USDC earnings get sent when you request a payout.</div>
+
+      <div class="method-card on" onclick="selPayout(this,'bank')" id="pay-bank">
+        <div class="method-radio"></div>
+        <div class="method-icon">🏦</div>
+        <div class="method-info">
+          <div class="method-name">Local Bank Transfer</div>
+          <div class="method-sub">BNC, Sogebank, UNIBANK — 1–2 hours · 1% fee</div>
+        </div>
+      </div>
+      <div class="method-extra show" id="extra-bank">
+        <div class="form-row-2" style="margin-bottom:4px;">
+          <div class="form-group"><label>Bank Name</label>
+            <select><option>BNC</option><option>Sogebank</option><option>UNIBANK</option><option>Capital Bank</option><option>Citibank Haiti</option></select>
+          </div>
+          <div class="form-group"><label>Account Number</label><input type="text" placeholder="Enter account number"/></div>
+        </div>
+        <div class="form-group"><label>Account Holder Name</label><input type="text" placeholder="Name on account"/></div>
+      </div>
+
+      <div class="method-card" onclick="selPayout(this,'moncash')" id="pay-moncash">
+        <div class="method-radio"></div>
+        <div class="method-icon">📱</div>
+        <div class="method-info">
+          <div class="method-name">MonCash</div>
+          <div class="method-sub">Instant · 1.5% fee</div>
+        </div>
+      </div>
+      <div class="method-extra" id="extra-moncash">
+        <div class="form-group"><label>MonCash Phone Number</label><input type="tel" placeholder="+509 3412-8844"/></div>
+      </div>
+
+      <div class="method-card" onclick="selPayout(this,'usdc')" id="pay-usdc">
+        <div class="method-radio"></div>
+        <div class="method-icon"><i class="ti ti-currency-dollar" style="color:var(--cyan);font-size:18px;"></i></div>
+        <div class="method-info">
+          <div class="method-name">Keep as USDC</div>
+          <div class="method-sub">Stay in your Tchotcho wallet · No fee</div>
+        </div>
+      </div>
+      <div class="method-extra" id="extra-usdc">
+        <div style="font-size:12px;color:var(--muted);padding:8px 12px;background:#00e5ff08;border-radius:8px;">
+          Earnings stay in your Tchotcho USDC wallet. You can withdraw to HTG anytime via an agent or bank.
+        </div>
+      </div>
+
+      <div class="form-actions" style="margin-top:8px;">
+        <button class="btn btn-back" onclick="goStep(3)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="goStep(5)">Continue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: REVIEW & SUBMIT -->
+  <div id="step-5" style="display:none;">
+    <div class="form-card">
+      <div class="step-icon">✅</div>
+      <div class="step-title">Review & submit</div>
+      <div class="step-sub">Check your information before submitting. You can go back to make changes.</div>
+
+      <div class="review-section">
+        <div class="review-title">Business</div>
+        <div class="review-row"><span style="color:var(--muted);">Store Name</span><span class="review-val" id="rv-biz-name">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Category</span><span class="review-val" id="rv-cat">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Address</span><span class="review-val" id="rv-addr">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Phone</span><span class="review-val" id="rv-phone">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <div class="review-title">Owner</div>
+        <div class="review-row"><span style="color:var(--muted);">Name</span><span class="review-val" id="rv-owner">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">ID Document</span><span class="review-val" id="rv-doc">—</span></div>
+        <div class="review-row"><span style="color:var(--muted);">Payout Method</span><span class="review-val" id="rv-payout">—</span></div>
+      </div>
+
+      <div class="terms-box">
+        <strong>Tchotcho Pay Merchant Agreement</strong><br/><br/>
+        By submitting this application, you agree to our merchant terms of service. You confirm that all information provided is accurate and that you authorize Tchotcho Pay to verify your identity and business through third-party KYC providers. Merchant accounts are subject to a 1–2% transaction fee on all payments received. Payouts are processed within 2 business hours of request. Tchotcho Pay reserves the right to suspend merchant accounts found in violation of our acceptable use policy, including fraudulent transactions or chargebacks exceeding 1% of monthly volume.
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="agree-terms" onchange="updateSubmit()"/>
+        <span>I agree to the <a href="#" style="color:var(--orange);">Merchant Terms of Service</a> and <a href="#" style="color:var(--orange);">Privacy Policy</a></span>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="agree-kyc" onchange="updateSubmit()"/>
+        <span>I authorize Tchotcho Pay to verify my identity and business information</span>
+      </label>
+
+      <div class="form-actions">
+        <button class="btn btn-back" onclick="goStep(4)"><i class="ti ti-arrow-left"></i></button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" id="submit-btn" disabled onclick="submitApplication()">
+          <i class="ti ti-check"></i> Submit Application
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6: SUCCESS -->
+  <div id="step-6" style="display:none;">
+    <div class="success-card" style="margin-top:32px;">
+      <div class="success-icon">🎉</div>
+      <h2 class="success-title">Application Submitted!</h2>
+      <p class="success-sub">Thank you, <strong id="success-name">Merchant</strong>! Your merchant application is under review. We'll notify you within <strong>24–48 hours</strong>.</p>
+      <div class="success-steps">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:10px;">What happens next</div>
+        <div class="success-step"><div class="ss-num">1</div><span>Our team verifies your ID and business documents (24–48 hrs)</span></div>
+        <div class="success-step"><div class="ss-num">2</div><span>You receive an approval email with your merchant credentials</span></div>
+        <div class="success-step"><div class="ss-num">3</div><span>Log in to your merchant portal and start accepting payments</span></div>
+        <div class="success-step"><div class="ss-num">4</div><span>List your products on the Haitian marketplace</span></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="merchant-portal.html" target="_blank" class="btn btn-primary"><i class="ti ti-building-store"></i> Preview Merchant Portal</a>
+        <a href="index.html" class="btn btn-back">Back to Home</a>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:var(--muted);">Questions? Email <a href="mailto:merchants@tchotchopay.com" style="color:var(--orange);">merchants@tchotchopay.com</a></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+const STEPS_META = [
+  {label:'Business Info',pct:20},
+  {label:'Owner Info',pct:40},
+  {label:'Documents',pct:60},
+  {label:'Payout',pct:80},
+  {label:'Review',pct:100},
+];
+let currentStep = 0;
+let selectedCat = '';
+let selectedPayout = 'bank';
+let frontUploaded = false, backUploaded = false;
+
+function startSignup() {
+  document.getElementById('hero-block').style.display = 'none';
+  document.getElementById('step-0').style.display = 'none';
+  document.getElementById('progress-wrap').style.display = 'block';
+  goStep(1);
+}
+
+function goStep(n) {
+  // hide all steps
+  [1,2,3,4,5,6].forEach(i => {
+    const el = document.getElementById('step-'+i);
+    if(el) el.style.display = 'none';
+  });
+  currentStep = n;
+  const el = document.getElementById('step-'+n);
+  if(el) el.style.display = 'block';
+
+  if(n <= 5) {
+    const meta = STEPS_META[n-1];
+    document.getElementById('step-label').textContent = 'Step '+n+' of 5';
+    document.getElementById('step-name').textContent = meta.label;
+    document.getElementById('progress-fill').style.width = meta.pct+'%';
+    renderStepDots(n);
+  }
+  if(n === 5) fillReview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderStepDots(active) {
+  const names = ['Business','Owner','Docs','Payout','Review'];
+  document.getElementById('steps-row').innerHTML = names.map((n,i)=>{
+    const num = i+1;
+    const cls = num < active ? 'done' : num === active ? 'active' : '';
+    return `<div class="step-dot"><div class="step-dot-circle ${cls}">${num < active ? '✓' : num}</div><div class="step-dot-lbl">${n}</div></div>`;
+  }).join('');
+}
+
+function selCat(el, cat) {
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  selectedCat = cat;
+}
+
+function selPayout(el, method) {
+  document.querySelectorAll('.method-card').forEach(m=>m.classList.remove('on'));
+  document.querySelectorAll('.method-extra').forEach(e=>e.classList.remove('show'));
+  el.classList.add('on');
+  document.getElementById('extra-'+method).classList.add('show');
+  selectedPayout = method;
+}
+
+function updateDocLabel() {
+  const type = document.getElementById('doc-type').value;
+  const label = {
+    'national-id':'ID Card Front',
+    'passport':'Passport Photo Page',
+    'drivers-license':'License Front',
+    'resident-card':'Card Front'
+  }[type];
+  document.getElementById('doc-front-label').innerHTML = label+' <span class="req">*</span>';
+}
+
+let uploading = {};
+function fakeUpload(side) {
+  if(uploading[side]) return;
+  uploading[side] = true;
+  const zone = document.getElementById(side==='front'?'doc-front-zone':side==='back'?'doc-back-zone':'biz-reg-zone');
+  const icon = document.getElementById(side+'-icon');
+  const lbl  = document.getElementById(side+'-label');
+  lbl.textContent = 'Uploading...';
+  icon.className = 'ti ti-loader';
+  icon.style.animation = 'spin 1s linear infinite';
+  setTimeout(()=>{
+    zone.classList.add('has-file');
+    icon.className = 'ti ti-circle-check';
+    icon.style.color = 'var(--orange)';
+    icon.style.animation = '';
+    lbl.textContent = side==='biz' ? 'Business certificate uploaded ✓' : (side==='front'?'Front':'Back')+' of ID uploaded ✓';
+    uploading[side] = false;
+    if(side==='front') frontUploaded = true;
+    if(side==='back') backUploaded = true;
+    if(frontUploaded && backUploaded) document.getElementById('docs-next').removeAttribute('disabled');
+  }, 1400);
+}
+
+function fillReview() {
+  document.getElementById('rv-biz-name').textContent = document.getElementById('biz-name').value || '—';
+  document.getElementById('rv-cat').textContent = selectedCat || '—';
+  const addr = document.getElementById('biz-addr').value;
+  const city = document.getElementById('biz-city').value;
+  document.getElementById('rv-addr').textContent = addr ? addr+', '+city : '—';
+  document.getElementById('rv-phone').textContent = document.getElementById('biz-phone').value || '—';
+  const first = document.getElementById('owner-first').value;
+  const last = document.getElementById('owner-last').value;
+  document.getElementById('rv-owner').textContent = [first,last].filter(Boolean).join(' ') || '—';
+  document.getElementById('rv-doc').textContent = document.getElementById('doc-type').options[document.getElementById('doc-type').selectedIndex].text;
+  const methods = {bank:'Bank Transfer',moncash:'MonCash',usdc:'Keep as USDC'};
+  document.getElementById('rv-payout').textContent = methods[selectedPayout];
+}
+
+function updateSubmit() {
+  const ok = document.getElementById('agree-terms').checked && document.getElementById('agree-kyc').checked;
+  document.getElementById('submit-btn')[ok?'removeAttribute':'setAttribute']('disabled','true');
+}
+
+function submitApplication() {
+  const name = document.getElementById('biz-name').value || 'Merchant';
+  document.getElementById('success-name').textContent = name;
+  document.getElementById('progress-wrap').style.display = 'none';
+  goStep(6);
+}
+
+// style spin for icon
+const style = document.createElement('style');
+style.textContent = '@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}';
+document.head.appendChild(style);
+</script>
+<script src="lang.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

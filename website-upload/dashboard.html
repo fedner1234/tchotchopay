@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Wallet — TchotchoPay</title>
+  <meta name="description" content="Manage your TchotchoPay USDC wallet — send money, pay bills, check balance, and more."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="canonical" href="https://tchotchopay.com/dashboard.html"/>
+  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/dashboard.html"/>
+  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/dashboard.html"/>
+  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/dashboard.html"/>
+  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/dashboard.html"/>
+  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/dashboard.html"/>
+  <meta property="og:title" content="My Wallet — TchotchoPay"/>
+  <meta property="og:description" content="Manage your TchotchoPay USDC wallet."/>
+  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
+  <meta property="og:url" content="https://tchotchopay.com/dashboard.html"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    html { overflow-x: hidden; }
+    :root {
+      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
+      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
+      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
+      --gold:#F7B731;
+      --card:rgba(10,31,110,0.55); --border:rgba(0,174,239,0.18);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;}
+    body{background:var(--navy);color:var(--white);display:flex;flex-direction:column;min-height:100vh;}
+
+    /* ── Loading screen ── */
+    #loading-screen{
+      position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;
+      justify-content:center;flex-direction:column;gap:16px;z-index:999;
+    }
+    .loader-logo{font-size:2rem;font-weight:900;color:var(--cyan);}
+    .loader-spinner{width:32px;height:32px;border:3px solid rgba(0,174,239,0.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── Topbar ── */
+    .topbar{
+      display:flex;align-items:center;padding:12px 24px;gap:16px;
+      background:rgba(2,11,45,0.97);border-bottom:1px solid var(--border);
+      position:sticky;top:0;z-index:100;
+    }
+    .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--white);}
+    .brand-logo{width:32px;height:32px;border-radius:8px;overflow:hidden;}
+    .brand-logo img{width:100%;height:100%;object-fit:cover;}
+    .brand span{font-weight:800;font-size:1rem;}
+    .brand em{color:var(--cyan);font-style:normal;}
+    .topbar-mid{flex:1;}
+    .topbar-right{display:flex;align-items:center;gap:12px;}
+    .user-pill{display:flex;align-items:center;gap:8px;background:rgba(0,174,239,0.08);border:1px solid var(--border);border-radius:50px;padding:5px 14px 5px 5px;}
+    .user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#1055CC,#00AEEF);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;}
+    .user-name{font-size:.82rem;font-weight:600;color:var(--white);}
+    .logout-btn{display:flex;align-items:center;gap:5px;color:var(--gray);font-size:.8rem;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:8px;transition:all .2s;font-family:inherit;}
+    .logout-btn:hover{color:var(--red);}
+
+    /* ── Layout ── */
+    .app-body{display:flex;flex:1;}
+
+    /* ── Sidebar ── */
+    .sidebar{
+      width:210px;flex-shrink:0;background:rgba(2,11,45,0.9);
+      border-right:1px solid var(--border);padding:20px 12px;
+      display:flex;flex-direction:column;gap:4px;
+      position:sticky;top:57px;height:calc(100vh - 57px);overflow-y:auto;
+    }
+    .nav-item{
+      display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
+      color:var(--gray);font-size:.87rem;font-weight:600;cursor:pointer;
+      transition:all .2s;text-decoration:none;border:none;background:none;font-family:inherit;width:100%;
+    }
+    .nav-item i{font-size:1.1rem;}
+    .nav-item:hover{background:rgba(0,174,239,0.08);color:var(--white);}
+    .nav-item.active{background:rgba(0,174,239,0.12);color:var(--cyan);border:1px solid rgba(0,174,239,0.2);}
+    .nav-section{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(143,168,204,0.4);padding:14px 14px 4px;margin-top:4px;}
+
+    /* ── Main content ── */
+    .main{flex:1;padding:28px 28px;overflow-y:auto;max-width:900px;}
+
+    /* ── KYC Banner ── */
+    .kyc-banner{
+      background:rgba(247,183,49,0.1);border:1px solid rgba(247,183,49,0.3);
+      border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;
+      margin-bottom:24px;
+    }
+    .kyc-banner i{font-size:1.3rem;color:var(--gold);}
+    .kyc-banner-text{flex:1;font-size:.87rem;color:var(--gold);}
+    .kyc-banner-text strong{display:block;font-size:.95rem;margin-bottom:2px;}
+    .kyc-btn{background:var(--gold);color:#000;font-weight:700;font-size:.8rem;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+    .kyc-banner.verified{background:rgba(0,200,150,0.1);border-color:rgba(0,200,150,0.3);}
+    .kyc-banner.verified i,.kyc-banner.verified .kyc-banner-text{color:var(--green);}
+
+    /* ── Balance card ── */
+    .balance-card{
+      background:linear-gradient(135deg,rgba(10,31,110,0.8),rgba(0,174,239,0.15));
+      border:1px solid var(--border);border-radius:20px;padding:28px;
+      margin-bottom:24px;position:relative;overflow:hidden;
+    }
+    .balance-card::before{
+      content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+      border-radius:50%;background:rgba(0,174,239,0.06);
+    }
+    .balance-label{font-size:.8rem;color:var(--gray);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;}
+    .balance-amount{font-size:2.8rem;font-weight:900;color:var(--white);line-height:1;}
+    .balance-amount span{font-size:1.2rem;color:var(--cyan);margin-left:6px;}
+    .balance-sub{font-size:.8rem;color:var(--gray);margin-top:6px;}
+    .balance-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+    .action-btn{
+      display:flex;align-items:center;gap:7px;padding:10px 20px;border-radius:12px;
+      font-size:.88rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .2s;
+    }
+    .action-btn.primary{background:var(--cyan);color:#020B2D;}
+    .action-btn.primary:hover{background:var(--light);}
+    .action-btn.outline{background:rgba(0,174,239,0.08);border:1px solid var(--border);color:var(--cyan);}
+    .action-btn.outline:hover{background:rgba(0,174,239,0.15);}
+
+    /* ── Grid ── */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+    .main{padding-bottom:80px;}
+    @media(max-width:640px){
+      .grid-2{grid-template-columns:1fr;}
+      .sidebar{display:none;}
+      .main{padding:16px 16px 80px;}
+      .balance-card{padding:20px;}
+      .balance-amount{font-size:2rem;}
+      .balance-actions{gap:8px;}
+      .action-btn{padding:9px 13px;font-size:.8rem;}
+      .modal{margin:12px;max-width:calc(100vw - 24px) !important;padding:20px !important;}
+      .send-dest-grid{grid-template-columns:1fr 1fr;}
+      .send-presets{gap:6px;}
+      .preset-btn{padding:7px 10px;font-size:.78rem;}
+      .savings-actions{flex-direction:column;gap:8px;}
+      .savings-btn{width:100%;justify-content:center;}
+      .recv-share-row{flex-direction:column;gap:8px;}
+      .recv-share-btn{width:100%;justify-content:center;}
+      .cashout-options{gap:10px;}
+      .kyc-banner{flex-wrap:wrap;gap:8px;}
+    }
+    @media(max-width:400px){
+      .action-btn{padding:8px 10px;font-size:.75rem;gap:4px;}
+      .balance-amount{font-size:1.7rem;}
+    }
+
+    /* ── Info card ── */
+    .info-card{
+      background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;
+    }
+    .info-card-title{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+    .info-card-title i{font-size:1rem;}
+    .info-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,174,239,0.08);}
+    .info-row:last-child{border-bottom:none;}
+    .info-row-label{font-size:.83rem;color:var(--gray);}
+    .info-row-value{font-size:.87rem;color:var(--white);font-weight:600;text-align:right;max-width:55%;word-break:break-all;}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:50px;font-size:.73rem;font-weight:700;}
+    .badge.pending{background:rgba(247,183,49,0.15);color:var(--gold);}
+    .badge.verified{background:rgba(0,200,150,0.15);color:var(--green);}
+    .badge.failed{background:rgba(255,76,106,0.15);color:var(--red);}
+    .copy-btn{background:none;border:none;color:var(--gray);cursor:pointer;padding:2px 6px;border-radius:5px;font-size:.8rem;transition:all .2s;}
+    .copy-btn:hover{color:var(--cyan);}
+
+    /* ── Bank card ── */
+    .bank-empty{text-align:center;padding:24px 0;color:var(--gray);}
+    .bank-empty i{font-size:2rem;margin-bottom:8px;display:block;}
+    .bank-empty p{font-size:.85rem;margin-bottom:14px;}
+    .bank-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,174,239,0.08);}
+    .bank-item:last-child{border-bottom:none;}
+    .bank-icon{width:36px;height:36px;border-radius:10px;background:rgba(0,174,239,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--cyan);}
+    .bank-info{flex:1;}
+    .bank-name{font-size:.88rem;font-weight:600;color:var(--white);}
+    .bank-mask{font-size:.78rem;color:var(--gray);}
+    .bank-status{font-size:.72rem;color:var(--green);font-weight:700;}
+
+    /* ── Balance sub-row ── */
+    .balance-sub-row{display:flex;gap:24px;margin-top:8px;}
+    .bsr-item .bsr-label{font-size:.7rem;color:rgba(143,168,204,0.6);margin-bottom:2px;}
+    .bsr-item .bsr-val{font-size:.88rem;font-weight:700;}
+
+    /* ── Bottom Nav ── */
+    .bottom-nav{
+      display:block;position:fixed;bottom:0;left:0;right:0;
+      background:rgba(2,11,45,0.97);border-top:1px solid var(--border);
+      padding:8px 0 max(8px,env(safe-area-inset-bottom));z-index:200;
+    }
+    .bn-items{display:flex;justify-content:space-around;}
+    .bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 20px;cursor:pointer;color:var(--gray);font-size:.65rem;font-weight:700;border:none;background:none;font-family:inherit;transition:color .15s;}
+    .bn-item i{font-size:1.3rem;}
+    .bn-item.active{color:var(--cyan);}
+
+    /* ── Quick links ── */
+    .quick-links{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+    @media(max-width:640px){.quick-links{grid-template-columns:repeat(2,1fr);}}
+    .quick-card{
+      background:var(--card);border:1px solid var(--border);border-radius:14px;
+      padding:16px;text-align:center;text-decoration:none;color:var(--white);
+      transition:all .2s;cursor:pointer;
+    }
+    .quick-card:hover{border-color:rgba(0,174,239,0.4);background:rgba(0,174,239,0.08);}
+    .quick-card i{font-size:1.6rem;color:var(--cyan);margin-bottom:8px;display:block;}
+    .quick-card-label{font-size:.8rem;font-weight:600;}
+
+    /* ── Wallet address ── */
+    .address-box{
+      background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:12px;
+      padding:12px 16px;display:flex;align-items:center;gap:10px;margin-top:14px;
+    }
+    .address-text{flex:1;font-size:.78rem;color:var(--gray);font-family:monospace;word-break:break-all;}
+
+    /* ── Toast ── */
+    .toast{
+      position:fixed;bottom:24px;right:24px;background:#0A1F6E;border:1px solid var(--cyan);
+      color:var(--white);padding:12px 18px;border-radius:12px;font-size:.85rem;
+      font-weight:600;z-index:9999;transform:translateY(80px);opacity:0;
+      transition:all .3s;pointer-events:none;
+    }
+    .toast.show{transform:translateY(0);opacity:1;}
+
+    /* ── Send modal ── */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(2,11,45,0.85);backdrop-filter:blur(4px);
+      z-index:500;display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .2s;
+    }
+    .modal-overlay.open{opacity:1;pointer-events:all;}
+    .modal{
+      background:#0A1F6E;border:1px solid var(--border);border-radius:20px;
+      padding:28px;width:100%;max-width:420px;margin:16px;
+    }
+    .modal-title{font-size:1.1rem;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+    .modal label{display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;margin-top:14px;}
+    .modal input{
+      width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);
+      border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;
+      font-family:inherit;outline:none;transition:border-color .2s;
+    }
+    .modal input:focus{border-color:var(--cyan);}
+    .modal-actions{display:flex;gap:10px;margin-top:22px;}
+    .modal-actions .action-btn{flex:1;justify-content:center;}
+    .modal-actions .cancel-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--gray);}
+
+    /* ── Add Funds modal tabs ── */
+    .fund-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+    .fund-tab{flex:1;padding:10px;text-align:center;font-size:.85rem;font-weight:700;cursor:pointer;background:transparent;color:var(--gray);border:none;transition:all .2s;}
+    .fund-tab.active{background:rgba(0,174,239,0.15);color:var(--cyan);}
+    .fund-panel{display:none;}
+    .fund-panel.active{display:block;}
+    .stripe-card-wrap{background:rgba(0,0,0,0.35);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:6px;}
+    .fee-note{font-size:.75rem;color:var(--gray);margin-top:8px;}
+    .bank-option-btn{width:100%;padding:14px;background:rgba(0,174,239,0.08);border:1px solid rgba(0,174,239,0.25);border-radius:12px;color:var(--white);font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:10px;transition:all .2s;}
+    .bank-option-btn:hover{background:rgba(0,174,239,0.15);}
+    .bank-option-btn i{font-size:1.3rem;color:var(--cyan);}
+
+    /* ── Receive modal ── */
+    .qr-card-inner{background:#fff;border-radius:16px;padding:14px;width:200px;height:200px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;}
+    .qr-svg{width:100%;height:100%;}
+    .recv-username{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 14px;padding:10px;background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.2);border-radius:12px;}
+    .recv-username .ub-label{font-size:.72rem;color:var(--gray);}
+    .recv-username .ub-val{font-size:.9rem;font-weight:800;color:var(--white);flex:1;text-align:center;}
+    .recv-field-label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+    .recv-addr{background:rgba(0,0,0,0.35);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:14px;transition:border-color .2s;}
+    .recv-addr:hover{border-color:rgba(0,174,239,0.4);}
+    .recv-addr span{flex:1;font-size:.75rem;color:var(--gray);font-family:monospace;word-break:break-all;}
+    .recv-share-row{display:flex;gap:8px;}
+    .recv-share-btn{flex:1;background:rgba(0,174,239,0.1);border:1px solid rgba(0,174,239,0.25);border-radius:12px;padding:11px 8px;color:var(--cyan);font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s;}
+    .recv-share-btn:hover{background:rgba(0,174,239,0.18);border-color:var(--cyan);}
+
+    /* ── Cash Out modal option buttons ── */
+    .cashout-option{
+      width:100%;padding:16px;background:rgba(0,174,239,0.06);border:1px solid rgba(0,174,239,0.2);
+      border-radius:14px;color:var(--white);font-size:.9rem;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;gap:12px;margin-bottom:10px;transition:all .2s;font-family:inherit;text-align:left;
+    }
+    .cashout-option:hover{background:rgba(0,174,239,0.14);border-color:rgba(0,174,239,0.4);}
+    .cashout-option i{font-size:1.4rem;color:var(--cyan);flex-shrink:0;}
+    .cashout-option-text .opt-title{display:block;font-size:.9rem;font-weight:700;}
+    .cashout-option-text .opt-sub{display:block;font-size:.75rem;color:var(--gray);font-weight:400;margin-top:2px;}
+    .cashout-step{display:none;}
+    .cashout-step.active{display:block;}
+
+    /* ── Savings card ── */
+    .savings-card{
+      background:linear-gradient(135deg,rgba(0,200,150,0.08),rgba(0,174,239,0.08));
+      border:1px solid rgba(0,200,150,0.25);border-radius:16px;padding:20px;margin-bottom:24px;
+    }
+    .savings-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+    .savings-header i{font-size:1.3rem;color:var(--green);}
+    .savings-header-text{flex:1;}
+    .savings-header-text h3{font-size:.95rem;font-weight:800;color:var(--white);}
+    .savings-header-text p{font-size:.75rem;color:var(--gray);margin-top:2px;}
+    .savings-balance{font-size:2rem;font-weight:900;color:var(--green);margin-bottom:4px;}
+    .savings-balance span{font-size:.9rem;color:rgba(0,200,150,0.7);}
+    .savings-sub{font-size:.75rem;color:var(--gray);margin-bottom:16px;}
+    .savings-actions{display:flex;gap:10px;flex-wrap:wrap;}
+    .savings-btn{display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;font-size:.83rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .2s;}
+    .savings-btn.add{background:var(--green);color:#020B2D;}
+    .savings-btn.add:hover{background:#00e0aa;}
+    .savings-btn.withdraw{background:rgba(0,200,150,0.1);border:1px solid rgba(0,200,150,0.3);color:var(--green);}
+    .savings-btn.withdraw:hover{background:rgba(0,200,150,0.2);}
+    .savings-apy{display:inline-flex;align-items:center;gap:5px;background:rgba(0,200,150,0.1);border:1px solid rgba(0,200,150,0.2);border-radius:50px;padding:3px 10px;font-size:.72rem;font-weight:700;color:var(--green);margin-left:auto;}
+
+    /* ── Edit profile btn inside card title ── */
+    .edit-profile-btn{
+      margin-left:auto;background:rgba(0,174,239,0.08);border:1px solid var(--border);
+      color:var(--cyan);border-radius:7px;padding:3px 10px;font-size:.72rem;font-weight:700;
+      cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .2s;
+    }
+    .edit-profile-btn:hover{background:rgba(0,174,239,0.18);}
+  </style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen">
+  <div class="loader-logo">TchotchoPay</div>
+  <div class="loader-spinner"></div>
+</div>
+
+<!-- Topbar -->
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-logo"><img src="tp logo" alt="TchotchoPay" onerror="this.style.display='none'"/></div>
+    <span>Tchotcho<em>Pay</em></span>
+  </a>
+  <div class="topbar-mid"></div>
+  <div class="topbar-right">
+    <div class="user-pill">
+      <div class="user-avatar" id="user-initials">?</div>
+      <span class="user-name" id="user-display-name">Loading...</span>
+    </div>
+    <button class="logout-btn" onclick="logout()"><i class="ti ti-logout"></i> Sign out</button>
+  </div>
+</header>
+
+<div class="app-body">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <a class="nav-item active" href="dashboard.html"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+    <a class="nav-item" href="send.html"><i class="ti ti-send"></i> Send Money</a>
+    <a class="nav-item" href="topup.html"><i class="ti ti-device-mobile"></i> Top-Up</a>
+    <a class="nav-item" href="p2p.html"><i class="ti ti-arrows-exchange"></i> P2P Trading</a>
+    <a class="nav-item" href="billpay.html"><i class="ti ti-file-invoice"></i> Bill Pay</a>
+    <button class="nav-item" onclick="scrollToCard()" style="text-align:left;"><i class="ti ti-credit-card"></i> My Card <span style="font-size:.65rem;background:rgba(0,200,150,.15);color:#00C896;border:1px solid rgba(0,200,150,.3);border-radius:50px;padding:1px 7px;margin-left:4px;">New</span></button>
+    <div class="nav-section">Account</div>
+    <a class="nav-item" href="referral.html"><i class="ti ti-gift"></i> Referral</a>
+    <a class="nav-item" href="security.html"><i class="ti ti-shield-check"></i> Security</a>
+    <a class="nav-item" href="faq.html"><i class="ti ti-help-circle"></i> Help</a>
+    <div style="flex:1;"></div>
+    <button class="nav-item" onclick="logout()" style="color:var(--red);margin-top:8px;"><i class="ti ti-logout"></i> Sign out</button>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- KYC Banner -->
+    <div class="kyc-banner" id="kyc-banner" style="display:none;">
+      <i class="ti ti-alert-circle"></i>
+      <div class="kyc-banner-text">
+        <strong id="kyc-title">Verify your identity</strong>
+        <span id="kyc-subtitle">Complete KYC to unlock sending money and higher limits.</span>
+      </div>
+      <button class="kyc-btn" id="kyc-btn" onclick="startKYC()">Verify Now</button>
+      <button class="kyc-btn" id="kyc-refresh-btn" onclick="refreshKYCStatus()" style="display:none;background:transparent;border:1px solid currentColor;color:inherit;margin-left:8px;" title="Re-check status"><i class="ti ti-refresh"></i></button>
+    </div>
+
+    <!-- Balance card -->
+    <div class="balance-card">
+      <div class="balance-label">USDC Balance</div>
+      <div class="balance-amount" id="balance-amount">0.00 <span>USDC</span></div>
+      <div class="balance-sub-row">
+        <div class="bsr-item">
+          <div class="bsr-label">≈ HTG Value</div>
+          <div class="bsr-val" id="balance-htg">— HTG</div>
+        </div>
+        <div class="bsr-item">
+          <div class="bsr-label">Network</div>
+          <div class="bsr-val" style="color:var(--green)">Base</div>
+        </div>
+        <div class="bsr-item">
+          <div class="bsr-label">Gas Fees</div>
+          <div class="bsr-val" style="color:var(--green)">Free ✓</div>
+        </div>
+      </div>
+      <div class="balance-actions">
+        <button class="action-btn primary" onclick="openSendModal()"><i class="ti ti-send"></i> Send</button>
+        <button class="action-btn outline" onclick="openFundModal()"><i class="ti ti-plus"></i> Add Funds</button>
+        <button class="action-btn outline" onclick="openReceiveModal()"><i class="ti ti-qrcode"></i> Receive</button>
+        <button class="action-btn outline" onclick="openCashOutModal()" style="border-color:rgba(0,200,150,0.3);color:var(--green);"><i class="ti ti-cash"></i> Cash Out</button>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="quick-links">
+      <a class="quick-card" href="send.html"><i class="ti ti-send"></i><div class="quick-card-label">Send Money</div></a>
+      <a class="quick-card" href="topup.html"><i class="ti ti-device-mobile"></i><div class="quick-card-label">Top-Up Phone</div></a>
+      <a class="quick-card" href="p2p.html"><i class="ti ti-arrows-exchange"></i><div class="quick-card-label">P2P Trading</div></a>
+      <a class="quick-card" href="billpay.html"><i class="ti ti-file-invoice"></i><div class="quick-card-label">Pay Bills</div></a>
+    </div>
+
+    <!-- Info grid -->
+    <div class="grid-2">
+
+      <!-- Account info -->
+      <div class="info-card">
+        <div class="info-card-title"><i class="ti ti-user-circle"></i> Account <button class="edit-profile-btn" onclick="openEditProfileModal()"><i class="ti ti-pencil"></i> Edit</button></div>
+        <div class="info-row">
+          <span class="info-row-label">Full name</span>
+          <span class="info-row-value" id="info-name">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row-label">Email</span>
+          <span class="info-row-value" id="info-email">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row-label">Phone</span>
+          <span class="info-row-value" id="info-phone">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row-label">KYC Status</span>
+          <span class="info-row-value" id="info-kyc">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-row-label">Member since</span>
+          <span class="info-row-value" id="info-since">—</span>
+        </div>
+      </div>
+
+      <!-- Bank account -->
+      <div class="info-card">
+        <div class="info-card-title"><i class="ti ti-building-bank"></i> Linked Bank</div>
+        <div id="bank-content">
+          <div class="bank-empty">
+            <i class="ti ti-bank"></i>
+            <p>No bank account linked yet.</p>
+            <button class="action-btn primary" onclick="linkBank()" style="margin:0 auto;font-size:.8rem;padding:8px 16px;">
+              <i class="ti ti-plus"></i> Link Bank
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wallet address -->
+    <div class="info-card" style="margin-bottom:24px;">
+      <div class="info-card-title"><i class="ti ti-wallet"></i> USDC Wallet Address (Secure Network)</div>
+      <div class="address-box">
+        <span class="address-text" id="wallet-address">Loading...</span>
+        <button class="copy-btn" onclick="copyAddress()" title="Copy address"><i class="ti ti-copy"></i></button>
+      </div>
+      <p style="font-size:.75rem;color:var(--gray);margin-top:10px;"><i class="ti ti-info-circle"></i> Send only USDC through our payment network to this address.</p>
+    </div>
+
+    <!-- ── VIRTUAL CARD SECTION ── -->
+    <div id="card-section" style="margin-top:24px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <i class="ti ti-credit-card" style="font-size:1.2rem;color:var(--cyan);"></i>
+        <h2 style="font-size:1rem;font-weight:800;">My Virtual Card</h2>
+        <span style="font-size:.7rem;background:rgba(0,200,150,.12);color:#00C896;border:1px solid rgba(0,200,150,.25);border-radius:50px;padding:2px 10px;">Powered by Lithic</span>
+      </div>
+
+      <!-- Loading -->
+      <div id="vc-loading" style="text-align:center;padding:32px;background:var(--card);border:1px solid var(--border);border-radius:18px;">
+        <div style="width:28px;height:28px;border:3px solid rgba(0,174,239,.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px;"></div>
+        <p style="color:var(--gray);font-size:.85rem;">Checking card status…</p>
+      </div>
+
+      <!-- No card yet -->
+      <div id="vc-none" style="display:none;text-align:center;padding:36px 24px;background:var(--card);border:1.5px dashed rgba(0,174,239,.25);border-radius:18px;">
+        <i class="ti ti-credit-card-off" style="font-size:2.5rem;color:var(--cyan);display:block;margin-bottom:12px;"></i>
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:6px;">No virtual card yet</h3>
+        <p style="color:var(--gray);font-size:.85rem;margin-bottom:20px;line-height:1.5;">Issue your free TchotchoPay virtual card — spend USDC anywhere Visa is accepted.</p>
+        <button onclick="issueCard()" style="background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:12px;color:#fff;font-size:.9rem;font-weight:800;padding:12px 28px;cursor:pointer;font-family:inherit;">
+          <i class="ti ti-plus"></i> Issue My Card
+        </button>
+      </div>
+
+      <!-- Card face -->
+      <div id="vc-card" style="display:none;">
+        <div style="background:linear-gradient(135deg,#0A1F6E 0%,#1055CC 50%,#0D62E8 100%);border-radius:18px;padding:28px 24px;position:relative;overflow:hidden;margin-bottom:16px;box-shadow:0 20px 60px rgba(0,0,0,.4);">
+          <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+          <div style="position:absolute;bottom:-50px;left:-20px;width:150px;height:150px;border-radius:50%;background:rgba(0,174,239,.1);"></div>
+          <div style="position:relative;z-index:1;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;">
+              <div style="font-size:.75rem;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.7);">TCHOTCHOPAY</div>
+              <div id="vc-status-badge" style="font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;"></div>
+            </div>
+            <div style="font-size:1.3rem;font-weight:700;letter-spacing:.18em;color:#fff;margin-bottom:20px;" id="vc-pan">•••• •••• •••• ••••</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+              <div>
+                <div style="font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Card Holder</div>
+                <div style="font-size:.85rem;font-weight:700;" id="vc-holder">—</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:.6rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;">Expires</div>
+                <div style="font-size:.85rem;font-weight:700;" id="vc-expiry">—</div>
+              </div>
+              <div style="font-size:1.4rem;font-weight:900;color:rgba(255,255,255,.9);font-style:italic;">VISA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card actions -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button id="vc-freeze-btn" onclick="toggleFreeze()" style="flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--white);font-size:.85rem;font-weight:700;padding:11px 16px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;">
+            <i class="ti ti-snowflake"></i> Freeze Card
+          </button>
+          <button onclick="revealCard()" style="flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--cyan);font-size:.85rem;font-weight:700;padding:11px 16px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;">
+            <i class="ti ti-eye"></i> Reveal Number
+          </button>
+        </div>
+        <p style="font-size:.75rem;color:var(--gray);margin-top:10px;text-align:center;">Card number hidden for security — tap Reveal to view temporarily.</p>
+      </div>
+
+      <!-- Error -->
+      <div id="vc-error" style="display:none;text-align:center;padding:24px;background:rgba(255,76,106,.08);border:1px solid rgba(255,76,106,.2);border-radius:14px;">
+        <i class="ti ti-alert-circle" style="color:var(--red);font-size:1.5rem;display:block;margin-bottom:8px;"></i>
+        <p style="color:#FF7A95;font-size:.85rem;" id="vc-error-msg">Unable to load card. Please try again.</p>
+        <button onclick="loadCard()" style="margin-top:12px;background:none;border:1px solid rgba(255,76,106,.3);border-radius:8px;color:#FF7A95;font-size:.8rem;padding:7px 16px;cursor:pointer;font-family:inherit;">Retry</button>
+      </div>
+    </div>
+
+    <!-- Savings section -->
+    <div class="savings-card">
+      <div class="savings-header">
+        <i class="ti ti-pig-money"></i>
+        <div class="savings-header-text">
+          <h3>USDC Savings Wallet</h3>
+          <p>Hold digital dollars. Earn while you save.</p>
+        </div>
+        <span class="savings-apy"><i class="ti ti-trending-up"></i> Stable USDC</span>
+      </div>
+      <div class="savings-balance" id="savings-balance">0.00 <span>USDC</span></div>
+      <div class="savings-sub" id="savings-sub">≈ 0 HTG · No lock-up · Withdraw anytime</div>
+      <div class="savings-actions">
+        <button class="savings-btn add" onclick="openSavingsDepositModal()"><i class="ti ti-circle-plus"></i> Move to Savings</button>
+        <button class="savings-btn withdraw" onclick="openSavingsWithdrawModal()"><i class="ti ti-circle-minus"></i> Withdraw</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Send modal -->
+<div class="modal-overlay" id="send-modal">
+  <div class="modal" style="max-width:480px;padding:24px;">
+
+    <!-- Step bar -->
+    <div style="display:flex;align-items:center;margin-bottom:22px;">
+      <div class="send-dot" id="sdot-1" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--gray);flex-shrink:0;transition:all .3s;">1</div>
+      <div class="send-line" id="sline-1" style="flex:1;height:2px;background:rgba(0,174,239,0.15);transition:background .3s;"></div>
+      <div class="send-dot" id="sdot-2" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--gray);flex-shrink:0;transition:all .3s;">2</div>
+      <div class="send-line" id="sline-2" style="flex:1;height:2px;background:rgba(0,174,239,0.15);transition:background .3s;"></div>
+      <div class="send-dot" id="sdot-3" style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--gray);flex-shrink:0;transition:all .3s;">3</div>
+    </div>
+
+    <!-- Step 1: Choose destination -->
+    <div id="send-panel-1" class="send-panel" style="display:block;">
+      <div style="font-size:1rem;font-weight:800;margin-bottom:4px;">Send Money</div>
+      <div style="color:var(--gray);font-size:.83rem;margin-bottom:18px;">Choose where to send</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+        <button onclick="selectSendDest('moncash')" id="dest-moncash" style="border:2px solid rgba(0,174,239,0.2);border-radius:14px;padding:18px 12px;cursor:pointer;text-align:center;background:rgba(2,11,45,0.5);transition:all .2s;position:relative;overflow:hidden;">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#00A651,#007a3d);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;">MC</div>
+          <div style="font-weight:700;font-size:.9rem;color:var(--white);">MonCash</div>
+          <div style="font-size:.7rem;color:var(--gray);margin-top:3px;">Digicel · Haiti</div>
+        </button>
+        <button onclick="selectSendDest('natcash')" id="dest-natcash" style="border:2px solid rgba(0,174,239,0.2);border-radius:14px;padding:18px 12px;cursor:pointer;text-align:center;background:rgba(2,11,45,0.5);transition:all .2s;position:relative;overflow:hidden;">
+          <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#003087,#0057A8);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;">NC</div>
+          <div style="font-weight:700;font-size:.9rem;color:var(--white);">NatCash</div>
+          <div style="font-size:.7rem;color:var(--gray);margin-top:3px;">Natcom · Haiti</div>
+        </button>
+      </div>
+      <button onclick="selectSendDest('usdc')" id="dest-usdc" style="width:100%;border:2px solid rgba(0,174,239,0.2);border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;background:rgba(2,11,45,0.5);transition:all .2s;display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="width:40px;height:40px;border-radius:12px;background:rgba(0,174,239,0.12);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--cyan);flex-shrink:0;"><i class="ti ti-currency-dollar"></i></div>
+        <div>
+          <div style="font-weight:700;font-size:.88rem;color:var(--white);">USDC Address</div>
+          <div style="font-size:.72rem;color:var(--gray);">Send to any Base wallet address</div>
+        </div>
+      </button>
+      <button class="action-btn cancel-btn" onclick="closeSendModal()" style="width:100%;justify-content:center;">Cancel</button>
+    </div>
+
+    <!-- Step 2: Amount + recipient -->
+    <div id="send-panel-2" class="send-panel" style="display:none;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <button onclick="sendGoStep(1)" style="background:none;border:none;color:var(--gray);cursor:pointer;padding:4px;font-size:1rem;"><i class="ti ti-arrow-left"></i></button>
+        <div id="send-dest-label" style="font-size:1rem;font-weight:800;"></div>
+      </div>
+
+      <!-- Phone (MonCash/NatCash) -->
+      <div id="send-phone-row" style="margin-bottom:14px;">
+        <div style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;">Recipient Phone</div>
+        <div style="display:flex;gap:8px;">
+          <div style="background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.25);border-radius:10px;color:var(--white);font-size:.95rem;font-weight:700;padding:12px 12px;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;">🇭🇹 +509</div>
+          <input id="send-phone" type="tel" placeholder="3700 0000" style="flex:1;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.25);border-radius:10px;color:var(--white);font-size:.95rem;font-weight:600;padding:12px 14px;font-family:inherit;outline:none;transition:border-color .2s;width:100%;" oninput="updateSendSummary()"/>
+        </div>
+      </div>
+
+      <!-- USDC address -->
+      <div id="send-addr-row" style="display:none;margin-bottom:14px;">
+        <div style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;">Wallet Address</div>
+        <input id="send-addr" type="text" placeholder="0x..." style="width:100%;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.25);border-radius:10px;color:var(--white);font-size:.88rem;padding:12px 14px;font-family:monospace;outline:none;transition:border-color .2s;" oninput="updateSendSummary()"/>
+      </div>
+
+      <!-- Amount presets -->
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Amount (USD)</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;" id="send-presets">
+        <button onclick="setSendPreset(25)"  class="send-preset" data-val="25"  style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;font-family:inherit;color:var(--white);"><div style="font-size:1.1rem;font-weight:800;">$25</div><div style="font-size:.67rem;color:var(--gray);">≈ 3,263 HTG</div></button>
+        <button onclick="setSendPreset(50)"  class="send-preset" data-val="50"  style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;font-family:inherit;color:var(--white);"><div style="font-size:1.1rem;font-weight:800;">$50</div><div style="font-size:.67rem;color:var(--gray);">≈ 6,525 HTG</div></button>
+        <button onclick="setSendPreset(100)" class="send-preset" data-val="100" style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;font-family:inherit;color:var(--white);"><div style="font-size:1.1rem;font-weight:800;">$100</div><div style="font-size:.67rem;color:var(--gray);">≈ 13,050 HTG</div></button>
+        <button onclick="setSendPreset(200)" class="send-preset" data-val="200" style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;font-family:inherit;color:var(--white);"><div style="font-size:1.1rem;font-weight:800;">$200</div><div style="font-size:.67rem;color:var(--gray);">≈ 26,100 HTG</div></button>
+        <button onclick="setSendPreset(500)" class="send-preset" data-val="500" style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;background:rgba(2,11,45,0.5);transition:all .2s;font-family:inherit;color:var(--white);"><div style="font-size:1.1rem;font-weight:800;">$500</div><div style="font-size:.67rem;color:var(--gray);">≈ 65,250 HTG</div></button>
+        <div style="border:1.5px solid rgba(0,174,239,0.2);border-radius:12px;padding:8px;background:rgba(2,11,45,0.5);">
+          <div style="font-size:.65rem;color:var(--gray);margin-bottom:3px;text-align:center;">Custom</div>
+          <input id="send-custom" type="number" placeholder="0" min="1" max="5000" style="width:100%;background:none;border:none;color:var(--white);font-size:.95rem;font-weight:800;text-align:center;outline:none;font-family:inherit;" oninput="setSendCustom(this.value)"/>
+        </div>
+      </div>
+
+      <!-- FX note -->
+      <div id="send-fx-note" style="background:rgba(0,200,150,0.06);border:1px solid rgba(0,200,150,0.15);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.82rem;color:var(--gray);display:none;align-items:center;gap:8px;">
+        <i class="ti ti-arrows-exchange" style="color:var(--green);"></i>
+        <span id="send-fx-text"></span>
+      </div>
+
+      <!-- Summary -->
+      <div id="send-summary" style="background:rgba(2,11,45,0.6);border:1px solid rgba(0,174,239,0.15);border-radius:14px;padding:16px;margin-bottom:14px;display:none;">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.85rem;"><span style="color:var(--gray);">You send</span><span id="ss-send" style="font-weight:700;"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.85rem;"><span style="color:var(--gray);">Fee (1%)</span><span id="ss-fee" style="font-weight:700;color:var(--gray);"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:.88rem;"><span style="color:var(--gray);">Recipient gets</span><span id="ss-recv" style="font-weight:800;color:var(--green);"></span></div>
+      </div>
+
+      <p id="send-step2-error" style="color:var(--red);font-size:.8rem;margin-bottom:10px;display:none;"></p>
+      <button onclick="sendGoStep(3)" style="width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;">Continue <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- Step 3: Confirm & Send -->
+    <div id="send-panel-3" class="send-panel" style="display:none;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <button onclick="sendGoStep(2)" style="background:none;border:none;color:var(--gray);cursor:pointer;padding:4px;font-size:1rem;"><i class="ti ti-arrow-left"></i></button>
+        <div style="font-size:1rem;font-weight:800;">Confirm Transfer</div>
+      </div>
+      <div style="background:rgba(2,11,45,0.6);border:1px solid rgba(0,174,239,0.15);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.87rem;"><span style="color:var(--gray);">Destination</span><span id="cs-dest" style="font-weight:700;"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.87rem;"><span style="color:var(--gray);">Recipient</span><span id="cs-recv" style="font-weight:700;"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.87rem;"><span style="color:var(--gray);">Amount</span><span id="cs-amount" style="font-weight:700;color:var(--cyan);"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,174,239,0.08);font-size:.87rem;"><span style="color:var(--gray);">Fee</span><span id="cs-fee" style="font-weight:700;"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:.9rem;"><span style="color:var(--white);font-weight:700;">They receive</span><span id="cs-they" style="font-weight:800;color:var(--green);font-size:.95rem;"></span></div>
+      </div>
+      <div style="background:rgba(0,174,239,0.04);border:1px solid rgba(0,174,239,0.12);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:.75rem;color:var(--gray);">
+        <i class="ti ti-shield-check" style="color:var(--cyan);"></i> Payment debited from your USDC wallet balance · Instant settlement
+      </div>
+      <p id="send-step3-error" style="color:var(--red);font-size:.8rem;margin-bottom:10px;display:none;"></p>
+      <button id="send-confirm-btn" onclick="doSendNow()" style="width:100%;background:linear-gradient(135deg,#007a3d,#00A651);color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;"><i class="ti ti-send"></i> Send Now</button>
+      <button onclick="closeSendModal()" style="width:100%;background:none;border:1.5px solid rgba(0,174,239,0.2);color:var(--gray);border-radius:50px;padding:12px;font-size:.88rem;cursor:pointer;font-family:inherit;margin-top:10px;">Cancel</button>
+    </div>
+
+    <!-- Step 4: Success -->
+    <div id="send-panel-4" class="send-panel" style="display:none;text-align:center;padding:12px 0;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,200,150,0.12);border:2px solid var(--green);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:2rem;">✅</div>
+      <div style="font-size:1.4rem;font-weight:800;color:var(--green);margin-bottom:6px;">Sent!</div>
+      <div id="success-msg" style="color:var(--gray);font-size:.85rem;margin-bottom:20px;line-height:1.6;"></div>
+      <button onclick="closeSendModal();loadProfile();" style="width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;">Done</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Add Funds modal -->
+<div class="modal-overlay" id="fund-modal">
+  <div class="modal">
+    <div class="modal-title"><i class="ti ti-plus" style="color:var(--cyan)"></i> Add Funds</div>
+    <div class="fund-tabs">
+      <button class="fund-tab active" onclick="switchFundTab('bank')"><i class="ti ti-building-bank"></i> Bank Transfer</button>
+      <button class="fund-tab" onclick="switchFundTab('card')"><i class="ti ti-credit-card"></i> Debit / Credit Card</button>
+    </div>
+
+    <!-- Bank tab -->
+    <div class="fund-panel active" id="fund-bank-panel">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px;">Connect your bank account to fund your USDC wallet via ACH. Free transfers, usually settle in 1–3 business days.</p>
+      <button class="bank-option-btn" onclick="linkBank();closeFundModal();">
+        <i class="ti ti-building-bank"></i>
+        <span>Connect Bank Account (ACH)</span>
+      </button>
+      <p class="fee-note">ACH bank transfers are free. Powered by Plaid.</p>
+    </div>
+
+    <!-- Card tab -->
+    <div class="fund-panel" id="fund-card-panel">
+      <label>Amount (USD)</label>
+      <input type="number" id="deposit-amount" placeholder="50.00" min="5" max="2000" step="1"/>
+      <p class="fee-note" id="deposit-fee-note">Fee: ~3.9% + $0.30 (Stripe 2.9% + $0.30 + 1% platform)</p>
+      <label>Card details</label>
+      <div class="stripe-card-wrap" id="stripe-card-element"></div>
+      <p id="deposit-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
+      <div class="modal-actions">
+        <button class="action-btn cancel-btn" onclick="closeFundModal()">Cancel</button>
+        <button class="action-btn primary" id="deposit-btn" onclick="submitDeposit()"><i class="ti ti-lock"></i> Pay & Add Funds</button>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;text-align:center;">
+      <button class="action-btn cancel-btn" id="fund-cancel-btn" onclick="closeFundModal()" style="width:100%;justify-content:center;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile modal -->
+<div class="modal-overlay" id="edit-profile-modal">
+  <div class="modal">
+    <div class="modal-title"><i class="ti ti-pencil" style="color:var(--cyan)"></i> Edit Profile</div>
+    <label>Full Name</label>
+    <input type="text" id="ep-name" placeholder="Your full name" autocomplete="name"/>
+    <label>Phone Number</label>
+    <input type="tel" id="ep-phone" placeholder="+1 (555) 000-0000" autocomplete="tel"/>
+    <p id="ep-error" style="color:var(--red);font-size:.8rem;margin-top:10px;display:none;"></p>
+    <p id="ep-success" style="color:var(--green);font-size:.8rem;margin-top:10px;display:none;">✓ Profile updated successfully!</p>
+    <div class="modal-actions">
+      <button class="action-btn cancel-btn" onclick="closeEditProfileModal()">Cancel</button>
+      <button class="action-btn primary" id="ep-save-btn" onclick="saveProfile()"><i class="ti ti-check"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Receive modal -->
+<div class="modal-overlay" id="receive-modal">
+  <div class="modal" style="max-width:420px;text-align:center;">
+    <div class="modal-title" style="justify-content:center;"><i class="ti ti-qrcode" style="color:var(--cyan)"></i> Receive USDC</div>
+    <p style="font-size:.82rem;color:var(--gray);margin-bottom:18px;">Share your QR code or address to receive USDC  instantly.</p>
+
+    <!-- QR Code -->
+    <div class="qr-card-inner">
+      <svg class="qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="white"/>
+        <!-- Top-left finder -->
+        <rect x="5" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="12" y="12" width="16" height="16" fill="#000"/>
+        <!-- Top-right finder -->
+        <rect x="65" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="72" y="12" width="16" height="16" fill="#000"/>
+        <!-- Bottom-left finder -->
+        <rect x="5" y="65" width="30" height="30" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="12" y="72" width="16" height="16" fill="#000"/>
+        <!-- Data modules -->
+        <rect x="40" y="5" width="5" height="5" fill="#000"/><rect x="50" y="5" width="5" height="5" fill="#000"/>
+        <rect x="55" y="5" width="5" height="5" fill="#000"/><rect x="40" y="12" width="5" height="5" fill="#000"/>
+        <rect x="50" y="12" width="5" height="5" fill="#000"/><rect x="40" y="20" width="5" height="5" fill="#000"/>
+        <rect x="55" y="20" width="5" height="5" fill="#000"/><rect x="5" y="40" width="5" height="5" fill="#000"/>
+        <rect x="15" y="40" width="5" height="5" fill="#000"/><rect x="25" y="40" width="5" height="5" fill="#000"/>
+        <rect x="5" y="50" width="5" height="5" fill="#000"/><rect x="20" y="50" width="5" height="5" fill="#000"/>
+        <rect x="30" y="50" width="5" height="5" fill="#000"/><rect x="5" y="55" width="5" height="5" fill="#000"/>
+        <rect x="15" y="55" width="5" height="5" fill="#000"/><rect x="5" y="60" width="5" height="5" fill="#000"/>
+        <rect x="25" y="60" width="5" height="5" fill="#000"/><rect x="40" y="40" width="5" height="5" fill="#000"/>
+        <rect x="50" y="40" width="5" height="5" fill="#000"/><rect x="60" y="40" width="5" height="5" fill="#000"/>
+        <rect x="70" y="40" width="5" height="5" fill="#000"/><rect x="80" y="40" width="5" height="5" fill="#000"/>
+        <rect x="90" y="40" width="5" height="5" fill="#000"/><rect x="40" y="50" width="5" height="5" fill="#000"/>
+        <rect x="55" y="50" width="5" height="5" fill="#000"/><rect x="65" y="50" width="5" height="5" fill="#000"/>
+        <rect x="80" y="50" width="5" height="5" fill="#000"/><rect x="45" y="55" width="5" height="5" fill="#000"/>
+        <rect x="60" y="55" width="5" height="5" fill="#000"/><rect x="75" y="55" width="5" height="5" fill="#000"/>
+        <rect x="90" y="55" width="5" height="5" fill="#000"/><rect x="40" y="60" width="5" height="5" fill="#000"/>
+        <rect x="50" y="60" width="5" height="5" fill="#000"/><rect x="70" y="60" width="5" height="5" fill="#000"/>
+        <rect x="85" y="60" width="5" height="5" fill="#000"/><rect x="40" y="70" width="5" height="5" fill="#000"/>
+        <rect x="55" y="70" width="5" height="5" fill="#000"/><rect x="65" y="70" width="5" height="5" fill="#000"/>
+        <rect x="80" y="70" width="5" height="5" fill="#000"/><rect x="45" y="75" width="5" height="5" fill="#000"/>
+        <rect x="60" y="75" width="5" height="5" fill="#000"/><rect x="75" y="75" width="5" height="5" fill="#000"/>
+        <rect x="40" y="80" width="5" height="5" fill="#000"/><rect x="50" y="80" width="5" height="5" fill="#000"/>
+        <rect x="70" y="80" width="5" height="5" fill="#000"/><rect x="40" y="90" width="5" height="5" fill="#000"/>
+        <rect x="55" y="90" width="5" height="5" fill="#000"/><rect x="65" y="90" width="5" height="5" fill="#000"/>
+        <rect x="85" y="90" width="5" height="5" fill="#000"/>
+        <!-- TchotchoPay logo center -->
+        <rect x="43" y="43" width="14" height="14" rx="2" fill="#1055CC"/>
+        <text x="50" y="52" fill="white" font-size="7" font-weight="bold" text-anchor="middle" font-family="sans-serif">T</text>
+      </svg>
+    </div>
+
+    <!-- Username -->
+    <div class="recv-username">
+      <span class="ub-label">@</span>
+      <span class="ub-val" id="recv-username-val">—</span>
+      <button style="background:none;border:none;color:var(--cyan);cursor:pointer;font-size:.78rem;font-weight:700;" onclick="copyUsername()">Copy</button>
+    </div>
+
+    <!-- Address -->
+    <div class="recv-field-label" style="text-align:left;">Wallet Address (USDC  instantly)</div>
+    <div class="recv-addr" onclick="copyAddress()">
+      <span id="recv-addr-text">Loading...</span>
+      <i class="ti ti-copy" style="color:var(--gray);flex-shrink:0;"></i>
+    </div>
+
+    <!-- Share buttons -->
+    <div class="recv-share-row">
+      <button class="recv-share-btn" onclick="copyReceiveLink()"><i class="ti ti-link"></i> Copy Link</button>
+      <button class="recv-share-btn" onclick="shareWhatsApp()"><i class="ti ti-brand-whatsapp"></i> WhatsApp</button>
+      <button class="recv-share-btn" onclick="showToast('QR download coming soon!')"><i class="ti ti-download"></i> Save QR</button>
+    </div>
+
+    <button class="action-btn cancel-btn" onclick="closeReceiveModal()" style="width:100%;justify-content:center;margin-top:14px;">Close</button>
+  </div>
+</div>
+
+<!-- Cash Out modal -->
+<div class="modal-overlay" id="cashout-modal">
+  <div class="modal">
+    <div class="modal-title"><i class="ti ti-cash" style="color:var(--green)"></i> Cash Out</div>
+
+    <!-- Step 1: Choose method -->
+    <div class="cashout-step active" id="cashout-step-1">
+      <p style="font-size:.83rem;color:var(--gray);margin-bottom:16px;">How would you like to cash out your USDC?</p>
+      <button class="cashout-option" onclick="selectCashOutMethod('bank')">
+        <i class="ti ti-building-bank"></i>
+        <span class="cashout-option-text">
+          <span class="opt-title">Bank Withdrawal (USD)</span>
+          <span class="opt-sub">Transfer to your linked US bank account · 1% fee · 1–3 days</span>
+        </span>
+      </button>
+      <button class="cashout-option" onclick="selectCashOutMethod('agent')">
+        <i class="ti ti-map-pin"></i>
+        <span class="cashout-option-text">
+          <span class="opt-title">Cash via Agent in Haiti</span>
+          <span class="opt-sub">Pick up cash HTG at a local TchotchoPay agent · 1% fee</span>
+        </span>
+      </button>
+      <button class="cashout-option" onclick="selectCashOutMethod('htg')">
+        <i class="ti ti-currency-dollar"></i>
+        <span class="cashout-option-text">
+          <span class="opt-title">Convert to HTG Gourdes</span>
+          <span class="opt-sub">Receive HTG in your MonCash or NatCash wallet · small FX spread</span>
+        </span>
+      </button>
+      <button class="cashout-option" onclick="selectCashOutMethod('keep')">
+        <i class="ti ti-pig-money"></i>
+        <span class="cashout-option-text">
+          <span class="opt-title">Keep as USDC Savings</span>
+          <span class="opt-sub">Move to your savings wallet · free · no lock-up</span>
+        </span>
+      </button>
+      <div class="modal-actions" style="margin-top:12px;">
+        <button class="action-btn cancel-btn" onclick="closeCashOutModal()" style="width:100%;justify-content:center;">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Enter amount -->
+    <div class="cashout-step" id="cashout-step-2">
+      <p style="font-size:.83rem;color:var(--gray);margin-bottom:6px;" id="cashout-method-desc">—</p>
+      <label style="display:block;font-size:.8rem;color:var(--gray);margin:14px 0 6px;">Amount (USDC)</label>
+      <input type="number" id="cashout-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
+      <div id="cashout-extra" style="margin-top:10px;"></div>
+      <p style="font-size:.75rem;color:var(--gray);margin-top:8px;" id="cashout-fee-note"></p>
+      <p id="cashout-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
+      <div class="modal-actions">
+        <button class="action-btn cancel-btn" onclick="cashoutBack()"><i class="ti ti-arrow-left"></i> Back</button>
+        <button class="action-btn primary" onclick="submitCashOut()" style="background:var(--green);color:#020B2D;"><i class="ti ti-check"></i> Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Savings Deposit modal -->
+<div class="modal-overlay" id="savings-deposit-modal">
+  <div class="modal">
+    <div class="modal-title"><i class="ti ti-circle-plus" style="color:var(--green)"></i> Move to Savings</div>
+    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Transfer USDC from your main wallet to your savings wallet. Free, instant, no lock-up.</p>
+    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USDC)</label>
+    <input type="number" id="savings-deposit-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
+    <p class="fee-note" style="margin-top:8px;">Free · Available balance: <span id="savings-available">—</span> USDC</p>
+    <p id="sd-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
+    <div class="modal-actions">
+      <button class="action-btn cancel-btn" onclick="closeSavingsDepositModal()">Cancel</button>
+      <button class="action-btn primary" onclick="submitSavingsDeposit()" style="background:var(--green);color:#020B2D;"><i class="ti ti-check"></i> Move Funds</button>
+    </div>
+  </div>
+</div>
+
+<!-- Savings Withdraw modal -->
+<div class="modal-overlay" id="savings-withdraw-modal">
+  <div class="modal">
+    <div class="modal-title"><i class="ti ti-circle-minus" style="color:var(--green)"></i> Withdraw from Savings</div>
+    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Move USDC back to your main wallet. Free, instant.</p>
+    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USDC)</label>
+    <input type="number" id="savings-withdraw-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
+    <p class="fee-note" style="margin-top:8px;">Free · Savings balance: <span id="savings-avail-withdraw">—</span> USDC</p>
+    <p id="sw-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
+    <div class="modal-actions">
+      <button class="action-btn cancel-btn" onclick="closeSavingsWithdrawModal()">Cancel</button>
+      <button class="action-btn primary" onclick="submitSavingsWithdraw()" style="background:var(--green);color:#020B2D;"><i class="ti ti-check"></i> Withdraw</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── Auth check ───────────────────────────────────────────────────────────
+  const sessionToken = sessionStorage.getItem('tp_session_token');
+  const userId       = sessionStorage.getItem('tp_user_id');
+
+  if (!sessionToken || !userId) {
+    window.location.href = 'login.html';
+  }
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  function showToast(msg, duration = 3000) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+  }
+
+  function copyAddress() {
+    const addr = document.getElementById('wallet-address').textContent;
+    if (addr && addr !== 'Not available' && addr !== 'Loading...') {
+      navigator.clipboard.writeText(addr).then(() => showToast('Address copied!'));
+    }
+  }
+
+  // ── Receive modal ──────────────────────────────────────────────────────────
+  function openReceiveModal() {
+    // Sync address and username into receive modal
+    const addr = document.getElementById('wallet-address').textContent;
+    const name = document.getElementById('info-name').textContent.trim();
+    const username = name && name !== '—'
+      ? name.toLowerCase().replace(/\s+/g, '.').replace(/[^a-z0-9.]/g,'')
+      : 'user';
+    document.getElementById('recv-addr-text').textContent = addr;
+    document.getElementById('recv-username-val').textContent = username;
+    document.getElementById('receive-modal').classList.add('open');
+  }
+  function closeReceiveModal() { document.getElementById('receive-modal').classList.remove('open'); }
+
+  function copyUsername() {
+    const u = document.getElementById('recv-username-val').textContent;
+    navigator.clipboard.writeText('@' + u).then(() => showToast('Username copied!'));
+  }
+
+  function copyReceiveLink() {
+    const addr = document.getElementById('wallet-address').textContent;
+    const link = `https://tchotchopay.com/send.html?to=${encodeURIComponent(addr)}`;
+    navigator.clipboard.writeText(link).then(() => showToast('Link copied!'));
+  }
+
+  function shareWhatsApp() {
+    const addr = document.getElementById('wallet-address').textContent;
+    const name = document.getElementById('recv-username-val').textContent;
+    const msg  = `Send me USDC on TchotchoPay!\n\nUsername: @${name}\nWallet: ${addr}\n\nhttps://tchotchopay.com`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  function logout() {
+    sessionStorage.removeItem('tp_session_token');
+    sessionStorage.removeItem('tp_user_id');
+    window.location.href = 'index.html';
+  }
+
+  // ── Send modal multi-step ─────────────────────────────────────────────────
+  const HTG_RATE = 130.5;
+  let _sendDest   = null;   // 'moncash' | 'natcash' | 'usdc'
+  let _sendAmount = 0;
+
+  function openSendModal() {
+    _sendDest = null; _sendAmount = 0;
+    sendGoStep(1);
+    document.getElementById('send-modal').classList.add('open');
+  }
+  function closeSendModal() {
+    document.getElementById('send-modal').classList.remove('open');
+  }
+
+  function sendGoStep(n) {
+    [1,2,3,4].forEach(i => {
+      document.getElementById(`send-panel-${i}`).style.display = i === n ? 'block' : 'none';
+    });
+    // Step dots
+    [1,2,3].forEach(i => {
+      const dot  = document.getElementById(`sdot-${i}`);
+      const line = document.getElementById(`sline-${i}`);
+      if (i < n) {
+        dot.style.borderColor = 'var(--green)'; dot.style.background = 'var(--green)';
+        dot.style.color = '#000'; dot.textContent = '✓';
+        if (line) line.style.background = 'var(--green)';
+      } else if (i === n) {
+        dot.style.borderColor = 'var(--cyan)'; dot.style.background = 'rgba(0,174,239,0.1)';
+        dot.style.color = 'var(--cyan)'; dot.textContent = i;
+        if (line) line.style.background = 'rgba(0,174,239,0.15)';
+      } else {
+        dot.style.borderColor = 'rgba(0,174,239,0.3)'; dot.style.background = 'none';
+        dot.style.color = 'var(--gray)'; dot.textContent = i;
+        if (line) line.style.background = 'rgba(0,174,239,0.15)';
+      }
+    });
+  }
+
+  function selectSendDest(dest) {
+    _sendDest = dest;
+    // Highlight selected card
+    ['moncash','natcash','usdc'].forEach(d => {
+      const el = document.getElementById(`dest-${d}`);
+      if (el) el.style.borderColor = d === dest ? 'var(--green)' : 'rgba(0,174,239,0.2)';
+    });
+    // Update step 2 label
+    const labels = { moncash: '🇭🇹 MonCash', natcash: '🇭🇹 NatCash', usdc: '💰 USDC Address' };
+    document.getElementById('send-dest-label').textContent = labels[dest];
+    // Show correct input
+    document.getElementById('send-phone-row').style.display = dest !== 'usdc' ? 'block' : 'none';
+    document.getElementById('send-addr-row').style.display  = dest === 'usdc' ? 'block' : 'none';
+    // Clear
+    document.getElementById('send-phone').value = '';
+    document.getElementById('send-addr').value  = '';
+    document.getElementById('send-custom').value = '';
+    document.querySelectorAll('.send-preset').forEach(b => b.style.borderColor = 'rgba(0,174,239,0.2)');
+    document.getElementById('send-fx-note').style.display   = 'none';
+    document.getElementById('send-summary').style.display   = 'none';
+    _sendAmount = 0;
+    sendGoStep(2);
+  }
+
+  function setSendPreset(val) {
+    _sendAmount = val;
+    document.getElementById('send-custom').value = '';
+    document.querySelectorAll('.send-preset').forEach(b => {
+      b.style.borderColor = parseFloat(b.dataset.val) === val ? 'var(--cyan)' : 'rgba(0,174,239,0.2)';
+      b.style.background  = parseFloat(b.dataset.val) === val ? 'rgba(0,174,239,0.08)' : 'rgba(2,11,45,0.5)';
+    });
+    updateSendSummary();
+  }
+
+  function setSendCustom(val) {
+    _sendAmount = parseFloat(val) || 0;
+    document.querySelectorAll('.send-preset').forEach(b => {
+      b.style.borderColor = 'rgba(0,174,239,0.2)';
+      b.style.background  = 'rgba(2,11,45,0.5)';
+    });
+    updateSendSummary();
+  }
+
+  function updateSendSummary() {
+    const amt = _sendAmount;
+    if (!amt || amt <= 0) {
+      document.getElementById('send-fx-note').style.display  = 'none';
+      document.getElementById('send-summary').style.display  = 'none';
+      return;
+    }
+    const fee      = +(amt * 0.01).toFixed(2);
+    const net      = +(amt - fee).toFixed(2);
+    const htg      = Math.round(net * HTG_RATE).toLocaleString();
+    const isUSDC   = _sendDest === 'usdc';
+
+    document.getElementById('send-fx-note').style.display = 'flex';
+    document.getElementById('send-fx-text').innerHTML = isUSDC
+      ? `<strong>${net.toFixed(2)} USDC</strong> delivered after 1% fee`
+      : `<strong>${net.toFixed(2)} USD</strong> → <strong>${htg} HTG</strong> after 1% fee`;
+
+    document.getElementById('send-summary').style.display = 'block';
+    document.getElementById('ss-send').textContent = `$${amt.toFixed(2)}`;
+    document.getElementById('ss-fee').textContent  = `$${fee.toFixed(2)}`;
+    document.getElementById('ss-recv').textContent = isUSDC ? `${net.toFixed(2)} USDC` : `${htg} HTG`;
+  }
+
+  function confirmSend() {
+    // Validate step 2 first
+    const errEl = document.getElementById('send-step2-error');
+    errEl.style.display = 'none';
+    const phone = document.getElementById('send-phone').value.trim();
+    const addr  = document.getElementById('send-addr').value.trim();
+    const recipient = _sendDest === 'usdc' ? addr : phone;
+
+    if (!recipient) { errEl.textContent = 'Enter a recipient.'; errEl.style.display = 'block'; return; }
+    if (!_sendAmount || _sendAmount <= 0) { errEl.textContent = 'Choose an amount.'; errEl.style.display = 'block'; return; }
+    if (_sendAmount > _mainBalance) { errEl.textContent = `Insufficient balance. You have ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+
+    const fee  = +(_sendAmount * 0.01).toFixed(2);
+    const net  = +(_sendAmount - fee).toFixed(2);
+    const htg  = Math.round(net * HTG_RATE).toLocaleString();
+    const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USDC Wallet' };
+
+    // Populate confirm step
+    document.getElementById('cs-dest').textContent   = destLabels[_sendDest];
+    document.getElementById('cs-recv').textContent   = _sendDest === 'usdc' ? addr : `+509 ${phone}`;
+    document.getElementById('cs-amount').textContent = `$${_sendAmount.toFixed(2)}`;
+    document.getElementById('cs-fee').textContent    = `$${fee.toFixed(2)}`;
+    document.getElementById('cs-they').textContent   = _sendDest === 'usdc' ? `${net.toFixed(2)} USDC` : `${htg} HTG`;
+
+    // Update confirm btn color per dest
+    const btn = document.getElementById('send-confirm-btn');
+    if (_sendDest === 'natcash') btn.style.background = 'linear-gradient(135deg,#003087,#0057A8)';
+    else if (_sendDest === 'usdc') btn.style.background = 'linear-gradient(135deg,var(--mid),var(--cyan))';
+    else btn.style.background = 'linear-gradient(135deg,#007a3d,#00A651)';
+
+    sendGoStep(3);
+  }
+
+  // Called by the "Send Now" button on step 3
+  async function doSendNow() {
+    const errEl = document.getElementById('send-step3-error');
+    const btn   = document.getElementById('send-confirm-btn');
+    errEl.style.display = 'none';
+
+    if (_sendAmount > _mainBalance) {
+      errEl.textContent = 'Insufficient balance.'; errEl.style.display = 'block'; return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin .8s linear infinite"></i> Processing…';
+
+    try {
+      // Deduct from Supabase via wallet-pay
+      const res  = await fetch('/.netlify/functions/wallet-pay', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ sessionToken, amountUSDC: _sendAmount }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        errEl.textContent = data.error || 'Payment failed. Please try again.';
+        errEl.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-send"></i> Send Now';
+        return;
+      }
+
+      // Update local balance from server response
+      _mainBalance = data.newBalance || Math.max(0, _mainBalance - _sendAmount);
+      updateBalanceDisplay();
+
+      const phone = document.getElementById('send-phone').value.trim();
+      const addr  = document.getElementById('send-addr').value.trim();
+      const fee   = +(_sendAmount * 0.01).toFixed(2);
+      const net   = +(_sendAmount - fee).toFixed(2);
+      const htg   = Math.round(net * HTG_RATE).toLocaleString();
+      const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USDC Wallet' };
+
+      document.getElementById('success-msg').innerHTML =
+        `<strong>$${_sendAmount.toFixed(2)}</strong> sent to <strong>${_sendDest === 'usdc' ? addr : '+509 ' + phone}</strong> via ${destLabels[_sendDest]}.<br>
+        They receive: <strong style="color:var(--green)">${_sendDest === 'usdc' ? net.toFixed(2) + ' USDC' : htg + ' HTG'}</strong>`;
+
+      sendGoStep(4);
+    } catch (err) {
+      errEl.textContent = 'Network error. Please try again.';
+      errEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-send"></i> Send Now';
+    }
+  }
+
+  function startKYC() { window.location.href = 'signup.html?kyc=1'; }
+
+  // ── KYC refresh ────────────────────────────────────────────────────────────
+  let _kycInquiryId = null;
+
+  async function refreshKYCStatus() {
+    const btn = document.getElementById('kyc-refresh-btn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin .8s linear infinite"></i>'; }
+    try {
+      if (_kycInquiryId) {
+        // Ask Persona directly — this also updates Supabase if completed
+        const res  = await fetch('/.netlify/functions/persona-kyc', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ action: 'checkInquiry', inquiryId: _kycInquiryId }),
+        });
+        const data = await res.json();
+        if (data.status === 'completed' || data.status === 'approved') {
+          // Supabase now updated — reload profile to reflect
+          await loadProfile();
+          return;
+        }
+      }
+      // Fallback: just reload profile from Supabase
+      await loadProfile();
+    } catch (e) {
+      showToast('Could not refresh status. Try again.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="ti ti-refresh"></i>'; }
+    }
+  }
+
+  // ── KYC polling — runs after returning from KYC flow ────────────────────
+  let _kycPollTimer = null;
+  function startKYCPolling(attempt) {
+    attempt = attempt || 1;
+    if (attempt > 20) return; // stop after ~5 minutes
+    _kycPollTimer = setTimeout(async () => {
+      if (!_kycInquiryId) return;
+      try {
+        const res  = await fetch('/.netlify/functions/persona-kyc', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ action: 'checkInquiry', inquiryId: _kycInquiryId }),
+        });
+        const data = await res.json();
+        if (data.status === 'completed' || data.status === 'approved') {
+          // Supabase updated — reload profile to show Verified badge
+          await loadProfile();
+          return;
+        }
+      } catch(e) { /* ignore, keep polling */ }
+      startKYCPolling(attempt + 1);
+    }, 15000); // every 15 seconds
+  }
+
+  // ── Load profile ─────────────────────────────────────────────────────────
+  // Failsafe: always hide loading screen within 10 seconds
+  const _loadingTimeout = setTimeout(() => {
+    document.getElementById('loading-screen').style.display = 'none';
+  }, 10000);
+
+  async function loadProfile() {
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch('/.netlify/functions/user-profile', {
+        headers: { 'Authorization': `Bearer ${sessionToken}` },
+        signal: ctrl.signal,
+      });
+      clearTimeout(timer);
+
+      if (res.status === 401) {
+        clearTimeout(_loadingTimeout);
+        document.getElementById('loading-screen').style.display = 'none';
+        logout();
+        return;
+      }
+      const data = await res.json();
+
+      if (!data.user) throw new Error('No user data');
+
+      const { user, wallet } = data;
+
+      // Topbar
+      const initials = user.full_name
+        ? user.full_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)
+        : '?';
+      document.getElementById('user-initials').textContent = initials;
+      document.getElementById('user-display-name').textContent = user.full_name || user.email;
+
+      // Balance
+      const bal = wallet.usdc_balance || 0;
+      _mainBalance = bal;
+      _savingsBalance = user.savings_balance || 0;
+      document.getElementById('balance-amount').innerHTML = `${bal.toFixed(2)} <span>USDC</span>`;
+      const htgVal = (bal * HTG_RATE).toLocaleString('en-US', { maximumFractionDigits: 0 });
+      document.getElementById('balance-htg').textContent = htgVal + ' HTG';
+      // Savings
+      document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USDC</span>`;
+      document.getElementById('savings-sub').textContent = `≈ ${Math.round(_savingsBalance * HTG_RATE).toLocaleString()} HTG · No lock-up · Withdraw anytime`;
+
+      // Wallet address
+      const addr = wallet.address || 'Not available';
+      document.getElementById('wallet-address').textContent = addr;
+
+      // Account info
+      document.getElementById('info-name').textContent   = user.full_name || '—';
+      document.getElementById('info-email').textContent  = user.email || '—';
+      document.getElementById('info-phone').textContent  = user.phone || 'Not set';
+      document.getElementById('info-since').textContent  = user.created_at
+        ? new Date(user.created_at).toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'})
+        : '—';
+
+      // Store inquiry ID — Supabase first, then sessionStorage fallback
+      if (user.kyc_inquiry_id) {
+        _kycInquiryId = user.kyc_inquiry_id;
+      } else {
+        const ssId = sessionStorage.getItem('tp_persona_inquiry_id');
+        if (ssId) _kycInquiryId = ssId;
+      }
+
+      // KYC badge + banner
+      const kyc = user.kyc_status || 'pending';
+      const kycBadges = {
+        verified: '<span class="badge verified"><i class="ti ti-shield-check"></i> Verified</span>',
+        pending:  '<span class="badge pending"><i class="ti ti-clock"></i> Pending</span>',
+        failed:   '<span class="badge failed"><i class="ti ti-x"></i> Failed</span>',
+      };
+      document.getElementById('info-kyc').innerHTML = kycBadges[kyc] || kycBadges.pending;
+
+      const banner = document.getElementById('kyc-banner');
+      if (kyc === 'verified') {
+        banner.classList.add('verified');
+        banner.style.display = 'flex';
+        document.getElementById('kyc-title').textContent    = 'Identity verified';
+        document.getElementById('kyc-subtitle').textContent = 'Your account is fully verified. All features are unlocked.';
+        document.getElementById('kyc-btn').style.display    = 'none';
+        setTimeout(() => { banner.style.display = 'none'; }, 5000);
+      } else if (kyc === 'pending') {
+        banner.style.display = 'flex';
+        if (_kycInquiryId) {
+          document.getElementById('kyc-refresh-btn').style.display = 'inline-flex';
+          // If coming back from KYC flow, show "processing" message and start polling
+          const fromKYC = sessionStorage.getItem('tp_persona_inquiry_id');
+          if (fromKYC) {
+            sessionStorage.removeItem('tp_persona_inquiry_id');
+            document.getElementById('kyc-title').textContent    = 'Verifying your identity…';
+            document.getElementById('kyc-subtitle').textContent = 'This usually takes less than a minute. Please wait.';
+            document.getElementById('kyc-btn').style.display    = 'none';
+            startKYCPolling();
+          }
+        }
+      } else if (kyc === 'failed') {
+        banner.style.display = 'flex';
+        document.getElementById('kyc-title').textContent    = 'Verification failed';
+        document.getElementById('kyc-subtitle').textContent = 'Please retry your identity verification.';
+        document.getElementById('kyc-btn').textContent      = 'Retry';
+      }
+
+    } catch (err) {
+      console.error('Profile load error:', err);
+      showToast('Could not load account data. Please refresh.', 5000);
+    }
+
+    clearTimeout(_loadingTimeout);
+    document.getElementById('loading-screen').style.display = 'none';
+  }
+
+  // ── Load linked bank ──────────────────────────────────────────────────────
+  async function loadBankAccounts() {
+    try {
+      const res = await fetch('/.netlify/functions/plaid-link', {
+        method: 'POST',
+        headers: {
+          'Content-Type':  'application/json',
+          'Authorization': `Bearer ${sessionToken}`,
+        },
+        body: JSON.stringify({ action: 'getAccounts' }),
+      });
+      const data = await res.json();
+      const accounts = data.accounts || [];
+      if (accounts.length === 0) return;
+
+      const container = document.getElementById('bank-content');
+      container.innerHTML = accounts.map(a => `
+        <div class="bank-item">
+          <div class="bank-icon"><i class="ti ti-building-bank"></i></div>
+          <div class="bank-info">
+            <div class="bank-name">${a.account_name || 'Bank Account'}</div>
+            <div class="bank-mask">••••${a.mask || '????'}</div>
+          </div>
+          <span class="bank-status"><i class="ti ti-check"></i> Linked</span>
+        </div>
+      `).join('') + `<button class="action-btn outline" onclick="linkBank()" style="margin-top:12px;font-size:.8rem;padding:7px 14px;width:100%;justify-content:center;"><i class="ti ti-plus"></i> Add another</button>`;
+    } catch (err) {
+      console.error('Bank load error:', err);
+    }
+  }
+
+  // ── Plaid link ────────────────────────────────────────────────────────────
+  async function linkBank() {
+    try {
+      const res = await fetch('/.netlify/functions/plaid-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionToken}` },
+        body: JSON.stringify({ action: 'createLinkToken' }),
+      });
+      const data = await res.json();
+      if (!data.linkToken) { showToast('Could not start bank link. Try again.'); return; }
+
+      const handler = Plaid.create({
+        token: data.linkToken,
+        onSuccess: async (publicToken) => {
+          const exchRes = await fetch('/.netlify/functions/plaid-link', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionToken}` },
+            body: JSON.stringify({ action: 'exchangeToken', publicToken }),
+          });
+          const exchData = await exchRes.json();
+          if (exchData.success) {
+            showToast(`Bank linked: ${exchData.accountName} ••••${exchData.mask}`);
+            loadBankAccounts();
+          } else {
+            showToast('Bank link failed. Please try again.');
+          }
+        },
+        onExit: () => {},
+      });
+      handler.open();
+    } catch (err) {
+      showToast('Could not connect to bank. Try again.');
+    }
+  }
+
+  // ── Edit Profile ──────────────────────────────────────────────────────────
+  function openEditProfileModal() {
+    const currentName  = document.getElementById('info-name').textContent.trim();
+    const currentPhone = document.getElementById('info-phone').textContent.trim();
+    document.getElementById('ep-name').value  = currentName  === '—' ? '' : currentName;
+    document.getElementById('ep-phone').value = currentPhone === 'Not set' ? '' : currentPhone;
+    document.getElementById('ep-error').style.display   = 'none';
+    document.getElementById('ep-success').style.display = 'none';
+    document.getElementById('ep-save-btn').disabled  = false;
+    document.getElementById('ep-save-btn').innerHTML = '<i class="ti ti-check"></i> Save Changes';
+    document.getElementById('edit-profile-modal').classList.add('open');
+  }
+
+  function closeEditProfileModal() {
+    document.getElementById('edit-profile-modal').classList.remove('open');
+  }
+
+  async function saveProfile() {
+    const name  = document.getElementById('ep-name').value.trim();
+    const phone = document.getElementById('ep-phone').value.trim();
+    const errEl = document.getElementById('ep-error');
+    const okEl  = document.getElementById('ep-success');
+    const btn   = document.getElementById('ep-save-btn');
+    errEl.style.display = 'none';
+    okEl.style.display  = 'none';
+
+    if (!name || name.length < 2) {
+      errEl.textContent   = 'Please enter your full name (at least 2 characters).';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    btn.disabled    = true;
+    btn.textContent = 'Saving…';
+
+    try {
+      const res  = await fetch('/.netlify/functions/update-profile', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionToken}` },
+        body:    JSON.stringify({ full_name: name, phone }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Save failed. Please try again.');
+
+      // Refresh displayed values immediately
+      document.getElementById('info-name').textContent  = name;
+      document.getElementById('info-phone').textContent = phone || 'Not set';
+
+      // Update topbar initials + name
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      document.getElementById('user-initials').textContent    = initials;
+      document.getElementById('user-display-name').textContent = name;
+
+      okEl.style.display = 'block';
+      showToast('Profile updated!');
+      setTimeout(closeEditProfileModal, 1400);
+    } catch (err) {
+      errEl.textContent   = err.message;
+      errEl.style.display = 'block';
+    } finally {
+      btn.disabled   = false;
+      btn.innerHTML  = '<i class="ti ti-check"></i> Save Changes';
+    }
+  }
+
+  // ── Cash Out ──────────────────────────────────────────────────────────────
+  let _cashoutMethod = null;
+  let _mainBalance   = 0;
+  let _savingsBalance = 0;
+
+  function openCashOutModal() {
+    _cashoutMethod = null;
+    document.getElementById('cashout-step-1').classList.add('active');
+    document.getElementById('cashout-step-2').classList.remove('active');
+    document.getElementById('cashout-error').style.display = 'none';
+    document.getElementById('cashout-modal').classList.add('open');
+  }
+  function closeCashOutModal() { document.getElementById('cashout-modal').classList.remove('open'); }
+
+  function selectCashOutMethod(method) {
+    _cashoutMethod = method;
+    const descs = {
+      bank:  'Enter how much USDC to withdraw to your linked bank account (USD). 1% fee applies.',
+      agent: 'Enter how much USDC to cash out via a TchotchoPay agent in Haiti (HTG). 1% fee applies.',
+      htg:   'Enter how much USDC to convert to HTG in your MonCash or NatCash wallet. FX spread applies.',
+      keep:  'Enter how much USDC to move to your savings wallet. Free, no lock-up.',
+    };
+    const fees = {
+      bank:  '1% withdrawal fee · Settle in 1–3 business days',
+      agent: '1% fee · Agent payout in HTG · Show QR code at pickup',
+      htg:   'Small FX spread (approx. 2%) · HTG sent to MonCash/NatCash',
+      keep:  'Free · Appears in your Savings Wallet immediately',
+    };
+    document.getElementById('cashout-method-desc').textContent = descs[method];
+    document.getElementById('cashout-fee-note').textContent = fees[method];
+    document.getElementById('cashout-amount').value = '';
+
+    // Show extra field for agent/HTG (phone / wallet number)
+    const extra = document.getElementById('cashout-extra');
+    if (method === 'agent') {
+      extra.innerHTML = `<label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Agent Code or Location</label><input type="text" id="cashout-agent-code" placeholder="e.g. PORT-AU-PRINCE-001" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>`;
+    } else if (method === 'htg') {
+      extra.innerHTML = `<label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">MonCash / NatCash Phone Number</label><input type="tel" id="cashout-phone" placeholder="+509 3700 0000" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>`;
+    } else {
+      extra.innerHTML = '';
+    }
+
+    document.getElementById('cashout-step-1').classList.remove('active');
+    document.getElementById('cashout-step-2').classList.add('active');
+  }
+
+  function cashoutBack() {
+    document.getElementById('cashout-step-2').classList.remove('active');
+    document.getElementById('cashout-step-1').classList.add('active');
+  }
+
+  async function submitCashOut() {
+    const amount = parseFloat(document.getElementById('cashout-amount').value);
+    const errEl  = document.getElementById('cashout-error');
+    errEl.style.display = 'none';
+
+    if (!amount || amount <= 0) {
+      errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return;
+    }
+    if (amount > _mainBalance) {
+      errEl.textContent = `Insufficient balance. Available: ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return;
+    }
+
+    if (_cashoutMethod === 'keep') {
+      // Move to savings — deduct from main balance in Supabase
+      try {
+        const res  = await fetch('/.netlify/functions/wallet-pay', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ sessionToken, amountUSDC: amount }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          const errEl = document.getElementById('cashout-error');
+          errEl.textContent = data.error || 'Failed. Try again.';
+          errEl.style.display = 'block';
+          return;
+        }
+        _mainBalance    = data.newBalance || Math.max(0, _mainBalance - amount);
+        _savingsBalance = _savingsBalance + amount;
+        updateBalanceDisplay();
+        closeCashOutModal();
+        showToast(`✅ ${amount.toFixed(2)} USDC moved to Savings!`);
+      } catch {
+        showToast('Network error. Please try again.');
+      }
+      return;
+    }
+
+    // For bank/agent/htg — deduct balance and queue the payout
+    try {
+      const res  = await fetch('/.netlify/functions/wallet-pay', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ sessionToken, amountUSDC: amount }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        const errEl = document.getElementById('cashout-error');
+        errEl.textContent = data.error || 'Failed. Try again.';
+        errEl.style.display = 'block';
+        return;
+      }
+      _mainBalance = data.newBalance || Math.max(0, _mainBalance - amount);
+      updateBalanceDisplay();
+      closeCashOutModal();
+      showToast('Cash out request submitted! We\'ll process it shortly.', 5000);
+    } catch {
+      showToast('Network error. Please try again.');
+    }
+  }
+
+  function updateBalanceDisplay() {
+    const HTG_RATE = 130.5;
+    document.getElementById('balance-amount').innerHTML = `${_mainBalance.toFixed(2)} <span>USDC</span>`;
+    document.getElementById('balance-htg').textContent = Math.round(_mainBalance * HTG_RATE).toLocaleString() + ' HTG';
+    document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USDC</span>`;
+    document.getElementById('savings-sub').textContent = `≈ ${Math.round(_savingsBalance * HTG_RATE).toLocaleString()} HTG · No lock-up · Withdraw anytime`;
+  }
+
+  // ── Savings modals ────────────────────────────────────────────────────────
+  function openSavingsDepositModal() {
+    document.getElementById('savings-available').textContent = _mainBalance.toFixed(2);
+    document.getElementById('savings-deposit-amount').value = '';
+    document.getElementById('sd-error').style.display = 'none';
+    document.getElementById('savings-deposit-modal').classList.add('open');
+  }
+  function closeSavingsDepositModal() { document.getElementById('savings-deposit-modal').classList.remove('open'); }
+
+  function openSavingsWithdrawModal() {
+    document.getElementById('savings-avail-withdraw').textContent = _savingsBalance.toFixed(2);
+    document.getElementById('savings-withdraw-amount').value = '';
+    document.getElementById('sw-error').style.display = 'none';
+    document.getElementById('savings-withdraw-modal').classList.add('open');
+  }
+  function closeSavingsWithdrawModal() { document.getElementById('savings-withdraw-modal').classList.remove('open'); }
+
+  function submitSavingsDeposit() {
+    const amount = parseFloat(document.getElementById('savings-deposit-amount').value);
+    const errEl  = document.getElementById('sd-error');
+    errEl.style.display = 'none';
+    if (!amount || amount <= 0) { errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return; }
+    if (amount > _mainBalance)  { errEl.textContent = `Max available: ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+    _mainBalance    = Math.max(0, _mainBalance - amount);
+    _savingsBalance = _savingsBalance + amount;
+    updateBalanceDisplay();
+    closeSavingsDepositModal();
+    showToast(`✅ ${amount.toFixed(2)} USDC moved to Savings!`);
+  }
+
+  function submitSavingsWithdraw() {
+    const amount = parseFloat(document.getElementById('savings-withdraw-amount').value);
+    const errEl  = document.getElementById('sw-error');
+    errEl.style.display = 'none';
+    if (!amount || amount <= 0)    { errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return; }
+    if (amount > _savingsBalance)  { errEl.textContent = `Max savings: ${_savingsBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+    _savingsBalance = Math.max(0, _savingsBalance - amount);
+    _mainBalance    = _mainBalance + amount;
+    updateBalanceDisplay();
+    closeSavingsWithdrawModal();
+    showToast(`✅ ${amount.toFixed(2)} USDC returned to main wallet!`);
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  loadProfile();
+  loadBankAccounts();
+
+  // ── Add Funds modal ───────────────────────────────────────────────────────
+  let stripeInstance = null;
+  let cardElement    = null;
+
+  function openFundModal() {
+    document.getElementById('fund-modal').classList.add('open');
+    switchFundTab('bank');
+  }
+  function closeFundModal() {
+    document.getElementById('fund-modal').classList.remove('open');
+  }
+
+  function switchFundTab(tab) {
+    document.querySelectorAll('.fund-tab').forEach((t, i) => {
+      t.classList.toggle('active', (i === 0 && tab === 'bank') || (i === 1 && tab === 'card'));
+    });
+    document.getElementById('fund-bank-panel').classList.toggle('active', tab === 'bank');
+    document.getElementById('fund-card-panel').classList.toggle('active', tab === 'card');
+    document.getElementById('fund-cancel-btn').style.display = tab === 'card' ? 'none' : 'block';
+
+    if (tab === 'card' && !stripeInstance) initStripeCard();
+  }
+
+  function initStripeCard() {
+    if (!window.Stripe) { showToast('Stripe not loaded — refresh and try again.'); return; }
+    const pk = 'pk_live_51RFVUqPl8UNFVHBcsPVMO3mFCLo8rXqO7hqPAFZ8JkOODl7b87N0r2PZRFqzv3NFOM4Hpa6DuNP9TalC5KM7MKh00D9o0IzJP';
+    stripeInstance = Stripe(pk);
+    const elements = stripeInstance.elements();
+    cardElement = elements.create('card', {
+      style: {
+        base: { color: '#F0F6FF', fontFamily: '"Segoe UI", system-ui, sans-serif', fontSize: '15px', '::placeholder': { color: '#8FA8CC' } },
+        invalid: { color: '#FF4C6A' },
+      },
+    });
+    cardElement.mount('#stripe-card-element');
+  }
+
+  async function submitDeposit() {
+    const amtInput = document.getElementById('deposit-amount');
+    const errEl    = document.getElementById('deposit-error');
+    const btn      = document.getElementById('deposit-btn');
+    errEl.style.display = 'none';
+
+    const amount = parseFloat(amtInput.value);
+    if (!amount || amount < 5 || amount > 2000) {
+      errEl.textContent = 'Enter an amount between $5 and $2,000.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Processing…';
+
+    try {
+      const res  = await fetch('/.netlify/functions/deposit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, userId }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.clientSecret) throw new Error(data.error || 'Could not create payment');
+
+      const total = (data.totalCents / 100).toFixed(2);
+      btn.textContent = `Pay $${total}`;
+
+      const { error, paymentIntent } = await stripeInstance.confirmCardPayment(data.clientSecret, {
+        payment_method: { card: cardElement },
+      });
+
+      if (error) {
+        errEl.textContent = error.message;
+        errEl.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti ti-lock"></i> Pay & Add Funds';
+        return;
+      }
+
+      if (paymentIntent.status === 'succeeded') {
+        closeFundModal();
+        showToast(`✅ $${amount.toFixed(2)} added to your wallet!`);
+        setTimeout(loadProfile, 2000); // refresh balance
+      }
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-lock"></i> Pay & Add Funds';
+    }
+  }
+</script>
+
+<!-- Virtual Card (Lithic) -->
+<script>
+  let _cardState = null;
+  function cardAuthHeader() {
+    const tok = sessionStorage.getItem('tp_session_token');
+    return tok ? { 'Authorization': 'Bearer ' + tok, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+  }
+  function vcShow(id) {
+    ['vc-loading','vc-none','vc-card','vc-error'].forEach(s => {
+      const el = document.getElementById(s);
+      if (el) el.style.display = (s === id) ? '' : 'none';
+    });
+  }
+  async function loadCard() {
+    vcShow('vc-loading');
+    try {
+      const res  = await fetch('/.netlify/functions/lithic-card?action=status', { headers: cardAuthHeader() });
+      const data = await res.json();
+      if (data.card) { renderCard(data.card); } else { vcShow('vc-none'); }
+    } catch(e) {
+      document.getElementById('vc-error-msg').textContent = 'Unable to load card. Please try again.';
+      vcShow('vc-error');
+    }
+  }
+  function renderCard(card) {
+    _cardState = card.state;
+    const badge = document.getElementById('vc-status-badge');
+    if (_cardState === 'OPEN') {
+      badge.textContent = '● Active';
+      badge.style.cssText = 'font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;background:rgba(0,200,150,.15);color:#00C896;border:1px solid rgba(0,200,150,.3);';
+    } else {
+      badge.textContent = '❄ Frozen';
+      badge.style.cssText = 'font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:50px;background:rgba(0,174,239,.1);color:var(--cyan);border:1px solid rgba(0,174,239,.3);';
+    }
+    const freezeBtn = document.getElementById('vc-freeze-btn');
+    freezeBtn.innerHTML = _cardState === 'OPEN'
+      ? '<i class="ti ti-snowflake"></i> Freeze Card'
+      : '<i class="ti ti-sun"></i> Unfreeze Card';
+    freezeBtn.style.color = _cardState === 'OPEN' ? 'var(--white)' : 'var(--cyan)';
+    const lastFour = card.last_four || '••••';
+    document.getElementById('vc-pan').textContent = `•••• •••• •••• ${lastFour}`;
+    document.getElementById('vc-expiry').textContent = (card.exp_month && card.exp_year)
+      ? `${String(card.exp_month).padStart(2,'0')}/${String(card.exp_year).slice(-2)}` : '—';
+    try {
+      const u = JSON.parse(sessionStorage.getItem('tp_user') || '{}');
+      document.getElementById('vc-holder').textContent = (u.full_name || 'CARD HOLDER').toUpperCase();
+    } catch { document.getElementById('vc-holder').textContent = 'CARD HOLDER'; }
+    vcShow('vc-card');
+  }
+  async function issueCard() {
+    vcShow('vc-loading');
+    try {
+      const res  = await fetch('/.netlify/functions/lithic-card?action=create', { method: 'POST', headers: cardAuthHeader() });
+      const data = await res.json();
+      if (data.card) { renderCard(data.card); }
+      else { document.getElementById('vc-error-msg').textContent = data.error || 'Could not issue card.'; vcShow('vc-error'); }
+    } catch(e) { document.getElementById('vc-error-msg').textContent = 'Network error.'; vcShow('vc-error'); }
+  }
+  async function toggleFreeze() {
+    const action = _cardState === 'OPEN' ? 'freeze' : 'unfreeze';
+    try {
+      const res  = await fetch('/.netlify/functions/lithic-card?action=' + action, { method: 'POST', headers: cardAuthHeader() });
+      const data = await res.json();
+      if (data.card) renderCard(data.card);
+    } catch(e) {}
+  }
+  async function revealCard() {
+    try {
+      const res  = await fetch('/.netlify/functions/lithic-card?action=reveal', { method: 'POST', headers: cardAuthHeader() });
+      const data = await res.json();
+      if (data.pan) {
+        const fmt = data.pan.match(/.{1,4}/g)?.join(' ') || data.pan;
+        document.getElementById('vc-pan').textContent = fmt;
+        setTimeout(() => { document.getElementById('vc-pan').textContent = `•••• •••• •••• ${data.pan.slice(-4)}`; }, 15000);
+      }
+    } catch(e) {}
+  }
+  function scrollToCard() {
+    document.getElementById('card-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.addEventListener('DOMContentLoaded', () => setTimeout(loadCard, 900));
+</script>
+
+<!-- Plaid Link SDK -->
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+<!-- Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Bottom Nav (mobile) -->
+<nav class="bottom-nav">
+  <div class="bn-items">
+    <button class="bn-item active" onclick="window.location='dashboard.html'"><i class="ti ti-home"></i>Home</button>
+    <button class="bn-item" onclick="openSendModal()"><i class="ti ti-send"></i>Send</button>
+    <button class="bn-item" onclick="copyAddress()"><i class="ti ti-qrcode"></i>Receive</button>
+    <button class="bn-item" onclick="window.location='dashboard.html#tx'"><i class="ti ti-list"></i>History</button>
+  </div>
+</nav>
+
+<script src="lang.js"></script>
+</body>
+</html>

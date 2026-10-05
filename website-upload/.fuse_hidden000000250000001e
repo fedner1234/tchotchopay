@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay POS — Merchant Terminal</title>
+<!-- Facebook Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentElement.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1331702829081068');fbq('track','PageView');</script>
+<style>
+  :root {
+    --navy: #020B2D;
+    --blue: #0A1F6E;
+    --mid: #1055CC;
+    --cyan: #00AEEF;
+    --green: #00C896;
+    --gold: #F7B731;
+    --red: #FF4B4B;
+    --white: #ffffff;
+    --light: #f0f4ff;
+    --muted: #8899BB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a1a;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  /* ── Top bar ── */
+  .top-bar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 4px;
+  }
+  .top-bar .brand {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--white); font-size: 1.1rem; font-weight: 700;
+  }
+  .top-bar .brand span { color: var(--cyan); }
+  .pos-badge {
+    background: var(--green); color: var(--navy);
+    font-size: 0.7rem; font-weight: 800; padding: 3px 8px;
+    border-radius: 20px; letter-spacing: 1px;
+  }
+  .top-bar .back-link {
+    color: var(--muted); text-decoration: none; font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .top-bar .back-link:hover { color: var(--cyan); }
+
+  /* ── Tablet wrapper ── */
+  .tablet {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 680px;
+    background: var(--navy);
+    border-radius: 24px;
+    border: 3px solid #1a2a5a;
+    box-shadow: 0 40px 120px rgba(0,174,239,0.15), 0 0 0 1px #0d1a3d;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Tablet header ── */
+  .tablet-header {
+    background: var(--blue);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .tablet-header .merchant-info { display: flex; align-items: center; gap: 12px; }
+  .merchant-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--mid));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: white; font-size: 0.9rem;
+  }
+  .merchant-name { color: white; font-weight: 600; font-size: 0.9rem; }
+  .merchant-sub { color: var(--muted); font-size: 0.75rem; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .header-time { color: var(--muted); font-size: 0.8rem; }
+  .wifi-icon { color: var(--green); font-size: 0.8rem; }
+  .header-logo { color: var(--cyan); font-weight: 800; font-size: 1rem; }
+
+  /* ── Main layout ── */
+  .tablet-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 80px;
+    background: #050d2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    gap: 6px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-item {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    border: 2px solid transparent;
+  }
+  .nav-item:hover { background: rgba(0,174,239,0.1); color: var(--cyan); }
+  .nav-item.active {
+    background: rgba(0,174,239,0.15);
+    color: var(--cyan);
+    border-color: rgba(0,174,239,0.3);
+  }
+  .nav-item .nav-icon { font-size: 1.2rem; }
+  .nav-item .nav-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sidebar-bottom { margin-top: auto; }
+
+  /* ── Screens ── */
+  .screen { display: none; flex: 1; overflow-y: auto; }
+  .screen.active { display: flex; }
+
+  /* ==============================
+     SCREEN 1: DASHBOARD
+  ============================== */
+  #screen-dashboard {
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    background: var(--navy);
+  }
+  .dash-greeting { color: white; font-size: 1.1rem; font-weight: 700; }
+  .dash-date { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+  .stat-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--blue);
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .stat-label { color: var(--muted); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .stat-value { color: white; font-size: 1.5rem; font-weight: 800; }
+  .stat-value.green { color: var(--green); }
+  .stat-value.cyan { color: var(--cyan); }
+  .stat-value.gold { color: var(--gold); }
+  .stat-sub { color: var(--muted); font-size: 0.72rem; margin-top: 4px; }
+
+  .dash-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; }
+
+  .dash-card {
+    background: var(--blue);
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .dash-card-title {
+    color: white; font-size: 0.85rem; font-weight: 700;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+
+  .txn-list { display: flex; flex-direction: column; gap: 10px; }
+  .txn-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+  }
+  .txn-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
+  }
+  .txn-avatar.moncash { background: rgba(255,75,75,0.2); color: #FF4B4B; }
+  .txn-avatar.natcash { background: rgba(247,183,49,0.2); color: var(--gold); }
+  .txn-avatar.cash { background: rgba(0,200,150,0.2); color: var(--green); }
+  .txn-info { flex: 1; }
+  .txn-name { color: white; font-size: 0.8rem; font-weight: 600; }
+  .txn-method { color: var(--muted); font-size: 0.7rem; }
+  .txn-amount { color: var(--green); font-size: 0.85rem; font-weight: 700; }
+  .txn-time { color: var(--muted); font-size: 0.68rem; }
+
+  .payment-breakdown { display: flex; flex-direction: column; gap: 10px; }
+  .pay-method {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+  }
+  .pay-method-left { display: flex; align-items: center; gap: 10px; }
+  .pay-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .pay-name { color: white; font-size: 0.8rem; font-weight: 600; }
+  .pay-count { color: var(--muted); font-size: 0.7rem; }
+  .pay-amount { color: white; font-size: 0.82rem; font-weight: 700; }
+  .pay-bar-wrap { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; margin-top: 4px; }
+  .pay-bar { height: 4px; border-radius: 4px; }
+
+  /* ==============================
+     SCREEN 2: NEW SALE / POS
+  ============================== */
+  #screen-sale {
+    flex-direction: row;
+    background: var(--navy);
+  }
+
+  .products-panel {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .products-header {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .products-title { color: white; font-size: 1rem; font-weight: 700; }
+  .search-bar {
+    background: var(--blue);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: white;
+    font-size: 0.82rem;
+    width: 180px;
+    outline: none;
+  }
+  .search-bar::placeholder { color: var(--muted); }
+
+  .cat-tabs { display: flex; gap: 8px; }
+  .cat-tab {
+    padding: 6px 14px; border-radius: 20px; font-size: 0.75rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.1); color: var(--muted);
+    background: transparent;
+  }
+  .cat-tab.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+  .cat-tab:hover:not(.active) { color: white; border-color: rgba(255,255,255,0.3); }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .product-card {
+    background: var(--blue);
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; text-align: center;
+  }
+  .product-card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .product-card:active { transform: scale(0.97); }
+  .product-emoji { font-size: 2rem; }
+  .product-name { color: white; font-size: 0.75rem; font-weight: 600; }
+  .product-price { color: var(--green); font-size: 0.82rem; font-weight: 700; }
+
+  /* Cart panel */
+  .cart-panel {
+    width: 300px;
+    background: #050d2a;
+    display: flex; flex-direction: column;
+    padding: 20px;
+    gap: 12px;
+  }
+  .cart-title { color: white; font-size: 1rem; font-weight: 700; }
+  .cart-empty { color: var(--muted); font-size: 0.82rem; text-align: center; padding: 30px 0; }
+
+  .cart-items { flex: 1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+  .cart-item {
+    background: var(--blue);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cart-item-emoji { font-size: 1.2rem; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { color: white; font-size: 0.78rem; font-weight: 600; }
+  .cart-item-price { color: var(--muted); font-size: 0.72rem; }
+  .cart-qty {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .qty-btn {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: rgba(255,255,255,0.1); border: none;
+    color: white; font-size: 0.85rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .qty-btn:hover { background: var(--mid); }
+  .qty-num { color: white; font-size: 0.82rem; font-weight: 700; min-width: 16px; text-align: center; }
+
+  .cart-divider { height: 1px; background: rgba(255,255,255,0.06); }
+
+  .cart-totals { display: flex; flex-direction: column; gap: 6px; }
+  .cart-row { display: flex; justify-content: space-between; align-items: center; }
+  .cart-row-label { color: var(--muted); font-size: 0.78rem; }
+  .cart-row-value { color: white; font-size: 0.82rem; font-weight: 600; }
+  .cart-total-row .cart-row-label { color: white; font-weight: 700; font-size: 0.9rem; }
+  .cart-total-row .cart-row-value { color: var(--green); font-weight: 800; font-size: 1rem; }
+
+  .pay-buttons { display: flex; flex-direction: column; gap: 8px; }
+  .btn-moncash {
+    background: linear-gradient(135deg, #FF4B4B, #CC0000);
+    color: white; border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-natcash {
+    background: linear-gradient(135deg, var(--gold), #e5a800);
+    color: var(--navy); border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-moncash:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-natcash:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-tchotcho {
+    background: linear-gradient(135deg, var(--mid), var(--cyan));
+    color: white; border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-tchotcho:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-cash {
+    background: rgba(0,200,150,0.15); color: var(--green);
+    border: 1px solid rgba(0,200,150,0.3); border-radius: 12px;
+    padding: 10px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-cash:hover { background: rgba(0,200,150,0.25); }
+  .btn-clear {
+    background: transparent; color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-clear:hover { color: var(--red); border-color: var(--red); }
+
+  /* ==============================
+     SCREEN 3: PAYMENT QR
+  ============================== */
+  #screen-payment {
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    padding: 30px;
+  }
+  .payment-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+  }
+  .payment-left { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+  .payment-method-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 700;
+  }
+  .payment-method-badge.moncash { background: rgba(255,75,75,0.15); color: #FF6B6B; border: 1px solid rgba(255,75,75,0.3); }
+  .payment-method-badge.natcash { background: rgba(247,183,49,0.15); color: var(--gold); border: 1px solid rgba(247,183,49,0.3); }
+  .payment-method-badge.tchotcho { background: rgba(0,174,239,0.15); color: var(--cyan); border: 1px solid rgba(0,174,239,0.3); }
+
+  .payment-amount-display { color: white; }
+  .payment-amount-htg { font-size: 2.5rem; font-weight: 800; color: var(--green); }
+  .payment-amount-usd { font-size: 1rem; color: var(--muted); margin-top: 4px; }
+
+  .payment-instructions { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+  .payment-steps { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .payment-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    color: rgba(255,255,255,0.7); font-size: 0.82rem;
+  }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--mid); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  .payment-right { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .qr-frame {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(0,174,239,0.3);
+  }
+  .qr-placeholder {
+    width: 180px; height: 180px;
+    display: grid; grid-template-columns: repeat(5,1fr); gap: 3px;
+  }
+  .qr-cell { border-radius: 2px; background: #1a1a2e; }
+  .qr-cell.white { background: white; }
+
+  .qr-label { color: var(--muted); font-size: 0.75rem; text-align: center; }
+  .qr-amount-badge {
+    background: var(--green); color: var(--navy);
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.85rem; font-weight: 800;
+  }
+
+  .waiting-indicator {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--cyan); font-size: 0.82rem;
+  }
+  .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .btn-back-sale {
+    background: rgba(255,255,255,0.06); color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+    padding: 10px 20px; font-size: 0.82rem; cursor: pointer;
+    transition: all 0.2s; margin-top: 10px;
+  }
+  .btn-back-sale:hover { color: white; border-color: rgba(255,255,255,0.3); }
+
+  .btn-simulate-pay {
+    background: linear-gradient(135deg, var(--green), #00a87d);
+    color: var(--navy); border: none; border-radius: 12px;
+    padding: 12px 28px; font-size: 0.88rem; font-weight: 800;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-simulate-pay:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,200,150,0.4); }
+
+  /* ==============================
+     SCREEN 4: RECEIPT / CONFIRMATION
+  ============================== */
+  #screen-receipt {
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    padding: 30px;
+  }
+  .receipt-container {
+    background: var(--blue);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  .receipt-success-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(0,200,150,0.15);
+    border: 3px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 2rem;
+    animation: popIn 0.4s ease-out;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .receipt-title { color: var(--green); font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+  .receipt-subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+
+  .receipt-body {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .receipt-header-row {
+    display: flex; justify-content: space-between;
+    color: var(--muted); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .receipt-line { display: flex; justify-content: space-between; padding: 5px 0; }
+  .receipt-line-name { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+  .receipt-line-val { color: white; font-size: 0.8rem; font-weight: 600; }
+  .receipt-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
+  .receipt-total-row { display: flex; justify-content: space-between; padding: 6px 0; }
+  .receipt-total-label { color: white; font-size: 0.9rem; font-weight: 700; }
+  .receipt-total-val { color: var(--green); font-size: 1rem; font-weight: 800; }
+
+  .receipt-txn-id { color: var(--muted); font-size: 0.72rem; margin-top: 8px; text-align: center; }
+
+  .receipt-wallet-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .receipt-wallet-badge.moncash { background: rgba(255,75,75,0.15); color: #FF6B6B; }
+  .receipt-wallet-badge.natcash { background: rgba(247,183,49,0.15); color: var(--gold); }
+
+  .receipt-buttons { display: flex; gap: 10px; }
+  .btn-new-sale {
+    flex: 1; background: linear-gradient(135deg, var(--mid), var(--cyan));
+    color: white; border: none; border-radius: 12px;
+    padding: 12px; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-new-sale:hover { opacity: 0.9; }
+  .btn-print {
+    background: rgba(255,255,255,0.08); color: white;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 12px 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-print:hover { background: rgba(255,255,255,0.15); }
+
+  /* ==============================
+     SCREEN 5: HISTORY
+  ============================== */
+  #screen-history {
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    background: var(--navy);
+  }
+  .history-header { display: flex; align-items: center; justify-content: space-between; }
+  .history-title { color: white; font-size: 1rem; font-weight: 700; }
+  .history-filter {
+    background: var(--blue); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 7px 14px; color: white;
+    font-size: 0.78rem; outline: none; cursor: pointer;
+  }
+  .history-table {
+    background: var(--blue);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .history-thead {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.2);
+    color: var(--muted); font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .history-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .history-row:hover { background: rgba(255,255,255,0.03); }
+  .history-row:last-child { border-bottom: none; }
+  .h-cell { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+  .h-cell .h-name { color: white; font-weight: 600; font-size: 0.82rem; }
+  .h-cell .h-items { color: var(--muted); font-size: 0.7rem; }
+  .h-method {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;
+  }
+  .h-method.moncash { background: rgba(255,75,75,0.15); color: #FF6B6B; }
+  .h-method.natcash { background: rgba(247,183,49,0.15); color: var(--gold); }
+  .h-method.cash { background: rgba(0,200,150,0.15); color: var(--green); }
+  .h-amount { color: var(--green); font-weight: 700; }
+  .h-status {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.72rem; font-weight: 600; color: var(--green);
+  }
+
+  /* ── Investor label ── */
+  .investor-note {
+    width: 100%; max-width: 1200px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-top: 12px;
+    color: var(--muted); font-size: 0.78rem;
+  }
+  .investor-note span { color: var(--cyan); }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .stat-cards { grid-template-columns: repeat(2,1fr); }
+    .product-grid { grid-template-columns: repeat(3,1fr); }
+    .dash-grid { grid-template-columns: 1fr; }
+    .payment-container { flex-direction: column; }
+    .history-thead, .history-row { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    .history-thead > *:nth-child(2), .history-row > *:nth-child(2) { display: none; }
+  }
+  @media (max-width: 640px) {
+    .product-grid { grid-template-columns: repeat(2,1fr); }
+    #screen-sale { flex-direction: column; }
+    .cart-panel { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <div class="brand">
+    🇭🇹 Tchotcho<span>Pay</span>
+    <div class="pos-badge">POS</div>
+  </div>
+  <a href="index.html" class="back-link">← Back to website</a>
+</div>
+
+<!-- Tablet -->
+<div class="tablet">
+
+  <!-- Tablet header -->
+  <div class="tablet-header">
+    <div class="merchant-info">
+      <div class="merchant-avatar">MB</div>
+      <div>
+        <div class="merchant-name">Makèt Bèl Ayiti</div>
+        <div class="merchant-sub">Port-au-Prince, Haiti · Terminal #3</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="wifi-icon">📶 Online</span>
+      <span class="header-time" id="live-time"></span>
+      <span class="header-logo">TchotchoPay</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="tablet-body">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="nav-item active" onclick="showScreen('dashboard', this)" title="Dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dash</span>
+      </div>
+      <div class="nav-item" onclick="showScreen('sale', this)" title="New Sale">
+        <span class="nav-icon">🛒</span>
+        <span class="nav-label">Sale</span>
+      </div>
+      <div class="nav-item" onclick="showScreen('history', this)" title="History">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">History</span>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="nav-item" title="Settings">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-label">Setup</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════
+         SCREEN 1: DASHBOARD
+    ═════════════════════════════ -->
+    <div class="screen active" id="screen-dashboard">
+      <div style="width:100%">
+        <div style="padding:20px 20px 0">
+          <div class="dash-greeting">Bonjou, Makèt Bèl Ayiti 👋</div>
+          <div class="dash-date" id="dash-date"></div>
+        </div>
+
+        <div style="padding:16px 20px; display:flex; flex-direction:column; gap:16px">
+          <!-- Stat cards -->
+          <div class="stat-cards">
+            <div class="stat-card">
+              <div class="stat-label">Today's Revenue</div>
+              <div class="stat-value green">47,850</div>
+              <div class="stat-sub">HTG · +12% vs yesterday</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Transactions</div>
+              <div class="stat-value cyan">38</div>
+              <div class="stat-sub">Today's sales</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">MonCash</div>
+              <div class="stat-value" style="color:#FF6B6B">28,200</div>
+              <div class="stat-sub">HTG · 22 transactions</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">NatCash</div>
+              <div class="stat-value gold">12,400</div>
+              <div class="stat-sub">HTG · 11 transactions</div>
+            </div>
+          </div>
+
+          <!-- Grid -->
+          <div class="dash-grid">
+            <!-- Recent transactions -->
+            <div class="dash-card">
+              <div class="dash-card-title">🔄 Recent Transactions</div>
+              <div class="txn-list">
+                <div class="txn-item">
+                  <div class="txn-avatar moncash">M</div>
+                  <div class="txn-info">
+                    <div class="txn-name">Roseline Duperval</div>
+                    <div class="txn-method">MonCash · Griot + Bannann</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="txn-amount">+650 HTG</div>
+                    <div class="txn-time">2 min ago</div>
+                  </div>
+                </div>
+                <div class="txn-item">
+                  <div class="txn-avatar natcash">N</div>
+                  <div class="txn-info">
+                    <div class="txn-name">Jean-Pierre Luc</div>
+                    <div class="txn-method">NatCash · Soup Joumou</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="txn-amount">+200 HTG</div>
+                    <div class="txn-time">8 min ago</div>
+                  </div>
+                </div>
+                <div class="txn-item">
+                  <div class="txn-avatar moncash">M</div>
+                  <div class="txn-info">
+                    <div class="txn-name">Marie-Claire Joseph</div>
+                    <div class="txn-method">MonCash · Dlo + Jus</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="txn-amount">+175 HTG</div>
+                    <div class="txn-time">15 min ago</div>
+                  </div>
+                </div>
+                <div class="txn-item">
+                  <div class="txn-avatar cash">$</div>
+                  <div class="txn-info">
+                    <div class="txn-name">Phillippe Antoine</div>
+                    <div class="txn-method">Cash · Riz + Pwa</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="txn-amount">+500 HTG</div>
+                    <div class="txn-time">22 min ago</div>
+                  </div>
+                </div>
+                <div class="txn-item">
+                  <div class="txn-avatar natcash">N</div>
+                  <div class="txn-info">
+                    <div class="txn-name">Claudette Mirambel</div>
+                    <div class="txn-method">NatCash · Fritay</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="txn-amount">+300 HTG</div>
+                    <div class="txn-time">31 min ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment breakdown -->
+            <div class="dash-card">
+              <div class="dash-card-title">💳 Payment Methods</div>
+              <div class="payment-breakdown">
+                <div class="pay-method">
+                  <div class="pay-method-left">
+                    <div class="pay-dot" style="background:#FF6B6B"></div>
+                    <div>
+                      <div class="pay-name">MonCash</div>
+                      <div class="pay-count">22 transactions</div>
+                    </div>
+                  </div>
+                  <div class="pay-amount">28,200 HTG</div>
+                </div>
+                <div class="pay-bar-wrap"><div class="pay-bar" style="background:#FF6B6B;width:59%"></div></div>
+
+                <div class="pay-method">
+                  <div class="pay-method-left">
+                    <div class="pay-dot" style="background:var(--gold)"></div>
+                    <div>
+                      <div class="pay-name">NatCash</div>
+                      <div class="pay-count">11 transactions</div>
+                    </div>
+                  </div>
+                  <div class="pay-amount">12,400 HTG</div>
+                </div>
+                <div class="pay-bar-wrap"><div class="pay-bar" style="background:var(--gold);width:26%"></div></div>
+
+                <div class="pay-method">
+                  <div class="pay-method-left">
+                    <div class="pay-dot" style="background:var(--green)"></div>
+                    <div>
+                      <div class="pay-name">Cash</div>
+                      <div class="pay-count">5 transactions</div>
+                    </div>
+                  </div>
+                  <div class="pay-amount">7,250 HTG</div>
+                </div>
+                <div class="pay-bar-wrap"><div class="pay-bar" style="background:var(--green);width:15%"></div></div>
+
+                <div style="margin-top:8px; padding:12px; background:rgba(0,200,150,0.08); border-radius:10px; border:1px solid rgba(0,200,150,0.2)">
+                  <div style="color:var(--muted);font-size:0.72rem">Digital payments (MonCash + NatCash)</div>
+                  <div style="color:var(--green);font-size:1rem;font-weight:800;margin-top:2px">85% of sales</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick action -->
+          <div style="display:flex; justify-content:center">
+            <button onclick="showScreen('sale', document.querySelectorAll('.nav-item')[1])"
+              style="background:linear-gradient(135deg,var(--mid),var(--cyan));color:white;border:none;border-radius:14px;padding:14px 40px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s"
+              onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+              ＋ New Sale
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════
+         SCREEN 2: NEW SALE
+    ═════════════════════════════ -->
+    <div class="screen" id="screen-sale">
+
+      <!-- Products -->
+      <div class="products-panel">
+        <div class="products-header">
+          <div class="products-title">🛒 New Sale</div>
+          <input class="search-bar" type="text" placeholder="🔍 Search product...">
+        </div>
+
+        <div class="cat-tabs">
+          <button class="cat-tab active">All</button>
+          <button class="cat-tab" onclick="filterCat(this,'food')">🍖 Food</button>
+          <button class="cat-tab" onclick="filterCat(this,'drink')">🥤 Drinks</button>
+          <button class="cat-tab" onclick="filterCat(this,'grocery')">🛍 Grocery</button>
+          <button class="cat-tab" onclick="filterCat(this,'service')">📱 Services</button>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+          <!-- Products injected by JS -->
+        </div>
+      </div>
+
+      <!-- Cart -->
+      <div class="cart-panel">
+        <div class="cart-title">🧾 Order</div>
+
+        <div class="cart-items" id="cart-items">
+          <div class="cart-empty" id="cart-empty">No items yet.<br>Tap a product to add.</div>
+        </div>
+
+        <div class="cart-divider"></div>
+
+        <div class="cart-totals">
+          <div class="cart-row">
+            <span class="cart-row-label">Subtotal</span>
+            <span class="cart-row-value" id="subtotal">0 HTG</span>
+          </div>
+          <div class="cart-row">
+            <span class="cart-row-label">Tax (0%)</span>
+            <span class="cart-row-value">0 HTG</span>
+          </div>
+          <div class="cart-row cart-total-row">
+            <span class="cart-row-label">Total</span>
+            <span class="cart-row-value" id="cart-total">0 HTG</span>
+          </div>
+          <div class="cart-row">
+            <span class="cart-row-label" style="font-size:0.7rem">≈ USD</span>
+            <span class="cart-row-value" style="font-size:0.75rem;color:var(--muted)" id="cart-usd">$0.00</span>
+          </div>
+        </div>
+
+        <div class="cart-divider"></div>
+
+        <div class="pay-buttons">
+          <button class="btn-tchotcho" onclick="payWith('tchotcho')">
+            💎 Pay with TchotchoPay
+          </button>
+          <button class="btn-moncash" onclick="payWith('moncash')">
+            📱 Pay with MonCash
+          </button>
+          <button class="btn-natcash" onclick="payWith('natcash')">
+            💛 Pay with NatCash
+          </button>
+          <button class="btn-cash">💵 Cash Payment</button>
+          <button class="btn-clear" onclick="clearCart()">🗑 Clear Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════
+         SCREEN 3: PAYMENT QR
+    ═════════════════════════════ -->
+    <div class="screen" id="screen-payment">
+      <div class="payment-container">
+        <div class="payment-left">
+          <div class="payment-method-badge moncash" id="pay-badge">📱 MonCash</div>
+
+          <div class="payment-amount-display">
+            <div style="color:var(--muted);font-size:0.82rem;margin-bottom:4px">Amount to collect</div>
+            <div class="payment-amount-htg" id="pay-htg">0 HTG</div>
+            <div class="payment-amount-usd" id="pay-usd">≈ $0.00 USD</div>
+          </div>
+
+          <div class="payment-instructions">
+            Ask your customer to:
+            <ul class="payment-steps">
+              <li class="payment-step"><span class="step-num">1</span> Open their MonCash app on their phone</li>
+              <li class="payment-step"><span class="step-num">2</span> Tap <strong style="color:white">Scan QR</strong> or <strong style="color:white">Pay Merchant</strong></li>
+              <li class="payment-step"><span class="step-num">3</span> Point camera at the QR code</li>
+              <li class="payment-step"><span class="step-num">4</span> Confirm the amount and tap <strong style="color:white">Pay</strong></li>
+            </ul>
+          </div>
+
+          <div class="waiting-indicator">
+            <div class="pulse-dot"></div>
+            Waiting for payment...
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <button class="btn-back-sale" onclick="showScreen('sale', document.querySelectorAll('.nav-item')[1])">
+              ← Back to Sale
+            </button>
+            <button class="btn-simulate-pay" onclick="simulatePayment()">
+              ✓ Simulate Payment
+            </button>
+          </div>
+        </div>
+
+        <div class="payment-right">
+          <div class="qr-frame">
+            <canvas id="qr-canvas" width="180" height="180"></canvas>
+          </div>
+          <div class="qr-label">Scan with MonCash or NatCash app</div>
+          <div class="qr-amount-badge" id="qr-badge">0 HTG</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════
+         SCREEN 4: RECEIPT
+    ═════════════════════════════ -->
+    <div class="screen" id="screen-receipt">
+      <div class="receipt-container">
+        <div class="receipt-success-icon">✅</div>
+        <div class="receipt-title">Peman Konfime!</div>
+        <div class="receipt-subtitle">Payment confirmed · <span id="receipt-time"></span></div>
+
+        <div class="receipt-wallet-badge moncash" id="receipt-badge">📱 Paid via MonCash</div>
+
+        <div class="receipt-body">
+          <div class="receipt-header-row">
+            <span>Item</span>
+            <span>Amount</span>
+          </div>
+          <div id="receipt-lines"></div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-total-row">
+            <span class="receipt-total-label">Total</span>
+            <span class="receipt-total-val" id="receipt-total">0 HTG</span>
+          </div>
+        </div>
+
+        <div class="receipt-txn-id" id="receipt-txn">TXN ID: TCP-2026-XXXXXXXX</div>
+
+        <div class="receipt-buttons" style="margin-top:20px">
+          <button class="btn-new-sale" onclick="newSale()">＋ New Sale</button>
+          <button class="btn-print">🖨 Print</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════
+         SCREEN 5: HISTORY
+    ═════════════════════════════ -->
+    <div class="screen" id="screen-history">
+      <div style="width:100%">
+        <div class="history-header" style="padding:20px 20px 0">
+          <div class="history-title">📋 Transaction History</div>
+          <select class="history-filter">
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </select>
+        </div>
+
+        <div style="padding:16px 20px">
+          <div class="history-table">
+            <div class="history-thead">
+              <div>Customer</div>
+              <div>Items</div>
+              <div>Method</div>
+              <div>Amount</div>
+              <div>Status</div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Roseline Duperval</div><div class="h-items">2:11 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Griot, Bannann</div>
+              <div class="h-cell"><span class="h-method moncash">📱 MonCash</span></div>
+              <div class="h-cell h-amount">650 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Jean-Pierre Luc</div><div class="h-items">2:04 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Soup Joumou</div>
+              <div class="h-cell"><span class="h-method natcash">💛 NatCash</span></div>
+              <div class="h-cell h-amount">200 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Marie-Claire Joseph</div><div class="h-items">1:57 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Dlo, Jus Citron</div>
+              <div class="h-cell"><span class="h-method moncash">📱 MonCash</span></div>
+              <div class="h-cell h-amount">175 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Phillippe Antoine</div><div class="h-items">1:50 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Riz, Pwa Wouj</div>
+              <div class="h-cell"><span class="h-method cash">💵 Cash</span></div>
+              <div class="h-cell h-amount">500 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Claudette Mirambel</div><div class="h-items">1:41 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Fritay (3x)</div>
+              <div class="h-cell"><span class="h-method natcash">💛 NatCash</span></div>
+              <div class="h-cell h-amount">300 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Bernard Toussaint</div><div class="h-items">1:28 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Poul Boukannen</div>
+              <div class="h-cell"><span class="h-method moncash">📱 MonCash</span></div>
+              <div class="h-cell h-amount">400 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Nadège Beaumont</div><div class="h-items">1:15 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Kremas, Diri</div>
+              <div class="h-cell"><span class="h-method moncash">📱 MonCash</span></div>
+              <div class="h-cell h-amount">750 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+            <div class="history-row">
+              <div class="h-cell"><div class="h-name">Edouard Célestine</div><div class="h-items">12:58 PM</div></div>
+              <div class="h-cell" style="color:var(--muted);font-size:0.78rem">Top-up Digicel</div>
+              <div class="h-cell"><span class="h-method natcash">💛 NatCash</span></div>
+              <div class="h-cell h-amount">500 HTG</div>
+              <div class="h-cell"><span class="h-status">✓ Done</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tablet-body -->
+</div><!-- end tablet -->
+
+<div class="investor-note">
+  🔒 Powered by <span>TchotchoPay</span> · MonCash & NatCash Integrated · BRH Compliant · Investor Demo v1.0
+</div>
+
+<script>
+// ── Products data ──
+const products = [
+  { id:1, emoji:'🍖', name:'Griot', price:300, cat:'food' },
+  { id:2, emoji:'🌶', name:'Bannann Peze', price:100, cat:'food' },
+  { id:3, emoji:'🍲', name:'Soup Joumou', price:200, cat:'food' },
+  { id:4, emoji:'🍗', name:'Poul Boukannen', price:400, cat:'food' },
+  { id:5, emoji:'🥣', name:'Diri Kole', price:150, cat:'food' },
+  { id:6, emoji:'🥘', name:'Legim', price:180, cat:'food' },
+  { id:7, emoji:'🐟', name:'Pwason Fri', price:250, cat:'food' },
+  { id:8, emoji:'🥞', name:'Fritay', price:100, cat:'food' },
+  { id:9, emoji:'🥤', name:'Jus Citron', price:75, cat:'drink' },
+  { id:10, emoji:'💧', name:'Dlo Glase', price:50, cat:'drink' },
+  { id:11, emoji:'🍹', name:'Kremas', price:250, cat:'drink' },
+  { id:12, emoji:'🧃', name:'Jus Mango', price:100, cat:'drink' },
+  { id:13, emoji:'🍚', name:'Riz (5kg)', price:500, cat:'grocery' },
+  { id:14, emoji:'🫘', name:'Pwa Wouj', price:350, cat:'grocery' },
+  { id:15, emoji:'🫒', name:'Lwil Palim', price:400, cat:'grocery' },
+  { id:16, emoji:'📱', name:'Top-up Digicel', price:500, cat:'service' },
+];
+
+// ── Cart state ──
+let cart = {};
+let currentPayMethod = 'moncash';
+
+// ── Render products ──
+function renderProducts(filter) {
+  const grid = document.getElementById('product-grid');
+  const filtered = filter ? products.filter(p => p.cat === filter) : products;
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" onclick="addToCart(${p.id})">
+      <div class="product-emoji">${p.emoji}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">${p.price} HTG</div>
+    </div>
+  `).join('');
+}
+renderProducts();
+
+function filterCat(btn, cat) {
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat === 'all' ? null : cat);
+}
+
+// ── Cart logic ──
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  cart[id] = cart[id] ? { ...cart[id], qty: cart[id].qty + 1 } : { ...p, qty: 1 };
+  renderCart();
+}
+
+function changeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty += delta;
+  if (cart[id].qty <= 0) delete cart[id];
+  renderCart();
+}
+
+function clearCart() {
+  cart = {};
+  renderCart();
+}
+
+function renderCart() {
+  const items = Object.values(cart);
+  const empty = document.getElementById('cart-empty');
+  const cartDiv = document.getElementById('cart-items');
+
+  if (items.length === 0) {
+    empty.style.display = 'block';
+    document.getElementById('subtotal').textContent = '0 HTG';
+    document.getElementById('cart-total').textContent = '0 HTG';
+    document.getElementById('cart-usd').textContent = '$0.00';
+    return;
+  }
+  empty.style.display = 'none';
+
+  let total = 0;
+  const html = items.map(item => {
+    total += item.price * item.qty;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-emoji">${item.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price} HTG each</div>
+        </div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  cartDiv.innerHTML = html + `<div id="cart-empty" style="display:none"></div>`;
+  document.getElementById('subtotal').textContent = total.toLocaleString() + ' HTG';
+  document.getElementById('cart-total').textContent = total.toLocaleString() + ' HTG';
+  document.getElementById('cart-usd').textContent = '$' + (total / 130).toFixed(2);
+}
+
+// ── Payment flow ──
+function payWith(method) {
+  const items = Object.values(cart);
+  if (items.length === 0) { alert('Add items first!'); return; }
+
+  currentPayMethod = method;
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  // Update payment screen
+  const badge = document.getElementById('pay-badge');
+  badge.textContent = method === 'moncash' ? '📱 MonCash' : method === 'natcash' ? '💛 NatCash' : '💎 TchotchoPay Wallet';
+  badge.className = 'payment-method-badge ' + method;
+
+  const usdAmount = (total/130).toFixed(2);
+  document.getElementById('pay-htg').textContent = total.toLocaleString() + ' HTG';
+  document.getElementById('pay-usd').textContent = method === 'tchotcho'
+    ? '≈ ' + usdAmount + ' USDC (TchotchoPay Wallet)'
+    : '≈ $' + usdAmount + ' USD';
+  document.getElementById('qr-badge').textContent = method === 'tchotcho'
+    ? usdAmount + ' USDC'
+    : total.toLocaleString() + ' HTG';
+
+  // Update steps for method
+  const appName = method === 'moncash' ? 'MonCash' : method === 'natcash' ? 'NatCash' : 'TchotchoPay';
+  const steps = method === 'tchotcho' ? `
+    <li class="payment-step"><span class="step-num">1</span> Customer opens their <strong style="color:white">TchotchoPay</strong> app</li>
+    <li class="payment-step"><span class="step-num">2</span> Tap <strong style="color:white">Pay</strong> → <strong style="color:white">Scan QR</strong></li>
+    <li class="payment-step"><span class="step-num">3</span> Point camera at the QR code</li>
+    <li class="payment-step"><span class="step-num">4</span> USDC deducted instantly from their wallet</li>
+  ` : `
+    <li class="payment-step"><span class="step-num">1</span> Open their <strong style="color:white">${appName}</strong> app on their phone</li>
+    <li class="payment-step"><span class="step-num">2</span> Tap <strong style="color:white">Scan QR</strong> or <strong style="color:white">Pay Merchant</strong></li>
+    <li class="payment-step"><span class="step-num">3</span> Point camera at the QR code</li>
+    <li class="payment-step"><span class="step-num">4</span> Confirm amount and tap <strong style="color:white">Pay</strong></li>
+  `;
+  document.querySelector('.payment-steps').innerHTML = steps;
+
+  drawQR(total, method);
+  showScreen('payment', null);
+}
+
+// ── Draw fake QR ──
+function drawQR(amount, method) {
+  const canvas = document.getElementById('qr-canvas');
+  const ctx = canvas.getContext('2d');
+  const size = 180;
+  const cellSize = size / 15;
+
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, size, size);
+
+  const color = method === 'moncash' ? '#CC0000' : '#e5a800';
+  ctx.fillStyle = color;
+
+  // Pseudo-random QR pattern
+  const seed = amount + method.length;
+  for (let r = 0; r < 15; r++) {
+    for (let c = 0; c < 15; c++) {
+      // Finder patterns
+      if ((r < 3 && c < 3) || (r < 3 && c > 11) || (r > 11 && c < 3)) {
+        ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+        continue;
+      }
+      if ((r < 4 && c < 4) || (r < 4 && c > 10) || (r > 10 && c < 4)) continue;
+      // Data
+      const val = (r * 13 + c * 7 + seed) % 3;
+      if (val > 0) ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+    }
+  }
+  // Center logo
+  ctx.fillStyle = 'white';
+  ctx.fillRect(6*cellSize, 6*cellSize, 3*cellSize, 3*cellSize);
+  ctx.fillStyle = color;
+  ctx.fillRect(6.5*cellSize, 6.5*cellSize, 2*cellSize, 2*cellSize);
+}
+
+function simulatePayment() {
+  const items = Object.values(cart);
+  const total = items.reduce((s,i) => s + i.price * i.qty, 0);
+  const method = currentPayMethod;
+
+  // Populate receipt
+  document.getElementById('receipt-badge').textContent =
+    method === 'moncash' ? '📱 Paid via MonCash' :
+    method === 'natcash' ? '💛 Paid via NatCash' :
+    '💎 Paid via TchotchoPay Wallet';
+  document.getElementById('receipt-badge').className =
+    'receipt-wallet-badge ' + (method === 'tchotcho' ? 'moncash' : method);
+  // Add USDC note on receipt if TchotchoPay
+  if (method === 'tchotcho') {
+    document.getElementById('receipt-badge').style.background = 'rgba(0,174,239,0.15)';
+    document.getElementById('receipt-badge').style.color = 'var(--cyan)';
+  } else {
+    document.getElementById('receipt-badge').style.background = '';
+    document.getElementById('receipt-badge').style.color = '';
+  }
+
+  document.getElementById('receipt-total').textContent = total.toLocaleString() + ' HTG';
+
+  const now = new Date();
+  document.getElementById('receipt-time').textContent =
+    now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+
+  const txnId = 'TCP-2026-' + Math.random().toString(36).substr(2,8).toUpperCase();
+  document.getElementById('receipt-txn').textContent = 'TXN ID: ' + txnId;
+
+  document.getElementById('receipt-lines').innerHTML = items.map(item => `
+    <div class="receipt-line">
+      <span class="receipt-line-name">${item.emoji} ${item.name} ×${item.qty}</span>
+      <span class="receipt-line-val">${(item.price * item.qty).toLocaleString()} HTG</span>
+    </div>
+  `).join('');
+
+  showScreen('receipt', null);
+}
+
+function newSale() {
+  clearCart();
+  showScreen('sale', document.querySelectorAll('.nav-item')[1]);
+}
+
+// ── Screen navigation ──
+function showScreen(name, navEl) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const target = document.getElementById('screen-' + name);
+  if (target) target.classList.add('active');
+  if (navEl) navEl.classList.add('active');
+}
+
+// ── Live time ──
+function updateTime() {
+  const now = new Date();
+  document.getElementById('live-time').textContent =
+    now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+  const dateEl = document.getElementById('dash-date');
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-US', opts);
+}
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a7d2c486ee0b51d40693661/1jvsf9vab';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

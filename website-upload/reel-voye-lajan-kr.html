@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>TchotchoPay — Voye Lajan</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:#000;font-family:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif}
+
+.reel-wrap{position:relative;width:390px;height:844px;overflow:hidden;background:#020B2D}
+
+/* ── Full-bleed scenes ── */
+.scene{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:96px 24px 200px;
+  opacity:0;transition:opacity 0.35s ease;pointer-events:none;
+  background:linear-gradient(175deg,#020B2D 0%,#0A1F6E 55%,#020B2D 100%);
+}
+.scene.active{opacity:1}
+
+/* subtle glow */
+.scene::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 280px 220px at 50% 42%,rgba(0,200,150,0.07) 0%,transparent 70%);pointer-events:none}
+
+/* ── Typography ── */
+.tag{font-size:11px;letter-spacing:2.8px;color:#00C896;text-transform:uppercase;margin-bottom:10px;text-align:center;font-weight:700}
+.headline{font-size:30px;font-weight:800;color:#fff;text-align:center;line-height:1.22;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.sub{font-size:15px;color:rgba(255,255,255,0.72);text-align:center;line-height:1.55}
+.green{color:#00C896}.cyan{color:#00AEEF}.gold{color:#F7B731}.red{color:#ff6b6b}
+
+/* ── Cards ── */
+.card{background:rgba(10,31,110,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:16px 18px;width:100%;margin-top:12px}
+
+/* S1 fee rows */
+.fee-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+.fee-row:last-child{border:none}
+.fee-label{font-size:14px;color:rgba(255,255,255,0.6);font-weight:500}
+.fee-val{font-size:16px;font-weight:700}
+.fee-bad{color:#ff6b6b}.fee-good{color:#00C896}
+
+/* S1 icon */
+.hero-icon{font-size:64px;margin-bottom:14px;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* S2 form */
+.badges{display:flex;gap:8px;margin-bottom:12px}
+.badge{flex:1;padding:10px;border-radius:12px;text-align:center;font-size:14px;font-weight:700}
+.badge-mc{background:rgba(255,100,0,0.18);border:2px solid #ff6400;color:#ff9f4a}
+.badge-nc{background:rgba(0,174,239,0.1);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5)}
+.field{margin-bottom:10px}
+.field-label{font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:4px;font-weight:600;letter-spacing:.5px}
+.field-val{font-size:16px;color:#fff;font-weight:600;background:rgba(2,11,45,0.7);border-radius:10px;padding:10px 13px}
+.send-btn{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:12px;padding:13px;text-align:center;font-size:15px;color:#fff;font-weight:700;margin-top:6px}
+
+/* S3 transfer anim */
+.xfer{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.av{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;border:2.5px solid #1055CC}
+.av-r{border-color:#00C896}
+.xline{flex:1;height:2.5px;background:linear-gradient(90deg,#1055CC,#00C896);border-radius:2px;position:relative}
+.xdot{width:12px;height:12px;border-radius:50%;background:#00AEEF;position:absolute;top:-4.75px;left:0;animation:slide 1.2s ease-in-out infinite}
+@keyframes slide{0%{left:0;opacity:1}80%{left:calc(100% - 12px);opacity:1}100%{left:calc(100% - 12px);opacity:0}}
+.amount-big{font-size:58px;font-weight:800;color:#00C896;line-height:1;text-shadow:0 0 30px rgba(0,200,150,0.35)}
+.htg{font-size:15px;color:rgba(255,255,255,0.5);margin-top:4px;margin-bottom:8px}
+
+/* S4 notification */
+.notif{background:rgba(10,31,110,0.9);border-radius:18px;padding:16px;width:100%;border-left:4px solid #00C896;backdrop-filter:blur(8px)}
+.notif-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.notif-icon{font-size:24px}
+.notif-app{font-size:12px;color:rgba(255,255,255,0.45)}
+.notif-title{font-size:15px;font-weight:700;color:#fff}
+.notif-body{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{font-size:12px;padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5)}
+.pill.lit{border-color:#00C896;color:#00C896}
+
+/* S5 comparison */
+.cmp-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid rgba(255,255,255,0.07)}
+.cmp-row:last-child{border:none}
+.cmp-name{font-size:13px;color:rgba(255,255,255,0.55);width:88px;flex-shrink:0;font-weight:500}
+.cmp-bar-wrap{flex:1;background:rgba(255,255,255,0.07);border-radius:4px;height:9px;overflow:hidden}
+.cmp-bar{height:100%;border-radius:4px}
+.bar-bad{background:#ff6b6b}.bar-mid{background:#F7B731}.bar-good{background:#00C896}
+.cmp-pct{font-size:13px;font-weight:700;width:28px;text-align:right}
+.pct-bad{color:#ff6b6b}.pct-mid{color:#F7B731}.pct-good{color:#00C896}
+
+/* S6 CTA */
+.cta-box{background:linear-gradient(135deg,rgba(0,200,150,0.15),rgba(16,85,204,0.18));border:1.5px solid rgba(0,200,150,0.6);border-radius:20px;padding:20px;width:100%;text-align:center;margin-top:12px;backdrop-filter:blur(8px)}
+.cta-main{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-url{font-size:14px;color:#00AEEF;margin-bottom:14px}
+.cta-btn{background:linear-gradient(135deg,#00C896,#1055CC);border-radius:14px;padding:14px;font-size:16px;font-weight:700;color:#fff}
+
+/* ════════════════════════════════
+   INSTAGRAM REELS CHROME
+   ════════════════════════════════ */
+
+/* Top progress segments */
+.ig-progress{position:absolute;top:48px;left:8px;right:8px;display:flex;gap:3px;z-index:300}
+.ig-seg{flex:1;height:2.5px;background:rgba(255,255,255,0.28);border-radius:2px;overflow:hidden}
+.ig-seg-fill{height:100%;background:#fff;width:0%;border-radius:2px}
+
+/* Top bar */
+.ig-top{position:absolute;top:56px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:6px 14px 0;z-index:300}
+.ig-back{font-size:22px;color:#fff;opacity:.9;line-height:1}
+.ig-top-icons{display:flex;gap:16px;align-items:center}
+.ig-top-icon{font-size:19px;color:#fff;opacity:.88}
+
+/* Bottom-left: profile + caption + music */
+.ig-bl{position:absolute;bottom:90px;left:12px;right:86px;z-index:300}
+.ig-profile-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.ig-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00C896,#1055CC);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;border:1.5px solid rgba(255,255,255,0.55);flex-shrink:0}
+.ig-uname{font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.6)}
+.ig-follow{font-size:12px;font-weight:700;color:#fff;border:1.5px solid rgba(255,255,255,0.75);border-radius:6px;padding:2px 9px;margin-left:2px}
+.ig-caption{font-size:13px;color:rgba(255,255,255,0.92);line-height:1.45;text-shadow:0 1px 4px rgba(0,0,0,0.5);margin-bottom:8px}
+.ig-music{display:flex;align-items:center;gap:5px}
+.ig-music-txt{font-size:12px;color:rgba(255,255,255,0.8)}
+
+/* Right actions */
+.ig-actions{position:absolute;bottom:86px;right:10px;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:300}
+.ig-act{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ig-act-icon{font-size:28px;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5))}
+.ig-act-count{font-size:12px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
+.ig-disc{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#222,#444);border:3px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;animation:spin 4s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Bottom nav */
+.ig-nav{position:absolute;bottom:0;left:0;right:0;height:88px;background:rgba(0,0,0,0.92);display:flex;align-items:flex-start;justify-content:space-around;padding-top:14px;z-index:300;border-top:0.5px solid rgba(255,255,255,0.08)}
+.ig-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ig-nav-icon{font-size:22px;opacity:.75}
+.ig-nav-icon.active-tab{opacity:1}
+.ig-nav-dot{width:4px;height:4px;border-radius:50%;background:#fff;margin-top:2px}
+
+/* Countdown */
+#countdown{position:fixed;inset:0;background:rgba(2,11,45,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+#countdown .num{font-size:110px;font-weight:800;color:#00C896;line-height:1}
+#countdown .hint{font-size:14px;color:rgba(255,255,255,0.5);margin-top:14px;text-align:center;line-height:1.65}
+#countdown .logo{font-size:20px;font-weight:700;color:#fff;margin-bottom:36px;letter-spacing:.5px}
+#countdown .logo span{color:#00C896}
+</style>
+</head>
+<body>
+<div class="reel-wrap">
+
+  <!-- ══ SCENE 1: Pwoblèm frè ══ -->
+  <div class="scene active" id="s1">
+    <div class="hero-icon">💸</div>
+    <div class="tag">Pwoblèm nan</div>
+    <div class="headline">Voye $100<br>bay fanmi Ayiti?</div>
+    <div class="card">
+      <div class="fee-row"><span class="fee-label">Western Union</span><span class="fee-val fee-bad">−$8 frè</span></div>
+      <div class="fee-row"><span class="fee-label">MoneyGram</span><span class="fee-val fee-bad">−$6 frè</span></div>
+      <div class="fee-row"><span class="fee-label">TchotchoPay</span><span class="fee-val fee-good">−$1 sèlman ✅</span></div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 2: Chwazi bous ══ -->
+  <div class="scene" id="s2">
+    <div class="tag">Voye bay bous</div>
+    <div class="headline">Chwazi MonCash<br>oswa NatCash</div>
+    <div class="badges">
+      <div class="badge badge-mc">MonCash</div>
+      <div class="badge badge-nc">NatCash</div>
+    </div>
+    <div class="card">
+      <div class="field"><div class="field-label">NIMEWO RESEVÈ A</div><div class="field-val">+509 3712 ••••</div></div>
+      <div class="field"><div class="field-label">KANTITE (USD)</div><div class="field-val green">$100.00</div></div>
+      <div class="send-btn">Voye Kounye a →</div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 3: Transfer ══ -->
+  <div class="scene" id="s3">
+    <div class="tag">Ap voye...</div>
+    <div class="xfer">
+      <div class="av">👤</div>
+      <div class="xline"><div class="xdot"></div></div>
+      <div class="av av-r">🇭🇹</div>
+    </div>
+    <div class="amount-big">$100</div>
+    <div class="htg">≈ 13 000 HTG</div>
+    <div class="sub">Rive nan kèk segonn ⚡</div>
+  </div>
+
+  <!-- ══ SCENE 4: Notifikasyon ══ -->
+  <div class="scene" id="s4">
+    <div class="tag">Ayiti — MonCash</div>
+    <div class="headline" style="font-size:24px">Fanmi ou<br>resi lajan!</div>
+    <div class="notif">
+      <div class="notif-top">
+        <span class="notif-icon">🟠</span>
+        <div><div class="notif-app">MonCash</div><div class="notif-title">Ou resi $100!</div></div>
+      </div>
+      <div class="notif-body">Depi TchotchoPay. Balans mete ajou ✅</div>
+    </div>
+    <div class="pills" style="margin-top:12px">
+      <div class="pill lit">🛒 Achte manje</div>
+      <div class="pill lit">⚡ Kouran</div>
+      <div class="pill lit">📱 Rechaj</div>
+      <div class="pill">💵 Kach</div>
+    </div>
+  </div>
+
+  <!-- ══ SCENE 5: Konpare frè ══ -->
+  <div class="scene" id="s5">
+    <div class="tag">Poukisa TchotchoPay</div>
+    <div class="headline">Sispann peye twòp</div>
+    <div class="card">
+      <div class="cmp-row"><span class="cmp-name">Western Union</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-bad" style="width:85%"></div></div><span class="cmp-pct pct-bad">8%</span></div>
+      <div class="cmp-row"><span class="cmp-name">MoneyGram</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-mid" style="width:65%"></div></div><span class="cmp-pct pct-mid">6%</span></div>
+      <div class="cmp-row"><span class="cmp-name">TchotchoPay</span><div class="cmp-bar-wrap"><div class="cmp-bar bar-good" style="width:12%"></div></div><span class="cmp-pct pct-good">1%</span></div>
+    </div>
+    <div class="sub" style="margin-top:16px;font-size:14px">Kenbe plis lajan nan men fanmi ou.</div>
+  </div>
+
+  <!-- ══ SCENE 6: CTA ══ -->
+  <div class="scene" id="s6">
+    <div class="tag">TchotchoPay</div>
+    <div class="headline" style="font-size:34px">Voye lajan.<br><span class="green">Pa frè.</span></div>
+    <div class="cta-box">
+      <div class="cta-main">Voye bay MonCash jodi a →</div>
+      <div class="cta-url">tchotchopay.com/send</div>
+      <div class="cta-btn">Kòmanse Gratis</div>
+    </div>
+  </div>
+
+  <!-- ════ IG CHROME ════ -->
+
+  <div class="ig-progress" id="igProgress">
+    <div class="ig-seg"><div class="ig-seg-fill" id="f0"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f1"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f2"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f3"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f4"></div></div>
+    <div class="ig-seg"><div class="ig-seg-fill" id="f5"></div></div>
+  </div>
+
+  <div class="ig-top">
+    <div class="ig-back">←</div>
+    <div class="ig-top-icons">
+      <span class="ig-top-icon">🔊</span>
+      <span class="ig-top-icon">⋯</span>
+    </div>
+  </div>
+
+  <div class="ig-bl">
+    <div class="ig-profile-row">
+      <div class="ig-av">T</div>
+      <span class="ig-uname">tchotchopay</span>
+      <span class="ig-follow">Suiv</span>
+    </div>
+    <div class="ig-caption"><strong>Voye $100 bay fanmi Ayiti pou $1 sèlman.</strong> Pa bezwen bank. Pa bezwen file. ⚡ #TchotchoPay #Ayiti #MonCash</div>
+    <div class="ig-music"><span>🎵</span><span class="ig-music-txt">Son orijinal · tchotchopay</span></div>
+  </div>
+
+  <div class="ig-actions">
+    <div class="ig-act"><span class="ig-act-icon">🤍</span><span class="ig-act-count">4.2K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">💬</span><span class="ig-act-count">318</span></div>
+    <div class="ig-act"><span class="ig-act-icon">➤</span><span class="ig-act-count">1.1K</span></div>
+    <div class="ig-act"><span class="ig-act-icon">🔖</span><span class="ig-act-count">897</span></div>
+    <div class="ig-act"><span class="ig-act-icon">⋯</span></div>
+    <div class="ig-disc">🎵</div>
+  </div>
+
+  <div class="ig-nav">
+    <div class="ig-nav-item"><span class="ig-nav-icon">🏠</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">🔍</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon active-tab">▶️</span><div class="ig-nav-dot"></div></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">❤️</span></div>
+    <div class="ig-nav-item"><span class="ig-nav-icon">👤</span></div>
+  </div>
+
+</div><!-- /reel-wrap -->
+
+<!-- Countdown -->
+<div id="countdown">
+  <div class="logo">Tchotcho<span>Pay</span></div>
+  <div class="num" id="cdNum">3</div>
+  <div class="hint">Prepare pou anrejistre<br>⌘+Shift+5 → Anrejistre Zòn Chwazi</div>
+</div>
+
+<script>
+const scenes=['s1','s2','s3','s4','s5','s6'];
+const durations=[5,5,5,6,5,4];
+let current=0,elapsed=0,timer=null;
+
+function showScene(i){
+  scenes.forEach((s,idx)=>document.getElementById(s).classList.toggle('active',idx===i));
+  // fill all previous segs to 100%
+  for(let k=0;k<i;k++) document.getElementById('f'+k).style.width='100%';
+  document.getElementById('f'+i).style.width='0%';
+  current=i; elapsed=0;
+}
+
+function tick(){
+  elapsed+=0.05;
+  const pct=Math.min((elapsed/durations[current])*100,100);
+  document.getElementById('f'+current).style.width=pct+'%';
+  if(elapsed>=durations[current]){
+    const next=current+1;
+    if(next>=scenes.length){clearInterval(timer);return;}
+    showScene(next);
+  }
+}
+
+let count=3;
+const cdNum=document.getElementById('cdNum');
+const cdOverlay=document.getElementById('countdown');
+const cdTimer=setInterval(()=>{
+  count--;
+  if(count<=0){clearInterval(cdTimer);cdOverlay.style.display='none';showScene(0);timer=setInterval(tick,50);}
+  else{cdNum.textContent=count;}
+},1000);
+</script>
+</body>
+</html>

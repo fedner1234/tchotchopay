@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block internal/admin pages from indexing
+Disallow: /admin-dashboard.html
+Disallow: /dashboard.html
+Disallow: /wallet-dashboard.html
+Disallow: /treasury-admin.html
+Disallow: /agent-dashboard.html
+Disallow: /merchant-portal.html
+Disallow: /wallet-test.html
+Disallow: /app-mockup.html
+Disallow: /mobile-preview.html
+Disallow: /onboarding.html
+Disallow: /banner-ad.html
+Disallow: /index_backup.html
+Disallow: /thankyou.html
+Disallow: /reel-
+Disallow: /slide-
+Disallow: /.netlify/
+
+# Sitemap location
+Sitemap: https://tchotchopay.com/sitemap.xml
