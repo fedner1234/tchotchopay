@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tchotcho Pay – Money for the Caribbean</title>
-  <meta name="description" content="Send money, receive digital dollars, top up phones, pay merchants, and support the people who matter most — all in one secure wallet." />
+  <title>TchotchoPay – Send Money to Haiti | MonCash, NatCash & USDC Wallet</title>
+  <meta name="description" content="Send money to Haiti instantly via MonCash & NatCash. Lower fees than Western Union & Remitly. USDC digital wallet, phone top-ups, bill pay & Haitian marketplace. Try TchotchoPay free." />
+  <meta name="keywords" content="send money to Haiti, Haiti remittance, MonCash transfer, NatCash transfer, USDC Haiti, voye lajan Ayiti, Haiti money transfer app, cheap remittance Haiti" />
+  <link rel="canonical" href="https://tchotchopay.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet" />
@@ -57,6 +59,54 @@
     .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-mid); transition: color .2s; }
     .nav-links a:hover { color: var(--blue); }
     .nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+
+    /* ── HAMBURGER & MOBILE MENU ── */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 8px; border-radius: 8px; flex-direction: column;
+      gap: 5px; margin-left: auto;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-dark); border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; top: 68px;
+      background: rgba(255,255,255,.99); backdrop-filter: blur(8px);
+      z-index: 99; flex-direction: column; padding: 24px 28px;
+      gap: 4px; overflow-y: auto;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 17px; font-weight: 600; color: var(--text-dark);
+      padding: 14px 0; border-bottom: 1px solid #F3F4F6;
+      transition: color .2s;
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--blue); }
+    .mobile-menu a.card-link {
+      color: var(--blue); display: flex; align-items: center; gap: 8px;
+    }
+    .mobile-menu a.card-link::before {
+      content: '💳'; font-size: 18px;
+    }
+    .mobile-menu-footer {
+      margin-top: 20px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .mobile-menu-footer a {
+      text-align: center; padding: 14px; border-radius: 10px;
+      font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+    }
+    .mobile-menu-footer .m-login {
+      border: 2px solid #D1D5DB; color: var(--text-dark);
+    }
+    .mobile-menu-footer .m-signup {
+      background: var(--blue); color: #fff;
+    }
     .btn-lang {
       display: flex; align-items: center; gap: 4px;
       font-size: 13px; font-weight: 500; color: var(--text-mid);
@@ -600,6 +650,9 @@
       .cta-cursive { display: none; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
+      .nav-right .btn-login, .nav-right .btn-lang { display: none; }
+      .nav-right .btn-primary { display: none; }
+      .hamburger { display: flex; }
     }
 
     @media (max-width: 600px) {
@@ -631,6 +684,7 @@
       <a href="send.html">Send Money</a>
       <a href="wallet-dashboard.html">Wallet</a>
       <a href="topup.html">Mobile Top-Up</a>
+      <a href="card.html">Virtual Card</a>
       <a href="p2p.html">Pay &amp; Shop</a>
       <a href="agent-signup.html">For Business</a>
       <a href="faq.html">Help</a>
@@ -640,8 +694,26 @@
       <a href="login.html" class="btn-login">Log In</a>
       <a href="signup.html" class="btn-primary">Get Started</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- ═══════════════ MOBILE MENU ═══════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="send.html">💸 Send Money</a>
+  <a href="wallet-dashboard.html">💳 Wallet</a>
+  <a href="topup.html">📱 Mobile Top-Up</a>
+  <a href="card.html" class="card-link">Virtual Card</a>
+  <a href="p2p.html">🔄 Pay &amp; Shop</a>
+  <a href="agent-signup.html">🏢 For Business</a>
+  <a href="faq.html">❓ Help</a>
+  <div class="mobile-menu-footer">
+    <a href="login.html" class="m-login">Log In</a>
+    <a href="signup.html" class="m-signup">Get Started →</a>
+  </div>
+</div>
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
@@ -1107,6 +1179,24 @@
     tab.addEventListener('click', () => {
       document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
+    });
+  });
+
+  // Mobile hamburger menu
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn  = document.getElementById('hamburger');
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  // Close mobile menu when a link is tapped
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
     });
   });
 </script>

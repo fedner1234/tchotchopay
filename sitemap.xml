@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages — highest priority -->
+  <url><loc>https://tchotchopay.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://tchotchopay.com/app.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tchotchopay.com/voye-lajan-ayiti.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tchotchopay.com/compare.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tchotchopay.com/pricing.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tchotchopay.com/calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tchotchopay.com/card.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tchotchopay.com/topup.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Info pages -->
+  <url><loc>https://tchotchopay.com/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tchotchopay.com/security.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tchotchopay.com/faq.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tchotchopay.com/blog.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tchotchopay.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tchotchopay.com/recipient.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Product pages -->
+  <url><loc>https://tchotchopay.com/send.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tchotchopay.com/billpay.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tchotchopay.com/p2p.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Business -->
+  <url><loc>https://tchotchopay.com/invest.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tchotchopay.com/referral.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tchotchopay.com/merchant-signup.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://tchotchopay.com/agent-signup.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://tchotchopay.com/terms.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://tchotchopay.com/signup.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://tchotchopay.com/login.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+
+</urlset>
