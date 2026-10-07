@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TchotchoPay — Scan to Open App</title>
+<style>
+  body { font-family: -apple-system, sans-serif; background: #1a6fd4; color: white; text-align: center; padding: 40px 20px; margin: 0; }
+  .card { background: white; color: #333; border-radius: 24px; padding: 40px; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  h1 { color: #1a6fd4; margin: 0 0 8px; font-size: 28px; }
+  p { color: #666; margin: 0 0 24px; font-size: 16px; }
+  #qrcode { margin: 0 auto 24px; }
+  .url { background: #f0f4ff; border-radius: 12px; padding: 12px 16px; font-family: monospace; font-size: 14px; color: #1a6fd4; word-break: break-all; }
+  .step { background: #f8f9fa; border-radius: 12px; padding: 12px 16px; margin-top: 16px; text-align: left; font-size: 14px; color: #444; }
+  .step strong { color: #1a6fd4; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>TchotchoPay</h1>
+  <p>Scan this QR code with your iPhone to open the app</p>
+  <div id="qrcode"></div>
+  <div class="url">exp://10.0.0.93:8082</div>
+  <div class="step"><strong>Step 1:</strong> Make sure your iPhone is on the same WiFi as this Mac</div>
+  <div class="step"><strong>Step 2:</strong> Open <strong>Expo Go</strong> on your iPhone</div>
+  <div class="step"><strong>Step 3:</strong> Tap <strong>Scan QR Code</strong> and scan the code above</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "exp://10.0.0.93:8082",
+    width: 220,
+    height: 220,
+    colorDark: "#1a6fd4",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
+</body>
+</html>

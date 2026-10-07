@@ -5,10 +5,33 @@
 
 const { webcrypto } = require("node:crypto");
 const subtle = webcrypto.subtle;
+const crypto  = require("node:crypto");
 
 const CIRCLE_API_BASE = "https://api.circle.com/v1/w3s";
 const CIRCLE_API_KEY = process.env.CIRCLE_API_KEY;
 const CIRCLE_ENTITY_SECRET = process.env.CIRCLE_ENTITY_SECRET; // 32-byte hex
+
+// ── Auth: verify session token (same logic as update-profile.js) ──────────────
+// Actions that require a valid user session
+const AUTH_REQUIRED_ACTIONS = new Set(["sendUsdc", "getBalance", "getWallet", "listWallets", "getTransaction"]);
+
+function verifySessionToken(token) {
+  try {
+    if (!token) return null;
+    const dot = token.lastIndexOf(".");
+    if (dot < 0) return null;
+    const payload  = token.slice(0, dot);
+    const sig      = token.slice(dot + 1);
+    const secret   = process.env.SUPABASE_SERVICE_KEY;
+    if (!secret) return null;
+    const expected = crypto.createHmac("sha256", secret).update(payload).digest("hex");
+    if (sig.length !== 64 || expected.length !== 64) return null;
+    if (!crypto.timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"))) return null;
+    const data = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
+    if (!data.userId || !data.exp || Date.now() > data.exp) return null;
+    return data.userId;
+  } catch { return null; }
+}
 
 // ── Allowed origins ────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
@@ -180,6 +203,16 @@ exports.handler = async (event) => {
     "unknown";
   if (isRateLimited(clientIP, action)) {
     return { statusCode: 429, headers, body: JSON.stringify({ error: "Too many requests. Please wait." }) };
+  }
+
+  // Auth check — user-facing actions require a valid session token
+  if (AUTH_REQUIRED_ACTIONS.has(action)) {
+    const authHeader = event.headers["authorization"] || event.headers["Authorization"] || "";
+    const rawToken   = authHeader.replace(/^Bearer\s+/i, "").trim();
+    const userId     = verifySessionToken(rawToken);
+    if (!userId) {
+      return { statusCode: 401, headers, body: JSON.stringify({ error: "Authentication required" }) };
+    }
   }
 
   try {

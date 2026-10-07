@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay — Designer Screen Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F0F2F5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 32px 24px; }
+
+  h1 { font-size: 28px; font-weight: 800; color: #020B2D; margin-bottom: 4px; }
+  .doc-sub { font-size: 14px; color: #6B7280; margin-bottom: 40px; }
+
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 13px; font-weight: 700; color: #9CA3AF;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 20px; padding-bottom: 8px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .screens-grid {
+    display: flex; flex-wrap: wrap; gap: 28px;
+  }
+
+  .screen-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .screen-num {
+    background: #1055CC; color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 20px;
+    align-self: flex-start;
+  }
+  .screen-label { font-size: 12px; font-weight: 700; color: #374151; text-align: center; max-width: 160px; }
+
+  .phone {
+    width: 160px; border-radius: 22px;
+    border: 6px solid #1A1A2E;
+    background: #fff; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  .phone-notch {
+    background: #1A1A2E; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phone-notch-inner {
+    width: 48px; height: 10px; background: #0d0d1a;
+    border-radius: 0 0 8px 8px;
+  }
+  .phone-screen { padding: 8px; min-height: 300px; background: #F8FAFF; }
+
+  /* Reusable UI pieces */
+  .ps-header {
+    background: linear-gradient(135deg, #0A1F6E, #1055CC);
+    padding: 10px 8px 8px; color: #fff; border-radius: 10px;
+    margin-bottom: 6px;
+  }
+  .ps-h-label { font-size: 9px; opacity: 0.7; font-weight: 600; }
+  .ps-h-amount { font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+  .ps-h-sub { font-size: 8px; opacity: 0.65; margin-top: 1px; }
+  .ps-h-addr {
+    background: rgba(255,255,255,0.15); border-radius: 6px;
+    padding: 4px 6px; margin-top: 6px; font-size: 8px; color: rgba(255,255,255,0.85);
+  }
+  .ps-btn-row { display: flex; gap: 4px; margin-top: 6px; }
+  .ps-btn {
+    flex: 1; background: rgba(255,255,255,0.2); border-radius: 7px;
+    padding: 5px 2px; text-align: center; font-size: 8px; color: #fff; font-weight: 700;
+  }
+  .ps-btn-icon { font-size: 12px; display: block; margin-bottom: 1px; }
+
+  .ps-section { font-size: 9px; font-weight: 700; color: #374151; margin: 6px 0 4px; }
+  .ps-card {
+    background: #fff; border-radius: 8px; padding: 6px 8px;
+    border: 1px solid #E5E7EB; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ps-card-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+  .ps-card-title { font-size: 9px; font-weight: 700; color: #111827; }
+  .ps-card-sub { font-size: 8px; color: #9CA3AF; }
+  .ps-chevron { font-size: 12px; color: #D1D5DB; margin-left: auto; }
+
+  .ps-tab-bar {
+    display: flex; background: #fff; border-top: 1px solid #E5E7EB;
+    padding: 4px 0 2px; margin: 0 -8px -8px;
+  }
+  .ps-tab {
+    flex: 1; text-align: center; font-size: 7px; color: #9CA3AF; font-weight: 700;
+    padding: 3px 0;
+  }
+  .ps-tab.active { color: #1055CC; }
+  .ps-tab-icon { font-size: 14px; display: block; }
+
+  .ps-tag {
+    display: inline-block; font-size: 8px; font-weight: 700;
+    padding: 2px 6px; border-radius: 20px;
+  }
+
+  .ps-input {
+    border: 1.5px solid #E5E7EB; border-radius: 7px;
+    padding: 5px 8px; font-size: 9px; color: #374151;
+    background: #fff; margin-bottom: 5px; width: 100%;
+  }
+
+  .ps-pill-row { display: flex; gap: 3px; margin: 4px 0; flex-wrap: wrap; }
+  .ps-pill {
+    font-size: 7px; font-weight: 700; padding: 3px 6px;
+    border-radius: 20px; border: 1px solid #E5E7EB;
+    background: #F9FAFB; color: #6B7280;
+  }
+  .ps-pill.active { background: #1055CC; color: #fff; border-color: #1055CC; }
+
+  .ps-modal-overlay {
+    background: rgba(0,0,0,0.45); position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0; border-radius: 16px;
+    display: flex; align-items: flex-end;
+  }
+  .ps-modal {
+    background: #fff; border-radius: 14px 14px 0 0;
+    padding: 10px 10px 6px; width: 100%;
+  }
+  .ps-modal-title { font-size: 12px; font-weight: 800; color: #111827; margin-bottom: 3px; }
+  .ps-modal-sub { font-size: 8px; color: #9CA3AF; margin-bottom: 8px; }
+
+  .ps-method {
+    display: flex; align-items: center; gap: 6px;
+    background: #F8FAFF; border-radius: 8px;
+    border: 1px solid #E5E7EB; padding: 7px 8px;
+    margin-bottom: 5px;
+  }
+  .ps-method-emoji { font-size: 16px; }
+  .ps-method-name { font-size: 9px; font-weight: 700; color: #111827; }
+  .ps-method-desc { font-size: 7px; color: #9CA3AF; }
+
+  .ps-cta {
+    background: #1055CC; color: #fff; border-radius: 8px;
+    padding: 8px; text-align: center; font-size: 9px; font-weight: 700;
+    margin-top: 6px;
+  }
+
+  .ps-success-page {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 260px; padding: 16px;
+    background: #F8FAFF;
+  }
+  .ps-success-emoji { font-size: 36px; margin-bottom: 8px; }
+  .ps-success-title { font-size: 13px; font-weight: 800; color: #111827; margin-bottom: 4px; }
+  .ps-success-sub { font-size: 8px; color: #6B7280; text-align: center; line-height: 1.4; }
+
+  .ps-big-amount {
+    font-size: 32px; font-weight: 800; color: #111827;
+    text-align: center; margin: 8px 0 2px;
+  }
+  .ps-numpad {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: #E5E7EB; border-radius: 4px; overflow: hidden;
+    margin: 6px 0;
+  }
+  .ps-numpad-key {
+    background: #fff; padding: 8px; text-align: center;
+    font-size: 12px; font-weight: 500; color: #111827;
+  }
+  .ps-contact {
+    display: flex; align-items: center; gap: 6px;
+    background: #fff; border-radius: 8px; padding: 6px 8px;
+    margin-bottom: 4px; border: 1px solid #E5E7EB;
+  }
+  .ps-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .ps-contact-name { font-size: 9px; font-weight: 700; color: #111827; }
+  .ps-contact-phone { font-size: 8px; color: #9CA3AF; }
+
+  .ps-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ps-service-card {
+    width: calc(50% - 2px); background: #fff; border-radius: 8px;
+    padding: 7px; border: 1px solid #E5E7EB;
+  }
+  .ps-service-emoji { font-size: 16px; margin-bottom: 3px; }
+  .ps-service-name { font-size: 8px; font-weight: 700; color: #111827; }
+  .ps-service-sub { font-size: 7px; color: #9CA3AF; }
+
+  .ps-stats { display: flex; background: #fff; border-top: 1px solid #F3F4F6; }
+  .ps-stat { flex: 1; text-align: center; padding: 8px 4px; }
+  .ps-stat-num { font-size: 13px; font-weight: 800; color: #111827; }
+  .ps-stat-label { font-size: 7px; color: #9CA3AF; }
+  .ps-divider { width: 1px; background: #E5E7EB; margin: 6px 0; }
+
+  .ps-qr {
+    width: 80px; height: 80px; background: repeating-linear-gradient(
+      0deg, #111 0px, #111 3px, #fff 3px, #fff 6px
+    ); border-radius: 6px; margin: 6px auto;
+    image-rendering: pixelated;
+  }
+  .ps-qr-fake {
+    width: 80px; height: 80px; margin: 6px auto;
+    background: #fff; border-radius: 6px;
+    display: grid; grid-template-columns: repeat(8, 1fr);
+    gap: 1px; padding: 6px;
+  }
+  .ps-qr-cell { background: #111; border-radius: 1px; }
+  .ps-qr-empty { background: transparent; }
+
+  .ps-lil-addr {
+    background: #F8FAFF; border: 1px solid #E5E7EB;
+    border-radius: 6px; padding: 5px 7px; font-size: 7px;
+    color: #374151; font-family: monospace;
+    word-break: break-all; margin-bottom: 4px;
+  }
+
+  .ps-vc-card {
+    background: linear-gradient(135deg, #0A1F6E, #1055CC, #00AEEF);
+    border-radius: 10px; padding: 10px; color: #fff; margin-bottom: 8px;
+  }
+  .ps-vc-brand { font-size: 8px; font-weight: 800; letter-spacing: 1px; }
+  .ps-vc-num { font-size: 9px; font-weight: 700; letter-spacing: 2px; margin: 6px 0 4px; }
+  .ps-vc-row { display: flex; justify-content: space-between; }
+  .ps-vc-field-label { font-size: 6px; opacity: 0.6; }
+  .ps-vc-field-val { font-size: 8px; font-weight: 700; }
+
+  .ps-auth-logo {
+    width: 40px; height: 40px; background: linear-gradient(135deg, #0A1F6E, #00AEEF);
+    border-radius: 12px; margin: 0 auto 8px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .ps-bank-card {
+    display: flex; align-items: center; gap: 6px;
+    background: #F0FDF4; border: 1px solid #BBF7D0;
+    border-radius: 8px; padding: 7px; margin-bottom: 5px;
+  }
+  .ps-bank-icon {
+    width: 28px; height: 28px; background: #DCFCE7;
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .ps-bank-name { font-size: 9px; font-weight: 700; color: #111827; }
+  .ps-bank-mask { font-size: 7px; color: #9CA3AF; }
+  .ps-linked-badge {
+    background: #10B981; color: #fff; font-size: 7px; font-weight: 700;
+    padding: 2px 5px; border-radius: 4px; margin-left: auto;
+  }
+
+  .ps-info-box {
+    background: #F8FAFF; border-radius: 8px; padding: 7px;
+    border: 1px solid #E5E7EB; margin: 5px 0;
+  }
+  .ps-info-line { font-size: 8px; color: #6B7280; margin-bottom: 2px; }
+
+  .ps-wallet-addr-input {
+    display: flex; align-items: center; gap: 4px;
+    border: 1.5px solid #1055CC; border-radius: 8px;
+    padding: 6px 8px; background: #fff; margin-bottom: 5px;
+  }
+  .ps-wallet-addr-field {
+    font-size: 8px; color: #9CA3AF; font-family: monospace; flex: 1;
+  }
+</style>
+</head>
+<body>
+
+<h1>TchotchoPay — Designer Screen Reference</h1>
+<p class="doc-sub">29 screens &amp; modal states · All screens at 160px width · Reload in browser for best view</p>
+
+<!-- ─── AUTH ─────────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Auth Flow</div>
+  <div class="screens-grid">
+
+    <!-- 1. Onboarding -->
+    <div class="screen-wrap">
+      <div class="screen-num">#1</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background: linear-gradient(160deg,#020B2D,#0A1F6E); display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;min-height:300px;">
+          <div style="font-size:48px;margin-bottom:10px;">💸</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;text-align:center;margin-bottom:6px;">TchotchoPay</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.65);text-align:center;margin-bottom:20px;line-height:1.5;">Send money to Haiti instantly.<br>USDC wallet · Marketplace · P2P</div>
+          <div style="background:#1055CC;color:#fff;border-radius:10px;padding:8px 24px;font-size:10px;font-weight:700;margin-bottom:8px;width:100%;text-align:center;">Get Started →</div>
+          <div style="color:rgba(255,255,255,0.5);font-size:8px;">Already have an account? <span style="color:#00AEEF;">Sign in</span></div>
+        </div>
+      </div>
+      <div class="screen-label">Onboarding</div>
+    </div>
+
+    <!-- 2. Login -->
+    <div class="screen-wrap">
+      <div class="screen-num">#2</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen">
+          <div class="ps-auth-logo">💳</div>
+          <div style="font-size:13px;font-weight:800;color:#111827;text-align:center;margin-bottom:4px;">Welcome back</div>
+          <div style="font-size:8px;color:#9CA3AF;text-align:center;margin-bottom:12px;">Sign in to your account</div>
+          <div class="ps-input">Email address</div>
+          <div class="ps-input" style="margin-bottom:8px;">••••••••</div>
+          <div class="ps-cta" style="margin-top:0;">Sign In →</div>
+          <div style="text-align:center;margin-top:8px;font-size:8px;color:#9CA3AF;">No account? <span style="color:#1055CC;font-weight:700;">Create one</span></div>
+          <div style="margin-top:12px;display:flex;align-items:center;gap:4px;"><div style="flex:1;height:1px;background:#E5E7EB;"></div><span style="font-size:7px;color:#9CA3AF;">or</span><div style="flex:1;height:1px;background:#E5E7EB;"></div></div>
+          <div style="border:1.5px solid #E5E7EB;border-radius:8px;padding:7px;text-align:center;font-size:9px;color:#374151;font-weight:600;margin-top:8px;">🍎 Continue with Apple</div>
+        </div>
+      </div>
+      <div class="screen-label">Login</div>
+    </div>
+
+    <!-- 3. Sign Up -->
+    <div class="screen-wrap">
+      <div class="screen-num">#3</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen">
+          <div style="font-size:12px;font-weight:800;color:#111827;margin-bottom:3px;">Create account</div>
+          <div style="font-size:8px;color:#9CA3AF;margin-bottom:10px;">Get your USDC wallet in 2 minutes</div>
+          <div class="ps-input">Full name</div>
+          <div class="ps-input">Email address</div>
+          <div class="ps-input">Phone number</div>
+          <div class="ps-input" style="margin-bottom:8px;">Create password</div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:7px;padding:6px;margin-bottom:8px;">
+            <div style="font-size:8px;font-weight:700;color:#047857;">KYC Verification</div>
+            <div style="font-size:7px;color:#6B7280;margin-top:2px;">Identity verified via Persona · Takes 2 mins</div>
+          </div>
+          <div class="ps-cta" style="margin-top:0;">Create Account →</div>
+        </div>
+      </div>
+      <div class="screen-label">Sign Up / KYC</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── MAIN TABS ─────────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Main Tab Screens</div>
+  <div class="screens-grid">
+
+    <!-- 4. Home -->
+    <div class="screen-wrap">
+      <div class="screen-num">#4</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;">
+          <div style="background:#fff;padding:6px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB;">
+            <span style="font-size:11px;font-weight:800;color:#0A1F6E;">TCHOTCHO PAY</span>
+            <span style="font-size:14px;">🔔</span>
+          </div>
+          <div style="padding:6px 8px 0;">
+            <div style="font-size:10px;font-weight:700;color:#111827;">Good morning, Fedner 👋</div>
+            <div style="font-size:8px;color:#9CA3AF;margin-bottom:6px;">Wednesday, October 7, 2026</div>
+            <div class="ps-header">
+              <div class="ps-h-label">USDC Balance</div>
+              <div class="ps-h-amount">$248.50</div>
+              <div class="ps-h-sub">≈ 32,926 HTG · Updated just now</div>
+              <div class="ps-btn-row" style="margin-top:8px;">
+                <div class="ps-btn"><span class="ps-btn-icon">📤</span>Send</div>
+                <div class="ps-btn"><span class="ps-btn-icon">➕</span>Add</div>
+                <div class="ps-btn"><span class="ps-btn-icon">📲</span>Receive</div>
+                <div class="ps-btn"><span class="ps-btn-icon">🏦</span>Cash Out</div>
+              </div>
+            </div>
+            <div class="ps-section">Quick Actions</div>
+            <div style="display:flex;gap:4px;margin-bottom:6px;">
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+                <div style="font-size:16px;">💸</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Send</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+                <div style="font-size:16px;">🛒</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Market</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+                <div style="font-size:16px;">📱</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Top-Up</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+                <div style="font-size:16px;">📷</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">QR Pay</div>
+              </div>
+            </div>
+            <div class="ps-section">Recent Activity</div>
+            <div class="ps-card"><div class="ps-card-icon" style="background:#D1FAE5;">📥</div><div><div class="ps-card-title">From Pierre</div><div class="ps-card-sub">Today</div></div><span style="margin-left:auto;font-size:9px;font-weight:700;color:#10B981;">+$100</span></div>
+            <div class="ps-card"><div class="ps-card-icon" style="background:#FEE2E2;">📤</div><div><div class="ps-card-title">To Marie</div><div class="ps-card-sub">Yesterday</div></div><span style="margin-left:auto;font-size:9px;font-weight:700;color:#EF4444;">-$50</span></div>
+          </div>
+          <div class="ps-tab-bar">
+            <div class="ps-tab active"><span class="ps-tab-icon">🏠</span>Home</div>
+            <div class="ps-tab"><span class="ps-tab-icon">💸</span>Send</div>
+            <div class="ps-tab"><span class="ps-tab-icon">🛒</span>Market</div>
+            <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Home</div>
+    </div>
+
+    <!-- 5. Send Step 1 - MonCash contacts -->
+    <div class="screen-wrap">
+      <div class="screen-num">#5</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="padding:6px 0 4px;">
+            <div style="font-size:14px;font-weight:800;color:#111827;">Send Money 💸</div>
+            <div style="font-size:8px;color:#9CA3AF;margin-bottom:8px;">Choose where to send</div>
+            <div style="display:flex;gap:4px;margin-bottom:8px;">
+              <div style="flex:1;background:#EFF6FF;border:1.5px solid #1055CC;border-radius:8px;padding:7px 4px;text-align:center;">
+                <div style="font-size:13px;">📱</div><div style="font-size:7px;font-weight:700;color:#1055CC;">MonCash</div>
+              </div>
+              <div style="flex:1;background:#fff;border:1.5px solid #E5E7EB;border-radius:8px;padding:7px 4px;text-align:center;">
+                <div style="font-size:13px;">📲</div><div style="font-size:7px;font-weight:700;color:#6B7280;">NatCash</div>
+              </div>
+              <div style="flex:1;background:#fff;border:1.5px solid #E5E7EB;border-radius:8px;padding:7px 4px;text-align:center;">
+                <div style="font-size:13px;">💳</div><div style="font-size:7px;font-weight:700;color:#6B7280;">USDC</div>
+              </div>
+            </div>
+            <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Recent</div>
+            <div class="ps-contact"><div class="ps-avatar" style="background:#7C3AED;">MJ</div><div><div class="ps-contact-name">Marie Jean</div><div class="ps-contact-phone">+509 3712-3456</div></div><span class="ps-chevron">›</span></div>
+            <div class="ps-contact"><div class="ps-avatar" style="background:#0EA5E9;">PL</div><div><div class="ps-contact-name">Pierre Louis</div><div class="ps-contact-phone">+509 3688-1234</div></div><span class="ps-chevron">›</span></div>
+            <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin:6px 0 5px;">Or enter a number</div>
+            <div style="display:flex;align-items:center;gap:5px;background:#EFF6FF;border:1.5px solid #1055CC;border-radius:8px;padding:8px;">
+              <span style="font-size:14px;">➕</span><span style="font-size:9px;font-weight:700;color:#1055CC;">Enter phone number</span>
+            </div>
+          </div>
+          <div class="ps-tab-bar">
+            <div class="ps-tab"><span class="ps-tab-icon">🏠</span>Home</div>
+            <div class="ps-tab active"><span class="ps-tab-icon">💸</span>Send</div>
+            <div class="ps-tab"><span class="ps-tab-icon">🛒</span>Market</div>
+            <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Send — contacts</div>
+    </div>
+
+    <!-- 6. Send Step 1 - USDC address -->
+    <div class="screen-wrap">
+      <div class="screen-num">#6</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:14px;font-weight:800;color:#111827;margin-bottom:2px;">Send Money 💸</div>
+          <div style="font-size:8px;color:#9CA3AF;margin-bottom:8px;">Choose where to send</div>
+          <div style="display:flex;gap:4px;margin-bottom:10px;">
+            <div style="flex:1;background:#fff;border:1.5px solid #E5E7EB;border-radius:8px;padding:7px 4px;text-align:center;">
+              <div style="font-size:13px;">📱</div><div style="font-size:7px;font-weight:700;color:#6B7280;">MonCash</div>
+            </div>
+            <div style="flex:1;background:#fff;border:1.5px solid #E5E7EB;border-radius:8px;padding:7px 4px;text-align:center;">
+              <div style="font-size:13px;">📲</div><div style="font-size:7px;font-weight:700;color:#6B7280;">NatCash</div>
+            </div>
+            <div style="flex:1;background:#EFF6FF;border:1.5px solid #1055CC;border-radius:8px;padding:7px 4px;text-align:center;">
+              <div style="font-size:13px;">💳</div><div style="font-size:7px;font-weight:700;color:#1055CC;">USDC</div>
+            </div>
+          </div>
+          <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:5px;">Recipient Wallet Address</div>
+          <div class="ps-wallet-addr-input">
+            <span style="font-size:14px;">🔗</span>
+            <div class="ps-wallet-addr-field">0x... or Arc wallet address</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;background:#EFF6FF;border:1.5px solid #1055CC;border-radius:8px;padding:8px;opacity:0.4;margin-bottom:8px;">
+            <span style="font-size:14px;">✅</span><span style="font-size:9px;font-weight:700;color:#1055CC;">Confirm Address & Continue</span>
+          </div>
+          <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:7px;">
+            <div style="font-size:8px;color:#92400E;line-height:1.4;">💡 Paste recipient's Tchotcho Pay wallet address. Transfers cannot be reversed.</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Send — USDC address</div>
+    </div>
+
+    <!-- 7. Send Step 2 - Amount -->
+    <div class="screen-wrap">
+      <div class="screen-num">#7</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:16px;margin-bottom:10px;color:#374151;">←</div>
+          <div style="text-align:center;margin-bottom:4px;">
+            <div style="font-size:8px;color:#9CA3AF;margin-bottom:6px;">Sending to</div>
+            <div style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;padding:4px 10px;">
+              <div class="ps-avatar" style="width:22px;height:22px;background:#7C3AED;font-size:7px;">MJ</div>
+              <span style="font-size:9px;font-weight:700;color:#111827;">Marie Jean</span>
+            </div>
+          </div>
+          <div class="ps-big-amount">$75.00</div>
+          <div style="text-align:center;font-size:8px;color:#9CA3AF;margin-bottom:8px;">75.00 USDC · Fee: $0.75</div>
+          <div class="ps-numpad">
+            <div class="ps-numpad-key">1</div><div class="ps-numpad-key">2</div><div class="ps-numpad-key">3</div>
+            <div class="ps-numpad-key">4</div><div class="ps-numpad-key">5</div><div class="ps-numpad-key">6</div>
+            <div class="ps-numpad-key">7</div><div class="ps-numpad-key">8</div><div class="ps-numpad-key">9</div>
+            <div class="ps-numpad-key">.</div><div class="ps-numpad-key">0</div><div class="ps-numpad-key">⌫</div>
+          </div>
+          <div class="ps-cta">Choose Payment →</div>
+        </div>
+      </div>
+      <div class="screen-label">Send — amount</div>
+    </div>
+
+    <!-- 8. Send Step 3 - Payment -->
+    <div class="screen-wrap">
+      <div class="screen-num">#8</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:16px;margin-bottom:6px;color:#374151;">←</div>
+          <div class="ps-header" style="margin-bottom:8px;">
+            <div style="font-size:7px;opacity:0.7;font-weight:600;">You're sending</div>
+            <div style="font-size:20px;font-weight:800;">$75.00</div>
+            <div style="font-size:7px;opacity:0.7;margin-bottom:8px;">to Marie Jean · via MonCash</div>
+            <div style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.2);padding-top:5px;margin-top:5px;">
+              <span style="font-size:7px;opacity:0.7;">Amount</span><span style="font-size:7px;">$75.00</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:7px;opacity:0.7;">Fee (1%)</span><span style="font-size:7px;">$0.75</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-weight:700;">
+              <span style="font-size:7px;">Total</span><span style="font-size:9px;">$75.75</span>
+            </div>
+          </div>
+          <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:5px;">Payment method</div>
+          <div style="display:flex;background:#F3F4F6;border-radius:9px;padding:3px;margin-bottom:8px;">
+            <div style="flex:1;background:#fff;border-radius:6px;padding:6px;text-align:center;font-size:8px;font-weight:700;color:#1055CC;">💳 USDC Wallet</div>
+            <div style="flex:1;padding:6px;text-align:center;font-size:8px;font-weight:600;color:#9CA3AF;">🏦 Card</div>
+          </div>
+          <div class="ps-info-box">
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:8px;color:#6B7280;">Available balance</span>
+              <span style="font-size:10px;font-weight:800;color:#1055CC;">$248.50</span>
+            </div>
+            <div style="background:#ECFDF5;border-radius:6px;padding:4px;margin-top:4px;">
+              <div style="font-size:7px;color:#059669;font-weight:600;">✅ Balance sufficient</div>
+            </div>
+          </div>
+          <div class="ps-cta">Send $75.00 from Wallet →</div>
+        </div>
+      </div>
+      <div class="screen-label">Send — payment</div>
+    </div>
+
+    <!-- 9. Send Success -->
+    <div class="screen-wrap">
+      <div class="screen-num">#9</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div class="ps-success-page">
+            <div class="ps-success-emoji">🎉</div>
+            <div class="ps-success-title">Lajan voye!</div>
+            <div class="ps-success-sub">$75.00 sent to Marie Jean<br>via MonCash</div>
+            <div style="font-size:8px;color:#9CA3AF;margin:8px 0 16px;">Ref: TX-20261007-4821</div>
+            <div class="ps-cta" style="width:100%;">Send Again</div>
+            <div style="font-size:9px;color:#1055CC;font-weight:700;margin-top:8px;">Back to Home</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Send — success</div>
+    </div>
+
+    <!-- 10. Marketplace grid -->
+    <div class="screen-wrap">
+      <div class="screen-num">#10</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;">
+          <div style="padding:8px 8px 4px;">
+            <div style="font-size:14px;font-weight:800;color:#111827;">Marketplace 🏪</div>
+            <div style="font-size:8px;color:#9CA3AF;margin-bottom:6px;">Pay for anything in Haiti with USDC</div>
+            <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #E5E7EB;border-radius:8px;padding:5px 8px;margin-bottom:6px;">
+              <span style="font-size:11px;">🔍</span>
+              <span style="font-size:8px;color:#9CA3AF;">Search services…</span>
+            </div>
+            <div class="ps-pill-row" style="margin-bottom:6px;">
+              <div class="ps-pill active">All</div>
+              <div class="ps-pill">Food</div>
+              <div class="ps-pill">Utilities</div>
+              <div class="ps-pill">Phone</div>
+              <div class="ps-pill">School</div>
+            </div>
+            <div class="ps-grid">
+              <div class="ps-service-card"><div class="ps-service-emoji">🍽️</div><div class="ps-service-name">Food & Grocery</div><div class="ps-service-sub">From $10.00</div></div>
+              <div class="ps-service-card"><div class="ps-service-emoji">⚡</div><div class="ps-service-name">Electricity</div><div class="ps-service-sub">From $25.00</div></div>
+              <div class="ps-service-card"><div class="ps-service-emoji">📱</div><div class="ps-service-name">Phone Top-Up</div><div class="ps-service-sub">From $5.00</div></div>
+              <div class="ps-service-card"><div class="ps-service-emoji">🎓</div><div class="ps-service-name">School Fees</div><div class="ps-service-sub">From $50.00</div></div>
+            </div>
+          </div>
+          <div class="ps-tab-bar">
+            <div class="ps-tab"><span class="ps-tab-icon">🏠</span>Home</div>
+            <div class="ps-tab"><span class="ps-tab-icon">💸</span>Send</div>
+            <div class="ps-tab active"><span class="ps-tab-icon">🛒</span>Market</div>
+            <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Marketplace</div>
+    </div>
+
+    <!-- 11. Profile -->
+    <div class="screen-wrap">
+      <div class="screen-num">#11</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#f8f9fa;">
+          <div style="background:#fff;padding:12px 8px;text-align:center;border-bottom:1px solid #F3F4F6;">
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1055CC,#00AEEF);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;">FF</div>
+            <div style="font-size:12px;font-weight:800;color:#2d3436;">Fedner François</div>
+            <div style="font-size:8px;color:#636e72;">fednerfrancois@yahoo.com</div>
+            <div style="margin-top:5px;background:#d4edda;border-radius:20px;padding:2px 8px;display:inline-block;">
+              <span style="font-size:8px;color:#155724;font-weight:600;">✅ Verified Account</span>
+            </div>
+          </div>
+          <div class="ps-stats">
+            <div class="ps-stat"><div class="ps-stat-num">47</div><div class="ps-stat-label">Transfers</div></div>
+            <div class="ps-divider"></div>
+            <div class="ps-stat"><div class="ps-stat-num">$4.2K</div><div class="ps-stat-label">Total Sent</div></div>
+            <div class="ps-divider"></div>
+            <div class="ps-stat"><div class="ps-stat-num">12</div><div class="ps-stat-label">Referrals</div></div>
+          </div>
+          <div style="padding:6px 8px;">
+            <div style="font-size:8px;font-weight:700;color:#b2bec3;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Language</div>
+            <div style="display:flex;gap:4px;background:#fff;border-radius:10px;padding:4px;margin-bottom:8px;">
+              <div style="flex:1;background:#EFF6FF;border:1.5px solid #1055CC;border-radius:8px;padding:5px;text-align:center;"><span style="font-size:14px;">🇺🇸</span><div style="font-size:8px;font-weight:700;color:#1055CC;">EN</div></div>
+              <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:5px;text-align:center;"><span style="font-size:14px;">🇭🇹</span><div style="font-size:8px;color:#636e72;">HT</div></div>
+              <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:5px;text-align:center;"><span style="font-size:14px;">🇫🇷</span><div style="font-size:8px;color:#636e72;">FR</div></div>
+              <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:5px;text-align:center;"><span style="font-size:14px;">🇪🇸</span><div style="font-size:8px;color:#636e72;">ES</div></div>
+            </div>
+            <div style="font-size:8px;font-weight:700;color:#b2bec3;text-transform:uppercase;margin-bottom:4px;">Wallet</div>
+            <div class="ps-card"><div class="ps-card-icon" style="background:#DBEAFE;">💳</div><div><div class="ps-card-title">Virtual Card</div><div class="ps-card-sub">Spend USDC anywhere online</div></div><span class="ps-chevron">›</span></div>
+            <div class="ps-card"><div class="ps-card-icon" style="background:#D1FAE5;">👥</div><div><div class="ps-card-title">Refer & Earn</div><div class="ps-card-sub">Get $5 per friend</div></div><span class="ps-chevron">›</span></div>
+          </div>
+          <div class="ps-tab-bar">
+            <div class="ps-tab"><span class="ps-tab-icon">🏠</span>Home</div>
+            <div class="ps-tab"><span class="ps-tab-icon">💸</span>Send</div>
+            <div class="ps-tab"><span class="ps-tab-icon">🛒</span>Market</div>
+            <div class="ps-tab active"><span class="ps-tab-icon">👤</span>Profile</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Profile</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── STACK SCREENS ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Stack Screens</div>
+  <div class="screens-grid">
+
+    <!-- 12. Wallet main -->
+    <div class="screen-wrap">
+      <div class="screen-num">#12</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:14px;font-weight:800;color:#111827;margin-bottom:2px;">Pòtmonè mwen 💳</div>
+          <div style="font-size:8px;color:#9CA3AF;margin-bottom:8px;">USDC · Digital Dollar Wallet</div>
+          <div class="ps-header">
+            <div class="ps-h-label">Available Balance</div>
+            <div class="ps-h-amount">$248.50</div>
+            <div class="ps-h-sub">USDC · US Dollar Coin</div>
+            <div class="ps-h-addr">Arc Wallet: 0x9F3b…a21C</div>
+          </div>
+          <div style="display:flex;gap:4px;margin-bottom:8px;">
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+              <div style="font-size:14px;">➕</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Add Funds</div>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+              <div style="font-size:14px;">📲</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Receive</div>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+              <div style="font-size:14px;">📋</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Copy Addr</div>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB;">
+              <div style="font-size:14px;">📤</div><div style="font-size:7px;font-weight:700;color:#6B7280;margin-top:2px;">Share</div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:10px;border:1.5px solid #E5E7EB;margin-bottom:6px;">
+            <div style="font-size:9px;font-weight:700;color:#111827;margin-bottom:3px;">🔗 Arc Wallet Address</div>
+            <div class="ps-lil-addr">0x9F3b4a21C8E2d7Fa6B1c3e9D0A5F8b2E4c7a21C</div>
+            <div style="display:flex;gap:4px;">
+              <div style="flex:1;background:#F3F4F6;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;">📋 Copy</div>
+              <div style="flex:1;background:#F3F4F6;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;">📤 Share</div>
+              <div style="flex:2;background:#1055CC;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;color:#fff;">⬛ QR Code</div>
+            </div>
+          </div>
+          <div style="font-size:9px;font-weight:700;color:#374151;margin-bottom:5px;">Recent Transactions</div>
+          <div class="ps-card" style="background:#fff;"><div class="ps-card-icon" style="background:#DCFCE7;">↙️</div><div><div class="ps-card-title">Received</div><div class="ps-card-sub">Oct 7</div></div><span style="margin-left:auto;font-size:9px;color:#10B981;font-weight:700;">+$100</span></div>
+        </div>
+      </div>
+      <div class="screen-label">Wallet</div>
+    </div>
+
+    <!-- 13. Top-Up -->
+    <div class="screen-wrap">
+      <div class="screen-num">#13</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:13px;font-weight:800;color:#111827;margin-bottom:2px;">Phone Top-Up 📱</div>
+          <div style="font-size:8px;color:#9CA3AF;margin-bottom:8px;">Send airtime to 13+ countries</div>
+          <div class="ps-input">🌍 Select Country</div>
+          <div class="ps-input">📡 Select Operator</div>
+          <div class="ps-input">📱 Phone Number</div>
+          <div class="ps-pill-row" style="margin-bottom:8px;">
+            <div class="ps-pill active">$5</div>
+            <div class="ps-pill">$10</div>
+            <div class="ps-pill">$20</div>
+            <div class="ps-pill">$25</div>
+          </div>
+          <div class="ps-info-box">
+            <div style="font-size:8px;color:#6B7280;">Live Rate: <strong>$1 USD = 132.5 HTG</strong></div>
+            <div style="font-size:8px;color:#6B7280;margin-top:2px;">Recipient gets ≈ 662 HTG airtime</div>
+          </div>
+          <div class="ps-cta" style="margin-top:8px;">Choose Payment →</div>
+          <div style="margin-top:8px;">
+            <div style="font-size:8px;font-weight:700;color:#9CA3AF;margin-bottom:4px;">Supported Countries</div>
+            <div class="ps-pill-row">
+              <div class="ps-pill">🇭🇹 Haiti</div>
+              <div class="ps-pill">🇩🇴 DR</div>
+              <div class="ps-pill">🇨🇺 Cuba</div>
+              <div class="ps-pill">🇯🇲 Jamaica</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Top-Up</div>
+    </div>
+
+    <!-- 14. QR Pay -->
+    <div class="screen-wrap">
+      <div class="screen-num">#14</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div style="font-size:13px;font-weight:800;color:#111827;margin-bottom:2px;">QR Pay 📷</div>
+          <div style="font-size:8px;color:#9CA3AF;margin-bottom:10px;">Scan to pay or receive USDC</div>
+          <div style="display:flex;gap:4px;background:#F3F4F6;border-radius:8px;padding:3px;margin-bottom:10px;">
+            <div style="flex:1;background:#fff;border-radius:6px;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#1055CC;">My QR Code</div>
+            <div style="flex:1;padding:6px;text-align:center;font-size:9px;font-weight:700;color:#9CA3AF;">Scan QR</div>
+          </div>
+          <div style="text-align:center;margin-bottom:6px;">
+            <div style="display:inline-block;background:#fff;border-radius:12px;padding:10px;border:1px solid #E5E7EB;">
+              <div style="width:80px;height:80px;background:repeating-conic-gradient(#111 0% 25%, #fff 0% 50%) 0 0 / 8px 8px;border-radius:4px;"></div>
+            </div>
+          </div>
+          <div class="ps-lil-addr" style="text-align:center;">0x9F3b4a21C8E2d7Fa6B1c3e9D</div>
+          <div style="display:flex;gap:6px;">
+            <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:8px;text-align:center;font-size:8px;font-weight:700;color:#374151;">📋 Copy</div>
+            <div style="flex:1;background:#1055CC;border-radius:8px;padding:8px;text-align:center;font-size:8px;font-weight:700;color:#fff;">📤 Share</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">QR Pay</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── WALLET MODALS ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Wallet Modals</div>
+  <div class="screens-grid">
+
+    <!-- 15. Add Funds - Card -->
+    <div class="screen-wrap">
+      <div class="screen-num">#15</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;">
+            <div class="ps-header"><div class="ps-h-amount">$248.50</div></div>
+          </div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Add Funds</div>
+              <div class="ps-modal-sub">Load your USDC wallet instantly</div>
+              <div style="display:flex;background:#F3F4F6;border-radius:8px;padding:3px;margin-bottom:8px;">
+                <div style="flex:1;background:#fff;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;color:#1055CC;">💳 Card</div>
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">🏦 Bank</div>
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">🔗 USDC</div>
+              </div>
+              <div class="ps-input">$ 0.00</div>
+              <div class="ps-pill-row" style="margin-bottom:6px;">
+                <div class="ps-pill">$25</div><div class="ps-pill active">$50</div><div class="ps-pill">$100</div><div class="ps-pill">$500</div>
+              </div>
+              <div style="font-size:7px;color:#9CA3AF;text-align:center;margin-bottom:5px;">Visa · Mastercard · Apple Pay — secured by Stripe</div>
+              <div class="ps-cta">Pay & Add Funds →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Add Funds — Card</div>
+    </div>
+
+    <!-- 16. Add Funds - Bank ACH -->
+    <div class="screen-wrap">
+      <div class="screen-num">#16</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Add Funds</div>
+              <div style="display:flex;background:#F3F4F6;border-radius:8px;padding:3px;margin-bottom:8px;">
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">💳 Card</div>
+                <div style="flex:1;background:#fff;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;color:#1055CC;">🏦 Bank</div>
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">🔗 USDC</div>
+              </div>
+              <div class="ps-bank-card">
+                <div class="ps-bank-icon">🏦</div>
+                <div><div class="ps-bank-name">Chase Bank</div><div class="ps-bank-mask">Account ···4821</div></div>
+                <div class="ps-linked-badge">✓ Linked</div>
+              </div>
+              <div class="ps-input">$ 0.00</div>
+              <div class="ps-pill-row" style="margin-bottom:5px;">
+                <div class="ps-pill">$50</div><div class="ps-pill active">$100</div><div class="ps-pill">$250</div><div class="ps-pill">$500</div>
+              </div>
+              <div class="ps-info-box">
+                <div class="ps-info-line">✅ Free ACH transfers — no card fee</div>
+                <div class="ps-info-line">⏱ 1–3 business days</div>
+              </div>
+              <div class="ps-cta">Transfer from Bank →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Add Funds — Bank</div>
+    </div>
+
+    <!-- 17. Add Funds - USDC Receive -->
+    <div class="screen-wrap">
+      <div class="screen-num">#17</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Receive USDC</div>
+              <div style="display:flex;background:#F3F4F6;border-radius:8px;padding:3px;margin-bottom:6px;">
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">💳 Card</div>
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">🏦 Bank</div>
+                <div style="flex:1;background:#fff;border-radius:6px;padding:5px;text-align:center;font-size:8px;font-weight:700;color:#1055CC;">🔗 USDC</div>
+              </div>
+              <div style="text-align:center;background:#F8FAFF;border-radius:10px;padding:8px;margin-bottom:6px;">
+                <div style="width:64px;height:64px;background:repeating-conic-gradient(#111 0% 25%, #fff 0% 50%) 0 0 / 6px 6px;border-radius:4px;margin:0 auto;"></div>
+              </div>
+              <div class="ps-lil-addr">0x9F3b4a21C8E2d7Fa6B1c3e9D0A5F8b2E4c7a21C</div>
+              <div style="display:flex;gap:5px;margin-top:4px;">
+                <div style="flex:1;background:#F3F4F6;border-radius:7px;padding:6px;text-align:center;font-size:8px;font-weight:700;">📋 Copy</div>
+                <div style="flex:1;background:#1055CC;border-radius:7px;padding:6px;text-align:center;font-size:8px;font-weight:700;color:#fff;">📤 Share</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Add Funds — USDC QR</div>
+    </div>
+
+    <!-- 18. Cash Out - method picker -->
+    <div class="screen-wrap">
+      <div class="screen-num">#18</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Cash Out 🏦</div>
+              <div style="font-size:9px;color:#9CA3AF;margin-bottom:8px;">Balance: <strong style="color:#1055CC;">$248.50 USDC</strong></div>
+              <div class="ps-method"><span class="ps-method-emoji">🟡</span><div><div class="ps-method-name">MonCash</div><div class="ps-method-desc">Send to any MonCash in Haiti</div></div><span class="ps-chevron">›</span></div>
+              <div class="ps-method"><span class="ps-method-emoji">🔵</span><div><div class="ps-method-name">NatCash</div><div class="ps-method-desc">Send to any NatCash in Haiti</div></div><span class="ps-chevron">›</span></div>
+              <div class="ps-method"><span class="ps-method-emoji">🤝</span><div><div class="ps-method-name">Cash Agent</div><div class="ps-method-desc">Pick up cash from local agent</div></div><span class="ps-chevron">›</span></div>
+              <div class="ps-method"><span class="ps-method-emoji">🏦</span><div><div class="ps-method-name">Bank Account (ACH)</div><div class="ps-method-desc">Withdraw to US bank — 1–3 days</div></div><span class="ps-chevron">›</span></div>
+              <div style="display:flex;align-items:center;gap:6px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:7px;margin-top:2px;">
+                <span style="font-size:16px;">💎</span>
+                <div><div style="font-size:9px;font-weight:700;color:#1055CC;">Keep as USDC</div><div style="font-size:7px;color:#9CA3AF;">Hold digital dollars — no fees</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Cash Out — methods</div>
+    </div>
+
+    <!-- 19. Cash Out - MonCash form -->
+    <div class="screen-wrap">
+      <div class="screen-num">#19</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Cash Out 🏦</div>
+              <div style="font-size:8px;color:#1055CC;font-weight:700;margin-bottom:2px;">← Back</div>
+              <div style="background:#EFF6FF;border-radius:7px;padding:4px 8px;display:inline-block;margin-bottom:8px;">
+                <span style="font-size:9px;font-weight:700;color:#1055CC;">🟡 MonCash</span>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;margin-bottom:4px;">RECIPIENT PHONE (HAITI)</div>
+              <div style="display:flex;align-items:center;border:1.5px solid #E5E7EB;border-radius:8px;padding:5px 8px;margin-bottom:6px;"><span style="font-size:12px;margin-right:4px;">📱</span><span style="font-size:9px;color:#9CA3AF;">+509 XXXX XXXX</span></div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;margin-bottom:4px;">AMOUNT (USD)</div>
+              <div style="display:flex;align-items:center;border:1.5px solid #E5E7EB;border-radius:8px;padding:5px 8px;margin-bottom:6px;"><span style="font-size:14px;color:#9CA3AF;margin-right:4px;">$</span><span style="font-size:9px;color:#9CA3AF;">0.00</span></div>
+              <div class="ps-pill-row" style="margin-bottom:6px;">
+                <div class="ps-pill">$10</div><div class="ps-pill">$25</div><div class="ps-pill active">$50</div><div class="ps-pill">$100</div>
+              </div>
+              <div class="ps-info-box">
+                <div class="ps-info-line">⚡ Usually arrives within minutes</div>
+                <div class="ps-info-line">💰 1% cash-out fee applies</div>
+              </div>
+              <div class="ps-cta">Send Cash Out →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Cash Out — MonCash</div>
+    </div>
+
+    <!-- 20. Cash Out - Agent -->
+    <div class="screen-wrap">
+      <div class="screen-num">#20</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Cash Out 🏦</div>
+              <div style="font-size:8px;color:#1055CC;font-weight:700;margin-bottom:2px;">← Back</div>
+              <div style="background:#EFF6FF;border-radius:7px;padding:4px 8px;display:inline-block;margin-bottom:8px;">
+                <span style="font-size:9px;font-weight:700;color:#1055CC;">🤝 Cash Agent</span>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;margin-bottom:4px;">AMOUNT (USD)</div>
+              <div style="display:flex;align-items:center;border:1.5px solid #E5E7EB;border-radius:8px;padding:5px 8px;margin-bottom:5px;"><span style="font-size:14px;color:#9CA3AF;margin-right:4px;">$</span><span style="font-size:9px;color:#9CA3AF;">0.00</span></div>
+              <div class="ps-pill-row" style="margin-bottom:5px;">
+                <div class="ps-pill">$10</div><div class="ps-pill">$25</div><div class="ps-pill">$50</div><div class="ps-pill active">$100</div>
+              </div>
+              <div class="ps-info-box">
+                <div class="ps-info-line">🤝 Show agent code at any Tchotcho Pay location</div>
+                <div class="ps-info-line">⚡ Instant cash pickup</div>
+                <div class="ps-info-line">📍 tchotchopay.com/agents</div>
+                <div class="ps-info-line">💰 1% fee applies</div>
+              </div>
+              <div class="ps-cta">Generate Agent Code →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Cash Out — Agent</div>
+    </div>
+
+    <!-- 21. Full Address Modal -->
+    <div class="screen-wrap">
+      <div class="screen-num">#21</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-header"><div class="ps-h-amount">$248.50</div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div class="ps-modal-title">Arc Wallet Address</div>
+              <div class="ps-modal-sub">Your USDC receiving address</div>
+              <div style="text-align:center;background:#F8FAFF;border-radius:10px;padding:8px;margin-bottom:6px;">
+                <div style="width:72px;height:72px;background:repeating-conic-gradient(#111 0% 25%, #fff 0% 50%) 0 0 / 7px 7px;border-radius:4px;margin:0 auto;"></div>
+              </div>
+              <div class="ps-lil-addr">0x9F3b4a21C8E2d7Fa6B1c3e9D0A5F8b2E4c7a21C8E2d7Fa6</div>
+              <div style="display:flex;gap:5px;margin-top:6px;">
+                <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:7px;text-align:center;font-size:8px;font-weight:700;">📋 Copy Address</div>
+                <div style="flex:1;background:#1055CC;border-radius:8px;padding:7px;text-align:center;font-size:8px;font-weight:700;color:#fff;">📤 Share</div>
+              </div>
+              <div style="text-align:center;margin-top:8px;font-size:9px;color:#9CA3AF;">Close</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Full Address modal</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── MARKETPLACE MODALS ─────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Marketplace Modals</div>
+  <div class="screens-grid">
+
+    <!-- 22. Marketplace payment modal -->
+    <div class="screen-wrap">
+      <div class="screen-num">#22</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-grid"><div class="ps-service-card"><div class="ps-service-emoji">🍽️</div><div class="ps-service-name">Food</div></div><div class="ps-service-card"><div class="ps-service-emoji">⚡</div><div class="ps-service-name">Electricity</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="font-size:22px;">🍽️</span>
+                <div style="flex:1;"><div style="font-size:11px;font-weight:800;color:#111827;">Food & Grocery</div><div style="font-size:8px;color:#9CA3AF;">Local markets & delivery</div></div>
+                <span style="font-size:14px;color:#9CA3AF;">✕</span>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:4px;">Amount (USD)</div>
+              <div style="display:flex;align-items:center;border:1.5px solid #E5E7EB;border-radius:8px;padding:5px 8px;margin-bottom:5px;"><span style="font-size:14px;color:#9CA3AF;margin-right:4px;">$</span><span style="font-size:16px;font-weight:700;color:#111827;">50.00</span></div>
+              <div class="ps-pill-row" style="margin-bottom:5px;">
+                <div class="ps-pill">$10</div><div class="ps-pill">$20</div><div class="ps-pill active">$50</div><div class="ps-pill">$100</div>
+              </div>
+              <div style="background:linear-gradient(135deg,#0A1F6E,#1055CC);border-radius:8px;padding:8px;margin-bottom:6px;">
+                <div style="display:flex;justify-content:space-between;"><span style="font-size:7px;color:rgba(255,255,255,0.7);">Service</span><span style="font-size:7px;color:#fff;">$50.00</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="font-size:7px;color:rgba(255,255,255,0.7);">Fee (1%)</span><span style="font-size:7px;color:#fff;">$0.50</span></div>
+                <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:3px;padding-top:3px;border-top:1px solid rgba(255,255,255,0.2);"><span style="font-size:8px;color:#fff;">Total</span><span style="font-size:10px;color:#fff;">$50.50</span></div>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:4px;">Pay with</div>
+              <div style="display:flex;background:#F3F4F6;border-radius:8px;padding:3px;margin-bottom:6px;">
+                <div style="flex:1;background:#fff;border-radius:5px;padding:5px;text-align:center;font-size:8px;font-weight:700;color:#1055CC;">💳 USDC Wallet</div>
+                <div style="flex:1;padding:5px;text-align:center;font-size:8px;color:#9CA3AF;">🏦 Card</div>
+              </div>
+              <div class="ps-cta">Pay $50.50 from Wallet →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Marketplace — payment</div>
+    </div>
+
+    <!-- 23. Marketplace success -->
+    <div class="screen-wrap">
+      <div class="screen-num">#23</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="background:#F8FAFF;">
+          <div class="ps-success-page">
+            <div class="ps-success-emoji">🎉</div>
+            <div class="ps-success-title">Payment Sent!</div>
+            <div class="ps-success-sub">Food & Grocery · $50.00 USDC<br>No cash needed!</div>
+            <div class="ps-cta" style="margin-top:16px;width:100%;">Done</div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Marketplace — success</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── PROFILE MODALS ─────────────────────────────────────────── -->
+<div class="section">
+  <div class="section-title">Profile Modals</div>
+  <div class="screens-grid">
+
+    <!-- 24. Virtual Card front -->
+    <div class="screen-wrap">
+      <div class="screen-num">#24</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-stats"><div class="ps-stat"><div class="ps-stat-num">47</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal" style="padding-bottom:20px;">
+              <div style="font-size:13px;font-weight:800;color:#111827;text-align:center;margin-bottom:3px;">💳 Virtual Card</div>
+              <div style="font-size:8px;color:#9CA3AF;text-align:center;margin-bottom:10px;">Spend your USDC anywhere Visa is accepted</div>
+              <div class="ps-vc-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <div class="ps-vc-brand">TCHOTCHO PAY</div>
+                  <span style="font-size:16px;">💳</span>
+                </div>
+                <div style="width:22px;height:16px;background:#FFD700;border-radius:3px;margin-bottom:8px;"></div>
+                <div class="ps-vc-num">4242  4242  4242  4242</div>
+                <div class="ps-vc-row">
+                  <div><div class="ps-vc-field-label">CARD HOLDER</div><div class="ps-vc-field-val">FEDNER FRANÇOIS</div></div>
+                  <div><div class="ps-vc-field-label">EXPIRES</div><div class="ps-vc-field-val">12/28</div></div>
+                  <div style="font-size:12px;font-weight:900;font-style:italic;">VISA</div>
+                </div>
+              </div>
+              <div style="font-size:8px;color:#9CA3AF;text-align:center;margin-bottom:8px;">Tap card to see CVV</div>
+              <div style="display:flex;gap:5px;margin-bottom:8px;">
+                <div style="flex:1;background:#F3F4F6;border-radius:7px;padding:6px;text-align:center;"><div style="font-size:12px;">📋</div><div style="font-size:7px;font-weight:600;color:#6B7280;margin-top:2px;">Copy Number</div></div>
+                <div style="flex:1;background:#F3F4F6;border-radius:7px;padding:6px;text-align:center;"><div style="font-size:12px;">↑</div><div style="font-size:7px;font-weight:600;color:#6B7280;margin-top:2px;">Share</div></div>
+                <div style="flex:1;background:#F3F4F6;border-radius:7px;padding:6px;text-align:center;"><div style="font-size:12px;">🌐</div><div style="font-size:7px;font-weight:600;color:#6B7280;margin-top:2px;">Learn More</div></div>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#9CA3AF;">Close</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Virtual Card (front)</div>
+    </div>
+
+    <!-- 25. Virtual Card back (CVV) -->
+    <div class="screen-wrap">
+      <div class="screen-num">#25</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-stats"><div class="ps-stat"><div class="ps-stat-num">47</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal" style="padding-bottom:20px;">
+              <div style="font-size:13px;font-weight:800;color:#111827;text-align:center;margin-bottom:10px;">💳 Virtual Card</div>
+              <div class="ps-vc-card" style="min-height:90px;">
+                <div style="height:22px;background:#333;border-radius:3px;margin:8px -10px 10px;"></div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div style="flex:1;height:24px;background:rgba(255,255,255,0.2);border-radius:3px;"></div>
+                  <div style="background:#fff;border-radius:4px;padding:4px 8px;"><span style="font-size:12px;font-weight:800;color:#111827;">737</span></div>
+                </div>
+                <div style="font-size:7px;color:rgba(255,255,255,0.4);text-align:center;margin-top:6px;">Tap to flip back</div>
+              </div>
+              <div style="font-size:8px;color:#9CA3AF;text-align:center;margin-bottom:8px;">Tap card to see front</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#10B981;"></div>
+                <span style="font-size:8px;color:#6B7280;">Card active · $0.00 spent this month</span>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#9CA3AF;">Close</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Virtual Card (CVV back)</div>
+    </div>
+
+    <!-- 26. Refer & Earn -->
+    <div class="screen-wrap">
+      <div class="screen-num">#26</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-stats"><div class="ps-stat"><div class="ps-stat-num">47</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal" style="padding-bottom:20px;">
+              <div style="font-size:26px;text-align:center;margin-bottom:4px;">🎁</div>
+              <div style="font-size:13px;font-weight:800;color:#111827;text-align:center;margin-bottom:4px;">Refer & Earn</div>
+              <div style="font-size:8px;color:#6B7280;text-align:center;margin-bottom:10px;line-height:1.4;">Invite friends — you both get <strong style="color:#10B981;">$5 USDC</strong> when they send their first transfer.</div>
+              <div style="background:#EFF6FF;border:1.5px solid #DBEAFE;border-radius:10px;padding:10px;text-align:center;margin-bottom:8px;">
+                <div style="font-size:7px;font-weight:700;color:#1055CC;letter-spacing:1px;margin-bottom:4px;">YOUR CODE</div>
+                <div style="font-size:16px;font-weight:900;color:#1055CC;letter-spacing:3px;">REFFED2026</div>
+              </div>
+              <div style="background:#1055CC;color:#fff;border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:700;margin-bottom:5px;">↑ Share Referral Link</div>
+              <div style="background:#F3F4F6;border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:600;color:#374151;margin-bottom:8px;">📋 Copy Code</div>
+              <div style="display:flex;gap:5px;margin-bottom:8px;">
+                <div style="flex:1;background:#F8F9FA;border-radius:8px;padding:7px;text-align:center;"><div style="font-size:13px;font-weight:800;color:#111827;">12</div><div style="font-size:7px;color:#6B7280;">Friends Invited</div></div>
+                <div style="flex:1;background:#F8F9FA;border-radius:8px;padding:7px;text-align:center;"><div style="font-size:13px;font-weight:800;color:#111827;">$60</div><div style="font-size:7px;color:#6B7280;">Total Earned</div></div>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#9CA3AF;">Close</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Refer & Earn</div>
+    </div>
+
+    <!-- 27. Personal Info view -->
+    <div class="screen-wrap">
+      <div class="screen-num">#27</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-stats"><div class="ps-stat"><div class="ps-stat-num">47</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal" style="padding-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div style="font-size:12px;font-weight:800;color:#111827;">👤 Personal Info</div>
+                <div style="background:#EFF6FF;border-radius:7px;padding:4px 8px;font-size:8px;font-weight:700;color:#1055CC;">✏️ Edit</div>
+              </div>
+              <div style="border-top:1px solid #F3F4F6;">
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span style="font-size:8px;color:#6B7280;">First Name</span><span style="font-size:8px;font-weight:600;color:#111827;">Fedner</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span style="font-size:8px;color:#6B7280;">Last Name</span><span style="font-size:8px;font-weight:600;color:#111827;">François</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span style="font-size:8px;color:#6B7280;">Email</span><span style="font-size:7px;font-weight:600;color:#111827;">fedner@yahoo.com</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span style="font-size:8px;color:#6B7280;">Phone</span><span style="font-size:8px;font-weight:600;color:#111827;">+1 (305) 555-4821</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;"><span style="font-size:8px;color:#6B7280;">Country</span><span style="font-size:8px;font-weight:600;color:#111827;">US 🇺🇸</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;"><span style="font-size:8px;color:#6B7280;">KYC Status</span><span style="font-size:8px;font-weight:600;color:#047857;">✅ Verified</span></div>
+              </div>
+              <div style="text-align:center;margin-top:8px;font-size:9px;color:#9CA3AF;">Close</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Personal Info (view)</div>
+    </div>
+
+    <!-- 28. Personal Info edit -->
+    <div class="screen-wrap">
+      <div class="screen-num">#28</div>
+      <div class="phone">
+        <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+        <div class="phone-screen" style="padding:0;background:#F8FAFF;position:relative;min-height:320px;">
+          <div style="padding:8px;opacity:0.3;"><div class="ps-stats"><div class="ps-stat"><div class="ps-stat-num">47</div></div></div></div>
+          <div class="ps-modal-overlay">
+            <div class="ps-modal" style="padding-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="font-size:12px;font-weight:800;color:#111827;">👤 Personal Info</div>
+                <div style="background:#EFF6FF;border-radius:7px;padding:4px 8px;font-size:8px;font-weight:700;color:#1055CC;">Cancel</div>
+              </div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:3px;">First Name</div>
+              <div class="ps-input" style="margin-bottom:6px;">Fedner</div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:3px;">Last Name</div>
+              <div class="ps-input" style="margin-bottom:6px;">François</div>
+              <div style="font-size:8px;font-weight:700;color:#9CA3AF;text-transform:uppercase;margin-bottom:3px;">Phone</div>
+              <div class="ps-input" style="margin-bottom:8px;">+1 (305) 555-4821</div>
+              <div class="ps-cta">Save Changes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-label">Personal Info (edit)</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── SUMMARY ──────────────────────────────────────────────────── -->
+<div style="background:#fff;border-radius:16px;border:1px solid #E5E7EB;padding:20px 24px;margin-top:8px;">
+  <div style="font-size:16px;font-weight:800;color:#111827;margin-bottom:12px;">Screen Count Summary</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <div style="background:#EFF6FF;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#1055CC;">Auth Flow — 3 screens</div>
+    <div style="background:#F0FDF4;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#047857;">Main Tabs — 7 screens (incl. sub-flows)</div>
+    <div style="background:#FEF3C7;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#92400E;">Stack Screens — 3 screens</div>
+    <div style="background:#F5F3FF;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#6D28D9;">Wallet Modals — 7 states</div>
+    <div style="background:#FFF7ED;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#C2410C;">Marketplace — 2 modals</div>
+    <div style="background:#FDF2F8;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;color:#9D174D;">Profile Modals — 5 states</div>
+  </div>
+  <div style="font-size:22px;font-weight:800;color:#1055CC;margin-top:12px;">Total: 28 screens &amp; states</div>
+  <div style="font-size:12px;color:#9CA3AF;margin-top:4px;">Colors: Primary #1055CC · Navy #0A1F6E · Deep Navy #020B2D · Cyan #00AEEF</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>TchotchoPay — App Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f1117; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif; }
+
+  /* Phone shell */
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: #000;
+    border-radius: 54px;
+    box-shadow: 0 0 0 2px #333, 0 0 0 4px #1a1a1a, 0 40px 120px rgba(0,0,0,0.8), inset 0 0 0 1px #444;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 54px;
+    background: transparent;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 28px 8px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .status-time { font-size: 17px; font-weight: 700; }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+
+  /* Dynamic island */
+  .dynamic-island {
+    position: absolute;
+    top: 12px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 34px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 200;
+  }
+
+  /* Screens container */
+  .screens { flex: 1; position: relative; overflow: hidden; }
+  .screen {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .screen.active { opacity: 1; transform: translateX(0); }
+  .screen.slide-left { opacity: 0; transform: translateX(-100%); }
+
+  /* Bottom tab bar */
+  .tab-bar {
+    height: 83px;
+    background: rgba(15,15,20,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding-top: 10px;
+    position: relative;
+    z-index: 50;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab-item:active { transform: scale(0.9); }
+  .tab-icon { font-size: 22px; line-height: 1; }
+  .tab-label { font-size: 10px; font-weight: 600; color: #666; letter-spacing: 0.2px; }
+  .tab-item.active .tab-label { color: #22c55e; }
+  .tab-item.active .tab-icon { filter: brightness(1.3); }
+
+  /* ===== SCREEN 1: HOME ===== */
+  #screen-home {
+    background: linear-gradient(160deg, #0d1b2a 0%, #0f1117 40%, #0a1628 100%);
+    padding-top: 54px;
+  }
+  .home-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .home-greeting { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+  .home-name { font-size: 22px; font-weight: 700; color: #fff; }
+  .notif-btn {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  /* Balance card */
+  .balance-card {
+    margin: 0 20px;
+    background: linear-gradient(135deg, #1a6fd4 0%, #0e4fa3 50%, #0a3580 100%);
+    border-radius: 24px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(26,111,212,0.35);
+  }
+  .balance-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .balance-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -20px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .balance-label { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500; margin-bottom: 8px; }
+  .balance-amount { font-size: 42px; font-weight: 800; color: #fff; letter-spacing: -1px; margin-bottom: 4px; }
+  .balance-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+  .card-actions { display: flex; gap: 12px; }
+  .card-btn {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+  .card-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.25); }
+  .card-btn-icon { font-size: 18px; margin-bottom: 2px; }
+
+  /* Quick actions */
+  .section-title {
+    font-size: 16px; font-weight: 700; color: #fff;
+    padding: 20px 24px 12px;
+  }
+  .quick-actions { display: flex; gap: 12px; padding: 0 20px; }
+  .qa-item {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 16px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .qa-item:active { transform: scale(0.95); background: rgba(255,255,255,0.12); }
+  .qa-icon { font-size: 24px; margin-bottom: 6px; }
+  .qa-label { font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 600; }
+
+  /* Recent transactions */
+  .tx-list { padding: 0 20px 20px; }
+  .tx-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .tx-avatar {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .tx-info { flex: 1; }
+  .tx-name { font-size: 14px; color: #fff; font-weight: 600; margin-bottom: 3px; }
+  .tx-date { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .tx-amount { font-size: 15px; font-weight: 700; }
+  .tx-green { color: #22c55e; }
+  .tx-red { color: #ff4d4d; }
+
+  /* ===== SCREEN 2: SEND ===== */
+  #screen-send {
+    background: linear-gradient(160deg, #0d1b2a 0%, #0f1117 100%);
+    padding-top: 54px;
+  }
+  .screen-header {
+    padding: 16px 24px 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .back-btn {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .screen-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .send-amount-section {
+    padding: 32px 24px 24px;
+    text-align: center;
+  }
+  .send-to-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+  .recipient-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50px;
+    padding: 8px 16px 8px 8px;
+    margin-bottom: 28px;
+  }
+  .recipient-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .recipient-name { font-size: 14px; color: #fff; font-weight: 600; }
+  .amount-display { font-size: 64px; font-weight: 800; color: #fff; letter-spacing: -2px; }
+  .amount-usdc { font-size: 16px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .amount-rate { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+  .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 24px 20px; }
+  .numpad-key {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    margin: 4px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .numpad-key:active { background: rgba(255,255,255,0.18); transform: scale(0.95); }
+  .send-cta {
+    margin: 0 20px 20px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(34,197,94,0.35);
+    transition: all 0.2s;
+  }
+  .send-cta:active { transform: scale(0.97); }
+
+  /* ===== SCREEN 3: MARKETPLACE ===== */
+  #screen-market {
+    background: #0f1117;
+    padding-top: 54px;
+  }
+  .market-header { padding: 16px 24px 20px; }
+  .market-title { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .market-sub { font-size: 14px; color: rgba(255,255,255,0.45); }
+  .market-search {
+    margin: 0 20px 20px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.35);
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .market-cats { display: flex; gap: 10px; padding: 0 20px 16px; overflow-x: auto; }
+  .market-cats::-webkit-scrollbar { display: none; }
+  .cat-chip {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .cat-chip.active {
+    background: rgba(34,197,94,0.15);
+    border-color: rgba(34,197,94,0.4);
+    color: #22c55e;
+  }
+  .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 20px; }
+  .market-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 18px;
+    padding: 16px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s;
+  }
+  .market-card:active { transform: scale(0.97); background: rgba(255,255,255,0.1); }
+  .market-icon { font-size: 32px; margin-bottom: 10px; }
+  .market-card-name { font-size: 14px; color: #fff; font-weight: 700; margin-bottom: 4px; }
+  .market-card-sub { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .market-card-price { margin-top: 10px; font-size: 14px; color: #22c55e; font-weight: 700; }
+
+  /* ===== SCREEN 4: PROFILE ===== */
+  #screen-profile {
+    background: #0f1117;
+    padding-top: 54px;
+  }
+  .profile-hero {
+    background: linear-gradient(135deg, #1a6fd4, #0a3580);
+    padding: 24px 24px 40px;
+    text-align: center;
+  }
+  .profile-avatar {
+    width: 84px; height: 84px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 28px;
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(34,197,94,0.4);
+  }
+  .profile-name { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .profile-handle { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 12px; }
+  .profile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(34,197,94,0.2);
+    border: 1px solid rgba(34,197,94,0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #22c55e;
+    font-weight: 600;
+  }
+  .profile-stats {
+    display: flex;
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    margin: -20px 20px 0;
+    padding: 20px 0;
+    position: relative;
+    z-index: 5;
+  }
+  .stat-item { flex: 1; text-align: center; }
+  .stat-value { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 500; }
+  .stat-divider { width: 1px; background: rgba(255,255,255,0.1); }
+  .profile-menu { padding: 20px; }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .menu-item:active { background: rgba(255,255,255,0.1); transform: scale(0.99); }
+  .menu-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .menu-text { flex: 1; }
+  .menu-name { font-size: 15px; color: #fff; font-weight: 600; margin-bottom: 2px; }
+  .menu-desc { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .menu-arrow { color: rgba(255,255,255,0.25); font-size: 18px; }
+
+  /* Success overlay */
+  .success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .success-overlay.show { opacity: 1; pointer-events: all; }
+  .success-card {
+    background: #1a1a2e;
+    border-radius: 28px;
+    padding: 40px 32px;
+    text-align: center;
+    width: 320px;
+    border: 1px solid rgba(34,197,94,0.3);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .success-overlay.show .success-card { transform: scale(1); }
+  .success-icon { font-size: 64px; margin-bottom: 16px; }
+  .success-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .success-desc { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 28px; line-height: 1.5; }
+  .success-btn {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .success-btn:active { transform: scale(0.97); }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="dynamic-island"></div>
+
+  <!-- Status bar -->
+  <div class="status-bar" id="status-bar">
+    <span class="status-time" id="clock">9:41</span>
+    <div class="status-icons">
+      <span>📶</span>
+      <span>🔋</span>
+    </div>
+  </div>
+
+  <!-- Screens -->
+  <div class="screens">
+
+    <!-- HOME SCREEN -->
+    <div class="screen active" id="screen-home">
+      <div class="home-header">
+        <div>
+          <div class="home-greeting">Bonjou,</div>
+          <div class="home-name">Fedner 👋</div>
+        </div>
+        <div class="notif-btn">🔔</div>
+      </div>
+
+      <div class="balance-card">
+        <div class="balance-label">USDC Balance</div>
+        <div class="balance-amount">$1,250.00</div>
+        <div class="balance-sub">≈ 162,500 HTG · Updated just now</div>
+        <div class="card-actions">
+          <div class="card-btn" onclick="showScreen('send')">
+            <div class="card-btn-icon">📤</div>
+            Send
+          </div>
+          <div class="card-btn" onclick="showScreen('market')">
+            <div class="card-btn-icon">➕</div>
+            Add
+          </div>
+          <div class="card-btn" onclick="showSuccess('cashout')">
+            <div class="card-btn-icon">🏦</div>
+            Cash Out
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Quick Actions</div>
+      <div class="quick-actions">
+        <div class="qa-item" onclick="showScreen('send')">
+          <div class="qa-icon">💸</div>
+          <div class="qa-label">Send</div>
+        </div>
+        <div class="qa-item" onclick="showScreen('market')">
+          <div class="qa-icon">🛒</div>
+          <div class="qa-label">Market</div>
+        </div>
+        <div class="qa-item" onclick="showSuccess('topup')">
+          <div class="qa-icon">📱</div>
+          <div class="qa-label">Top-Up</div>
+        </div>
+        <div class="qa-item" onclick="showSuccess('qr')">
+          <div class="qa-icon">📷</div>
+          <div class="qa-label">QR Pay</div>
+        </div>
+      </div>
+
+      <div class="section-title">Recent Activity</div>
+      <div class="tx-list">
+        <div class="tx-item">
+          <div class="tx-avatar" style="background:rgba(34,197,94,0.15)">💚</div>
+          <div class="tx-info">
+            <div class="tx-name">Marie Jean-Baptiste</div>
+            <div class="tx-date">Today, 2:30 PM</div>
+          </div>
+          <div class="tx-amount tx-red">-$50.00</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-avatar" style="background:rgba(26,111,212,0.15)">📲</div>
+          <div class="tx-info">
+            <div class="tx-name">Digicel Top-Up</div>
+            <div class="tx-date">Yesterday, 10:15 AM</div>
+          </div>
+          <div class="tx-amount tx-red">-$10.00</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-avatar" style="background:rgba(255,200,0,0.15)">🏦</div>
+          <div class="tx-info">
+            <div class="tx-name">Bank Transfer</div>
+            <div class="tx-date">Oct 4, 9:00 AM</div>
+          </div>
+          <div class="tx-amount tx-green">+$500.00</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-avatar" style="background:rgba(255,100,50,0.15)">🛒</div>
+          <div class="tx-info">
+            <div class="tx-name">Marketplace — Groceries</div>
+            <div class="tx-date">Oct 3, 6:45 PM</div>
+          </div>
+          <div class="tx-amount tx-red">-$32.50</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-avatar" style="background:rgba(34,197,94,0.15)">📥</div>
+          <div class="tx-info">
+            <div class="tx-name">Received from Pierre</div>
+            <div class="tx-date">Oct 2, 3:20 PM</div>
+          </div>
+          <div class="tx-amount tx-green">+$100.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEND SCREEN -->
+    <div class="screen" id="screen-send">
+      <div class="screen-header">
+        <div class="back-btn" onclick="showScreen('home')">←</div>
+        <div class="screen-title">Send Money</div>
+      </div>
+
+      <div class="send-amount-section">
+        <div class="send-to-label">Sending to</div>
+        <div class="recipient-pill">
+          <div class="recipient-avatar">MJ</div>
+          <div class="recipient-name">Marie Jean-Baptiste</div>
+        </div>
+        <div class="amount-display" id="amount-display">$0</div>
+        <div class="amount-usdc" id="amount-usdc">0 USDC</div>
+        <div class="amount-rate">1 USDC = $1.00 USD · ≈ 130 HTG</div>
+      </div>
+
+      <div class="numpad">
+        <div class="numpad-key" onclick="numpadPress('1')">1</div>
+        <div class="numpad-key" onclick="numpadPress('2')">2</div>
+        <div class="numpad-key" onclick="numpadPress('3')">3</div>
+        <div class="numpad-key" onclick="numpadPress('4')">4</div>
+        <div class="numpad-key" onclick="numpadPress('5')">5</div>
+        <div class="numpad-key" onclick="numpadPress('6')">6</div>
+        <div class="numpad-key" onclick="numpadPress('7')">7</div>
+        <div class="numpad-key" onclick="numpadPress('8')">8</div>
+        <div class="numpad-key" onclick="numpadPress('9')">9</div>
+        <div class="numpad-key" onclick="numpadPress('.')">·</div>
+        <div class="numpad-key" onclick="numpadPress('0')">0</div>
+        <div class="numpad-key" onclick="numpadPress('⌫')">⌫</div>
+      </div>
+
+      <div class="send-cta" onclick="showSuccess('send')">
+        Send USDC →
+      </div>
+    </div>
+
+    <!-- MARKETPLACE SCREEN -->
+    <div class="screen" id="screen-market">
+      <div class="market-header">
+        <div class="market-title">Marketplace</div>
+        <div class="market-sub">Pay for anything in Haiti with USDC</div>
+      </div>
+
+      <div class="market-search">
+        🔍 &nbsp;Search services...
+      </div>
+
+      <div class="market-cats">
+        <div class="cat-chip active">All</div>
+        <div class="cat-chip">Food</div>
+        <div class="cat-chip">Utilities</div>
+        <div class="cat-chip">Phone</div>
+        <div class="cat-chip">School</div>
+        <div class="cat-chip">Transport</div>
+      </div>
+
+      <div class="market-grid">
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">🍽️</div>
+          <div class="market-card-name">Food & Grocery</div>
+          <div class="market-card-sub">Local markets & delivery</div>
+          <div class="market-card-price">From $2.00</div>
+        </div>
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">⚡</div>
+          <div class="market-card-name">Electricity</div>
+          <div class="market-card-sub">EDH bill payment</div>
+          <div class="market-card-price">Pay exact amount</div>
+        </div>
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">📱</div>
+          <div class="market-card-name">Phone Top-Up</div>
+          <div class="market-card-sub">Digicel & Natcom</div>
+          <div class="market-card-price">From $5.00</div>
+        </div>
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">🎓</div>
+          <div class="market-card-name">School Fees</div>
+          <div class="market-card-sub">Pay tuition directly</div>
+          <div class="market-card-price">Any amount</div>
+        </div>
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">🚌</div>
+          <div class="market-card-name">Transportation</div>
+          <div class="market-card-sub">Tap-tap & moto</div>
+          <div class="market-card-price">From $1.00</div>
+        </div>
+        <div class="market-card" onclick="showSuccess('market')">
+          <div class="market-icon">💊</div>
+          <div class="market-card-name">Pharmacy</div>
+          <div class="market-card-sub">Medicine & health</div>
+          <div class="market-card-price">Any amount</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE SCREEN -->
+    <div class="screen" id="screen-profile">
+      <div class="profile-hero">
+        <div class="profile-avatar">F</div>
+        <div class="profile-name">Fedner François</div>
+        <div class="profile-handle">@fedner · tchotchopay.com</div>
+        <div class="profile-badge">✅ Verified Account</div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-item">
+          <div class="stat-value">47</div>
+          <div class="stat-label">Transfers</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value">$4.2K</div>
+          <div class="stat-label">Total Sent</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Referrals</div>
+        </div>
+      </div>
+
+      <div class="profile-menu" style="margin-top:16px;">
+        <div class="menu-item">
+          <div class="menu-icon" style="background:rgba(26,111,212,0.15)">💳</div>
+          <div class="menu-text">
+            <div class="menu-name">Virtual Card</div>
+            <div class="menu-desc">Spend USDC anywhere online</div>
+          </div>
+          <div class="menu-arrow">›</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-icon" style="background:rgba(34,197,94,0.15)">👥</div>
+          <div class="menu-text">
+            <div class="menu-name">Refer & Earn</div>
+            <div class="menu-desc">Get $5 for each friend you invite</div>
+          </div>
+          <div class="menu-arrow">›</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-icon" style="background:rgba(255,165,0,0.15)">🔒</div>
+          <div class="menu-text">
+            <div class="menu-name">Security & KYC</div>
+            <div class="menu-desc">Face ID · Identity verified</div>
+          </div>
+          <div class="menu-arrow">›</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-icon" style="background:rgba(150,100,255,0.15)">📋</div>
+          <div class="menu-text">
+            <div class="menu-name">Transaction History</div>
+            <div class="menu-desc">View all payments & receipts</div>
+          </div>
+          <div class="menu-arrow">›</div>
+        </div>
+        <div class="menu-item" onclick="showSuccess('logout')">
+          <div class="menu-icon" style="background:rgba(255,50,50,0.1)">🚪</div>
+          <div class="menu-text">
+            <div class="menu-name" style="color:#ff4d4d">Log Out</div>
+            <div class="menu-desc">Sign out of your account</div>
+          </div>
+          <div class="menu-arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .screens -->
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <div class="tab-item active" id="tab-home" onclick="showScreen('home')">
+      <div class="tab-icon">🏠</div>
+      <div class="tab-label">Home</div>
+    </div>
+    <div class="tab-item" id="tab-send" onclick="showScreen('send')">
+      <div class="tab-icon">💸</div>
+      <div class="tab-label">Send</div>
+    </div>
+    <div class="tab-item" id="tab-market" onclick="showScreen('market')">
+      <div class="tab-icon">🛒</div>
+      <div class="tab-label">Market</div>
+    </div>
+    <div class="tab-item" id="tab-profile" onclick="showScreen('profile')">
+      <div class="tab-icon">👤</div>
+      <div class="tab-label">Profile</div>
+    </div>
+  </div>
+
+</div><!-- end .phone -->
+
+<!-- Success overlay -->
+<div class="success-overlay" id="success-overlay" onclick="hideSuccess()">
+  <div class="success-card" onclick="event.stopPropagation()">
+    <div class="success-icon" id="success-icon">✅</div>
+    <div class="success-title" id="success-title">Transfer Sent!</div>
+    <div class="success-desc" id="success-desc">Your USDC transfer was sent successfully.</div>
+    <div class="success-btn" onclick="hideSuccess()">Done</div>
+  </div>
+</div>
+
+<script>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours(), m = now.getMinutes();
+    document.getElementById('clock').textContent = h + ':' + String(m).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Screen navigation
+  let currentScreen = 'home';
+  function showScreen(name) {
+    const prev = document.getElementById('screen-' + currentScreen);
+    const next = document.getElementById('screen-' + name);
+    if (prev === next) return;
+
+    prev.classList.remove('active');
+    prev.classList.add('slide-left');
+    setTimeout(() => prev.classList.remove('slide-left'), 350);
+
+    next.classList.add('active');
+    currentScreen = name;
+
+    // Update tabs
+    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+    const tab = document.getElementById('tab-' + name);
+    if (tab) tab.classList.add('active');
+  }
+
+  // Numpad
+  let amountStr = '0';
+  function numpadPress(key) {
+    if (key === '⌫') {
+      amountStr = amountStr.length > 1 ? amountStr.slice(0,-1) : '0';
+    } else if (key === '.') {
+      if (!amountStr.includes('.')) amountStr += '.';
+    } else {
+      if (amountStr === '0') amountStr = key;
+      else amountStr += key;
+    }
+    const val = parseFloat(amountStr) || 0;
+    document.getElementById('amount-display').textContent = '$' + amountStr;
+    document.getElementById('amount-usdc').textContent = val.toFixed(2) + ' USDC';
+  }
+
+  // Success modal
+  const successMessages = {
+    send: { icon: '✅', title: 'Sent Successfully!', desc: '$' + (parseFloat(amountStr)||50).toFixed(2) + ' USDC sent to Marie.\nShe\'ll receive it instantly.' },
+    cashout: { icon: '🏦', title: 'Cash-Out Requested', desc: 'Your funds are on the way to your bank. Arrives in 1-2 business days.' },
+    topup: { icon: '📱', title: 'Top-Up Complete!', desc: 'Digicel credit has been added to the phone number instantly.' },
+    qr: { icon: '📷', title: 'QR Code Ready', desc: 'Share your QR code to receive USDC payments from anyone.' },
+    market: { icon: '🛒', title: 'Order Placed!', desc: 'Your payment was processed with USDC. No cash needed!' },
+    logout: { icon: '👋', title: 'See you soon!', desc: 'You\'ve been logged out of TchotchoPay safely.' },
+  };
+  function showSuccess(type) {
+    const m = successMessages[type] || { icon: '✅', title: 'Done!', desc: 'Action completed successfully.' };
+    document.getElementById('success-icon').textContent = m.icon;
+    document.getElementById('success-title').textContent = m.title;
+    document.getElementById('success-desc').textContent = m.desc;
+    document.getElementById('success-overlay').classList.add('show');
+  }
+  function hideSuccess() {
+    document.getElementById('success-overlay').classList.remove('show');
+    if (currentScreen === 'send') {
+      amountStr = '0';
+      document.getElementById('amount-display').textContent = '$0';
+      document.getElementById('amount-usdc').textContent = '0 USDC';
+      showScreen('home');
+    }
+  }
+</script>
+</body>
+</html>
