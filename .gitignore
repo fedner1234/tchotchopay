@@ -18,3 +18,4 @@ deploy-log.txt
 *.jpg
 *.jpeg
 netlify/functions/node_modules/
+zi*
