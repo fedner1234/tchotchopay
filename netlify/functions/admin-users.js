@@ -4,7 +4,7 @@
 // Never returns password_hash or any sensitive credential.
 
 const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://tchotchopay.com',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Secret',
   'Content-Type': 'application/json',

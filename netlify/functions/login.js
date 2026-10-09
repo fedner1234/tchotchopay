@@ -11,12 +11,39 @@ const CORS_HEADERS = {
 };
 
 // Rate limiter — 5 attempts per 15 minutes per IP
+// Uses Upstash Redis if UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN are set,
+// otherwise falls back to in-memory (still works, just resets on cold start).
 const rateLimitMap = new Map();
-function isRateLimited(ip) {
-  const now = Date.now();
-  const windowMs = 15 * 60 * 1000; // 15 minutes
-  const maxRequests = 5;
 
+async function isRateLimited(ip) {
+  const redisUrl   = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const windowSec  = 15 * 60; // 15 minutes
+  const maxRequests = 5;
+  const key = `rl:login:${ip}`;
+
+  // ── Upstash Redis path (persistent across cold starts) ──
+  if (redisUrl && redisToken) {
+    try {
+      const incr = await fetch(`${redisUrl}/incr/${key}`, {
+        headers: { Authorization: `Bearer ${redisToken}` },
+      }).then(r => r.json());
+      const count = incr.result;
+      if (count === 1) {
+        // First request in window — set expiry
+        await fetch(`${redisUrl}/expire/${key}/${windowSec}`, {
+          headers: { Authorization: `Bearer ${redisToken}` },
+        });
+      }
+      return count > maxRequests;
+    } catch {
+      // Redis unreachable — fall through to in-memory
+    }
+  }
+
+  // ── In-memory fallback ──
+  const now = Date.now();
+  const windowMs = windowSec * 1000;
   if (!rateLimitMap.has(ip)) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs });
     return false;
@@ -135,7 +162,7 @@ exports.handler = async (event) => {
   }
 
   const ip = event.headers['x-forwarded-for']?.split(',')[0] || 'unknown';
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return {
       statusCode: 429,
       headers: CORS_HEADERS,

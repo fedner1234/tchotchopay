@@ -11,7 +11,8 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json',
 };
 
-// Simple in-memory rate limiter (resets on cold start — use Upstash Redis for production)
+// Rate limiter — 3 registrations per hour per IP
+// Uses Upstash Redis if env vars are set, otherwise falls back to in-memory.
 // Verify Cloudflare Turnstile token
 async function verifyTurnstile(token) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
@@ -31,11 +32,35 @@ async function verifyTurnstile(token) {
 }
 
 const rateLimitMap = new Map();
-function isRateLimited(ip) {
-  const now = Date.now();
-  const windowMs = 60 * 60 * 1000; // 1 hour
-  const maxRequests = 3; // max 3 registrations per IP per hour
 
+async function isRateLimited(ip) {
+  const redisUrl   = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const windowSec  = 60 * 60; // 1 hour
+  const maxRequests = 3;
+  const key = `rl:register:${ip}`;
+
+  // ── Upstash Redis path (persistent across cold starts) ──
+  if (redisUrl && redisToken) {
+    try {
+      const incr = await fetch(`${redisUrl}/incr/${key}`, {
+        headers: { Authorization: `Bearer ${redisToken}` },
+      }).then(r => r.json());
+      const count = incr.result;
+      if (count === 1) {
+        await fetch(`${redisUrl}/expire/${key}/${windowSec}`, {
+          headers: { Authorization: `Bearer ${redisToken}` },
+        });
+      }
+      return count > maxRequests;
+    } catch {
+      // Redis unreachable — fall through to in-memory
+    }
+  }
+
+  // ── In-memory fallback ──
+  const now = Date.now();
+  const windowMs = windowSec * 1000;
   if (!rateLimitMap.has(ip)) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs });
     return false;
@@ -198,7 +223,7 @@ exports.handler = async (event) => {
 
   // Rate limiting
   const ip = event.headers['x-forwarded-for']?.split(',')[0] || 'unknown';
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return {
       statusCode: 429,
       headers: CORS_HEADERS,
@@ -234,8 +259,11 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Invalid email address' }) };
   }
 
-  if (password.length < 8) {
-    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Password must be at least 8 characters' }) };
+  if (password.length < 12) {
+    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Password must be at least 12 characters' }) };
+  }
+  if (!/[0-9]/.test(password) && !/[^a-zA-Z0-9]/.test(password)) {
+    return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Password must contain at least one number or special character' }) };
   }
 
   try {
