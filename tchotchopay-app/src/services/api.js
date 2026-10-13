@@ -62,4 +62,17 @@ export const updateProfile = (data) =>
 export const getExchangeRates = () =>
   api.get('/.netlify/functions/exchange-rates');
 
+// --- AGENT ---
+export const agentLookup = (agentToken, customerPhone) =>
+  api.post('/.netlify/functions/agent-lookup', { agentToken, customerPhone });
+
+export const agentLoad = (agentToken, customerPhone, amountUSD) =>
+  api.post('/.netlify/functions/agent-load', { agentToken, customerPhone, amountUSD });
+
+export const agentTopupZelle = (agentToken, amountUSD, zelleConfirmation) =>
+  api.post('/.netlify/functions/agent-topup-zelle', { agentToken, amountUSD, zelleConfirmation });
+
+export const agentTopup = (agentToken, amountUSD, method) =>
+  api.post('/.netlify/functions/agent-topup', { agentToken, amountUSD, method });
+
 export default api;

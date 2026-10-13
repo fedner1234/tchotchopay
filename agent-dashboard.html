@@ -467,6 +467,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
   <div class="sb-nav">
     <a class="on" onclick="showPage('dashboard',this)"><i class="ti ti-layout-dashboard"></i>Dashboard <span class="badge-pill" id="badge-pending">3</span></a>
+    <a onclick="showPage('load',this)" style="color:var(--green);"><i class="ti ti-cash"></i>Load Customer Wallet</a>
     <a onclick="showPage('history',this)"><i class="ti ti-history"></i>Transaction History</a>
     <a onclick="showPage('float',this)"><i class="ti ti-wallet"></i>Float & Earnings</a>
     <a onclick="showPage('profile',this)"><i class="ti ti-user-circle"></i>My Profile</a>
@@ -767,6 +768,124 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       </div>
     </div>
 
+    <!-- ── PAGE: LOAD CUSTOMER WALLET ── -->
+    <div class="page" id="page-load">
+
+      <!-- Header banner -->
+      <div class="float-banner" style="background:linear-gradient(135deg,#00e67618,#0d1120);border-color:#00e67630;">
+        <div class="float-icon" style="background:#00e67620;"><i class="ti ti-cash" style="color:var(--green);"></i></div>
+        <div class="float-info">
+          <div class="float-label">Your Float Balance</div>
+          <div class="float-amount" style="color:var(--green);" id="load-float-display">$0.00</div>
+          <div class="float-htg">Available to load onto customer wallets</div>
+        </div>
+        <div class="float-actions">
+          <button class="btn btn-outline" onclick="openTopup()"><i class="ti ti-plus"></i> Top Up Float</button>
+        </div>
+      </div>
+
+      <div class="sections" style="grid-template-columns:1fr 380px;margin-top:20px;">
+
+        <!-- Load Form -->
+        <div class="section-card" style="padding:24px;">
+          <div class="section-title" style="margin-bottom:6px;font-size:16px;">Load Customer Wallet</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:24px;">Customer hands you cash → enter their phone → confirm → done.</div>
+
+          <!-- Step 1: Phone -->
+          <div class="load-step" id="step-phone">
+            <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.8px;margin-bottom:10px;">STEP 1 — FIND CUSTOMER</div>
+            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Customer Phone Number</label>
+            <div style="display:flex;gap:10px;">
+              <input type="tel" id="load-phone" placeholder="(305) 555-0100"
+                style="flex:1;background:#0d1120;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--txt);font-size:15px;outline:none;"
+                oninput="this.style.borderColor='var(--border)';document.getElementById('load-err').textContent='';"
+                onkeydown="if(event.key==='Enter')lookupCustomer()" />
+              <button class="btn btn-cyan" onclick="lookupCustomer()" id="btn-lookup">
+                <i class="ti ti-search"></i> Find
+              </button>
+            </div>
+            <div id="load-err" style="color:var(--red);font-size:12px;margin-top:8px;min-height:18px;"></div>
+          </div>
+
+          <!-- Step 2: Customer found (hidden until lookup) -->
+          <div class="load-step" id="step-customer" style="display:none;margin-top:20px;">
+            <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.8px;margin-bottom:10px;">STEP 2 — CUSTOMER FOUND</div>
+            <div style="display:flex;align-items:center;gap:14px;background:#00e5ff08;border:1px solid #00e5ff30;border-radius:12px;padding:14px 16px;margin-bottom:20px;">
+              <div id="load-av" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--cyan2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#000;flex-shrink:0;">?</div>
+              <div>
+                <div id="load-cname" style="font-size:15px;font-weight:700;color:var(--txt);">—</div>
+                <div id="load-cphone" style="font-size:12px;color:var(--muted);margin-top:2px;">—</div>
+              </div>
+              <span style="margin-left:auto;background:#00e67620;color:var(--green);border:1px solid #00e67640;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;"><i class="ti ti-shield-check"></i> Verified</span>
+            </div>
+
+            <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Cash Amount Received ($)</label>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;" id="amount-presets">
+              <button class="ta-btn" onclick="setAmount(20)">$20</button>
+              <button class="ta-btn" onclick="setAmount(50)">$50</button>
+              <button class="ta-btn" onclick="setAmount(100)">$100</button>
+              <button class="ta-btn" onclick="setAmount(200)">$200</button>
+            </div>
+            <input type="number" id="load-amount" placeholder="Custom amount" min="5" max="500"
+              style="width:100%;background:#0d1120;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--txt);font-size:22px;font-weight:700;outline:none;margin-bottom:8px;"
+              oninput="this.style.borderColor='var(--border)';" />
+            <div style="font-size:11px;color:var(--muted);margin-bottom:20px;">Min $5 · Max $500 per load</div>
+
+            <button class="btn btn-green" style="width:100%;padding:14px;font-size:15px;justify-content:center;" onclick="confirmLoad()">
+              <i class="ti ti-check"></i> Confirm & Load Wallet
+            </button>
+            <button class="btn btn-ghost" style="width:100%;margin-top:8px;justify-content:center;" onclick="resetLoad()">
+              <i class="ti ti-arrow-left"></i> Search Different Number
+            </button>
+          </div>
+
+          <!-- Step 3: Success (hidden until confirmed) -->
+          <div class="load-step" id="step-success" style="display:none;margin-top:20px;text-align:center;">
+            <div style="width:70px;height:70px;border-radius:50%;background:#00e67620;border:2px solid #00e67660;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+              <i class="ti ti-check" style="font-size:36px;color:var(--green);"></i>
+            </div>
+            <div style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:6px;">Wallet Loaded!</div>
+            <div id="success-msg" style="font-size:13px;color:var(--muted);margin-bottom:24px;">—</div>
+            <div style="background:#ffffff06;border-radius:12px;padding:16px;text-align:left;margin-bottom:20px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:var(--muted);">Amount Loaded</span><span id="receipt-amount" style="font-weight:700;color:var(--green);">—</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:var(--muted);">Customer</span><span id="receipt-customer" style="font-weight:600;">—</span></div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:var(--muted);">New Wallet Balance</span><span id="receipt-balance" style="font-weight:600;">—</span></div>
+              <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--muted);">Your Float Remaining</span><span id="receipt-float" style="font-weight:600;color:var(--yellow);">—</span></div>
+            </div>
+            <button class="btn btn-cyan" style="width:100%;padding:13px;font-size:14px;justify-content:center;" onclick="resetLoad()">
+              <i class="ti ti-plus"></i> Load Another Customer
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right col: tips + recent loads -->
+        <div>
+          <div class="section-card" style="padding:18px;margin-bottom:16px;">
+            <div class="section-title" style="margin-bottom:12px;">How It Works</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              <div style="margin-bottom:8px;"><span style="color:var(--cyan);font-weight:700;">1.</span> Customer hands you cash</div>
+              <div style="margin-bottom:8px;"><span style="color:var(--cyan);font-weight:700;">2.</span> Enter their phone number</div>
+              <div style="margin-bottom:8px;"><span style="color:var(--cyan);font-weight:700;">3.</span> Enter the cash amount</div>
+              <div style="margin-bottom:8px;"><span style="color:var(--cyan);font-weight:700;">4.</span> Confirm — wallet credited instantly</div>
+              <div style="margin-bottom:8px;"><span style="color:var(--green);font-weight:700;">5.</span> You earn $1 per load</div>
+            </div>
+            <div style="background:#ffd74010;border:1px solid #ffd74030;border-radius:8px;padding:10px 12px;margin-top:12px;font-size:12px;color:var(--yellow);">
+              <i class="ti ti-alert-triangle"></i> Always count the cash before loading. Loads are instant and non-reversible.
+            </div>
+          </div>
+
+          <div class="section-card" style="padding:18px;">
+            <div class="section-title" style="margin-bottom:12px;">Recent Loads Today</div>
+            <div id="recent-loads-list">
+              <div style="font-size:12px;color:var(--muted);text-align:center;padding:20px 0;">No loads today yet.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /page-load -->
+
   </div><!-- /content -->
 </div><!-- /main -->
 
@@ -834,32 +953,107 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 <!-- ═══ MODAL: FLOAT TOP-UP ═══ -->
 <div class="overlay" id="topup-overlay" onclick="closeTopupModal(event)">
-  <div class="modal">
+  <div class="modal" style="max-width:480px;">
     <div class="modal-head">
       <div>
-        <div class="modal-title">Request Float Top-up</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Funds will be credited within 30 minutes</div>
+        <div class="modal-title">Top Up Float</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Choose how you want to fund your float</div>
       </div>
       <button class="modal-close" onclick="document.getElementById('topup-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
     </div>
     <div class="modal-body">
-      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Select amount</div>
-      <div class="topup-amounts">
-        <div class="ta-btn" onclick="selectTopup(this,'500')">500 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'1000')">1,000 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'2000')">2,000 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'5000')">5,000 USDC</div>
+
+      <!-- Method Tabs -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;">
+        <button class="topup-method-btn on" onclick="switchTopupMethod('zelle',this)" id="btn-zelle">
+          <span style="font-size:18px;">💚</span>
+          <div style="font-weight:700;font-size:13px;">Zelle</div>
+          <div style="font-size:10px;color:var(--green);font-weight:700;">FREE</div>
+        </button>
+        <button class="topup-method-btn" onclick="switchTopupMethod('ach',this)" id="btn-ach">
+          <span style="font-size:18px;">🏦</span>
+          <div style="font-weight:700;font-size:13px;">Bank ACH</div>
+          <div style="font-size:10px;color:var(--muted);">$5 max fee</div>
+        </button>
+        <button class="topup-method-btn" onclick="switchTopupMethod('card',this)" id="btn-card">
+          <span style="font-size:18px;">💳</span>
+          <div style="font-weight:700;font-size:13px;">Card</div>
+          <div style="font-size:10px;color:var(--muted);">2.9% fee</div>
+        </button>
       </div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Or enter custom amount</div>
-      <input class="custom-input" type="number" id="topup-amount" placeholder="Enter USDC amount" min="100" max="10000" />
-      <div class="topup-note">Current balance: 1,240.50 USDC · Minimum request: 100 USDC</div>
+
+      <!-- Amount selector (shared) -->
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Amount</div>
+      <div class="topup-amounts" style="grid-template-columns:repeat(4,1fr);display:grid;">
+        <div class="ta-btn" onclick="selectTopupAmt(this,100)">$100</div>
+        <div class="ta-btn" onclick="selectTopupAmt(this,200)">$200</div>
+        <div class="ta-btn" onclick="selectTopupAmt(this,500)">$500</div>
+        <div class="ta-btn" onclick="selectTopupAmt(this,1000)">$1,000</div>
+      </div>
+      <input class="custom-input" type="number" id="topup-amount" placeholder="Custom amount ($50–$5,000)" min="50" max="5000"
+        style="margin:10px 0 4px;" oninput="document.querySelectorAll('.ta-btn').forEach(b=>b.classList.remove('on'));" />
+      <div id="topup-fee-note" style="font-size:11px;color:var(--green);margin-bottom:16px;min-height:16px;">No fee with Zelle</div>
+
+      <!-- ZELLE panel -->
+      <div id="panel-zelle">
+        <div style="background:#00e67610;border:1px solid #00e67630;border-radius:12px;padding:16px;margin-bottom:14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">📲 Send Zelle to:</div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:4px;">tchotchopay@gmail.com</div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">or <strong style="color:var(--txt);">(305) 000-0000</strong></div>
+          <div style="font-size:11px;color:var(--muted);">⚠️ In the Zelle memo, write: <strong style="color:var(--yellow);">FLOAT-[your name]</strong></div>
+        </div>
+        <input class="custom-input" id="zelle-confirm" placeholder="Zelle confirmation # (optional)" style="margin-bottom:14px;" />
+        <div style="font-size:11px;color:var(--muted);margin-bottom:14px;">Admin will verify and credit your float within 30 minutes (business hours).</div>
+      </div>
+
+      <!-- ACH panel -->
+      <div id="panel-ach" style="display:none;">
+        <div style="background:#00e5ff08;border:1px solid #00e5ff20;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--muted);line-height:1.7;">
+          <strong style="color:var(--txt);">ACH Bank Debit</strong> — Enter your bank account details below. Stripe securely debits your account. Float credited next business day.<br/>Fee: 0.8% capped at $5.
+        </div>
+        <input class="custom-input" id="ach-routing"  placeholder="Routing number (9 digits)" maxlength="9" style="margin-bottom:10px;" />
+        <input class="custom-input" id="ach-account"  placeholder="Account number" style="margin-bottom:10px;" />
+        <select class="custom-input" id="ach-type" style="margin-bottom:14px;color:var(--txt);background:#0d1120;border:1.5px solid var(--border);">
+          <option value="checking">Checking account</option>
+          <option value="savings">Savings account</option>
+        </select>
+      </div>
+
+      <!-- Card panel -->
+      <div id="panel-card" style="display:none;">
+        <div style="background:#ff525210;border:1px solid #ff525230;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--muted);">
+          ⚡ Instant — credited immediately. Fee: 2.9% + $0.30
+        </div>
+        <input class="custom-input" id="card-number"  placeholder="Card number" maxlength="19" style="margin-bottom:10px;"
+          oninput="this.value=this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim()" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <input class="custom-input" id="card-exp"  placeholder="MM / YY" maxlength="7" />
+          <input class="custom-input" id="card-cvc"  placeholder="CVC" maxlength="4" type="password" />
+        </div>
+      </div>
+
+      <!-- Error / success message -->
+      <div id="topup-msg" style="min-height:18px;font-size:12px;margin-bottom:10px;"></div>
+
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="document.getElementById('topup-overlay').classList.remove('show')">Cancel</button>
-        <button class="btn btn-cyan" onclick="submitTopup()"><i class="ti ti-arrow-up"></i> Submit Request</button>
+        <button class="btn btn-cyan" id="btn-submit-topup" onclick="submitTopupNew()">
+          <i class="ti ti-arrow-up"></i> <span id="topup-btn-label">Submit Zelle Request</span>
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+.topup-method-btn{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:#0d1120;border:2px solid var(--border);border-radius:12px;
+  padding:12px 8px;cursor:pointer;transition:.15s;color:var(--txt);
+}
+.topup-method-btn:hover{border-color:var(--cyan);}
+.topup-method-btn.on{border-color:var(--cyan);background:#00e5ff10;}
+</style>
 
 <!-- ═══ TOAST ═══ -->
 <div class="toast" id="toast">
@@ -1151,5 +1345,271 @@ window.addEventListener('resize',()=>{
 </script>
 <script src="chat-widget.js" defer></script>
 <script src="cookie-consent.js" defer></script>
+
+<!-- ═══ AGENT TOPUP SCRIPT ═══ -->
+<script>
+let activeTopupMethod = 'zelle';
+
+function switchTopupMethod(method, el) {
+  activeTopupMethod = method;
+  document.querySelectorAll('.topup-method-btn').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('panel-zelle').style.display = method === 'zelle' ? 'block' : 'none';
+  document.getElementById('panel-ach').style.display   = method === 'ach'   ? 'block' : 'none';
+  document.getElementById('panel-card').style.display  = method === 'card'  ? 'block' : 'none';
+  const labels = { zelle: 'Submit Zelle Request', ach: 'Submit ACH Debit', card: 'Pay with Card' };
+  document.getElementById('topup-btn-label').textContent = labels[method];
+  updateTopupFeeNote();
+}
+
+function selectTopupAmt(el, val) {
+  document.querySelectorAll('.topup-amounts .ta-btn').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('topup-amount').value = val;
+  updateTopupFeeNote();
+}
+
+function updateTopupFeeNote() {
+  const amount = parseFloat(document.getElementById('topup-amount').value) || 0;
+  const note   = document.getElementById('topup-fee-note');
+  if (activeTopupMethod === 'zelle') {
+    note.style.color = 'var(--green)';
+    note.textContent  = amount ? `You send $${amount.toFixed(2)} — no fees` : 'No fee with Zelle';
+  } else if (activeTopupMethod === 'ach') {
+    const fee = amount ? Math.min(amount * 0.008, 5).toFixed(2) : '5.00 max';
+    note.style.color = 'var(--muted)';
+    note.textContent = amount ? `ACH fee: $${fee} · Float credited next business day` : 'Fee: 0.8% capped at $5';
+  } else {
+    const fee = amount ? (amount * 0.029 + 0.30).toFixed(2) : '';
+    note.style.color = 'var(--muted)';
+    note.textContent = amount ? `Card fee: $${fee} · Credited instantly` : 'Fee: 2.9% + $0.30';
+  }
+}
+
+document.getElementById('topup-amount').addEventListener('input', updateTopupFeeNote);
+
+async function submitTopupNew() {
+  const amount = parseFloat(document.getElementById('topup-amount').value);
+  const msgEl  = document.getElementById('topup-msg');
+  const btn    = document.getElementById('btn-submit-topup');
+
+  msgEl.style.color = 'var(--red)';
+  if (!amount || amount < 50)   { msgEl.textContent = 'Minimum top-up is $50.'; return; }
+  if (amount > 5000)             { msgEl.textContent = 'Maximum top-up is $5,000.'; return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite;"></i> Processing…';
+
+  try {
+    if (activeTopupMethod === 'zelle') {
+      const confirmation = document.getElementById('zelle-confirm').value.trim();
+      const res  = await fetch('/.netlify/functions/agent-topup-zelle', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agentToken: AGENT_TOKEN, amountUSD: amount, zelleConfirmation: confirmation }),
+      });
+      const data = await res.json();
+      if (!res.ok) { msgEl.textContent = data.error || 'Error. Try again.'; return; }
+      msgEl.style.color = 'var(--green)';
+      msgEl.textContent = data.message;
+      showToast('success', 'Zelle Request Sent!', `Send $${amount} to tchotchopay@gmail.com`);
+      setTimeout(() => document.getElementById('topup-overlay').classList.remove('show'), 3000);
+
+    } else {
+      // Card or ACH — would need full Stripe Elements in production
+      // For now, show the user what to expect
+      msgEl.style.color = 'var(--yellow)';
+      msgEl.textContent = `${activeTopupMethod.toUpperCase()} payments require Stripe setup. Please use Zelle for now.`;
+    }
+  } catch(e) {
+    msgEl.textContent = 'Network error. Check your connection.';
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<i class="ti ti-arrow-up"></i> <span id="topup-btn-label">${{zelle:'Submit Zelle Request',ach:'Submit ACH Debit',card:'Pay with Card'}[activeTopupMethod]}</span>`;
+}
+
+// Override old submitTopup
+window.submitTopup = submitTopupNew;
+</script>
+
+<!-- ═══ AGENT LOAD WALLET SCRIPT ═══ -->
+<script>
+// Session token from localStorage (set on login)
+const AGENT_TOKEN = localStorage.getItem('tp_session') || '';
+let loadCustomerData = null;
+let recentLoads = [];
+
+// ── Update float display on load page ────────────────────────────────────
+function refreshLoadFloat() {
+  const floatEl = document.getElementById('load-float-display');
+  // Pull from existing float-display on dashboard (already populated)
+  const mainFloat = document.getElementById('float-display');
+  if (mainFloat && floatEl) {
+    floatEl.textContent = mainFloat.textContent;
+  }
+}
+
+// ── Set preset amounts ────────────────────────────────────────────────────
+function setAmount(val) {
+  document.getElementById('load-amount').value = val;
+  document.querySelectorAll('#amount-presets .ta-btn').forEach(b => b.classList.remove('on'));
+  event.target.classList.add('on');
+}
+
+// ── Look up customer by phone ─────────────────────────────────────────────
+async function lookupCustomer() {
+  const phone = document.getElementById('load-phone').value.trim();
+  const errEl = document.getElementById('load-err');
+  const btn   = document.getElementById('btn-lookup');
+
+  if (!phone) { errEl.textContent = 'Enter a phone number.'; return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite;"></i> Finding…';
+
+  try {
+    const res  = await fetch('/.netlify/functions/agent-lookup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentToken: AGENT_TOKEN, customerPhone: phone }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      errEl.textContent = data.error || 'No account found for that number.';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-search"></i> Find';
+      return;
+    }
+
+    loadCustomerData = { name: data.customerName || 'Customer', phone, balance: data.walletBalance };
+    showCustomerFound(loadCustomerData);
+  } catch(e) {
+    errEl.textContent = 'Network error. Check your connection.';
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-search"></i> Find';
+}
+
+function showCustomerFound(customer) {
+  document.getElementById('load-av').textContent = customer.name.slice(0,2).toUpperCase();
+  document.getElementById('load-cname').textContent = customer.name;
+  document.getElementById('load-cphone').textContent = customer.phone;
+  document.getElementById('step-phone').style.opacity = '0.5';
+  document.getElementById('step-customer').style.display = 'block';
+  document.getElementById('load-amount').focus();
+}
+
+// ── Confirm and submit the load ───────────────────────────────────────────
+async function confirmLoad() {
+  const amount = parseFloat(document.getElementById('load-amount').value);
+  if (!amount || amount < 5)   { showToast('error','Invalid amount','Minimum load is $5.00'); return; }
+  if (amount > 500)             { showToast('error','Too large','Maximum single load is $500.00'); return; }
+  if (!loadCustomerData)        { showToast('error','No customer','Look up a customer first'); return; }
+
+  const btn = document.querySelector('#step-customer .btn-green');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin 1s linear infinite;"></i> Processing…';
+
+  try {
+    const res  = await fetch('/.netlify/functions/agent-load', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        agentToken:    AGENT_TOKEN,
+        customerPhone: loadCustomerData.phone,
+        amountUSD:     amount,
+      }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showToast('error', 'Load Failed', data.error || 'Something went wrong.');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-check"></i> Confirm & Load Wallet';
+      return;
+    }
+
+    // Success
+    showLoadSuccess(data, amount);
+    addRecentLoad(data, amount);
+    // Update float display
+    const floatEl = document.getElementById('load-float-display');
+    if (floatEl) floatEl.textContent = '$' + data.agentFloatRemaining.toFixed(2);
+
+  } catch(e) {
+    showToast('error','Network Error','Check your connection and try again.');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-check"></i> Confirm & Load Wallet';
+  }
+}
+
+function showLoadSuccess(data, amount) {
+  document.getElementById('step-phone').style.display    = 'none';
+  document.getElementById('step-customer').style.display = 'none';
+  document.getElementById('step-success').style.display  = 'block';
+  document.getElementById('success-msg').textContent     = data.message || 'Wallet loaded successfully!';
+  document.getElementById('receipt-amount').textContent  = '$' + amount.toFixed(2) + ' USDC';
+  document.getElementById('receipt-customer').textContent = data.customerName || loadCustomerData?.name || '—';
+  document.getElementById('receipt-balance').textContent = '$' + (data.customerNewBalance||0).toFixed(2) + ' USDC';
+  document.getElementById('receipt-float').textContent   = '$' + (data.agentFloatRemaining||0).toFixed(2);
+  showToast('success','Done!', data.message || 'Wallet loaded!');
+}
+
+function addRecentLoad(data, amount) {
+  const name = data.customerName || loadCustomerData?.phone || '—';
+  const html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#00e67620;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green);">${name.slice(0,2).toUpperCase()}</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">${name}</div>
+          <div style="font-size:11px;color:var(--muted);">Just now</div>
+        </div>
+      </div>
+      <span style="font-weight:700;color:var(--green);">+$${amount.toFixed(2)}</span>
+    </div>`;
+  const list = document.getElementById('recent-loads-list');
+  if (list.querySelector('[style*="No loads"]')) list.innerHTML = '';
+  list.insertAdjacentHTML('afterbegin', html);
+}
+
+// ── Reset load form ───────────────────────────────────────────────────────
+function resetLoad() {
+  loadCustomerData = null;
+  document.getElementById('load-phone').value    = '';
+  document.getElementById('load-amount').value   = '';
+  document.getElementById('load-err').textContent = '';
+  document.getElementById('step-phone').style.opacity  = '1';
+  document.getElementById('step-phone').style.display  = 'block';
+  document.getElementById('step-customer').style.display = 'none';
+  document.getElementById('step-success').style.display  = 'none';
+  const btn = document.querySelector('#step-customer .btn-green');
+  if (btn) { btn.disabled = false; btn.innerHTML = '<i class="ti ti-check"></i> Confirm & Load Wallet'; }
+  document.querySelectorAll('#amount-presets .ta-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('load-phone').focus();
+}
+
+// Hook into existing showPage to refresh float
+const _origShowPage = window.showPage;
+window.showPage = function(page, el) {
+  _origShowPage(page, el);
+  if (page === 'load') {
+    refreshLoadFloat();
+    document.getElementById('load-phone').focus();
+  }
+};
+
+// ── Add green button style ────────────────────────────────────────────────
+const style = document.createElement('style');
+style.textContent = `
+  .btn-green { background:var(--green); color:#000; font-weight:700; }
+  .btn-green:hover { background:#00c960; }
+  .btn-green:disabled { opacity:.5; cursor:not-allowed; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>

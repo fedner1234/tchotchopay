@@ -8,16 +8,21 @@ import { useAuth } from '../context/AuthContext';
 import { useLang } from '../context/LangContext';
 
 // Screens
-import OnboardingScreen from '../screens/OnboardingScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SignUpScreen from '../screens/SignUpScreen';
-import HomeScreen from '../screens/HomeScreen';
-import SendMoneyScreen from '../screens/SendMoneyScreen';
+import OnboardingScreen  from '../screens/OnboardingScreen';
+import LoginScreen       from '../screens/LoginScreen';
+import SignUpScreen      from '../screens/SignUpScreen';
+import HomeScreen        from '../screens/HomeScreen';
+import SendMoneyScreen   from '../screens/SendMoneyScreen';
 import MarketplaceScreen from '../screens/MarketplaceScreen';
-import WalletScreen from '../screens/WalletScreen';
-import TopUpScreen from '../screens/TopUpScreen';
-import QRPayScreen from '../screens/QRPayScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import WalletScreen      from '../screens/WalletScreen';
+import TopUpScreen       from '../screens/TopUpScreen';
+import QRPayScreen       from '../screens/QRPayScreen';
+import ProfileScreen     from '../screens/ProfileScreen';
+
+// Agent screens
+import AgentHomeScreen  from '../screens/AgentHomeScreen';
+import AgentLoadScreen  from '../screens/AgentLoadScreen';
+import AgentFloatScreen from '../screens/AgentFloatScreen';
 
 const Icon = ({ label, focused }) => (
   <Text style={{ fontSize: 22, opacity: focused ? 1 : 0.45 }}>{label}</Text>
@@ -26,11 +31,10 @@ const Icon = ({ label, focused }) => (
 const Stack = createNativeStackNavigator();
 const Tab   = createBottomTabNavigator();
 
-const BRAND = { primary: '#1055CC', inactive: '#9CA3AF', bg: '#ffffff' };
+const BRAND = { primary: '#1055CC', inactive: '#9CA3AF', bg: '#ffffff', green: '#10B981' };
 
-// 4-tab layout matching AppPreview: Home | Send | Market | Profile
-// Wallet & TopUp are accessible via navigation.navigate() from Home screen buttons
-function MainTabs() {
+// ── Regular user tabs (Home | Send | Market | Profile) ──────────────────
+function MainTabs({ isAgent }) {
   const { t } = useLang();
   return (
     <Tab.Navigator
@@ -73,6 +77,20 @@ function MainTabs() {
           tabBarIcon: ({ focused }) => <Icon label="🛒" focused={focused} />,
         }}
       />
+
+      {/* Agent tab — only appears when user is an approved agent */}
+      {isAgent && (
+        <Tab.Screen
+          name="AgentHome"
+          component={AgentHomeScreen}
+          options={{
+            tabBarLabel: 'Agent',
+            tabBarIcon: ({ focused }) => <Icon label="🏪" focused={focused} />,
+            tabBarActiveTintColor: BRAND.green,
+          }}
+        />
+      )}
+
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
@@ -85,18 +103,34 @@ function MainTabs() {
   );
 }
 
-// Root stack — wraps tabs + screens reachable via navigation.navigate()
+// ── Main stack — tabs + screens reachable via navigation.navigate() ──────
 function MainStack() {
+  const { user } = useAuth();
+
+  // Agent flag: true when user has is_agent=true OR agent_status='active' in their profile
+  // The login function should return this from Supabase agent_floats check
+  const isAgent = !!(user?.is_agent || user?.agent_status === 'active');
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Tabs"    component={MainTabs} />
+      {/* Main tabs */}
+      <Stack.Screen name="Tabs">
+        {() => <MainTabs isAgent={isAgent} />}
+      </Stack.Screen>
+
+      {/* Standard screens */}
       <Stack.Screen name="Wallet"  component={WalletScreen} />
       <Stack.Screen name="TopUp"   component={TopUpScreen} />
       <Stack.Screen name="QRPay"   component={QRPayScreen} />
+
+      {/* Agent screens — always registered so navigation.navigate() works */}
+      <Stack.Screen name="AgentLoad"  component={AgentLoadScreen} />
+      <Stack.Screen name="AgentFloat" component={AgentFloatScreen} />
     </Stack.Navigator>
   );
 }
 
+// ── Root navigator ───────────────────────────────────────────────────────
 export default function AppNavigator() {
   const { user, loading } = useAuth();
 

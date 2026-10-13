@@ -598,6 +598,23 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-arrows-exchange" style="color:var(--yellow);font-size:14px;"></i></div></div><div class="kpi-val">1,240</div><div class="kpi-lbl">Cash-outs Today</div></div>
         <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-coins" style="color:var(--gold);font-size:14px;"></i></div></div><div class="kpi-val">$1,240</div><div class="kpi-lbl">Agent Commissions Today</div></div>
       </div>
+
+      <!-- ── Pending Zelle Top-up Approvals ── -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-head">
+          <div>
+            <div class="card-title">💚 Pending Zelle Float Top-ups</div>
+            <div class="card-sub">Verify you received the Zelle, then approve to credit agent float</div>
+          </div>
+          <span class="count-chip chip-yellow" id="zelle-pending-count">Loading…</span>
+          <button class="btn btn-cyan btn-sm" onclick="loadZellePending()"><i class="ti ti-refresh"></i> Refresh</button>
+        </div>
+        <div id="zelle-pending-list" style="padding:0 16px 16px;">
+          <div style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Loading pending requests…</div>
+        </div>
+      </div>
+
+      <!-- ── All Agents Table ── -->
       <div class="card">
         <div class="card-head"><div class="card-title">All Cash Agents</div><div style="display:flex;gap:6px;"><button class="btn btn-cyan btn-sm" onclick="showToast('info','Coming soon','Agent onboarding form')"><i class="ti ti-plus"></i> Add Agent</button></div></div>
         <table class="tbl">
@@ -1331,5 +1348,121 @@ setTimeout(()=>{
 </script>
 <script src="chat-widget.js" defer></script>
 <script src="cookie-consent.js" defer></script>
+
+<!-- ═══ ZELLE APPROVAL SCRIPT ═══ -->
+<script>
+const ADMIN_SECRET_KEY = localStorage.getItem('tp_admin_secret') || '';
+
+async function loadZellePending() {
+  const listEl  = document.getElementById('zelle-pending-list');
+  const countEl = document.getElementById('zelle-pending-count');
+  if (!listEl) return;
+
+  listEl.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Loading…</div>';
+
+  try {
+    const res  = await fetch('/.netlify/functions/admin-users', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'get_pending_topups', adminSecret: ADMIN_SECRET_KEY }),
+    });
+    const data = await res.json();
+
+    if (!res.ok || !data.topups) {
+      listEl.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:16px;">No pending requests or unable to load.</div>';
+      countEl.textContent = '0 pending';
+      return;
+    }
+
+    const pending = (data.topups || []).filter(t => t.method === 'zelle' && t.status === 'pending');
+    countEl.textContent = pending.length + ' pending';
+
+    if (pending.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;color:var(--green);font-size:13px;padding:16px;">✅ No pending Zelle requests.</div>';
+      return;
+    }
+
+    listEl.innerHTML = pending.map(t => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);" id="zelle-row-${t.id}">
+        <div>
+          <div style="font-size:14px;font-weight:700;">$${parseFloat(t.amount_usd).toFixed(2)} — ${t.agent_name || 'Agent'}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">
+            ${new Date(t.created_at).toLocaleString()} · Float before: $${parseFloat(t.float_before).toFixed(2)}
+            ${t.zelle_confirmation ? ` · Ref: ${t.zelle_confirmation}` : ''}
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-sm" style="background:#ff525220;color:var(--red);border:1px solid #ff525240;"
+            onclick="handleZelleAction('${t.id}','reject')">
+            <i class="ti ti-x"></i> Reject
+          </button>
+          <button class="btn btn-sm btn-green"
+            onclick="handleZelleAction('${t.id}','approve')">
+            <i class="ti ti-check"></i> Approve $${parseFloat(t.amount_usd).toFixed(2)}
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+  } catch(e) {
+    listEl.innerHTML = '<div style="color:var(--red);font-size:13px;padding:16px;">Error loading. Check ADMIN_SECRET.</div>';
+  }
+}
+
+async function handleZelleAction(topupId, action) {
+  const secret = ADMIN_SECRET_KEY || prompt('Enter your Admin Secret:');
+  if (!secret) return;
+  localStorage.setItem('tp_admin_secret', secret);
+
+  const row = document.getElementById(`zelle-row-${topupId}`);
+  if (row) row.style.opacity = '0.5';
+
+  try {
+    const res  = await fetch('/.netlify/functions/agent-topup-approve', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret: secret, topupId, action }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showToast('error', 'Failed', data.error || 'Error');
+      if (row) row.style.opacity = '1';
+      return;
+    }
+
+    if (action === 'approve') {
+      showToast('success', 'Approved!', data.message || 'Float credited to agent.');
+    } else {
+      showToast('info', 'Rejected', 'Zelle request rejected.');
+    }
+
+    if (row) row.remove();
+    // Update count
+    const countEl = document.getElementById('zelle-pending-count');
+    if (countEl) {
+      const n = parseInt(countEl.textContent) - 1;
+      countEl.textContent = Math.max(0,n) + ' pending';
+      if (n <= 0) {
+        document.getElementById('zelle-pending-list').innerHTML =
+          '<div style="text-align:center;color:var(--green);font-size:13px;padding:16px;">✅ No pending Zelle requests.</div>';
+      }
+    }
+  } catch(e) {
+    showToast('error', 'Network Error', 'Check connection');
+    if (row) row.style.opacity = '1';
+  }
+}
+
+// Auto-load when Agents page opens
+const _adminOrigShow = window.showPage;
+window.showPage = function(page, el) {
+  _adminOrigShow && _adminOrigShow(page, el);
+  if (page === 'agents') loadZellePending();
+};
+
+// Also load on initial render if agents page is active
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelector('#page-agents.on')) loadZellePending();
+});
+</script>
 </body>
 </html>
