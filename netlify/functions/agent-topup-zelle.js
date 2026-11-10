@@ -121,10 +121,10 @@ exports.handler = async (event) => {
   return respond(200, {
     success: true,
     requestId: record?.[0]?.id || null,
-    message:   `✅ Zelle request submitted for $${amount.toFixed(2)}. Send the Zelle to: tchotchopay@gmail.com or (305) 000-0000. Admin will approve within 30 minutes.`,
+    message:   `✅ Zelle request submitted for $${amount.toFixed(2)}. Send the Zelle to: hello@tchotchopay.com or (239) 209-3021. Admin will approve within 30 minutes.`,
     zelleInfo: {
-      email:  'tchotchopay@gmail.com',
-      phone:  '(305) 000-0000',
+      email:  'hello@tchotchopay.com',
+      phone:  '(239) 209-3021',
       memo:   `Float - ${agentId.slice(0,8).toUpperCase()}`,
       amount: amount,
     },

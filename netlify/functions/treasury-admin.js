@@ -8,6 +8,16 @@
 
 const { webcrypto } = require('node:crypto');
 const subtle = webcrypto.subtle;
+const crypto = require('crypto');
+
+// Timing-safe secret comparison
+function safeCompareSecrets(a, b) {
+  try {
+    const aBuf = Buffer.from(String(a).padEnd(64));
+    const bBuf = Buffer.from(String(b).padEnd(64));
+    return crypto.timingSafeEqual(aBuf, bBuf) && a.length === b.length;
+  } catch { return false; }
+}
 
 const CIRCLE_API_BASE    = 'https://api.circle.com/v1/w3s';
 const BLOCKCHAIN         = 'ARC';
@@ -97,8 +107,8 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body || '{}'); }
   catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
-  // Admin auth
-  if (!process.env.ADMIN_SECRET || body.adminSecret !== process.env.ADMIN_SECRET) {
+  // Admin auth — timing-safe comparison prevents secret guessing attacks
+  if (!process.env.ADMIN_SECRET || !body.adminSecret || !safeCompareSecrets(body.adminSecret, process.env.ADMIN_SECRET)) {
     return { statusCode: 403, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 

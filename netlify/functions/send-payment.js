@@ -1,8 +1,47 @@
 // TchotchoPay — Stripe PaymentIntent for MonCash / NatCash Transfers
 // Keeps STRIPE_SECRET_KEY server-side; frontend never sees it.
-// POST body: { amount (USD), wallet ('moncash'|'natcash'), phoneNumber }
+// POST body: { amount (USD), wallet ('moncash'|'natcash'), phoneNumber, sessionToken }
+// Requires valid session token — unauthenticated requests are rejected.
 
 const STRIPE_API = 'https://api.stripe.com/v1';
+const crypto     = require('crypto');
+
+// ── Session token verification ─────────────────────────────────
+function verifySessionToken(token) {
+  try {
+    if (!token) return null;
+    const dot      = token.lastIndexOf('.');
+    if (dot < 0) return null;
+    const payload  = token.slice(0, dot);
+    const sig      = token.slice(dot + 1);
+    const secret   = process.env.SESSION_SECRET || process.env.SUPABASE_SERVICE_KEY;
+    if (!secret) return null;
+    const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+    if (sig.length !== 64 || expected.length !== 64) return null;
+    if (!crypto.timingSafeEqual(Buffer.from(sig, 'hex'), Buffer.from(expected, 'hex'))) return null;
+    const data = JSON.parse(Buffer.from(payload, 'base64').toString('utf8'));
+    if (!data.userId || !data.exp || Date.now() > data.exp) return null;
+    return data.userId;
+  } catch { return null; }
+}
+
+// ── Daily limit check via Supabase ─────────────────────────────
+// Returns total USD sent by user today (resets at midnight UTC)
+async function getDailyTotal(userId) {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  if (!supabaseUrl || !supabaseKey) return 0;
+  try {
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/transactions?user_id=eq.${userId}&created_at=gte.${today}T00:00:00Z&select=amount_usd`,
+      { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` } }
+    );
+    if (!res.ok) return 0;
+    const rows = await res.json();
+    return rows.reduce((sum, r) => sum + (parseFloat(r.amount_usd) || 0), 0);
+  } catch { return 0; }
+}
 
 // ── Allowed origins ────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
@@ -72,7 +111,30 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { amount, wallet, phoneNumber } = JSON.parse(event.body || '{}');
+    const { amount, wallet, phoneNumber, sessionToken } = JSON.parse(event.body || '{}');
+
+    // ── Authentication required ──────────────────────────────────
+    const userId = verifySessionToken(sessionToken);
+    if (!userId) {
+      return {
+        statusCode: 401,
+        headers: HEADERS,
+        body: JSON.stringify({ error: 'Authentication required. Please sign in to send money.' }),
+      };
+    }
+
+    // ── Daily transaction limit: $2,000 per user ─────────────────
+    const DAILY_LIMIT = 2000;
+    const dailyTotal = await getDailyTotal(userId);
+    if (dailyTotal + Number(amount) > DAILY_LIMIT) {
+      return {
+        statusCode: 429,
+        headers: HEADERS,
+        body: JSON.stringify({
+          error: `Daily limit reached. You have sent $${dailyTotal.toFixed(2)} today. Maximum is $${DAILY_LIMIT}/day.`,
+        }),
+      };
+    }
 
     // Validate amount: $10 – $1,000
     const amtNum = Number(amount);

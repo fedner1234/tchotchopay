@@ -3,6 +3,17 @@
 // Protected by X-Admin-Secret header (must match ADMIN_SECRET env var).
 // Never returns password_hash or any sensitive credential.
 
+const crypto = require('crypto');
+
+// Timing-safe secret comparison — prevents character-by-character timing attacks
+function safeCompareSecrets(a, b) {
+  try {
+    const aBuf = Buffer.from(String(a).padEnd(64));
+    const bBuf = Buffer.from(String(b).padEnd(64));
+    return crypto.timingSafeEqual(aBuf, bBuf) && a.length === b.length;
+  } catch { return false; }
+}
+
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': 'https://tchotchopay.com',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -27,7 +38,7 @@ exports.handler = async (event) => {
   }
 
   const providedSecret = event.headers['x-admin-secret'];
-  if (!providedSecret || providedSecret !== adminSecret) {
+  if (!providedSecret || !safeCompareSecrets(providedSecret, adminSecret)) {
     return { statusCode: 401, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 

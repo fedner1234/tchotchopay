@@ -90,7 +90,7 @@ function generateSessionToken(userId) {
     iat: Date.now(),
     exp: Date.now() + (7 * 24 * 60 * 60 * 1000), // 7 days
   })).toString('base64');
-  const secret = process.env.SUPABASE_SERVICE_KEY || 'fallback-secret';
+  const secret = process.env.SESSION_SECRET || process.env.SUPABASE_SERVICE_KEY || 'fallback-secret';
   const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
   return `${payload}.${sig}`;
 }

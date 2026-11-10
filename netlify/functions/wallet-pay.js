@@ -30,7 +30,7 @@ function verifySessionToken(token) {
     const payload  = token.slice(0, dot);
     const sig      = token.slice(dot + 1);
     const expected = crypto
-      .createHmac('sha256', SUPABASE_SERVICE_KEY)
+      .createHmac('sha256', process.env.SESSION_SECRET || SUPABASE_SERVICE_KEY)
       .update(payload)
       .digest('hex');
     if (sig.length !== 64 || expected.length !== 64) return null;
