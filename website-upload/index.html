@@ -52,6 +52,16 @@ a { text-decoration: none; color: inherit; }
 .mmenu-btns { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 .mmenu-btns a { display: block; text-align: center; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 16px; }
 
+/* ── TRUSTED PARTNERS GRID ── */
+.partners-section { padding: 0; }
+.partners-inner { max-width: 1085px; margin: 0 auto; padding: 40px 24px; }
+.partners-title { text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; color: #888; margin-bottom: 28px; }
+.partners-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.partner-card { display: flex; flex-direction: column; align-items: center; gap: 8px; background: #fff; border: 1px solid #E8E0D0; border-radius: 14px; padding: 16px 12px; width: 90px; }
+.partner-card span { font-size: 11px; font-weight: 500; color: #555; text-align: center; }
+.p-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0; }
+@media (max-width: 600px) { .partner-card { width: 72px; padding: 12px 8px; } .p-icon { width: 36px; height: 36px; font-size: 12px; } }
+
 /* ── SECTION IMAGES ── */
 .ds { width: 100%; display: block; line-height: 0; position: relative; background: #FBF7EF; }
 .ds img { width: 100%; max-width: 1085px; height: auto; display: block; margin: 0 auto; }
@@ -141,6 +151,33 @@ a { text-decoration: none; color: inherit; }
 <!-- ── STATS / PARTNERS BAR ── -->
 <div class="ds">
   <img src="sec-partners.jpg" alt="&lt;1% Transfer fee · ~Instant Settlement · 24/7 Available · $0 P2P Transfers">
+</div>
+
+<!-- ── TRUSTED PARTNERS GRID ── -->
+<div class="ds partners-section">
+  <div class="partners-inner">
+    <p class="partners-title">OUR TRUSTED PARTNERS</p>
+    <div class="partners-grid">
+      <div class="partner-card"><div class="p-icon" style="background:#635BFF">C</div><span>Circle</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#635BFF">S</div><span>Stripe</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#1A1F71;font-size:11px;font-weight:800;letter-spacing:-0.5px">VISA</div><span>Visa</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#00C0C7">P</div><span>Plaid</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#3B4EF0">Pe</div><span>Persona</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#3ECF8E">Sb</div><span>Supabase</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#111">A</div><span>Arc</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#0052FF">B</div><span>Base</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#111">&#xf8ff;</div><span>Apple Pay</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#fff;border:1px solid #E5E5E5"><svg width="22" height="22" viewBox="0 0 22 22"><polygon points="4,11 11,4 18,11 11,18" fill="#4285F4"/><polygon points="4,11 11,4 11,18" fill="#34A853"/><polygon points="4,11 18,11 11,18" fill="#FBBC04"/></svg></div><span>Google Pay</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#E10A0A">D</div><span>Digicel</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#00A651">N</div><span>Natcom</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#E8A020">MC</div><span>MonCash</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#003087">NC</div><span>NatCash</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#0052FF">Cb</div><span>Coinbase</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#232F3E"><svg width="22" height="13" viewBox="0 0 60 36" fill="#FF9900"><path d="M17 24c-5 2-11 3-17 1l1-2c5 2 10 1 15-1zm26-1c-3 1-7 2-11 2-4 0-8-1-11-2l1-2c3 1 6 2 10 2s7-1 10-2zm-5-18c3 1 6 3 8 6l-2 1c-2-3-5-4-8-5zm-24 0l-1 2c-3 1-6 3-8 6l-2-1c2-3 5-5 8-6z"/></svg></div><span>AWS</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#F38020">Cf</div><span>Cloudflare</span></div>
+      <div class="partner-card"><div class="p-icon" style="background:#111">U</div><span>Unit</span></div>
+    </div>
+  </div>
 </div>
 
 <!-- ── APP SHOWCASE — FEATURES ── -->
