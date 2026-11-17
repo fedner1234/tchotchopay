@@ -74,19 +74,6 @@ a { text-decoration: none; color: inherit; }
 .hero-wrap img { width: 100%; max-width: 1085px; height: auto; display: block; margin: 0 auto; }
 
 
-/* ── WAITLIST SECTION ── */
-.wl-wrap { background: #0A1739; }
-.wl-overlay { background: #0A1739; display: flex; align-items: center; justify-content: center; padding: 48px 20px 60px; }
-.wl-inner { width: 100%; max-width: 370px; margin: 0 auto; }
-.wl-form-box { width: 100%; }
-.wl-form { display: flex; flex-direction: column; gap: 8px; }
-.wl-form input { width: 100%; padding: 13px 18px; border: none; border-radius: 8px; background: rgba(255,255,255,0.92); color: #222; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; box-sizing: border-box; }
-.wl-form input::placeholder { color: #999; }
-.wl-submit { background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; width: 100%; }
-.wl-submit:hover { background: #E0B84A; }
-@media (max-width: 768px) {
-  .wl-inner { padding: 0 20px; }
-}
 </style>
 </head>
 <body>
@@ -260,22 +247,10 @@ a { text-decoration: none; color: inherit; }
   <img src="sec-ditch.jpg" alt="FAQ — TchotchoPay help questions and early access">
 </div>
 
-<!-- ── WAITLIST EMAIL FORM ── -->
-<div class="wl-wrap">
-  <div class="ds dark">
-    <img src="sec-testi.jpg" alt="Join the TchotchoPay waitlist">
-  </div>
-  <div class="wl-overlay">
-    <div class="wl-inner">
-      <div class="wl-form-box">
-        <form class="wl-form" method="post" name="waitlist" onsubmit="joinWaitlist(event)">
-          <input type="hidden" name="form-name" value="waitlist">
-          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-          <button type="submit" class="wl-submit">Join Now</button>
-        </form>
-      </div>
-    </div>
-  </div>
+<!-- ── WAITLIST ── -->
+<div class="ds dark">
+  <img src="sec-testi.jpg" alt="Join the TchotchoPay waitlist">
+  <a href="/signup" aria-label="Join the waitlist" style="position:absolute;inset:0;display:block"></a>
 </div>
 
 <!-- ── FOOTER LINKS ── -->
