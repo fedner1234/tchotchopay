@@ -53,57 +53,16 @@ a { text-decoration: none; color: inherit; }
 .mmenu-btns a { display: block; text-align: center; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 16px; }
 
 /* ── SECTION IMAGES ── */
-.ds { width: 100%; display: block; line-height: 0; position: relative; }
-.ds img { width: 100%; height: auto; display: block; }
+.ds { width: 100%; display: block; line-height: 0; position: relative; background: #FBF7EF; }
+.ds img { width: 100%; max-width: 1085px; height: auto; display: block; margin: 0 auto; }
+/* Dark background sections — match image edges */
+.ds.dark { background: #0A1739; }
+.ds.navy { background: #0A1E5E; }
 
 /* ── HERO ── */
-.hero-wrap { position: relative; width: 100%; line-height: 0; }
-.hero-wrap img { width: 100%; height: auto; display: block; }
-.hero-calc-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  pointer-events: none;
-}
-.hero-calc-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; height: 100%; }
-.hw {
-  position: absolute;
-  right: 4.5%;
-  top: 10%;
-  width: 32%;
-  max-width: 420px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 22px 20px 18px;
-  box-shadow: 0 8px 40px rgba(10,30,94,0.12);
-  pointer-events: auto;
-}
-.hw-title { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #999; margin-bottom: 14px; }
-.hw-presets { display: flex; gap: 6px; margin-bottom: 14px; }
-.hw-preset { flex: 1; text-align: center; padding: 8px 4px; border-radius: 50px; border: 1.5px solid #E5DECE; background: #fff; font-size: 13px; font-weight: 600; color: #2C2C2C; cursor: pointer; transition: 0.15s; }
-.hw-preset.active, .hw-preset:hover { background: #0A1E5E; color: #fff; border-color: #0A1E5E; }
-.hw-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0EBE0; }
-.hw-row-label { font-size: 12px; color: #888; }
-.hw-row-val { font-size: 13px; font-weight: 600; color: #1A1A1A; }
-.hw-result-box { background: #FBF7EF; border-radius: 10px; padding: 12px 14px; margin: 12px 0 10px; }
-.hw-result-label { font-size: 11px; color: #888; margin-bottom: 4px; }
-.hw-result-num { font-size: 26px; font-weight: 800; color: #0A1E5E; line-height: 1; }
-.hw-result-cur { font-size: 11px; color: #888; margin-top: 3px; }
-.hw-compare { font-size: 11px; color: #555; margin-bottom: 12px; line-height: 1.5; }
-.hw-btn { display: block; width: 100%; text-align: center; background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 50px; cursor: pointer; border: none; transition: 0.2s; }
-.hw-btn:hover { background: #E0B84A; transform: translateY(-1px); }
+.hero-wrap { width: 100%; line-height: 0; background: #FBF7EF; }
+.hero-wrap img { width: 100%; max-width: 1085px; height: auto; display: block; margin: 0 auto; }
 
-/* ── HERO MOBILE BUTTONS ── */
-.hero-mobile-btns { display: none; gap: 10px; padding: 12px 16px; background: #FBF7EF; }
-.hero-mobile-btns a { flex: 1; text-align: center; padding: 12px; border-radius: 50px; font-weight: 700; font-size: 14px; white-space: nowrap; }
-.h-btn-gold { background: #C9A227; color: #07163F; }
-.h-btn-outline { border: 2px solid #0A1E5E; color: #0A1E5E; }
-@media (max-width: 768px) {
-  .hero-calc-overlay { display: none; }
-  .hero-mobile-btns { display: flex; }
-}
 
 /* ── WAITLIST SECTION ── */
 .wl-wrap { position: relative; }
@@ -176,47 +135,9 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
-<!-- ── HERO — sec-hero.jpg + live calculator ── -->
+<!-- ── HERO ── -->
 <div class="hero-wrap">
   <img src="sec-hero.jpg" alt="TchotchoPay — Money for the Caribbean. Simple. Fast. Yours.">
-  <div class="hero-calc-overlay">
-    <div class="hero-calc-inner">
-      <div class="hw">
-        <div class="hw-title">See exactly how much arrives</div>
-        <div class="hw-presets">
-          <button class="hw-preset" onclick="setAmt(50)">$50</button>
-          <button class="hw-preset active" onclick="setAmt(100)">$100</button>
-          <button class="hw-preset" onclick="setAmt(200)">$200</button>
-          <button class="hw-preset" onclick="setAmt(500)">$500</button>
-        </div>
-        <div class="hw-row">
-          <span class="hw-row-label">&#127482;&#127480; You send</span>
-          <span class="hw-row-val" id="hw-send">$100.00</span>
-        </div>
-        <div class="hw-row">
-          <span class="hw-row-label">&#128203; Fee (2%)</span>
-          <span class="hw-row-val" id="hw-fee">$2.00</span>
-        </div>
-        <div class="hw-row">
-          <span class="hw-row-label">&#9889; Speed</span>
-          <span class="hw-row-val">~2 min</span>
-        </div>
-        <div class="hw-result-box">
-          <div class="hw-result-label">&#127477;&#127481; Recipient gets</div>
-          <div class="hw-result-num" id="hw-result">12,789</div>
-          <div class="hw-result-cur">HTG on Marie's MonCash</div>
-        </div>
-        <div class="hw-compare">Send $100 via TchotchoPay and your family gets <strong>820 HTG more</strong> than Western Union.</div>
-        <a class="hw-btn" href="/signup">&#8594; Send Money Now</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── HERO MOBILE BUTTONS (shown below 768px) ── -->
-<div class="hero-mobile-btns">
-  <a class="h-btn-gold" href="/send">Send Money Now &#8594;</a>
-  <a class="h-btn-outline" href="/signup">Open Your Wallet</a>
 </div>
 
 <!-- ── STATS / PARTNERS BAR ── -->
@@ -247,7 +168,7 @@ a { text-decoration: none; color: inherit; }
 </div>
 
 <!-- ── WALLET FEATURES ── -->
-<div class="ds">
+<div class="ds dark">
   <img src="sec-wallet.jpg" alt="TchotchoPay wallet — Digital dollars, MonCash integration, 24/7 access">
 </div>
 
@@ -300,7 +221,7 @@ a { text-decoration: none; color: inherit; }
 </div>
 
 <!-- ── TESTIMONIALS BAR ── -->
-<div class="ds">
+<div class="ds dark">
   <img src="sec-testi.jpg" alt="Families already talk like this — TchotchoPay testimonials">
 </div>
 
@@ -312,12 +233,12 @@ a { text-decoration: none; color: inherit; }
 </div>
 
 <!-- ── SECURITY ── -->
-<div class="ds">
+<div class="ds dark">
   <img src="sec-security.jpg" alt="Your money is safe with TchotchoPay — Bank-grade security, 24/7 support">
 </div>
 
 <!-- ── FAQ / HELP CENTER ── -->
-<div class="ds">
+<div class="ds dark">
   <img src="sec-faq.jpg" alt="Help Center — 24/7 support for TchotchoPay users">
   <a href="/faq" aria-label="Help Center" style="position:absolute;inset:0;display:block"></a>
 </div>
