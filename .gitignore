@@ -15,6 +15,10 @@ deploy-log.txt
 *.xlsx
 *.mp4
 *.png
+# Allow designer section images and logo in website-upload
+!website-upload/sec-*.jpg
+!website-upload/tp logo.jpg
+!website-upload/d*.jpg
 *.jpg
 *.jpeg
 netlify/functions/node_modules/
