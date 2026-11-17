@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay — All 14 App Screens (Designer Reference)</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #0A1F6E;
+  background: linear-gradient(160deg, #020B2D 0%, #0A1F6E 60%, #1055CC 100%);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  padding: 40px 24px 60px;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.brand-row {
+  display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;
+}
+.brand-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, #00AEEF, #1055CC);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 8px 24px rgba(0,174,239,0.4);
+}
+.brand-name {
+  font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.5px;
+}
+.page-sub { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.tag { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 8px; letter-spacing: 0.5px; }
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 20px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ── SCREEN CARD ── */
+.screen-card {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.screen-number {
+  font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.screen-name {
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); text-align: center;
+}
+
+/* ── PHONE FRAME ── */
+.phone {
+  width: 218px; height: 438px;
+  background: #111;
+  border-radius: 40px;
+  border: 3px solid #2A2A3A;
+  box-shadow:
+    0 0 0 1px #000,
+    inset 0 0 0 1px #333,
+    0 24px 64px rgba(0,0,0,0.7),
+    0 8px 24px rgba(0,0,0,0.5);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 86px; height: 22px;
+  background: #111;
+  border-radius: 0 0 14px 14px;
+  z-index: 100;
+}
+.screen { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+/* ── STATUS BAR ── */
+.sb {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 14px 6px;
+  font-size: 10px; font-weight: 700;
+}
+.sb-icons { display: flex; gap: 3px; align-items: center; font-size: 9px; }
+
+/* ── BOTTOM NAV ── */
+.bnav {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid #E5E7EB;
+  display: flex; justify-content: space-around;
+  padding: 8px 0 14px;
+}
+.bnav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.bnav-icon { font-size: 18px; }
+.bnav-label { font-size: 8px; font-weight: 600; color: #9CA3AF; }
+.bnav-item.active .bnav-label { color: #1055CC; }
+
+/* ── COMMON ATOMS ── */
+.btn-blue {
+  background: #1055CC; color: #fff;
+  font-size: 12px; font-weight: 800;
+  border-radius: 13px; padding: 13px;
+  text-align: center;
+}
+.btn-outline-blue {
+  background: transparent; color: #1055CC;
+  font-size: 12px; font-weight: 700;
+  border: 1.5px solid #1055CC; border-radius: 13px; padding: 12px;
+  text-align: center;
+}
+.field {
+  background: #F9FAFB; border: 1.5px solid #E5E7EB;
+  border-radius: 11px; padding: 10px 12px;
+  font-size: 11px; color: #020B2D; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.field.focus { border-color: #1055CC; background: #F0F4FF; }
+.flabel {
+  font-size: 9px; font-weight: 700; color: #9CA3AF;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 4px; margin-top: 10px;
+}
+.card-white {
+  background: #fff; border-radius: 14px;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  grid-column: 1 / -1;
+  height: 1px; background: rgba(255,255,255,0.12);
+  margin: 8px 0;
+  position: relative;
+}
+.section-divider::before {
+  content: attr(data-label);
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: #0A1F6E; color: rgba(255,255,255,0.5);
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 12px;
+}
+
+/* ── FOOTER ── */
+.page-footer {
+  text-align: center; margin-top: 56px;
+  color: rgba(255,255,255,0.3); font-size: 11px;
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px;
+  max-width: 1160px; margin: 56px auto 0;
+}
+.page-footer span { color: #00AEEF; }
+</style>
+</head>
+<body>
+
+<!-- ── PAGE HEADER ── -->
+<div class="page-header">
+  <div class="brand-row">
+    <div class="brand-icon">💸</div>
+    <div class="brand-name">TchotchoPay</div>
+  </div>
+  <div class="page-sub">Mobile App — Designer Screen Reference</div>
+  <div class="tag">ALL 14 SCREENS &nbsp;·&nbsp; EXACT APP COLORS &nbsp;·&nbsp; EXPO SDK 58</div>
+</div>
+
+<div class="grid">
+
+<!-- ════════════════════════════════════════
+     SECTION 1 — AUTH FLOW
+═════════════════════════════════════════ -->
+<div class="section-divider" data-label="Auth Flow"></div>
+
+<!-- ── S01: SPLASH ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:linear-gradient(160deg,#00AEEF 0%,#020B2D 100%)">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:24px">
+        <!-- Logo placeholder -->
+        <div style="width:88px;height:88px;background:rgba(255,255,255,0.15);border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border:2px solid rgba(255,255,255,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.3)">
+          <span style="font-size:40px">💸</span>
+        </div>
+        <div style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;margin-bottom:6px">TchotchoPay</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.75);font-style:italic;text-align:center;line-height:1.5">Your money, your hands</div>
+        <!-- Loading dots -->
+        <div style="display:flex;gap:6px;margin-top:40px">
+          <div style="width:7px;height:7px;background:#00AEEF;border-radius:50%"></div>
+          <div style="width:7px;height:7px;background:rgba(255,255,255,0.4);border-radius:50%"></div>
+          <div style="width:7px;height:7px;background:rgba(255,255,255,0.4);border-radius:50%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 01</div>
+  <div class="screen-name">Splash Screen</div>
+</div>
+
+<!-- ── S02: ONBOARDING ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:linear-gradient(160deg,#020B2D 0%,#0A1F6E 100%)">
+      <div class="sb" style="color:#fff"><span>9:41</span><div class="sb-icons">▲ ▌</div></div>
+      <!-- Skip -->
+      <div style="text-align:right;padding:0 16px 8px;font-size:10px;color:rgba(255,255,255,0.5);font-weight:600">Skip</div>
+      <!-- Slide content -->
+      <div style="padding:12px 24px 0;text-align:center">
+        <div style="font-size:56px;margin-bottom:16px">💸</div>
+        <div style="font-size:20px;font-weight:900;color:#fff;margin-bottom:8px;line-height:1.2">Send Money to Haiti</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:28px">Send money to Haiti in seconds.<br>No hidden fees. Always fair.</div>
+        <!-- Feature chips -->
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:28px">
+          <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 10px;font-size:9px;color:rgba(255,255,255,0.8);font-weight:700">⚡ Instant</div>
+          <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 10px;font-size:9px;color:rgba(255,255,255,0.8);font-weight:700">$0 Fees</div>
+          <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 10px;font-size:9px;color:rgba(255,255,255,0.8);font-weight:700">🔒 Safe</div>
+        </div>
+        <!-- Dots -->
+        <div style="display:flex;gap:6px;justify-content:center;margin-bottom:24px">
+          <div style="width:22px;height:5px;background:#1055CC;border-radius:3px"></div>
+          <div style="width:7px;height:5px;background:rgba(255,255,255,0.25);border-radius:3px"></div>
+          <div style="width:7px;height:5px;background:rgba(255,255,255,0.25);border-radius:3px"></div>
+          <div style="width:7px;height:5px;background:rgba(255,255,255,0.25);border-radius:3px"></div>
+        </div>
+        <div style="background:#1055CC;border-radius:13px;padding:13px;text-align:center;font-size:12px;font-weight:800;color:#fff">Next →</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 02</div>
+  <div class="screen-name">Onboarding Slide</div>
+</div>
+
+<!-- ── S03: LOGIN ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <!-- Logo area -->
+      <div style="padding:8px 20px 16px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">💸</div>
+        <div style="font-size:16px;font-weight:900;color:#020B2D">TchotchoPay</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px">Send money — fast, easy, no fees</div>
+      </div>
+      <!-- White card -->
+      <div style="background:#fff;border-radius:20px 20px 0 0;padding:20px 18px;flex:1;box-shadow:0 -4px 24px rgba(0,0,0,0.06)">
+        <div style="font-size:18px;font-weight:900;color:#020B2D;margin-bottom:16px">Sign In</div>
+        <div class="flabel">Email</div>
+        <div class="field focus">
+          <span style="color:#020B2D;font-size:11px">jean@gmail.com</span>
+          <span style="color:#1055CC;font-size:12px">✓</span>
+        </div>
+        <div class="flabel">Password</div>
+        <div class="field">
+          <span style="font-size:16px;color:#020B2D;letter-spacing:3px">••••••••</span>
+          <span style="font-size:13px;color:#9CA3AF">👁</span>
+        </div>
+        <div style="text-align:right;font-size:10px;color:#1055CC;font-weight:700;margin:-4px 0 14px">Forgot your password?</div>
+        <div class="btn-blue">Sign In</div>
+        <div style="display:flex;align-items:center;gap:8px;margin:14px 0">
+          <div style="flex:1;height:1px;background:#E5E7EB"></div>
+          <span style="font-size:10px;color:#9CA3AF"</span>or<//span>
+          <div style="flex:1;height:1px;background:#E5E7EB"></div>
+        </div>
+        <!-- Face ID -->
+        <div style="background:#F0F4FF;border:1px solid #DBEAFE;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px">
+          <span style="font-size:22px">🔐</span>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#020B2D">Use Face ID</div>
+            <div style="font-size:9px;color:#9CA3AF">Sign in with biometrics</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:14px;font-size:10px;color:#9CA3AF">
+          Don't have an account? <span style="color:#1055CC;font-weight:700">Sign Up</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 03</div>
+  <div class="screen-name">Login</div>
+</div>
+
+<!-- ── S04: SIGN UP ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="font-size:14px;color:#1055CC;font-weight:600;padding:0 16px 2px">←</div>
+      <div style="font-size:18px;font-weight:900;color:#020B2D;padding:0 16px 2px">Create Account 💸</div>
+      <div style="font-size:10px;color:#9CA3AF;padding:0 16px 12px">Free to join. No monthly fees.</div>
+      <!-- Form on white -->
+      <div style="background:#fff;margin:0 14px;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05)">
+        <div style="display:flex;gap:8px">
+          <div style="flex:1">
+            <div class="flabel" style="margin-top:0">First Name</div>
+            <div class="field" style="margin-bottom:0">Jean</div>
+          </div>
+          <div style="flex:1">
+            <div class="flabel" style="margin-top:0">Last Name</div>
+            <div class="field" style="margin-bottom:0">Pierre</div>
+          </div>
+        </div>
+        <div class="flabel">Email</div>
+        <div class="field focus" style="margin-bottom:0">jean@gmail.com</div>
+        <div class="flabel">Phone</div>
+        <div class="field" style="margin-bottom:0">+1 (305) 000-0000</div>
+        <div class="flabel">Password</div>
+        <div class="field" style="margin-bottom:0">
+          <span style="font-size:16px;letter-spacing:3px;color:#020B2D">••••••••</span>
+          <span style="font-size:12px;color:#9CA3AF">👁</span>
+        </div>
+        <div class="flabel">Confirm Password</div>
+        <div class="field" style="margin-bottom:0">
+          <span style="font-size:16px;letter-spacing:3px;color:#020B2D">••••••••</span>
+        </div>
+      </div>
+      <div style="padding:10px 14px 0;font-size:9px;color:#9CA3AF;line-height:1.5">By continuing you agree to TchotchoPay's <span style="color:#1055CC">Terms</span> and <span style="color:#1055CC">Privacy Policy</span>.</div>
+      <div style="padding:10px 14px 0">
+        <div class="btn-blue">Continue to Verify ID →</div>
+      </div>
+      <div style="text-align:center;margin-top:10px;font-size:10px;color:#9CA3AF">Already have an account? <span style="color:#1055CC;font-weight:700">Sign in</span></div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 04</div>
+  <div class="screen-name">Sign Up</div>
+</div>
+
+<!-- ── S05: KYC ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#fff">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 14px;border-bottom:1px solid #F3F4F6">
+        <div style="font-size:15px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:15px;font-weight:800;color:#020B2D">Verify Identity</div>
+      </div>
+      <div style="padding:16px">
+        <!-- Persona embed visual -->
+        <div style="background:#F0F4FF;border:1.5px solid #DBEAFE;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px">
+          <div style="font-size:42px;margin-bottom:10px">🪪</div>
+          <div style="font-size:14px;font-weight:800;color:#020B2D;margin-bottom:4px">Identity Verification</div>
+          <div style="font-size:10px;color:#1055CC;font-weight:600">Powered by Persona KYC</div>
+        </div>
+        <!-- Steps -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+          <div style="background:#F9FAFB;border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:10px;border:1px solid #E5E7EB">
+            <div style="width:26px;height:26px;background:#1055CC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700">1</div>
+            <div>
+              <div style="font-size:11px;font-weight:700;color:#020B2D">📷 Take a selfie</div>
+              <div style="font-size:9px;color:#9CA3AF">Look at the camera with good lighting</div>
+            </div>
+          </div>
+          <div style="background:#F9FAFB;border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:10px;border:1px solid #E5E7EB">
+            <div style="width:26px;height:26px;background:#E5E7EB;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#9CA3AF;font-weight:700">2</div>
+            <div>
+              <div style="font-size:11px;font-weight:700;color:#020B2D">🪪 Upload government ID</div>
+              <div style="font-size:9px;color:#9CA3AF">Passport, Driver's License, or State ID</div>
+            </div>
+          </div>
+        </div>
+        <!-- Compliance badge -->
+        <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:11px;padding:10px 13px;margin-bottom:16px">
+          <div style="font-size:10px;font-weight:700;color:#065F46">✅ BSA/AML · FinCEN · OFAC Compliant</div>
+          <div style="font-size:9px;color:#047857;margin-top:2px">Your data is encrypted and never shared</div>
+        </div>
+        <div class="btn-blue">Start Verification →</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 05</div>
+  <div class="screen-name">KYC — Verify Identity</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SECTION 2 — MAIN APP
+═════════════════════════════════════════ -->
+<div class="section-divider" data-label="Main App"></div>
+
+<!-- ── S06: HOME ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <!-- Nav header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:28px 16px 8px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:linear-gradient(135deg,#00AEEF,#1055CC);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px">💸</div>
+          <span style="font-size:13px;font-weight:900;color:#020B2D">TchotchoPay</span>
+        </div>
+        <span style="font-size:20px">🔔</span>
+      </div>
+      <!-- Greeting -->
+      <div style="padding:0 16px 10px">
+        <div style="font-size:14px;font-weight:800;color:#020B2D">Good morning, Fedner 👋</div>
+        <div style="font-size:9px;color:#9CA3AF">Monday, October 26, 2026</div>
+      </div>
+      <!-- Balance Card -->
+      <div style="margin:0 14px 12px;background:linear-gradient(135deg,#0A1F6E,#1055CC);border-radius:20px;padding:18px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:rgba(255,255,255,0.06);border-radius:50%"></div>
+        <div style="position:absolute;bottom:-30px;right:20px;width:100px;height:100px;background:rgba(0,174,239,0.1);border-radius:50%"></div>
+        <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px">USDC Balance</div>
+        <div style="font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:2px">$2,450.00</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:14px">USDC · US Dollar Coin</div>
+        <!-- Mini HTG rate -->
+        <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:9px;color:rgba(255,255,255,0.7)">Live Rate</div>
+          <div style="font-size:10px;color:#00AEEF;font-weight:700">1 USD = 132.5 HTG</div>
+        </div>
+      </div>
+      <!-- Quick Actions -->
+      <div style="display:flex;gap:8px;padding:0 14px 10px">
+        <div style="flex:1;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;border:1px solid #E5E7EB">
+          <div style="font-size:20px">💸</div>
+          <div style="font-size:9px;font-weight:700;color:#374151;margin-top:3px">Send</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;border:1px solid #E5E7EB">
+          <div style="font-size:20px">🛒</div>
+          <div style="font-size:9px;font-weight:700;color:#374151;margin-top:3px">Market</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;border:1px solid #E5E7EB">
+          <div style="font-size:20px">📱</div>
+          <div style="font-size:9px;font-weight:700;color:#374151;margin-top:3px">Top-Up</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;border:1px solid #E5E7EB">
+          <div style="font-size:20px">📷</div>
+          <div style="font-size:9px;font-weight:700;color:#374151;margin-top:3px">QR Pay</div>
+        </div>
+      </div>
+      <!-- Transactions -->
+      <div style="font-size:11px;font-weight:800;color:#020B2D;padding:0 16px 8px">Recent Transactions</div>
+      <div style="margin:0 14px 6px;background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;border:1px solid #F3F4F6">
+        <div style="width:34px;height:34px;background:#D1FAE5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📥</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:600;color:#020B2D">Received from Pierre</div><div style="font-size:9px;color:#9CA3AF">Today, 10:34 AM</div></div>
+        <div style="font-size:11px;font-weight:800;color:#10B981">+$100</div>
+      </div>
+      <div style="margin:0 14px;background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;border:1px solid #F3F4F6">
+        <div style="width:34px;height:34px;background:#FEE2E2;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">📤</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:600;color:#020B2D">Sent to Marie</div><div style="font-size:9px;color:#9CA3AF">Yesterday, 2:30 PM</div></div>
+        <div style="font-size:11px;font-weight:800;color:#EF4444">-$50</div>
+      </div>
+      <!-- Bottom Nav -->
+      <div class="bnav" style="position:absolute;bottom:0;left:0;right:0">
+        <div class="bnav-item active"><div class="bnav-icon">🏠</div><div class="bnav-label" style="color:#1055CC">Home</div></div>
+        <div class="bnav-item"><div class="bnav-icon">💸</div><div class="bnav-label">Send</div></div>
+        <div class="bnav-item"><div class="bnav-icon">🛒</div><div class="bnav-label">Market</div></div>
+        <div class="bnav-item"><div class="bnav-icon">👤</div><div class="bnav-label">Profile</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 06</div>
+  <div class="screen-name">Home Screen</div>
+</div>
+
+<!-- ── S07: WALLET ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F9FAFB">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="font-size:16px;font-weight:900;color:#020B2D;padding:2px 16px 4px">My Wallet 💳</div>
+      <div style="font-size:10px;color:#9CA3AF;padding:0 16px 10px">USDC · Digital Dollar Wallet</div>
+      <!-- Balance card -->
+      <div style="margin:0 14px 10px;background:linear-gradient(135deg,#0A1F6E,#1055CC);border-radius:18px;padding:16px">
+        <div style="font-size:9px;color:rgba(255,255,255,0.6);font-weight:700;margin-bottom:2px">Available Balance</div>
+        <div style="font-size:30px;font-weight:900;color:#fff;margin-bottom:2px">$2,450.00</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:10px">USDC · US Dollar Coin</div>
+        <div style="background:rgba(255,255,255,0.12);border-radius:9px;padding:8px 10px;display:flex;justify-content:space-between">
+          <div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.5px">Arc Wallet Address</div>
+            <div style="font-size:10px;color:#fff;font-weight:700;font-family:monospace">0x4a8f…b32c</div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6)">👁 View</div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div style="display:flex;gap:6px;padding:0 14px 10px">
+        <div style="flex:1;background:#fff;border-radius:10px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:16px">➕</div><div style="font-size:8px;color:#374151;font-weight:700;margin-top:2px">Add Funds</div></div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:16px">📲</div><div style="font-size:8px;color:#374151;font-weight:700;margin-top:2px">Receive</div></div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:16px">📋</div><div style="font-size:8px;color:#374151;font-weight:700;margin-top:2px">Copy Addr</div></div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:8px 4px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:16px">🏦</div><div style="font-size:8px;color:#374151;font-weight:700;margin-top:2px">Cash Out</div></div>
+      </div>
+      <!-- Address card -->
+      <div style="margin:0 14px 10px;background:#fff;border-radius:13px;padding:12px;border:1.5px solid #E5E7EB">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:800;color:#020B2D">🔗 Arc Wallet Address</div>
+          <div style="background:#1055CC;border-radius:6px;padding:2px 7px;font-size:8px;color:#fff;font-weight:700">ARC</div>
+        </div>
+        <div style="font-size:9px;color:#9CA3AF;margin-bottom:8px">Send USDC to fund your wallet. Arrives in minutes.</div>
+        <div style="background:#F9FAFB;border-radius:8px;padding:8px;font-family:monospace;font-size:9px;color:#374151;margin-bottom:8px;border:1px solid #E5E7EB">0x4a8f3d2c1e9b7a6f5d4c3b2a1e8f7d6c5b4a3e2</div>
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:700;color:#374151">📋 Copy</div>
+          <div style="flex:1;background:#F3F4F6;border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:700;color:#374151">📤 Share</div>
+          <div style="flex:1;background:#1055CC;border-radius:8px;padding:7px;text-align:center;font-size:9px;font-weight:700;color:#fff">⬛ QR</div>
+        </div>
+      </div>
+      <!-- Savings -->
+      <div style="margin:0 14px;background:#fff;border-radius:13px;padding:12px;border:1px solid #E5E7EB">
+        <div style="font-size:11px;font-weight:800;color:#020B2D;margin-bottom:2px">💰 USDC Savings Goal</div>
+        <div style="font-size:9px;color:#9CA3AF;margin-bottom:8px">Keep your value. USDC = $1 always.</div>
+        <div style="height:6px;background:#F3F4F6;border-radius:6px;overflow:hidden;margin-bottom:5px">
+          <div style="height:100%;width:62%;background:linear-gradient(90deg,#1055CC,#00AEEF);border-radius:6px"></div>
+        </div>
+        <div style="font-size:9px;color:#374151;font-weight:600">$620 / $1,000 goal</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 07</div>
+  <div class="screen-name">USDC Wallet</div>
+</div>
+
+<!-- ── S08: SEND MONEY ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 14px">
+        <div style="font-size:16px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:16px;font-weight:800;color:#020B2D">Send Money</div>
+      </div>
+      <!-- Recipient -->
+      <div style="margin:0 14px 12px;background:#fff;border-radius:14px;padding:13px;border:1px solid #E5E7EB">
+        <div style="font-size:9px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Sending to</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:38px;height:38px;background:linear-gradient(135deg,#1055CC,#00AEEF);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff">M</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#020B2D">Marie Jean</div>
+            <div style="font-size:10px;color:#9CA3AF">+509 3712-4488</div>
+          </div>
+          <div style="margin-left:auto;font-size:10px;color:#10B981;font-weight:700">✓ Verified</div>
+        </div>
+      </div>
+      <!-- Amount display -->
+      <div style="text-align:center;padding:8px 16px 12px">
+        <div style="font-size:42px;font-weight:900;color:#020B2D;letter-spacing:-2px">$120</div>
+        <div style="font-size:10px;color:#1055CC;font-weight:600;margin-top:2px">120.00 USDC · Fee: $0.00</div>
+      </div>
+      <!-- Keypad -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:0 20px 10px">
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">1</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">2</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">3</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">4</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">5</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">6</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">7</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">8</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">9</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#374151;border:1px solid #E5E7EB">.</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;font-weight:600;color:#020B2D;border:1px solid #E5E7EB">0</div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;font-size:16px;color:#1055CC;border:1px solid #E5E7EB">⌫</div>
+      </div>
+      <div style="padding:0 20px">
+        <div class="btn-blue">Send Now — Free</div>
+      </div>
+      <div style="text-align:center;margin-top:7px;font-size:9px;color:#9CA3AF">Arrives instantly · No fee inside TchotchoPay</div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 08</div>
+  <div class="screen-name">Send Money — Send Money</div>
+</div>
+
+<!-- ── S09: TOP-UP ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 12px">
+        <div style="font-size:16px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:16px;font-weight:800;color:#020B2D">Mobile Top-Up 📱</div>
+      </div>
+      <!-- Country -->
+      <div style="margin:0 14px 10px;background:#fff;border-radius:13px;padding:12px;display:flex;align-items:center;gap:10px;border:1px solid #E5E7EB">
+        <span style="font-size:22px">🇭🇹</span>
+        <div style="flex:1">
+          <div style="font-size:12px;font-weight:800;color:#020B2D">Haiti</div>
+          <div style="font-size:10px;color:#9CA3AF">HTG · Digicel · Natcom</div>
+        </div>
+        <div style="font-size:12px;color:#9CA3AF">▼</div>
+      </div>
+      <!-- Provider -->
+      <div style="font-size:9px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;padding:0 16px 6px">Select Provider</div>
+      <div style="display:flex;gap:8px;padding:0 14px 10px">
+        <div style="flex:1;background:#1055CC;border-radius:11px;padding:10px;text-align:center;font-size:11px;font-weight:700;color:#fff">📱 Digicel</div>
+        <div style="flex:1;background:#fff;border-radius:11px;padding:10px;text-align:center;font-size:11px;font-weight:700;color:#374151;border:1px solid #E5E7EB">📶 Natcom</div>
+      </div>
+      <!-- Amounts -->
+      <div style="font-size:9px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;padding:0 16px 6px">Amount</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 14px 10px">
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:13px;font-weight:800;color:#020B2D">$5</div><div style="font-size:9px;color:#9CA3AF">250 HTG</div></div>
+        <div style="background:#EFF6FF;border-radius:11px;padding:9px;text-align:center;border:1.5px solid #1055CC"><div style="font-size:13px;font-weight:800;color:#1055CC">$10</div><div style="font-size:9px;color:#1055CC">500 HTG</div></div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:13px;font-weight:800;color:#020B2D">$25</div><div style="font-size:9px;color:#9CA3AF">1,250 HTG</div></div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:13px;font-weight:800;color:#020B2D">$50</div><div style="font-size:9px;color:#9CA3AF">2,500 HTG</div></div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:13px;font-weight:800;color:#020B2D">$100</div><div style="font-size:9px;color:#9CA3AF">5,000 HTG</div></div>
+        <div style="background:#fff;border-radius:11px;padding:9px;text-align:center;border:1px solid #E5E7EB"><div style="font-size:13px;font-weight:800;color:#020B2D">Other</div><div style="font-size:9px;color:#9CA3AF">Custom</div></div>
+      </div>
+      <!-- Rate -->
+      <div style="margin:0 14px 10px;background:#F0FDF4;border-radius:11px;padding:10px 13px;display:flex;justify-content:space-between;border:1px solid #BBF7D0">
+        <div style="font-size:10px;color:#374151">Live Rate</div>
+        <div style="font-size:10px;color:#10B981;font-weight:700">1 USD = 132.5 HTG ✓</div>
+      </div>
+      <div style="padding:0 14px">
+        <div class="btn-blue">Top-Up $10 Now</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 09</div>
+  <div class="screen-name">Mobile Top-Up</div>
+</div>
+
+<!-- ── S10: QR PAY ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 8px">
+        <div style="font-size:16px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:16px;font-weight:800;color:#020B2D">My QR Code</div>
+      </div>
+      <div style="font-size:10px;color:#9CA3AF;text-align:center;margin-bottom:10px">Show this to receive USDC instantly</div>
+      <!-- QR Card -->
+      <div style="margin:0 22px 10px;background:#fff;border-radius:20px;padding:16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
+        <svg width="130" height="130" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 10px">
+          <rect width="130" height="130" fill="white"/>
+          <rect x="8" y="8" width="30" height="30" fill="#020B2D" rx="3"/>
+          <rect x="12" y="12" width="22" height="22" fill="#fff" rx="1"/>
+          <rect x="16" y="16" width="14" height="14" fill="#020B2D" rx="1"/>
+          <rect x="92" y="8" width="30" height="30" fill="#020B2D" rx="3"/>
+          <rect x="96" y="12" width="22" height="22" fill="#fff" rx="1"/>
+          <rect x="100" y="16" width="14" height="14" fill="#020B2D" rx="1"/>
+          <rect x="8" y="92" width="30" height="30" fill="#020B2D" rx="3"/>
+          <rect x="12" y="96" width="22" height="22" fill="#fff" rx="1"/>
+          <rect x="16" y="100" width="14" height="14" fill="#020B2D" rx="1"/>
+          <rect x="46" y="8" width="6" height="6" fill="#020B2D"/><rect x="54" y="8" width="6" height="6" fill="#020B2D"/><rect x="70" y="8" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="16" width="6" height="6" fill="#020B2D"/><rect x="62" y="16" width="6" height="6" fill="#020B2D"/><rect x="78" y="16" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="24" width="6" height="6" fill="#020B2D"/><rect x="54" y="24" width="6" height="6" fill="#020B2D"/><rect x="62" y="24" width="6" height="6" fill="#020B2D"/>
+          <rect x="8" y="46" width="6" height="6" fill="#020B2D"/><rect x="16" y="46" width="6" height="6" fill="#020B2D"/><rect x="30" y="46" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="46" width="6" height="6" fill="#020B2D"/><rect x="62" y="46" width="6" height="6" fill="#020B2D"/><rect x="70" y="46" width="6" height="6" fill="#020B2D"/>
+          <rect x="86" y="46" width="6" height="6" fill="#020B2D"/><rect x="102" y="46" width="6" height="6" fill="#020B2D"/><rect x="116" y="46" width="6" height="6" fill="#020B2D"/>
+          <rect x="8" y="54" width="6" height="6" fill="#020B2D"/><rect x="24" y="54" width="6" height="6" fill="#020B2D"/><rect x="46" y="54" width="6" height="6" fill="#020B2D"/>
+          <rect x="54" y="54" width="6" height="6" fill="#020B2D"/><rect x="70" y="54" width="6" height="6" fill="#020B2D"/><rect x="86" y="54" width="6" height="6" fill="#020B2D"/>
+          <rect x="8" y="62" width="6" height="6" fill="#020B2D"/><rect x="16" y="62" width="6" height="6" fill="#020B2D"/><rect x="30" y="62" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="62" width="6" height="6" fill="#020B2D"/><rect x="62" y="62" width="6" height="6" fill="#020B2D"/><rect x="78" y="62" width="6" height="6" fill="#020B2D"/>
+          <rect x="94" y="62" width="6" height="6" fill="#020B2D"/><rect x="110" y="62" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="70" width="6" height="6" fill="#020B2D"/><rect x="54" y="70" width="6" height="6" fill="#020B2D"/><rect x="70" y="70" width="6" height="6" fill="#020B2D"/>
+          <rect x="86" y="70" width="6" height="6" fill="#020B2D"/><rect x="102" y="70" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="78" width="6" height="6" fill="#020B2D"/><rect x="62" y="78" width="6" height="6" fill="#020B2D"/><rect x="78" y="78" width="6" height="6" fill="#020B2D"/>
+          <rect x="46" y="86" width="6" height="6" fill="#020B2D"/><rect x="54" y="86" width="6" height="6" fill="#020B2D"/><rect x="70" y="86" width="6" height="6" fill="#020B2D"/>
+          <rect x="86" y="86" width="6" height="6" fill="#020B2D"/><rect x="102" y="86" width="6" height="6" fill="#020B2D"/>
+          <!-- Center logo -->
+          <rect x="52" y="52" width="26" height="26" fill="#1055CC" rx="5"/>
+          <text x="65" y="69" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="13" font-weight="900" fill="#fff">T</text>
+        </svg>
+        <div style="font-size:13px;font-weight:800;color:#020B2D">Fedner François</div>
+        <div style="font-size:10px;color:#9CA3AF;margin-top:2px">@fedner · tchotchopay.com</div>
+      </div>
+      <!-- Amount -->
+      <div style="margin:0 14px 8px;background:#fff;border-radius:13px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;border:1px solid #E5E7EB">
+        <div><div style="font-size:9px;color:#9CA3AF">Request Amount</div><div style="font-size:16px;font-weight:800;color:#1055CC">$50.00 USDC</div></div>
+        <div style="font-size:11px;color:#1055CC">Edit ✎</div>
+      </div>
+      <!-- Share -->
+      <div style="margin:0 14px;background:#F0F4FF;border:1.5px solid #DBEAFE;border-radius:13px;padding:11px;text-align:center;font-size:12px;font-weight:700;color:#1055CC">📤 Share My QR Code</div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 10</div>
+  <div class="screen-name">QR Pay / Receive</div>
+</div>
+
+<!-- ── S11: MARKETPLACE ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="font-size:18px;font-weight:900;color:#020B2D;padding:2px 16px 10px">Marketplace 🛒</div>
+      <!-- Search -->
+      <div style="margin:0 14px 10px;background:#fff;border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:8px;border:1px solid #E5E7EB">
+        <span style="font-size:14px;color:#9CA3AF">🔍</span>
+        <span style="font-size:11px;color:#9CA3AF">Search merchants…</span>
+      </div>
+      <!-- Categories -->
+      <div style="display:flex;gap:6px;padding:0 14px 10px;overflow:hidden">
+        <div style="background:#1055CC;border-radius:20px;padding:5px 11px;font-size:9px;font-weight:700;color:#fff;white-space:nowrap">All</div>
+        <div style="background:#fff;border-radius:20px;padding:5px 11px;font-size:9px;font-weight:700;color:#374151;border:1px solid #E5E7EB;white-space:nowrap">🍔 Food</div>
+        <div style="background:#fff;border-radius:20px;padding:5px 11px;font-size:9px;font-weight:700;color:#374151;border:1px solid #E5E7EB;white-space:nowrap">⚡ Utilitè</div>
+        <div style="background:#fff;border-radius:20px;padding:5px 11px;font-size:9px;font-weight:700;color:#374151;border:1px solid #E5E7EB;white-space:nowrap">🚌 Transpò</div>
+      </div>
+      <!-- Merchants -->
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:#fff;margin:0 14px 6px;border-radius:12px;border:1px solid #E5E7EB">
+        <div style="width:40px;height:40px;background:#FEF3C7;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🍔</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:700;color:#020B2D">Mamba Restaurant</div><div style="font-size:9px;color:#9CA3AF">Food & Drinks · Port-au-Prince</div></div>
+        <div style="background:#1055CC;border-radius:9px;padding:4px 9px;font-size:9px;font-weight:700;color:#fff">Pay</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:#fff;margin:0 14px 6px;border-radius:12px;border:1px solid #E5E7EB">
+        <div style="width:40px;height:40px;background:#DBEAFE;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">⚡</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:700;color:#020B2D">EDH Electricity</div><div style="font-size:9px;color:#9CA3AF">Utilities · Nationwide</div></div>
+        <div style="background:#1055CC;border-radius:9px;padding:4px 9px;font-size:9px;font-weight:700;color:#fff">Pay</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:#fff;margin:0 14px 6px;border-radius:12px;border:1px solid #E5E7EB">
+        <div style="width:40px;height:40px;background:#FEE2E2;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🚌</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:700;color:#020B2D">Tap Tap Express</div><div style="font-size:9px;color:#9CA3AF">Transportation · Haiti</div></div>
+        <div style="background:#1055CC;border-radius:9px;padding:4px 9px;font-size:9px;font-weight:700;color:#fff">Pay</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:#fff;margin:0 14px;border-radius:12px;border:1px solid #E5E7EB">
+        <div style="width:40px;height:40px;background:#D1FAE5;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏫</div>
+        <div style="flex:1"><div style="font-size:11px;font-weight:700;color:#020B2D">École Primaire</div><div style="font-size:9px;color:#9CA3AF">School Fees · Education</div></div>
+        <div style="background:#1055CC;border-radius:9px;padding:4px 9px;font-size:9px;font-weight:700;color:#fff">Pay</div>
+      </div>
+      <div class="bnav" style="position:absolute;bottom:0;left:0;right:0">
+        <div class="bnav-item"><div class="bnav-icon">🏠</div><div class="bnav-label">Home</div></div>
+        <div class="bnav-item"><div class="bnav-icon">💸</div><div class="bnav-label">Send</div></div>
+        <div class="bnav-item active"><div class="bnav-icon">🛒</div><div class="bnav-label" style="color:#1055CC">Market</div></div>
+        <div class="bnav-item"><div class="bnav-icon">👤</div><div class="bnav-label">Profile</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 11</div>
+  <div class="screen-name">Marketplace</div>
+</div>
+
+<!-- ── S12: PROFILE ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F3F4F6">
+      <div class="sb" style="color:#020B2D"><span>9:41</span><div class="sb-icons" style="color:#020B2D">▲ ▌</div></div>
+      <div style="font-size:18px;font-weight:900;color:#020B2D;padding:2px 16px 12px">Profile</div>
+      <!-- Virtual Card -->
+      <div style="margin:0 14px 12px;background:linear-gradient(135deg,#0A1F6E,#1055CC);border-radius:18px;padding:18px;height:106px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-15px;right:-15px;width:70px;height:70px;background:rgba(0,174,239,0.15);border-radius:50%"></div>
+        <div style="font-size:18px;margin-bottom:6px">💳</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:700;letter-spacing:2px;margin-bottom:6px">•••• •••• •••• 4488</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <div>
+            <div style="font-size:10px;color:#fff;font-weight:700">FEDNER FRANCOIS</div>
+            <div style="font-size:9px;color:#00AEEF;font-weight:600">Virtual USDC Card</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:8px;color:rgba(255,255,255,0.5)">VALID</div>
+            <div style="font-size:10px;color:#fff;font-weight:700">10/28</div>
+          </div>
+        </div>
+      </div>
+      <!-- Profile items -->
+      <div style="background:#fff;margin:0 14px;border-radius:14px;overflow:hidden;border:1px solid #E5E7EB">
+        <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #F3F4F6">
+          <span style="font-size:17px;width:28px;text-align:center">👤</span>
+          <span style="font-size:12px;font-weight:600;color:#020B2D;flex:1">Personal Info</span>
+          <span style="font-size:13px;color:#9CA3AF">›</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #F3F4F6">
+          <span style="font-size:17px;width:28px;text-align:center">🔔</span>
+          <span style="font-size:12px;font-weight:600;color:#020B2D;flex:1">Notifications</span>
+          <div style="background:#EF4444;color:#fff;font-size:8px;font-weight:800;border-radius:20px;padding:2px 6px;margin-right:6px">3</div>
+          <span style="font-size:13px;color:#9CA3AF">›</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #F3F4F6">
+          <span style="font-size:17px;width:28px;text-align:center">🔒</span>
+          <span style="font-size:12px;font-weight:600;color:#020B2D;flex:1">Security & KYC</span>
+          <div style="background:#D1FAE5;color:#065F46;font-size:8px;font-weight:800;border-radius:20px;padding:2px 6px;margin-right:6px">Verified</div>
+          <span style="font-size:13px;color:#9CA3AF">›</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid #F3F4F6">
+          <span style="font-size:17px;width:28px;text-align:center">🎁</span>
+          <span style="font-size:12px;font-weight:600;color:#020B2D;flex:1">Referral Program</span>
+          <span style="font-size:13px;color:#9CA3AF">›</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:11px 14px">
+          <span style="font-size:17px;width:28px;text-align:center">📞</span>
+          <span style="font-size:12px;font-weight:600;color:#020B2D;flex:1">Help & Support</span>
+          <span style="font-size:13px;color:#9CA3AF">›</span>
+        </div>
+      </div>
+      <!-- Sign out -->
+      <div style="margin:10px 14px;background:#FEF2F2;border-radius:12px;padding:11px;text-align:center;font-size:12px;font-weight:700;color:#EF4444;border:1px solid #FECACA">Sign Out</div>
+      <div class="bnav" style="position:absolute;bottom:0;left:0;right:0">
+        <div class="bnav-item"><div class="bnav-icon">🏠</div><div class="bnav-label">Home</div></div>
+        <div class="bnav-item"><div class="bnav-icon">💸</div><div class="bnav-label">Send</div></div>
+        <div class="bnav-item"><div class="bnav-icon">🛒</div><div class="bnav-label">Market</div></div>
+        <div class="bnav-item active"><div class="bnav-icon">👤</div><div class="bnav-label" style="color:#1055CC">Profile</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 12</div>
+  <div class="screen-name">Profile — Profile</div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SECTION 3 — AGENT MODE
+═════════════════════════════════════════ -->
+<div class="section-divider" data-label="Agent Mode"></div>
+
+<!-- ── S13: AGENT HOME ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F9FAFB">
+      <div class="sb" style="color:#111827"><span>9:41</span><div class="sb-icons" style="color:#111827">▲ ▌</div></div>
+      <!-- Header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 16px 14px">
+        <div>
+          <div style="font-size:11px;color:#6B7280;font-weight:600">Agent Dashboard 🏪</div>
+          <div style="font-size:16px;font-weight:900;color:#111827;margin-top:2px">Jean-Pierre</div>
+        </div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#10B981"></div>
+      </div>
+      <!-- Float card -->
+      <div style="margin:0 14px 12px;background:#fff;border-radius:18px;padding:18px;border:2px solid rgba(16,185,129,0.3);box-shadow:0 4px 16px rgba(0,0,0,0.06)">
+        <div style="font-size:10px;color:#6B7280;font-weight:700;letter-spacing:0.5px;margin-bottom:4px">Your Float Balance</div>
+        <div style="font-size:36px;font-weight:900;color:#10B981;margin-bottom:2px">$420.00</div>
+        <div style="font-size:10px;color:#6B7280;margin-bottom:14px">Available to load onto customer wallets</div>
+        <div style="background:#10B981;border-radius:11px;padding:11px;text-align:center;font-size:12px;font-weight:800;color:#fff">+ Top Up Float</div>
+      </div>
+      <!-- Quick Actions -->
+      <div style="font-size:11px;font-weight:800;color:#111827;padding:0 16px 8px">Quick Actions</div>
+      <div style="display:flex;gap:10px;padding:0 14px 12px">
+        <div style="flex:1;background:#fff;border-radius:14px;padding:14px;border:1px solid #E5E7EB;text-align:center">
+          <div style="font-size:26px;margin-bottom:6px">💵</div>
+          <div style="font-size:11px;font-weight:800;color:#111827;margin-bottom:3px">Load Customer</div>
+          <div style="font-size:9px;color:#6B7280;line-height:1.4">Cash → wallet credit</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:14px;padding:14px;border:1px solid #E5E7EB;text-align:center">
+          <div style="font-size:26px;margin-bottom:6px">🏦</div>
+          <div style="font-size:11px;font-weight:800;color:#111827;margin-bottom:3px">Top Up Float</div>
+          <div style="font-size:9px;color:#6B7280;line-height:1.4">Zelle · ACH · Card</div>
+        </div>
+      </div>
+      <!-- How you earn -->
+      <div style="margin:0 14px;background:#fff;border-radius:14px;padding:14px;border:1px solid #E5E7EB">
+        <div style="font-size:11px;font-weight:800;color:#111827;margin-bottom:10px">How You Earn</div>
+        <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+          <div style="width:32px;height:32px;border-radius:10px;background:#F9FAFB;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">👥</div>
+          <div><div style="font-size:10px;font-weight:700;color:#111827">$1 per customer load</div><div style="font-size:9px;color:#6B7280">Every load earns $1 commission</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <div style="width:32px;height:32px;border-radius:10px;background:#F9FAFB;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">⚡</div>
+          <div><div style="font-size:10px;font-weight:700;color:#111827">Instant wallet credit</div><div style="font-size:9px;color:#6B7280">Customer credited immediately</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 13</div>
+  <div class="screen-name">Agent Dashboard</div>
+</div>
+
+<!-- ── S14: AGENT FLOAT TOP-UP ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F9FAFB">
+      <div class="sb" style="color:#111827"><span>9:41</span><div class="sb-icons" style="color:#111827">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 12px">
+        <div style="font-size:15px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:15px;font-weight:800;color:#111827">Top Up Float</div>
+      </div>
+      <!-- Float badge -->
+      <div style="margin:0 14px 12px;background:#F0FDF4;border-radius:12px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;border:1px solid #BBF7D0">
+        <div style="font-size:10px;color:#065F46;font-weight:700">Current Float</div>
+        <div style="font-size:16px;font-weight:900;color:#10B981">$420.00</div>
+      </div>
+      <!-- Method selector -->
+      <div style="font-size:9px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;padding:0 16px 6px">Payment Method</div>
+      <div style="display:flex;gap:6px;padding:0 14px 12px">
+        <div style="flex:1;background:#1055CC;border-radius:10px;padding:9px;text-align:center;font-size:10px;font-weight:700;color:#fff">💸 Zelle</div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:10px;font-weight:700;color:#374151;border:1px solid #E5E7EB">🏦 ACH</div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:10px;font-weight:700;color:#374151;border:1px solid #E5E7EB">💳 Card</div>
+      </div>
+      <!-- Zelle info -->
+      <div style="margin:0 14px 10px;background:#fff;border-radius:13px;padding:14px;border:1.5px solid #DBEAFE">
+        <div style="font-size:11px;font-weight:800;color:#111827;margin-bottom:8px">💸 Zelle Details</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:10px;color:#6B7280">Send to Email</div>
+          <div style="font-size:10px;font-weight:700;color:#1055CC">hello@tchotchopay.com</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <div style="font-size:10px;color:#6B7280">Or Phone</div>
+          <div style="font-size:10px;font-weight:700;color:#1055CC">(239) 209-3021</div>
+        </div>
+        <div style="background:#F0F4FF;border-radius:8px;padding:8px;font-size:9px;color:#374151;line-height:1.5">✅ No fee with Zelle<br>⏱ Approved within 2 hours<br>🔒 Min $50 · Max $5,000</div>
+      </div>
+      <!-- Presets -->
+      <div style="font-size:9px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;padding:0 16px 6px">Amount</div>
+      <div style="display:flex;gap:7px;padding:0 14px 10px">
+        <div style="flex:1;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:12px;font-weight:800;color:#374151;border:1px solid #E5E7EB">$100</div>
+        <div style="flex:1;background:#EFF6FF;border-radius:10px;padding:9px;text-align:center;font-size:12px;font-weight:800;color:#1055CC;border:1.5px solid #1055CC">$200</div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:12px;font-weight:800;color:#374151;border:1px solid #E5E7EB">$500</div>
+        <div style="flex:1;background:#fff;border-radius:10px;padding:9px;text-align:center;font-size:12px;font-weight:800;color:#374151;border:1px solid #E5E7EB">$1k</div>
+      </div>
+      <div style="padding:0 14px">
+        <div style="background:#10B981;border-radius:12px;padding:12px;text-align:center;font-size:12px;font-weight:800;color:#fff">Submit Top-Up Request →</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 14</div>
+  <div class="screen-name">Agent Float Top-Up</div>
+</div>
+
+<!-- ── S15: AGENT LOAD CUSTOMER ── -->
+<div class="screen-card">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen" style="background:#F9FAFB">
+      <div class="sb" style="color:#111827"><span>9:41</span><div class="sb-icons" style="color:#111827">▲ ▌</div></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 12px">
+        <div style="font-size:15px;color:#1055CC;font-weight:600">←</div>
+        <div style="font-size:15px;font-weight:800;color:#111827">Load Customer Wallet</div>
+      </div>
+      <!-- Float -->
+      <div style="margin:0 14px 10px;background:#F0FDF4;border-radius:11px;padding:10px 13px;display:flex;justify-content:space-between;align-items:center;border:1px solid #BBF7D0">
+        <div style="font-size:10px;color:#065F46;font-weight:700">Your Float</div>
+        <div style="font-size:15px;font-weight:900;color:#10B981">$420.00</div>
+      </div>
+      <!-- Phone lookup -->
+      <div style="padding:0 14px">
+        <div style="font-size:9px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px">Customer Phone</div>
+        <div style="background:#fff;border:1.5px solid #1055CC;border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:16px">📱</span>
+          <span style="font-size:13px;color:#111827;font-weight:600">+509 3712-4488</span>
+          <span style="margin-left:auto;font-size:11px;color:#10B981;font-weight:700">✓ Found</span>
+        </div>
+        <!-- Customer -->
+        <div style="background:#EFF6FF;border-radius:11px;padding:11px 13px;display:flex;align-items:center;gap:10px;margin-bottom:10px;border:1px solid #DBEAFE">
+          <div style="width:36px;height:36px;background:#1055CC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff">M</div>
+          <div>
+            <div style="font-size:12px;font-weight:800;color:#111827">Marie Jean</div>
+            <div style="font-size:10px;color:#6B7280">Wallet: 2,450.00 USDC</div>
+          </div>
+        </div>
+        <!-- Amount -->
+        <div style="font-size:9px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px">Cash Received</div>
+        <div style="background:#fff;border:1.5px solid #E5E7EB;border-radius:11px;padding:10px 13px;display:flex;align-items:center;margin-bottom:7px">
+          <span style="font-size:18px;color:#6B7280;margin-right:5px">$</span>
+          <span style="font-size:24px;font-weight:800;color:#111827">50.00</span>
+        </div>
+        <div style="display:flex;gap:5px;margin-bottom:10px">
+          <div style="flex:1;background:#F3F4F6;border-radius:9px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#6B7280">$10</div>
+          <div style="flex:1;background:#F3F4F6;border-radius:9px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#6B7280">$25</div>
+          <div style="flex:1;background:#1055CC;border-radius:9px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#fff">$50</div>
+          <div style="flex:1;background:#F3F4F6;border-radius:9px;padding:7px;text-align:center;font-size:11px;font-weight:700;color:#6B7280">$100</div>
+        </div>
+        <!-- Summary -->
+        <div style="background:#F0FDF4;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:9px;color:#065F46;line-height:1.7">
+          ⚡ Customer gets $50.00 USDC instantly<br>
+          💰 You earn $1.00 commission<br>
+          🏦 Your float: $420 → $370
+        </div>
+        <div style="background:#10B981;border-radius:12px;padding:12px;text-align:center;font-size:12px;font-weight:800;color:#fff">✓ Confirm Load — $50</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-number">Screen 15</div>
+  <div class="screen-name">Agent: Load Customer</div>
+</div>
+
+<!-- ── EMPTY SLOT (4th in row — for balance) ── -->
+<div class="screen-card" style="visibility:hidden">
+  <div class="phone"></div>
+</div>
+
+</div>
+
+<div class="page-footer">
+  <span>TchotchoPay</span> — Mobile App · All Screens · Designer Reference &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; © 2026
+  <br>Colors: Primary #1055CC · Navy #0A1F6E · Cyan #00AEEF · Dark #020B2D · Green #10B981
+</div>
+
+</body>
+</html>

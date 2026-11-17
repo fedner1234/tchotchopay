@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay Ad</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Arial Black', Impact, sans-serif;
+  }
+  .stage {
+    width: 360px;
+    height: 640px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 0 80px rgba(0,0,0,0.9);
+  }
+  .topo {
+    position: absolute;
+    inset: 0;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+  .wash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    opacity: 0;
+  }
+  .char-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 140px;
+    transform: translateX(-50%) scale(0.8);
+    width: 200px;
+    height: 240px;
+    display: none;
+    opacity: 0;
+  }
+  .char-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6));
+  }
+  .headline {
+    position: absolute;
+    top: 50px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(-8px);
+    line-height: 1.2;
+    padding: 0 20px;
+  }
+  .big-word {
+    position: absolute;
+    bottom: 80px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 900;
+    color: #FFEF00;
+    text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000, 4px 4px 0 #000;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+    transition: opacity 0.15s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none;
+  }
+  .scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+  }
+  .logo-name { font-size: 56px; font-weight: 900; letter-spacing: -2px; line-height: 1; text-align: center; }
+  .logo-name em { color: #FFEF00; font-style: normal; }
+  .logo-name span { color: #fff; }
+  .logo-tag { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif; margin-top: 10px; text-align: center; }
+  .logo-pill { display: inline-block; margin-top: 22px; background: #FFEF00; color: #000; font-size: 14px; font-weight: 900; padding: 10px 28px; border-radius: 50px; letter-spacing: 1px; }
+  .compare-block { width: 100%; }
+  .compare-title { font-size: 18px; font-weight: 900; color: #fff; text-align: center; margin-bottom: 18px; letter-spacing: 1px; }
+  .compare-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-radius: 16px; margin-bottom: 10px; }
+  .compare-row.bad { background: rgba(255,60,60,0.12); border: 2px solid rgba(255,60,60,0.3); }
+  .compare-row.good { background: rgba(0,220,100,0.12); border: 2px solid rgba(0,220,100,0.35); }
+  .compare-label { font-size: 15px; font-weight: 900; color: #fff; }
+  .compare-fee { font-size: 24px; font-weight: 900; }
+  .compare-row.bad .compare-fee { color: #ff5555; }
+  .compare-row.good .compare-fee { color: #00dc64; }
+  .compare-note { font-size: 11px; color: rgba(255,255,255,0.5); font-family: Arial,sans-serif; font-weight:400; margin-top:2px; }
+  .feat-row { display: flex; align-items: center; gap: 14px; background: rgba(255,239,0,0.08); border: 1.5px solid rgba(255,239,0,0.25); border-radius: 16px; padding: 14px 16px; width: 100%; margin-bottom: 10px; }
+  .feat-icon { font-size: 32px; line-height: 1; flex-shrink: 0; }
+  .feat-name { font-size: 16px; font-weight: 900; color: #FFEF00; }
+  .feat-desc { font-size: 11px; color: rgba(255,255,255,0.6); font-family: Arial,sans-serif; font-weight:400; margin-top:2px; }
+  .cta-big { font-size: 46px; font-weight: 900; color: #fff; text-align: center; line-height: 1.05; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; }
+  .cta-big em { color: #FFEF00; font-style: normal; }
+  .cta-btn { background: #FFEF00; color: #000; font-size: 20px; font-weight: 900; padding: 16px 36px; border-radius: 14px; margin-top: 28px; box-shadow: 0 6px 0 #a0a000, 0 10px 24px rgba(0,0,0,0.5); text-align: center; }
+  .cta-url { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 14px; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 400; text-transform: uppercase; }
+  .prog { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.08); z-index: 20; }
+  .prog-fill { height: 100%; background: #FFEF00; width: 0; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="topo">
+    <svg viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg" width="360" height="640">
+      <g fill="none" stroke="white" stroke-width="1.2">
+        <path d="M-30,300 C40,180 140,260 220,200 S340,120 400,280"/>
+        <path d="M-30,340 C50,210 150,290 230,230 S350,150 410,310"/>
+        <path d="M-30,260 C30,150 130,230 210,170 S330,90 400,250"/>
+        <path d="M-30,380 C60,240 160,320 240,260 S360,180 420,340"/>
+        <path d="M-30,420 C70,280 170,360 250,300 S370,220 420,380"/>
+        <path d="M-30,460 C80,310 180,400 260,330 S380,250 430,420"/>
+        <path d="M-30,220 C20,120 110,200 200,130 S320,60 400,210"/>
+        <path d="M-30,180 C10,90 100,160 190,100 S310,30 400,170"/>
+        <path d="M-30,500 C90,350 190,440 280,360 S390,280 440,460"/>
+        <path d="M-30,540 C100,380 200,480 290,390 S400,310 450,500"/>
+        <path d="M-30,580 C110,410 210,520 300,420 S410,340 460,540"/>
+        <path d="M-30,140 C0,60 90,130 180,70 S300,0 400,130"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wash" id="wash"></div>
+
+  <!-- Character: friendly Haitian person with phone -->
+  <div class="char-wrap" id="charWrap">
+    <svg class="char-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body -->
+      <rect x="42" y="152" width="116" height="88" rx="22" fill="#00209F"/>
+      <!-- Collar -->
+      <path d="M86,154 L100,178 L114,154" fill="none" stroke="white" stroke-width="3"/>
+      <!-- Neck -->
+      <rect x="83" y="132" width="34" height="26" rx="8" fill="#C68642"/>
+      <!-- Head -->
+      <ellipse cx="100" cy="108" rx="50" ry="52" fill="#C68642"/>
+      <!-- Hair -->
+      <path d="M52,96 Q50,58 100,52 Q150,58 148,96 Q138,74 100,70 Q62,74 52,96Z" fill="#1a0800"/>
+      <!-- Ears -->
+      <ellipse cx="50" cy="108" rx="9" ry="12" fill="#C68642"/>
+      <ellipse cx="150" cy="108" rx="9" ry="12" fill="#C68642"/>
+      <!-- Eyes -->
+      <ellipse cx="81" cy="104" rx="13" ry="14" fill="white"/>
+      <ellipse cx="119" cy="104" rx="13" ry="14" fill="white"/>
+      <circle cx="84" cy="106" r="8" fill="#1a0800"/>
+      <circle cx="122" cy="106" r="8" fill="#1a0800"/>
+      <circle cx="87" cy="103" r="3.5" fill="white"/>
+      <circle cx="125" cy="103" r="3.5" fill="white"/>
+      <!-- Eyebrows -->
+      <path d="M68,89 Q81,83 94,89" fill="none" stroke="#1a0800" stroke-width="4" stroke-linecap="round"/>
+      <path d="M106,89 Q119,83 132,89" fill="none" stroke="#1a0800" stroke-width="4" stroke-linecap="round"/>
+      <!-- Nose -->
+      <ellipse cx="100" cy="120" rx="8" ry="6" fill="#b5753a"/>
+      <!-- Smile -->
+      <path id="mouth" d="M76,135 Q100,156 124,135" fill="#6B2A10" stroke="#5a1e0a" stroke-width="1.5"/>
+      <path d="M79,137 Q100,150 121,137" fill="white"/>
+      <!-- Phone held up -->
+      <g transform="translate(138,155) rotate(-10)">
+        <rect x="0" y="0" width="32" height="52" rx="7" fill="#111827" stroke="#FFEF00" stroke-width="2"/>
+        <rect x="4" y="4" width="24" height="36" rx="3" fill="#0f2260"/>
+        <rect x="7" y="8" width="9" height="9" rx="3" fill="#FFEF00"/>
+        <text x="7" y="27" font-size="8" fill="rgba(255,255,255,0.5)" font-family="Arial">$0.99</text>
+        <circle cx="16" cy="46" r="4" fill="#333"/>
+      </g>
+      <!-- Money sparkle -->
+      <text x="134" y="148" font-size="20">💸</text>
+      <!-- Haiti flag patch on shirt -->
+      <rect x="58" y="170" width="16" height="10" rx="2" fill="#00209F"/>
+      <rect x="58" y="175" width="16" height="5" rx="0" fill="#D21034"/>
+    </svg>
+  </div>
+
+  <div class="headline" id="headline"></div>
+  <div class="big-word" id="bigWord"></div>
+
+  <!-- Logo scene -->
+  <div class="scene" id="scLogo">
+    <div class="logo-name"><span>Tchotcho</span><em>Pay</em></div>
+    <div class="logo-tag">Send money to Haiti</div>
+    <div class="logo-pill">💳 Fast · Safe · Cheap</div>
+  </div>
+
+  <!-- Fee comparison -->
+  <div class="scene" id="scCompare">
+    <div class="compare-title">SENDING $100 TO HAITI</div>
+    <div class="compare-block">
+      <div class="compare-row bad">
+        <div><div class="compare-label">Western Union</div><div class="compare-note">Takes 1–3 days</div></div>
+        <div class="compare-fee">$18+</div>
+      </div>
+      <div class="compare-row bad">
+        <div><div class="compare-label">MoneyGram</div><div class="compare-note">Hidden exchange fees</div></div>
+        <div class="compare-fee">$12+</div>
+      </div>
+      <div class="compare-row good">
+        <div><div class="compare-label">TchotchoPay ✅</div><div class="compare-note">Arrives in seconds</div></div>
+        <div class="compare-fee">$0.99</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="scene" id="scFeat">
+    <div class="feat-row">
+      <div class="feat-icon">⚡</div>
+      <div><div class="feat-name">Instant Transfer</div><div class="feat-desc">Powered by USDC on Base blockchain</div></div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-icon">🛒</div>
+      <div><div class="feat-name">Haiti Marketplace</div><div class="feat-desc">Pay bills, food & phone top-ups</div></div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-icon">💰</div>
+      <div><div class="feat-name">USDC Savings</div><div class="feat-desc">Save in digital dollars, not gourdes</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="scene" id="scCta">
+    <div class="cta-big">Send money<br>home for<br><em>$0.99</em></div>
+    <div class="cta-btn">📲 Download Free Now</div>
+    <div class="cta-url">tchotchopay.com</div>
+  </div>
+
+  <div class="prog"><div class="prog-fill" id="progFill"></div></div>
+</div>
+
+<script>
+const TOTAL = 18000;
+const stage = document.getElementById('stage');
+const charWrap = document.getElementById('charWrap');
+const headline = document.getElementById('headline');
+const bigWord = document.getElementById('bigWord');
+const wash = document.getElementById('wash');
+const progFill = document.getElementById('progFill');
+const mouth = document.getElementById('mouth');
+
+const scenes = {
+  logo:    document.getElementById('scLogo'),
+  compare: document.getElementById('scCompare'),
+  feat:    document.getElementById('scFeat'),
+  cta:     document.getElementById('scCta'),
+};
+
+function showScene(name) {
+  Object.values(scenes).forEach(s => s.style.opacity = '0');
+  if (name && scenes[name]) scenes[name].style.opacity = '1';
+}
+
+function setWord(text, size, color) {
+  bigWord.textContent = text || '';
+  bigWord.style.fontSize = (size || 64) + 'px';
+  bigWord.style.color = color || '#FFEF00';
+  bigWord.style.opacity = text ? '1' : '0';
+  bigWord.style.transform = text ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(10px)';
+}
+
+function setHeadline(text) {
+  headline.innerHTML = text || '';
+  headline.style.opacity = text ? '1' : '0';
+  headline.style.transform = text ? 'translateY(0)' : 'translateY(-8px)';
+}
+
+function showChar(visible, happy) {
+  if (visible) {
+    charWrap.style.display = 'flex';
+    requestAnimationFrame(() => {
+      charWrap.style.transition = 'opacity 0.35s, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
+      charWrap.style.opacity = '1';
+      charWrap.style.transform = 'translateX(-50%) scale(1)';
+    });
+    if (mouth) mouth.setAttribute('d', happy === false
+      ? 'M76,144 Q100,134 124,144'
+      : 'M76,135 Q100,156 124,135');
+  } else {
+    charWrap.style.transition = 'opacity 0.3s, transform 0.35s';
+    charWrap.style.opacity = '0';
+    charWrap.style.transform = 'translateX(-50%) scale(0.8)';
+    setTimeout(() => { if (charWrap.style.opacity === '0') charWrap.style.display = 'none'; }, 350);
+  }
+}
+
+function zoomChar(scale) {
+  charWrap.style.transition = 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)';
+  charWrap.style.transform = `translateX(-50%) scale(${scale})`;
+}
+
+function setWash(color, alpha) {
+  if (!color) { wash.style.opacity = '0'; return; }
+  wash.style.background = `radial-gradient(circle at 50% 60%, ${color} 0%, transparent 65%)`;
+  wash.style.opacity = alpha || '0.45';
+}
+
+function shake() {
+  let i = 0;
+  const seq = [[-5,-3],[5,3],[-4,4],[4,-4],[-3,3],[0,0]];
+  const iv = setInterval(() => {
+    const [x,y] = seq[i++];
+    stage.style.transform = `translate(${x}px,${y}px)`;
+    if (i >= seq.length) { clearInterval(iv); stage.style.transform = ''; }
+  }, 40);
+}
+
+const timeline = [
+  // Logo reveal 0-3s
+  { t: 0,    fn: () => { showScene('logo'); setWash('#00209F', 0.3); } },
+  { t: 2800, fn: () => { showScene(null); setWash(null); } },
+
+  // Mascot unhappy: stop overpaying 3-7s
+  { t: 3200, fn: () => { showChar(true, false); setWash('#990000', 0.2); setHeadline('STOP OVERPAYING'); } },
+  { t: 4000, fn: () => setWord('$18', 80, '#ff5555') },
+  { t: 4700, fn: () => { shake(); setWord('IN FEES', 52, '#ff5555'); } },
+  { t: 5400, fn: () => { showChar(true, true); setWash('#006600', 0.2); setWord('SAVE', 72); } },
+  { t: 5900, fn: () => { zoomChar(1.12); setWord('MORE!', 80, '#00ff88'); } },
+  { t: 6600, fn: () => { showChar(false); setWord('', 0); setHeadline(''); setWash(null); } },
+
+  // Comparison 7-10s
+  { t: 7000, fn: () => showScene('compare') },
+  { t: 9800, fn: () => showScene(null) },
+
+  // Mascot happy: tchotchopay 10-13s
+  { t: 10200, fn: () => { showChar(true, true); setWash('#005500', 0.2); setHeadline('WITH TCHOTCHOPAY'); } },
+  { t: 11000, fn: () => { zoomChar(1.1); setWord('INSTANT', 62); } },
+  { t: 11600, fn: () => setWord('TRANSFER', 52) },
+  { t: 12100, fn: () => setWord('$0.99', 80, '#00ff88') },
+  { t: 12700, fn: () => { shake(); zoomChar(1.18); setWord('ONLY!', 72, '#00ff88'); } },
+  { t: 13300, fn: () => { showChar(false); setWord('', 0); setHeadline(''); setWash(null); } },
+
+  // Features 13.5-15.5s
+  { t: 13600, fn: () => showScene('feat') },
+  { t: 15400, fn: () => showScene(null) },
+
+  // CTA 15.7-18s
+  { t: 15700, fn: () => { showScene('cta'); setWash('#806600', 0.2); } },
+  { t: 17800, fn: () => { showScene(null); setWash(null); } },
+];
+
+let start = null;
+let fired = new Set();
+
+function tick(ts) {
+  if (!start) start = ts;
+  const elapsed = (ts - start) % TOTAL;
+  progFill.style.width = (elapsed / TOTAL * 100) + '%';
+
+  if (elapsed < 60 && !fired.has('reset')) {
+    fired = new Set();
+    showScene(null);
+    showChar(false);
+    setWord('', 0);
+    setHeadline('');
+    setWash(null);
+    charWrap.style.display = 'none';
+  }
+
+  for (const ev of timeline) {
+    if (elapsed >= ev.t && !fired.has(ev.t)) {
+      fired.add(ev.t);
+      ev.fn();
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+charWrap.style.display = 'none';
+charWrap.style.opacity = '0';
+
+// ===== VOICEOVER via Web Speech API =====
+// Voice lines timed to match exactly what's on screen
+// Scene durations: Logo 0-2.8s | Mascot angry 3.2-6.6s | Compare 7-9.8s | Mascot happy 10.2-13.3s | Features 13.6-15.4s | CTA 15.7-18s
+const voiceLines = [
+  { t: 200,   text: "TchotchoPay." },
+  { t: 900,   text: "Send money to Haiti." },
+  { t: 3300,  text: "Stop overpaying." },
+  { t: 4050,  text: "Eighteen dollars in fees?" },
+  { t: 5450,  text: "Save more." },
+  { t: 5950,  text: "Send faster." },
+  { t: 7100,  text: "Sending one hundred dollars to Haiti." },
+  { t: 7900,  text: "Western Union: eighteen dollars." },
+  { t: 8650,  text: "MoneyGram: twelve dollars." },
+  { t: 9300,  text: "TchotchoPay: ninety-nine cents." },
+  { t: 10300, text: "With TchotchoPay." },
+  { t: 11050, text: "Instant transfer." },
+  { t: 11650, text: "Right now." },
+  { t: 12150, text: "Only ninety-nine cents." },
+  { t: 13650, text: "Instant transfers." },
+  { t: 14100, text: "Haiti marketplace." },
+  { t: 14600, text: "USDC savings." },
+  { t: 15750, text: "Send money home for ninety-nine cents." },
+  { t: 16900, text: "Download free today." },
+];
+
+let voiceFired = new Set();
+let voiceEnabled = false;
+let selectedVoice = null;
+
+function speak(text) {
+  if (!voiceEnabled || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = 1.05;
+  u.pitch = 1.0;
+  u.volume = 1.0;
+  if (selectedVoice) u.voice = selectedVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function pickVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  // Prefer US English voices
+  selectedVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Google'))
+    || voices.find(v => v.lang === 'en-US')
+    || voices[0] || null;
+}
+
+if (window.speechSynthesis) {
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = pickVoice;
+  }
+  pickVoice();
+}
+
+// Voice timeline runs inside the main tick
+const origTimeline = [...timeline];
+
+// Add voice play button overlay
+const voiceBtn = document.createElement('div');
+voiceBtn.id = 'voiceBtn';
+voiceBtn.style.cssText = `
+  position:absolute; top:14px; right:14px; z-index:30;
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(255,239,0,0.15); border:2px solid rgba(255,239,0,0.5);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:18px; transition:background 0.2s;
+  user-select:none;
+`;
+voiceBtn.textContent = '🔇';
+voiceBtn.title = 'Tap to enable voice';
+stage.appendChild(voiceBtn);
+
+voiceBtn.addEventListener('click', () => {
+  voiceEnabled = !voiceEnabled;
+  voiceBtn.textContent = voiceEnabled ? '🔊' : '🔇';
+  voiceBtn.style.background = voiceEnabled ? 'rgba(255,239,0,0.35)' : 'rgba(255,239,0,0.15)';
+  if (!voiceEnabled) window.speechSynthesis.cancel();
+});
+
+// Patch tick to also fire voice lines
+const _origTick = tick;
+// Override: voice lines fire in main loop
+const voiceTimeline = voiceLines;
+let _voiceFiredSet = new Set();
+
+// Monkey-patch: add voice to main loop
+const _origForLoop = `for (const ev of timeline)`;
+
+// Instead, we hook into requestAnimationFrame directly
+function voiceTick(ts) {
+  if (!start) { requestAnimationFrame(voiceTick); return; }
+  const elapsed = (ts - start) % TOTAL;
+
+  if (elapsed < 60 && !_voiceFiredSet.has('reset')) {
+    _voiceFiredSet = new Set();
+  }
+
+  for (const ev of voiceTimeline) {
+    if (elapsed >= ev.t && !_voiceFiredSet.has(ev.t)) {
+      _voiceFiredSet.add(ev.t);
+      speak(ev.text);
+    }
+  }
+  requestAnimationFrame(voiceTick);
+}
+
+requestAnimationFrame(tick);
+requestAnimationFrame(voiceTick);
+</script>
+</body>
+</html>
