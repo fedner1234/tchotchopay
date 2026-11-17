@@ -65,14 +65,14 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ── WAITLIST SECTION ── */
-.wl-wrap { background: #0A1E5E; }
-.wl-overlay { display: flex; align-items: center; justify-content: center; padding: 36px 20px 52px; }
-.wl-inner { width: 100%; max-width: 600px; margin: 0 auto; }
+.wl-wrap { background: #0A1739; position: relative; }
+.wl-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 20px; }
+.wl-inner { width: 100%; max-width: 370px; margin: 0 auto; }
 .wl-form-box { width: 100%; }
-.wl-form { display: flex; flex-direction: column; gap: 10px; }
-.wl-form input { width: 100%; padding: 13px 18px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; background: rgba(255,255,255,0.15); color: #fff; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; box-sizing: border-box; }
-.wl-form input::placeholder { color: rgba(255,255,255,0.65); }
-.wl-submit { background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; width: 100%; }
+.wl-form { display: flex; flex-direction: column; gap: 8px; }
+.wl-form input { width: 100%; padding: 13px 18px; border: none; border-radius: 8px; background: rgba(255,255,255,0.92); color: #222; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; box-sizing: border-box; }
+.wl-form input::placeholder { color: #999; }
+.wl-submit { background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 8px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; width: 100%; }
 .wl-submit:hover { background: #E0B84A; }
 @media (max-width: 768px) {
   .wl-inner { padding: 0 20px; }
@@ -218,45 +218,37 @@ a { text-decoration: none; color: inherit; }
   <a href="/signup" aria-label="Create free account" style="position:absolute;bottom:12%;left:4%;width:22%;height:9%;display:block"></a>
 </div>
 
-<!-- ── TESTIMONIALS BAR ── -->
-<div class="ds dark">
-  <img src="sec-testi.jpg" alt="Families already talk like this — TchotchoPay testimonials">
-</div>
-
-<!-- ── DITCH THE OLD CTA ── -->
+<!-- ── FAQ + EARLY ACCESS ── -->
 <div class="ds">
-  <img src="sec-ditch.jpg" alt="Ditch the old. Swipe the future.">
-  <a href="/signup" aria-label="Get started free" style="position:absolute;bottom:16%;left:4%;width:16%;height:11%;display:block"></a>
-  <a href="/app" aria-label="Get the app" style="position:absolute;bottom:16%;left:22%;width:14%;height:11%;display:block"></a>
+  <img src="sec-ditch.jpg" alt="FAQ — TchotchoPay help questions and early access">
 </div>
 
-<!-- ── SECURITY ── -->
-<div class="ds dark">
-  <img src="sec-security.jpg" alt="Your money is safe with TchotchoPay — Bank-grade security, 24/7 support">
-</div>
-
-<!-- ── FAQ / HELP CENTER ── -->
-<div class="ds dark">
-  <img src="sec-faq.jpg" alt="Help Center — 24/7 support for TchotchoPay users">
-  <a href="/faq" aria-label="Help Center" style="position:absolute;inset:0;display:block"></a>
-</div>
-
-<!-- ── WAITLIST ── -->
+<!-- ── WAITLIST EMAIL FORM ── -->
 <div class="wl-wrap">
   <div class="ds dark">
-    <img src="sec-waitlist.jpg" alt="Be the first to use TchotchoPay — Join the waitlist">
+    <img src="sec-testi.jpg" alt="Join the TchotchoPay waitlist">
   </div>
   <div class="wl-overlay">
     <div class="wl-inner">
       <div class="wl-form-box">
         <form class="wl-form" method="post" name="waitlist" onsubmit="joinWaitlist(event)">
           <input type="hidden" name="form-name" value="waitlist">
-          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-          <button type="submit" class="wl-submit">&#9993; Join the Waitlist</button>
+          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+          <button type="submit" class="wl-submit">Join Now</button>
         </form>
       </div>
     </div>
   </div>
+</div>
+
+<!-- ── FOOTER LINKS ── -->
+<div class="ds dark">
+  <img src="sec-security.jpg" alt="TchotchoPay — footer links">
+</div>
+
+<!-- ── FOOTER COPYRIGHT ── -->
+<div class="ds dark">
+  <img src="sec-faq.jpg" alt="© 2026 TchotchoPay LLC">
 </div>
 
 <script>
