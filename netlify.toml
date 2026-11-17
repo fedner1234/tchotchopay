@@ -55,6 +55,17 @@
     # No caching of API responses — always fresh
     Cache-Control = "no-store, no-cache, must-revalidate"
 
+# ── HTML — always fetch fresh (never cache HTML pages) ───────────
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
 # ── Static Asset Caching ──────────────────────────────────────────
 [[headers]]
   for = "/*.css"
