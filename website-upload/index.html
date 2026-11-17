@@ -65,19 +65,17 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ── WAITLIST SECTION ── */
-.wl-wrap { position: relative; }
-.wl-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.wl-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; height: 100%; display: flex; align-items: center; justify-content: center; }
-.wl-form-box { width: 420px; max-width: 90vw; }
+.wl-wrap { background: #0A1E5E; }
+.wl-overlay { display: flex; align-items: center; justify-content: center; padding: 36px 20px 52px; }
+.wl-inner { width: 100%; max-width: 600px; margin: 0 auto; }
+.wl-form-box { width: 100%; }
 .wl-form { display: flex; flex-direction: column; gap: 10px; }
-.wl-form input { width: 100%; padding: 13px 18px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; background: rgba(255,255,255,0.15); color: #fff; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; }
+.wl-form input { width: 100%; padding: 13px 18px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; background: rgba(255,255,255,0.15); color: #fff; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; box-sizing: border-box; }
 .wl-form input::placeholder { color: rgba(255,255,255,0.65); }
 .wl-submit { background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; width: 100%; }
 .wl-submit:hover { background: #E0B84A; }
 @media (max-width: 768px) {
-  .wl-overlay { position: static; background: #0A1E5E; }
-  .wl-inner { padding: 32px 20px; }
-  .wl-form-box { width: 100%; }
+  .wl-inner { padding: 0 20px; }
 }
 </style>
 </head>
@@ -245,7 +243,7 @@ a { text-decoration: none; color: inherit; }
 
 <!-- ── WAITLIST ── -->
 <div class="wl-wrap">
-  <div class="ds">
+  <div class="ds dark">
     <img src="sec-waitlist.jpg" alt="Be the first to use TchotchoPay — Join the waitlist">
   </div>
   <div class="wl-overlay">
