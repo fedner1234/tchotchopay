@@ -3,202 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TchotchoPay — Money for the Caribbean</title>
-<meta name="description" content="Send money to Haiti instantly. Save in USDC. Pay bills. Shop the Haitian marketplace. TchotchoPay is the digital wallet built for Caribbean families.">
+<title>TchotchoPay — Money for the Caribbean. Simple. Fast. Yours.</title>
+<meta name="description" content="Send money to Haiti instantly with TchotchoPay. Low fees, USDC wallet, MonCash delivery. The smartest way to send money to the Caribbean.">
+<meta name="keywords" content="send money to Haiti, remittance Haiti, MonCash transfer, USDC wallet Haiti, TchotchoPay">
 <meta property="og:title" content="TchotchoPay — Money for the Caribbean">
-<meta property="og:description" content="Send money to Haiti instantly with TchotchoPay. Lower fees than Western Union. USDC wallet. MonCash & NatCash delivery.">
-<meta property="og:image" content="og-image.png">
-<meta property="og:url" content="https://tchotchopay.com/">
+<meta property="og:description" content="Send money to Haiti instantly. Low fees. USDC wallet. MonCash delivery.">
+<meta property="og:image" content="https://tchotchopay.com/sec-hero.jpg">
+<meta property="og:url" content="https://tchotchopay.com">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="logo_icon_80x80.png" type="image/png">
+<link rel="icon" href="tp logo.jpg" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: #FBF7EF; overflow-x: hidden; }
-  a { text-decoration: none; color: inherit; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: #FBF7EF; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
 
-  /* ── STICKY NAV ── */
-  .real-nav {
-    position: sticky; top: 0; z-index: 200;
-    background: #fff;
-    border-bottom: 1px solid #E5DECE;
-  }
-  .nav-wrap {
-    max-width: 1160px; margin: 0 auto;
-    display: flex; align-items: center;
-    height: 68px; padding: 0 24px;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: 40px; flex-shrink: 0; }
-  .nav-logo img { height: 34px; width: auto; }
-  .nav-logo span { font-size: 19px; font-weight: 700; color: #0A1E5E; letter-spacing: -0.3px; }
-  .nav-links { display: flex; gap: 2px; flex: 1; }
-  .nav-links a { font-size: 14px; font-weight: 500; color: #2C2C2C; padding: 8px 11px; border-radius: 8px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-  .nav-links a:hover { background: #FBF7EF; color: #0A1E5E; }
-  .nav-right { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
-  .nav-login { font-size: 14px; font-weight: 600; color: #0A1E5E; padding: 8px 14px; border-radius: 50px; transition: background 0.15s; }
-  .nav-login:hover { background: #FBF7EF; }
-  .nav-cta { background: #C9A227; color: #07163F; font-size: 14px; font-weight: 700; padding: 9px 22px; border-radius: 50px; transition: all 0.2s; }
-  .nav-cta:hover { background: #E0B84A; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,162,39,0.4); }
-  .ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; margin-left: auto; border: none; background: none; }
-  .ham span { display: block; width: 24px; height: 2px; background: #0A1E5E; border-radius: 2px; }
-  @media (max-width: 860px) {
-    .nav-links, .nav-login { display: none; }
-    .ham { display: flex; }
-  }
+/* ── NAV ── */
+.real-nav { position: sticky; top: 0; z-index: 200; background: #fff; border-bottom: 1px solid #E5DECE; }
+.nav-wrap { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; height: 68px; padding: 0 24px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; margin-right: 40px; flex-shrink: 0; }
+.nav-logo img { height: 34px; width: auto; }
+.nav-logo span { font-size: 19px; font-weight: 700; color: #0A1E5E; letter-spacing: -0.3px; }
+.nav-links { display: flex; gap: 2px; flex: 1; }
+.nav-links a { font-size: 14px; font-weight: 500; color: #2C2C2C; padding: 8px 11px; border-radius: 8px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+.nav-links a:hover { background: #FBF7EF; color: #0A1E5E; }
+.nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.nav-login { font-size: 14px; font-weight: 500; color: #2C2C2C; padding: 8px 14px; border-radius: 50px; }
+.nav-login:hover { background: #FBF7EF; }
+.nav-cta { background: #C9A227; color: #07163F; font-size: 14px; font-weight: 700; padding: 9px 18px; border-radius: 50px; transition: 0.2s; white-space: nowrap; }
+.nav-cta:hover { background: #E0B84A; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,162,39,0.4); }
+.ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; margin-left: auto; border: none; background: none; }
+.ham span { display: block; width: 24px; height: 2px; background: #0A1E5E; border-radius: 2px; }
+@media (max-width: 860px) {
+  .nav-links, .nav-login { display: none; }
+  .ham { display: flex; }
+}
 
-  /* ── MOBILE MENU ── */
-  .mmenu { display: none; position: fixed; inset: 0; background: #fff; z-index: 300; padding: 24px; overflow-y: auto; }
-  .mmenu.open { display: block; }
-  .mmenu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-  .mmenu-close { font-size: 26px; cursor: pointer; border: none; background: none; color: #0A1E5E; }
-  .mmenu-links { display: flex; flex-direction: column; }
-  .mmenu-links a { font-size: 17px; font-weight: 500; color: #2C2C2C; padding: 14px 0; border-bottom: 1px solid #E5DECE; display: block; }
-  .mmenu-btns { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
-  .mmenu-btns a { display: block; text-align: center; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 16px; }
+/* ── MOBILE MENU ── */
+.mmenu { display: none; position: fixed; inset: 0; background: #fff; z-index: 300; padding: 24px; overflow-y: auto; }
+.mmenu.open { display: block; }
+.mmenu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+.mmenu-close { font-size: 26px; cursor: pointer; border: none; background: none; color: #0A1E5E; }
+.mmenu-links { display: flex; flex-direction: column; }
+.mmenu-links a { font-size: 17px; font-weight: 500; color: #2C2C2C; padding: 14px 0; border-bottom: 1px solid #E5DECE; display: block; }
+.mmenu-btns { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.mmenu-btns a { display: block; text-align: center; padding: 14px; border-radius: 50px; font-weight: 700; font-size: 16px; }
 
-  /* ── DESIGN SECTIONS ── */
-  .ds {
-    width: 100%;
-    display: block;
-    line-height: 0;
-    position: relative;
-    background: #FBF7EF;
-  }
-  .ds img {
-    width: 100%;
-    max-width: 1600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
+/* ── SECTION IMAGES ── */
+.ds { width: 100%; display: block; line-height: 0; position: relative; }
+.ds img { width: 100%; height: auto; display: block; }
 
-  /* ── HERO CALCULATOR OVERLAY ── */
-  .hero-wrap { position: relative; width: 100%; line-height: 0; background: #FBF7EF; }
-  .hero-wrap img { width: 100%; max-width: 1600px; height: auto; display: block; margin: 0 auto; }
-  .hero-calc-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .hero-calc-inner {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    height: 100%;
-  }
-  .hw {
-    position: absolute;
-    right: 4.5%;
-    top: 10%;
-    width: 32%;
-    max-width: 420px;
-    background: #fff;
-    border-radius: 16px;
-    padding: 22px 20px 18px;
-    box-shadow: 0 8px 40px rgba(10,30,94,0.12);
-  }
-  .hw-title { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #999; margin-bottom: 14px; }
-  .hw-presets { display: flex; gap: 6px; margin-bottom: 14px; }
-  .hw-preset { flex: 1; text-align: center; padding: 7px 4px; border: 1.5px solid #E5DECE; border-radius: 8px; font-size: 13px; font-weight: 600; color: #0A1E5E; cursor: pointer; background: #fff; font-family: 'Inter',sans-serif; transition: all 0.15s; }
-  .hw-preset.active, .hw-preset:hover { background: #0A1E5E; color: #fff; border-color: #0A1E5E; }
-  .hw-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0EBE0; font-size: 13px; }
-  .hw-row:last-of-type { border-bottom: none; }
-  .hw-row-label { color: #888; font-weight: 500; display: flex; align-items: center; gap: 6px; }
-  .hw-row-val { font-weight: 700; color: #0A1E5E; }
-  .hw-result-box { background: #0A1E5E; border-radius: 12px; padding: 14px 16px; margin: 12px 0; }
-  .hw-result-label { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
-  .hw-result-num { font-size: 26px; font-weight: 800; color: #fff; }
-  .hw-result-cur { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
-  .hw-compare { font-size: 11px; color: #0A1E5E; background: #EEF4FF; border-radius: 8px; padding: 8px 10px; margin-bottom: 14px; text-align: center; }
-  .hw-compare strong { color: #C9A227; }
-  .hw-btn { display: block; width: 100%; text-align: center; background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 50px; transition: all 0.2s; font-family: 'Inter',sans-serif; cursor: pointer; border: none; }
-  .hw-btn:hover { background: #E0B84A; transform: translateY(-1px); }
+/* ── HERO ── */
+.hero-wrap { position: relative; width: 100%; line-height: 0; }
+.hero-wrap img { width: 100%; height: auto; display: block; }
+.hero-calc-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.hero-calc-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; height: 100%; }
+.hw {
+  position: absolute;
+  right: 4.5%;
+  top: 10%;
+  width: 32%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 20px 18px;
+  box-shadow: 0 8px 40px rgba(10,30,94,0.12);
+  pointer-events: auto;
+}
+.hw-title { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #999; margin-bottom: 14px; }
+.hw-presets { display: flex; gap: 6px; margin-bottom: 14px; }
+.hw-preset { flex: 1; text-align: center; padding: 8px 4px; border-radius: 50px; border: 1.5px solid #E5DECE; background: #fff; font-size: 13px; font-weight: 600; color: #2C2C2C; cursor: pointer; transition: 0.15s; }
+.hw-preset.active, .hw-preset:hover { background: #0A1E5E; color: #fff; border-color: #0A1E5E; }
+.hw-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0EBE0; }
+.hw-row-label { font-size: 12px; color: #888; }
+.hw-row-val { font-size: 13px; font-weight: 600; color: #1A1A1A; }
+.hw-result-box { background: #FBF7EF; border-radius: 10px; padding: 12px 14px; margin: 12px 0 10px; }
+.hw-result-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+.hw-result-num { font-size: 26px; font-weight: 800; color: #0A1E5E; line-height: 1; }
+.hw-result-cur { font-size: 11px; color: #888; margin-top: 3px; }
+.hw-compare { font-size: 11px; color: #555; margin-bottom: 12px; line-height: 1.5; }
+.hw-btn { display: block; width: 100%; text-align: center; background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 50px; cursor: pointer; border: none; transition: 0.2s; }
+.hw-btn:hover { background: #E0B84A; transform: translateY(-1px); }
 
-  /* ── HERO LEFT CTA BUTTONS (mobile) ── */
-  .hero-mobile-btns { display: none; gap: 10px; padding: 12px 16px; background: #FBF7EF; }
-  .hero-mobile-btns a { flex: 1; text-align: center; padding: 12px; border-radius: 50px; font-weight: 700; font-size: 14px; white-space: nowrap; }
-  .h-btn-gold { background: #C9A227; color: #07163F; }
-  .h-btn-outline { border: 2px solid #0A1E5E; color: #0A1E5E; }
-  @media (max-width: 768px) {
-    .hero-calc-overlay { display: none; }
-    .hero-mobile-btns { display: flex; }
-  }
+/* ── HERO MOBILE BUTTONS ── */
+.hero-mobile-btns { display: none; gap: 10px; padding: 12px 16px; background: #FBF7EF; }
+.hero-mobile-btns a { flex: 1; text-align: center; padding: 12px; border-radius: 50px; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.h-btn-gold { background: #C9A227; color: #07163F; }
+.h-btn-outline { border: 2px solid #0A1E5E; color: #0A1E5E; }
+@media (max-width: 768px) {
+  .hero-calc-overlay { display: none; }
+  .hero-mobile-btns { display: flex; }
+}
 
-  /* ── WAITLIST OVERLAY (d14) ── */
-  .wl-wrap { position: relative; overflow: hidden; }
-  .wl-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
-  .wl-inner {
-    width: 100%; max-width: 1600px; margin: 0 auto;
-    position: relative; height: 100%;
-  }
-  .wl-form-box {
-    position: absolute;
-    left: 50%; transform: translateX(-50%);
-    top: 39%;
-    width: 28%;
-    min-width: 240px;
-  }
-  .wl-form { display: flex; flex-direction: column; gap: 10px; }
-  .wl-form input {
-    width: 100%; padding: 13px 18px;
-    border: 1.5px solid rgba(255,255,255,0.3);
-    border-radius: 50px;
-    background: rgba(255,255,255,0.1);
-    color: #fff; font-size: 14px; outline: none;
-    font-family: 'Inter',sans-serif;
-    transition: border-color 0.2s;
-  }
-  .wl-form input::placeholder { color: rgba(255,255,255,0.45); }
-  .wl-form input:focus { border-color: #C9A227; }
-  .wl-submit {
-    background: #C9A227; color: #07163F;
-    font-size: 14px; font-weight: 700;
-    padding: 13px 24px; border-radius: 50px;
-    border: none; cursor: pointer;
-    font-family: 'Inter',sans-serif;
-    transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .wl-submit:hover { background: #E0B84A; }
-  @media (max-width: 768px) {
-    .wl-overlay { position: static; }
-    .wl-inner { height: auto; padding: 20px 16px; }
-    .wl-form-box { position: static; transform: none; width: 100%; }
-  }
+/* ── WAITLIST SECTION ── */
+.wl-wrap { position: relative; }
+.wl-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.wl-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; height: 100%; display: flex; align-items: center; justify-content: center; }
+.wl-form-box { width: 420px; max-width: 90vw; }
+.wl-form { display: flex; flex-direction: column; gap: 10px; }
+.wl-form input { width: 100%; padding: 13px 18px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50px; background: rgba(255,255,255,0.15); color: #fff; font-size: 14px; outline: none; font-family: 'Inter', sans-serif; }
+.wl-form input::placeholder { color: rgba(255,255,255,0.65); }
+.wl-submit { background: #C9A227; color: #07163F; font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 50px; border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; width: 100%; }
+.wl-submit:hover { background: #E0B84A; }
+@media (max-width: 768px) {
+  .wl-overlay { position: static; background: #0A1E5E; }
+  .wl-inner { padding: 32px 20px; }
+  .wl-form-box { width: 100%; }
+}
 </style>
 </head>
 <body>
 
-<!-- STICKY NAV -->
+<!-- ── NAV ── -->
 <nav class="real-nav">
   <div class="nav-wrap">
     <a href="/" class="nav-logo">
-      <img src="logo-t.png" alt="TchotchoPay">
+      <img src="tp logo.jpg" alt="TchotchoPay">
       <span>TchotchoPay</span>
     </a>
     <div class="nav-links">
-      <a href="/send.html">Send</a>
-      <a href="/app.html">App</a>
-      <a href="/topup.html">Top-Up</a>
-      <a href="/send.html">Pay</a>
-      <a href="/card.html">Card</a>
-      <a href="/compare.html">Compare</a>
-      <a href="/about.html">Business</a>
-      <a href="/recipient.html">Haiti</a>
+      <a href="/send">Send</a>
+      <a href="/app">App</a>
+      <a href="/topup">Top-Up</a>
+      <a href="/send">Pay</a>
+      <a href="/card">Card</a>
+      <a href="/compare">Compare</a>
+      <a href="/about">Business</a>
+      <a href="/recipient">Haiti</a>
     </div>
     <div class="nav-right">
-      <a href="/login.html" class="nav-login">Guest</a>
-      <a href="/signup.html" class="nav-cta">Get started</a>
+      <a class="nav-login" href="/login">Log In</a>
+      <a class="nav-cta" href="/signup">Get started</a>
     </div>
     <button class="ham" onclick="document.getElementById('mm').classList.toggle('open')">
       <span></span><span></span><span></span>
@@ -206,34 +151,34 @@
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- ── MOBILE MENU ── -->
 <div class="mmenu" id="mm">
   <div class="mmenu-top">
-    <a href="/" style="display:flex;align-items:center;gap:10px">
-      <img src="logo-t.png" alt="T" style="height:30px">
-      <span style="font-size:17px;font-weight:700;color:#0A1E5E">TchotchoPay</span>
+    <a href="/" class="nav-logo">
+      <img src="tp logo.jpg" alt="TchotchoPay">
+      <span>TchotchoPay</span>
     </a>
-    <button class="mmenu-close" onclick="document.getElementById('mm').classList.remove('open')">✕</button>
+    <button class="mmenu-close" onclick="document.getElementById('mm').classList.remove('open')">&#x2715;</button>
   </div>
   <div class="mmenu-links">
-    <a href="/send.html" onclick="document.getElementById('mm').classList.remove('open')">Send Money</a>
-    <a href="/app.html" onclick="document.getElementById('mm').classList.remove('open')">App</a>
-    <a href="/topup.html" onclick="document.getElementById('mm').classList.remove('open')">Top-Up</a>
-    <a href="/card.html" onclick="document.getElementById('mm').classList.remove('open')">Card</a>
-    <a href="/compare.html" onclick="document.getElementById('mm').classList.remove('open')">Compare</a>
-    <a href="/recipient.html" onclick="document.getElementById('mm').classList.remove('open')">Receive in Haiti</a>
-    <a href="/about.html" onclick="document.getElementById('mm').classList.remove('open')">About</a>
-    <a href="/faq.html" onclick="document.getElementById('mm').classList.remove('open')">Help</a>
+    <a href="/send">Send Money</a>
+    <a href="/app">App</a>
+    <a href="/topup">Top-Up</a>
+    <a href="/card">Card</a>
+    <a href="/compare">Compare</a>
+    <a href="/recipient">Receive in Haiti</a>
+    <a href="/about">About</a>
+    <a href="/faq">Help</a>
   </div>
   <div class="mmenu-btns">
-    <a href="/login.html" style="border:2px solid #0A1E5E;color:#0A1E5E">Log In</a>
-    <a href="/signup.html" style="background:#C9A227;color:#07163F">Get Started Free</a>
+    <a href="/login" style="border:2px solid #0A1E5E;color:#0A1E5E;">Log In</a>
+    <a href="/signup" style="background:#C9A227;color:#07163F;">Get Started Free</a>
   </div>
 </div>
 
-<!-- d1 — HERO: Money for the Caribbean + live calculator -->
+<!-- ── HERO — sec-hero.jpg + live calculator ── -->
 <div class="hero-wrap">
-  <img src="d1.jpg" alt="TchotchoPay — Money for the Caribbean. Simple. Fast. Yours.">
+  <img src="sec-hero.jpg" alt="TchotchoPay — Money for the Caribbean. Simple. Fast. Yours.">
   <div class="hero-calc-overlay">
     <div class="hero-calc-inner">
       <div class="hw">
@@ -245,126 +190,150 @@
           <button class="hw-preset" onclick="setAmt(500)">$500</button>
         </div>
         <div class="hw-row">
-          <span class="hw-row-label">🇺🇸 You send</span>
+          <span class="hw-row-label">&#127482;&#127480; You send</span>
           <span class="hw-row-val" id="hw-send">$100.00</span>
         </div>
         <div class="hw-row">
-          <span class="hw-row-label">📋 Fee (2%)</span>
+          <span class="hw-row-label">&#128203; Fee (2%)</span>
           <span class="hw-row-val" id="hw-fee">$2.00</span>
         </div>
         <div class="hw-row">
-          <span class="hw-row-label">⚡ Speed</span>
+          <span class="hw-row-label">&#9889; Speed</span>
           <span class="hw-row-val">~2 min</span>
         </div>
         <div class="hw-result-box">
-          <div class="hw-result-label">🇭🇹 Recipient gets</div>
-          <div class="hw-result-num" id="hw-result">12,676</div>
+          <div class="hw-result-label">&#127477;&#127481; Recipient gets</div>
+          <div class="hw-result-num" id="hw-result">12,789</div>
           <div class="hw-result-cur">HTG on Marie's MonCash</div>
         </div>
         <div class="hw-compare">Send $100 via TchotchoPay and your family gets <strong>820 HTG more</strong> than Western Union.</div>
-        <a href="/signup.html" class="hw-btn">→ Send Money Now</a>
+        <a class="hw-btn" href="/signup">&#8594; Send Money Now</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Mobile hero CTA buttons -->
+<!-- ── HERO MOBILE BUTTONS (shown below 768px) ── -->
 <div class="hero-mobile-btns">
-  <a href="/send.html" class="h-btn-gold">Send Money Now →</a>
-  <a href="/signup.html" class="h-btn-outline">Open Your Wallet</a>
+  <a class="h-btn-gold" href="/send">Send Money Now &#8594;</a>
+  <a class="h-btn-outline" href="/signup">Open Your Wallet</a>
 </div>
 
-<!-- d2 — STATS BAR -->
+<!-- ── STATS / PARTNERS BAR ── -->
 <div class="ds">
-  <img src="d2.jpg" alt="<1% Transfer fee · ~Instant Settlement · 24/7 Available · $0 P2P transfers">
+  <img src="sec-partners.jpg" alt="&lt;1% Transfer fee · ~Instant Settlement · 24/7 Available · $0 P2P Transfers">
 </div>
 
-<!-- d3 — APP SCREENSHOTS -->
+<!-- ── TOP-UP — 8 COUNTRIES ── -->
 <div class="ds">
-  <img src="d3.jpg" alt="TchotchoPay app — Send $100, Marie receives 12,676 HTG, Delivered instantly">
+  <img src="sec-download.jpg" alt="Top-Up available in 8 countries — USA, Canada, France, Dominican Republic, Cuba, Jamaica, Trinidad, Guyana">
+  <a href="/topup" aria-label="Top Up Now" style="position:absolute;bottom:14%;left:4%;width:16%;height:9%;display:block"></a>
+  <a href="/signup" aria-label="Join the Waitlist" style="position:absolute;bottom:14%;left:22%;width:16%;height:9%;display:block"></a>
 </div>
 
-<!-- d4 — DOWNLOAD -->
-<div class="ds" style="position:relative">
-  <img src="d4.jpg" alt="Scan to download TchotchoPay — iPhone and Android">
-  <!-- Transparent click areas over App Store / Google Play buttons -->
-  <a href="https://apps.apple.com" target="_blank" rel="noopener" style="position:absolute;top:52%;left:28%;width:16%;height:9%;display:block" title="Download on App Store"></a>
-  <a href="https://play.google.com" target="_blank" rel="noopener" style="position:absolute;top:52%;left:46%;width:18%;height:9%;display:block" title="Get on Google Play"></a>
-</div>
-
-<!-- d5 — HOW IT WORKS (3 steps) -->
+<!-- ── HOW IT WORKS — 3 STEPS ── -->
 <div class="ds">
-  <img src="d5.jpg" alt="Send money in 3 steps — Load wallet · Send to Haiti · Delivered instantly">
+  <img src="sec-howitworks.jpg" alt="Send money in 3 steps — Load wallet · Send to Haiti · Delivered to MonCash">
 </div>
 
-<!-- d6 — USDC CARD + DIGITAL SAVINGS -->
-<div class="ds" style="position:relative">
-  <img src="d6.jpg" alt="Spend USDC anywhere Visa is accepted · Stop watching the gourde shrink — 4.5% APY">
-  <!-- Get Your Card CTA -->
-  <a href="/card.html" style="position:absolute;bottom:52%;left:4%;width:14%;height:5%;display:block" title="Get Your Card"></a>
-  <!-- See all Fees CTA -->
-  <a href="/pricing.html" style="position:absolute;bottom:52%;left:19.5%;width:13%;height:5%;display:block" title="See all Fees"></a>
-</div>
-
-<!-- d7 — YOUR WALLET WORKS EVERYWHERE (dark navy, 6 feature cards) -->
+<!-- ── APP SHOWCASE — FEATURES ── -->
 <div class="ds">
-  <img src="d7.jpg" alt="Your wallet works everywhere in Haiti — Money Transfer, Digital Wallet, Phone Top-Ups, Haitian Marketplace, Visa Debit Card, Digital Savings">
+  <img src="sec-showcase.jpg" alt="TchotchoPay app — Send $100, Marie receives 12,676 HTG, Delivered to MonCash">
 </div>
 
-<!-- d8 — COMPETITOR COMPARISON TABLE -->
+<!-- ── PAYMENTS IN HAITI ── -->
 <div class="ds">
-  <img src="d8.jpg" alt="We beat every competitor sending money to Haiti — TchotchoPay vs Western Union, MoneyGram, Remitly, WorldRemit">
+  <img src="sec-payments.jpg" alt="Your wallet works everywhere in Haiti — Phone Top-ups, School Fees, Transportation, Local Merchants">
 </div>
 
-<!-- d9 — TWO WAYS TO GROW (Merchants + Agents) -->
-<div class="ds" style="position:relative">
-  <img src="d9.jpg" alt="Two ways to grow with TchotchoPay — Accept QR payments at your store · Earn 1% as a cash agent">
-  <!-- Apply as a Merchant -->
-  <a href="/merchant-signup.html" style="position:absolute;bottom:48%;left:4%;width:16%;height:5%;display:block" title="Apply as a Merchant"></a>
-  <!-- Apply as an Agent -->
-  <a href="/agent-signup.html" style="position:absolute;bottom:14%;right:4%;width:16%;height:5%;display:block" title="Apply as an Agent"></a>
-</div>
-
-<!-- d10 — AGENT CARD + RECEIVE MONEY IN HAITI -->
-<div class="ds" style="position:relative">
-  <img src="d10.jpg" alt="Earn 1% — carry the black Agent Card · Resevwa lajan ou — receive your money in Haiti">
-  <!-- Create Free Wallet -->
-  <a href="/signup.html" style="position:absolute;bottom:7%;left:4%;width:28%;height:6%;display:block" title="Create Free Wallet"></a>
-</div>
-
-<!-- d11 — DIASPORA CORRIDORS + WHAT HAPPENS WHEN YOU TAP SEND -->
+<!-- ── WALLET FEATURES ── -->
 <div class="ds">
-  <img src="d11.jpg" alt="Built where Haitian families actually live — US, Canada, France · What actually happens when you tap Send">
+  <img src="sec-wallet.jpg" alt="TchotchoPay wallet — Digital dollars, MonCash integration, 24/7 access">
 </div>
 
-<!-- d12 — DITCH THE OLD + TESTIMONIALS -->
-<div class="ds" style="position:relative">
-  <img src="d12.jpg" alt="Ditch the old. Swipe the future. · Families already talk like this — testimonials">
-  <!-- Join the waitlist -->
-  <a href="/signup.html" style="position:absolute;top:28%;left:4%;width:14%;height:5%;display:block" title="Join the waitlist"></a>
-  <!-- See the app -->
-  <a href="/app.html" style="position:absolute;top:28%;left:19.5%;width:12%;height:5%;display:block" title="See the app"></a>
+<!-- ── SPEND USDC ── -->
+<div class="ds">
+  <img src="sec-spendusdc.jpg" alt="Spend USDC anywhere Visa is accepted · Stop watching the gourde lose value">
+  <a href="/card" aria-label="Learn about USDC Virtual Card" style="position:absolute;bottom:14%;left:4%;width:16%;height:9%;display:block"></a>
+  <a href="/pricing" aria-label="See pricing" style="position:absolute;bottom:14%;left:22%;width:14%;height:9%;display:block"></a>
 </div>
 
-<!-- d13 — SECURITY + FAQ -->
-<div class="ds" style="position:relative">
-  <img src="d13.jpg" alt="Your money is safe with TchotchoPay — Bank-grade security, 256-bit encryption, 2FA · How can we help you?">
-  <!-- FAQ click area -->
-  <a href="/faq.html" style="position:absolute;bottom:0;left:0;right:0;height:42%;display:block" title="View Full Help Center"></a>
+<!-- ── VIRTUAL CARD ── -->
+<div class="ds">
+  <img src="sec-card.jpg" alt="TchotchoPay Visa Virtual Card — Spend USDC anywhere, Apple Pay & Google Pay">
+  <a href="/card" aria-label="Get your card" style="position:absolute;bottom:14%;left:4%;width:16%;height:7%;display:block"></a>
 </div>
 
-<!-- d14 — WAITLIST CTA + FOOTER -->
+<!-- ── GOURDE / SAVINGS ── -->
+<div class="ds">
+  <img src="sec-gourde.jpg" alt="Save in USDC — Beat the gourde, earn 4.5% APY on digital dollar savings">
+</div>
+
+<!-- ── P2P TRANSFERS ── -->
+<div class="ds">
+  <img src="sec-p2p.jpg" alt="Free peer-to-peer transfers — Send money to anyone with a TchotchoPay wallet">
+</div>
+
+<!-- ── COMPARISON TABLE ── -->
+<div class="ds">
+  <img src="sec-compare.jpg" alt="We beat every competitor sending money to Haiti — TchotchoPay vs Western Union, MoneyGram, Remitly, WorldRemit">
+</div>
+
+<!-- ── GROW YOUR BUSINESS — MERCHANTS ── -->
+<div class="ds">
+  <img src="sec-merchant.jpg" alt="Accept digital payments at your store — TchotchoPay Merchant QR">
+  <a href="/merchant-signup" aria-label="Become a merchant" style="position:absolute;bottom:8%;left:4%;width:16%;height:7%;display:block"></a>
+  <a href="/merchant-portal" aria-label="Preview portal" style="position:absolute;bottom:8%;left:22%;width:16%;height:7%;display:block"></a>
+</div>
+
+<!-- ── GROW YOUR BUSINESS — AGENTS ── -->
+<div class="ds">
+  <img src="sec-grow.jpg" alt="Two ways to grow with TchotchoPay — Accept QR payments or earn as an Agent">
+  <a href="/agent-signup" aria-label="Become an agent" style="position:absolute;bottom:8%;right:4%;width:16%;height:7%;display:block"></a>
+  <a href="/agent-dashboard" aria-label="Preview dashboard" style="position:absolute;bottom:8%;right:22%;width:16%;height:7%;display:block"></a>
+</div>
+
+<!-- ── RECEIVE MONEY IN HAITI (globe) ── -->
+<div class="ds">
+  <img src="sec-globe.jpg" alt="Receive money in Haiti — RESEVWA LAJAN OU — Free TchotchoPay account for recipients">
+  <a href="/signup" aria-label="Create free account" style="position:absolute;bottom:12%;left:4%;width:22%;height:9%;display:block"></a>
+</div>
+
+<!-- ── TESTIMONIALS BAR ── -->
+<div class="ds">
+  <img src="sec-testi.jpg" alt="Families already talk like this — TchotchoPay testimonials">
+</div>
+
+<!-- ── DITCH THE OLD CTA ── -->
+<div class="ds">
+  <img src="sec-ditch.jpg" alt="Ditch the old. Swipe the future.">
+  <a href="/signup" aria-label="Get started free" style="position:absolute;bottom:16%;left:4%;width:16%;height:11%;display:block"></a>
+  <a href="/app" aria-label="Get the app" style="position:absolute;bottom:16%;left:22%;width:14%;height:11%;display:block"></a>
+</div>
+
+<!-- ── SECURITY ── -->
+<div class="ds">
+  <img src="sec-security.jpg" alt="Your money is safe with TchotchoPay — Bank-grade security, 24/7 support">
+</div>
+
+<!-- ── FAQ / HELP CENTER ── -->
+<div class="ds">
+  <img src="sec-faq.jpg" alt="Help Center — 24/7 support for TchotchoPay users">
+  <a href="/faq" aria-label="Help Center" style="position:absolute;inset:0;display:block"></a>
+</div>
+
+<!-- ── WAITLIST ── -->
 <div class="wl-wrap">
   <div class="ds">
-    <img src="d14.jpg" alt="Be the first to use TchotchoPay — Join the waitlist">
+    <img src="sec-waitlist.jpg" alt="Be the first to use TchotchoPay — Join the waitlist">
   </div>
   <div class="wl-overlay">
     <div class="wl-inner">
       <div class="wl-form-box">
-        <form class="wl-form" name="waitlist" data-netlify="true" onsubmit="joinWaitlist(event)">
+        <form class="wl-form" method="post" name="waitlist" onsubmit="joinWaitlist(event)">
           <input type="hidden" name="form-name" value="waitlist">
-          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
-          <button type="submit" class="wl-submit">✉ Join Now</button>
+          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+          <button type="submit" class="wl-submit">&#9993; Join the Waitlist</button>
         </form>
       </div>
     </div>
@@ -372,39 +341,54 @@
 </div>
 
 <script>
-var RATE = 130.50;
+var RATE = 127.89;
+var currentAmt = 100;
 
-function setAmt(v) {
-  document.querySelectorAll('.hw-preset').forEach(function(b){ b.classList.remove('active'); });
-  event.currentTarget.classList.add('active');
-  calc(v);
+function setAmt(n) {
+  currentAmt = n;
+  document.querySelectorAll('.hw-preset').forEach(function(b) {
+    b.classList.toggle('active', parseInt(b.textContent.replace('$','')) === n);
+  });
+  updateCalc();
 }
 
-function calc(v) {
-  var amt = v || 100;
-  var fee = amt * 0.02;
-  var net = (amt - fee) * RATE;
-  document.getElementById('hw-send').textContent = '$' + amt.toFixed(2);
-  document.getElementById('hw-fee').textContent  = '$' + fee.toFixed(2);
-  document.getElementById('hw-result').textContent = Math.round(net).toLocaleString('en-US');
+function updateCalc() {
+  var fee = currentAmt * 0.02;
+  var net = currentAmt - fee;
+  var htg = Math.round(net * RATE);
+  var sendEl = document.getElementById('hw-send');
+  var feeEl = document.getElementById('hw-fee');
+  var resEl = document.getElementById('hw-result');
+  if (sendEl) sendEl.textContent = '$' + currentAmt.toFixed(2);
+  if (feeEl) feeEl.textContent = '$' + fee.toFixed(2);
+  if (resEl) resEl.textContent = htg.toLocaleString();
 }
+
+fetch('/api/exchange-rates').then(function(r){ return r.json(); }).then(function(d){
+  if (d && d.HTG) { RATE = d.HTG; updateCalc(); }
+}).catch(function(){});
+
+updateCalc();
 
 function joinWaitlist(e) {
   e.preventDefault();
   var form = e.target;
-  var email = form.querySelector('input[type="email"]').value;
+  var email = form.email.value;
+  var btn = form.querySelector('.wl-submit');
+  btn.textContent = 'Joining…';
+  btn.disabled = true;
   fetch('/', {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: 'form-name=waitlist&email=' + encodeURIComponent(email)
   }).then(function() {
-    form.innerHTML = '<p style="color:#C9A227;font-size:15px;font-weight:600;text-align:center;padding:14px">🎉 You\'re on the list!</p>';
+    btn.textContent = '✓ You\'re on the list!';
+    form.email.value = '';
   }).catch(function() {
-    form.innerHTML = '<p style="color:#C9A227;font-size:15px;font-weight:600;text-align:center;padding:14px">🎉 You\'re on the list!</p>';
+    btn.textContent = '✓ You\'re on the list!';
+    form.email.value = '';
   });
 }
-
-calc(100);
 </script>
 </body>
 </html>
