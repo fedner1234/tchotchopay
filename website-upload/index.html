@@ -65,6 +65,14 @@ a { text-decoration: none; color: inherit; }
 .hero-wrap .ds-inner { max-width: 1085px; margin: 0 auto; }
 .hero-wrap img { width: 100%; height: auto; display: block; }
 
+/* ── OVERLAY LINKS — suppress long-press image callout on mobile ── */
+.ds-inner a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ── MOBILE: scroll horizontally so 1085px images stay readable ── */
 @media (max-width: 600px) {
   body { min-width: 390px; }
@@ -252,9 +260,10 @@ a { text-decoration: none; color: inherit; }
 
 <!-- ── WAITLIST ── -->
 <div class="ds dark">
-  <div class="ds-inner" style="position:relative">
+  <div class="ds-inner">
     <img src="sec-testi.jpg" alt="Join the TchotchoPay waitlist" loading="lazy">
-    <a href="/signup" aria-label="Join the waitlist" style="position:absolute;inset:0;display:block"></a>
+    <!-- Only cover the "Join Now" button area, not the email field -->
+    <a href="/signup" aria-label="Join Now" style="position:absolute;bottom:10%;left:28%;width:44%;height:38%;display:block"></a>
   </div>
 </div>
 
