@@ -57,19 +57,20 @@ a { text-decoration: none; color: inherit; }
 .ds { width: 100%; display: block; line-height: 0; background: #FBF7EF; }
 .ds.dark { background: #0A1739; }
 .ds.navy { background: #0A1E5E; }
-/* Inner wrapper centers image and anchors overlays to it, not to the full-page container */
 .ds-inner { max-width: 1085px; margin: 0 auto; position: relative; line-height: 0; }
-.ds img {
-  width: 100%; height: auto; display: block;
-  /* Sharper rendering — prevents browser from adding extra blur when scaling */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
+.ds img { width: 100%; height: auto; display: block; }
 
 /* ── HERO ── */
 .hero-wrap { width: 100%; line-height: 0; background: #FBF7EF; }
 .hero-wrap .ds-inner { max-width: 1085px; margin: 0 auto; }
-.hero-wrap img { width: 100%; height: auto; display: block; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; }
+.hero-wrap img { width: 100%; height: auto; display: block; }
+
+/* ── MOBILE: scroll horizontally so 1085px images stay readable ── */
+@media (max-width: 600px) {
+  body { min-width: 390px; }
+  .ds, .hero-wrap { overflow-x: auto; }
+  .ds-inner, .hero-wrap .ds-inner { min-width: 600px; }
+}
 
 
 </style>
