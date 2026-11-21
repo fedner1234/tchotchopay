@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:1080px; height:1920px;
+  background:#020B2D;
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:relative;
+}
+.topbar { position:absolute; top:0; left:0; right:0; height:10px; background:linear-gradient(90deg,#00AEEF,#1055CC); }
+
+/* LOGO */
+.logo { position:absolute; top:64px; left:0; right:0; text-align:center; font-size:26px; font-weight:900; letter-spacing:.22em; color:rgba(255,255,255,.32); text-transform:uppercase; }
+
+/* TITLE */
+.title { position:absolute; top:134px; left:0; right:0; text-align:center; font-size:88px; font-weight:900; color:#fff; }
+.title span { color:#00AEEF; }
+
+/* STEPS — below title */
+.steps { position:absolute; top:278px; left:60px; right:60px; display:flex; flex-direction:column; gap:0; }
+.step { display:flex; gap:36px; align-items:flex-start; padding:28px 0; }
+.step-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+.step-num { width:78px; height:78px; border-radius:50%; background:linear-gradient(135deg,#00AEEF,#1055CC); display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:900; color:#fff; }
+.step-line { width:3px; height:56px; background:linear-gradient(to bottom,rgba(0,174,239,.4),transparent); margin-top:8px; }
+.step-content { padding-top:10px; }
+.step-title { font-size:48px; font-weight:900; color:#fff; margin-bottom:10px; }
+.step-desc { font-size:34px; color:rgba(255,255,255,.5); line-height:1.4; margin-bottom:14px; }
+.step-tag { display:inline-block; background:rgba(0,174,239,.1); border:1.5px solid rgba(0,174,239,.22); border-radius:40px; padding:8px 28px; font-size:26px; font-weight:800; color:#00AEEF; }
+
+/* STAT BAR — steps: 4 × ~220px = 880px, starts 278, ends ~1158 */
+.stat-bar { position:absolute; top:1220px; left:60px; right:60px; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:30px; padding:40px; display:flex; justify-content:space-around; }
+.stat { text-align:center; }
+.stat-val { font-size:68px; font-weight:900; color:#00AEEF; }
+.stat-lbl { font-size:24px; font-weight:700; color:rgba(255,255,255,.38); margin-top:8px; letter-spacing:.1em; }
+
+/* HANDLE */
+.handle { position:absolute; bottom:64px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:rgba(255,255,255,.22); letter-spacing:.18em; }
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div class="logo">TCHOTCHOPAY</div>
+<div class="title">How It <span>Works</span></div>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-title">Sign Up Free</div>
+      <div class="step-desc">Create your account in 2 minutes. No bank needed.</div>
+      <div class="step-tag">tchotchopay.com</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-title">Fund Your Wallet</div>
+      <div class="step-desc">Add money via debit card or receive USDC from family.</div>
+      <div class="step-tag">USDC on Base</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+    <div class="step-content">
+      <div class="step-title">Issue Your Card</div>
+      <div class="step-desc">One tap and your free virtual Visa is ready instantly.</div>
+      <div class="step-tag">Powered by Visa</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-left"><div class="step-num">4</div></div>
+    <div class="step-content">
+      <div class="step-title">Spend Anywhere</div>
+      <div class="step-desc">Shop online, pay bills, subscribe to anything — worldwide.</div>
+      <div class="step-tag">50M+ merchants</div>
+    </div>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat"><div class="stat-val">2 min</div><div class="stat-lbl">TO SIGN UP</div></div>
+  <div class="stat"><div class="stat-val">$0</div><div class="stat-lbl">CARD FEE</div></div>
+  <div class="stat"><div class="stat-val">24/7</div><div class="stat-lbl">AVAILABLE</div></div>
+</div>
+
+<div class="handle">@TCHOTCHOPAY</div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TchotchoPay Reel — Poukisa li chè?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Segoe UI',system-ui,sans-serif;}
+
+/* ── Instagram Reels Player Shell ── */
+.player{position:relative;width:340px;height:604px;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.8);background:#000;}
+.player-top{position:absolute;top:0;left:0;right:0;z-index:50;padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;}
+.player-top .handle{color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.player-top .handle img{width:28px;height:28px;border-radius:50%;border:2px solid #fff;object-fit:cover;}
+.player-top .handle-av{width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:linear-gradient(135deg,#0a1f6e,#00c8ff);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;}
+.player-top .follow-btn{border:1.5px solid #fff;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;background:transparent;}
+.player-right{position:absolute;right:12px;bottom:90px;z-index:50;display:flex;flex-direction:column;align-items:center;gap:18px;}
+.player-right .r-icon{display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-size:10px;}
+.player-right .r-icon svg{width:24px;height:24px;fill:#fff;}
+.player-bottom{position:absolute;bottom:0;left:0;right:0;z-index:50;padding:12px 16px 18px;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 100%);}
+.player-bottom .caption{color:#fff;font-size:12px;line-height:1.4;margin-bottom:8px;}
+.player-bottom .caption strong{font-weight:700;}
+.player-bottom .audio-row{display:flex;align-items:center;gap:8px;color:#fff;font-size:10px;}
+.player-bottom .audio-disc{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#0a1f6e,#00c8ff);animation:spin 3s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Progress bar */
+.progress-bar{position:absolute;top:0;left:0;right:0;height:3px;z-index:60;display:flex;gap:3px;padding:0 12px;padding-top:8px;}
+.prog-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
+.prog-seg .fill{height:100%;background:#fff;width:0%;transition:none;}
+.prog-seg.done .fill{width:100%;}
+.prog-seg.active .fill{animation:fillBar var(--dur,3s) linear forwards;}
+@keyframes fillBar{from{width:0%}to{width:100%}}
+
+/* ── Slides ── */
+.slides{position:absolute;inset:0;z-index:10;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;}
+.slide.on{opacity:1;}
+
+/* ── SLIDE 1 — Hook ── */
+.s1{background:linear-gradient(160deg,#0a0a1a 0%,#0d1a2e 100%);}
+.s1 .hook-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:#00c8ff;text-transform:uppercase;margin-bottom:10px;}
+.s1 .hook-title{font-size:30px;font-weight:900;color:#fff;text-align:center;line-height:1.15;padding:0 24px;}
+.s1 .hook-title span{color:#ff4d4d;}
+.s1 .hook-sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:14px;text-align:center;padding:0 32px;line-height:1.5;}
+.s1 .wu-pill{margin-top:20px;background:rgba(255,77,77,.12);border:1px solid rgba(255,77,77,.35);border-radius:12px;padding:10px 20px;text-align:center;}
+.s1 .wu-pill .wu-amt{font-size:28px;font-weight:900;color:#ff4d4d;}
+.s1 .wu-pill .wu-lbl{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+/* ── SLIDE 2 — WU phone screen ── */
+.s2{background:#1a0000;}
+.phone-frame{width:210px;height:380px;background:#f5f5f5;border-radius:22px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;}
+.wu-header{background:#FFDD00;padding:12px 14px 10px;display:flex;align-items:center;gap:8px;}
+.wu-logo{font-size:14px;font-weight:900;color:#000;}
+.wu-header-title{font-size:11px;color:#000;font-weight:600;}
+.wu-body{padding:12px 14px;background:#f5f5f5;}
+.wu-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e8e8e8;font-size:11px;color:#333;}
+.wu-row:last-child{border-bottom:none;}
+.wu-row .lbl{color:#666;}
+.wu-row .val{font-weight:700;color:#000;}
+.wu-row.fee-row .val{color:#cc0000;font-size:14px;}
+.wu-row.recv-row .val{color:#cc0000;}
+.wu-total-box{margin-top:10px;background:#ffeeee;border-radius:10px;padding:10px;text-align:center;}
+.wu-total-box .t-lbl{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;}
+.wu-total-box .t-amt{font-size:22px;font-weight:900;color:#cc0000;margin-top:2px;}
+.wu-total-box .t-sub{font-size:9px;color:#999;margin-top:2px;}
+.wu-btn{margin:10px 14px;background:#FFDD00;color:#000;font-weight:700;font-size:11px;border-radius:8px;padding:10px;text-align:center;}
+.slide-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(26,0,0,.95),transparent);padding:20px 16px 14px;text-align:center;}
+.slide-label .sl-tag{font-size:10px;font-weight:700;letter-spacing:.1em;color:#ff6b6b;text-transform:uppercase;margin-bottom:4px;}
+.slide-label .sl-text{font-size:16px;font-weight:800;color:#fff;line-height:1.3;}
+
+/* ── SLIDE 3 — TchotchoPay phone screen ── */
+.s3{background:#001a0d;}
+.tp-header{background:linear-gradient(135deg,#0a1f6e,#0052ff);padding:12px 14px 10px;display:flex;align-items:center;gap:8px;}
+.tp-logo-box{width:24px;height:24px;border-radius:6px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;}
+.tp-header-title{font-size:11px;color:#fff;font-weight:600;}
+.tp-body{padding:12px 14px;background:#fff;}
+.tp-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:11px;color:#333;}
+.tp-row:last-child{border-bottom:none;}
+.tp-row .lbl{color:#666;}
+.tp-row .val{font-weight:700;color:#000;}
+.tp-row.fee-row .val{color:#00a86b;font-size:14px;}
+.tp-row.recv-row .val{color:#00a86b;}
+.tp-total-box{margin-top:10px;background:#e8fff4;border-radius:10px;padding:10px;text-align:center;}
+.tp-total-box .t-lbl{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.05em;}
+.tp-total-box .t-amt{font-size:22px;font-weight:900;color:#00a86b;margin-top:2px;}
+.tp-total-box .t-sub{font-size:9px;color:#999;margin-top:2px;}
+.tp-btn{margin:10px 14px;background:linear-gradient(135deg,#0052ff,#0a1f6e);color:#fff;font-weight:700;font-size:11px;border-radius:8px;padding:10px;text-align:center;}
+.s3-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,26,13,.95),transparent);padding:20px 16px 14px;text-align:center;}
+.s3-label .sl-tag{font-size:10px;font-weight:700;letter-spacing:.1em;color:#00e676;text-transform:uppercase;margin-bottom:4px;}
+.s3-label .sl-text{font-size:16px;font-weight:800;color:#fff;line-height:1.3;}
+
+/* ── SLIDE 4 — Savings comparison ── */
+.s4{background:linear-gradient(160deg,#050d1a 0%,#0a1a0a 100%);}
+.compare-box{width:270px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;}
+.compare-title{text-align:center;padding:16px;font-size:13px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.06);}
+.compare-row{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.05);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row .cr-brand{width:90px;font-size:11px;font-weight:700;color:rgba(255,255,255,.6);}
+.compare-row .cr-fee{flex:1;font-size:20px;font-weight:900;}
+.compare-row .cr-recv{font-size:13px;font-weight:600;color:rgba(255,255,255,.4);}
+.compare-row.wu-row-c .cr-fee{color:#ff4d4d;}
+.compare-row.tp-row-c .cr-fee{color:#00e676;}
+.save-badge{margin-top:22px;background:linear-gradient(135deg,#00c8ff20,#00e67620);border:1.5px solid #00e676;border-radius:16px;padding:14px 28px;text-align:center;}
+.save-badge .sb-lbl{font-size:11px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.08em;}
+.save-badge .sb-amt{font-size:36px;font-weight:900;color:#00e676;margin-top:4px;}
+.save-badge .sb-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+/* ── SLIDE 5 — CTA ── */
+.s5{background:linear-gradient(160deg,#0a1f6e 0%,#001233 100%);}
+.s5 .cta-icon{width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;margin-bottom:20px;}
+.s5 .cta-title{font-size:26px;font-weight:900;color:#fff;text-align:center;line-height:1.2;padding:0 24px;}
+.s5 .cta-sub{font-size:13px;color:rgba(255,255,255,.65);text-align:center;margin-top:10px;padding:0 32px;line-height:1.5;}
+.s5 .cta-btn{margin-top:24px;background:#fff;color:#0a1f6e;font-size:14px;font-weight:800;padding:14px 32px;border-radius:14px;letter-spacing:.02em;}
+.s5 .cta-url{margin-top:12px;font-size:11px;color:rgba(255,255,255,.45);}
+.s5 .cta-features{margin-top:20px;display:flex;gap:12px;}
+.s5 .cf{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;font-size:10px;color:rgba(255,255,255,.7);font-weight:600;text-align:center;}
+
+/* Nav dots */
+.nav-dots{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:60;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:.3s;}
+.dot.on{background:#fff;width:18px;border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="player">
+
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="prog-seg" style="--dur:4s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:5s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:5s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:5s"><div class="fill"></div></div>
+    <div class="prog-seg" style="--dur:5s"><div class="fill"></div></div>
+  </div>
+
+  <!-- Top bar -->
+  <div class="player-top">
+    <div class="handle">
+      <div class="handle-av">T</div>
+      <span>tchotchopay</span>
+    </div>
+    <div class="follow-btn">Suiv</div>
+  </div>
+
+  <!-- Right icons -->
+  <div class="player-right">
+    <div class="r-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      4.2K
+    </div>
+    <div class="r-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      318
+    </div>
+    <div class="r-icon">
+      <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+      Pataje
+    </div>
+  </div>
+
+  <!-- Bottom caption -->
+  <div class="player-bottom">
+    <div class="caption"><strong>tchotchopay</strong> · Voye lajan ann Ayiti san pèdi lajan nan frè 💸 Kont USDC gratis · tchotchopay.com</div>
+    <div class="audio-row">
+      <div class="audio-disc"></div>
+      <span>TchotchoPay — Voye lajan fasil</span>
+    </div>
+  </div>
+
+  <!-- Nav dots -->
+  <div class="nav-dots" id="nav-dots">
+    <div class="dot on"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- ══ SLIDES ══ -->
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: Hook -->
+    <div class="slide s1 on" id="slide-0">
+      <div class="hook-label">Kesyon enpòtan</div>
+      <div class="hook-title">Poukisa li <span>chè</span> konsa pou voye lajan ann Ayiti?</div>
+      <div class="hook-sub">Chak fwa ou voye $100, konpayi tradisyonèl yo pran <strong style="color:#ff4d4d;">$10–$15</strong> nan pòch ou.</div>
+      <div class="wu-pill">
+        <div class="wu-amt">$15.00</div>
+        <div class="wu-lbl">Frè mwayen — Western Union</div>
+      </div>
+    </div>
+
+    <!-- Slide 2: WU Receipt -->
+    <div class="slide s2" id="slide-1">
+      <div class="phone-frame">
+        <div class="wu-header">
+          <div class="wu-logo">WU</div>
+          <div class="wu-header-title">Western Union — Konfirmasyon</div>
+        </div>
+        <div class="wu-body">
+          <div class="wu-row"><span class="lbl">Ou voye</span><span class="val">$100.00 USD</span></div>
+          <div class="wu-row fee-row"><span class="lbl">Frè transfè</span><span class="val">– $14.90</span></div>
+          <div class="wu-row recv-row"><span class="lbl">Fanmi ou resevwa</span><span class="val">$85.10</span></div>
+          <div class="wu-total-box">
+            <div class="t-lbl">Ou pèdi nan frè</div>
+            <div class="t-amt">$14.90</div>
+            <div class="t-sub">Chak fwa ou voye lajan</div>
+          </div>
+          <div class="wu-btn">✓ Transfè konfime</div>
+        </div>
+      </div>
+      <div class="slide-label">
+        <div class="sl-tag">Sa k ap pase?</div>
+        <div class="sl-text">$15 nan frè pou voye $100 sèlman? 😤</div>
+      </div>
+    </div>
+
+    <!-- Slide 3: TchotchoPay Receipt -->
+    <div class="slide s3" id="slide-2">
+      <div class="phone-frame">
+        <div class="tp-header">
+          <div class="tp-logo-box">T</div>
+          <div class="tp-header-title" style="color:#fff;">TchotchoPay — Konfirmasyon</div>
+        </div>
+        <div class="tp-body">
+          <div class="tp-row"><span class="lbl">Ou voye</span><span class="val">$100.00 USD</span></div>
+          <div class="tp-row fee-row"><span class="lbl">Frè transfè</span><span class="val">– $2.00</span></div>
+          <div class="tp-row recv-row"><span class="lbl">Fanmi ou resevwa</span><span class="val">$98.00</span></div>
+          <div class="tp-total-box">
+            <div class="t-lbl">Ou ekonomize</div>
+            <div class="t-amt">$12.90</div>
+            <div class="t-sub">Konpare ak Western Union</div>
+          </div>
+          <div class="tp-btn">✓ Voye nan MonCash / NatCash</div>
+        </div>
+      </div>
+      <div class="s3-label">
+        <div class="sl-tag">TchotchoPay ✓</div>
+        <div class="sl-text">$2 sèlman — fanmi ou resevwa plis! 🎉</div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Savings math -->
+    <div class="slide s4" id="slide-3" style="flex-direction:column;gap:0;">
+      <div class="compare-box">
+        <div class="compare-title">Voye $100 ann Ayiti</div>
+        <div class="compare-row wu-row-c">
+          <div class="cr-brand">Western<br/>Union</div>
+          <div class="cr-fee">$14.90</div>
+          <div class="cr-recv">Resevwa $85</div>
+        </div>
+        <div class="compare-row tp-row-c">
+          <div class="cr-brand" style="color:#00e676;">TchotchoPay</div>
+          <div class="cr-fee">$2.00</div>
+          <div class="cr-recv" style="color:#00e676;">Resevwa $98</div>
+        </div>
+      </div>
+      <div class="save-badge">
+        <div class="sb-lbl">Ou ekonomize chak fwa</div>
+        <div class="sb-amt">$12.90</div>
+        <div class="sb-sub">× 12 mwa = <strong style="color:#fff;">$154.80/ane</strong> nan pòch ou</div>
+      </div>
+    </div>
+
+    <!-- Slide 5: CTA -->
+    <div class="slide s5" id="slide-4">
+      <div class="cta-icon">T</div>
+      <div class="cta-title">Kòmanse voye lajan pi bon mache jodi a</div>
+      <div class="cta-sub">Kont gratis. Voye nan MonCash ak NatCash. USDC wallet pou ekonomize.</div>
+      <div class="cta-btn">Kreye kont ou gratis</div>
+      <div class="cta-url">tchotchopay.com</div>
+      <div class="cta-features">
+        <div class="cf">💸 Frè $2</div>
+        <div class="cf">⚡ Rapid</div>
+        <div class="cf">🔒 Sekirite</div>
+      </div>
+    </div>
+
+  </div><!-- /slides -->
+</div><!-- /player -->
+
+<script>
+const TOTAL = 5;
+const DURS  = [4000, 5000, 5000, 5000, 5000];
+let cur = 0, timer = null;
+
+const slides   = document.querySelectorAll('.slide');
+const dots     = document.querySelectorAll('.dot');
+const segs     = document.querySelectorAll('.prog-seg');
+
+function goTo(n) {
+  if (n >= TOTAL) n = 0;
+  slides.forEach((s, i) => s.classList.toggle('on', i === n));
+  dots.forEach((d, i)   => d.classList.toggle('on', i === n));
+  segs.forEach((s, i) => {
+    s.classList.remove('active', 'done');
+    if (i < n)  s.classList.add('done');
+    if (i === n) s.classList.add('active');
+    // reset fill animation
+    const fill = s.querySelector('.fill');
+    fill.style.animation = 'none';
+    fill.offsetHeight; // reflow
+    if (i === n) fill.style.animation = '';
+  });
+  cur = n;
+  clearTimeout(timer);
+  timer = setTimeout(() => goTo(cur + 1), DURS[n]);
+}
+
+// Click to advance
+document.querySelector('.slides').addEventListener('click', e => {
+  const x = e.clientX;
+  const w = window.innerWidth;
+  if (x < w / 2) goTo(Math.max(0, cur - 1));
+  else           goTo(cur + 1);
+});
+
+goTo(0);
+</script>
+</body>
+</html>

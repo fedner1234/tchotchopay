@@ -445,12 +445,12 @@
 
     <!-- Wallet address -->
     <div class="info-card" style="margin-bottom:24px;">
-      <div class="info-card-title"><i class="ti ti-wallet"></i> USDC Wallet Address (Secure Network)</div>
+      <div class="info-card-title"><i class="ti ti-wallet"></i> USDC Wallet Address (Base Network)</div>
       <div class="address-box">
         <span class="address-text" id="wallet-address">Loading...</span>
         <button class="copy-btn" onclick="copyAddress()" title="Copy address"><i class="ti ti-copy"></i></button>
       </div>
-      <p style="font-size:.75rem;color:var(--gray);margin-top:10px;"><i class="ti ti-info-circle"></i> Send only USDC through our payment network to this address.</p>
+      <p style="font-size:.75rem;color:var(--gray);margin-top:10px;"><i class="ti ti-info-circle"></i> Send only USDC on Base network to this address.</p>
     </div>
 
     <!-- ── VIRTUAL CARD SECTION ── -->
@@ -727,7 +727,7 @@
 <div class="modal-overlay" id="receive-modal">
   <div class="modal" style="max-width:420px;text-align:center;">
     <div class="modal-title" style="justify-content:center;"><i class="ti ti-qrcode" style="color:var(--cyan)"></i> Receive USDC</div>
-    <p style="font-size:.82rem;color:var(--gray);margin-bottom:18px;">Share your QR code or address to receive USDC  instantly.</p>
+    <p style="font-size:.82rem;color:var(--gray);margin-bottom:18px;">Share your QR code or address to receive USDC on Base.</p>
 
     <!-- QR Code -->
     <div class="qr-card-inner">
@@ -782,7 +782,7 @@
     </div>
 
     <!-- Address -->
-    <div class="recv-field-label" style="text-align:left;">Wallet Address (USDC  instantly)</div>
+    <div class="recv-field-label" style="text-align:left;">Wallet Address (USDC on Base)</div>
     <div class="recv-addr" onclick="copyAddress()">
       <span id="recv-addr-text">Loading...</span>
       <i class="ti ti-copy" style="color:var(--gray);flex-shrink:0;"></i>
@@ -1801,6 +1801,5 @@
   </div>
 </nav>
 
-<script src="lang.js"></script>
 </body>
 </html>

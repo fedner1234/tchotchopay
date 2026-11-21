@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay Virtual Card Reel</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #111;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 24px;
+    overflow-x: auto;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Each frame is 1080×1920 scaled to 270×480 for preview */
+  .frame {
+    width: 270px;
+    height: 480px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+
+  /* ── COLORS ── */
+  :root {
+    --navy:  #020B2D;
+    --mid:   #0A1F6E;
+    --blue:  #1055CC;
+    --cyan:  #00AEEF;
+    --white: #FFFFFF;
+    --gray:  #8899BB;
+  }
+
+  /* ─────────────────────────────────────────────────────── FRAME 1 — HOOK */
+  .f1 {
+    background: linear-gradient(160deg, #020B2D 0%, #0A1F6E 60%, #020B2D 100%);
+  }
+  .f1-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,174,239,.25) 0%, transparent 70%);
+    top: -60px; right: -80px;
+  }
+  .f1-glow2 {
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,174,239,.15) 0%, transparent 70%);
+    bottom: 60px; left: -40px;
+  }
+  .f1-logo {
+    position: absolute;
+    top: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+  }
+  .f1-card {
+    position: absolute;
+    top: 80px; left: 20px; right: 20px;
+    height: 140px;
+    background: linear-gradient(135deg, #0A1F6E 0%, #1055CC 50%, #0D62E8 100%);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 40px rgba(0,174,239,.2);
+  }
+  .f1-card-chip {
+    width: 28px; height: 20px;
+    background: linear-gradient(135deg, #d4af37, #f5d87a, #d4af37);
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .f1-card-num {
+    font-size: 13px; font-weight: 700; letter-spacing: .15em;
+    color: rgba(255,255,255,.9);
+    margin-bottom: 16px;
+  }
+  .f1-card-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .f1-card-name { font-size: 8px; font-weight: 700; color: rgba(255,255,255,.8); letter-spacing: .08em; }
+  .f1-card-visa { font-size: 16px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.9); }
+  .f1-usdc-badge {
+    position: absolute;
+    top: 200px; right: 20px;
+    background: rgba(0,174,239,.15);
+    border: 1px solid rgba(0,174,239,.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 9px; font-weight: 800;
+    color: #00AEEF; letter-spacing: .1em;
+  }
+  .f1-headline {
+    position: absolute;
+    bottom: 140px; left: 20px; right: 20px;
+  }
+  .f1-headline h1 {
+    font-size: 32px; font-weight: 900; line-height: 1.05;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0,0,0,.3);
+  }
+  .f1-headline h1 span { color: #00AEEF; }
+  .f1-sub {
+    position: absolute;
+    bottom: 100px; left: 20px; right: 20px;
+    font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.5;
+  }
+  .f1-tag {
+    position: absolute;
+    bottom: 56px; left: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .f1-dot { width: 6px; height: 6px; border-radius: 50%; background: #00AEEF; }
+  .f1-tag span { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: .12em; }
+  .f1-handle {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; color: rgba(255,255,255,.3);
+    letter-spacing: .14em;
+  }
+
+  /* ─────────────────────────────────────────────────────── FRAME 2 — PROBLEM */
+  .f2 { background: #020B2D; }
+  .f2-top {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, #00AEEF, #1055CC);
+  }
+  .f2-logo {
+    position: absolute;
+    top: 22px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em;
+    color: rgba(255,255,255,.35); text-transform: uppercase;
+  }
+  .f2-stat {
+    position: absolute;
+    top: 60px; left: 20px; right: 20px;
+    text-align: center;
+  }
+  .f2-stat-num {
+    font-size: 64px; font-weight: 900; color: #00AEEF; line-height: 1;
+  }
+  .f2-stat-label {
+    font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6);
+    letter-spacing: .08em; margin-top: 4px;
+  }
+  .f2-divider {
+    position: absolute;
+    top: 170px; left: 30px; right: 30px;
+    height: 1px; background: rgba(255,255,255,.08);
+  }
+  .f2-problems {
+    position: absolute;
+    top: 185px; left: 20px; right: 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .f2-prob {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px; padding: 10px 14px;
+  }
+  .f2-prob-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(255,76,106,.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+  .f2-prob-text { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.7); line-height: 1.4; }
+  .f2-headline {
+    position: absolute;
+    bottom: 80px; left: 20px; right: 20px;
+    text-align: center;
+  }
+  .f2-headline h2 {
+    font-size: 20px; font-weight: 900; color: #fff; line-height: 1.2;
+  }
+  .f2-headline h2 span { color: #00AEEF; }
+  .f2-handle {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; color: rgba(255,255,255,.25);
+    letter-spacing: .14em;
+  }
+
+  /* ─────────────────────────────────────────────────────── FRAME 3 — CARD REVEAL */
+  .f3 { background: linear-gradient(160deg, #020B2D 0%, #061840 100%); }
+  .f3-glow {
+    position: absolute;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(0,174,239,.2) 0%, transparent 65%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .f3-logo {
+    position: absolute;
+    top: 22px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em;
+    color: rgba(255,255,255,.35); text-transform: uppercase;
+  }
+  .f3-label {
+    position: absolute;
+    top: 55px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; letter-spacing: .2em;
+    color: #00AEEF; text-transform: uppercase;
+  }
+  .f3-card {
+    position: absolute;
+    top: 80px; left: 14px; right: 14px;
+    height: 150px;
+    background: linear-gradient(135deg, #0A1F6E 0%, #1055CC 50%, #0D62E8 100%);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(0,174,239,.25);
+    overflow: hidden;
+  }
+  .f3-card-circle1 {
+    position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .f3-card-circle2 {
+    position: absolute; bottom: -40px; left: -20px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: rgba(0,174,239,.08);
+  }
+  .f3-card-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+  .f3-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .f3-card-brand { font-size: 8px; font-weight: 900; letter-spacing: .15em; color: rgba(255,255,255,.6); }
+  .f3-card-chip2 {
+    width: 24px; height: 17px;
+    background: linear-gradient(135deg, #d4af37, #f5d87a, #d4af37);
+    border-radius: 3px;
+  }
+  .f3-card-num2 {
+    font-size: 14px; font-weight: 700; letter-spacing: .2em;
+    color: rgba(255,255,255,.9); text-align: center;
+  }
+  .f3-card-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .f3-card-holder { font-size: 8px; font-weight: 700; color: rgba(255,255,255,.7); letter-spacing: .06em; }
+  .f3-card-visa2 { font-size: 14px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.9); }
+
+  .f3-features {
+    position: absolute;
+    top: 248px; left: 14px; right: 14px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .f3-feat {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px;
+    background: rgba(0,174,239,.06);
+    border: 1px solid rgba(0,174,239,.15);
+    border-radius: 10px;
+  }
+  .f3-feat-icon { font-size: 14px; }
+  .f3-feat-text { font-size: 9.5px; font-weight: 700; color: rgba(255,255,255,.75); }
+  .f3-feat-value { margin-left: auto; font-size: 9px; font-weight: 800; color: #00AEEF; }
+
+  .f3-headline {
+    position: absolute;
+    bottom: 65px; left: 14px; right: 14px;
+    text-align: center;
+  }
+  .f3-headline h2 { font-size: 17px; font-weight: 900; color: #fff; line-height: 1.2; }
+  .f3-headline p { font-size: 10px; color: rgba(255,255,255,.5); margin-top: 4px; }
+  .f3-handle {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; color: rgba(255,255,255,.25);
+    letter-spacing: .14em;
+  }
+
+  /* ─────────────────────────────────────────────────────── FRAME 4 — HOW IT WORKS */
+  .f4 { background: #020B2D; }
+  .f4-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, #00AEEF, #1055CC);
+  }
+  .f4-logo {
+    position: absolute; top: 22px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em;
+    color: rgba(255,255,255,.35); text-transform: uppercase;
+  }
+  .f4-title {
+    position: absolute; top: 55px; left: 0; right: 0;
+    text-align: center;
+    font-size: 16px; font-weight: 900; color: #fff;
+  }
+  .f4-title span { color: #00AEEF; }
+  .f4-steps {
+    position: absolute;
+    top: 90px; left: 16px; right: 16px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .f4-step {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0;
+  }
+  .f4-step-left { display: flex; flex-direction: column; align-items: center; }
+  .f4-step-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #00AEEF, #1055CC);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900; color: #fff; flex-shrink: 0;
+  }
+  .f4-step-line {
+    width: 2px; flex: 1; min-height: 24px;
+    background: linear-gradient(to bottom, rgba(0,174,239,.4), transparent);
+    margin-top: 4px;
+  }
+  .f4-step-content { padding-top: 4px; }
+  .f4-step-title { font-size: 11px; font-weight: 900; color: #fff; margin-bottom: 3px; }
+  .f4-step-desc { font-size: 9.5px; color: rgba(255,255,255,.5); line-height: 1.4; }
+  .f4-step-tag {
+    display: inline-block;
+    margin-top: 4px;
+    background: rgba(0,174,239,.1);
+    border: 1px solid rgba(0,174,239,.2);
+    border-radius: 20px; padding: 2px 8px;
+    font-size: 8px; font-weight: 800; color: #00AEEF;
+  }
+  .f4-stat-bar {
+    position: absolute;
+    bottom: 60px; left: 16px; right: 16px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 12px; padding: 12px 16px;
+    display: flex; justify-content: space-around;
+  }
+  .f4-stat { text-align: center; }
+  .f4-stat-val { font-size: 16px; font-weight: 900; color: #00AEEF; }
+  .f4-stat-lbl { font-size: 8px; font-weight: 700; color: rgba(255,255,255,.4); margin-top: 2px; }
+  .f4-handle {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; color: rgba(255,255,255,.25);
+    letter-spacing: .14em;
+  }
+
+  /* ─────────────────────────────────────────────────────── FRAME 5 — CTA */
+  .f5 { background: linear-gradient(160deg, #020B2D 0%, #0A1F6E 60%, #020B2D 100%); }
+  .f5-glow {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,174,239,.2) 0%, transparent 65%);
+    top: 50%; left: 50%; transform: translate(-50%,-70%);
+  }
+  .f5-logo {
+    position: absolute; top: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em;
+    color: rgba(255,255,255,.4); text-transform: uppercase;
+  }
+  .f5-card-mini {
+    position: absolute;
+    top: 60px; left: 40px; right: 40px; height: 110px;
+    background: linear-gradient(135deg, #0A1F6E 0%, #1055CC 50%, #0D62E8 100%);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 50px rgba(0,174,239,.2);
+    display: flex; flex-direction: column; justify-content: space-between;
+    overflow: hidden;
+  }
+  .f5-card-mini-top { display: flex; justify-content: space-between; }
+  .f5-card-mini-brand { font-size: 7px; font-weight: 900; letter-spacing: .15em; color: rgba(255,255,255,.5); }
+  .f5-card-mini-chip {
+    width: 20px; height: 14px;
+    background: linear-gradient(135deg, #d4af37, #f5d87a);
+    border-radius: 3px;
+  }
+  .f5-card-mini-num { font-size: 11px; font-weight: 700; letter-spacing: .18em; color: rgba(255,255,255,.9); text-align: center; }
+  .f5-card-mini-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .f5-card-mini-holder { font-size: 7px; font-weight: 700; color: rgba(255,255,255,.6); }
+  .f5-card-mini-visa { font-size: 12px; font-weight: 900; font-style: italic; color: rgba(255,255,255,.9); }
+  .f5-headline {
+    position: absolute;
+    top: 192px; left: 16px; right: 16px;
+    text-align: center;
+  }
+  .f5-headline h1 { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.1; }
+  .f5-headline h1 span { color: #00AEEF; }
+  .f5-headline p { font-size: 10.5px; color: rgba(255,255,255,.55); margin-top: 8px; line-height: 1.5; }
+  .f5-perks {
+    position: absolute;
+    top: 310px; left: 16px; right: 16px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .f5-perk {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 700; color: rgba(255,255,255,.7);
+  }
+  .f5-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(0,174,239,.15);
+    border: 1px solid rgba(0,174,239,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; flex-shrink: 0;
+  }
+  .f5-cta {
+    position: absolute;
+    bottom: 90px; left: 20px; right: 20px;
+    background: linear-gradient(135deg, #00AEEF, #1055CC);
+    border-radius: 14px; padding: 14px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,174,239,.3);
+  }
+  .f5-cta-label { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: .04em; }
+  .f5-cta-url { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .f5-handle {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-size: 9px; font-weight: 800; color: rgba(255,255,255,.25);
+    letter-spacing: .14em;
+  }
+
+  /* Frame labels */
+  .frame-label {
+    color: rgba(255,255,255,.3);
+    font-size: 10px; font-weight: 700;
+    text-align: center; margin-top: 8px;
+    font-family: monospace; letter-spacing: .08em;
+  }
+  .wrapper { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+
+<!-- FRAME 1: HOOK -->
+<div class="wrapper">
+  <div class="frame f1">
+    <div class="f1-glow"></div>
+    <div class="f1-glow2"></div>
+    <div class="f1-logo">TCHOTCHOPAY</div>
+
+    <!-- Card visual -->
+    <div class="f1-card">
+      <div class="f1-card-chip"></div>
+      <div class="f1-card-num">•••• •••• •••• 4291</div>
+      <div class="f1-card-row">
+        <div class="f1-card-name">JEAN F. FRANCOIS</div>
+        <div class="f1-card-visa">VISA</div>
+      </div>
+    </div>
+    <div class="f1-usdc-badge">USDC POWERED</div>
+
+    <div class="f1-headline">
+      <h1>Spend USDC<br>Like <span>Cash.</span></h1>
+    </div>
+    <div class="f1-sub">Your free TchotchoPay Visa card — works anywhere in the world, no bank required.</div>
+    <div class="f1-tag">
+      <div class="f1-dot"></div>
+      <span>VIRTUAL CARD · FREE · INSTANT</span>
+    </div>
+    <div class="f1-handle">@TCHOTCHOPAY</div>
+  </div>
+  <div class="frame-label">FRAME 1 — HOOK</div>
+</div>
+
+<!-- FRAME 2: PROBLEM -->
+<div class="wrapper">
+  <div class="frame f2">
+    <div class="f2-top"></div>
+    <div class="f2-logo">TCHOTCHOPAY</div>
+
+    <div class="f2-stat">
+      <div class="f2-stat-num">47%</div>
+      <div class="f2-stat-label">OF HAITIANS ARE UNBANKED</div>
+    </div>
+    <div class="f2-divider"></div>
+
+    <div class="f2-problems">
+      <div class="f2-prob">
+        <div class="f2-prob-icon">❌</div>
+        <div class="f2-prob-text">No Visa or Mastercard access</div>
+      </div>
+      <div class="f2-prob">
+        <div class="f2-prob-icon">❌</div>
+        <div class="f2-prob-text">Can't shop online or pay subscriptions</div>
+      </div>
+      <div class="f2-prob">
+        <div class="f2-prob-icon">❌</div>
+        <div class="f2-prob-text">Cash only — risky and inconvenient</div>
+      </div>
+      <div class="f2-prob">
+        <div class="f2-prob-icon">❌</div>
+        <div class="f2-prob-text">Locked out of the digital economy</div>
+      </div>
+    </div>
+
+    <div class="f2-headline">
+      <h2>There is a better<br>way. <span>TchotchoPay.</span></h2>
+    </div>
+    <div class="f2-handle">@TCHOTCHOPAY</div>
+  </div>
+  <div class="frame-label">FRAME 2 — PROBLEM</div>
+</div>
+
+<!-- FRAME 3: CARD REVEAL -->
+<div class="wrapper">
+  <div class="frame f3">
+    <div class="f3-glow"></div>
+    <div class="f3-logo">TCHOTCHOPAY</div>
+    <div class="f3-label">✦ INTRODUCING YOUR CARD ✦</div>
+
+    <div class="f3-card">
+      <div class="f3-card-circle1"></div>
+      <div class="f3-card-circle2"></div>
+      <div class="f3-card-inner">
+        <div class="f3-card-top">
+          <div class="f3-card-brand">TCHOTCHOPAY</div>
+          <div class="f3-card-chip2"></div>
+        </div>
+        <div class="f3-card-num2">•••• •••• •••• 4291</div>
+        <div class="f3-card-bottom">
+          <div class="f3-card-holder">JEAN FEDNER FRANCOIS</div>
+          <div class="f3-card-visa2">VISA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f3-features">
+      <div class="f3-feat">
+        <div class="f3-feat-icon">💳</div>
+        <div class="f3-feat-text">Works anywhere Visa is accepted</div>
+        <div class="f3-feat-value">WORLDWIDE</div>
+      </div>
+      <div class="f3-feat">
+        <div class="f3-feat-icon">⚡</div>
+        <div class="f3-feat-text">Load instantly with USDC</div>
+        <div class="f3-feat-value">INSTANT</div>
+      </div>
+      <div class="f3-feat">
+        <div class="f3-feat-icon">🔒</div>
+        <div class="f3-feat-text">Freeze/unfreeze anytime</div>
+        <div class="f3-feat-value">SECURE</div>
+      </div>
+      <div class="f3-feat">
+        <div class="f3-feat-icon">🎁</div>
+        <div class="f3-feat-text">Free to get — no monthly fees</div>
+        <div class="f3-feat-value">FREE</div>
+      </div>
+    </div>
+
+    <div class="f3-headline">
+      <h2>Your USDC wallet.<br>Now a real card.</h2>
+      <p>Shop Amazon, Netflix, Airbnb & more</p>
+    </div>
+    <div class="f3-handle">@TCHOTCHOPAY</div>
+  </div>
+  <div class="frame-label">FRAME 3 — CARD REVEAL</div>
+</div>
+
+<!-- FRAME 4: HOW IT WORKS -->
+<div class="wrapper">
+  <div class="frame f4">
+    <div class="f4-top"></div>
+    <div class="f4-logo">TCHOTCHOPAY</div>
+    <div class="f4-title">How It <span>Works</span></div>
+
+    <div class="f4-steps">
+      <div class="f4-step">
+        <div class="f4-step-left">
+          <div class="f4-step-num">1</div>
+          <div class="f4-step-line"></div>
+        </div>
+        <div class="f4-step-content">
+          <div class="f4-step-title">Sign Up Free</div>
+          <div class="f4-step-desc">Create your TchotchoPay account in 2 minutes. No bank account needed.</div>
+          <div class="f4-step-tag">tchotchopay.com</div>
+        </div>
+      </div>
+      <div class="f4-step">
+        <div class="f4-step-left">
+          <div class="f4-step-num">2</div>
+          <div class="f4-step-line"></div>
+        </div>
+        <div class="f4-step-content">
+          <div class="f4-step-title">Fund Your Wallet</div>
+          <div class="f4-step-desc">Add money via debit card, ACH transfer, or receive USDC from family.</div>
+          <div class="f4-step-tag">USDC on Base</div>
+        </div>
+      </div>
+      <div class="f4-step">
+        <div class="f4-step-left">
+          <div class="f4-step-num">3</div>
+          <div class="f4-step-line"></div>
+        </div>
+        <div class="f4-step-content">
+          <div class="f4-step-title">Issue Your Card</div>
+          <div class="f4-step-desc">One tap to get your free virtual Visa card. Start spending immediately.</div>
+          <div class="f4-step-tag">Powered by Visa</div>
+        </div>
+      </div>
+      <div class="f4-step">
+        <div class="f4-step-left">
+          <div class="f4-step-num">4</div>
+        </div>
+        <div class="f4-step-content">
+          <div class="f4-step-title">Spend Anywhere</div>
+          <div class="f4-step-desc">Shop online, pay bills, subscribe to services — worldwide.</div>
+          <div class="f4-step-tag">50M+ merchants</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f4-stat-bar">
+      <div class="f4-stat">
+        <div class="f4-stat-val">2 min</div>
+        <div class="f4-stat-lbl">TO SIGN UP</div>
+      </div>
+      <div class="f4-stat">
+        <div class="f4-stat-val">$0</div>
+        <div class="f4-stat-lbl">CARD FEE</div>
+      </div>
+      <div class="f4-stat">
+        <div class="f4-stat-val">24/7</div>
+        <div class="f4-stat-lbl">AVAILABLE</div>
+      </div>
+    </div>
+
+    <div class="f4-handle">@TCHOTCHOPAY</div>
+  </div>
+  <div class="frame-label">FRAME 4 — HOW IT WORKS</div>
+</div>
+
+<!-- FRAME 5: CTA -->
+<div class="wrapper">
+  <div class="frame f5">
+    <div class="f5-glow"></div>
+    <div class="f5-logo">TCHOTCHOPAY</div>
+
+    <div class="f5-card-mini">
+      <div class="f5-card-mini-top">
+        <div class="f5-card-mini-brand">TCHOTCHOPAY</div>
+        <div class="f5-card-mini-chip"></div>
+      </div>
+      <div class="f5-card-mini-num">•••• •••• •••• ••••</div>
+      <div class="f5-card-mini-bottom">
+        <div class="f5-card-mini-holder">YOUR NAME HERE</div>
+        <div class="f5-card-mini-visa">VISA</div>
+      </div>
+    </div>
+
+    <div class="f5-headline">
+      <h1>Get Your <span>Free</span><br>Card Today</h1>
+      <p>Join thousands of Haitians already using TchotchoPay to spend, send, and save in USDC.</p>
+    </div>
+
+    <div class="f5-perks">
+      <div class="f5-perk">
+        <div class="f5-check">✓</div>
+        No bank account required
+      </div>
+      <div class="f5-perk">
+        <div class="f5-check">✓</div>
+        Free virtual Visa card
+      </div>
+      <div class="f5-perk">
+        <div class="f5-check">✓</div>
+        Send money to Haiti instantly
+      </div>
+    </div>
+
+    <div class="f5-cta">
+      <div class="f5-cta-label">Sign Up Free →</div>
+      <div class="f5-cta-url">tchotchopay.com</div>
+    </div>
+
+    <div class="f5-handle">@TCHOTCHOPAY</div>
+  </div>
+  <div class="frame-label">FRAME 5 — CTA</div>
+</div>
+
+</body>
+</html>

@@ -268,7 +268,7 @@ input[type=range]{width:100%;accent-color:#00AEEF;height:4px}
     <div class="wallet-card">
       <div class="wc-label">Tchotcho Wallet</div>
       <div class="wc-balance">$250.00</div>
-      <div class="wc-usdc">250.00 USDC · Secure Network</div>
+      <div class="wc-usdc">250.00 USDC · Base Network</div>
       <div class="wc-row">
         <span>@marie.haiti</span>
         <span style="color:#00C896">▲ +$100 today</span>
@@ -439,9 +439,9 @@ input[type=range]{width:100%;accent-color:#00AEEF;height:4px}
       <div class="success-screen">
         <div class="success-icon"><i class="ti ti-check"></i></div>
         <div class="success-title">Money Sent! 🎉</div>
-        <div class="success-sub" id="ss-done-msg">Sent successfully via<br>Secure Network</div>
+        <div class="success-sub" id="ss-done-msg">Sent successfully via<br>Base Network</div>
         <div style="background:rgba(34,212,94,0.08);border:1px solid rgba(34,212,94,0.2);border-radius:12px;padding:12px 20px;margin-top:20px;font-size:12px;color:#00C896;font-weight:600">
-          ✓ Transaction  instantly secure digital network
+          ✓ Transaction on Base blockchain
         </div>
         <button class="ph-btn primary" style="margin-top:20px" onclick="go('send')"><i class="ti ti-send"></i> Send Another</button>
         <button class="ph-btn outline" style="margin-top:8px" onclick="go('home')"><i class="ti ti-home"></i> Back to Wallet</button>
@@ -509,7 +509,7 @@ input[type=range]{width:100%;accent-color:#00AEEF;height:4px}
         <rect x="98" y="98" width="8" height="8" rx="1" fill="#020B2D"/>
       </svg>
       <div class="qr-user">@marie.haiti</div>
-      <div class="qr-addr">0x3F2...8e1a · Secure Network</div>
+      <div class="qr-addr">0x3F2...8e1a · Base Network</div>
     </div>
 
     <div class="share-row">
@@ -852,7 +852,7 @@ function goSendDone() {
   document.getElementById('ss3').style.display = 'none';
   document.getElementById('ss-done').style.display = '';
   document.getElementById('ss-done-msg').innerHTML =
-    '<strong style="color:#fff;font-size:16px">$' + v.toFixed(2) + '</strong> sent to ' + selName + '<br><span style="color:rgba(255,255,255,0.5)">Arrived instantly  instantly Network</span>';
+    '<strong style="color:#fff;font-size:16px">$' + v.toFixed(2) + '</strong> sent to ' + selName + '<br><span style="color:rgba(255,255,255,0.5)">Arrived instantly on Base Network</span>';
 }
 
 // ── CASH OUT ──

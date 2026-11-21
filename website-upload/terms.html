@@ -39,19 +39,18 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--navy);color:var(--white);line-height:1.7;overflow-x:hidden;overflow-x:hidden;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--navy);color:var(--white);line-height:1.7;overflow-x:hidden;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;padding:14px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:28px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:28px;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
-
+.nav-logo-box{width:34px;height:34px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:9px;overflow:hidden;}
 .nav-logo-box img{width:100%;height:100%;object-fit:cover;}
-.nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-
+.nav-brand{font-size:1.05rem;font-weight:700;}
+.nav-brand em{color:var(--cyan);font-style:normal;}
 .nav-links{display:flex;align-items:center;gap:20px;list-style:none;margin-left:auto;}
-.nav-links a{color:#374151;text-decoration:none;font-size:.88rem;transition:color .2s;}
-.nav-links a:hover{color:#1055CC;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
 .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:var(--white)!important;padding:8px 18px;border-radius:50px;font-weight:600;font-size:.85rem;}
 
 /* HERO */
@@ -150,9 +149,7 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
 .footer-copy{color:var(--gray);font-size:.8rem;}
 
 @media(max-width:680px){
-  nav{padding:12px 16px;
-      border-bottom: 2px solid #D21034;
-    }
+  nav{padding:12px 16px;}
   .nav-links{display:none;}
   .legal-hero h1{font-size:1.6rem;}
   .tab-bar{flex-direction:column;}
@@ -160,11 +157,6 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
 }
 .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -205,8 +197,9 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
 <body>
 
 <nav>
-  <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-box"><img src="logo.png" alt="T" onerror="this.style.display='none'"/></div>
+    <span class="nav-brand">Tchotcho<em>Pay</em></span>
   </a>
   <ul class="nav-links">
     <li><a href="index.html#features">Features</a></li>
@@ -295,7 +288,7 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
       <p>Tchotcho Pay provides the following Services:</p>
       <ul>
         <li><strong>Money Transfer:</strong> Send USD-funded USDC to recipients in Haiti and other supported regions</li>
-        <li><strong>USDC Wallet:</strong> Hold, send, and receive USDC (USD Coin) </li>
+        <li><strong>USDC Wallet:</strong> Hold, send, and receive USDC (USD Coin) on the Base blockchain</li>
         <li><strong>Cash Out:</strong> Convert USDC to Haitian gourdes (HTG) via our agent network or local bank transfer</li>
         <li><strong>Marketplace:</strong> Purchase goods and services from verified Haitian merchants using USDC</li>
         <li><strong>P2P Payments:</strong> Send USDC to other Tchotcho Pay users by username, phone, or QR code</li>
@@ -335,13 +328,13 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
 
     <div class="clause" id="tos-7">
       <h2><span class="cl-num">7</span> USDC & Digital Assets</h2>
-      <p>Tchotcho Pay uses <strong>USDC (USD Coin)</strong> on the <strong>secure payment network</strong> for all internal transactions. USDC is a stablecoin pegged 1:1 to the US dollar and issued by Circle Internet Financial.</p>
+      <p>Tchotcho Pay uses <strong>USDC (USD Coin)</strong> on the <strong>Base blockchain</strong> for all internal transactions. USDC is a stablecoin pegged 1:1 to the US dollar and issued by Circle Internet Financial.</p>
       <ul>
-        <li>USDC balances in your Tchotcho Pay wallet are maintained </li>
+        <li>USDC balances in your Tchotcho Pay wallet are maintained on the Base blockchain</li>
         <li>Tchotcho Pay does not lend, invest, or use customer USDC balances</li>
-        <li>Secure Digital Network transactions are <strong>irreversible</strong> once confirmed</li>
+        <li>Blockchain transactions are <strong>irreversible</strong> once confirmed</li>
         <li>Tchotcho Pay is not responsible for losses due to user error (e.g., sending to wrong address)</li>
-        <li>In the event of a payment network failure or congestion, we will make reasonable efforts to process your transaction but cannot guarantee timing</li>
+        <li>In the event of a blockchain network failure or congestion, we will make reasonable efforts to process your transaction but cannot guarantee timing</li>
       </ul>
       <div class="highlight-box"><i class="ti ti-info-circle"></i>USDC is not a security, investment product, or bank deposit. It is a digital representation of one US dollar. It does not earn interest or returns unless explicitly stated.</div>
     </div>
@@ -480,7 +473,7 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
       <ul>
         <li><strong>KYC/Identity verification providers:</strong> To verify your identity documents</li>
         <li><strong>Payment processors:</strong> To process card deposits and bank transfers</li>
-        <li><strong>Secure Digital Network infrastructure:</strong> Transaction data is recorded on the Base secure digital ledger — this is pseudonymous (wallet addresses, not names)</li>
+        <li><strong>Blockchain infrastructure:</strong> Transaction data is recorded on the Base public blockchain — this is pseudonymous (wallet addresses, not names)</li>
         <li><strong>Law enforcement and regulators:</strong> When required by law, subpoena, or court order</li>
         <li><strong>AML/BSA reporting:</strong> FinCEN and other regulatory bodies as required</li>
         <li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets, with prior notice to users</li>
@@ -496,7 +489,7 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
         <li>Required by financial regulations (typically <strong>5 years</strong> after account closure under BSA requirements)</li>
         <li>Necessary to resolve disputes or enforce our Terms</li>
       </ul>
-      <p>After the retention period, your data is securely deleted or anonymized. Transaction records on the secure digital network are public and permanent by nature of digital payment technology.</p>
+      <p>After the retention period, your data is securely deleted or anonymized. Transaction records on the blockchain are public and permanent by nature of blockchain technology.</p>
     </div>
 
     <div class="clause" id="pp-5">
@@ -690,7 +683,7 @@ footer{background:#010818;border-top:1px solid rgba(0,174,239,.1);padding:36px 2
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand">
-      <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:7px;overflow:hidden;"><img src="logo-full.png" alt="T" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/></div>
+      <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:7px;overflow:hidden;"><img src="logo.png" alt="T" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/></div>
       <span style="font-weight:700;">Tchotcho<em style="color:var(--cyan);font-style:normal;">Pay</em></span>
     </a>
     <nav class="footer-links">

@@ -39,7 +39,7 @@
       --gold:#F7B731;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;}
 
     /* ── SPLIT LAYOUT ── */
     .split{display:flex;min-height:100vh;}
@@ -51,8 +51,7 @@
 
     /* Left panel content */
     .lp-brand{display:flex;align-items:center;gap:12px;margin-bottom:60px;}
-    .lp-logo{height:42px;width:auto;display:block;}
-    .lp-logo-fallback{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#1055CC,#00AEEF);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#fff;}
+    .lp-logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#1055CC,#00AEEF);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#fff;}
     .lp-name{font-weight:700;font-size:1.1rem;}
     .lp-name em{color:var(--cyan);font-style:normal;}
     .lp-headline{font-size:1.7rem;font-weight:900;line-height:1.2;margin-bottom:16px;}
@@ -255,11 +254,6 @@
     .mobile-bar .mb-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem;}
     .mobile-bar .mb-brand em{color:var(--cyan);font-style:normal;}
     @media(max-width:820px){.mobile-bar{display:flex;}.right-panel{padding-top:16px;}}
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -327,8 +321,7 @@
   <div class="left-panel">
     <div>
       <div class="lp-brand">
-        <img src="logo-full.png" alt="TchotchoPay" class="lp-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="lp-logo-fallback" style="display:none">T</div>
+        <div class="lp-logo">T</div>
         <div class="lp-name">Tchotcho<em>Pay</em></div>
       </div>
       <h2 class="lp-headline">Send money to Haiti<br/>with <em>zero hassle</em></h2>
@@ -344,7 +337,7 @@
         </div>
         <div class="lp-feat">
           <div class="lp-feat-icon gold"><i class="ti ti-shield-check" style="color:var(--gold)"></i></div>
-          <span>USDC — <strong>digital dollar savings</strong></span>
+          <span>USDC on Base — <strong>digital dollar savings</strong></span>
         </div>
         <div class="lp-feat">
           <div class="lp-feat-icon cyan"><i class="ti ti-shopping-bag" style="color:var(--cyan)"></i></div>
@@ -370,7 +363,7 @@
         </div>
       </div>
     </div>
-    <div class="lp-footer-note">🔒 Bank-grade security · USDC digital dollars · Your money, your control</div>
+    <div class="lp-footer-note">🔒 Bank-grade security · USDC on Base blockchain · Your money, your control</div>
   </div>
 
   <!-- ── RIGHT PANEL ── -->
@@ -466,14 +459,6 @@
           <span>I agree to Tchotcho Pay's <a href="terms.html" target="_blank">Terms of Service</a> and <a href="terms.html" target="_blank">Privacy Policy</a></span>
         </div>
 
-        <!-- Cloudflare Turnstile CAPTCHA -->
-        <div class="cf-turnstile"
-             data-sitekey="0x4AAAAAAEqmWYFfGWg_CHD3"
-             data-theme="dark"
-             data-callback="onTurnstileSolved"
-             data-expired-callback="onTurnstileExpired"
-             style="margin:16px 0;"></div>
-
         <button class="btn-primary" id="btn1" onclick="createAccount()" disabled>
           Create My Account <i class="ti ti-arrow-right"></i>
         </button>
@@ -543,7 +528,7 @@
         <button class="btn-back" onclick="nextStep(3)"><i class="ti ti-arrow-left"></i> Back</button>
         <div class="step-badge"><i class="ti ti-wallet"></i> Add Funds</div>
         <h2 class="step-title">Load your wallet</h2>
-        <p class="step-sub">Add money to start sending. Funds are instantly converted to USDC.</p>
+        <p class="step-sub">Add money to start sending. Funds are instantly converted to USDC on Base.</p>
 
         <div class="fund-options">
           <div class="fund-opt" onclick="selectFund(this,'bank')">
@@ -625,6 +610,14 @@
           <span>I confirm that all information I provided is accurate and I am the person identified in the documents submitted.</span>
         </div>
 
+        <!-- Cloudflare Turnstile CAPTCHA -->
+        <div class="cf-turnstile"
+             data-sitekey="0x4AAAAAAEqmWYFfGWg_CHD3"
+             data-theme="dark"
+             data-callback="onTurnstileSolved"
+             data-expired-callback="onTurnstileExpired"
+             style="margin:16px 0;"></div>
+
         <button class="btn-primary" id="btn6" onclick="submitKYC()" disabled>
           <i class="ti ti-rocket"></i> Activate My Wallet
         </button>
@@ -644,13 +637,13 @@
             <div class="wc-label" style="margin-bottom:2px;">Balance</div>
             <div class="wc-balance" id="wc-balance">$0.00 USDC</div>
             <div class="wc-sub" id="wc-htg">≈ 0 HTG at today's rate</div>
-            <div class="wc-addr" id="wc-addr">0x3fA8…c42b · Secure Payment Network</div>
+            <div class="wc-addr" id="wc-addr">0x3fA8…c42b · Base Network</div>
           </div>
 
           <div class="feature-pills">
             <div class="f-pill">✓ Identity Verified</div>
             <div class="f-pill">✓ Wallet Active</div>
-            <div class="f-pill">✓ USDC</div>
+            <div class="f-pill">✓ USDC on Base</div>
           </div>
 
           <div class="kyc-status">
@@ -864,48 +857,39 @@
     document.getElementById('persona-start-wrap').style.display = 'none';
     document.getElementById('persona-loading').style.display = 'block';
 
-    // Require a real userId — don't allow anonymous KYC
-    const userId = sessionStorage.getItem('tp_user_id');
-    if (!userId) {
-      showPersonaFailed('Session expired. Please go back to Step 1 and create your account first.');
-      return;
-    }
+    // Get userId from sessionStorage (set during register step)
+    const userId    = sessionStorage.getItem('tp_user_id') || 'demo-user';
     const email     = document.getElementById('email')?.value || '';
     const firstName = document.getElementById('fname')?.value || '';
     const lastName  = document.getElementById('lname')?.value || '';
 
-    // Pass any previously stored inquiry ID so the backend can try to resume it
-    // (if expired/failed, the backend will create a fresh one automatically)
-    const existingInquiryId = (() => { try { return sessionStorage.getItem('tp_persona_inquiry_id'); } catch(e) { return null; } })();
-
     try {
-      // Create (or resume) a Persona inquiry via our Netlify function
+      // Create Persona inquiry via our Netlify function
       const res = await fetch('/.netlify/functions/persona-kyc', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'createInquiry', userId, email, firstName, lastName, existingInquiryId }),
+        body: JSON.stringify({ action: 'createInquiry', userId, email, firstName, lastName }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Could not start verification');
-      if (!data.inquiryId) throw new Error('Verification service did not return an inquiry. Check PERSONA_API_KEY and PERSONA_TEMPLATE_ID in Netlify.');
+      if (!data.sessionToken && !data.templateId) throw new Error('Verification service not configured');
 
       personaInquiryId = data.inquiryId;
-      try { sessionStorage.setItem('tp_persona_inquiry_id', data.inquiryId); } catch(e) {}
 
-      // Load Persona embedded SDK
+      // Load Persona embedded SDK and launch
       if (!window.Persona) {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
           s.src = 'https://cdn.withpersona.com/dist/persona-v4.8.0.js';
           s.onload = resolve;
-          s.onerror = () => reject(new Error('Failed to load Persona SDK. Check your internet connection.'));
+          s.onerror = reject;
           document.head.appendChild(s);
         });
       }
 
       document.getElementById('persona-loading').style.display = 'none';
 
-      // Use sessionToken if we have one, otherwise fall back to templateId
+      // Use sessionToken mode if available, otherwise fall back to templateId + referenceId
       const clientConfig = data.sessionToken
         ? { inquiryId: data.inquiryId, sessionToken: data.sessionToken }
         : { templateId: data.templateId, referenceId: userId,
@@ -913,36 +897,29 @@
 
       personaClient = new Persona.Client({
         ...clientConfig,
-        onReady: () => personaClient.open(),
+        onReady:    () => personaClient.open(),
         onComplete: ({ inquiryId }) => {
           personaInquiryId = inquiryId;
+          // Store so dashboard can pick it up for a status re-check
           try { sessionStorage.setItem('tp_persona_inquiry_id', inquiryId); } catch(e) {}
+          // Show success immediately — don't block the UI on the API call
           document.getElementById('persona-loading').style.display = 'none';
           document.getElementById('persona-success').style.display = 'block';
           showToast('✅ Identity verified!');
+          // Update Supabase in the background (non-blocking)
           checkPersonaStatus(inquiryId);
         },
-        onCancel: () => {
-          // User closed the widget — let them try again
+        onCancel:   () => {
           document.getElementById('persona-loading').style.display = 'none';
           document.getElementById('persona-start-wrap').style.display = 'block';
           btn.disabled = false;
-          // Clear the stored inquiry ID so next attempt creates a fresh one
-          try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
-          personaInquiryId = null;
         },
-        onError: (err) => {
-          console.error('Persona widget error:', err);
-          const msg = err?.message || err?.code || 'Verification error. Please try again.';
-          showPersonaFailed(msg);
-          // Clear stored inquiry so retry starts fresh
-          try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
-          personaInquiryId = null;
+        onError:    (err) => {
+          showPersonaFailed(err?.message || 'Verification error. Please try again.');
         },
       });
 
     } catch (err) {
-      console.error('Persona KYC start error:', err);
       showPersonaFailed(err.message);
     }
   }
@@ -976,10 +953,6 @@
   }
 
   function retryPersonaKYC() {
-    // Clear any stored inquiry so we always create a fresh one on retry
-    try { sessionStorage.removeItem('tp_persona_inquiry_id'); } catch(e) {}
-    personaInquiryId = null;
-    personaClient    = null;
     document.getElementById('persona-failed').style.display = 'none';
     document.getElementById('persona-start-wrap').style.display = 'block';
     document.getElementById('btn-start-kyc').disabled = false;
@@ -1156,8 +1129,8 @@
           document.getElementById('wc-htg').textContent = '≈ ' + (bal * 130.5).toLocaleString('en-US',{maximumFractionDigits:0}) + ' HTG at today\'s rate';
           const addr = data.wallet?.address || data.user.wallet_address || '';
           document.getElementById('wc-addr').textContent = addr
-            ? addr.slice(0,6) + '…' + addr.slice(-4) + ' · Secure Payment Network'
-            : '· Secure Payment Network';
+            ? addr.slice(0,6) + '…' + addr.slice(-4) + ' · Base Network'
+            : '· Base Network';
           return;
         }
       } catch(e) { /* fall through to form-based values */ }
@@ -1170,7 +1143,7 @@
     const bal = fundAmt || 0;
     document.getElementById('wc-balance').textContent = bal.toFixed(2) + ' USDC';
     document.getElementById('wc-htg').textContent = '≈ ' + (bal * 130.5).toLocaleString('en-US',{maximumFractionDigits:0}) + ' HTG at today\'s rate';
-    document.getElementById('wc-addr').textContent = '· Secure Payment Network';
+    document.getElementById('wc-addr').textContent = '· Base Network';
   }
 
   // ── UTILS ─────────────────────────────────────────────────────────

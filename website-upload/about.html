@@ -45,17 +45,16 @@
     nav {
       position:fixed; top:0; left:0; right:0; z-index:9999;
       display:flex; align-items:center; padding:14px 32px;
-      background: #fff;  backdrop-filter:blur(12px);
-      border-bottom: 2px solid #D21034; gap:16px;
+      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
     }
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
-    
-    .nav-back { margin-left:auto; color: #374151; text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
-    .nav-back:hover { color: #1055CC; }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
+    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
+    .nav-logo img { width:100%; height:100%; object-fit:cover; }
+    .nav-brand span { font-weight:700; font-size:1rem; }
+    .nav-brand em { color:var(--cyan); font-style:normal; }
+    .nav-back { margin-left:auto; color:var(--gray); text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
+    .nav-back:hover { color:var(--white); }
 
     /* ── HERO ── */
     .hero {
@@ -274,25 +273,18 @@
     .reveal-right.visible { opacity:1; transform:none; }
 
     @media(max-width:580px) {
-      nav { padding:12px 16px;
-      border-bottom: 2px solid #D21034;
-    }
+      nav { padding:12px 16px; }
       .hero h1 { font-size:1.9rem; }
       section, .story-section, .timeline-section { padding:56px 20px; }
       .join-card { padding:36px 24px; }
     }
   
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link{color:var(--gray,#8FA8CC);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
     .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -329,16 +321,14 @@
   gtag('js', new Date());
   gtag('config', 'G-LKXNGW0JJ5');
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"TchotchoPay","url":"https://tchotchopay.com","logo":"https://tchotchopay.com/logo-full.png","description":"TchotchoPay is a Haiti fintech company built to serve the Haitian diaspora. Send money, save in USDC, and pay with your phone — all in one app.","foundingDate":"2024","sameAs":["https://www.instagram.com/tchotchopay","https://www.facebook.com/tchotchopay","https://x.com/tchotchopay"]}
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'" /></div>
+    <span>Tchotcho<em>Pay</em></span>
   </a>
     <div class="nav-links">
     <a href="pricing.html" class="nav-link">Pricing</a>
@@ -380,7 +370,7 @@
     </div>
     <div class="stat-card reveal">
       <div class="stat-num" id="stat4-num">~2 min</div>
-      <div class="stat-label" id="stat4-label">Average settlement time</div>
+      <div class="stat-label" id="stat4-label">Average settlement time on Base</div>
     </div>
   </div>
 </div>
@@ -414,7 +404,7 @@
       <h2 class="section-title" id="story-title">Why we <em>built this</em></h2>
       <p id="story-p1"><strong>Every month, millions of Haitians abroad send money home.</strong> They wait in line at Western Union. They pay $7 on a $100 transfer. They watch exchange rates that disappear into someone else's margin.</p>
       <p id="story-p2">We grew up watching our families do this. We've done it ourselves. The diaspora sends over <strong>$3.7 billion to Haiti every year</strong> — and somewhere between 8% and 12% of every dollar evaporates before it reaches a family member.</p>
-      <p id="story-p3">Tchotcho Pay was born from a simple belief: <strong>the people who need money the most should lose the least of it in transit.</strong> With USDC digital dollars, we can move dollars in minutes for fractions of a cent.</p>
+      <p id="story-p3">Tchotcho Pay was born from a simple belief: <strong>the people who need money the most should lose the least of it in transit.</strong> With USDC on Base blockchain, we can move dollars in minutes for fractions of a cent.</p>
       <p id="story-p4">We're not just a remittance app. We're building <strong>Haiti's financial infrastructure</strong> — a wallet, a marketplace, a savings account, and a payment network, all in one.</p>
     </div>
   </div>
@@ -478,7 +468,7 @@
         <div class="tl-dot"></div>
         <div class="tl-date" id="tl2-date">Q2 2025</div>
         <div class="tl-title" id="tl2-title">Product Architecture</div>
-        <div class="tl-desc" id="tl2-desc">USDC selected as core settlement layer. Smart contract architecture designed. Compliance framework established with legal counsel.</div>
+        <div class="tl-desc" id="tl2-desc">USDC on Base selected as core settlement layer. Smart contract architecture designed. Compliance framework established with legal counsel.</div>
       </div>
       <div class="tl-item reveal">
         <div class="tl-dot"></div>
@@ -533,7 +523,7 @@
         <div class="team-avatar" style="background:linear-gradient(135deg,#00C896,#1055CC)">👨🏾‍💻</div>
         <div class="team-name" id="tm2-name">Jean-Pierre Dumas</div>
         <div class="team-role" id="tm2-role">CTO & Co-Founder</div>
-        <div class="team-bio" id="tm2-bio">Full-stack engineer and payment systems architect. Previously built payment infrastructure at a top fintech. Expert in USDC, secure payment network, and automated payment systems.</div>
+        <div class="team-bio" id="tm2-bio">Full-stack engineer and blockchain architect. Previously built payment infrastructure at a top fintech. Expert in USDC, Base network, and smart contracts.</div>
         <div class="team-flag">🇭🇹 🇨🇦 Cap-Haïtien → Montréal</div>
         <div class="team-links">
           <a href="#" class="team-link"><i class="ti ti-brand-linkedin"></i></a>
@@ -580,7 +570,7 @@
         <div class="team-avatar" style="background:linear-gradient(135deg,#1055CC,#8B5CF6)">👨🏾‍⚖️</div>
         <div class="team-name" id="tm6-name">Réginald Belizaire</div>
         <div class="team-role" id="tm6-role">General Counsel</div>
-        <div class="team-bio" id="tm6-bio">Fintech attorney specializing in money transmission licensing, AML compliance, and fintech regulation. Licensed in NY, FL, and MA.</div>
+        <div class="team-bio" id="tm6-bio">Fintech attorney specializing in money transmission licensing, AML compliance, and blockchain regulation. Licensed in NY, FL, and MA.</div>
         <div class="team-flag">🇭🇹 🇺🇸 Les Cayes → New York</div>
         <div class="team-links">
           <a href="#" class="team-link"><i class="ti ti-brand-linkedin"></i></a>
@@ -602,7 +592,7 @@
         <div class="advisor-card reveal">
           <div class="advisor-avatar" style="background:rgba(247,183,49,0.1)">⛓️</div>
           <div class="advisor-name" id="adv2-name">Dr. Lisa Chen</div>
-          <div class="advisor-role" id="adv2-role">Digital Payments Economist, MIT</div>
+          <div class="advisor-role" id="adv2-role">Blockchain Economist, MIT</div>
         </div>
         <div class="advisor-card reveal">
           <div class="advisor-avatar" style="background:rgba(0,200,150,0.1)">📱</div>
@@ -720,12 +710,12 @@
       stat1_num: '$3.7B', stat1_label: 'Remittances sent to Haiti yearly',
       stat2_num: '8–12%', stat2_label: 'Lost to fees with traditional services',
       stat3_num: '<1%', stat3_label: 'Our transaction fee — up to 10× cheaper',
-      stat4_num: '~2 min', stat4_label: 'Average settlement time',
+      stat4_num: '~2 min', stat4_label: 'Average settlement time on Base',
       ssl1:'People in Haiti', ssl2:'Haitian diaspora', ssl3:'of Haiti GDP is remittances', ssl4:'unbanked population',
       story_badge: 'Our Story', story_title: 'Why we <em>built this</em>',
       story_p1: '<strong>Every month, millions of Haitians abroad send money home.</strong> They wait in line at Western Union. They pay $7 on a $100 transfer. They watch exchange rates that disappear into someone else\'s margin.',
       story_p2: 'We grew up watching our families do this. We\'ve done it ourselves. The diaspora sends over <strong>$3.7 billion to Haiti every year</strong> — and somewhere between 8% and 12% of every dollar evaporates before it reaches a family member.',
-      story_p3: 'Tchotcho Pay was born from a simple belief: <strong>the people who need money the most should lose the least of it in transit.</strong> With USDC digital dollars, we can move dollars in minutes for fractions of a cent.',
+      story_p3: 'Tchotcho Pay was born from a simple belief: <strong>the people who need money the most should lose the least of it in transit.</strong> With USDC on Base blockchain, we can move dollars in minutes for fractions of a cent.',
       story_p4: 'We\'re not just a remittance app. We\'re building <strong>Haiti\'s financial infrastructure</strong> — a wallet, a marketplace, a savings account, and a payment network, all in one.',
       values_badge: 'Our Values', values_title: 'What <em>drives us</em>',
       v1_title:'Community First', v1_desc:"Every decision we make starts with one question: does this help Haitian families? We exist to serve the community, not extract from it.",
@@ -736,21 +726,21 @@
       v6_title:'Long-Term Vision', v6_desc:"We're not building for an exit. We're building the financial rails Haiti deserves — a platform that grows with the country for the next 50 years.",
       timeline_badge:'Roadmap', timeline_title:'How we got here & <em>where we\'re going</em>',
       tl1_date:'Q1 2025', tl1_title:'Company Founded', tl1_desc:'Tchotcho Pay LLC incorporated. Core team assembled. Initial research into Haiti remittance corridors and USDC infrastructure.',
-      tl2_date:'Q2 2025', tl2_title:'Product Architecture', tl2_desc:'USDC selected as core settlement layer. Smart contract architecture designed. Compliance framework established.',
+      tl2_date:'Q2 2025', tl2_title:'Product Architecture', tl2_desc:'USDC on Base selected as core settlement layer. Smart contract architecture designed. Compliance framework established.',
       tl3_date:'Q3 2025', tl3_title:'Beta Development', tl3_desc:'App prototype built. 50 beta users onboarded from the Haitian diaspora in New York, Miami, and Boston. First real transfer tested.',
       tl4_date:'Q4 2025 — Q1 2026', tl4_title:'Waitlist & Community Launch', tl4_desc:'Public waitlist opened. 2,000+ signups in first 30 days. Marketplace merchant pilot in Port-au-Prince. Mobile top-up launched.',
       tl5_date:'Q3 2026 — Target Launch', tl5_title:'Full Public Launch', tl5_desc:'App available on iOS & Android. Full marketplace live. Agent network across Haiti. Bill pay, USDC savings accounts.',
       tl6_date:'2027', tl6_title:'Expand to Caribbean & Africa', tl6_desc:'Replicate the model in Jamaica, Dominican Republic, and French-speaking West Africa.',
       team_badge:'The Team', team_title:'The people <em>building it</em>', team_sub:"We're Haitian, we're diaspora, and we've lived this problem ourselves.",
       tm1_name:'Fedner François', tm1_role:'Founder & CEO', tm1_bio:'Haitian-American entrepreneur with a vision to transform how the diaspora sends money home. Led product strategy and business development from day one.',
-      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO & Co-Founder', tm2_bio:'Full-stack engineer and payment systems architect. Previously built payment infrastructure at a top fintech. Expert in USDC, secure payment network, and automated payment systems.',
+      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO & Co-Founder', tm2_bio:'Full-stack engineer and blockchain architect. Previously built payment infrastructure at a top fintech. Expert in USDC, Base network, and smart contracts.',
       tm3_name:'Marie-Claire Pierre', tm3_role:'COO & Co-Founder', tm3_bio:'Operations and compliance specialist. 10 years in financial services. Leads regulatory strategy, KYC/AML framework, and Haiti agent network expansion.',
       tm4_name:'David Estimé', tm4_role:'Head of Design', tm4_bio:'Product designer focused on accessibility. Designed the Tchotcho Pay app to be usable by first-time smartphone users in Haiti.',
       tm5_name:'Nadège Joseph', tm5_role:'Head of Growth', tm5_bio:'Growth strategist with deep roots in the Haitian diaspora community. Built referral campaigns that onboarded 10,000+ users for a previous fintech startup.',
-      tm6_name:'Réginald Belizaire', tm6_role:'General Counsel', tm6_bio:'Fintech attorney specializing in money transmission licensing, AML compliance, and fintech regulation. Licensed in NY, FL, and MA.',
+      tm6_name:'Réginald Belizaire', tm6_role:'General Counsel', tm6_bio:'Fintech attorney specializing in money transmission licensing, AML compliance, and blockchain regulation. Licensed in NY, FL, and MA.',
       advisors_title:'Advisors', advisors_sub:'Industry veterans guiding our growth.',
       adv1_name:'Robert Chamblain', adv1_role:'Ex-VP, Citibank Caribbean',
-      adv2_name:'Dr. Lisa Chen', adv2_role:'Digital Payments Economist, MIT',
+      adv2_name:'Dr. Lisa Chen', adv2_role:'Blockchain Economist, MIT',
       adv3_name:'Marcus Williams', adv3_role:'Founder, African fintech startup',
       adv4_name:'Carole Étienne', adv4_role:'Haiti Economic Policy Expert',
       press_label:'As featured in',
@@ -774,7 +764,7 @@
       story_badge:'Istwa Nou', story_title:'Poukisa nou <em>bati sa a</em>',
       story_p1:'<strong>Chak mwa, dè milyon Ayisyen aletranje voye lajan lakay.</strong> Yo tann nan ranje nan Western Union. Yo peye $7 sou $100. Yo gade to echanj ki disparèt nan majan lòt moun.',
       story_p2:'Nou te grandi wè fanmi nou fè sa. Nou fè li tèt nou. Dyaspora a voye plis pase <strong>$3.7 milya ann Ayiti chak ane</strong> — epi kèk kote ant 8% ak 12% nan chak dola evapore anvan li rive nan fanmi.',
-      story_p3:'Tchotcho Pay te fèt sou yon kwayans senp: <strong>moun ki bezwen lajan plis ta dwe pèdi mwens nan tranzit.</strong> Ak USDC sou réseau de paiement sécurisé, nou kapab deplase dola nan kèk minit pou fraksyon santim.',
+      story_p3:'Tchotcho Pay te fèt sou yon kwayans senp: <strong>moun ki bezwen lajan plis ta dwe pèdi mwens nan tranzit.</strong> Ak USDC sou blockchain Base, nou kapab deplase dola nan kèk minit pou fraksyon santim.',
       story_p4:'Nou pa jis yon aplikasyon remitans. Nou ap bati <strong>enfrastrikti finansyè Ayiti</strong> — yon pòtfèy, yon maché, yon kont epay, ak yon rezo pèman, tout nan youn.',
       values_badge:'Valè Nou', values_title:'Sa ki <em>drive nou</em>',
       v1_title:'Kominote Dabò', v1_desc:"Chak desizyon nou pran kòmanse ak yon kesyon: èske sa a ede fanmi Ayisyen? Nou egziste pou sèvi kominote a, pa pou tire sou li.",
@@ -792,14 +782,14 @@
       tl6_date:'2027', tl6_title:'Ekspansyon Karayib & Afrik', tl6_desc:'Replike modèl la nan Jamayik, Repiblik Dominikèn, ak Afrik Frankosfòn.',
       team_badge:'Ekip La', team_title:'Moun ki <em>ap bati li</em>', team_sub:"Nou se Ayisyen, nou se dyaspora, epi nou menm nou te viv pwoblèm sa a.",
       tm1_name:'Fedner François', tm1_role:'Fondatè & Direktè Jeneral', tm1_bio:'Antreprenè Ayisyen-Ameriken ak yon vizyon pou transfòme fason dyaspora a voye lajan lakay.',
-      tm2_name:'Jean-Pierre Dumas', tm2_role:'DT & Ko-Fondatè', tm2_bio:'Enjenyè ak achitèk secure digital network. Espè nan USDC, rezo pèman nou an, ak kontrats entèlijan.',
+      tm2_name:'Jean-Pierre Dumas', tm2_role:'DT & Ko-Fondatè', tm2_bio:'Enjenyè ak achitèk blockchain. Espè nan USDC, rezo Base, ak kontrats entèlijan.',
       tm3_name:'Marie-Claire Pierre', tm3_role:'DO & Ko-Fondatè', tm3_bio:'Espesyalis operasyon ak konfòmite. 10 ane nan sèvis finansyè. Dirije estrateji regilatif ak rezo ajan.',
       tm4_name:'David Estimé', tm4_role:'Chèf Dizay', tm4_bio:'Dizayè pwodui ak aksan sou aksesibilite. Fèt aplikasyon an pou itilizatè smartphone premye fwa ann Ayiti.',
       tm5_name:'Nadège Joseph', tm5_role:'Chèf Kwasans', tm5_bio:'Estratejis kwasans ak rasin pwofon nan kominote dyaspora Ayisyen an.',
-      tm6_name:'Réginald Belizaire', tm6_role:'Konsèy Jeneral', tm6_bio:'Avoka fintech espesyalize nan lisans transmisyon lajan, AML, ak regilasman secure digital network.',
+      tm6_name:'Réginald Belizaire', tm6_role:'Konsèy Jeneral', tm6_bio:'Avoka fintech espesyalize nan lisans transmisyon lajan, AML, ak regilasman blockchain.',
       advisors_title:'Konseyè', advisors_sub:'Vetèran endistri ki gide kwasans nou an.',
       adv1_name:'Robert Chamblain', adv1_role:'Ansyen VP, Citibank Karayib',
-      adv2_name:'Dr. Lisa Chen', adv2_role:'Ekonomis Secure Digital Network, MIT',
+      adv2_name:'Dr. Lisa Chen', adv2_role:'Ekonomis Blockchain, MIT',
       adv3_name:'Marcus Williams', adv3_role:'Fondatè, startup fintech Afrik',
       adv4_name:'Carole Étienne', adv4_role:'Ekspè Politik Ekonomik Ayiti',
       press_label:'Prezante nan',
@@ -841,14 +831,14 @@
       tl6_date:'2027', tl6_title:'Expansion Caraïbes & Afrique', tl6_desc:'Répliquer le modèle en Jamaïque, en République dominicaine et en Afrique francophone.',
       team_badge:"L'Équipe", team_title:'Les personnes qui le <em>construisent</em>', team_sub:"Nous sommes Haïtiens, nous sommes de la diaspora, et nous avons vécu ce problème nous-mêmes.",
       tm1_name:'Fedner François', tm1_role:'Fondateur & PDG', tm1_bio:"Entrepreneur haïtiano-américain avec la vision de transformer la façon dont la diaspora envoie de l'argent au pays.",
-      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO & Co-Fondateur', tm2_bio:'Ingénieur et architecte secure digital network. Expert en USDC, notre réseau de paiement et contrats intelligents.',
+      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO & Co-Fondateur', tm2_bio:'Ingénieur et architecte blockchain. Expert en USDC, réseau Base et contrats intelligents.',
       tm3_name:'Marie-Claire Pierre', tm3_role:'COO & Co-Fondatrice', tm3_bio:'Spécialiste des opérations et de la conformité. 10 ans dans les services financiers.',
       tm4_name:'David Estimé', tm4_role:'Responsable Design', tm4_bio:"Designer produit axé sur l'accessibilité. A conçu l'app Tchotcho Pay pour les nouveaux utilisateurs de smartphone en Haïti.",
       tm5_name:'Nadège Joseph', tm5_role:'Responsable Croissance', tm5_bio:"Stratège de croissance avec des racines profondes dans la communauté de la diaspora haïtienne.",
-      tm6_name:'Réginald Belizaire', tm6_role:'Conseil Juridique', tm6_bio:'Avocat fintech spécialisé en licences de transfert, LBC et réglementation secure digital network.',
+      tm6_name:'Réginald Belizaire', tm6_role:'Conseil Juridique', tm6_bio:'Avocat fintech spécialisé en licences de transfert, LBC et réglementation blockchain.',
       advisors_title:'Conseillers', advisors_sub:'Des vétérans de l\'industrie guidant notre croissance.',
       adv1_name:'Robert Chamblain', adv1_role:'Ex-VP, Citibank Caraïbes',
-      adv2_name:'Dr. Lisa Chen', adv2_role:'Économiste Secure Digital Network, MIT',
+      adv2_name:'Dr. Lisa Chen', adv2_role:'Économiste Blockchain, MIT',
       adv3_name:'Marcus Williams', adv3_role:'Fondateur, startup fintech africaine',
       adv4_name:'Carole Étienne', adv4_role:'Experte Politique Économique Haïti',
       press_label:'Présenté dans',
@@ -890,14 +880,14 @@
       tl6_date:'2027', tl6_title:'Expansión al Caribe y África', tl6_desc:'Replicar el modelo en Jamaica, República Dominicana y África francófona.',
       team_badge:'El Equipo', team_title:'Las personas que lo <em>construyen</em>', team_sub:"Somos haitianos, somos diáspora, y hemos vivido este problema nosotros mismos.",
       tm1_name:'Fedner François', tm1_role:'Fundador y CEO', tm1_bio:'Empresario haitianoamericano con visión de transformar cómo la diáspora envía dinero a casa.',
-      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO y Co-Fundador', tm2_bio:'Ingeniero y arquitecto secure digital network. Experto en USDC, nuestra red de pago y contratos inteligentes.',
+      tm2_name:'Jean-Pierre Dumas', tm2_role:'CTO y Co-Fundador', tm2_bio:'Ingeniero y arquitecto blockchain. Experto en USDC, red Base y contratos inteligentes.',
       tm3_name:'Marie-Claire Pierre', tm3_role:'COO y Co-Fundadora', tm3_bio:'Especialista en operaciones y cumplimiento. 10 años en servicios financieros.',
       tm4_name:'David Estimé', tm4_role:'Jefe de Diseño', tm4_bio:'Diseñador de producto enfocado en accesibilidad para usuarios de smartphone en Haití.',
       tm5_name:'Nadège Joseph', tm5_role:'Jefa de Crecimiento', tm5_bio:'Estratega de crecimiento con raíces profundas en la comunidad de la diáspora haitiana.',
-      tm6_name:'Réginald Belizaire', tm6_role:'Asesor Jurídico', tm6_bio:'Abogado fintech especializado en licencias de transmisión de dinero, AML y regulación secure digital network.',
+      tm6_name:'Réginald Belizaire', tm6_role:'Asesor Jurídico', tm6_bio:'Abogado fintech especializado en licencias de transmisión de dinero, AML y regulación blockchain.',
       advisors_title:'Asesores', advisors_sub:'Veteranos de la industria guiando nuestro crecimiento.',
       adv1_name:'Robert Chamblain', adv1_role:'Ex-VP, Citibank Caribe',
-      adv2_name:'Dra. Lisa Chen', adv2_role:'Economista Secure Digital Network, MIT',
+      adv2_name:'Dra. Lisa Chen', adv2_role:'Economista Blockchain, MIT',
       adv3_name:'Marcus Williams', adv3_role:'Fundador, startup fintech africana',
       adv4_name:'Carole Étienne', adv4_role:'Experta Política Económica Haití',
       press_label:'Destacado en',
@@ -968,8 +958,24 @@
     document.documentElement.lang = lang;
   }
 
-  // lang.js handles switcher injection — apply language on load
-  window.addEventListener('DOMContentLoaded', () => { applyLang(activeLang); });
+  // Inject lang switcher into nav
+  window.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('nav');
+    const sw = document.createElement('div');
+    sw.style.cssText = 'display:flex;gap:3px;align-items:center;background:#0A1F6E;border:1.5px solid rgba(0,174,239,0.5);border-radius:50px;padding:3px;margin-left:8px;flex-shrink:0;';
+    ['EN','HT','FR','ES'].forEach(code => {
+      const btn = document.createElement('button');
+      btn.className = 'tc-lang-btn';
+      btn.dataset.lang = code.toLowerCase();
+      btn.textContent = code;
+      btn.onclick = () => applyLang(code.toLowerCase());
+      btn.style.cssText = 'padding:5px 10px;border-radius:50px;border:none;background:none;color:#8FA8CC;font-size:.76rem;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;';
+      sw.appendChild(btn);
+    });
+    const backLink = nav.querySelector('.nav-back');
+    nav.insertBefore(sw, backLink);
+    applyLang(activeLang);
+  });
 </script>
 <script src="chat-widget.js" defer></script>
 <script src="cookie-consent.js" defer></script>

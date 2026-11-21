@@ -33,19 +33,18 @@
       --gold:#F7B731;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:12px;}
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
     .nav-name em{color:var(--cyan);font-style:normal;}
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
-    .nav-link:hover{color:#1055CC;background:rgba(0,174,239,.08);}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
     @media(max-width:600px){.nav-links{display:none;}}
 
@@ -179,11 +178,6 @@
     .footer-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- GA4 Consent Mode: default denied until user accepts -->
   <script>
@@ -203,20 +197,14 @@
   gtag('js', new Date());
   gtag('config', 'G-LKXNGW0JJ5');
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-  {"@type":"Question","name":"Is TchotchoPay cheaper than Western Union?","acceptedAnswer":{"@type":"Answer","text":"Yes. TchotchoPay charges 1-2% compared to Western Union and MoneyGram which charge 3-8% when including exchange rate markups."}},
-  {"@type":"Question","name":"How does TchotchoPay compare to Ria Money Transfer?","acceptedAnswer":{"@type":"Answer","text":"TchotchoPay offers lower fees (1-2% vs 2-4%), supports both MonCash and NatCash, and includes a USDC savings wallet — features Ria does not offer."}},
-  {"@type":"Question","name":"What makes TchotchoPay different from other remittance apps?","acceptedAnswer":{"@type":"Answer","text":"TchotchoPay combines money transfer, USDC wallet, Haitian marketplace, virtual Visa card, bill pay, and mobile top-up in one app — built specifically for the Haitian community."}}
-]}
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
   </a>
   <div class="nav-links">
     <a href="pricing.html" class="nav-link">Pricing</a>
@@ -530,7 +518,7 @@
     <div class="trust-logos">
       <div class="trust-logo"><i class="ti ti-brand-stripe"></i> Stripe Payments</div>
       <div class="trust-logo">⚡ Reloadly</div>
-      <div class="trust-logo">🔵 Secure Payment Network</div>
+      <div class="trust-logo">🔵 Base Blockchain</div>
       <div class="trust-logo">💵 USDC by Circle</div>
     </div>
   </div>

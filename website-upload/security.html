@@ -39,19 +39,18 @@
       --gold:#F7B731; --gold:#F7B731;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:12px;}
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
     .nav-name em{color:var(--cyan);font-style:normal;}
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
-    .nav-link:hover{color:#1055CC;background:rgba(0,174,239,.08);}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
     @media(max-width:600px){.nav-links{display:none;}}
 
@@ -92,7 +91,7 @@
     .layer:last-child .layer-connector{display:none;}
     .layer-left{flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:0 24px 0 0;position:relative;z-index:1;}
     .layer-icon{width:62px;height:62px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;border:2px solid;}
-    .layer-body{flex:1;background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:18px;padding:22px 24px;margin-bottom:16px;transition:border-color .2s;overflow-x:hidden;}
+    .layer-body{flex:1;background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:18px;padding:22px 24px;margin-bottom:16px;transition:border-color .2s;}
     .layer-body:hover{border-color:rgba(0,174,239,.25);}
     .layer-name{font-size:1rem;font-weight:800;margin-bottom:4px;}
     .layer-desc{font-size:.84rem;color:var(--gray);line-height:1.6;margin-bottom:10px;}
@@ -190,11 +189,6 @@
     }
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -237,7 +231,8 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
   </a>
   <div class="nav-links">
     <a href="pricing.html" class="nav-link">Pricing</a>
@@ -339,8 +334,8 @@
           </div>
         </div>
         <div class="layer-body">
-          <div class="layer-name">Layer 4 — USDC on Secure Payment Network</div>
-          <div class="layer-desc">Your money is held as USDC — a regulated digital dollar issued by Circle (co-founded by Coinbase). Every USDC is backed 1:1 by USD held in reserve. Transfers happen  instantly, a secure digital network built by Coinbase, providing transparent and immutable transaction records that nobody can alter — not even us.</div>
+          <div class="layer-name">Layer 4 — USDC on Base Blockchain</div>
+          <div class="layer-desc">Your money is held as USDC — a regulated digital dollar issued by Circle (co-founded by Coinbase). Every USDC is backed 1:1 by USD held in reserve. Transfers happen on Base, a blockchain built by Coinbase, providing transparent and immutable transaction records that nobody can alter — not even us.</div>
           <div class="layer-tags">
             <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">USDC by Circle</span>
             <span class="layer-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">1:1 USD Backed</span>
@@ -389,8 +384,8 @@
       </div>
 
       <div style="background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:20px;padding:28px;">
-        <div style="font-size:1rem;font-weight:800;color:var(--green);margin-bottom:14px;">⛓️ What is secure payment network?</div>
-        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:12px;">Base is a payment network built by <strong style="color:var(--white)">Coinbase</strong> — one of the largest and most trusted crypto companies in the world, publicly traded on NASDAQ.</p>
+        <div style="font-size:1rem;font-weight:800;color:var(--green);margin-bottom:14px;">⛓️ What is Base blockchain?</div>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:12px;">Base is a blockchain network built by <strong style="color:var(--white)">Coinbase</strong> — one of the largest and most trusted crypto companies in the world, publicly traded on NASDAQ.</p>
         <p style="font-size:.85rem;color:var(--gray);line-height:1.7;">Base lets us settle transfers in ~2 seconds for a fraction of a cent — compared to 2–5 days and $25+ fees for international bank wires. Every transaction is permanently recorded and publicly verifiable.</p>
       </div>
 
@@ -460,7 +455,7 @@
       <div class="sec-card reveal">
         <div class="sec-icon" style="background:rgba(247,183,49,.1);">🧾</div>
         <div class="sec-title">Immutable Transaction Records</div>
-        <div class="sec-desc">Every transfer is permanently recorded . These records cannot be deleted, edited, or disputed — your history is tamper-proof forever.</div>
+        <div class="sec-desc">Every transfer is permanently recorded on the Base blockchain. These records cannot be deleted, edited, or disputed — your history is tamper-proof forever.</div>
       </div>
 
       <div class="sec-card reveal">
@@ -650,7 +645,7 @@
 
   // ── FAQ ──────────────────────────────────────────────────────────
   const FAQS = [
-    { q: 'What happens to my money if Tchotcho Pay shuts down?', a: 'Your USDC is held  — not in a Tchotcho Pay bank account. This means even if Tchotcho Pay ceased operations, your USDC remains in your wallet and can be accessed through any other compatible secure digital network wallet app. We cannot touch or freeze your funds.' },
+    { q: 'What happens to my money if Tchotcho Pay shuts down?', a: 'Your USDC is held on the Base blockchain — not in a Tchotcho Pay bank account. This means even if Tchotcho Pay ceased operations, your USDC remains in your wallet and can be accessed through any other compatible blockchain wallet app. We cannot touch or freeze your funds.' },
     { q: 'Can Tchotcho Pay access or move my money without my permission?', a: 'No. Every transfer requires your biometric approval (fingerprint or Face ID) plus your 6-digit transfer PIN. Two separate approvals are needed before any money moves. Our systems can monitor your account and flag suspicious activity, but cannot move funds unilaterally.' },
     { q: 'Is USDC the same as Bitcoin or other crypto I\'ve heard about?', a: 'No. USDC is fundamentally different from Bitcoin or other cryptocurrencies. It does not fluctuate in value — 1 USDC is always exactly $1 USD. It is a "stablecoin," essentially a digital dollar. Your balance will never go up or down in value due to the market.' },
     { q: 'What happens if I lose my phone?', a: 'Tap "Freeze Account" from any browser by logging into tchotchopay.com, or call our support line. Your account will be instantly locked. When you get a new phone, log in with your email and password — you\'ll need to re-verify your identity on the new device before any transfers are allowed.' },

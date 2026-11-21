@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Send Money to MonCash & NatCash — Tchotcho Pay</title>
-  <meta name="description" content="Send money directly to MonCash and NatCash wallets in Haiti. Fast, secure, low fees. Pay with debit or credit card from the U.S., Canada, or France."/>
+  <meta name="description" content="Voye lajan dirèkteman nan MonCash ak NatCash ann Ayiti. Send money to Haiti fast, secure, low fees. Pay with debit or credit card from the U.S., Canada, or France."/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://tchotchopay.com/send.html"/>
   <link rel="alternate" hreflang="en" href="https://tchotchopay.com/send.html"/>
@@ -35,24 +35,22 @@
       --moncash:#00A651; --natcash:#003087;
     }
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; overflow-x:hidden;
-    }
+    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
 
     /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:9999;
       display:flex; align-items:center; padding:14px 32px;
-      background: #fff;  backdrop-filter:blur(12px);
-      border-bottom: 2px solid #D21034; gap:16px;
+      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
     }
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
-    
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
+    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
+    .nav-logo img { width:100%; height:100%; object-fit:cover; }
+    .nav-brand span { font-weight:700; font-size:1rem; }
+    .nav-brand em { color:var(--cyan); font-style:normal; }
     .nav-links { display:flex; gap:20px; margin-left:auto; align-items:center; }
-    .nav-link { color: #374151; text-decoration:none; font-size:0.85rem; transition:color .2s; white-space:nowrap; }
+    .nav-link { color:var(--gray); text-decoration:none; font-size:0.85rem; transition:color .2s; white-space:nowrap; }
     .nav-link:hover { color:var(--white); }
     .nav-link.active { color:var(--cyan); font-weight:600; }
 
@@ -112,10 +110,6 @@
 
     /* Wallet grid */
     .wallet-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
-    .wallet-card.tchotcho { --tc:#1055CC; }
-    .wallet-logo.tc { background:linear-gradient(135deg,#0A1F6E,#1055CC); color:#fff; }
-    .wallet-tag.tc { background:rgba(16,85,204,0.18); color:#7FD4F7; }
-    .wallet-card-full { grid-column:1/-1; } /* spans both columns */
     .wallet-card {
       border:2px solid rgba(0,174,239,0.2); border-radius:16px;
       padding:22px 16px; cursor:pointer; text-align:center;
@@ -364,11 +358,6 @@
       border-radius:14px; font-size:0.8rem; color:var(--gray); text-align:center; line-height:1.5;
     }
     .rate-note strong { color:var(--white); }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- GA4 Consent Mode: default denied until user accepts -->
   <script>
@@ -388,16 +377,14 @@
   gtag('js', new Date());
   gtag('config', 'G-LKXNGW0JJ5');
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"Send Money to MonCash and NatCash","provider":{"@type":"Organization","name":"TchotchoPay","url":"https://tchotchopay.com"},"description":"Send money directly to MonCash and NatCash mobile wallets in Haiti. Fast, secure, low fees.","url":"https://tchotchopay.com/send.html","areaServed":["US","CA","FR"],"offers":{"@type":"Offer","description":"1-2% fee, funds arrive in minutes"}}
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="tchotchopay-logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'"/></div>
+    <span>Tchotcho <em>Pay</em></span>
   </a>
   <div class="nav-links">
     <a href="topup.html" class="nav-link">Top-Up</a>
@@ -494,47 +481,25 @@
           <div class="wallet-sub">Natcom / BNC mobile wallet</div>
           <span class="wallet-tag natcash">Widely used</span>
         </div>
-        <div class="wallet-card wallet-card-full" id="card-tchotcho" onclick="selectWallet('tchotcho', this)">
-          <div class="wallet-logo tc">TP</div>
-          <div class="wallet-name">TchotchoPay Wallet</div>
-          <div class="wallet-sub">Send directly to any TchotchoPay user — free &amp; instant</div>
-          <span class="wallet-tag tc">Free · Instant</span>
-        </div>
       </div>
       <button class="btn-primary" id="btn1" onclick="goStep(2)" disabled>
         <i class="ti ti-arrow-right"></i> Continue
       </button>
     </div>
 
-    <!-- STEP 2: Phone number / Username -->
+    <!-- STEP 2: Phone number -->
     <div class="panel" id="panel2">
-      <!-- Haiti phone (MonCash / NatCash) -->
-      <div id="p2-phone-section">
-        <div class="panel-title">Recipient's number</div>
-        <div class="panel-sub" id="p2-sub">Enter the Haiti phone number registered to their <span id="p2-wallet">MonCash</span> wallet.</div>
-        <div class="input-label">Recipient Phone Number</div>
-        <div class="phone-row">
-          <div class="country-code">🇭🇹 +509</div>
-          <input class="phone-input" id="phone-input" type="tel" placeholder="XX XX XXXX" maxlength="11"
-                 oninput="formatPhone(this); validatePhone()" />
-        </div>
-        <div class="field-error" id="phone-error">Please enter a valid 8-digit Haiti phone number.</div>
-        <div style="font-size:.78rem;color:var(--gray);margin-bottom:24px;" id="phone-hint">
-          MonCash (Digicel): 36, 37, 38, 46, 47, 55…<br>NatCash (Natcom): 34, 35, 48…
-        </div>
+      <div class="panel-title">Recipient's number</div>
+      <div class="panel-sub" id="p2-sub">Enter the Haiti phone number registered to their <span id="p2-wallet">MonCash</span> wallet.</div>
+      <div class="input-label">Recipient Phone Number</div>
+      <div class="phone-row">
+        <div class="country-code">🇭🇹 +509</div>
+        <input class="phone-input" id="phone-input" type="tel" placeholder="XX XX XXXX" maxlength="11"
+               oninput="formatPhone(this); validatePhone()" />
       </div>
-      <!-- TchotchoPay wallet username -->
-      <div id="p2-wallet-section" style="display:none;">
-        <div class="panel-title">Recipient's wallet</div>
-        <div class="panel-sub">Enter the recipient's TchotchoPay username or phone number.</div>
-        <div class="input-label">Username or Phone</div>
-        <input class="phone-input" id="wallet-input" type="text" placeholder="@username or phone number"
-               style="width:100%;border-radius:10px;padding:14px 16px;"
-               oninput="validateWalletInput()" />
-        <div class="field-error" id="wallet-error">Please enter a valid username or phone number.</div>
-        <div style="font-size:.78rem;color:var(--gray);margin-bottom:24px;">
-          ✓ Free transfer · ✓ Instant · ✓ No fees between TchotchoPay users
-        </div>
+      <div class="field-error" id="phone-error">Please enter a valid 8-digit Haiti phone number.</div>
+      <div style="font-size:.78rem;color:var(--gray);margin-bottom:24px;" id="phone-hint">
+        MonCash (Digicel): 36, 37, 38, 46, 47, 55…<br>NatCash (Natcom): 34, 35, 48…
       </div>
       <button class="btn-primary" id="btn2" onclick="goStep(3)" disabled>
         <i class="ti ti-arrow-right"></i> Continue
@@ -828,38 +793,16 @@
       hdr.className  = 'ps-header-mc'; icon.className = 'ps-wallet-icon mc';
       icon.textContent = 'MC'; nm.textContent = 'MonCash'; op.textContent = 'by Digicel Haiti';
       btn.className = 'ps-btn-mc';
-    } else if (name === 'natcash') {
+    } else {
       hdr.className  = 'ps-header-nc'; icon.className = 'ps-wallet-icon nc';
       icon.textContent = 'NC'; nm.textContent = 'NatCash'; op.textContent = 'by Natcom / BNC';
       btn.className = 'ps-btn-nc';
-    } else {
-      hdr.className  = 'ps-header-mc'; icon.className = 'ps-wallet-icon';
-      icon.style.background = 'linear-gradient(135deg,#0A1F6E,#1055CC)';
-      icon.textContent = 'TP'; nm.textContent = 'TchotchoPay Wallet'; op.textContent = 'Free · Instant transfer';
-      btn.className = 'ps-btn-mc'; btn.style.background = '#1055CC';
     }
-    // Toggle Step 2 sections
-    const isTP = name === 'tchotcho';
-    document.getElementById('p2-phone-section').style.display = isTP ? 'none' : 'block';
-    document.getElementById('p2-wallet-section').style.display = isTP ? 'block' : 'none';
-    document.getElementById('btn2').disabled = true; // reset until input filled
-    if (!isTP) {
-      document.getElementById('phone-input').value = '';
-      document.getElementById('p2-wallet').textContent = name === 'moncash' ? 'MonCash' : 'NatCash';
-      document.getElementById('phone-hint').innerHTML = name === 'moncash'
-        ? 'MonCash (Digicel): 36, 37, 38, 46, 47, 55…'
-        : 'NatCash (Natcom): 34, 35, 48…';
-    } else {
-      document.getElementById('wallet-input').value = '';
-    }
-  }
-
-  function validateWalletInput() {
-    const val = (document.getElementById('wallet-input').value || '').trim();
-    const valid = val.length >= 3;
-    document.getElementById('btn2').disabled = !valid;
-    document.getElementById('wallet-error').style.display = valid ? 'none' : 'block';
-    document.getElementById('ps-phone').textContent = val || '—';
+    // Update step 2 sub
+    document.getElementById('p2-wallet').textContent = name === 'moncash' ? 'MonCash' : 'NatCash';
+    document.getElementById('phone-hint').innerHTML = name === 'moncash'
+      ? 'MonCash (Digicel): 36, 37, 38, 46, 47, 55…'
+      : 'NatCash (Natcom): 34, 35, 48…';
   }
 
   // ── PHONE FORMAT ─────────────────────────────────────────────

@@ -19,11 +19,10 @@
 
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
     .nav-name em{color:var(--cyan);font-style:normal;}
     .nav-back{margin-left:auto;color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 16px;border-radius:50px;border:1px solid rgba(0,174,239,.2);transition:.2s;}
     .nav-back:hover{color:var(--white);border-color:var(--cyan);}
@@ -149,7 +148,8 @@
 
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
   </a>
   <a href="index.html" class="nav-back"><i class="ti ti-arrow-left"></i> Home</a>
 </nav>

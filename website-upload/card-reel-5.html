@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:1080px; height:1920px;
+  background:linear-gradient(160deg,#020B2D 0%,#0A1F6E 60%,#020B2D 100%);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:relative;
+}
+.glow { position:absolute; width:900px; height:900px; background:radial-gradient(circle,rgba(0,174,239,.18) 0%,transparent 65%); top:-200px; left:50%; transform:translateX(-50%); }
+
+/* LOGO */
+.logo { position:absolute; top:64px; left:0; right:0; text-align:center; font-size:26px; font-weight:900; letter-spacing:.22em; color:rgba(255,255,255,.38); text-transform:uppercase; }
+
+/* CARD MINI */
+.card { position:absolute; top:150px; left:100px; right:100px; height:300px; background:linear-gradient(135deg,#0A1F6E 0%,#1055CC 52%,#0D62E8 100%); border-radius:36px; padding:44px 52px; box-shadow:0 60px 140px rgba(0,0,0,.55),0 0 120px rgba(0,174,239,.25); overflow:hidden; }
+.cc1 { position:absolute; top:-70px; right:-70px; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.06); }
+.cc2 { position:absolute; bottom:-90px; left:-50px; width:240px; height:240px; border-radius:50%; background:rgba(0,174,239,.08); }
+.card-inner { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+.card-top { display:flex; justify-content:space-between; }
+.card-brand { font-size:20px; font-weight:900; letter-spacing:.18em; color:rgba(255,255,255,.6); }
+.chip { width:62px; height:44px; background:linear-gradient(135deg,#d4af37,#f5d87a,#d4af37); border-radius:10px; }
+.card-num { font-size:40px; font-weight:700; letter-spacing:.22em; color:#fff; text-align:center; }
+.card-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+.card-holder { font-size:20px; font-weight:800; color:rgba(255,255,255,.8); }
+.card-visa { font-size:44px; font-weight:900; font-style:italic; color:rgba(255,255,255,.92); }
+
+/* BIG HEADLINE — card ends at ~450 */
+.headline { position:absolute; top:510px; left:60px; right:60px; text-align:center; }
+.headline h1 { font-size:108px; font-weight:900; color:#fff; line-height:1.05; }
+.headline h1 span { color:#00AEEF; }
+
+/* SUB — headline is 3 lines × 108px = ~340px, starts 510, ends ~850 */
+.sub { position:absolute; top:900px; left:60px; right:60px; text-align:center; font-size:40px; color:rgba(255,255,255,.52); line-height:1.5; }
+
+/* PERKS — sub is ~2 lines × 60px = ~120px, starts 900, ends ~1020 */
+.perks { position:absolute; top:1090px; left:60px; right:60px; display:flex; flex-direction:column; gap:26px; }
+.perk { display:flex; align-items:center; gap:30px; font-size:40px; font-weight:700; color:rgba(255,255,255,.72); }
+.check { width:62px; height:62px; border-radius:50%; flex-shrink:0; background:rgba(0,174,239,.14); border:2px solid rgba(0,174,239,.3); display:flex; align-items:center; justify-content:center; font-size:30px; }
+
+/* CTA — perks: 3 × ~90px = 270px + gaps, starts 1090, ends ~1400 */
+.cta { position:absolute; top:1470px; left:60px; right:60px; background:linear-gradient(135deg,#00AEEF,#1055CC); border-radius:36px; padding:60px; text-align:center; box-shadow:0 20px 80px rgba(0,174,239,.3); }
+.cta-label { font-size:56px; font-weight:900; color:#fff; letter-spacing:.04em; }
+.cta-url { font-size:36px; color:rgba(255,255,255,.65); margin-top:10px; }
+
+/* HANDLE */
+.handle { position:absolute; bottom:64px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:rgba(255,255,255,.22); letter-spacing:.18em; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="logo">TCHOTCHOPAY</div>
+
+<div class="card">
+  <div class="cc1"></div><div class="cc2"></div>
+  <div class="card-inner">
+    <div class="card-top"><div class="card-brand">TCHOTCHOPAY</div><div class="chip"></div></div>
+    <div class="card-num">•••• •••• •••• ••••</div>
+    <div class="card-bottom"><div class="card-holder">YOUR NAME HERE</div><div class="card-visa">VISA</div></div>
+  </div>
+</div>
+
+<div class="headline">
+  <h1>Get Your<br><span>Free</span><br>Card Today</h1>
+</div>
+
+<div class="sub">Join Haitians worldwide already spending, sending, and saving with TchotchoPay.</div>
+
+<div class="perks">
+  <div class="perk"><div class="check">✓</div>No bank account required</div>
+  <div class="perk"><div class="check">✓</div>Free virtual Visa card</div>
+  <div class="perk"><div class="check">✓</div>Send money to Haiti instantly</div>
+</div>
+
+<div class="cta">
+  <div class="cta-label">Sign Up Free →</div>
+  <div class="cta-url">tchotchopay.com</div>
+</div>
+
+<div class="handle">@TCHOTCHOPAY</div>
+</body>
+</html>

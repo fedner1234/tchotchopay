@@ -45,21 +45,19 @@
       --gold: #F7B731; --moncash: #00A651; --natcash: #003087;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--navy); color: var(--white); overflow-x:hidden;
-    }
+    html, body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--navy); color: var(--white); }
 
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: #fff;  backdrop-filter: blur(12px);
-      border-bottom: 2px solid #D21034;
+      background: rgba(2,11,45,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,174,239,0.15);
       padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo { width: 34px; height: 34px; border-radius: 9px; overflow: hidden; background: linear-gradient(135deg,#0A1F6E,#00AEEF); }
+    .nav-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .nav-name { font-size: 1.1rem; font-weight: 900; color: var(--white); }
     .nav-name em { color: var(--cyan); font-style: normal; }
     .nav-cta {
       background: var(--cyan); color: #020B2D; font-weight: 800; font-size: .88rem;
@@ -219,19 +217,17 @@
       .compare-table { font-size: .82rem; }
       .compare-table td, .compare-table thead th { padding: 12px 12px; }
     }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
 </head>
 <body>
 
 <!-- ── NAV ── -->
 <nav>
-  <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+  <a class="nav-brand" href="/">
+    <div class="nav-logo">
+      <img src="logo.png" alt="TchotchoPay" onerror="this.style.display='none'"/>
+    </div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
   </a>
   <a class="nav-cta" href="signup.html">Kòmanse Gratis →</a>
 </nav>
@@ -272,7 +268,7 @@
   <div class="trust-inner">
     <div class="trust-item"><i class="ti ti-shield-check"></i> Anrejistre FinCEN</div>
     <div class="trust-item"><i class="ti ti-clock"></i> Livrezon nan 5 minit</div>
-    <div class="trust-item"><i class="ti ti-lock"></i> USDC sou secure payment network</div>
+    <div class="trust-item"><i class="ti ti-lock"></i> USDC sou Base blockchain</div>
     <div class="trust-item"><i class="ti ti-users"></i> 24/7 Sipò Ayisyen</div>
   </div>
 </div>

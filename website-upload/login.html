@@ -22,10 +22,9 @@
     html { overflow-x: hidden; }
     :root{--navy:#020B2D;--blue:#0A1F6E;--mid:#1055CC;--cyan:#00AEEF;--light:#7FD4F7;--gray:#8FA8CC;--white:#F0F6FF;--green:#00C896;--red:#FF4C6A;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
     .card{background:rgba(10,31,110,0.6);border:1px solid rgba(0,174,239,0.2);border-radius:24px;padding:36px;width:100%;max-width:400px;}
     .logo{text-align:center;margin-bottom:28px;}
-    .logo img{height:48px;width:auto;display:block;margin:0 auto 8px;}
     .logo-text{font-size:1.6rem;font-weight:900;color:var(--white);}
     .logo-text em{color:var(--cyan);font-style:normal;}
     .logo-sub{font-size:.85rem;color:var(--gray);margin-top:4px;}
@@ -51,18 +50,12 @@
     .signup-link{text-align:center;font-size:.85rem;}
     .signup-link a{color:var(--cyan);text-decoration:none;font-weight:700;}
     .signup-link a:hover{text-decoration:underline;}
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">
-      <img src="logo-full.png" alt="TchotchoPay" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-      <div class="logo-text" style="display:none">Tchotcho<em>Pay</em></div>
+      <div class="logo-text">Tchotcho<em>Pay</em></div>
       <div class="logo-sub">Sign in to your wallet</div>
     </div>
 
@@ -95,7 +88,6 @@
     <div class="signup-link"><a href="signup.html">Create a free TchotchoPay wallet →</a></div>
   </div>
 
-<script src="lang.js"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
   // Redirect if already logged in

@@ -40,15 +40,14 @@
       --ht-blue:#003087; --ht-red:#CE1126;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
 
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:13px 28px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:12px;}
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:13px 28px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.18);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
+    .nav-name{font-weight:700;font-size:1rem;}
     .nav-name em{color:var(--cyan);font-style:normal;}
     .haiti-badge{display:flex;align-items:center;gap:5px;background:rgba(206,17,38,.12);border:1px solid rgba(206,17,38,.25);border-radius:50px;padding:4px 12px;font-size:.72rem;font-weight:700;color:#ff6b7a;margin-left:8px;}
     .lang-row{display:flex;gap:4px;margin-left:auto;}
@@ -258,11 +257,6 @@
     .footer-mini-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -308,7 +302,8 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-name">Tchotcho<em>Pay</em></span>
   </a>
   <div class="haiti-badge">🇭🇹 Ayiti</div>
   <div class="lang-row">
@@ -361,7 +356,7 @@
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="sb-title" id="s1t">Download the app & create wallet</div>
-          <div class="sb-sub" id="s1s">Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a <em>USDC wallet</em> .</div>
+          <div class="sb-sub" id="s1s">Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a <em>USDC wallet</em> on Base blockchain.</div>
         </div>
       </div>
       <div class="step-item">
@@ -753,7 +748,7 @@
       'cta-main':'Create Free Wallet','cta-agent':'Find Agent Near You',
       't1':'No bank account needed','t2':'Cash out in HTG anytime','t3':'Pay EDH, CAMEP & school fees','t4':'Save in digital dollars (4.5% APY)','t5':'Works on any smartphone',
       'how-title':'Get your money in 4 easy steps','how-sub':'No complicated steps. No bank required. Just a smartphone and a free Tchotcho Pay account.',
-      's1t':'Download the app & create wallet','s1s':'Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a USDC wallet .',
+      's1t':'Download the app & create wallet','s1s':'Free sign-up in under 3 minutes. No bank account needed — just a phone number and ID. You get a USDC wallet on Base blockchain.',
       's2t':'Share your username or QR code','s2s':'Tell your family abroad your Tchotcho Pay username or show your QR code. They send from the US, Canada, or France — it arrives in under 2 minutes.',
       's3t':'Receive USDC — digital dollars','s3s':'Funds arrive as USDC — 1 USDC always equals $1 USD. No exchange risk. You see your balance in your wallet instantly with HTG equivalent shown live.',
       's4t':'Spend, save, or cash out','s4s':'Pay EDH bills, top up phone, buy from merchants, send to family — or cash out HTG through a local agent in your city. Your choice, your control.',
@@ -781,7 +776,7 @@
       'cta-main':'Kreye Bous Gratis','cta-agent':'Jwenn Ajan Pre Ou',
       't1':'Pa bezwen kont bank','t2':'Kache nan HTG nenpòt ki lè','t3':'Peye EDH, CAMEP ak frè lekòl','t4':'Ekonomize nan dola dijital (4.5% APY)','t5':'Travay sou nenpòt ki telefòn',
       'how-title':'Resevwa lajan ou nan 4 etap fasil','how-sub':'Pa gen etap konplike. Pa gen bank obligatwa. Jis yon telefòn ak yon kont Tchotcho Pay gratis.',
-      's1t':'Telechaje app la & kreye bous ou','s1s':'Enskrisyon gratis nan mwens pase 3 minit. Pa bezwen kont bank — jis yon nimewo telefòn ak yon ID. Ou jwenn yon bous USDC sou secure payment network.',
+      's1t':'Telechaje app la & kreye bous ou','s1s':'Enskrisyon gratis nan mwens pase 3 minit. Pa bezwen kont bank — jis yon nimewo telefòn ak yon ID. Ou jwenn yon bous USDC sou Base blockchain.',
       's2t':'Pataje non itilizatè ou oswa kòd QR ou','s2s':'Di fanmi ou lòt bò non Tchotcho Pay ou oswa montre kòd QR ou. Yo voye depi USA, Kanada, oswa Lafrans — li rive nan mwens pase 2 minit.',
       's3t':'Resevwa USDC — dola dijital','s3s':'Lajan an rive kòm USDC — 1 USDC toujou egal $1 USD. Pa gen risk echanj. Ou wè balans ou nan bous ou yon segonn ak ekilivan HTG ki montre an dirèk.',
       's4t':'Depanse, ekonomize, oswa kache','s4s':'Peye fakti EDH, rechaje telefòn, achte nan komèsan, voye bay fanmi — oswa kache HTG atravè yon ajan lokal nan vil ou. Ou chwazi, ou kontwole.',

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TchotchoPay — Preview Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#FEF9F4;color:#07163F;overflow-x:hidden}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:#07163F;
+  color:rgba(255,255,255,0.75);
+  font-size:12px;
+  padding:7px 32px;
+  display:flex;justify-content:space-between;align-items:center;
+  letter-spacing:0.02em;
+}
+.topbar a{color:rgba(255,255,255,0.75);text-decoration:none}
+.topbar .rate{color:#C9A227;font-weight:600}
+
+/* ── NAV ── */
+nav{
+  background:#fff;
+  border-bottom:1px solid rgba(7,22,63,0.08);
+  padding:0 32px;
+  display:flex;align-items:center;
+  height:72px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(7,22,63,0.06);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.nav-logo img{width:36px;height:36px}
+.nav-logo-text{line-height:1.1}
+.nav-logo-text strong{display:block;font-size:15px;font-weight:800;color:#07163F}
+.nav-logo-text span{display:block;font-size:11px;color:#8899BB;font-weight:400}
+.nav-links{display:flex;align-items:center;gap:4px;margin:0 24px}
+.nav-links a{
+  font-size:13.5px;font-weight:500;color:#07163F;text-decoration:none;
+  padding:6px 10px;border-radius:6px;transition:background 0.15s;white-space:nowrap;
+}
+.nav-links a:hover{background:#F0F4FF}
+.nav-btns{display:flex;gap:10px;align-items:center}
+.btn-ghost{
+  font-size:13px;font-weight:600;color:#07163F;border:1.5px solid #07163F;
+  background:transparent;padding:8px 18px;border-radius:8px;cursor:pointer;
+  text-decoration:none;white-space:nowrap;transition:all 0.15s;
+}
+.btn-ghost:hover{background:#07163F;color:#fff}
+.btn-primary{
+  font-size:13px;font-weight:700;color:#07163F;background:#C9A227;
+  border:none;padding:9px 20px;border-radius:8px;cursor:pointer;
+  text-decoration:none;white-space:nowrap;transition:all 0.15s;
+}
+.btn-primary:hover{background:#B8911F}
+
+/* ── HERO ── */
+.hero{
+  background:#FEF9F4;
+  padding:64px 32px 48px;
+  display:grid;
+  grid-template-columns:1fr 480px;
+  gap:48px;
+  align-items:center;
+  max-width:1280px;
+  margin:0 auto;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid rgba(7,22,63,0.12);
+  border-radius:100px;padding:8px 16px;
+  font-size:13px;font-weight:500;color:#07163F;
+  margin-bottom:24px;
+  box-shadow:0 2px 8px rgba(7,22,63,0.06);
+}
+.hero h1{
+  font-size:clamp(36px,4.5vw,58px);
+  font-weight:900;
+  line-height:1.08;
+  color:#07163F;
+  margin-bottom:14px;
+  letter-spacing:-0.02em;
+}
+.hero h1 .accent{color:#1A56FF}
+.hero-sub{
+  font-size:clamp(18px,2vw,22px);
+  font-weight:700;
+  color:#C9A227;
+  margin-bottom:16px;
+  letter-spacing:0.01em;
+}
+.hero-body{
+  font-size:15px;line-height:1.65;color:#3D5080;
+  margin-bottom:32px;max-width:460px;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+.cta-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#C9A227;color:#07163F;
+  font-size:15px;font-weight:700;
+  padding:14px 28px;border-radius:10px;
+  text-decoration:none;transition:all 0.15s;border:none;cursor:pointer;
+}
+.cta-gold:hover{background:#B8911F;transform:translateY(-1px)}
+.cta-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:#07163F;
+  font-size:15px;font-weight:600;
+  padding:14px 28px;border-radius:10px;
+  border:2px solid #07163F;text-decoration:none;transition:all 0.15s;
+}
+.cta-outline:hover{background:#07163F;color:#fff;transform:translateY(-1px)}
+.trust-badges{
+  display:flex;flex-wrap:wrap;gap:20px;margin-bottom:28px;
+}
+.trust-badge{
+  display:flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:500;color:#3D5080;
+}
+.trust-badge .dot{
+  width:18px;height:18px;border-radius:50%;
+  background:#07163F;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.flags{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.flag-chip{
+  display:flex;align-items:center;gap:6px;
+  background:#fff;border:1px solid rgba(7,22,63,0.1);
+  border-radius:8px;padding:6px 10px;
+  font-size:12px;font-weight:500;color:#07163F;
+  box-shadow:0 1px 4px rgba(7,22,63,0.05);
+}
+.flag-chip img{width:20px;height:14px;border-radius:2px;object-fit:cover}
+
+/* ── CALCULATOR CARD ── */
+.calc-card{
+  background:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 8px 40px rgba(7,22,63,0.14),0 2px 8px rgba(7,22,63,0.06);
+  border:1px solid rgba(7,22,63,0.06);
+}
+.calc-header{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;font-weight:600;color:#07163F;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(7,22,63,0.08);
+}
+.calc-header .arrow{color:#C9A227;font-size:16px}
+.preset-row{display:flex;gap:8px;margin-bottom:20px}
+.preset-btn{
+  flex:1;padding:10px 4px;border-radius:8px;border:1.5px solid rgba(7,22,63,0.15);
+  background:#fff;font-size:14px;font-weight:600;color:#07163F;
+  cursor:pointer;transition:all 0.15s;
+}
+.preset-btn:hover{border-color:#07163F}
+.preset-btn.active{background:#07163F;color:#fff;border-color:#07163F}
+.calc-rows{display:flex;flex-direction:column;gap:0}
+.calc-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid rgba(7,22,63,0.07);
+}
+.calc-row:last-of-type{border-bottom:none}
+.calc-row-label{display:flex;align-items:center;gap:8px;font-size:14px;color:#3D5080}
+.calc-row-label .flag-sm{font-size:18px}
+.calc-row-label .icon{font-size:16px;width:20px;text-align:center}
+.calc-row-val{font-size:14px;font-weight:600;color:#07163F}
+.calc-big-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0 12px;border-bottom:1px solid rgba(7,22,63,0.07);
+}
+.calc-big-label{display:flex;align-items:center;gap:8px;font-size:14px;color:#3D5080}
+.calc-big-val{font-size:clamp(22px,2.5vw,28px);font-weight:900;color:#07163F;letter-spacing:-0.02em}
+.calc-info{
+  background:#EEF3FD;border-radius:10px;
+  padding:12px 14px;margin:12px 0;
+  font-size:13px;line-height:1.5;color:#1A3399;font-weight:500;
+}
+.calc-cta{
+  display:block;width:100%;padding:15px;
+  background:#1A56FF;color:#fff;
+  font-size:15px;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;
+  text-decoration:none;text-align:center;
+  transition:all 0.15s;margin-top:4px;
+}
+.calc-cta:hover{background:#1040CC;transform:translateY(-1px)}
+
+/* ── STATS BAR ── */
+.stats-bar{
+  background:#FEF9F4;
+  border-top:1px solid rgba(201,162,39,0.2);
+  padding:28px 32px;
+}
+.stats-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+}
+.stat-card{
+  background:#fff;
+  border:1px solid rgba(7,22,63,0.08);
+  border-top:3px solid #C9A227;
+  border-radius:12px;
+  padding:20px 24px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(7,22,63,0.05);
+}
+.stat-val{font-size:clamp(20px,2vw,26px);font-weight:900;color:#07163F;letter-spacing:-0.02em;margin-bottom:4px}
+.stat-label{font-size:13px;color:#8899BB;font-weight:500}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:40px 20px 32px}
+  .topbar{font-size:11px;padding:6px 16px}
+  .topbar .right{display:none}
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .topbar{justify-content:center}
+  nav{padding:0 16px;height:60px}
+  .hero{padding:28px 16px 24px}
+  .hero h1{font-size:32px}
+  .hero-ctas{flex-direction:column}
+  .cta-gold,.cta-outline{justify-content:center}
+  .stats-bar{padding:20px 16px}
+  .stats-inner{grid-template-columns:repeat(2,1fr);gap:10px}
+  .stat-card{padding:14px 12px}
+  .calc-card{padding:20px 16px}
+  .preset-btn{font-size:13px;padding:9px 2px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>EN · HT · FR · ES &nbsp;·&nbsp; Live rate <span class="rate">1 USDC = 130.50 HTG</span></div>
+  <div class="right">hello@tchotchopay.com &nbsp;·&nbsp; 24/7 support</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="logo-t.png" alt="TchotchoPay logo" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      <strong>TchotchoPay</strong>
+      <span>Money for the Caribbean</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="send.html">Send</a>
+    <a href="app.html">App</a>
+    <a href="app.html">Download</a>
+    <a href="p2p.html">Pay</a>
+    <a href="card.html">Card</a>
+    <a href="compare.html">Compare</a>
+    <a href="about.html">Business</a>
+    <a href="recipient.html">Haiti</a>
+  </div>
+  <div class="nav-btns">
+    <a href="login.html" class="btn-ghost">Guest</a>
+    <a href="signup.html" class="btn-primary">Get started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        🌐 Top-up &amp; money transfer in 8 countries
+      </div>
+      <h1>Money for the <span class="accent">Caribbean.</span></h1>
+      <div class="hero-sub">Simple. Fast. Yours.</div>
+      <p class="hero-body">Send money. Receive digital dollars. Pay with your phone.<br>Top up mobile phones. Cash out when you need to.</p>
+      <div class="hero-ctas">
+        <a href="send.html" class="cta-gold">Send Money</a>
+        <a href="signup.html" class="cta-outline">Open Your Wallet</a>
+      </div>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <div class="dot"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A227" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          Bank-Level Security
+        </div>
+        <div class="trust-badge">
+          <div class="dot"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 2v3l2 1" stroke="#C9A227" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          Instant Transfers
+        </div>
+        <div class="trust-badge">
+          <div class="dot"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A227" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          Trusted Across the Caribbean
+        </div>
+        <div class="trust-badge">
+          <div class="dot"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A227" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+          No Hidden Fees
+        </div>
+      </div>
+      <div class="flags">
+        <div class="flag-chip">🇺🇸 United States</div>
+        <div class="flag-chip">🇨🇦 Canada</div>
+        <div class="flag-chip">🇫🇷 France</div>
+        <div class="flag-chip">🇭🇹 Haiti</div>
+        <div class="flag-chip">🇩🇴 Dominican Republic</div>
+        <div class="flag-chip">🇧🇷 Brazil</div>
+        <div class="flag-chip">🇬🇧 United Kingdom</div>
+        <div class="flag-chip">🇧🇪 Belgium</div>
+        <div class="flag-chip">+ Other</div>
+      </div>
+    </div>
+
+    <!-- RIGHT — CALCULATOR -->
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="arrow">→</span>
+        See exactly how much arrives
+      </div>
+      <div class="preset-row">
+        <button class="preset-btn" onclick="tcp.set(50)">$50</button>
+        <button class="preset-btn active" id="btn-100" onclick="tcp.set(100)">$100</button>
+        <button class="preset-btn" onclick="tcp.set(200)">$200</button>
+        <button class="preset-btn" onclick="tcp.set(500)">$500</button>
+      </div>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <div class="calc-row-label"><span class="flag-sm">🇺🇸</span> You send</div>
+          <div class="calc-row-val" id="cv-send">$100.00</div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-row-label"><span class="icon">🧾</span> Fee (2%)</div>
+          <div class="calc-row-val" id="cv-fee">$2.00</div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-row-label"><span class="icon">⏱</span> Speed</div>
+          <div class="calc-row-val">~2 min</div>
+        </div>
+      </div>
+      <div class="calc-big-row">
+        <div class="calc-big-label"><span class="flag-sm">🇭🇹</span>&nbsp; Recipient gets</div>
+        <div class="calc-big-val" id="cv-htg">12,676 HTG</div>
+      </div>
+      <div class="calc-info" id="cv-info">
+        Send $100 via TchotchoPay and your family gets 820 HTG more than Western Union.
+      </div>
+      <a id="cv-cta" href="send.html?amount=100" class="calc-cta">→ Send Money Now</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <div class="stat-val">&lt;1%</div>
+      <div class="stat-label">Transfer fee</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">~Instant</div>
+      <div class="stat-label">Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">24/7</div>
+      <div class="stat-label">Available</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">$0</div>
+      <div class="stat-label">P2P transfers</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var tcp = {
+  rate: 129.35,
+  current: 100,
+  set: function(amount) {
+    this.current = amount;
+    // update active button
+    document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active')});
+    var amounts = [50,100,200,500];
+    amounts.forEach(function(a,i){
+      if(a===amount) document.querySelectorAll('.preset-btn')[i].classList.add('active');
+    });
+    var fee = +(amount * 0.02).toFixed(2);
+    var htg = Math.round((amount - fee) * tcp.rate);
+    var diff = Math.round(htg - amount * 0.92 * 125);
+    document.getElementById('cv-send').textContent = '$' + amount.toFixed(2);
+    document.getElementById('cv-fee').textContent  = '$' + fee.toFixed(2);
+    document.getElementById('cv-htg').textContent  = htg.toLocaleString() + ' HTG';
+    document.getElementById('cv-info').textContent =
+      'Send $' + amount + ' via TchotchoPay and your family gets ' +
+      (diff > 0 ? diff.toLocaleString() : '0') + ' HTG more than Western Union.';
+    document.getElementById('cv-cta').href = 'send.html?amount=' + amount;
+  }
+};
+</script>
+</body>
+</html>

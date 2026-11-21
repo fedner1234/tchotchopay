@@ -40,24 +40,22 @@
     --cubacel:#003087; --flow:#FF6900; --bmobile:#00529B; --gtt:#005F3C;
     }
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; overflow-x:hidden;
-    }
+    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
 
     /* ── NAV ── */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:9999;
       display:flex; align-items:center; padding:14px 32px;
-      background: #fff;  backdrop-filter:blur(12px);
-      border-bottom: 2px solid #D21034; gap:16px;
+      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
     }
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
-    
-    
-    .nav-back { margin-left:auto; color: #374151; text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
-    .nav-back:hover { color: #1055CC; }
+    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
+    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
+    .nav-logo img { width:100%; height:100%; object-fit:cover; }
+    .nav-brand span { font-weight:700; font-size:1rem; }
+    .nav-brand em { color:var(--cyan); font-style:normal; }
+    .nav-back { margin-left:auto; color:var(--gray); text-decoration:none; font-size:0.85rem; display:flex; align-items:center; gap:6px; transition:color .2s; white-space:nowrap; }
+    .nav-back:hover { color:var(--white); }
 
     /* ── HERO ── */
     .hero {
@@ -395,9 +393,7 @@
     }
 
     @media(max-width:580px) {
-      nav { padding:12px 16px;
-      border-bottom: 2px solid #D21034;
-    }
+      nav { padding:12px 16px; }
       .flow-card { padding:20px 16px; }
       .carrier-grid { grid-template-columns:1fr 1fr; gap:10px; }
       .amount-grid { grid-template-columns:repeat(3,1fr); gap:8px; }
@@ -406,16 +402,11 @@
     }
   
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link{color:var(--gray,#8FA8CC);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
     .nav-link:hover{color:#F0F6FF;background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,#1055CC,#00AEEF);color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -452,16 +443,14 @@
   gtag('js', new Date());
   gtag('config', 'G-LKXNGW0JJ5');
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"Haiti Phone Top-Up","provider":{"@type":"Organization","name":"TchotchoPay","url":"https://tchotchopay.com"},"description":"Top up Digicel and Natcom phones in Haiti, Dominican Republic, Cuba, Jamaica, Trinidad and Tobago instantly from the US.","url":"https://tchotchopay.com/topup.html","areaServed":["US","CA","FR"]}
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'" /></div>
+    <span>Tchotcho<em>Pay</em></span>
   </a>
     <div class="nav-links">
     <a href="send.html" class="nav-link" style="color:#4fd48a;font-weight:700;">💸 Send to Wallet</a>
@@ -488,7 +477,7 @@
         <div class="hs-num">1</div>
         <div class="hs-text">
           <div class="ht" id="hs1t">Choose Country & Carrier</div>
-          <div class="hs" id="hs1s">8 Caribbean countries</div>
+          <div class="hs" id="hs1s">Haiti or Dominican Republic</div>
         </div>
       </div>
       <div class="how-step">
@@ -571,16 +560,6 @@
           <span class="cb-flag">🇬🇾</span>
           <div class="cb-name">Guyana</div>
           <div class="cb-sub">Digicel · GTT</div>
-        </button>
-        <button class="country-btn" id="btn-country-bs" onclick="selectCountry('BS',this)">
-          <span class="cb-flag">🇧🇸</span>
-          <div class="cb-name">Bahamas</div>
-          <div class="cb-sub">BTC · Aliv</div>
-        </button>
-        <button class="country-btn" id="btn-country-tc" onclick="selectCountry('TC',this)">
-          <span class="cb-flag">🇹🇨</span>
-          <div class="cb-name">Turks & Caicos</div>
-          <div class="cb-sub">Digicel · Flow</div>
         </button>
       </div>
 
@@ -990,66 +969,6 @@
     ],
   };
 
-  COUNTRY_CONFIG.BS = {
-    flag: '🇧🇸', dialCode: '+1', code: 'BS',
-    phonePlaceholder: '(242) XXX-XXXX', phoneDigits: 7,
-    phoneFormat: v => {
-      v = v.replace(/\D/g,'').slice(0,7);
-      if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
-      return v;
-    },
-    phoneHint: 'Bahamas 7-digit mobile number (after +1 242)',
-    localCurrency: 'BSD', localRate: 1,
-    carriers: [
-      { key:'btc-bs',  label:'BTC',  sub:'Bahamas Telecommunications', abbr:'BTC', cls:'btc'  },
-      { key:'aliv-bs', label:'Aliv', sub:'Cable Bahamas · NewCo',       abbr:'ALV', cls:'aliv' },
-    ],
-    amounts: [
-      { usd:5,  local:5,  data:'500 MB / 30 mins' },
-      { usd:10, local:10, data:'1 GB / 60 mins' },
-      { usd:20, local:20, data:'2 GB / 120 mins' },
-      { usd:30, local:30, data:'4 GB / 200 mins' },
-      { usd:50, local:50, data:'10 GB / Unlimited calls' },
-    ],
-    plans: [
-      { carrier:'btc-bs',  usd:10, local:10, perks:['1 GB data','60 min calls','Valid 14 days'] },
-      { carrier:'btc-bs',  usd:25, local:25, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
-      { carrier:'btc-bs',  usd:50, local:50, perks:['10 GB data','Unlimited calls','Valid 30 days'] },
-      { carrier:'aliv-bs', usd:10, local:10, perks:['1 GB data','60 min calls','Valid 14 days'] },
-      { carrier:'aliv-bs', usd:25, local:25, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
-    ],
-  };
-
-  COUNTRY_CONFIG.TC = {
-    flag: '🇹🇨', dialCode: '+1', code: 'TC',
-    phonePlaceholder: '(649) XXX-XXXX', phoneDigits: 7,
-    phoneFormat: v => {
-      v = v.replace(/\D/g,'').slice(0,7);
-      if (v.length > 3) return v.slice(0,3)+'-'+v.slice(3);
-      return v;
-    },
-    phoneHint: 'Turks & Caicos 7-digit mobile number (after +1 649)',
-    localCurrency: 'USD', localRate: 1,
-    carriers: [
-      { key:'digicel-tc', label:'Digicel', sub:'Largest network in TCI',   abbr:'D!',   cls:'digicel' },
-      { key:'flow-tc',    label:'Flow',    sub:'Liberty Latin America',     abbr:'Flow', cls:'flow'    },
-    ],
-    amounts: [
-      { usd:5,  local:5,  data:'500 MB / 30 mins' },
-      { usd:10, local:10, data:'1 GB / 60 mins' },
-      { usd:20, local:20, data:'2 GB / 120 mins' },
-      { usd:30, local:30, data:'4 GB / 200 mins' },
-      { usd:50, local:50, data:'10 GB / Unlimited calls' },
-    ],
-    plans: [
-      { carrier:'digicel-tc', usd:10, local:10, perks:['1 GB data','60 min calls','Valid 14 days'] },
-      { carrier:'digicel-tc', usd:25, local:25, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
-      { carrier:'digicel-tc', usd:50, local:50, perks:['10 GB data','Unlimited calls','Valid 30 days'] },
-      { carrier:'flow-tc',    usd:10, local:10, perks:['1 GB data','60 min calls','Valid 14 days'] },
-      { carrier:'flow-tc',    usd:25, local:25, perks:['3 GB data','Unlimited SMS','Valid 30 days'] },
-    ],
-  };
-
   let selectedCountry = 'HT';
   let selectedCarrier = null;
   let selectedAmount  = null;
@@ -1058,7 +977,7 @@
   // ── RELOADLY OPERATOR IDs (fetched per country) ───────────────────
   const RELOADLY_FN = '/.netlify/functions/reloadly';
   // Cache per country
-  const operatorCache = { HT: {}, DO: {}, CU: {}, JM: {}, TT: {}, GY: {}, BS: {}, TC: {} };
+  const operatorCache = { HT: {}, DO: {}, CU: {}, JM: {}, TT: {}, GY: {} };
 
   async function loadOperators(country) {
     try {
@@ -1088,12 +1007,6 @@
         } else if (country === 'GY') {
           if (name.includes('digicel')) operatorCache.GY['digicel-gy'] = op.id;
           if (name.includes('gtt') || name.includes('guyana telephone')) operatorCache.GY['gtt'] = op.id;
-        } else if (country === 'BS') {
-          if (name.includes('btc') || name.includes('bahamas telecom')) operatorCache.BS['btc-bs'] = op.id;
-          if (name.includes('aliv') || name.includes('cable bahamas') || name.includes('newco')) operatorCache.BS['aliv-bs'] = op.id;
-        } else if (country === 'TC') {
-          if (name.includes('digicel')) operatorCache.TC['digicel-tc'] = op.id;
-          if (name.includes('flow') || name.includes('lime') || name.includes('liberty')) operatorCache.TC['flow-tc'] = op.id;
         }
       });
       console.log(`Operators loaded for ${country}:`, operatorCache[country]);
@@ -1114,8 +1027,7 @@
 
     const cfg = COUNTRY_CONFIG[code];
     // Update phone preview header
-    const countryNames = { HT:'Haiti', DO:'Dominican Rep.', CU:'Cuba', JM:'Jamaica', TT:'Trinidad', GY:'Guyana', BS:'Bahamas', TC:'Turks & Caicos' };
-    document.getElementById('ps-carrier-name').textContent = cfg.carriers[0].label + ' ' + (countryNames[code] || code);
+    document.getElementById('ps-carrier-name').textContent = cfg.carriers[0].label + ' ' + (code === 'HT' ? 'Haiti' : 'DR');
 
     // Load operators if not yet cached
     if (Object.keys(operatorCache[code]).length === 0) loadOperators(code);

@@ -39,19 +39,18 @@
       --gold:#F7B731; --gold:#F7B731;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;}
 
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:#fff;backdrop-filter:blur(12px);border-bottom: 2px solid #D21034;gap:12px;}
-    .nav-brand { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo-img { height: 46px; width: auto; display: block; }
-    
-    
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.2);gap:12px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
+    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
+    .nav-logo img{width:100%;height:100%;object-fit:cover;}
     .nav-brand-name{font-weight:700;font-size:1rem;}
     .nav-brand-name em{color:var(--cyan);font-style:normal;}
     .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color: #374151;text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
-    .nav-link:hover{color:#1055CC;background:rgba(0,174,239,.08);}
+    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
     .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;}
     .nav-cta:hover{opacity:.9;background:linear-gradient(135deg,var(--mid),var(--cyan))!important;}
     @media(max-width:640px){.nav-links{display:none;}.nav-back-mobile{display:flex!important;}}
@@ -230,15 +229,10 @@
     .cw-input::placeholder{color:rgba(143,168,204,.3);}
     .cw-send{background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:0 50px 50px 0;padding:9px 14px;color:#fff;cursor:pointer;font-size:.9rem;}
 
-    @media(max-width:480px){.chat-window{width:calc(100% - 48px);right:24px;}}
+    @media(max-width:480px){.chat-window{width:calc(100vw - 48px);right:24px;}}
     @media(max-width:480px){.field-row{grid-template-columns:1fr;}}
   .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
     .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  
-    /* ── PREVENT HORIZONTAL SCROLL ON MOBILE ── */
-    html, body { overflow-x: hidden !important; max-width: 100% !important; }
-    * { box-sizing: border-box; }
-    img, video, iframe, table { max-width: 100%; }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -292,7 +286,8 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="logo-full.png" alt="TchotchoPay" class="nav-logo-img" />
+    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
+    <span class="nav-brand-name">Tchotcho<em>Pay</em></span>
   </a>
   <div class="nav-links">
     <a href="social.html">📲 Social Media</a>
@@ -772,13 +767,13 @@
 
   // ── FAQ QUICK ────────────────────────────────────────────────────
   const FAQS = [
-    { q:'How long does sending money to Haiti take?', a:'Transfers on Tchotcho Pay typically settle in under 2 minutes. Funds are sent as USDC digital dollars, which confirms almost instantly.' },
+    { q:'How long does sending money to Haiti take?', a:'Transfers on Tchotcho Pay typically settle in under 2 minutes. Funds are sent as USDC on Base blockchain, which confirms almost instantly.' },
     { q:'What is USDC and is it safe?', a:'USDC is a US Dollar-backed stablecoin — 1 USDC = $1 USD, always. It\'s issued by Circle, fully regulated, and audited monthly. Your funds are backed 1:1.' },
     { q:'What fees does Tchotcho Pay charge?', a:'Debit card deposits: 2%. Credit card: 3%. ACH/Bank and Wire: Free. Cash-out in Haiti: 1%. Sending between Tchotcho Pay users: always Free.' },
     { q:'How does someone in Haiti receive money?', a:'They get a Tchotcho Pay wallet. Funds arrive as USDC. They can keep it, send to family, pay bills, or cash out through local agents for HTG cash.' },
     { q:'Can I pay EDH electricity bills?', a:'Yes! Tchotcho Pay supports EDH electricity, CAMEP water, school fees, internet (Natcom, Digicel), and government taxes — all from your USDC wallet.' },
     { q:'How do I verify my identity (KYC)?', a:'During signup, upload a government ID (passport, driver\'s license, or national ID) plus a selfie. Verification typically completes in under 2 minutes.' },
-    { q:'Is my USDC safe? What about hacks?', a:'USDC funds are held , not in a bank. We use multi-sig wallets, 2FA, biometric verification, and military-grade encryption for all accounts.' },
+    { q:'Is my USDC safe? What about hacks?', a:'USDC funds are held on Base blockchain, not in a bank. We use multi-sig wallets, 2FA, biometric verification, and military-grade encryption for all accounts.' },
     { q:'Can I hold USDC as savings in Haiti?', a:'Yes — this is one of our best features. Instead of holding Haitian Gourdes that lose value, recipients can save in USDC (digital dollars) and earn 4.5% APY.' },
   ];
 
@@ -799,7 +794,7 @@
   const BOT_REPLIES = [
     "I can help you with that! Could you share your account email or transaction ID so I can look into it?",
     "Got it — let me check that for you. What country are you sending from?",
-    "Thanks for reaching out. Most transfers complete in under 2 minutes  instantly. Are you still seeing a pending status?",
+    "Thanks for reaching out. Most transfers complete in under 2 minutes on Base. Are you still seeing a pending status?",
     "I understand. Let me escalate this to our Haiti team. Could you give me your registered phone number?",
     "That's a great question! USDC always equals $1 USD — there's no price volatility. Your funds are fully backed.",
     "For cash-out in Haiti, our agent network covers Port-au-Prince, Cap-Haïtien, Les Cayes, and 40+ other locations.",

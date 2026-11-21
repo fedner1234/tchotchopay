@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  width:1080px; height:1920px;
+  background:linear-gradient(160deg,#020B2D 0%,#061840 100%);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  overflow:hidden; position:relative;
+}
+.glow { position:absolute; width:900px; height:900px; background:radial-gradient(circle,rgba(0,174,239,.18) 0%,transparent 65%); top:200px; left:50%; transform:translateX(-50%); }
+
+/* LOGO */
+.logo { position:absolute; top:64px; left:0; right:0; text-align:center; font-size:26px; font-weight:900; letter-spacing:.22em; color:rgba(255,255,255,.32); text-transform:uppercase; }
+
+/* LABEL */
+.label { position:absolute; top:128px; left:0; right:0; text-align:center; font-size:24px; font-weight:800; letter-spacing:.22em; color:#00AEEF; text-transform:uppercase; }
+
+/* CARD */
+.card { position:absolute; top:192px; left:50px; right:50px; height:380px; background:linear-gradient(135deg,#0A1F6E 0%,#1055CC 52%,#0D62E8 100%); border-radius:36px; padding:50px 56px; box-shadow:0 60px 140px rgba(0,0,0,.6),0 0 120px rgba(0,174,239,.28); overflow:hidden; }
+.cc1 { position:absolute; top:-90px; right:-90px; width:340px; height:340px; border-radius:50%; background:rgba(255,255,255,.06); }
+.cc2 { position:absolute; bottom:-110px; left:-60px; width:280px; height:280px; border-radius:50%; background:rgba(0,174,239,.08); }
+.card-inner { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+.card-top { display:flex; justify-content:space-between; }
+.card-brand { font-size:22px; font-weight:900; letter-spacing:.18em; color:rgba(255,255,255,.6); }
+.chip { width:68px; height:48px; background:linear-gradient(135deg,#d4af37,#f5d87a,#d4af37); border-radius:10px; }
+.card-num { font-size:44px; font-weight:700; letter-spacing:.22em; color:#fff; text-align:center; }
+.card-bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+.card-holder { font-size:22px; font-weight:800; color:rgba(255,255,255,.8); }
+.card-visa { font-size:48px; font-weight:900; font-style:italic; color:rgba(255,255,255,.92); }
+
+/* FEATURES — card ends at ~572, features start at 608 */
+.features { position:absolute; top:608px; left:50px; right:50px; display:flex; flex-direction:column; gap:22px; }
+.feat { display:flex; align-items:center; gap:28px; background:rgba(0,174,239,.06); border:1.5px solid rgba(0,174,239,.16); border-radius:26px; padding:30px 38px; }
+.feat-icon { font-size:52px; flex-shrink:0; }
+.feat-text { font-size:36px; font-weight:700; color:rgba(255,255,255,.75); flex:1; }
+.feat-val { font-size:28px; font-weight:900; color:#00AEEF; flex-shrink:0; }
+
+/* HEADLINE — 4 feats × ~112px = 448px + gaps, starts 608, ends ~1124 */
+.headline { position:absolute; top:1180px; left:50px; right:50px; text-align:center; }
+.headline h2 { font-size:74px; font-weight:900; color:#fff; line-height:1.15; }
+.headline p { font-size:38px; color:rgba(255,255,255,.48); margin-top:20px; }
+
+/* HANDLE */
+.handle { position:absolute; bottom:64px; left:0; right:0; text-align:center; font-size:22px; font-weight:800; color:rgba(255,255,255,.22); letter-spacing:.18em; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="logo">TCHOTCHOPAY</div>
+<div class="label">✦ YOUR VIRTUAL CARD ✦</div>
+
+<div class="card">
+  <div class="cc1"></div><div class="cc2"></div>
+  <div class="card-inner">
+    <div class="card-top"><div class="card-brand">TCHOTCHOPAY</div><div class="chip"></div></div>
+    <div class="card-num">•••• •••• •••• 4291</div>
+    <div class="card-bottom"><div class="card-holder">SOPHIE JOSEPH</div><div class="card-visa">VISA</div></div>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feat"><div class="feat-icon">💳</div><div class="feat-text">Works anywhere Visa is accepted</div><div class="feat-val">WORLDWIDE</div></div>
+  <div class="feat"><div class="feat-icon">⚡</div><div class="feat-text">Load instantly with USDC</div><div class="feat-val">INSTANT</div></div>
+  <div class="feat"><div class="feat-icon">🔒</div><div class="feat-text">Freeze or unfreeze anytime</div><div class="feat-val">SECURE</div></div>
+  <div class="feat"><div class="feat-icon">🎁</div><div class="feat-text">Free to get — no monthly fees</div><div class="feat-val">FREE</div></div>
+</div>
+
+<div class="headline">
+  <h2>Your USDC wallet.<br>Now a real card.</h2>
+  <p>Shop Amazon, Netflix, Airbnb &amp; more</p>
+</div>
+
+<div class="handle">@TCHOTCHOPAY</div>
+</body>
+</html>
