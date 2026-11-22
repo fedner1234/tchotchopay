@@ -515,6 +515,27 @@ footer{padding:32px 0 18px}
 .qr-dl img{width:200px;height:200px;object-fit:contain;margin:0 auto 12px;display:block}
 @media(max-width:800px){.cap4{grid-template-columns:1fr 1fr}.camp-shot{margin:24px auto 0}}
 
+/* ── MOBILE NAV ── */
+.mob-btn{display:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex:0 0 40px;transition:border-color .2s}
+.mob-btn:hover{border-color:var(--navy)}
+.mob-btn span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;transition:all .25s}
+#mobNav{position:fixed;inset:0;z-index:999;background:var(--cream);display:flex;flex-direction:column;padding:0;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+#mobNav.open{transform:translateX(0)}
+.mob-nav-inner{padding:28px 24px 40px;display:flex;flex-direction:column;min-height:100%}
+.mob-nav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.mob-close{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mob-nav-links{display:flex;flex-direction:column}
+.mob-nav-links a{display:block;padding:15px 0;font-size:17px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--line);text-decoration:none;letter-spacing:-.01em}
+.mob-nav-actions{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.mob-nav-actions .btn{justify-content:center;width:100%;height:52px;font-size:15px}
+.mob-nav-langs{display:flex;gap:8px;margin-top:20px}
+.mob-nav-langs button{flex:1;padding:11px 8px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--navy);font-family:var(--sans);transition:all .2s}
+.mob-nav-langs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(max-width:960px){
+  .mob-btn{display:flex}
+  header .actions{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -600,8 +621,43 @@ footer{padding:32px 0 18px}
       <a class="btn btn-ghost" href="login.html">Log In</a>
       <a class="btn btn-blue" href="signup.html">Get started</a>
     </div>
+    <button class="mob-btn" id="mobBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<div id="mobNav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-head">
+      <a class="logo" href="#top" onclick="document.getElementById('mobNav').classList.remove('open')">
+        <img src="assets/logo.png" alt="TchotchoPay" style="width:34px;height:34px">
+        <div>TchotchoPay<small>Money for the Caribbean</small></div>
+      </a>
+      <button class="mob-close" id="mobClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mob-nav-links">
+      <a href="send.html">Send Money</a>
+      <a href="app.html">App</a>
+      <a href="card.html">Virtual Card</a>
+      <a href="compare.html">Compare</a>
+      <a href="#business" onclick="document.getElementById('mobNav').classList.remove('open')">Business</a>
+      <a href="recipient.html">Receive in Haiti</a>
+      <a href="topup.html">Top Up</a>
+    </nav>
+    <div class="mob-nav-actions">
+      <a class="btn btn-ghost" href="login.html" style="border-color:var(--navy);color:var(--navy)">Log In</a>
+      <a class="btn btn-blue" href="signup.html">Get started</a>
+    </div>
+    <div class="mob-nav-langs">
+      <button class="mob-lang active" data-lang="en">🇺🇸 EN</button>
+      <button class="mob-lang" data-lang="ht">🇭🇹 HT</button>
+      <button class="mob-lang" data-lang="es">🇪🇸 ES</button>
+    </div>
+  </div>
+</div>
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
@@ -1538,6 +1594,7 @@ function applyLang(lang) {
   // Label
   setTxt(q('#langLabel'), labels[lang]);
   qq('.lang-opt').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
+  qq('.mob-lang').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
 
   // ── NAV ──
   const navLinks = qq('nav a');
@@ -1709,7 +1766,7 @@ function applyLang(lang) {
     if (bizBlocks[1]) {
       setTxt(bizBlocks[1].querySelector('.sec-k'), t.agent_eyebrow);
       setTxt(bizBlocks[1].querySelector('h3'), t.agent_h3);
-      const paras = bizBlocks[1].querySelectorAll('p:not(.sec-p)');
+      const paras = bizBlocks[1].querySelectorAll('p:not(.sec-p):not(.sec-k)');
       if (paras[0]) setTxt(paras[0], t.agent_p);
       if (paras[1]) setTxt(paras[1], t.agent_new);
       const numsA = bizBlocks[1].querySelectorAll('.nums span');
@@ -1764,7 +1821,7 @@ function applyLang(lang) {
   if (campSec) {
     setTxt(campSec.querySelector('.sec-k'), t.camp_eyebrow);
     setHTML(campSec.querySelector('h2'), t.camp_h2);
-    setTxt(campSec.querySelector('p'), t.camp_p);
+    setTxt(campSec.querySelector('p:not(.sec-k)'), t.camp_p);
     const campCtAs = campSec.querySelectorAll('.cta a');
     if (campCtAs[0]) setTxt(campCtAs[0], t.camp_cta1);
     if (campCtAs[1]) setTxt(campCtAs[1], t.camp_cta2);
@@ -1813,7 +1870,7 @@ function applyLang(lang) {
 
   // ── WAITLIST ──
   const wh2 = q('.wait h2'); if(wh2) setTxt(wh2, t.waitlist_h2);
-  const wp = q('.wait > .wrap > p'); if(wp) setTxt(wp, t.waitlist_p);
+  const wp = q('.wait > .wrap > p:not(.sec-k)'); if(wp) setTxt(wp, t.waitlist_p);
   const wbtn = q('.wait-box button[type=submit]');
   if (wbtn) { const svg=wbtn.querySelector('svg'); wbtn.textContent=' '+t.waitlist_btn; if(svg)wbtn.prepend(svg); }
 
@@ -1848,6 +1905,44 @@ document.querySelectorAll('.lang-opt').forEach(opt => {
 // Restore saved language
 const saved = localStorage.getItem('tcp_lang');
 if (saved && translations[saved]) applyLang(saved);
+
+// ── MOBILE NAV ──
+const mobNav = document.getElementById('mobNav');
+const mobBtn = document.getElementById('mobBtn');
+const mobClose = document.getElementById('mobClose');
+
+function openMobNav() {
+  mobNav.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobNav() {
+  mobNav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (mobBtn) mobBtn.addEventListener('click', openMobNav);
+if (mobClose) mobClose.addEventListener('click', closeMobNav);
+
+// Close on nav link clicks (anchor links)
+mobNav.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', closeMobNav);
+});
+
+// Close on background tap (outside the inner content)
+mobNav.addEventListener('click', e => {
+  if (e.target === mobNav) closeMobNav();
+});
+
+// Mobile language buttons
+mobNav.querySelectorAll('.mob-lang').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    applyLang(lang);
+    // Sync header lang buttons active state
+    document.querySelectorAll('.mob-lang').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    closeMobNav();
+  });
+});
 </script>
 </body>
 </html>
