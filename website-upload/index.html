@@ -751,7 +751,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section>
+<section id="savings">
   <div class="wrap scene">
     <div class="stage">
       <img class="phone-shot" src="images/phone-savings.jpg" alt="Plus Vault digital savings">
@@ -876,7 +876,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section>
+<section id="corridors">
   <div class="wrap">
     <p class="sec-k">Diaspora corridors</p>
     <h2>Built where Haitian families actually live</h2>
@@ -889,7 +889,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section class="dark">
+<section class="dark" id="path">
   <div class="wrap">
     <p class="sec-k">The path of a dollar</p>
     <h2>What actually happens when you tap Send</h2>
@@ -921,7 +921,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section>
+<section id="quotes">
   <div class="wrap">
     <p class="sec-k">From the corridor</p>
     <h2>Families already talk like this</h2>
@@ -933,7 +933,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section>
+<section id="security">
   <div class="wrap">
     <p class="sec-k">Security</p>
     <h2>Your money is safe with Tchotcho Pay</h2>
@@ -975,7 +975,7 @@ footer{padding:32px 0 18px}
   </div>
 </section>
 
-<section>
+<section id="faq">
   <div class="wrap">
     <p class="sec-k">Help Center</p>
     <h2>How can we help you?</h2>
@@ -1031,53 +1031,504 @@ footer{padding:32px 0 18px}
 </script>
 
 <script>
-// ── LANGUAGE SWITCHER ──────────────────────────────────────────────
+// ── FULL PAGE LANGUAGE SWITCHER ────────────────────────────────────────────────
 const translations = {
   en: {
+    // Nav
     nav_send:"Send", nav_app:"App", nav_download:"Download", nav_pay:"Pay",
     nav_card:"Card", nav_compare:"Compare", nav_business:"Business", nav_haiti:"Haiti",
     btn_login:"Log In", btn_started:"Get started",
+    // Hero
     hero_eyebrow:"Top-up & money transfer in 8 countries",
     hero_h1:"Money for the <em>Caribbean.</em>",
     hero_sub:"Simple. Fast. Yours.",
     hero_lead:"Send money. Receive digital dollars. Pay with your phone. Top up mobile phones. Cash out when you need to.",
     btn_send:"Send Money", btn_wallet:"Open Your Wallet",
+    trust_1:"Bank-Level Security", trust_2:"Instant Transfers",
+    trust_3:"Trusted Across the Caribbean", trust_4:"No Hidden Fees",
+    // Calculator
+    calc_h3:"See exactly how much arrives",
+    calc_send:"You send", calc_fee:"Fee (2%)", calc_speed:"Speed", calc_rcv:"Recipient gets",
+    calc_cta:"Send Money Now",
+    // Stats bar
+    stat_fee:"Transfer fee", stat_settle:"Settlement", stat_avail:"Available", stat_p2p:"P2P transfers",
+    // Partners
+    partners_head:"Our trusted partners",
+    // App theater
+    app_eyebrow:"The iOS & Android app",
+    app_h2:"Designed like a bank.<br>Feels like a message.",
+    app_p:"The TchotchoPay wallet on iPhone 18 Pro — cream, navy and gold, same as the brand. Send, receive, pay QR, top up Digicel or Natcom, cash out at 300+ agents.",
+    // Download
+    dl_eyebrow:"Get the app",
+    dl_h2:"Scan to download TchotchoPay",
+    dl_p:"iPhone and Android. Same wallet, same live rate, same two-minute send to MonCash and NatCash. Open the camera, scan the code, or tap a store.",
+    dl_scan:"Scan with your phone camera",
+    dl_ios_small:"Download on the", dl_ios_b:"App Store",
+    dl_gp_small:"GET IT ON", dl_gp_b:"Google Play",
+    // How-to steps
+    how_eyebrow:"See it in action",
+    how_h2:"Send money in 3 simple steps",
+    how_p:"Add funds. Choose a wallet in Haiti. Delivered instantly — 24/7.",
+    // Pay section
+    pay_eyebrow:"Everything in one app",
+    pay_h2:"Your complete payment solution",
+    pay_p:"TchotchoPay is a full-service payment platform — send money, pay bills, shop local, and save, all from one app.",
+    cap1_title:"Phone Top-Ups", cap1_p:"Digicel or Natcom, instantly, from the wallet.",
+    cap2_title:"Bills & school", cap2_p:"EDH, CAMEP, school — no cash, no queue.",
+    cap3_title:"Pay by QR", cap3_p:"Scan, confirm, done — merchants paid in seconds.",
+    cap4_title:"Haitian marketplace", cap4_p:"Food, goods, services — paid digitally.",
+    // Card
+    card_eyebrow:"TchotchoPay Card",
+    card_h2:"Spend your USDC anywhere Visa is accepted",
+    card_p:"No cash, no conversion delays. Load money, get your virtual card instantly, and start spending online or in stores with Apple Pay or Google Pay.",
+    card_li1:"Virtual Card — Available now — get it in 2 min",
+    card_li2:"Physical Card — Coming soon — join waitlist",
+    card_li3:"Instant activation — no credit check required",
+    card_li4:"Works with Apple Pay & Google Pay",
+    card_li5:"Freeze & unfreeze instantly from the app",
+    card_cta1:"Get Your Card", card_cta2:"See all fees",
+    // Savings
+    save_eyebrow:"Digital savings account",
+    save_h2:"Stop watching the gourde shrink",
+    save_p:"The Haitian gourde loses 15–25% of its value every year. Saving under a mattress in USD earns nothing. TchotchoPay holds a digital dollar — and Plus members can earn 4.5% APY.",
+    save_bad_lbl:"Gourde", save_cash_lbl:"Cash at home", save_plus_lbl:"USDC Plus",
+    save_bad_sub:"Yearly inflation", save_cash_sub:"No yield · theft risk", save_plus_sub:"APY · 1 USDC = $1",
+    // Dark marketplace
+    mkt_eyebrow:"Pay for everything",
+    mkt_h2:"Your wallet works everywhere in Haiti",
+    mkt_p:"Pay for everyday essentials directly from your TchotchoPay wallet — no cash, no bank visit, no friction.",
+    pill_food:"Food", pill_elec:"Electricity", pill_phone:"Phone Top-ups",
+    pill_school:"School Fees", pill_trans:"Transportation", pill_merch:"Local Merchants",
+    feat1_h3:"Money Transfer", feat1_p:"Send from the U.S., Canada, or France to Haiti in seconds — via bank transfer, debit or credit card. Fast, safe, and always low fees.",
+    feat2_h3:"Digital Wallet", feat2_p:"Your TchotchoPay wallet holds digital dollars — stable, secure, and always accessible. No bank account required.",
+    feat3_h3:"Phone Top-Ups & Bill Pay", feat3_p:"Top up Digicel or Natcom instantly. Pay electricity, school fees, and more — directly from your wallet, no cash needed.",
+    feat4_h3:"Haitian Marketplace", feat4_p:"Shop local merchants in Haiti — food, goods, services — and pay digitally. A full ecosystem built for Haitian communities.",
+    feat5_h3:"Visa Debit Card", feat5_p:"Spend your wallet balance anywhere Visa is accepted. Virtual card available now — physical card coming soon.",
+    feat6_h3:"Digital Savings Account", feat6_p:"Save in stable digital dollars instead of gourdes. Protect your money from inflation and access it anytime.",
+    // Compare
+    cmp_eyebrow:"Haiti's best remittance option",
+    cmp_h2:"We beat every competitor sending money to Haiti",
+    cmp_p:"Lower fees, faster delivery, and the only service that sends directly to MonCash and NatCash wallets. On $100, your family keeps 820 HTG more than Western Union.",
+    th_feature:"Feature", th_wu:"WU", th_mg:"MG", th_remitly:"Remitly",
+    tr1_name:"Transfer fee (debit)", tr2_name:"ACH fee",
+    tr3_name:"Send to MonCash", tr4_name:"Send to NatCash",
+    tr5_name:"Haiti bill pay (EDH, CAMEP)", tr6_name:"USDC wallet", tr7_name:"Creole support",
+    tr_yes:"Yes", tr_no:"No",
+    // Business
+    biz_eyebrow:"For business",
+    biz_h2:"Two ways to grow with TchotchoPay",
+    biz_p:"Merchants take digital payments. Cash agents earn 1% helping families cash out — and get a black premium Agent Card.",
+    merch_eyebrow:"01 · Merchants",
+    merch_h3:"Accept QR payments at your store",
+    merch_p:"Customer scans. You get paid in seconds. List products on the Haitian marketplace. Withdraw to bank, MonCash, or keep USDC.",
+    merch_setup:"Setup fee", merch_txn:"Transaction fee", merch_payout:"Payout speed",
+    merch_cta:"Apply as a Merchant",
+    agent_eyebrow:"02 · Cash agents",
+    agent_h3:"Earn 1% — and carry the black Agent Card",
+    agent_p:"Help neighbors cash out to gourdes. TchotchoPay verifies the customer. Your float is topped up in 30 minutes. Zero risk to your own money.",
+    agent_new:"New: a matte-black premium Agent Card — gold chip, agent status, built for the corridor.",
+    agent_earn:"Per cash-out", agent_float:"Float top-up", agent_hrs:"Active hours",
+    agent_cta:"Apply as an Agent",
+    // Haiti receive
+    haiti_eyebrow:"For people in Haiti",
+    haiti_h2:"Resevwa lajan ou — receive your money",
+    haiti_p:"Fanmi ou voye lajan. Ou resevwa dola dijital. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou.",
+    haiti_agents:"Cash-out agents", haiti_arrive:"Money arrives", haiti_apy:"Save in digital dollars",
+    haiti_cta:"Create Free Wallet",
+    // Corridors
+    corr_eyebrow:"Diaspora corridors",
+    corr_h2:"Built where Haitian families actually live",
+    corr_p:"TchotchoPay is not a generic \"send worldwide\" app. It is designed around the three corridors that move most of Haiti's $3.7B in remittances — then delivered onto MonCash, NatCash, and cash agents on the ground.",
+    corr_us_p:"Miami, New York, Boston, Atlanta. ACH free, debit in seconds. The largest Haitian diaspora corridor in the world.",
+    corr_ca_p:"Montreal and Toronto families send home without the 8–12% Western Union haircut — in Creole, French, or English.",
+    corr_fr_p:"Paris office, SEPA-friendly rails, and a product that already speaks Français — not a translated afterthought.",
+    // Path
+    path_eyebrow:"The path of a dollar",
+    path_h2:"What actually happens when you tap Send",
+    path_p:"Most remittance brands hide this. We show it — because trust is a design decision.",
+    path_1_b:"1. You fund", path_1_s:"ACH, debit, credit, or wire. Converts to USDC.",
+    path_2_b:"2. Locked 1:1", path_2_s:"Circle USDC. One coin, one dollar. Public ledger.",
+    path_3_b:"3. Settles ~2 min", path_3_s:"No SWIFT, no weekend freeze, no \"pending 3 days\".",
+    path_4_b:"4. Haiti receives", path_4_s:"Wallet, MonCash, NatCash, bills, or cash-out.",
+    // Campaign
+    camp_eyebrow:"The campaign",
+    camp_h2:"Ditch the old.<br><em>Swipe the future.</em>",
+    camp_p:"Western Union still takes 8–12%. The gourde still melts. TchotchoPay is the wallet Haiti's diaspora actually asked for — Creole first, USDC under the hood, Visa in the pocket.",
+    camp_cta1:"Join the waitlist", camp_cta2:"See the app",
+    // Quotes
+    quotes_eyebrow:"From the corridor",
+    quotes_h2:"Families already talk like this",
+    q1:"\"My mom sent $200 from Miami. I received it in less than 2 minutes. I paid EDH and my kid's school fees the same day.\"",
+    q2:"\"Before, I was paying 8% commission every time. Now the fee is only 1%. I save more money every month.\"",
+    q3:"\"I kept my USDC for 6 months. It didn't lose value like the gourde. It's like holding real dollar bills.\"",
+    // Security
+    sec_eyebrow:"Security",
+    sec_h2:"Your money is safe with Tchotcho Pay",
+    sec_p:"We built security into every layer — from the moment you open an account to the second money arrives in Haiti.",
+    sec_badge_b:"Bank-grade safety",
+    sec_badge_p:"KYC on every wallet. AES-256 in transit and at rest. Circle 1:1 reserves. FinCEN / OFAC screening.",
+    kyc1_b:"1 · Government ID", kyc1_p:"Passport, national ID or driver's license. No anonymous wallets.",
+    kyc2_b:"2 · Live selfie", kyc2_p:"Liveness check matches your face to the ID. Persona-powered KYC.",
+    kyc3_b:"3 · Always on", kyc3_p:"2FA, biometrics, device alerts, AES-256, FinCEN / OFAC screening.",
+    sec_stat1_s:"AES encryption", sec_stat2_s:"Every new device",
+    sec_stat3_s:"Circle USDC reserves", sec_stat4_s:"Fraud losses to date",
+    // FAQ
+    faq_eyebrow:"Help Center",
+    faq_h2:"How can we help you?",
+    faq_q1:"How do I send money to someone in Haiti?",
+    faq_a1:"Open the app, tap Send, search by username, phone, or QR. Enter amount, confirm with PIN. Recipient receives USDC instantly. Transfers between TchotchoPay users are always free.",
+    faq_q2:"How fast does the money arrive?",
+    faq_a2:"Transfers between TchotchoPay wallets are instant — typically under 5 seconds. No bank processing delays.",
+    faq_q3:"What is USDC?",
+    faq_a3:"A digital dollar. 1 USDC = $1. Issued by Circle, backed 1:1. Does not fluctuate like Bitcoin.",
+    faq_q4:"What are the fees?",
+    faq_a4:"P2P free. Debit deposit 2%. Credit 3%. ACH free. Cash-out 1%. Bill pay and top-up free.",
+    // Waitlist
     waitlist_h2:"Be the first to use TchotchoPay",
     waitlist_p:"Join thousands of Haitian diaspora members waiting for a smarter way to send money home. 2,847 people already joined. No spam.",
     waitlist_btn:"Join Now",
-    footer_copy:"© 2026 TchotchoPay LLC · Miami · Port-au-Prince · Paris · tchotchopay.com"
+    // Footer
+    footer_prod:"PRODUCT", footer_biz:"BUSINESS", footer_co:"COMPANY",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Port-au-Prince · Paris · tchotchopay.com",
+    footer_tagline:"Money for the Caribbean"
   },
+
   ht: {
+    // Nav
     nav_send:"Voye", nav_app:"Aplikasyon", nav_download:"Telechaje", nav_pay:"Peye",
     nav_card:"Kat", nav_compare:"Konpare", nav_business:"Biznis", nav_haiti:"Ayiti",
     btn_login:"Konekte", btn_started:"Kòmanse",
+    // Hero
     hero_eyebrow:"Transfè lajan nan 8 peyi",
     hero_h1:"Lajan pou <em>Karayib la.</em>",
     hero_sub:"Senp. Vit. Pou ou.",
     hero_lead:"Voye lajan. Resevwa dola dijital. Peye ak telefòn ou. Rechaje telefòn mobil. Retire kach lè ou bezwen.",
     btn_send:"Voye Lajan", btn_wallet:"Ouvri Pòtefèy ou",
+    trust_1:"Sekirite Nivo Bank", trust_2:"Transfè Imedya",
+    trust_3:"Fè Konfyans nan Karayib la", trust_4:"Pa Gen Frè Kache",
+    // Calculator
+    calc_h3:"Wè egzakteman konbyen ki rive",
+    calc_send:"Ou voye", calc_fee:"Frè (2%)", calc_speed:"Vitès", calc_rcv:"Destinatè resevwa",
+    calc_cta:"Voye Lajan Kounye a",
+    // Stats bar
+    stat_fee:"Frè transfè", stat_settle:"Reglèman", stat_avail:"Disponib", stat_p2p:"Transfè P2P",
+    // Partners
+    partners_head:"Patnè nou fè konfyans",
+    // App theater
+    app_eyebrow:"Aplikasyon iOS & Android",
+    app_h2:"Fèt tankou yon bank.<br>Santi tankou yon mesaj.",
+    app_p:"Pòtefèy TchotchoPay sou iPhone 18 Pro — krèm, ble maren ak lò, menm jan ak mak la. Voye, resevwa, peye QR, rechaje Digicel oswa Natcom, retire kach nan 300+ ajan.",
+    // Download
+    dl_eyebrow:"Telechaje aplikasyon",
+    dl_h2:"Eskane pou telechaje TchotchoPay",
+    dl_p:"iPhone ak Android. Menm pòtefèy, menm to an dirèk, menm de minit pou voye nan MonCash ak NatCash. Ouvri kamera, eskane kòd la, oswa tape yon magazen.",
+    dl_scan:"Eskane ak kamera telefòn ou",
+    dl_ios_small:"Telechaje sou", dl_ios_b:"App Store",
+    dl_gp_small:"JWENN LI SOU", dl_gp_b:"Google Play",
+    // How-to steps
+    how_eyebrow:"Wè l an aksyon",
+    how_h2:"Voye lajan nan 3 etap senp",
+    how_p:"Ajoute lajan. Chwazi yon pòtefèy ann Ayiti. Delivre imedyatman — 24/7.",
+    // Pay section
+    pay_eyebrow:"Tout nan yon aplikasyon",
+    pay_h2:"Solisyon peman konplè ou",
+    pay_p:"TchotchoPay se yon platfòm peman konplè — voye lajan, peye fakti, achte lokal, ak ekonomize, tout nan yon aplikasyon.",
+    cap1_title:"Rechaje Telefòn", cap1_p:"Digicel oswa Natcom, imedyatman, depi pòtefèy.",
+    cap2_title:"Fakti & lekòl", cap2_p:"EDH, CAMEP, lekòl — pa gen kash, pa gen ranje.",
+    cap3_title:"Peye pa QR", cap3_p:"Eskane, konfime, fini — machann peye an segonn.",
+    cap4_title:"Mache ayisyen", cap4_p:"Manje, machandiz, sèvis — peye dijitalman.",
+    // Card
+    card_eyebrow:"Kat TchotchoPay",
+    card_h2:"Depanse USDC ou nenpòt kote Visa aksepte",
+    card_p:"Pa gen kash, pa gen reta konvèsyon. Chaje lajan, jwenn kat vityèl ou imedyatman, kòmanse depanse anliy oswa nan magazen ak Apple Pay oswa Google Pay.",
+    card_li1:"Kat Vityèl — Disponib kounye a — jwenn li an 2 minit",
+    card_li2:"Kat Fizik — Byento — rejwenn lis datant",
+    card_li3:"Aktivasyon imedya — pa bezwen tchèk kredi",
+    card_li4:"Travay ak Apple Pay & Google Pay",
+    card_li5:"Bloke & debloke imedyatman depi aplikasyon",
+    card_cta1:"Jwenn Kat ou", card_cta2:"Wè tout frè",
+    // Savings
+    save_eyebrow:"Kont epay dijital",
+    save_h2:"Sispann gade goud la diminye",
+    save_p:"Goud ayisyen pèdi 15–25% nan valè l chak ane. Ekonomize anba yon matla nan dola pa rapòte anyen. TchotchoPay kenbe yon dola dijital — ak manm Plus yo ka touche 4.5% APY.",
+    save_bad_lbl:"Goud", save_cash_lbl:"Kash nan kay", save_plus_lbl:"USDC Plus",
+    save_bad_sub:"Enflasyon anyèl", save_cash_sub:"Pa gen randman · risk vòl", save_plus_sub:"APY · 1 USDC = $1",
+    // Dark marketplace
+    mkt_eyebrow:"Peye pou tout bagay",
+    mkt_h2:"Pòtefèy ou travay toupatou ann Ayiti",
+    mkt_p:"Peye pou bezwen chak jou yo dirèkteman depi pòtefèy TchotchoPay ou — pa gen kash, pa gen vizit bank, pa gen frikasyon.",
+    pill_food:"Manje", pill_elec:"Elektrisite", pill_phone:"Rechaje Telefòn",
+    pill_school:"Frè Lekòl", pill_trans:"Transpò", pill_merch:"Machann Lokal",
+    feat1_h3:"Transfè Lajan", feat1_p:"Voye depi Etazini, Kanada, oswa Lafrans ann Ayiti an segonn — via virement bancaire, kat debi oswa kredi. Rapid, san danje, ak frè toujou ba.",
+    feat2_h3:"Pòtefèy Dijital", feat2_p:"Pòtefèy TchotchoPay ou kenbe dola dijital — estab, an sekirite, ak toujou aksesib. Pa bezwen kont bank.",
+    feat3_h3:"Rechaje Telefòn & Peye Fakti", feat3_p:"Rechaje Digicel oswa Natcom imedyatman. Peye elektrisite, frè lekòl, ak plis — dirèkteman depi pòtefèy ou, pa bezwen kash.",
+    feat4_h3:"Mache Ayisyen", feat4_p:"Achte nan machann lokal ann Ayiti — manje, machandiz, sèvis — ak peye dijitalman. Yon ekosistèm konplè bati pou kominote ayisyen.",
+    feat5_h3:"Kat Debi Visa", feat5_p:"Depanse balans pòtefèy ou nenpòt kote Visa aksepte. Kat vityèl disponib kounye a — kat fizik ap vini byento.",
+    feat6_h3:"Kont Epay Dijital", feat6_p:"Ekonomize nan dola dijital estab olye de goud. Pwoteje lajan ou kont enflasyon ak jwenn aksè nenpòt ki lè.",
+    // Compare
+    cmp_eyebrow:"Pi bon opsyon remitans pou Ayiti",
+    cmp_h2:"Nou bat tout konpetitè ki voye lajan ann Ayiti",
+    cmp_p:"Frè ki pi ba, livrezon ki pi rapid, ak sèl sèvis ki voye dirèkteman nan pòtefèy MonCash ak NatCash. Sou $100, fanmi ou kenbe 820 HTG plis pase Western Union.",
+    th_feature:"Karakteristik", th_wu:"WU", th_mg:"MG", th_remitly:"Remitly",
+    tr1_name:"Frè transfè (debi)", tr2_name:"Frè ACH",
+    tr3_name:"Voye nan MonCash", tr4_name:"Voye nan NatCash",
+    tr5_name:"Peye fakti Ayiti (EDH, CAMEP)", tr6_name:"Pòtefèy USDC", tr7_name:"Sipò kreyòl",
+    tr_yes:"Wi", tr_no:"Non",
+    // Business
+    biz_eyebrow:"Pou biznis",
+    biz_h2:"De fason pou grandi ak TchotchoPay",
+    biz_p:"Machann aksepte peman dijital. Ajan kash touche 1% ede fanmi yo retire — epi jwenn yon Kat Ajan preyimyom nwa.",
+    merch_eyebrow:"01 · Machann",
+    merch_h3:"Aksepte peman QR nan boutik ou",
+    merch_p:"Kliyan eskane. Ou peye an segonn. Liste pwodwi sou mache ayisyen. Retire nan bank, MonCash, oswa kenbe USDC.",
+    merch_setup:"Frè konfigirasyon", merch_txn:"Frè tranzaksyon", merch_payout:"Vitès peman",
+    merch_cta:"Aplike kòm Machann",
+    agent_eyebrow:"02 · Ajan kash",
+    agent_h3:"Touche 1% — epi pote Kat Ajan nwa",
+    agent_p:"Ede vwazen yo retire nan goud. TchotchoPay verifye kliyan. Flotèt ou rechaje an 30 minit. Zewo risk pou lajan pa ou.",
+    agent_new:"Nouvo: yon Kat Ajan preyimyom mat-nwa — chip lò, estati ajan, bati pou koulwa.",
+    agent_earn:"Pa retrè", agent_float:"Recharge flotèt", agent_hrs:"Orè aktif",
+    agent_cta:"Aplike kòm Ajan",
+    // Haiti receive
+    haiti_eyebrow:"Pou moun ann Ayiti",
+    haiti_h2:"Resevwa lajan ou",
+    haiti_p:"Fanmi ou voye lajan. Ou resevwa dola dijital. Peye fakti, achte, kache, oswa ekonomize — tout nan telefòn ou.",
+    haiti_agents:"Ajan pou retire kash", haiti_arrive:"Lajan rive", haiti_apy:"Ekonomize nan dola dijital",
+    haiti_cta:"Kreye Pòtefèy Gratis",
+    // Corridors
+    corr_eyebrow:"Koulwa dyaspora",
+    corr_h2:"Bati kote fanmi ayisyen reyèlman viv",
+    corr_p:"TchotchoPay pa yon aplikasyon jenèrik \"voye toupatou\". Li fèt pou twa koulwa ki deplase pifò 3.7 miliyard dola remitans Ayiti — epi livre nan MonCash, NatCash, ak ajan kash sou teren.",
+    corr_us_p:"Miami, New York, Boston, Atlanta. ACH gratis, debi an segonn. Pi gwo koulwa dyaspora ayisyen nan mond lan.",
+    corr_ca_p:"Fanmi Montréal ak Toronto voye lakay san frè 8–12% Western Union — an kreyòl, fransè, oswa anglè.",
+    corr_fr_p:"Biwo Paris, ray SEPA-konpatib, ak yon pwodwi ki deja pale fransè — pa yon tradiksyon apre kou.",
+    // Path
+    path_eyebrow:"Chemen yon dola",
+    path_h2:"Sa ki reyèlman pase lè ou tape Voye",
+    path_p:"Pifò mak remitans kache sa. Nou montre l — paske konfyans se yon desizyon konsepsyon.",
+    path_1_b:"1. Ou finanse", path_1_s:"ACH, debi, kredi, oswa virement. Konvèti an USDC.",
+    path_2_b:"2. Bloke 1:1", path_2_s:"Circle USDC. Yon pyès, yon dola. Rejis piblik.",
+    path_3_b:"3. Regle ~2 minit", path_3_s:"Pa gen SWIFT, pa gen blokaj wikenn, pa gen \"an atant 3 jou\".",
+    path_4_b:"4. Ayiti resevwa", path_4_s:"Pòtefèy, MonCash, NatCash, fakti, oswa retire kash.",
+    // Campaign
+    camp_eyebrow:"Kanpay la",
+    camp_h2:"Abandone ansyen.<br><em>Glise nan lavni.</em>",
+    camp_p:"Western Union pran toujou 8–12%. Goud la toujou ap fon. TchotchoPay se pòtefèy dyaspora Ayiti te reyèlman mande — kreyòl an premye, USDC anba kapo, Visa nan pòch.",
+    camp_cta1:"Rejwenn lis datant", camp_cta2:"Wè aplikasyon",
+    // Quotes
+    quotes_eyebrow:"Depi koulwa",
+    quotes_h2:"Fanmi yo deja pale konsa",
+    q1:"\"Manman mwen voye $200 depi Miami. Mwen te resevwa l an mwens pase 2 minit. Mwen te peye EDH ak frè lekòl pitit mwen menm jou a.\"",
+    q2:"\"Anvan, mwen t ap peye 8% komisyon chak fwa. Kounye a frè a se sèlman 1%. Mwen ekonomize plis lajan chak mwa.\"",
+    q3:"\"Mwen te kenbe USDC mwen pou 6 mwa. Li pa te pèdi valè tankou goud la. Li se tankou kenbe vre biyè dola.\"",
+    // Security
+    sec_eyebrow:"Sekirite",
+    sec_h2:"Lajan ou an sekirite ak Tchotcho Pay",
+    sec_p:"Nou bati sekirite nan chak kouch — depi moman ou ouvri yon kont jiska segonn lajan rive ann Ayiti.",
+    sec_badge_b:"Sekirite nivo bank",
+    sec_badge_p:"KYC sou chak pòtefèy. AES-256 pandan transpò ak repo. Rezèv Circle 1:1. Depistaj FinCEN / OFAC.",
+    kyc1_b:"1 · Idantifikasyon gouvènman", kyc1_p:"Paspò, kat nasyonal oswa lisans kondi. Pa gen pòtefèy anonim.",
+    kyc2_b:"2 · Selfie an dirèk", kyc2_p:"Tchèk aktivite matche figi ou ak ID. KYC Persona.",
+    kyc3_b:"3 · Toujou aktif", kyc3_p:"2FA, byometrik, alèt aparèy, AES-256, depistaj FinCEN / OFAC.",
+    sec_stat1_s:"Chifre AES", sec_stat2_s:"Chak nouvo aparèy",
+    sec_stat3_s:"Rezèv Circle USDC", sec_stat4_s:"Pèt fwod jiskaprezan",
+    // FAQ
+    faq_eyebrow:"Sant Èd",
+    faq_h2:"Kijan nou ka ede ou?",
+    faq_q1:"Kijan mwen ka voye lajan ban yon moun ann Ayiti?",
+    faq_a1:"Ouvri aplikasyon, tape Voye, chèche pa non itilizatè, telefòn, oswa QR. Antre kantite, konfime ak PIN. Destinatè resevwa USDC imedyatman. Transfè ant itilizatè TchotchoPay toujou gratis.",
+    faq_q2:"Konbyen vit lajan rive?",
+    faq_a2:"Transfè ant pòtefèy TchotchoPay yo imedya — anjeneral mwens pase 5 segonn. Pa gen reta tretman bank.",
+    faq_q3:"Kisa USDC ye?",
+    faq_a3:"Yon dola dijital. 1 USDC = $1. Emèt pa Circle, sipòte 1:1. Pa fluktyasyon tankou Bitcoin.",
+    faq_q4:"Ki frè yo ye?",
+    faq_a4:"P2P gratis. Depo debi 2%. Kredi 3%. ACH gratis. Retrè 1%. Peye fakti ak rechaje gratis.",
+    // Waitlist
     waitlist_h2:"Soy premye a itilize TchotchoPay",
     waitlist_p:"Rejwenn dè milye manm dyaspora ayisyen ki ap tann yon fason pi entelijan pou voye lajan lakay. 2,847 moun deja rejwenn. Pa gen spam.",
     waitlist_btn:"Rejwenn Kounye a",
-    footer_copy:"© 2026 TchotchoPay LLC · Miami · Pòtoprens · Pari · tchotchopay.com"
+    // Footer
+    footer_prod:"PWODWI", footer_biz:"BIZNIS", footer_co:"KONPAYI",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Pòtoprens · Pari · tchotchopay.com",
+    footer_tagline:"Lajan pou Karayib la"
   },
+
   es: {
+    // Nav
     nav_send:"Enviar", nav_app:"App", nav_download:"Descargar", nav_pay:"Pagar",
     nav_card:"Tarjeta", nav_compare:"Comparar", nav_business:"Negocios", nav_haiti:"Haití",
     btn_login:"Iniciar sesión", btn_started:"Comenzar",
+    // Hero
     hero_eyebrow:"Recarga y transferencia en 8 países",
     hero_h1:"Dinero para el <em>Caribe.</em>",
     hero_sub:"Simple. Rápido. Tuyo.",
     hero_lead:"Envía dinero. Recibe dólares digitales. Paga con tu teléfono. Recarga móviles. Retira efectivo cuando lo necesites.",
     btn_send:"Enviar Dinero", btn_wallet:"Abrir mi Billetera",
+    trust_1:"Seguridad Bancaria", trust_2:"Transferencias Instantáneas",
+    trust_3:"Confianza en todo el Caribe", trust_4:"Sin Tarifas Ocultas",
+    // Calculator
+    calc_h3:"Ve exactamente cuánto llega",
+    calc_send:"Tú envías", calc_fee:"Tarifa (2%)", calc_speed:"Velocidad", calc_rcv:"El destinatario recibe",
+    calc_cta:"Enviar Dinero Ahora",
+    // Stats bar
+    stat_fee:"Tarifa de transferencia", stat_settle:"Liquidación", stat_avail:"Disponible", stat_p2p:"Transferencias P2P",
+    // Partners
+    partners_head:"Nuestros socios de confianza",
+    // App theater
+    app_eyebrow:"La app iOS y Android",
+    app_h2:"Diseñado como un banco.<br>Se siente como un mensaje.",
+    app_p:"La billetera TchotchoPay en iPhone 18 Pro — crema, azul marino y dorado, igual que la marca. Envía, recibe, paga QR, recarga Digicel o Natcom, retira en 300+ agentes.",
+    // Download
+    dl_eyebrow:"Descarga la app",
+    dl_h2:"Escanea para descargar TchotchoPay",
+    dl_p:"iPhone y Android. Misma billetera, mismo tipo en vivo, mismo envío en dos minutos a MonCash y NatCash. Abre la cámara, escanea el código, o toca una tienda.",
+    dl_scan:"Escanea con la cámara de tu teléfono",
+    dl_ios_small:"Descargar en", dl_ios_b:"App Store",
+    dl_gp_small:"CONSÍGUELO EN", dl_gp_b:"Google Play",
+    // How-to steps
+    how_eyebrow:"Míralo en acción",
+    how_h2:"Envía dinero en 3 pasos simples",
+    how_p:"Agrega fondos. Elige una billetera en Haití. Entregado al instante — 24/7.",
+    // Pay section
+    pay_eyebrow:"Todo en una app",
+    pay_h2:"Tu solución de pago completa",
+    pay_p:"TchotchoPay es una plataforma de pago completa — envía dinero, paga cuentas, compra local y ahorra, todo desde una app.",
+    cap1_title:"Recargas de Teléfono", cap1_p:"Digicel o Natcom, al instante, desde la billetera.",
+    cap2_title:"Facturas y escuela", cap2_p:"EDH, CAMEP, escuela — sin efectivo, sin fila.",
+    cap3_title:"Pagar por QR", cap3_p:"Escanea, confirma, listo — comerciantes pagados en segundos.",
+    cap4_title:"Mercado haitiano", cap4_p:"Comida, bienes, servicios — pagados digitalmente.",
+    // Card
+    card_eyebrow:"Tarjeta TchotchoPay",
+    card_h2:"Gasta tus USDC en cualquier lugar donde se acepte Visa",
+    card_p:"Sin efectivo, sin demoras de conversión. Carga dinero, obtén tu tarjeta virtual al instante y comienza a gastar en línea o en tiendas con Apple Pay o Google Pay.",
+    card_li1:"Tarjeta Virtual — Disponible ahora — obtener en 2 min",
+    card_li2:"Tarjeta Física — Próximamente — unirse a la lista de espera",
+    card_li3:"Activación instantánea — sin verificación de crédito",
+    card_li4:"Compatible con Apple Pay y Google Pay",
+    card_li5:"Congelar y descongelar al instante desde la app",
+    card_cta1:"Obtén tu Tarjeta", card_cta2:"Ver todas las tarifas",
+    // Savings
+    save_eyebrow:"Cuenta de ahorros digital",
+    save_h2:"Deja de ver encogerse el gourde",
+    save_p:"El gourde haitiano pierde 15–25% de su valor cada año. Ahorrar bajo el colchón en USD no genera nada. TchotchoPay guarda un dólar digital — y los miembros Plus pueden ganar 4.5% APY.",
+    save_bad_lbl:"Gourde", save_cash_lbl:"Efectivo en casa", save_plus_lbl:"USDC Plus",
+    save_bad_sub:"Inflación anual", save_cash_sub:"Sin rendimiento · riesgo de robo", save_plus_sub:"APY · 1 USDC = $1",
+    // Dark marketplace
+    mkt_eyebrow:"Paga por todo",
+    mkt_h2:"Tu billetera funciona en todo Haití",
+    mkt_p:"Paga los artículos esenciales directamente desde tu billetera TchotchoPay — sin efectivo, sin visita al banco, sin fricción.",
+    pill_food:"Comida", pill_elec:"Electricidad", pill_phone:"Recargas de Teléfono",
+    pill_school:"Cuotas Escolares", pill_trans:"Transporte", pill_merch:"Comerciantes Locales",
+    feat1_h3:"Transferencia de Dinero", feat1_p:"Envía desde EE.UU., Canadá o Francia a Haití en segundos — por transferencia bancaria, débito o tarjeta de crédito. Rápido, seguro y siempre con tarifas bajas.",
+    feat2_h3:"Billetera Digital", feat2_p:"Tu billetera TchotchoPay guarda dólares digitales — estable, segura y siempre accesible. No se requiere cuenta bancaria.",
+    feat3_h3:"Recargas y Pago de Facturas", feat3_p:"Recarga Digicel o Natcom al instante. Paga electricidad, cuotas escolares y más — directamente desde tu billetera, sin efectivo.",
+    feat4_h3:"Mercado Haitiano", feat4_p:"Compra en comerciantes locales en Haití — comida, bienes, servicios — y paga digitalmente. Un ecosistema completo construido para comunidades haitianas.",
+    feat5_h3:"Tarjeta de Débito Visa", feat5_p:"Gasta tu saldo de billetera en cualquier lugar donde se acepte Visa. Tarjeta virtual disponible ahora — tarjeta física próximamente.",
+    feat6_h3:"Cuenta de Ahorros Digital", feat6_p:"Ahorra en dólares digitales estables en lugar de gourdes. Protege tu dinero de la inflación y accede cuando quieras.",
+    // Compare
+    cmp_eyebrow:"La mejor opción de remesas para Haití",
+    cmp_h2:"Superamos a todos los competidores enviando dinero a Haití",
+    cmp_p:"Tarifas más bajas, entrega más rápida, y el único servicio que envía directamente a billeteras MonCash y NatCash. En $100, tu familia retiene 820 HTG más que Western Union.",
+    th_feature:"Característica", th_wu:"WU", th_mg:"MG", th_remitly:"Remitly",
+    tr1_name:"Tarifa de transferencia (débito)", tr2_name:"Tarifa ACH",
+    tr3_name:"Enviar a MonCash", tr4_name:"Enviar a NatCash",
+    tr5_name:"Pago de facturas (EDH, CAMEP)", tr6_name:"Billetera USDC", tr7_name:"Soporte en criollo",
+    tr_yes:"Sí", tr_no:"No",
+    // Business
+    biz_eyebrow:"Para negocios",
+    biz_h2:"Dos formas de crecer con TchotchoPay",
+    biz_p:"Los comerciantes aceptan pagos digitales. Los agentes de efectivo ganan 1% ayudando a familias a retirar — y reciben una Tarjeta de Agente negra premium.",
+    merch_eyebrow:"01 · Comerciantes",
+    merch_h3:"Acepta pagos QR en tu tienda",
+    merch_p:"El cliente escanea. Cobras en segundos. Lista productos en el mercado haitiano. Retira al banco, MonCash, o mantén USDC.",
+    merch_setup:"Tarifa de configuración", merch_txn:"Tarifa de transacción", merch_payout:"Velocidad de pago",
+    merch_cta:"Aplicar como Comerciante",
+    agent_eyebrow:"02 · Agentes de efectivo",
+    agent_h3:"Gana 1% — y lleva la Tarjeta de Agente negra",
+    agent_p:"Ayuda a vecinos a retirar en gourdes. TchotchoPay verifica al cliente. Tu flotador se recarga en 30 minutos. Cero riesgo para tu propio dinero.",
+    agent_new:"Nuevo: una Tarjeta de Agente premium negro mate — chip dorado, estado de agente, construida para el corredor.",
+    agent_earn:"Por retiro", agent_float:"Recarga de flotador", agent_hrs:"Horas activas",
+    agent_cta:"Aplicar como Agente",
+    // Haiti receive
+    haiti_eyebrow:"Para personas en Haití",
+    haiti_h2:"Recibe tu dinero",
+    haiti_p:"Tu familia envía dinero. Recibes dólares digitales. Paga facturas, compra, ahorra o guarda — todo en tu teléfono.",
+    haiti_agents:"Agentes de retiro", haiti_arrive:"El dinero llega", haiti_apy:"Ahorra en dólares digitales",
+    haiti_cta:"Crear Billetera Gratis",
+    // Corridors
+    corr_eyebrow:"Corredores de la diáspora",
+    corr_h2:"Construido donde las familias haitianas realmente viven",
+    corr_p:"TchotchoPay no es una app genérica de \"enviar a todo el mundo\". Está diseñada en torno a los tres corredores que mueven la mayor parte de los $3.7B en remesas de Haití — y se entrega en MonCash, NatCash y agentes de efectivo sobre el terreno.",
+    corr_us_p:"Miami, Nueva York, Boston, Atlanta. ACH gratis, débito en segundos. El corredor de diáspora haitiana más grande del mundo.",
+    corr_ca_p:"Las familias de Montreal y Toronto envían a casa sin el recorte del 8–12% de Western Union — en criollo, francés o inglés.",
+    corr_fr_p:"Oficina en París, rieles compatibles con SEPA, y un producto que ya habla francés — no una ocurrencia tardía traducida.",
+    // Path
+    path_eyebrow:"El camino de un dólar",
+    path_h2:"Qué sucede realmente cuando tocas Enviar",
+    path_p:"La mayoría de las marcas de remesas ocultan esto. Nosotros lo mostramos — porque la confianza es una decisión de diseño.",
+    path_1_b:"1. Tú financias", path_1_s:"ACH, débito, crédito o transferencia. Se convierte a USDC.",
+    path_2_b:"2. Bloqueado 1:1", path_2_s:"Circle USDC. Una moneda, un dólar. Libro mayor público.",
+    path_3_b:"3. Liquida ~2 min", path_3_s:"Sin SWIFT, sin bloqueo de fin de semana, sin \"pendiente 3 días\".",
+    path_4_b:"4. Haití recibe", path_4_s:"Billetera, MonCash, NatCash, facturas o retiro.",
+    // Campaign
+    camp_eyebrow:"La campaña",
+    camp_h2:"Abandona lo viejo.<br><em>Desliza el futuro.</em>",
+    camp_p:"Western Union todavía cobra 8–12%. El gourde todavía se derrite. TchotchoPay es la billetera que la diáspora de Haití realmente pidió — criollo primero, USDC bajo el capó, Visa en el bolsillo.",
+    camp_cta1:"Unirse a la lista de espera", camp_cta2:"Ver la app",
+    // Quotes
+    quotes_eyebrow:"Desde el corredor",
+    quotes_h2:"Las familias ya hablan así",
+    q1:"\"Mi mamá envió $200 desde Miami. Lo recibí en menos de 2 minutos. Pagué EDH y las cuotas escolares de mi hijo el mismo día.\"",
+    q2:"\"Antes pagaba 8% de comisión cada vez. Ahora la tarifa es solo 1%. Ahorro más dinero cada mes.\"",
+    q3:"\"Guardé mis USDC por 6 meses. No perdieron valor como el gourde. Es como tener billetes reales de dólar.\"",
+    // Security
+    sec_eyebrow:"Seguridad",
+    sec_h2:"Tu dinero está seguro con Tchotcho Pay",
+    sec_p:"Construimos seguridad en cada capa — desde el momento en que abres una cuenta hasta el segundo en que el dinero llega a Haití.",
+    sec_badge_b:"Seguridad bancaria",
+    sec_badge_p:"KYC en cada billetera. AES-256 en tránsito y en reposo. Reservas Circle 1:1. Verificación FinCEN / OFAC.",
+    kyc1_b:"1 · Identificación gubernamental", kyc1_p:"Pasaporte, ID nacional o licencia de conducir. Sin billeteras anónimas.",
+    kyc2_b:"2 · Selfie en vivo", kyc2_p:"La verificación de vida hace coincidir tu cara con el ID. KYC impulsado por Persona.",
+    kyc3_b:"3 · Siempre activo", kyc3_p:"2FA, biometría, alertas de dispositivo, AES-256, verificación FinCEN / OFAC.",
+    sec_stat1_s:"Cifrado AES", sec_stat2_s:"Cada nuevo dispositivo",
+    sec_stat3_s:"Reservas Circle USDC", sec_stat4_s:"Pérdidas por fraude a fecha",
+    // FAQ
+    faq_eyebrow:"Centro de Ayuda",
+    faq_h2:"¿Cómo podemos ayudarte?",
+    faq_q1:"¿Cómo envío dinero a alguien en Haití?",
+    faq_a1:"Abre la app, toca Enviar, busca por nombre de usuario, teléfono o QR. Ingresa el monto, confirma con PIN. El destinatario recibe USDC al instante. Las transferencias entre usuarios TchotchoPay son siempre gratuitas.",
+    faq_q2:"¿Qué tan rápido llega el dinero?",
+    faq_a2:"Las transferencias entre billeteras TchotchoPay son instantáneas — generalmente menos de 5 segundos. Sin demoras de procesamiento bancario.",
+    faq_q3:"¿Qué es USDC?",
+    faq_a3:"Un dólar digital. 1 USDC = $1. Emitido por Circle, respaldado 1:1. No fluctúa como Bitcoin.",
+    faq_q4:"¿Cuáles son las tarifas?",
+    faq_a4:"P2P gratis. Depósito débito 2%. Crédito 3%. ACH gratis. Retiro 1%. Pago de facturas y recarga gratis.",
+    // Waitlist
     waitlist_h2:"Sé el primero en usar TchotchoPay",
     waitlist_p:"Únete a miles de miembros de la diáspora haitiana esperando una forma más inteligente de enviar dinero a casa. 2,847 personas ya se unieron. Sin spam.",
     waitlist_btn:"Unirse Ahora",
-    footer_copy:"© 2026 TchotchoPay LLC · Miami · Puerto Príncipe · París · tchotchopay.com"
+    // Footer
+    footer_prod:"PRODUCTO", footer_biz:"NEGOCIOS", footer_co:"EMPRESA",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Puerto Príncipe · París · tchotchopay.com",
+    footer_tagline:"Dinero para el Caribe"
   }
 };
 
 const labels = {en:"EN", ht:"KR", es:"ES"};
+
+function q(sel) { return document.querySelector(sel); }
+function qq(sel) { return document.querySelectorAll(sel); }
+
+function setTxt(el, val) { if (el && val) el.textContent = val; }
+function setHTML(el, val) { if (el && val) el.innerHTML = val; }
+
+function setSVGText(el, val) {
+  // For elements that have an SVG + text — preserve SVG, replace text node
+  if (!el || !val) return;
+  const svg = el.querySelector('svg');
+  el.textContent = ' ' + val;
+  if (svg) el.prepend(svg);
+}
 
 function applyLang(lang) {
   const t = translations[lang];
@@ -1085,49 +1536,298 @@ function applyLang(lang) {
   localStorage.setItem('tcp_lang', lang);
 
   // Label
-  document.getElementById('langLabel').textContent = labels[lang];
-  document.querySelectorAll('.lang-opt').forEach(o => {
-    o.classList.toggle('active', o.dataset.lang === lang);
-  });
+  setTxt(q('#langLabel'), labels[lang]);
+  qq('.lang-opt').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
 
-  // Nav links (by order)
-  const navLinks = document.querySelectorAll('nav a');
-  const keys = ['nav_send','nav_app','nav_download','nav_pay','nav_card','nav_compare','nav_business','nav_haiti'];
-  navLinks.forEach((a, i) => { if (keys[i] && t[keys[i]]) a.textContent = t[keys[i]]; });
+  // ── NAV ──
+  const navLinks = qq('nav a');
+  ['nav_send','nav_app','nav_download','nav_pay','nav_card','nav_compare','nav_business','nav_haiti']
+    .forEach((k,i) => { if (navLinks[i]) setTxt(navLinks[i], t[k]); });
+  const hBtns = qq('header .actions a');
+  if (hBtns[0]) setTxt(hBtns[0], t.btn_login);
+  if (hBtns[1]) setTxt(hBtns[1], t.btn_started);
 
-  // Header buttons
-  const hBtns = document.querySelectorAll('header .actions a');
-  if (hBtns[0]) hBtns[0].textContent = t.btn_login;
-  if (hBtns[1]) hBtns[1].textContent = t.btn_started;
-
-  // Hero
-  const eyebrow = document.querySelector('.hero .eyebrow');
+  // ── HERO ──
+  const eyebrow = q('.hero .eyebrow');
   if (eyebrow) eyebrow.childNodes[eyebrow.childNodes.length-1].textContent = ' '+t.hero_eyebrow;
-  const h1 = document.querySelector('.hero h1');
-  if (h1) h1.innerHTML = t.hero_h1;
-  const sub = document.querySelector('.hero .sub');
-  if (sub) sub.textContent = t.hero_sub;
-  const lead = document.querySelector('.hero .lead');
-  if (lead) lead.textContent = t.hero_lead;
-
-  // Hero CTAs
-  const ctaBtns = document.querySelectorAll('.hero .cta a');
+  setHTML(q('.hero h1'), t.hero_h1);
+  setTxt(q('.hero .sub'), t.hero_sub);
+  setTxt(q('.hero .lead'), t.hero_lead);
+  const ctaBtns = qq('.hero .cta a');
   ctaBtns.forEach(b => {
-    if (b.href.includes('send.html')) { const svg = b.querySelector('svg'); b.textContent = ' '+t.btn_send; if(svg) b.prepend(svg); }
-    if (b.href.includes('signup.html')) { const svg = b.querySelector('svg'); b.textContent = ' '+t.btn_wallet; if(svg) b.prepend(svg); }
+    if (b.href.includes('send.html')) { const svg=b.querySelector('svg'); b.textContent=' '+t.btn_send; if(svg)b.prepend(svg); }
+    if (b.href.includes('signup.html')) { const svg=b.querySelector('svg'); b.textContent=' '+t.btn_wallet; if(svg)b.prepend(svg); }
+  });
+  // Trust badges
+  const trusts = qq('.trust span');
+  [t.trust_1, t.trust_2, t.trust_3, t.trust_4].forEach((v,i) => {
+    if (trusts[i]) { const svg=trusts[i].querySelector('svg'); trusts[i].textContent=' '+v; if(svg)trusts[i].prepend(svg); }
   });
 
-  // Waitlist
-  const wh2 = document.querySelector('.wait h2');
-  if (wh2) wh2.textContent = t.waitlist_h2;
-  const wp = document.querySelector('.wait p');
-  if (wp) wp.textContent = t.waitlist_p;
-  const wbtn = document.querySelector('.wait-box button[type=submit]');
-  if (wbtn) { const svg = wbtn.querySelector('svg'); wbtn.textContent = ' '+t.waitlist_btn; if(svg) wbtn.prepend(svg); }
+  // ── CALCULATOR ──
+  setHTML(q('.calc h3'), '<svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12h14M13 6l7 6-7 6"/></svg> ' + t.calc_h3);
+  const rows = qq('.calc .row .k');
+  if (rows[0]) rows[0].innerHTML = '<img class="flag" src="flags/us.svg" alt=""> ' + t.calc_send;
+  if (rows[1]) rows[1].innerHTML = '<svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg> ' + t.calc_fee;
+  if (rows[2]) rows[2].innerHTML = '<svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg> ' + t.calc_speed;
+  const big = q('.calc .big .k');
+  if (big) big.innerHTML = '<img class="flag-lg" src="flags/ht.svg" alt=""> ' + t.calc_rcv;
+  const calcBtn = q('.calc .btn-blue');
+  if (calcBtn) { const svg=calcBtn.querySelector('svg'); calcBtn.textContent=' '+t.calc_cta; if(svg)calcBtn.prepend(svg); }
 
-  // Footer copy
-  const copy = document.querySelector('.copy');
-  if (copy) copy.textContent = t.footer_copy;
+  // ── STATS BAR ──
+  const statSpans = qq('.stats .stat span');
+  [t.stat_fee, t.stat_settle, t.stat_avail, t.stat_p2p].forEach((v,i) => { if(statSpans[i])setTxt(statSpans[i],v); });
+
+  // ── PARTNERS ──
+  setTxt(q('.partners .head'), t.partners_head);
+
+  // ── APP THEATER ──
+  const appSec = q('#app');
+  if (appSec) {
+    setTxt(appSec.querySelector('.sec-k'), t.app_eyebrow);
+    setHTML(appSec.querySelector('h2'), t.app_h2);
+    setTxt(appSec.querySelector('.sec-p'), t.app_p);
+  }
+
+  // ── DOWNLOAD ──
+  const dlSec = q('#download');
+  if (dlSec) {
+    setTxt(dlSec.querySelector('.sec-k'), t.dl_eyebrow);
+    setTxt(dlSec.querySelector('h2'), t.dl_h2);
+    setTxt(dlSec.querySelector('.sec-p'), t.dl_p);
+    const scan = dlSec.querySelector('.qr-dl span');
+    if (scan) setTxt(scan, t.dl_scan);
+    const badges = dlSec.querySelectorAll('.store-badge');
+    if (badges[0]) { const sm=badges[0].querySelector('small'); const b=badges[0].querySelector('b'); setTxt(sm,t.dl_ios_small); setTxt(b,t.dl_ios_b); }
+    if (badges[1]) { const sm=badges[1].querySelector('small'); const b=badges[1].querySelector('b'); setTxt(sm,t.dl_gp_small); setTxt(b,t.dl_gp_b); }
+  }
+
+  // ── HOW-TO STEPS ──
+  const howSec = q('#how');
+  if (howSec) {
+    setTxt(howSec.querySelector('.sec-k'), t.how_eyebrow);
+    setTxt(howSec.querySelector('h2'), t.how_h2);
+    setTxt(howSec.querySelector('.sec-p'), t.how_p);
+  }
+
+  // ── PAY SECTION ──
+  const paySec = q('#pay');
+  if (paySec) {
+    setTxt(paySec.querySelector('.sec-k'), t.pay_eyebrow);
+    setTxt(paySec.querySelector('h2'), t.pay_h2);
+    setTxt(paySec.querySelector('.sec-p'), t.pay_p);
+    const caps = paySec.querySelectorAll('.cap4 > div');
+    if (caps[0]) { setTxt(caps[0].querySelector('b'), t.cap1_title); setTxt(caps[0].querySelector('span'), t.cap1_p); }
+    if (caps[1]) { setTxt(caps[1].querySelector('b'), t.cap2_title); setTxt(caps[1].querySelector('span'), t.cap2_p); }
+    if (caps[2]) { setTxt(caps[2].querySelector('b'), t.cap3_title); setTxt(caps[2].querySelector('span'), t.cap3_p); }
+    if (caps[3]) { setTxt(caps[3].querySelector('b'), t.cap4_title); setTxt(caps[3].querySelector('span'), t.cap4_p); }
+  }
+
+  // ── CARD SECTION ──
+  const cardSec = q('#card');
+  if (cardSec) {
+    setTxt(cardSec.querySelector('.sec-k'), t.card_eyebrow);
+    setTxt(cardSec.querySelector('h2'), t.card_h2);
+    setTxt(cardSec.querySelector('.sec-p'), t.card_p);
+    const lis = cardSec.querySelectorAll('li');
+    [t.card_li1,t.card_li2,t.card_li3,t.card_li4,t.card_li5].forEach((v,i) => {
+      if (lis[i]) { const badge=lis[i].querySelector('.icon-badge'); lis[i].textContent=' '+v; if(badge)lis[i].prepend(badge); }
+    });
+    const ctas = cardSec.querySelectorAll('.cta a');
+    if (ctas[0]) setTxt(ctas[0], t.card_cta1);
+    if (ctas[1]) setTxt(ctas[1], t.card_cta2);
+  }
+
+  // ── SAVINGS SECTION ──
+  const saveSec = q('#savings');
+  if (saveSec) {
+    setTxt(saveSec.querySelector('.sec-k'), t.save_eyebrow);
+    setTxt(saveSec.querySelector('h2'), t.save_h2);
+    setTxt(saveSec.querySelector('.sec-p'), t.save_p);
+    const inflBoxes = saveSec.querySelectorAll('.infl > div');
+    if (inflBoxes[0]) { setTxt(inflBoxes[0].querySelector('small'), t.save_bad_lbl); setTxt(inflBoxes[0].querySelector('span'), t.save_bad_sub); }
+    if (inflBoxes[1]) { setTxt(inflBoxes[1].querySelector('small'), t.save_cash_lbl); setTxt(inflBoxes[1].querySelector('span'), t.save_cash_sub); }
+    if (inflBoxes[2]) { setTxt(inflBoxes[2].querySelector('small'), t.save_plus_lbl); setTxt(inflBoxes[2].querySelector('span'), t.save_plus_sub); }
+  }
+
+  // ── DARK MARKETPLACE (#product) ──
+  const mktSec = q('#product');
+  if (mktSec) {
+    setTxt(mktSec.querySelector('.sec-k'), t.mkt_eyebrow);
+    setTxt(mktSec.querySelector('h2'), t.mkt_h2);
+    setTxt(mktSec.querySelector('.sec-p'), t.mkt_p);
+    const pills = mktSec.querySelectorAll('.pill');
+    [t.pill_food,t.pill_elec,t.pill_phone,t.pill_school,t.pill_trans,t.pill_merch].forEach((v,i) => {
+      if (pills[i]) { const svg=pills[i].querySelector('svg'); pills[i].textContent=' '+v; if(svg)pills[i].prepend(svg); }
+    });
+    const feats = mktSec.querySelectorAll('.feat');
+    [[t.feat1_h3,t.feat1_p],[t.feat2_h3,t.feat2_p],[t.feat3_h3,t.feat3_p],
+     [t.feat4_h3,t.feat4_p],[t.feat5_h3,t.feat5_p],[t.feat6_h3,t.feat6_p]].forEach(([h,p],i) => {
+      if (feats[i]) { setTxt(feats[i].querySelector('h3'), h); setTxt(feats[i].querySelector('p'), p); }
+    });
+  }
+
+  // ── COMPARE SECTION ──
+  const cmpSec = q('#compare');
+  if (cmpSec) {
+    setTxt(cmpSec.querySelector('.sec-k'), t.cmp_eyebrow);
+    setTxt(cmpSec.querySelector('h2'), t.cmp_h2);
+    setTxt(cmpSec.querySelector('.sec-p'), t.cmp_p);
+    const ths = cmpSec.querySelectorAll('thead th');
+    if (ths[0]) setTxt(ths[0], t.th_feature);
+    if (ths[2]) setTxt(ths[2], t.th_wu);
+    if (ths[3]) setTxt(ths[3], t.th_mg);
+    if (ths[4]) setTxt(ths[4], t.th_remitly);
+    const trs = cmpSec.querySelectorAll('tbody tr');
+    const trNames = [t.tr1_name,t.tr2_name,t.tr3_name,t.tr4_name,t.tr5_name,t.tr6_name,t.tr7_name];
+    trs.forEach((tr,i) => { const td=tr.querySelector('td'); if(td&&trNames[i])setTxt(td,trNames[i]); });
+    // Yes/No cells
+    cmpSec.querySelectorAll('td.win').forEach(td => { if(td.textContent.trim()==='Yes'||td.textContent.trim()==='Wi'||td.textContent.trim()==='Sí') setTxt(td,t.tr_yes); });
+    cmpSec.querySelectorAll('tbody td:not(.win)').forEach(td => { if(td.textContent.trim()==='No') setTxt(td,t.tr_no); });
+  }
+
+  // ── BUSINESS SECTION ──
+  const bizSec = q('#business');
+  if (bizSec) {
+    setTxt(bizSec.querySelector(':scope > .wrap > .sec-k'), t.biz_eyebrow);
+    setTxt(bizSec.querySelector(':scope > .wrap > h2'), t.biz_h2);
+    setTxt(bizSec.querySelector(':scope > .wrap > .sec-p'), t.biz_p);
+    // Merchant block
+    const bizBlocks = bizSec.querySelectorAll('.biz-block');
+    if (bizBlocks[0]) {
+      setTxt(bizBlocks[0].querySelector('.sec-k'), t.merch_eyebrow);
+      setTxt(bizBlocks[0].querySelector('h3'), t.merch_h3);
+      setTxt(bizBlocks[0].querySelector('.sec-p'), t.merch_p);
+      const numsM = bizBlocks[0].querySelectorAll('.nums span');
+      if (numsM[0]) setTxt(numsM[0], t.merch_setup);
+      if (numsM[1]) setTxt(numsM[1], t.merch_txn);
+      if (numsM[2]) setTxt(numsM[2], t.merch_payout);
+      const mechCta = bizBlocks[0].querySelector('.btn');
+      if (mechCta) setTxt(mechCta, t.merch_cta);
+    }
+    if (bizBlocks[1]) {
+      setTxt(bizBlocks[1].querySelector('.sec-k'), t.agent_eyebrow);
+      setTxt(bizBlocks[1].querySelector('h3'), t.agent_h3);
+      const paras = bizBlocks[1].querySelectorAll('p:not(.sec-p)');
+      if (paras[0]) setTxt(paras[0], t.agent_p);
+      if (paras[1]) setTxt(paras[1], t.agent_new);
+      const numsA = bizBlocks[1].querySelectorAll('.nums span');
+      if (numsA[0]) setTxt(numsA[0], t.agent_earn);
+      if (numsA[1]) setTxt(numsA[1], t.agent_float);
+      if (numsA[2]) setTxt(numsA[2], t.agent_hrs);
+      const agentCta = bizBlocks[1].querySelector('.btn');
+      if (agentCta) setTxt(agentCta, t.agent_cta);
+    }
+  }
+
+  // ── HAITI RECEIVE ──
+  const haitiSec = q('#haiti');
+  if (haitiSec) {
+    setTxt(haitiSec.querySelector('.sec-k'), t.haiti_eyebrow);
+    setTxt(haitiSec.querySelector('h2'), t.haiti_h2);
+    setTxt(haitiSec.querySelector('.sec-p'), t.haiti_p);
+    const stat3 = haitiSec.querySelectorAll('.stat3 span');
+    if (stat3[0]) setTxt(stat3[0], t.haiti_agents);
+    if (stat3[1]) setTxt(stat3[1], t.haiti_arrive);
+    if (stat3[2]) setTxt(stat3[2], t.haiti_apy);
+    const hCta = haitiSec.querySelector('.btn-navy');
+    if (hCta) setTxt(hCta, t.haiti_cta);
+  }
+
+  // ── CORRIDORS ──
+  const corrSec = q('#corridors');
+  if (corrSec) {
+    setTxt(corrSec.querySelector('.sec-k'), t.corr_eyebrow);
+    setTxt(corrSec.querySelector('h2'), t.corr_h2);
+    setTxt(corrSec.querySelector('.sec-p'), t.corr_p);
+    const cors = corrSec.querySelectorAll('.cor p');
+    if (cors[0]) setTxt(cors[0], t.corr_us_p);
+    if (cors[1]) setTxt(cors[1], t.corr_ca_p);
+    if (cors[2]) setTxt(cors[2], t.corr_fr_p);
+  }
+
+  // ── PATH OF DOLLAR ──
+  const pathSec = q('#path');
+  if (pathSec) {
+    setTxt(pathSec.querySelector('.sec-k'), t.path_eyebrow);
+    setTxt(pathSec.querySelector('h2'), t.path_h2);
+    setTxt(pathSec.querySelector('.sec-p'), t.path_p);
+    const boxes = pathSec.querySelectorAll('.box');
+    [[t.path_1_b,t.path_1_s],[t.path_2_b,t.path_2_s],[t.path_3_b,t.path_3_s],[t.path_4_b,t.path_4_s]].forEach(([b,s],i) => {
+      if (boxes[i]) { setTxt(boxes[i].querySelector('b'), b); setTxt(boxes[i].querySelector('span'), s); }
+    });
+  }
+
+  // ── CAMPAIGN ──
+  const campSec = q('.campaign');
+  if (campSec) {
+    setTxt(campSec.querySelector('.sec-k'), t.camp_eyebrow);
+    setHTML(campSec.querySelector('h2'), t.camp_h2);
+    setTxt(campSec.querySelector('p'), t.camp_p);
+    const campCtAs = campSec.querySelectorAll('.cta a');
+    if (campCtAs[0]) setTxt(campCtAs[0], t.camp_cta1);
+    if (campCtAs[1]) setTxt(campCtAs[1], t.camp_cta2);
+  }
+
+  // ── QUOTES ──
+  const quotesSec = q('#quotes');
+  if (quotesSec) {
+    setTxt(quotesSec.querySelector('.sec-k'), t.quotes_eyebrow);
+    setTxt(quotesSec.querySelector('h2'), t.quotes_h2);
+    const quotePs = quotesSec.querySelectorAll('.quote p');
+    if (quotePs[0]) setTxt(quotePs[0], t.q1);
+    if (quotePs[1]) setTxt(quotePs[1], t.q2);
+    if (quotePs[2]) setTxt(quotePs[2], t.q3);
+  }
+
+  // ── SECURITY ──
+  const secSec = q('#security');
+  if (secSec) {
+    setTxt(secSec.querySelector('.sec-k'), t.sec_eyebrow);
+    setTxt(secSec.querySelector('h2'), t.sec_h2);
+    setTxt(secSec.querySelector('.sec-p'), t.sec_p);
+    setTxt(secSec.querySelector('.secu-rail b'), t.sec_badge_b);
+    setTxt(secSec.querySelector('.secu-rail p'), t.sec_badge_p);
+    const kycSteps = secSec.querySelectorAll('.kyc-step');
+    [[t.kyc1_b,t.kyc1_p],[t.kyc2_b,t.kyc2_p],[t.kyc3_b,t.kyc3_p]].forEach(([b,p],i) => {
+      if (kycSteps[i]) { setTxt(kycSteps[i].querySelector('b'), b); setTxt(kycSteps[i].querySelector('p'), p); }
+    });
+    const secStats = secSec.querySelectorAll('.secu-stats .stat span');
+    [t.sec_stat1_s,t.sec_stat2_s,t.sec_stat3_s,t.sec_stat4_s].forEach((v,i) => { if(secStats[i])setTxt(secStats[i],v); });
+  }
+
+  // ── FAQ ──
+  const faqSec = q('#faq');
+  if (faqSec) {
+    setTxt(faqSec.querySelector('.sec-k'), t.faq_eyebrow);
+    setTxt(faqSec.querySelector('h2'), t.faq_h2);
+    const details = faqSec.querySelectorAll('details');
+    [[t.faq_q1,t.faq_a1],[t.faq_q2,t.faq_a2],[t.faq_q3,t.faq_a3],[t.faq_q4,t.faq_a4]].forEach(([q,a],i) => {
+      if (details[i]) {
+        setTxt(details[i].querySelector('summary'), q);
+        setTxt(details[i].querySelector('p'), a);
+      }
+    });
+  }
+
+  // ── WAITLIST ──
+  const wh2 = q('.wait h2'); if(wh2) setTxt(wh2, t.waitlist_h2);
+  const wp = q('.wait > .wrap > p'); if(wp) setTxt(wp, t.waitlist_p);
+  const wbtn = q('.wait-box button[type=submit]');
+  if (wbtn) { const svg=wbtn.querySelector('svg'); wbtn.textContent=' '+t.waitlist_btn; if(svg)wbtn.prepend(svg); }
+
+  // ── FOOTER ──
+  const fgs = q('footer .fg');
+  if (fgs) {
+    const fHeads = fgs.querySelectorAll('h4');
+    if (fHeads[0]) setTxt(fHeads[0], t.footer_prod);
+    if (fHeads[1]) setTxt(fHeads[1], t.footer_biz);
+    if (fHeads[2]) setTxt(fHeads[2], t.footer_co);
+    const logoSmall = fgs.querySelector('.logo small');
+    if (logoSmall) setTxt(logoSmall, t.footer_tagline);
+  }
+  setTxt(q('.copy'), t.footer_copy);
 }
 
 // Dropdown toggle
