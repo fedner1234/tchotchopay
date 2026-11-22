@@ -437,9 +437,9 @@ table tr:last-child td{border-bottom:0}
 .secu-rail b{display:block;font-family:var(--display);font-size:20px;margin:8px 0;letter-spacing:.03em}
 .secu-rail p{color:#c9d4ea;font-size:13px}
 .wait .wait-box{background:rgba(255,255,255,.06);border:1px solid rgba(196,160,53,.28);border-radius:20px;
-  padding:22px;max-width:520px;margin-top:22px}
-.fake-in{height:48px;border-radius:8px;background:#fff;color:#5C6780;display:flex;align-items:center;
-  padding:0 16px;font-size:15px;margin-bottom:12px}
+  padding:22px;max-width:520px;margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.wait .wait-box input[type=email]{height:52px;border-radius:12px;border:0;padding:0 16px;font-size:15px;font-family:var(--sans);width:100%;outline:none;color:var(--ink)}
+.wait .wait-box button{width:100%;justify-content:center}
 .path .box{border:1px solid rgba(196,160,53,.22)}
 .path .box .ico{width:28px;height:28px;margin:0 auto 8px;color:#C4A035}
 .icon-badge svg.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;display:block}
@@ -973,10 +973,11 @@ footer{padding:32px 0 18px}
     <p class="sec-k">Early access</p>
     <h2>Be the first to use TchotchoPay</h2>
     <p>Join thousands of Haitian diaspora members waiting for a smarter way to send money home. 2,847 people already joined. No spam. We’ll only contact you when we launch.</p>
-    <div class="wait-box">
-      <div class="fake-in">you@example.com</div>
-      <a class="btn btn-gold" href="signup.html" style="width:100%"><svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Join Now</a>
-    </div>
+    <form class="wait-box" name="waitlist" method="POST" data-netlify="true" action="/thankyou.html">
+      <input type="hidden" name="form-name" value="waitlist"/>
+      <input type="email" name="email" placeholder="you@example.com" required style="height:52px;border-radius:12px;border:0;padding:0 16px;min-width:0;flex:1;font-size:15px;font-family:var(--sans);outline:none"/>
+      <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center"><svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Join Now</button>
+    </form>
   </div>
 </section>
 
