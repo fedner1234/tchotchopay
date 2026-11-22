@@ -41,6 +41,14 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 nav{display:flex;gap:20px;font-size:14px;font-weight:500;color:var(--muted)}
 nav a:hover{color:var(--navy)}
 .actions{display:flex;gap:10px}
+.lang-wrap{position:relative;margin-left:4px}
+.lang-btn{display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 11px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--navy);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:border .2s}
+.lang-btn:hover{border-color:var(--navy)}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(1,18,64,.12);min-width:140px;overflow:hidden;display:none;z-index:200}
+.lang-drop.open{display:block}
+.lang-opt{display:block;width:100%;text-align:left;padding:11px 16px;border:none;background:none;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);transition:background .15s}
+.lang-opt:hover{background:var(--cream)}
+.lang-opt.active{color:var(--blue);font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:8px;font-weight:600;font-size:14.5px;letter-spacing:.01em;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
 .btn:hover{transform:translateY(-1px)}
 .btn-navy{background:var(--navy);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 10px 18px rgba(1,18,64,.18)}
@@ -576,6 +584,18 @@ footer{padding:32px 0 18px}
       <a href="#business">Business</a>
       <a href="recipient.html">Haiti</a>
     </nav>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn" aria-label="Language">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+        <span id="langLabel">EN</span>
+        <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <button class="lang-opt active" data-lang="en">🇺🇸 English</button>
+        <button class="lang-opt" data-lang="ht">🇭🇹 Kreyòl</button>
+        <button class="lang-opt" data-lang="es">🇪🇸 Español</button>
+      </div>
+    </div>
     <div class="actions">
       <a class="btn btn-ghost" href="login.html">Log In</a>
       <a class="btn btn-blue" href="signup.html">Get started</a>
@@ -1008,6 +1028,126 @@ footer{padding:32px 0 18px}
   }
   amts.addEventListener('click', e=>{ const b=e.target.closest('button'); if(b) setAmt(+b.dataset.v); });
 })();
+</script>
+
+<script>
+// ── LANGUAGE SWITCHER ──────────────────────────────────────────────
+const translations = {
+  en: {
+    nav_send:"Send", nav_app:"App", nav_download:"Download", nav_pay:"Pay",
+    nav_card:"Card", nav_compare:"Compare", nav_business:"Business", nav_haiti:"Haiti",
+    btn_login:"Log In", btn_started:"Get started",
+    hero_eyebrow:"Top-up & money transfer in 8 countries",
+    hero_h1:"Money for the <em>Caribbean.</em>",
+    hero_sub:"Simple. Fast. Yours.",
+    hero_lead:"Send money. Receive digital dollars. Pay with your phone. Top up mobile phones. Cash out when you need to.",
+    btn_send:"Send Money", btn_wallet:"Open Your Wallet",
+    waitlist_h2:"Be the first to use TchotchoPay",
+    waitlist_p:"Join thousands of Haitian diaspora members waiting for a smarter way to send money home. 2,847 people already joined. No spam.",
+    waitlist_btn:"Join Now",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Port-au-Prince · Paris · tchotchopay.com"
+  },
+  ht: {
+    nav_send:"Voye", nav_app:"Aplikasyon", nav_download:"Telechaje", nav_pay:"Peye",
+    nav_card:"Kat", nav_compare:"Konpare", nav_business:"Biznis", nav_haiti:"Ayiti",
+    btn_login:"Konekte", btn_started:"Kòmanse",
+    hero_eyebrow:"Transfè lajan nan 8 peyi",
+    hero_h1:"Lajan pou <em>Karayib la.</em>",
+    hero_sub:"Senp. Vit. Pou ou.",
+    hero_lead:"Voye lajan. Resevwa dola dijital. Peye ak telefòn ou. Rechaje telefòn mobil. Retire kach lè ou bezwen.",
+    btn_send:"Voye Lajan", btn_wallet:"Ouvri Pòtefèy ou",
+    waitlist_h2:"Soy premye a itilize TchotchoPay",
+    waitlist_p:"Rejwenn dè milye manm dyaspora ayisyen ki ap tann yon fason pi entelijan pou voye lajan lakay. 2,847 moun deja rejwenn. Pa gen spam.",
+    waitlist_btn:"Rejwenn Kounye a",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Pòtoprens · Pari · tchotchopay.com"
+  },
+  es: {
+    nav_send:"Enviar", nav_app:"App", nav_download:"Descargar", nav_pay:"Pagar",
+    nav_card:"Tarjeta", nav_compare:"Comparar", nav_business:"Negocios", nav_haiti:"Haití",
+    btn_login:"Iniciar sesión", btn_started:"Comenzar",
+    hero_eyebrow:"Recarga y transferencia en 8 países",
+    hero_h1:"Dinero para el <em>Caribe.</em>",
+    hero_sub:"Simple. Rápido. Tuyo.",
+    hero_lead:"Envía dinero. Recibe dólares digitales. Paga con tu teléfono. Recarga móviles. Retira efectivo cuando lo necesites.",
+    btn_send:"Enviar Dinero", btn_wallet:"Abrir mi Billetera",
+    waitlist_h2:"Sé el primero en usar TchotchoPay",
+    waitlist_p:"Únete a miles de miembros de la diáspora haitiana esperando una forma más inteligente de enviar dinero a casa. 2,847 personas ya se unieron. Sin spam.",
+    waitlist_btn:"Unirse Ahora",
+    footer_copy:"© 2026 TchotchoPay LLC · Miami · Puerto Príncipe · París · tchotchopay.com"
+  }
+};
+
+const labels = {en:"EN", ht:"KR", es:"ES"};
+
+function applyLang(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  localStorage.setItem('tcp_lang', lang);
+
+  // Label
+  document.getElementById('langLabel').textContent = labels[lang];
+  document.querySelectorAll('.lang-opt').forEach(o => {
+    o.classList.toggle('active', o.dataset.lang === lang);
+  });
+
+  // Nav links (by order)
+  const navLinks = document.querySelectorAll('nav a');
+  const keys = ['nav_send','nav_app','nav_download','nav_pay','nav_card','nav_compare','nav_business','nav_haiti'];
+  navLinks.forEach((a, i) => { if (keys[i] && t[keys[i]]) a.textContent = t[keys[i]]; });
+
+  // Header buttons
+  const hBtns = document.querySelectorAll('header .actions a');
+  if (hBtns[0]) hBtns[0].textContent = t.btn_login;
+  if (hBtns[1]) hBtns[1].textContent = t.btn_started;
+
+  // Hero
+  const eyebrow = document.querySelector('.hero .eyebrow');
+  if (eyebrow) eyebrow.childNodes[eyebrow.childNodes.length-1].textContent = ' '+t.hero_eyebrow;
+  const h1 = document.querySelector('.hero h1');
+  if (h1) h1.innerHTML = t.hero_h1;
+  const sub = document.querySelector('.hero .sub');
+  if (sub) sub.textContent = t.hero_sub;
+  const lead = document.querySelector('.hero .lead');
+  if (lead) lead.textContent = t.hero_lead;
+
+  // Hero CTAs
+  const ctaBtns = document.querySelectorAll('.hero .cta a');
+  ctaBtns.forEach(b => {
+    if (b.href.includes('send.html')) { const svg = b.querySelector('svg'); b.textContent = ' '+t.btn_send; if(svg) b.prepend(svg); }
+    if (b.href.includes('signup.html')) { const svg = b.querySelector('svg'); b.textContent = ' '+t.btn_wallet; if(svg) b.prepend(svg); }
+  });
+
+  // Waitlist
+  const wh2 = document.querySelector('.wait h2');
+  if (wh2) wh2.textContent = t.waitlist_h2;
+  const wp = document.querySelector('.wait p');
+  if (wp) wp.textContent = t.waitlist_p;
+  const wbtn = document.querySelector('.wait-box button[type=submit]');
+  if (wbtn) { const svg = wbtn.querySelector('svg'); wbtn.textContent = ' '+t.waitlist_btn; if(svg) wbtn.prepend(svg); }
+
+  // Footer copy
+  const copy = document.querySelector('.copy');
+  if (copy) copy.textContent = t.footer_copy;
+}
+
+// Dropdown toggle
+const langBtn = document.getElementById('langBtn');
+const langDrop = document.getElementById('langDrop');
+langBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  langDrop.classList.toggle('open');
+});
+document.addEventListener('click', () => langDrop.classList.remove('open'));
+document.querySelectorAll('.lang-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    applyLang(opt.dataset.lang);
+    langDrop.classList.remove('open');
+  });
+});
+
+// Restore saved language
+const saved = localStorage.getItem('tcp_lang');
+if (saved && translations[saved]) applyLang(saved);
 </script>
 </body>
 </html>
