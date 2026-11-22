@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 618" width="300" height="618">
+  <defs>
+    <linearGradient id="tiytopup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eeeae3"/><stop offset=".06" stop-color="#8a8680"/>
+      <stop offset=".5" stop-color="#2f2c2a"/><stop offset=".94" stop-color="#8a8680"/>
+      <stop offset="1" stop-color="#e6e1d8"/>
+    </linearGradient>
+    <linearGradient id="navytopup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a56c8"/><stop offset=".5" stop-color="#011240"/><stop offset="1" stop-color="#0A1C4A"/>
+    </linearGradient>
+    <linearGradient id="shinetopup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shtopup" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#011240" flood-opacity=".12"/>
+    </filter>
+    <clipPath id="scrtopup"><rect x="14" y="14" width="272" height="590" rx="44"/></clipPath>
+  </defs>
+  <rect width="300" height="618" rx="54" fill="url(#tiytopup)"/>
+  <rect x="1.2" y="1.2" width="297.6" height="615.6" rx="52.5" fill="none" stroke="#fff" stroke-opacity=".45"/>
+  <rect x="-3" y="118" width="5" height="28" rx="1.5" fill="#7a7670"/>
+  <rect x="-3" y="158" width="5" height="48" rx="1.5" fill="#7a7670"/>
+  <rect x="-3" y="214" width="5" height="48" rx="1.5" fill="#7a7670"/>
+  <rect x="298" y="168" width="5" height="78" rx="1.5" fill="#7a7670"/>
+  <rect x="8" y="8" width="284" height="602" rx="48" fill="#0a0a0c"/>
+  <rect x="12" y="12" width="276" height="594" rx="45" fill="#ffffff"/>
+  <g clip-path="url(#scrtopup)">
+
+    <text x="28" y="56" font-family="Segoe UI, Arial" font-size="13" font-weight="700" fill="#0E1630">9:41</text>
+    <g transform="translate(222,46)" fill="#0E1630">
+      <rect x="0" y="7" width="3" height="5" rx=".4"/>
+      <rect x="5" y="5" width="3" height="7" rx=".4"/>
+      <rect x="10" y="3" width="3" height="9" rx=".4"/>
+      <rect x="15" y="1" width="3" height="11" rx=".4" opacity=".3"/>
+      <path d="M32 11.5c-2.4-2.4-2.4-6.2 0-8.6" fill="none" stroke="#0E1630" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M35 9.4c-1.2-1.2-1.2-3.2 0-4.4" fill="none" stroke="#0E1630" stroke-width="1.3" stroke-linecap="round"/>
+      <rect x="42" y="2" width="20" height="10" rx="2" fill="none" stroke="#0E1630" stroke-width="1.3"/>
+      <rect x="44" y="4" width="14" height="6" rx="1"/>
+      <rect x="62" y="5" width="1.6" height="4" rx=".5"/>
+    </g>
+<text x="28" y="88" font-family="Segoe UI, Arial" font-size="11" fill="#5C6780">Top up</text>
+    <text x="28" y="112" font-family="Segoe UI, Arial" font-size="20" font-weight="700" fill="#011240">Digicel Haiti</text>
+<g>
+  <rect x="32" y="128" width="112" height="36" rx="18" fill="#011240"/>
+  <text x="88" y="151" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Segoe UI, Arial">Digicel</text>
+  <rect x="156" y="128" width="112" height="36" rx="18" fill="#EEF3FF"/>
+  <text x="212" y="151" text-anchor="middle" font-size="13" font-weight="700" fill="#011240" font-family="Segoe UI, Arial">Natcom</text>
+</g>
+<g>
+      <rect x="22" y="180" width="256" height="54" rx="14" fill="#ffffff" stroke="#E6D9C4"/>
+      <text x="38" y="198" font-family="Segoe UI, Arial" font-size="9" font-weight="700" letter-spacing="1.1" fill="#5C6780">NUMBER</text>
+      <text x="38" y="218" font-family="Segoe UI, Arial" font-size="13.5" font-weight="700" fill="#011240">+509 34 12 7781</text>
+    </g>
+<g>
+      <rect x="22" y="244" width="256" height="54" rx="14" fill="#EAF8EF" stroke="#E6D9C4"/>
+      <text x="38" y="262" font-family="Segoe UI, Arial" font-size="9" font-weight="700" letter-spacing="1.1" fill="#5C6780">AMOUNT</text>
+      <text x="38" y="282" font-family="Segoe UI, Arial" font-size="13.5" font-weight="700" fill="#011240">$10.00  ·  instant</text>
+    </g>
+<g>
+  <rect x="32" y="316" width="70" height="34" rx="17" fill="#EEF3FF"/><text x="67" y="338" text-anchor="middle" font-size="13" font-weight="700" fill="#011240" font-family="Segoe UI, Arial">$5</text>
+  <rect x="115" y="316" width="70" height="34" rx="17" fill="#011240"/><text x="150" y="338" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="Segoe UI, Arial">$10</text>
+  <rect x="198" y="316" width="70" height="34" rx="17" fill="#EEF3FF"/><text x="233" y="338" text-anchor="middle" font-size="13" font-weight="700" fill="#011240" font-family="Segoe UI, Arial">$20</text>
+</g>
+<g>
+      <rect x="22" y="372" width="256" height="44" rx="10" fill="#011240"/>
+      <text x="150.0" y="400" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" font-weight="700" fill="#fff">Top up $10</text>
+    </g>
+</g>
+  <rect x="12" y="12" width="276" height="594" rx="45" fill="url(#shinetopup)" pointer-events="none"/>
+  <rect x="96" y="22" width="108" height="32" rx="16" fill="#050505"/>
+  <circle cx="182" cy="38" r="5" fill="#0a2040"/>
+  <circle cx="168" cy="38" r="3" fill="#1a1a1c"/>
+  <rect x="95" y="590" width="110" height="5" rx="2.5" fill="#011240" opacity=".85"/>
+</svg>
