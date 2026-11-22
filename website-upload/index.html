@@ -597,8 +597,8 @@ footer{padding:32px 0 18px}
     </a>
     <nav>
       <a href="send.html">Send</a>
+      <a href="topup.html">Top Up</a>
       <a href="app.html">App</a>
-      <a href="app.html">Download</a>
       <a href="#pay">Pay</a>
       <a href="card.html">Card</a>
       <a href="compare.html">Compare</a>
@@ -671,6 +671,7 @@ footer{padding:32px 0 18px}
       <p class="lead">Send money. Receive digital dollars. Pay with your phone. Top up mobile phones. Cash out when you need to.</p>
       <div class="cta">
         <a class="btn btn-navy" href="send.html"><svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12h14M13 6l7 6-7 6"/></svg> Send Money</a>
+        <a class="btn btn-gold" href="topup.html"><svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 7h6"/></svg> Top Up</a>
         <a class="btn btn-ghost" href="signup.html"><svg class="ico" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16" cy="14" r="1"/></svg> Open Your Wallet</a>
       </div>
       <div class="trust">
@@ -1091,7 +1092,7 @@ footer{padding:32px 0 18px}
 const translations = {
   en: {
     // Nav
-    nav_send:"Send", nav_app:"App", nav_download:"Download", nav_pay:"Pay",
+    nav_send:"Send", nav_topup:"Top Up", nav_app:"App", nav_pay:"Pay",
     nav_card:"Card", nav_compare:"Compare", nav_business:"Business", nav_haiti:"Haiti",
     btn_login:"Log In", btn_started:"Get started",
     // Hero
@@ -1099,7 +1100,7 @@ const translations = {
     hero_h1:"Money for the <em>Caribbean.</em>",
     hero_sub:"Simple. Fast. Yours.",
     hero_lead:"Send money. Receive digital dollars. Pay with your phone. Top up mobile phones. Cash out when you need to.",
-    btn_send:"Send Money", btn_wallet:"Open Your Wallet",
+    btn_send:"Send Money", btn_topup:"Top Up", btn_wallet:"Open Your Wallet",
     trust_1:"Bank-Level Security", trust_2:"Instant Transfers",
     trust_3:"Trusted Across the Caribbean", trust_4:"No Hidden Fees",
     // Calculator
@@ -1251,7 +1252,7 @@ const translations = {
 
   ht: {
     // Nav
-    nav_send:"Voye", nav_app:"Aplikasyon", nav_download:"Telechaje", nav_pay:"Peye",
+    nav_send:"Voye", nav_topup:"Rechaj", nav_app:"Aplikasyon", nav_pay:"Peye",
     nav_card:"Kat", nav_compare:"Konpare", nav_business:"Biznis", nav_haiti:"Ayiti",
     btn_login:"Konekte", btn_started:"Kòmanse",
     // Hero
@@ -1259,7 +1260,7 @@ const translations = {
     hero_h1:"Lajan pou <em>Karayib la.</em>",
     hero_sub:"Senp. Vit. Pou ou.",
     hero_lead:"Voye lajan. Resevwa dola dijital. Peye ak telefòn ou. Rechaje telefòn mobil. Retire kach lè ou bezwen.",
-    btn_send:"Voye Lajan", btn_wallet:"Ouvri Pòtefèy ou",
+    btn_send:"Voye Lajan", btn_topup:"Rechaj Telefòn", btn_wallet:"Ouvri Pòtefèy ou",
     trust_1:"Sekirite Nivo Bank", trust_2:"Transfè Imedya",
     trust_3:"Fè Konfyans nan Karayib la", trust_4:"Pa Gen Frè Kache",
     // Calculator
@@ -1411,7 +1412,7 @@ const translations = {
 
   es: {
     // Nav
-    nav_send:"Enviar", nav_app:"App", nav_download:"Descargar", nav_pay:"Pagar",
+    nav_send:"Enviar", nav_topup:"Recargar", nav_app:"App", nav_pay:"Pagar",
     nav_card:"Tarjeta", nav_compare:"Comparar", nav_business:"Negocios", nav_haiti:"Haití",
     btn_login:"Iniciar sesión", btn_started:"Comenzar",
     // Hero
@@ -1419,7 +1420,7 @@ const translations = {
     hero_h1:"Dinero para el <em>Caribe.</em>",
     hero_sub:"Simple. Rápido. Tuyo.",
     hero_lead:"Envía dinero. Recibe dólares digitales. Paga con tu teléfono. Recarga móviles. Retira efectivo cuando lo necesites.",
-    btn_send:"Enviar Dinero", btn_wallet:"Abrir mi Billetera",
+    btn_send:"Enviar Dinero", btn_topup:"Recargar", btn_wallet:"Abrir mi Billetera",
     trust_1:"Seguridad Bancaria", trust_2:"Transferencias Instantáneas",
     trust_3:"Confianza en todo el Caribe", trust_4:"Sin Tarifas Ocultas",
     // Calculator
@@ -1598,7 +1599,7 @@ function applyLang(lang) {
 
   // ── NAV ──
   const navLinks = qq('nav a');
-  ['nav_send','nav_app','nav_download','nav_pay','nav_card','nav_compare','nav_business','nav_haiti']
+  ['nav_send','nav_topup','nav_app','nav_pay','nav_card','nav_compare','nav_business','nav_haiti']
     .forEach((k,i) => { if (navLinks[i]) setTxt(navLinks[i], t[k]); });
   const hBtns = qq('header .actions a');
   if (hBtns[0]) setTxt(hBtns[0], t.btn_login);
@@ -1613,6 +1614,7 @@ function applyLang(lang) {
   const ctaBtns = qq('.hero .cta a');
   ctaBtns.forEach(b => {
     if (b.href.includes('send.html')) { const svg=b.querySelector('svg'); b.textContent=' '+t.btn_send; if(svg)b.prepend(svg); }
+    if (b.href.includes('topup.html')) { const svg=b.querySelector('svg'); b.textContent=' '+t.btn_topup; if(svg)b.prepend(svg); }
     if (b.href.includes('signup.html')) { const svg=b.querySelector('svg'); b.textContent=' '+t.btn_wallet; if(svg)b.prepend(svg); }
   });
   // Trust badges
