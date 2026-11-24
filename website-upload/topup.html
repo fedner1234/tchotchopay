@@ -103,10 +103,15 @@ h2 em{font-style:normal;color:var(--blue)}
 .f-label{font-size:13px;font-weight:600;margin-bottom:7px}
 .f-input{width:100%;height:48px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;font-size:15px;color:var(--ink);background:#fff;outline:none;margin-bottom:18px;transition:border .15s}
 .f-input:focus{border-color:var(--navy)}
-.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
 .amt-btn{height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
 .amt-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .amt-btn:hover:not(.on){border-color:var(--navy);color:var(--navy)}
+.custom-amt-wrap{position:relative;margin-bottom:20px}
+.custom-amt-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:600;color:var(--muted);pointer-events:none;z-index:1}
+.custom-amt-input{width:100%;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px 0 26px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;font-family:var(--sans)}
+.custom-amt-input:focus{border-color:var(--navy)}
+.custom-amt-input::placeholder{font-weight:400;color:var(--muted)}
 .summary{background:#f9f4ec;border-radius:12px;padding:14px 16px;margin-bottom:18px}
 .sum-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--muted)}
 .sum-row b{color:var(--ink);font-weight:600}
@@ -268,6 +273,10 @@ footer a:hover{color:#fff}
         <button class="amt-btn" onclick="selectAmt(this,35)">$35</button>
         <button class="amt-btn" onclick="selectAmt(this,50)">$50</button>
       </div>
+      <div class="custom-amt-wrap">
+        <span class="custom-amt-prefix">$</span>
+        <input class="custom-amt-input" id="customAmt" type="number" min="1" max="10000" step="1" placeholder="Enter your own amount">
+      </div>
       <div class="summary">
         <div class="sum-row"><span>Carrier</span><b id="s-carrier">Digicel</b></div>
         <div class="sum-row"><span>Amount</span><b id="s-amt">$10.00</b></div>
@@ -302,8 +311,22 @@ function calc(){
 }
 function selectAmt(el,v){
   document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');curAmt=v;calc();
+  el.classList.add('on');
+  const ci=document.getElementById('customAmt');
+  if(ci) ci.value='';
+  curAmt=v;calc();
 }
+function setCustomAmt(el){
+  const v=parseFloat(el.value);
+  if(v>0){
+    document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('on'));
+    curAmt=v;calc();
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  const ci=document.getElementById('customAmt');
+  if(ci) ci.addEventListener('input',function(){setCustomAmt(this);});
+});
 function setCarrier(c){
   curCarrier=c;
   document.getElementById('s-carrier').textContent=c;
