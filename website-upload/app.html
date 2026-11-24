@@ -1,898 +1,712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tchotcho Pay App — Your Haitian Money App</title>
-  <!-- SEO & Open Graph -->
-  <meta name="description" content="The Tchotcho Pay mobile app lets you send money, receive USDC, pay bills, top up phones, and shop in the Haitian marketplace — all from your phone."/>
-  <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://tchotchopay.com/app.html"/>
-  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/app.html"/>
-  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/app.html"/>
-  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/app.html"/>
-  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/app.html"/>
-  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/app.html"/>
-  <!-- Open Graph (Facebook, WhatsApp, iMessage) -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://tchotchopay.com/app.html"/>
-  <meta property="og:title" content="Tchotcho Pay App — Your Haitian Money App"/>
-  <meta property="og:description" content="The Tchotcho Pay mobile app lets you send money, receive USDC, pay bills, top up phones, and shop in the Haitian marketplace — all from your phone."/>
-  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta property="og:site_name" content="Tchotcho Pay"/>
-  <meta property="og:locale" content="en_US"/>
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:site" content="@TchotchoPay"/>
-  <meta name="twitter:title" content="Tchotcho Pay App — Your Haitian Money App"/>
-  <meta name="twitter:description" content="The Tchotcho Pay mobile app lets you send money, receive USDC, pay bills, top up phones, and shop in the Haitian marketplace — all from your phone."/>
-  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
-  <style>
-    html { overflow-x: hidden; }
-    :root {
-      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
-      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
-      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
-      --gold:#F7B731; --gold:#F7B731;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--navy);color:var(--white);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Download the TchotchoPay App — TchotchoPay</title>
+<meta name="description" content="Get the TchotchoPay mobile app for iOS and Android. Send money, manage your wallet, pay bills — all from your phone."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://tchotchopay.com/app.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://tchotchopay.com/app.html"/>
+<meta property="og:title" content="Download the TchotchoPay App — TchotchoPay"/>
+<meta property="og:description" content="Get the TchotchoPay mobile app for iOS and Android. Send money, manage your wallet, pay bills — all from your phone."/>
+<meta property="og:image" content="https://tchotchopay.com/assets/logo.png"/>
+<meta property="og:site_name" content="TchotchoPay"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@TchotchoPay"/>
+<style>
+@font-face{font-family:"Cook Conthic";src:url("fonts/CookConthic.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI-Semibold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
 
-    /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;padding:14px 32px;background:rgba(2,11,45,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,174,239,.15);gap:12px;}
-    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);}
-    .nav-logo{width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0A1F6E,#00AEEF);}
-    .nav-logo img{width:100%;height:100%;object-fit:cover;}
-    .nav-name{font-weight:700;font-size:1rem;}
-    .nav-name em{color:var(--cyan);font-style:normal;}
-    .nav-links{display:flex;gap:6px;margin-left:auto;align-items:center;}
-    .nav-link{color:var(--gray);text-decoration:none;font-size:.85rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
-    .nav-link:hover{color:var(--white);background:rgba(0,174,239,.08);}
-    .nav-cta{background:linear-gradient(135deg,var(--mid),var(--cyan));color:#fff!important;font-weight:700;padding:8px 18px;border-radius:50px;}
-    @media(max-width:600px){.nav-links{display:none;}}
+:root{
+  --navy:#011240; --navy2:#0A1C4A; --cream:#FFF7ED; --paper:#fff;
+  --gold:#C4A035; --blue:#1557D6; --ink:#0E1630; --muted:#5C6780;
+  --line:#E6D9C4; --ok:#1FA971; --bad:#C0392B;
+  --display:"Cook Conthic",Impact,"Arial Narrow",sans-serif;
+  --serif:"Cook Conthic",Impact,"Arial Narrow",sans-serif;
+  --sans:"Segoe UI",ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-weight:400;background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}
+.wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ico-lg{width:28px;height:28px}
+.flag{width:22px;height:16px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.flag-lg{width:32px;height:24px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 
-    /* ── HERO ── */
-    .hero{min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden;}
-    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 20% 50%,rgba(0,174,239,.08),transparent 60%),radial-gradient(ellipse 50% 70% at 80% 30%,rgba(16,85,204,.12),transparent 60%);pointer-events:none;}
-    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,174,239,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,174,239,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);}
-    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1;}
-    @media(max-width:760px){.hero-inner{grid-template-columns:1fr;text-align:center;}.hero-phones{order:-1;}}
+.topbar{background:var(--navy);color:#c9d4ea;font-size:12px;font-weight:500;padding:8px 0;letter-spacing:.01em}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px}
+.topbar b{color:#fff;font-weight:600}
+header{position:sticky;top:0;z-index:50;background:rgba(255,247,237,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em}
+.logo img{width:38px;height:38px}
+.logo small{font-size:11px;color:var(--muted);font-weight:500;display:block;margin-top:-1px;letter-spacing:0}
+nav{display:flex;gap:20px;font-size:14px;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--navy)}
+.actions{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:8px;font-weight:600;font-size:14.5px;letter-spacing:.01em;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 10px 18px rgba(1,18,64,.18)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 10px 18px rgba(21,87,214,.22)}
+.btn-ghost{background:#fff;border:1.5px solid var(--navy);color:var(--navy);box-shadow:none}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:700;box-shadow:0 8px 16px rgba(196,160,53,.28)}
+svg.dev,svg.agent-vec{display:block;overflow:visible}.dev{width:268px;height:auto;display:block;filter:drop-shadow(0 18px 10px rgba(1,18,64,.12)) drop-shadow(0 40px 50px rgba(1,18,64,.22))}
+.dev.sm{width:214px}
+.dev.lg{width:300px}
+.dev.mid{width:292px;transform:translateY(-22px);z-index:3;position:relative}
+.dev.l{transform:rotate(-7deg) translateY(30px)}
+.dev.r{transform:rotate(7deg) translateY(30px)}
+.agent-vec{width:min(440px,100%);height:auto;filter:drop-shadow(0 18px 10px rgba(0,0,0,.2)) drop-shadow(0 36px 56px rgba(0,0,0,.42));transform:rotate(-6deg)}
+.getapp{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.getapp-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.qr-dl{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.32);border-radius:24px;padding:28px;text-align:center;box-shadow:0 1px 0 #fff inset,0 18px 40px rgba(1,18,64,.12);max-width:280px;margin-left:auto}
+.qr-dl img,.qr-dl svg{width:200px;height:200px;margin:0 auto 12px;display:block}
+.qr-dl span{font-size:13px;font-weight:600;color:var(--muted)}
+.store-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.store-row img,.store-row svg{height:52px;width:auto;display:block}
 
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);color:var(--green);padding:6px 16px;border-radius:50px;font-size:.76rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px;}
-    .hero-badge .bdot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-    .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.08;margin-bottom:18px;}
-    .hero h1 em{color:var(--cyan);font-style:normal;}
-    .hero-sub{color:var(--gray);font-size:1rem;line-height:1.7;margin-bottom:32px;max-width:460px;}
-    @media(max-width:760px){.hero-sub{margin:0 auto 32px;}}
+.hero{padding:52px 0 20px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:18px}
+h1{font-family:var(--display);font-weight:700;font-size:62px;line-height:.96;letter-spacing:.01em;color:var(--navy)}
+h1 em{font-style:normal;color:var(--blue)}
+.sub{margin-top:16px;font-size:22px;font-weight:600;color:var(--blue);letter-spacing:-.02em}
+.lead{margin-top:14px;color:var(--muted);font-size:17px;max-width:520px;font-weight:400}
+.cta{display:flex;gap:12px;margin:28px 0 22px;flex-wrap:wrap}
+.trust{display:flex;flex-wrap:wrap;gap:16px 22px;font-size:13px;font-weight:500;color:var(--muted)}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust .ico{color:var(--blue);width:18px;height:18px}
+.flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:999px;font-size:13px;font-weight:500;transition:box-shadow .2s,transform .2s}
+.chip:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(1,18,64,.08)}
 
-    /* Store buttons */
-    .store-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
-    @media(max-width:760px){.store-btns{justify-content:center;}}
-    .store-btn{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);border-radius:16px;padding:12px 22px;cursor:pointer;text-decoration:none;color:var(--white);transition:all .25s;backdrop-filter:blur(8px);}
-    .store-btn:hover{border-color:var(--cyan);background:rgba(0,174,239,.08);transform:translateY(-2px);}
-    .store-btn-icon{font-size:1.8rem;flex-shrink:0;}
-    .store-btn-text .sbt-sub{font-size:.65rem;color:rgba(255,255,255,.45);display:block;}
-    .store-btn-text .sbt-name{font-size:.95rem;font-weight:700;}
+.calc{background:#fff;border:1px solid rgba(196,160,53,.22);border-radius:22px;padding:24px;box-shadow:0 1px 0 #fff inset,0 28px 70px rgba(1,18,64,.12)}
+.calc h3{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:-.01em}
+.amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.amounts button{height:42px;line-height:42px;padding:0;text-align:center;border-radius:11px;border:1px solid var(--line);background:#fff;font-weight:600;cursor:pointer;font-size:14px;display:block;width:100%}
+.amounts button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f1ebe0;font-size:14px;font-weight:500}
+.row .k{color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:400}
+.big{display:flex;justify-content:space-between;align-items:flex-end;padding:16px 0 8px}
+.big b{font-family:var(--display);font-size:36px;color:var(--navy);line-height:1;font-weight:700}
+.vs{background:#F4FBF6;border-radius:12px;padding:12px 14px;margin:12px 0;font-size:13px;color:#1e6b3a;font-weight:500}
+.calc .btn{width:100%;justify-content:center;margin-top:8px;height:50px}
 
-    /* Stats row */
-    .hero-stats{display:flex;gap:24px;flex-wrap:wrap;}
-    @media(max-width:760px){.hero-stats{justify-content:center;}}
-    .hs{text-align:left;}
-    .hs-num{font-size:1.3rem;font-weight:900;color:var(--cyan);}
-    .hs-label{font-size:.72rem;color:var(--gray);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+.stat{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);border-radius:16px;padding:18px 16px;text-align:center}
+.stat b{display:block;font-family:var(--display);font-size:26px;color:var(--navy);font-weight:700;line-height:1}
+.stat span{font-size:12px;color:var(--muted);font-weight:500}
 
-    /* ── PHONE SHOWCASE ── */
-    .hero-phones{display:flex;gap:16px;justify-content:center;align-items:flex-end;position:relative;}
-    .phone-float{animation:float 4s ease-in-out infinite;}
-    .phone-float:nth-child(2){animation-delay:-.8s;animation-duration:4.5s;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-    .phone-wrap{position:relative;}
-    .phone-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:140px;height:30px;background:rgba(0,174,239,.25);filter:blur(20px);border-radius:50%;}
-    .phone{width:200px;background:linear-gradient(160deg,#0d1f4e,#050e28);border:2px solid rgba(0,174,239,.35);border-radius:36px;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);}
-    .phone.small{width:170px;opacity:.8;}
-    .phone-notch{width:64px;height:16px;background:#000;border-radius:10px;margin:0 auto 8px;}
-    .phone-screen{background:#070d1f;border-radius:26px;overflow:hidden;}
+.partners{padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:36px;background:linear-gradient(180deg,#fff,#FFF9F1);overflow:hidden}
+.partners .head{text-align:center;padding:16px 16px 6px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--navy)}
+.marquee{overflow:hidden;padding:8px 0 18px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:0;width:max-content;animation:mq 32s linear infinite}
+.track span{display:inline-flex;align-items:center;gap:10px;padding:0 28px;font-family:var(--display);font-size:15px;letter-spacing:.08em;color:var(--navy);opacity:.55;white-space:nowrap}
+.track span:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* Screen: Home */
-    .scr-home{padding:0;}
-    .scr-header{background:linear-gradient(135deg,#0A1F6E,#1055CC);padding:14px 14px 20px;}
-    .scr-greeting{font-size:.6rem;color:rgba(255,255,255,.4);margin-bottom:2px;}
-    .scr-name{font-size:.88rem;font-weight:800;margin-bottom:12px;}
-    .scr-balance-card{background:rgba(0,0,0,.2);border-radius:12px;padding:12px;}
-    .scr-bal-label{font-size:.55rem;color:rgba(255,255,255,.4);}
-    .scr-bal-amount{font-size:1.5rem;font-weight:900;color:var(--cyan);}
-    .scr-bal-htg{font-size:.58rem;color:rgba(255,255,255,.35);}
-    .scr-actions{display:flex;gap:6px;padding:10px 12px;}
-    .scr-act{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px 4px;text-align:center;}
-    .scr-act-i{font-size:.85rem;margin-bottom:3px;}
-    .scr-act-l{font-size:.5rem;color:rgba(255,255,255,.4);}
-    .scr-txs{padding:8px 12px;}
-    .scr-tx-hdr{font-size:.55rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
-    .scr-tx{display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
-    .scr-tx:last-child{border:none;}
-    .scr-tx-ico{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;}
-    .scr-tx-inf{flex:1;}
-    .scr-tx-name{font-size:.62rem;font-weight:700;}
-    .scr-tx-date{font-size:.52rem;color:rgba(255,255,255,.3);}
-    .scr-tx-amt{font-size:.68rem;font-weight:800;}
-    .amt-g{color:var(--green);}
-    .amt-r{color:var(--red);}
+.lux{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.28);border-radius:20px;box-shadow:0 1px 0 #fff inset,0 12px 24px rgba(1,18,64,.06),0 28px 56px rgba(1,18,64,.10);position:relative}
+.lux:before{content:"";position:absolute;left:18%;right:18%;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.stat{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);border-radius:16px;padding:18px 16px;text-align:center;box-shadow:0 1px 0 #fff inset,0 12px 28px rgba(1,18,64,.06);position:relative}
+.stat:before{content:"";position:absolute;left:22%;right:22%;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
-    /* Screen: Send */
-    .scr-send{padding:12px;}
-    .scr-send-title{font-size:.82rem;font-weight:800;margin-bottom:10px;}
-    .scr-contact{display:flex;align-items:center;gap:8px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);border-radius:10px;padding:9px 10px;margin-bottom:8px;}
-    .scr-contact-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0;}
-    .scr-contact-name{font-size:.72rem;font-weight:700;}
-    .scr-contact-user{font-size:.58rem;color:rgba(255,255,255,.35);}
-    .scr-amount-row{background:rgba(2,11,45,.6);border:1.5px solid rgba(0,174,239,.25);border-radius:10px;padding:10px 12px;text-align:center;margin-bottom:8px;}
-    .scr-amt-big{font-size:1.8rem;font-weight:900;color:var(--cyan);}
-    .scr-amt-htg{font-size:.6rem;color:rgba(255,255,255,.3);}
-    .scr-send-btn{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:50px;padding:10px;font-size:.72rem;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;}
+/* iPhone 18 Pro */
+.iphone{
+  --w:286px; --h:586px;
+  width:var(--w);height:var(--h);position:relative;flex:0 0 var(--w);
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.22) 0%,transparent 10%,transparent 90%,rgba(0,0,0,.3) 100%),
+    linear-gradient(180deg,#d0cbc3 0%,#9a958c 7%,#5e5a55 16%,#3a3733 45%,#2c2a27 78%,#6a665f 94%,#d7d2c8 100%);
+  border-radius:50px;padding:9px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.4),
+    inset 0 0 0 5.5px #2c2a28,
+    0 40px 80px rgba(1,18,64,.28),
+    0 8px 18px rgba(1,18,64,.16);
+}
+.iphone.sm{--w:232px;--h:476px;border-radius:42px;padding:8px}
+.iphone.lg{--w:308px;--h:630px;border-radius:54px;padding:10px}
+.iphone .hw{position:absolute;background:linear-gradient(180deg,#9a958c,#3a3733);border-radius:2px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.iphone .hw.silent{left:-3px;top:108px;width:3px;height:24px}
+.iphone .hw.vu{left:-3px;top:148px;width:3px;height:44px}
+.iphone .hw.vd{left:-3px;top:200px;width:3px;height:44px}
+.iphone .hw.pwr{right:-3px;top:150px;width:3px;height:72px}
+.iphone .hw.cam{right:-4px;top:268px;width:4px;height:52px;border-radius:3px}
+.glass{height:100%;background:#000;border-radius:42px;overflow:hidden;position:relative}
+.iphone.sm .glass{border-radius:34px}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#050505;border-radius:20px;z-index:8;box-shadow:0 0 0 4px #000}
+.iphone.sm .island{width:84px;height:24px;top:8px}
+.island:before,.island:after{content:"";position:absolute;top:50%;transform:translateY(-50%);border-radius:50%}
+.island:before{right:9px;width:10px;height:10px;background:radial-gradient(circle at 35% 35%,#24508c,#071018 70%)}
+.island:after{right:24px;width:6px;height:6px;background:#1c1c1e}
+.home-ind{width:104px;height:5px;background:#F7F3EA;border-radius:8px;margin:6px auto 8px;opacity:.85;flex:0 0 auto}
 
-    /* Screen: Savings */
-    .scr-savings{padding:12px;}
-    .scr-sav-title{font-size:.82rem;font-weight:800;margin-bottom:10px;}
-    .scr-sav-total{background:linear-gradient(135deg,rgba(0,200,150,.15),rgba(0,174,239,.1));border:1px solid rgba(0,200,150,.25);border-radius:12px;padding:12px;text-align:center;margin-bottom:10px;}
-    .scr-sav-apy{font-size:.58rem;color:var(--green);font-weight:700;margin-bottom:2px;}
-    .scr-sav-amount{font-size:1.3rem;font-weight:900;color:var(--green);}
-    .scr-sav-label{font-size:.55rem;color:rgba(255,255,255,.35);}
-    .scr-goal{background:rgba(255,255,255,.04);border-radius:10px;padding:9px 10px;margin-bottom:6px;}
-    .scr-goal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
-    .scr-goal-name{font-size:.65rem;font-weight:700;}
-    .scr-goal-pct{font-size:.6rem;color:var(--cyan);}
-    .scr-goal-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
-    .scr-goal-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--mid),var(--cyan));}
+/* Dark luxury app UI */
+.ui{background:#0B1430;color:#F7F3EA;height:100%;display:flex;flex-direction:column;padding-top:42px;font-family:var(--sans);position:relative}
+.iphone.sm .ui{padding-top:34px}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:0 20px 6px;font-size:12px;font-weight:700;letter-spacing:.02em}
+.sb svg{display:block}
+.ui-pad{padding:0 16px}
+.hello{font-size:11px;font-weight:500;color:rgba(247,243,234,.55);letter-spacing:.04em;text-transform:uppercase}
+.uname{font-size:18px;font-weight:650;letter-spacing:-.03em;margin-top:1px}
+.bal-card{margin:10px 14px 8px;background:linear-gradient(165deg,#13245c 0%,#011240 55%,#1a3f9a 100%);border-radius:18px;padding:14px 16px 13px;box-shadow:0 16px 32px rgba(0,0,0,.25);position:relative;overflow:hidden}
+.bal-card:after{content:"";position:absolute;right:-20px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(196,160,53,.16)}
+.bal-card small{opacity:.65;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.bal-card strong{display:block;font-family:var(--display);font-size:34px;font-weight:700;line-height:1.05;margin:5px 0 4px;letter-spacing:.01em}
+.bal-card em{font-style:normal;font-size:11px;opacity:.7;font-weight:500}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px 4px}
+.act{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#F7F3EA}
+.act i{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.08);color:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.act .ico{width:18px;height:18px}
+.feed{padding:6px 14px 0;flex:1;min-height:0}
+.feed h4{font-size:11px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,243,234,.5);margin:4px 0 6px}
+.tx{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.07);font-size:12px;font-weight:500}
+.tx .av{width:28px;height:28px;border-radius:9px;background:rgba(196,160,53,.18);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:8px;flex:0 0 28px}
+.tx .who{display:flex;align-items:center;min-width:0}
+.tx .who span{display:block;font-size:10px;color:rgba(247,243,234,.45);font-weight:400}
+.pos{color:#5EE0A0;font-weight:700}.neg{color:#FF8B8B;font-weight:700}
+.tabs{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);background:linear-gradient(180deg,rgba(8,14,36,.92),rgba(4,8,22,.98));border-top:1px solid rgba(255,255,255,.1);padding:8px 6px 0;font-size:10px;font-weight:600;color:rgba(247,243,234,.42);text-align:center;letter-spacing:.02em}
+.tabs span{display:flex;flex-direction:column;align-items:center;gap:3px;white-space:nowrap}
+.tabs .on{color:var(--gold)}
+.tabs .on .tfill{filter:drop-shadow(0 0 6px rgba(196,160,53,.55))}
+.tfill{width:22px;height:22px;display:block;fill:currentColor}
+.tabs.mini{font-size:0;padding:10px 8px 4px}
+.tabs.mini .tfill{width:20px;height:20px}
+.group{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:16px;margin:8px 14px;overflow:hidden}
+.group .field{margin:0;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.07);border-radius:0}
+.group .field:last-child{border-bottom:0}
+.group .list-row{padding:10px 12px;margin:0;border-top:1px solid rgba(255,255,255,.07)}
+.group .list-row:first-child{border-top:0}
 
-    /* ── FEATURES ── */
-    .features{padding:100px 24px;background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(0,174,239,.05),transparent 70%);}
-    .features-inner{max-width:1100px;margin:0 auto;}
-    .section-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,.08);border:1px solid rgba(0,174,239,.2);color:var(--cyan);padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
-    .section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:10px;line-height:1.2;}
-    .section-sub{color:var(--gray);font-size:.92rem;line-height:1.6;max-width:520px;margin-bottom:48px;}
-    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    @media(max-width:760px){.features-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:480px){.features-grid{grid-template-columns:1fr;}}
-    .feat-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.12);border-radius:20px;padding:24px;transition:all .25s;position:relative;overflow:hidden;}
-    .feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,174,239,.4),transparent);opacity:0;transition:opacity .25s;}
-    .feat-card:hover{border-color:rgba(0,174,239,.3);transform:translateY(-4px);}
-    .feat-card:hover::before{opacity:1;}
-    .feat-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
-    .feat-title{font-size:.95rem;font-weight:800;margin-bottom:6px;}
-    .feat-desc{font-size:.8rem;color:var(--gray);line-height:1.6;}
-    .feat-tag{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:50px;margin-top:10px;}
+.aui{display:flex;align-items:center;justify-content:center;height:42px;border-radius:12px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13px;margin:8px 14px 4px;letter-spacing:-.01em}
+.aui.ghost{background:rgba(255,255,255,.08);color:#F7F3EA;font-weight:600}
+.field{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;margin:7px 0}
+.field small{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,243,234,.45);font-weight:600}
+.field b{font-size:13px;font-weight:650;letter-spacing:-.01em}
+.title{font-size:11px;color:rgba(247,243,234,.5);font-weight:500}
+.title b{display:block;font-size:17px;color:#F7F3EA;font-weight:650;letter-spacing:-.03em}
+.huge{font-family:var(--display);font-size:42px;line-height:1;letter-spacing:.01em;font-weight:700;text-align:center;margin:8px 0 2px}
+.hint{text-align:center;font-size:11px;color:rgba(247,243,234,.5);font-weight:500}
+.okchip{display:inline-flex;align-items:center;gap:6px;background:rgba(31,169,113,.15);color:#5EE0A0;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:650}
+.list-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);font-size:12px;font-weight:550}
+.list-row i{width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:var(--gold);flex:0 0 34px}
+.list-row .ico{width:16px;height:16px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chips span{background:rgba(255,255,255,.08);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:650}
+.chips span.on{background:var(--gold);color:var(--navy)}
+.mini-card{margin:8px 14px;border-radius:12px;overflow:hidden;box-shadow:0 12px 24px rgba(0,0,0,.35)}
+.check{width:54px;height:54px;border-radius:50%;background:rgba(31,169,113,.18);color:#5EE0A0;display:flex;align-items:center;justify-content:center;margin:8px auto 6px}
+.qr-box{width:150px;height:150px;margin:8px auto;border-radius:16px;background:
+  repeating-linear-gradient(90deg,#F7F3EA 0 6px,transparent 6px 10px),
+  repeating-linear-gradient(#F7F3EA 0 6px,transparent 6px 10px),
+  #0B1430;background-size:100% 8px,8px 100%,auto;position:relative;box-shadow:0 0 0 8px #fff,0 0 0 9px #0B1430}
+.qr-box:after{content:"";position:absolute;inset:52px;background:var(--navy);border-radius:8px;background-image:url("assets/logo.png");background-size:70%;background-repeat:no-repeat;background-position:center}
+.scan{flex:1;margin:8px 16px;border-radius:18px;background:#050814;position:relative;overflow:hidden;min-height:160px}
+.scan:before{content:"";position:absolute;inset:28px;border:2px solid rgba(196,160,53,.85);border-radius:16px;box-shadow:0 0 0 80px rgba(0,0,0,.45)}
+.scan i{position:absolute;left:18px;right:18px;height:2px;background:var(--gold);top:50%;box-shadow:0 0 16px var(--gold);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%,100%{top:32%}50%{top:68%}}
+.toggle{width:36px;height:20px;border-radius:99px;background:var(--ok);position:relative;flex:0 0 36px}
+.toggle:after{content:"";position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:2px;right:2px}
 
-    /* ── SCREENSHOTS CAROUSEL ── */
-    .screenshots{padding:80px 24px;background:linear-gradient(180deg,transparent,rgba(10,31,110,.2),transparent);}
-    .screenshots-inner{max-width:1100px;margin:0 auto;}
-    .carousel-wrap{position:relative;overflow:hidden;margin-top:40px;}
-    .carousel-track{display:flex;gap:20px;transition:transform .4s ease;padding:20px 0 40px;}
-    .carousel-slide{flex-shrink:0;width:220px;cursor:pointer;transition:all .3s;}
-    .carousel-slide:hover{transform:translateY(-6px);}
-    .carousel-slide.active{transform:translateY(-10px);}
-    .slide-phone{background:linear-gradient(160deg,#0d1f4e,#050e28);border:2px solid rgba(0,174,239,.3);border-radius:32px;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.5);}
-    .slide-phone.active-phone{border-color:var(--cyan);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(0,174,239,.2);}
-    .slide-notch{width:56px;height:14px;background:#000;border-radius:8px;margin:0 auto 6px;}
-    .slide-screen{background:#070d1f;border-radius:22px;height:380px;overflow:hidden;display:flex;flex-direction:column;}
-    .slide-label{text-align:center;font-size:.78rem;font-weight:700;color:var(--gray);margin-top:12px;transition:color .3s;}
-    .carousel-slide.active .slide-label{color:var(--cyan);}
-    .carousel-nav{display:flex;gap:8px;justify-content:center;margin-top:20px;}
-    .cnav-btn{width:8px;height:8px;border-radius:50%;background:rgba(0,174,239,.2);border:none;cursor:pointer;transition:all .3s;padding:0;}
-    .cnav-btn.active{width:24px;border-radius:4px;background:var(--cyan);}
-    .carousel-arrows{display:flex;gap:10px;justify-content:center;margin-top:14px;}
-    .c-arrow{width:40px;height:40px;border-radius:50%;background:rgba(0,174,239,.1);border:1.5px solid rgba(0,174,239,.2);color:var(--cyan);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.9rem;}
-    .c-arrow:hover{background:rgba(0,174,239,.18);border-color:var(--cyan);}
+.studio{padding:72px 0 88px;background:
+  radial-gradient(ellipse 55% 28% at 50% 88%,rgba(1,18,64,.14),transparent 70%),
+  radial-gradient(ellipse 70% 50% at 50% 78%,rgba(196,160,53,.18),transparent 70%),
+  linear-gradient(180deg,#fffaf3 0%,#eadfcb 100%);overflow:hidden}
+.phones{display:flex;justify-content:center;align-items:flex-end;gap:28px;perspective:1800px}
+.iphone.mid{transform:translateY(-26px) scale(1.05);z-index:4}
+.iphone.l{transform:rotateY(14deg) rotateZ(-2deg) translateY(36px) scale(.94)}
+.iphone.r{transform:rotateY(-14deg) rotateZ(2deg) translateY(36px) scale(.94)}
+.cap{text-align:center;margin-top:18px;font-size:12px;font-weight:600;color:var(--navy)}
+.cap span{display:block;color:var(--muted);font-weight:400;font-size:12px}
 
-    /* Screen content helpers */
-    .scr-topbar{background:linear-gradient(135deg,#0A1F6E,#020B2D);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;}
-    .scr-topbar-title{font-size:.75rem;font-weight:800;}
-    .scr-topbar-icon{color:var(--cyan);font-size:.8rem;}
-    .scr-padded{padding:12px;}
+section{padding:92px 0}
+.sec-k{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+h2{font-family:var(--display);font-size:40px;font-weight:700;color:var(--navy);line-height:1.08;margin-bottom:12px;letter-spacing:.015em}
+.sec-p{color:var(--muted);max-width:640px;font-size:16.5px;font-weight:400}
 
-    /* Bill pay screen */
-    .scr-bill-cat{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
-    .scr-bill-item{background:rgba(255,255,255,.04);border:1px solid rgba(0,174,239,.1);border-radius:8px;padding:8px 4px;text-align:center;cursor:pointer;}
-    .scr-bill-ico{font-size:.9rem;margin-bottom:3px;}
-    .scr-bill-lbl{font-size:.5rem;color:rgba(255,255,255,.4);}
-    .scr-bill-item.active-bill{border-color:var(--cyan);background:rgba(0,174,239,.08);}
-    .scr-bill-form{background:rgba(2,11,45,.6);border:1px solid rgba(0,174,239,.15);border-radius:10px;padding:10px;}
-    .scr-bill-f-label{font-size:.55rem;color:rgba(255,255,255,.35);margin-bottom:3px;}
-    .scr-bill-f-val{font-size:.72rem;font-weight:700;margin-bottom:8px;}
-    .scr-bill-pay-btn{width:100%;background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:50px;padding:8px;font-size:.65rem;font-weight:700;color:#fff;cursor:pointer;}
+.journey{display:flex;justify-content:center;gap:28px;align-items:flex-end;flex-wrap:wrap}
+.j-lab{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:650}
+.j-lab .n{font-family:var(--display);font-size:28px;color:var(--gold);line-height:1;font-weight:700}
 
-    /* Receive screen */
-    .scr-receive{padding:12px;text-align:center;}
-    .scr-qr-wrap{width:100px;height:100px;background:var(--white);border-radius:12px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;padding:6px;}
-    .scr-receive-name{font-size:.72rem;font-weight:700;margin-bottom:2px;}
-    .scr-receive-user{font-size:.6rem;color:rgba(255,255,255,.35);margin-bottom:10px;}
-    .scr-share-btns{display:flex;gap:6px;justify-content:center;}
-    .scr-share-btn{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 4px;text-align:center;cursor:pointer;}
-    .scr-share-ico{font-size:.75rem;margin-bottom:2px;}
-    .scr-share-lbl{font-size:.5rem;color:rgba(255,255,255,.35);}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.g4{text-align:center}
+.g4 .dev,.journey .dev{margin:0 auto}
+.g4 p{margin-top:14px;font-weight:650;letter-spacing:-.02em}
+.g4 span{display:block;color:var(--muted);font-size:13px;font-weight:400;margin-top:4px}
 
-    /* ── HOW IT WORKS ── */
-    .how-section{padding:100px 24px;background:rgba(10,31,110,.15);border-top:1px solid rgba(0,174,239,.07);border-bottom:1px solid rgba(0,174,239,.07);}
-    .how-inner{max-width:960px;margin:0 auto;}
-    .how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;position:relative;}
-    .how-steps::before{content:'';position:absolute;top:28px;left:14%;right:14%;height:2px;background:linear-gradient(90deg,var(--mid),var(--cyan));z-index:0;}
-    @media(max-width:640px){.how-steps{grid-template-columns:1fr 1fr;}.how-steps::before{display:none;}}
-    @media(max-width:380px){.how-steps{grid-template-columns:1fr;}}
-    .how-step{text-align:center;position:relative;z-index:1;}
-    .how-step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--mid),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;margin:0 auto 14px;box-shadow:0 0 0 4px rgba(16,85,204,.15),0 0 0 8px rgba(16,85,204,.06);}
-    .how-step-title{font-size:.9rem;font-weight:800;margin-bottom:6px;}
-    .how-step-desc{font-size:.78rem;color:var(--gray);line-height:1.5;}
+.scene{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.scene .stage{display:flex;justify-content:center;align-items:center;gap:28px}
+.list{list-style:none;margin:22px 0}
+.list li{display:flex;gap:12px;align-items:flex-start;margin:13px 0;font-size:15px;font-weight:500}
+.list .icon-badge{width:36px;height:36px;border-radius:10px;margin:0;flex:0 0 36px}
+.icon-badge{width:48px;height:48px;border-radius:14px;background:#EEF3FF;color:var(--blue);display:flex;align-items:center;justify-content:center;margin:10px 0 14px}
 
-    /* ── REVIEWS ── */
-    .reviews{padding:80px 24px;}
-    .reviews-inner{max-width:1100px;margin:0 auto;}
-    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
-    @media(max-width:760px){.reviews-grid{grid-template-columns:1fr;}}
-    .review-card{background:rgba(10,31,110,.3);border:1px solid rgba(0,174,239,.1);border-radius:20px;padding:24px;transition:border-color .2s;}
-    .review-card:hover{border-color:rgba(0,174,239,.25);}
-    .rv-stars{color:var(--gold);font-size:.9rem;margin-bottom:10px;letter-spacing:2px;}
-    .rv-quote{font-size:.85rem;color:var(--gray);line-height:1.6;margin-bottom:16px;font-style:italic;}
-    .rv-author{display:flex;align-items:center;gap:10px;}
-    .rv-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:800;flex-shrink:0;}
-    .rv-name{font-size:.85rem;font-weight:700;}
-    .rv-city{font-size:.72rem;color:var(--gray);}
-    .rv-platform{font-size:.68rem;color:rgba(143,168,204,.4);margin-top:12px;display:flex;align-items:center;gap:4px;}
+.flip{perspective:1400px;width:100%;max-width:520px}
+.flip-inner{position:relative;width:100%;aspect-ratio:1.586;transform-style:preserve-3d;animation:cflip 9s ease-in-out infinite;border-radius:18px}
+.flip:hover .flip-inner{animation-play-state:paused}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;overflow:hidden;box-shadow:0 24px 50px rgba(1,18,64,.18)}
+.face img{width:100%;height:100%;object-fit:cover}
+.face.back{transform:rotateY(180deg)}
+@keyframes cflip{0%,42%{transform:rotateY(0)}48%,90%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
 
-    /* ── WAITLIST ── */
-    .waitlist-section{padding:100px 24px;text-align:center;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,174,239,.07),transparent 70%);}
-    .waitlist-inner{max-width:560px;margin:0 auto;}
-    .waitlist-count-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);border-radius:50px;padding:6px 16px;font-size:.78rem;color:var(--green);font-weight:700;margin-bottom:20px;}
-    .waitlist-form{display:flex;gap:0;background:rgba(10,31,110,.4);border:1.5px solid rgba(0,174,239,.25);border-radius:50px;overflow:hidden;margin-top:24px;transition:border-color .2s;}
-    .waitlist-form:focus-within{border-color:var(--cyan);}
-    .waitlist-input{flex:1;background:none;border:none;outline:none;color:var(--white);padding:14px 22px;font-size:.92rem;font-family:inherit;}
-    .waitlist-input::placeholder{color:rgba(143,168,204,.35);}
-    .waitlist-btn{background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:0 50px 50px 0;padding:14px 26px;color:#fff;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .2s;}
-    .waitlist-btn:hover{opacity:.9;}
-    .waitlist-note{font-size:.75rem;color:rgba(143,168,204,.4);margin-top:10px;}
-    .platform-badges{display:flex;gap:12px;justify-content:center;margin-top:20px;}
-    .plat-badge{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--gray);}
-    .plat-badge i{color:var(--cyan);}
+.dark{background:var(--navy);color:#fff}
+.dark h2,.dark .sec-k{color:#fff}
+.dark .sec-k{color:var(--gold)}
+.dark .sec-p{color:#c9d4ea}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.feat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px}
+.feat .icon-badge{background:rgba(196,160,53,.15);color:var(--gold)}
+.feat h3{font-family:var(--display);font-size:22px;font-weight:700;margin:4px 0 8px;letter-spacing:.02em}
+.feat p{color:#c9d4ea;font-size:14px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:999px;font-size:13px;font-weight:500}
 
-    /* ── SCROLL REVEAL ── */
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
-    .reveal.visible{opacity:1;transform:translateY(0);}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:28px}
+th{background:var(--navy);color:#fff;text-align:left;padding:14px 16px;font-size:12px;letter-spacing:.08em;font-weight:650}
+td{padding:13px 16px;border-bottom:1px solid #f1ebe0;font-size:14px;font-weight:500}
+tr:last-child td{border-bottom:0}
+td.win{color:var(--ok);font-weight:700}
+.cmp-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0}
+.cmp{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.cmp.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cmp small{display:block;opacity:.7;font-size:11px;margin-bottom:6px;font-weight:600}
+.cmp b{font-family:var(--display);font-size:22px;font-weight:700}
 
-    /* ── TOAST ── */
-    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,150,.95);color:#000;padding:11px 22px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;pointer-events:none;transition:all .3s;z-index:9999;white-space:nowrap;}
-    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.biz{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.panel{border-radius:22px;padding:28px;color:#fff;min-height:320px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.row-app{display:flex;gap:24px;align-items:center}
+.row-app > div:first-child{flex:1;min-width:0}
+.panel.a{background:var(--navy2)}.panel.b{background:#12305f}
+.panel h3{font-family:var(--display);font-size:26px;font-weight:700;margin:4px 0 8px;letter-spacing:.02em}
+.panel p{color:#c9d4ea;flex:1}
+.nums{display:flex;gap:22px;margin:18px 0}
+.nums b{display:block;font-family:var(--display);font-size:24px;font-weight:700}
+.nums span{font-size:12px;opacity:.75;font-weight:500}
 
-    /* ── FOOTER ── */
-    .footer-mini{background:rgba(10,31,110,.2);border-top:1px solid rgba(0,174,239,.1);padding:28px 24px;text-align:center;}
-    .footer-mini-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
-    .footer-mini-links a{color:var(--gray);font-size:.8rem;text-decoration:none;transition:color .2s;}
-    .footer-mini-links a:hover{color:var(--cyan);}
-    .footer-copy{font-size:.73rem;color:rgba(143,168,204,.4);}
-  .nav-login { border: 1.5px solid var(--cyan); color: var(--cyan) !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; font-size: 0.82rem; text-decoration:none; white-space:nowrap; }
-    .nav-login:hover { background: rgba(0,174,239,0.12) !important; color: var(--white) !important; }
-  </style>
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1331702829081068');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1331702829081068&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-  <!-- GA4 Consent Mode: default denied until user accepts -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      analytics_storage: 'denied',
-      ad_storage: 'denied',
-      wait_for_update: 500
-    });
-  </script>
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-LKXNGW0JJ5');
-</script>
+.haiti-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+.stat3 div{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);border-radius:16px;padding:16px;box-shadow:0 1px 0 #fff inset,0 10px 24px rgba(1,18,64,.05)}
+.stat3 b{display:block;font-family:var(--display);font-size:24px;color:var(--navy);font-weight:700}
+.stat3 span{font-size:12px;color:var(--muted);font-weight:500}
+.agents{display:grid;gap:10px}
+.agent{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.agent p{font-size:13px;color:var(--muted)}
+
+.corridor{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.cor{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .2s,box-shadow .2s}
+.cor:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,18,64,.08)}
+.cor h3{margin:10px 0 6px;font-size:20px;font-family:var(--display);font-weight:700;letter-spacing:.02em}
+.cor p{color:var(--muted);font-size:14px}
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.path .box{background:#0A1C4A;border-radius:16px;padding:22px 16px;text-align:center;color:#fff}
+.path .box .ico{display:block;margin:0 auto;color:var(--gold)}
+.path .box b{display:block;margin:10px 0 6px;font-size:15px;font-weight:650}
+.path .box span{font-size:13px;color:#c9d4ea;display:block}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.quote{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.quote p{font-family:var(--sans);font-size:16px;line-height:1.55;color:var(--navy);margin:12px 0 16px;font-weight:400}
+.quote small{color:var(--muted);font-weight:600}
+.infl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px}
+.infl div{border-radius:16px;padding:26px 22px;background:#fff;border:1px solid var(--line)}
+.infl .bad{background:#FDECEC}
+.infl .ok{background:#EAF8EF}
+.infl b{display:block;font-family:var(--display);font-size:38px;line-height:1;margin:8px 0;color:var(--navy);font-weight:700}
+.infl .bad b{color:var(--bad)}
+.infl .ok b{color:var(--ok)}
+.infl small{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.infl span{font-size:14px;color:var(--muted)}
+
+.campaign{background:radial-gradient(ellipse 80% 80% at 80% 50%,#12305f 0%,var(--navy) 55%);color:#fff;padding:88px 0;overflow:hidden}
+.campaign h2{color:#fff;font-size:52px;max-width:640px;letter-spacing:.015em}
+.campaign h2 em{font-style:normal;color:var(--gold)}
+.campaign p{color:#c9d4ea;max-width:480px;margin:8px 0 24px}
+.camp-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.gold-wallet{
+  width:min(360px,100%);height:420px;margin:0 auto;position:relative;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.35),transparent 18%),
+    linear-gradient(90deg,#5a480c 0%,#E8C547 14%,#F6E7B2 38%,#C4A035 50%,#F6E7B2 62%,#E8C547 86%,#5a480c 100%);
+  border-radius:36px 36px 44px 44px;
+  box-shadow:
+    0 0 0 1px rgba(255,230,150,.35),
+    0 30px 60px rgba(196,160,53,.35),
+    0 50px 90px rgba(1,18,64,.28),
+    inset 0 3px 0 rgba(255,255,255,.55),
+    inset 0 -18px 28px rgba(0,0,0,.22);
+}
+.gold-wallet .mouth{position:absolute;top:28px;left:26px;right:26px;height:18px;background:#1a1406;border-radius:8px;box-shadow:inset 0 8px 14px #000,0 1px 0 rgba(255,255,255,.35)}
+.gold-wallet img{position:absolute;left:30px;right:30px;top:16px;border-radius:16px;box-shadow:0 22px 44px rgba(0,0,0,.4);animation:swipe 5.5s ease-in-out infinite}
+@keyframes swipe{0%,100%{transform:translateY(88px) rotate(-8deg)}45%,55%{transform:translateY(8px) rotate(-2deg)}}
+.langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.langs span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:500}
+
+.faq{margin-top:20px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0}
+.faq summary{cursor:pointer;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:12px;letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--blue);font-size:20px;font-weight:400}
+.faq details[open] summary:after{content:"–"}
+.faq details p{margin-top:10px;color:var(--muted);font-size:14.5px}
+
+.wait{background:linear-gradient(180deg,var(--navy),#02091f);color:#fff;padding:88px 0}
+.wait h2{color:#fff}
+.wait p{color:#c9d4ea;max-width:560px}
+form{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+form input{height:52px;border-radius:12px;border:0;padding:0 16px;min-width:280px;font-size:15px;font-family:var(--sans)}
+
+footer{background:#010b28;color:#9aabc8;padding:48px 0 24px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;margin-bottom:28px}
+footer h4{color:#fff;font-size:11px;letter-spacing:.12em;margin-bottom:12px;font-weight:700}
+footer a{display:block;margin:7px 0;font-size:13px;font-weight:500}
+footer a:hover{color:#fff}
+.copy{border-top:1px solid #1a2a55;padding-top:16px;font-size:12px}
+
+.qr-real{width:148px;height:148px;margin:10px auto;border-radius:18px;background:#fff;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 12px 28px rgba(0,0,0,.25)}
+.qr-real img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+.agent-shot{width:100%;max-width:420px;border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:rotate(-6deg)}
+.kyc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin-top:32px}
+.kyc-step{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);border-radius:20px;padding:22px 18px;text-align:center;box-shadow:0 1px 0 #fff inset,0 16px 36px rgba(1,18,64,.07)}
+.kyc-step .ico-wrap{width:56px;height:56px;border-radius:18px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#F3E6C0,#C4A035);color:var(--navy)}
+.kyc-step b{display:block;font-family:var(--display);font-size:16px;letter-spacing:.04em;margin-bottom:6px}
+.kyc-step p{font-size:13px;color:var(--muted)}
+.kyc-line{width:36px;height:2px;background:linear-gradient(90deg,var(--gold),#E8C547);align-self:center}
+.secu-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.feat{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(196,160,53,.22);border-radius:18px;padding:26px 24px;position:relative;overflow:hidden}
+.feat:before{content:"";position:absolute;left:20px;right:20px;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cmp{background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.2);border-radius:16px;padding:18px 16px;position:relative;box-shadow:0 10px 28px rgba(1,18,64,.05)}
+.cmp.on{background:linear-gradient(180deg,#0A1C4A,#011240);color:#fff;border-color:var(--gold);box-shadow:0 16px 40px rgba(1,18,64,.22)}
+.cmp.on:after{content:"BEST";position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;letter-spacing:.12em;background:var(--gold);color:var(--navy);padding:3px 7px;border-radius:999px}
+.cor,.quote,.faq details,.agent,.step,.calc{
+  box-shadow:0 1px 0 #fff inset,0 14px 36px rgba(1,18,64,.06);
+}
+.infl div{border-radius:20px;padding:26px 22px;background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);box-shadow:0 1px 0 #fff inset,0 14px 32px rgba(1,18,64,.06);position:relative}
+.infl .bad{background:linear-gradient(180deg,#fff,#FDECEC);border-color:rgba(192,57,43,.25)}
+.infl .ok{background:linear-gradient(180deg,#fff,#EAF8EF);border-color:rgba(31,169,113,.3)}
+.biz-block{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;background:linear-gradient(180deg,#fff,#FFF8EE);border:1px solid rgba(196,160,53,.22);border-radius:28px;padding:36px;margin-top:24px;box-shadow:0 24px 60px rgba(1,18,64,.08)}
+.biz-block.agent{background:linear-gradient(180deg,#141414,#050505);color:#fff;border-color:#3a3a3a}
+.biz-block.agent h2,.biz-block.agent h3{color:#fff}
+.biz-block.agent .sec-p,.biz-block.agent p{color:#c9c4b6}
+.biz-block.agent .sec-k{color:var(--gold)}
+
+@media(max-width:1080px){
+  .grid4{grid-template-columns:1fr 1fr}
+  h1{font-size:48px}
+  .campaign h2{font-size:40px}
+}
+@media(max-width:960px){
+  h1{font-size:40px} h2{font-size:32px}
+  .hero-grid,.scene,.haiti-grid,.biz,.feats,.cmp-cards,.fg,.corridor,.quotes,.infl,.path,.camp-grid,.grid4,.kyc,.biz-block,.secu-stats,.getapp-grid{grid-template-columns:1fr}
+  .qr-dl{margin:24px auto 0}
+  .dev.l,.dev.r,.dev.mid{transform:none}
+  .kyc{grid-template-columns:1fr}
+  .kyc-line{display:none}
+  .row-app{flex-direction:column}
+  nav{display:none}
+  .cmp-cards{grid-template-columns:1fr 1fr}
+  .phones,.journey{flex-direction:column;align-items:center}
+  .iphone.l,.iphone.r,.iphone.mid{transform:none}
+  .stats{grid-template-columns:1fr 1fr}
+}
+
+/* PDF / CorelDRAW: no shadow ghosts */
+.btn,.btn-navy,.btn-blue,.btn-gold,.btn-ghost,.calc,.lux,.stat,.qr-dl,.chip,.cor,.quote,
+.cmp,.kyc-step,.feat,.faq details,.biz-block,.agent,.gold-wallet,.path .box,.infl div,
+.wait,footer,.secu-stats .stat,.list li{box-shadow:none !important;filter:none !important}
+.lux:before,.stat:before,.feat:before{display:none !important}
+svg.dev{overflow:hidden}
+.flip{display:none !important}
+.partners{padding:28px 0 32px;overflow:visible}
+.partners .head{padding-bottom:14px}
+.marquee{overflow:visible;padding:0;mask-image:none}
+.track{display:flex !important;flex-wrap:wrap !important;justify-content:center !important;
+  gap:10px !important;width:auto !important;max-width:1080px;margin:0 auto;animation:none !important;transform:none !important}
+.track span{opacity:1 !important;background:#fff;border:1px solid #E6D9C4;border-radius:999px;
+  padding:8px 16px !important;font-size:13px;letter-spacing:.04em}
+.store-badge{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 16px 0 12px;
+  background:#011240;color:#fff;border-radius:10px;min-width:168px}
+.store-badge small{display:block;font-size:9px;color:#c9d4ea;font-weight:600;letter-spacing:.04em}
+.store-badge b{display:block;font-size:16px;font-weight:700;line-height:1.1}
+.store-badge svg{width:22px;height:22px;flex:0 0 22px}
+.cmp{position:relative;overflow:hidden}
+table{border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid #E6D9C4}
+table th,table td{border:none;border-bottom:1px solid #F1EBE0}
+table tr:last-child td{border-bottom:0}
+.kyc-step{position:relative;overflow:hidden}
+.kyc-step .ico-wrap{width:64px;height:64px}
+.secu-shell{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:stretch;margin-top:28px}
+.secu-rail{background:linear-gradient(180deg,#011240,#0A1C4A);color:#fff;border-radius:22px;padding:28px 22px;text-align:center}
+.secu-rail .shield{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:rgba(196,160,53,.15);
+  display:flex;align-items:center;justify-content:center;color:#C4A035}
+.secu-rail b{display:block;font-family:var(--display);font-size:20px;margin:8px 0;letter-spacing:.03em}
+.secu-rail p{color:#c9d4ea;font-size:13px}
+.wait .wait-box{background:rgba(255,255,255,.06);border:1px solid rgba(196,160,53,.28);border-radius:20px;
+  padding:22px;max-width:520px;margin-top:22px}
+.fake-in{height:48px;border-radius:8px;background:#fff;color:#5C6780;display:flex;align-items:center;
+  padding:0 16px;font-size:15px;margin-bottom:12px}
+.path .box{border:1px solid rgba(196,160,53,.22)}
+.path .box .ico{width:28px;height:28px;margin:0 auto 8px;color:#C4A035}
+.icon-badge svg.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;display:block}
+.ico-wrap svg.ico{width:28px;height:28px;stroke:#011240;fill:none;stroke-width:1.75;display:block}
+.feat .icon-badge svg.ico{stroke:#C4A035}
+.pills .ico{width:16px;height:16px;stroke:#C4A035;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* premium boxes — gold cap, no weasyprint shadow ghosts */
+.calc{border:1px solid rgba(196,160,53,.4);border-top:3px solid #C4A035;border-radius:24px;padding:28px 26px;background:#fff}
+.stat,.lux{border:1px solid rgba(196,160,53,.32);border-top:3px solid #C4A035}
+.pchip{border:1px solid rgba(196,160,53,.35);border-top:3px solid #C4A035;border-radius:18px;width:118px;height:96px;background:linear-gradient(180deg,#fff,#FFF8EE)}
+.dark .feat{border:1px solid rgba(196,160,53,.5);border-radius:24px;background:linear-gradient(160deg,#1A3570 0%,#0C1C4A 58%,#081433 100%);padding:28px 26px 26px 28px;position:relative;overflow:hidden}
+.dark .feat .feat-rail{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,#E2C86A,#C4A035 40%,#9A7A22)}
+.dark .feat .icon-badge{width:58px;height:58px;border-radius:50%;background:#011240;border:2px solid #C4A035;color:#C4A035;margin:0 0 16px;display:flex;align-items:center;justify-content:center}
+.dark .feat .icon-badge svg.ico{width:26px;height:26px;fill:#C4A035 !important;stroke:none !important}
+.pill{color:#F6E7C1;border:1px solid rgba(196,160,53,.45);background:rgba(196,160,53,.12)}
+.pill svg.ico{width:16px;height:16px;fill:#C4A035 !important;stroke:none !important;color:#C4A035}
+.path .box{border:1px solid rgba(196,160,53,.45);border-top:3px solid #C4A035;border-radius:20px;background:#0B1A4A}
+.cmp{border:1px solid rgba(196,160,53,.3);border-top:3px solid #C4A035;border-radius:18px}
+.kyc-step,.quote,.cor,.faq details{border:1px solid rgba(196,160,53,.3);border-top:3px solid #C4A035}
+.qr-dl,.wait-box{border:1px solid rgba(196,160,53,.4);border-top:3px solid #C4A035}
+.chip{border:1px solid rgba(196,160,53,.3)}
+h1{letter-spacing:.02em}
+
+
+.amounts button{line-height:42px;padding:0;text-align:center}
+.pchip{width:112px;height:92px;background:#fff;border:1px solid #E6D9C4;border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+.pchip b{font-family:"Segoe UI",Arial,sans-serif;font-size:12px;font-weight:650;color:#011240;letter-spacing:0;opacity:1}
+.pchip .plogo{width:32px;height:32px;display:block}
+.track{gap:12px !important;max-width:1180px !important}
+.track span{display:none}
+.dark .feat{background:#0E2258;border:1px solid rgba(196,160,53,.4)}
+.dark .feat .icon-badge{background:#C4A035;color:#011240;width:52px;height:52px;border-radius:16px}
+.dark .feat .icon-badge svg{stroke:#011240 !important;fill:none !important;stroke-width:1.85;width:24px;height:24px}
+.dark .pill{background:#0E2258;border:1px solid rgba(196,160,53,.35);color:#fff}
+.dark .pill svg.ico{stroke:#C4A035 !important;fill:none !important;width:16px;height:16px}
+.path .box{background:#0E2258;border:1px solid rgba(196,160,53,.45);border-radius:18px;padding:22px 16px;text-align:center}
+.path .ico-well{width:52px;height:52px;border-radius:16px;background:#C4A035;margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center}
+.path .ico-well svg{width:24px;height:24px;stroke:#011240;fill:none;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;display:block}
+.path .box b{color:#fff}
+.path .box span{color:#c9d4ea}
+.wait{padding:48px 0 36px}
+.wait-inner{text-align:center;max-width:640px;margin:0 auto}
+.wait-inner p{margin-left:auto;margin-right:auto}
+.wait-box{margin:18px auto 0;max-width:440px}
+footer{padding:32px 0 18px}
+
+/* IMAGE SHOTS */
+
+.shot{width:100%;height:auto;display:block;margin:0 auto}
+.partners{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:36px}
+.partners .head{text-align:center;padding:18px 16px 8px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--navy)}
+.partners .shot{max-width:1120px;padding:4px 24px 28px}
+.studio .shot{max-width:980px}
+.how-shot{max-width:940px;margin:12px auto 0}
+.pay-shot{max-width:1100px;margin:28px auto 8px}
+.cap4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;margin-top:8px}
+.cap4 b{display:block;font-size:14px;color:var(--navy);margin-bottom:4px}
+.cap4 span{font-size:13px;color:var(--muted)}
+.phone-shot{width:min(340px,100%);margin:0 auto;display:block}
+.card-shot{width:min(460px,100%);display:block;margin:0 auto}
+.camp-shot{width:min(540px,100%);display:block;margin-left:auto}
+.qr-dl img{width:200px;height:200px;object-fit:contain;margin:0 auto 12px;display:block}
+@media(max-width:800px){.cap4{grid-template-columns:1fr 1fr}.camp-shot{margin:24px auto 0}}
+
+</style>
+<style>
+/* Inner page extras */
+.page-hero{padding:72px 0 56px;background:linear-gradient(160deg,var(--navy) 0%,#0a1c4a 100%);color:#fff;text-align:center}
+.page-hero h1{font-family:var(--display);font-size:52px;line-height:1;color:#fff;letter-spacing:.01em}
+.page-hero .lead{color:#9aabc8;font-size:17px;margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto}
+.page-hero .cta{justify-content:center;margin-top:28px}
+.section{padding:72px 0}
+.section-alt{background:#fff}
+.section-dark{background:var(--navy);color:#fff}
+.section-cream{background:var(--cream)}
+h2{font-family:var(--display);font-size:40px;color:var(--navy);line-height:1.05;letter-spacing:.01em}
+h2 em{font-style:normal;color:var(--blue)}
+.section-dark h2{color:#fff}
+h3.sub-heading{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.section-lead{color:var(--muted);font-size:17px;margin-top:12px;max-width:600px}
+.section-dark .section-lead{color:#9aabc8}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px}
+.section-dark .card-box{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
+.card-box .ico-wrap{width:48px;height:48px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.section-dark .card-box .ico-wrap{background:rgba(255,255,255,.12)}
+.card-box h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.section-dark .card-box h3{color:#fff}
+.card-box p{font-size:14px;color:var(--muted);line-height:1.6}
+.section-dark .card-box p{color:#9aabc8}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-row{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--line)}
+.step-row:last-child{border-bottom:none}
+.fee-table{width:100%;border-collapse:collapse;font-size:14px}
+.fee-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+.fee-table td{padding:12px 16px;border-bottom:1px solid var(--line)}
+.fee-table tr:nth-child(even) td{background:#FFF9F2}
+.fee-table .us{color:var(--blue);font-weight:700}
+.badge-ok{display:inline-flex;align-items:center;gap:5px;background:#E8F8F0;color:var(--ok);font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.form-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px;box-shadow:0 1px 0 #fff inset,0 28px 70px rgba(1,18,64,.08);max-width:520px;margin:0 auto}
+.form-group{margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px}
+input[type=text],input[type=email],input[type=tel],input[type=password],select,textarea{width:100%;height:48px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;font-size:14px;font-family:var(--sans);color:var(--ink);background:#fff;outline:none;transition:border .2s}
+textarea{height:120px;padding:12px 14px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.accs{display:flex;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.accs a{color:var(--blue);font-weight:600}
+.accordion-item{border-bottom:1px solid var(--line)}
+.accordion-btn{width:100%;background:none;border:none;text-align:left;padding:20px 0;font-size:16px;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.accordion-body{display:none;padding:0 0 20px;color:var(--muted);font-size:14.5px;line-height:1.7}
+.accordion-item.open .accordion-body{display:block}
+.accordion-item.open .accordion-btn{color:var(--blue)}
+.price-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 28px;text-align:center}
+.price-card.featured{background:var(--navy);border-color:var(--navy);color:#fff}
+.price-card .price-amt{font-family:var(--display);font-size:48px;color:var(--navy);font-weight:700;line-height:1}
+.price-card.featured .price-amt{color:#fff}
+.price-card .price-label{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.price-card.featured .price-label{color:#9aabc8}
+.price-card ul{list-style:none;text-align:left;margin:20px 0;font-size:14px;color:var(--muted)}
+.price-card.featured ul{color:#9aabc8}
+.price-card ul li{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:9px;align-items:center}
+.price-card.featured ul li{border-color:rgba(255,255,255,.1)}
+.trust-bar{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:center;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:40px}
+.trust-bar span{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+.trust-bar .ico{color:var(--blue);width:18px;height:18px}
+@media(max-width:768px){
+  .page-hero h1{font-size:36px}
+  h2{font-size:28px}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"/></div>
-    <span class="nav-name">Tchotcho<em>Pay</em></span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="calculator.html" class="nav-link">Calculator</a>
-    <a href="p2p.html" class="nav-link" style="color:var(--cyan);font-weight:700;">⇄ P2P Trading</a>
-    <a href="faq.html" class="nav-link">Help</a>
-    <a href="login.html" class="nav-login">Log In</a>
-    <a href="signup.html" class="nav-cta nav-link">Get Started</a>
-  </div>
-</nav>
-
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge"><div class="bdot"></div> Coming Soon to iOS & Android</div>
-      <h1>The Haiti money app<br/>built for <em>real life</em></h1>
-      <p class="hero-sub">Send money, pay bills, top up phones, save in digital dollars, and cash out anywhere in Haiti. One app — everything your family needs.</p>
-      <div class="store-btns">
-        <a class="store-btn" onclick="showToast('iOS app coming soon — join the waitlist!')">
-          <div class="store-btn-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          </div>
-          <div class="store-btn-text"><span class="sbt-sub">Download on the</span><span class="sbt-name">App Store</span></div>
-        </a>
-        <a class="store-btn" onclick="showToast('Android app coming soon — join the waitlist!')">
-          <div class="store-btn-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#00C896"><path d="M3.18 23.76a1.5 1.5 0 0 1-.68-.17c-.42-.24-.5-.68-.5-1.08V1.49c0-.4.08-.84.5-1.08.42-.23.84-.05 1.14.17l18 10.5a1.5 1.5 0 0 1 0 2.84l-18 10.5c-.15.09-.3.34-.46.34z"/></svg>
-          </div>
-          <div class="store-btn-text"><span class="sbt-sub">Get it on</span><span class="sbt-name">Google Play</span></div>
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="hs"><div class="hs-num">&lt;2 min</div><div class="hs-label">Transfer speed</div></div>
-        <div class="hs"><div class="hs-num">&lt;1%</div><div class="hs-label">Transfer fee</div></div>
-        <div class="hs"><div class="hs-num">300+</div><div class="hs-label">Haiti agents</div></div>
-        <div class="hs"><div class="hs-num">4.5%</div><div class="hs-label">Savings APY</div></div>
-      </div>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <img src="assets/logo.png" alt="TchotchoPay" />
+      <div>TchotchoPay<small>Money for the Caribbean</small></div>
+    </a>
+    <nav>
+      <a href="send.html">Send</a>
+      <a href="app.html">App</a>
+      <a href="app.html">Download</a>
+      <a href="#pay">Pay</a>
+      <a href="card.html">Card</a>
+      <a href="compare.html">Compare</a>
+      <a href="#business">Business</a>
+      <a href="recipient.html">Haiti</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-ghost" href="login.html">Log In</a>
+      <a class="btn btn-blue" href="signup.html">Get started</a>
     </div>
+  </div>
+</header>
 
-    <!-- PHONE MOCKUPS -->
-    <div class="hero-phones">
-      <!-- Left phone: Send -->
-      <div class="phone-wrap phone-float" style="margin-bottom:30px;">
-        <div class="phone small">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="scr-topbar"><span class="scr-topbar-title">Send Money</span><i class="ti ti-x scr-topbar-icon"></i></div>
-            <div class="scr-send" style="padding:10px;">
-              <div style="font-size:.62rem;color:rgba(255,255,255,.35);margin-bottom:6px;">To</div>
-              <div class="scr-contact">
-                <div class="scr-contact-av" style="background:rgba(0,200,150,.15);color:var(--green);">M</div>
-                <div><div class="scr-contact-name">Marie Joseph</div><div class="scr-contact-user">@mariejoseph</div></div>
-              </div>
-              <div class="scr-amount-row">
-                <div class="scr-amt-big">$150</div>
-                <div class="scr-amt-htg">≈ 19,575 HTG</div>
-              </div>
-              <div style="display:flex;justify-content:space-between;font-size:.58rem;color:rgba(255,255,255,.3);margin-bottom:8px;padding:0 2px;"><span>Fee</span><span style="color:var(--green)">Free</span></div>
-              <div class="scr-send-btn">Send $150 →</div>
-            </div>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">📱 iOS &amp; Android</div>
+    <h1>Get the TchotchoPay App</h1>
+    <p class="lead">Send money, check your balance, pay bills, and manage your USDC wallet — all from your phone.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="signup.html">Join the Waitlist</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream">
+  <div class="wrap">
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow">Coming to App Store &amp; Google Play</div>
+        <h2>Everything in <em>your pocket</em></h2>
+        <p class="section-lead">The TchotchoPay mobile app gives you full wallet access, instant transfers, and the Haiti marketplace — right on your phone.</p>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:14px;align-items:flex-start"><div class="step-num" style="background:var(--gold);color:var(--navy)">✓</div><div><strong>Send money in 10 seconds</strong><br><span style="color:var(--muted);font-size:14px">Type a name, pick an amount, tap Send. Done.</span></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><div class="step-num" style="background:var(--gold);color:var(--navy)">✓</div><div><strong>USDC balance &amp; history</strong><br><span style="color:var(--muted);font-size:14px">See your wallet balance and every transaction in real time.</span></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><div class="step-num" style="background:var(--gold);color:var(--navy)">✓</div><div><strong>QR code payments</strong><br><span style="color:var(--muted);font-size:14px">Pay merchants and friends by scanning a QR code — no typing needed.</span></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><div class="step-num" style="background:var(--gold);color:var(--navy)">✓</div><div><strong>Bill pay &amp; top-up</strong><br><span style="color:var(--muted);font-size:14px">Pay electricity, school fees, and mobile top-ups in Haiti without leaving the app.</span></div></div>
+          <div style="display:flex;gap:14px;align-items:flex-start"><div class="step-num" style="background:var(--gold);color:var(--navy)">✓</div><div><strong>Virtual card management</strong><br><span style="color:var(--muted);font-size:14px">View, freeze, and use your TchotchoPay Mastercard from the app.</span></div></div>
+        </div>
+        <div style="margin-top:32px">
+          <p style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:14px">COMING SOON TO</p>
+          <div class="store-row">
+            <img src="assets/svg/badge-apple.svg" alt="App Store" style="height:52px;width:auto"/>
+            <img src="assets/svg/badge-google.svg" alt="Google Play" style="height:52px;width:auto"/>
           </div>
         </div>
-        <div class="phone-glow"></div>
       </div>
-
-      <!-- Center phone: Home -->
-      <div class="phone-wrap phone-float">
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="scr-home">
-              <div class="scr-header">
-                <div class="scr-greeting">Good morning 👋</div>
-                <div class="scr-name">Fedner François</div>
-                <div class="scr-balance-card">
-                  <div class="scr-bal-label">Wallet Balance</div>
-                  <div class="scr-bal-amount">$485.20</div>
-                  <div class="scr-bal-htg">≈ 63,318 HTG · 4.5% APY</div>
-                </div>
-              </div>
-              <div class="scr-actions">
-                <div class="scr-act"><div class="scr-act-i">📤</div><div class="scr-act-l">Send</div></div>
-                <div class="scr-act"><div class="scr-act-i">📥</div><div class="scr-act-l">Receive</div></div>
-                <div class="scr-act"><div class="scr-act-i">⚡</div><div class="scr-act-l">Bills</div></div>
-                <div class="scr-act"><div class="scr-act-i">📱</div><div class="scr-act-l">Top-Up</div></div>
-              </div>
-              <div class="scr-txs">
-                <div class="scr-tx-hdr">Recent Activity</div>
-                <div class="scr-tx">
-                  <div class="scr-tx-ico" style="background:rgba(0,200,150,.12);">📥</div>
-                  <div class="scr-tx-inf"><div class="scr-tx-name">From USA · Jean</div><div class="scr-tx-date">Today 2:14 PM</div></div>
-                  <div class="scr-tx-amt amt-g">+$200</div>
-                </div>
-                <div class="scr-tx">
-                  <div class="scr-tx-ico" style="background:rgba(247,183,49,.1);">⚡</div>
-                  <div class="scr-tx-inf"><div class="scr-tx-name">EDH Electricity</div><div class="scr-tx-date">Yesterday</div></div>
-                  <div class="scr-tx-amt amt-r">-$45</div>
-                </div>
-                <div class="scr-tx">
-                  <div class="scr-tx-ico" style="background:rgba(247,183,49,.1);">🎓</div>
-                  <div class="scr-tx-inf"><div class="scr-tx-name">School Fees</div><div class="scr-tx-date">Jun 18</div></div>
-                  <div class="scr-tx-amt amt-r">-$80</div>
-                </div>
-                <div class="scr-tx">
-                  <div class="scr-tx-ico" style="background:rgba(0,174,239,.1);">📱</div>
-                  <div class="scr-tx-inf"><div class="scr-tx-name">Digicel Top-Up</div><div class="scr-tx-date">Jun 17</div></div>
-                  <div class="scr-tx-amt amt-r">-$10</div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div style="text-align:center">
+        <div class="qr-dl">
+          <img src="assets/qr-marie.png" alt="Download QR" style="border-radius:12px"/>
+          <span>Scan to join the waitlist</span>
         </div>
-        <div class="phone-glow" style="width:180px;"></div>
-      </div>
-
-      <!-- Right phone: Savings -->
-      <div class="phone-wrap phone-float" style="margin-bottom:30px;">
-        <div class="phone small">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="scr-topbar"><span class="scr-topbar-title">Savings</span><i class="ti ti-plus scr-topbar-icon"></i></div>
-            <div class="scr-savings">
-              <div class="scr-sav-total">
-                <div class="scr-sav-apy">4.5% APY — Earning Now</div>
-                <div class="scr-sav-amount">$1,240.00</div>
-                <div class="scr-sav-label">Total Savings in USDC</div>
-              </div>
-              <div class="scr-goal">
-                <div class="scr-goal-top"><span class="scr-goal-name">🏠 New House</span><span class="scr-goal-pct">42%</span></div>
-                <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:42%"></div></div>
-              </div>
-              <div class="scr-goal">
-                <div class="scr-goal-top"><span class="scr-goal-name">🎓 School Fund</span><span class="scr-goal-pct">78%</span></div>
-                <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:78%;background:linear-gradient(90deg,var(--green),var(--cyan));"></div></div>
-              </div>
-              <div class="scr-goal">
-                <div class="scr-goal-top"><span class="scr-goal-name">✈️ Vacation</span><span class="scr-goal-pct">25%</span></div>
-                <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:25%;background:linear-gradient(90deg,var(--gold),var(--cyan));"></div></div>
-              </div>
-            </div>
-          </div>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+          <div class="card-box" style="text-align:left"><strong style="font-size:14px;color:var(--navy)">📲 iPhone &amp; iPad</strong><br><span style="color:var(--muted);font-size:13px">iOS 16+ · Available in US App Store</span></div>
+          <div class="card-box" style="text-align:left"><strong style="font-size:14px;color:var(--navy)">🤖 Android</strong><br><span style="color:var(--muted);font-size:13px">Android 8.0+ · Available in Google Play</span></div>
         </div>
-        <div class="phone-glow"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FEATURES ── -->
-<section class="features">
-  <div class="features-inner">
-    <div class="section-center reveal" style="text-align:center;">
-      <div class="section-tag"><i class="ti ti-sparkles"></i> Features</div>
-      <h2 class="section-title">Everything in one app</h2>
-      <p class="section-sub" style="margin:0 auto 48px;">Built specifically for the Haitian community — in Haiti and abroad. No bank required.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(0,174,239,.12);">💸</div>
-        <div class="feat-title">Send Money to Haiti</div>
-        <div class="feat-desc">Transfer USDC to anyone in Haiti in under 2 minutes. From the US, Canada, France — anywhere. Up to 8x cheaper than wire transfers.</div>
-        <div class="feat-tag" style="background:rgba(0,200,150,.1);color:var(--green);border:1px solid rgba(0,200,150,.2);">⚡ Under 2 minutes</div>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(0,200,150,.1);">🏦</div>
-        <div class="feat-title">USDC Wallet</div>
-        <div class="feat-desc">Hold digital dollars that never lose value. 1 USDC always equals $1 USD — no inflation, no exchange risk. Your money stays yours.</div>
-        <div class="feat-tag" style="background:rgba(0,174,239,.08);color:var(--cyan);border:1px solid rgba(0,174,239,.2);">🔒 Always $1 USD</div>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(247,183,49,.1);">📊</div>
-        <div class="feat-title">4.5% APY Savings</div>
-        <div class="feat-desc">Your savings earn 4.5% per year automatically. No minimum balance, no lock-up period. Set goals for house, school, or emergencies.</div>
-        <div class="feat-tag" style="background:rgba(247,183,49,.08);color:var(--gold);border:1px solid rgba(247,183,49,.18);">💰 Beats inflation</div>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(206,17,38,.1);">⚡</div>
-        <div class="feat-title">Pay Haiti Bills</div>
-        <div class="feat-desc">EDH electricity, CAMEP water, school fees, internet — pay any Haiti bill directly from your USDC wallet. No queues, no agents needed.</div>
-        <div class="feat-tag" style="background:rgba(0,200,150,.1);color:var(--green);border:1px solid rgba(0,200,150,.2);">✓ Instant confirmation</div>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(0,174,239,.1);">📱</div>
-        <div class="feat-title">Phone Top-Up</div>
-        <div class="feat-desc">Top up Digicel or Natcom for anyone in Haiti from anywhere in the world. Works instantly, any amount from $5 to $50.</div>
-        <div class="feat-tag" style="background:rgba(0,174,239,.08);color:var(--cyan);border:1px solid rgba(0,174,239,.2);">📡 Digicel & Natcom</div>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon" style="background:rgba(247,183,49,.1);">💵</div>
-        <div class="feat-title">Cash Out in HTG</div>
-        <div class="feat-desc">Convert USDC to Haitian Gourdes through 300+ local agents across Haiti. Show your QR code, get cash in hand in minutes.</div>
-        <div class="feat-tag" style="background:rgba(247,183,49,.1);color:var(--gold);border:1px solid rgba(247,183,49,.2);">📍 300+ agents</div>
-      </div>
+<section class="section section-alt">
+  <div class="wrap">
+    <h2 style="text-align:center;margin-bottom:40px">App <em>Features</em></h2>
+    <div class="grid-3">
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12h14M13 6l7 6-7 6"/></svg></div><h3>Instant Send</h3><p>Send USDC to any TchotchoPay wallet worldwide. Settles in under 5 seconds on Base blockchain.</p></div>
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Face ID / Fingerprint</h3><p>Log in and approve payments with biometric authentication — no passwords needed.</p></div>
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div><h3>Virtual Card</h3><p>Use your TchotchoPay Mastercard for online purchases from anywhere in the world.</p></div>
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><h3>Haiti Marketplace</h3><p>Pay local merchants, utilities, and schools directly from your wallet — no cash needed.</p></div>
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M12 2C8.68 2 6 4.68 6 8s2.68 6 6 6 6-2.68 6-6-2.68-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0 2c-4.42 0-8 2-8 4v2h16v-2c0-2-3.58-4-8-4z"/></svg></div><h3>Referral Program</h3><p>Invite friends and earn $5 for every person who joins and completes their first transfer.</p></div>
+      <div class="card-box"><div class="ico-wrap"><svg class="ico ico-lg" viewBox="0 0 24 24" style="stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><h3>Mobile Top-Up</h3><p>Top up Digicel and Natcom phones in Haiti directly from the app in seconds.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── SCREENSHOTS CAROUSEL ── -->
-<section class="screenshots">
-  <div class="screenshots-inner">
-    <div style="text-align:center;" class="reveal">
-      <div class="section-tag"><i class="ti ti-device-mobile"></i> App Screens</div>
-      <h2 class="section-title">See it in action</h2>
-      <p class="section-sub" style="margin:0 auto;">Every screen designed for clarity and speed. Works beautifully on any Android or iPhone.</p>
-    </div>
-    <div class="carousel-wrap">
-      <div class="carousel-track" id="carousel-track">
-
-        <!-- Screen 1: Home -->
-        <div class="carousel-slide active" onclick="goSlide(0)">
-          <div class="slide-phone active-phone">
-            <div class="slide-notch"></div>
-            <div class="slide-screen">
-              <div class="scr-header" style="padding:14px 14px 18px;">
-                <div class="scr-greeting">Good morning 👋</div>
-                <div class="scr-name">Fedner François</div>
-                <div class="scr-balance-card">
-                  <div class="scr-bal-label">Wallet Balance</div>
-                  <div class="scr-bal-amount" style="font-size:1.8rem;">$485.20</div>
-                  <div class="scr-bal-htg">≈ 63,318 HTG · +4.5% APY</div>
-                </div>
-              </div>
-              <div class="scr-actions" style="padding:12px 14px;">
-                <div class="scr-act"><div class="scr-act-i">📤</div><div class="scr-act-l">Send</div></div>
-                <div class="scr-act"><div class="scr-act-i">📥</div><div class="scr-act-l">Receive</div></div>
-                <div class="scr-act"><div class="scr-act-i">⚡</div><div class="scr-act-l">Bills</div></div>
-                <div class="scr-act"><div class="scr-act-i">📱</div><div class="scr-act-l">Top-Up</div></div>
-              </div>
-              <div class="scr-txs" style="padding:10px 14px;">
-                <div class="scr-tx-hdr">Recent Activity</div>
-                <div class="scr-tx"><div class="scr-tx-ico" style="background:rgba(0,200,150,.12);">📥</div><div class="scr-tx-inf"><div class="scr-tx-name">From Jean · USA</div><div class="scr-tx-date">Today 2:14 PM</div></div><div class="scr-tx-amt amt-g">+$200</div></div>
-                <div class="scr-tx"><div class="scr-tx-ico" style="background:rgba(247,183,49,.1);">⚡</div><div class="scr-tx-inf"><div class="scr-tx-name">EDH Electricity</div><div class="scr-tx-date">Yesterday</div></div><div class="scr-tx-amt amt-r">-$45</div></div>
-                <div class="scr-tx"><div class="scr-tx-ico" style="background:rgba(247,183,49,.1);">🎓</div><div class="scr-tx-inf"><div class="scr-tx-name">School Fees</div><div class="scr-tx-date">Jun 18</div></div><div class="scr-tx-amt amt-r">-$80</div></div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-label">Home Wallet</div>
-        </div>
-
-        <!-- Screen 2: Send -->
-        <div class="carousel-slide" onclick="goSlide(1)">
-          <div class="slide-phone">
-            <div class="slide-notch"></div>
-            <div class="slide-screen">
-              <div class="scr-topbar"><span class="scr-topbar-title">Send Money</span></div>
-              <div style="padding:14px;">
-                <div style="font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:6px;">To</div>
-                <div class="scr-contact" style="margin-bottom:14px;">
-                  <div class="scr-contact-av" style="background:rgba(0,200,150,.15);color:var(--green);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;">M</div>
-                  <div><div class="scr-contact-name" style="font-size:.82rem;">Marie Joseph</div><div class="scr-contact-user">@mariejoseph · Haiti</div></div>
-                </div>
-                <div class="scr-amount-row" style="margin-bottom:10px;">
-                  <div style="font-size:.6rem;color:rgba(255,255,255,.3);margin-bottom:2px;">Amount</div>
-                  <div class="scr-amt-big" style="font-size:2.2rem;">$150</div>
-                  <div class="scr-amt-htg">≈ 19,575 HTG at 130.50</div>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:.65rem;color:rgba(255,255,255,.3);margin-bottom:6px;"><span>Transfer fee</span><span style="color:var(--green);font-weight:700;">Free</span></div>
-                <div style="display:flex;justify-content:space-between;font-size:.65rem;color:rgba(255,255,255,.3);margin-bottom:12px;"><span>Arrives in</span><span style="color:var(--cyan);font-weight:700;">~2 minutes</span></div>
-                <div class="scr-send-btn" style="font-size:.82rem;padding:12px;">Send $150 →</div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-label">Send Money</div>
-        </div>
-
-        <!-- Screen 3: Bill Pay -->
-        <div class="carousel-slide" onclick="goSlide(2)">
-          <div class="slide-phone">
-            <div class="slide-notch"></div>
-            <div class="slide-screen">
-              <div class="scr-topbar"><span class="scr-topbar-title">Bill Pay</span></div>
-              <div style="padding:14px;">
-                <div style="font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:8px;">Select Bill Type</div>
-                <div class="scr-bill-cat">
-                  <div class="scr-bill-item active-bill"><div class="scr-bill-ico">⚡</div><div class="scr-bill-lbl">EDH</div></div>
-                  <div class="scr-bill-item"><div class="scr-bill-ico">🎓</div><div class="scr-bill-lbl">School</div></div>
-                  <div class="scr-bill-item"><div class="scr-bill-ico">💧</div><div class="scr-bill-lbl">Water</div></div>
-                  <div class="scr-bill-item"><div class="scr-bill-ico">📡</div><div class="scr-bill-lbl">Internet</div></div>
-                  <div class="scr-bill-item"><div class="scr-bill-ico">🏛️</div><div class="scr-bill-lbl">Taxes</div></div>
-                  <div class="scr-bill-item"><div class="scr-bill-ico">📋</div><div class="scr-bill-lbl">Other</div></div>
-                </div>
-                <div class="scr-bill-form">
-                  <div class="scr-bill-f-label">EDH Account Number</div>
-                  <div class="scr-bill-f-val">4521-0087-1234</div>
-                  <div class="scr-bill-f-label">Amount</div>
-                  <div class="scr-bill-f-val" style="color:var(--cyan);">$50.00 USDC</div>
-                  <div class="scr-bill-pay-btn">Pay EDH Bill →</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-label">Bill Pay</div>
-        </div>
-
-        <!-- Screen 4: Receive / QR -->
-        <div class="carousel-slide" onclick="goSlide(3)">
-          <div class="slide-phone">
-            <div class="slide-notch"></div>
-            <div class="slide-screen">
-              <div class="scr-topbar"><span class="scr-topbar-title">Receive Money</span></div>
-              <div class="scr-receive" style="padding:16px;text-align:center;">
-                <div style="font-size:.68rem;color:rgba(255,255,255,.35);margin-bottom:10px;">Your QR Code</div>
-                <div class="scr-qr-wrap" style="width:120px;height:120px;">
-                  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#020B2D" style="width:100%;height:100%;">
-                    <rect x="2" y="2" width="18" height="18"/><rect x="28" y="2" width="18" height="18"/>
-                    <rect x="2" y="28" width="18" height="18"/>
-                    <rect x="5" y="5" width="12" height="12" fill="white"/><rect x="31" y="5" width="12" height="12" fill="white"/>
-                    <rect x="5" y="31" width="12" height="12" fill="white"/>
-                    <rect x="8" y="8" width="6" height="6" fill="#020B2D"/><rect x="34" y="8" width="6" height="6" fill="#020B2D"/>
-                    <rect x="8" y="34" width="6" height="6" fill="#020B2D"/>
-                    <rect x="28" y="28" width="4" height="4"/><rect x="34" y="28" width="4" height="4"/>
-                    <rect x="40" y="28" width="6" height="6"/><rect x="28" y="34" width="6" height="4"/>
-                  </svg>
-                </div>
-                <div class="scr-receive-name">@fedner_tchotcho</div>
-                <div class="scr-receive-user">Scan to send money</div>
-                <div class="scr-share-btns">
-                  <div class="scr-share-btn"><div class="scr-share-ico">💬</div><div class="scr-share-lbl">WhatsApp</div></div>
-                  <div class="scr-share-btn"><div class="scr-share-ico">📋</div><div class="scr-share-lbl">Copy Link</div></div>
-                  <div class="scr-share-btn"><div class="scr-share-ico">⬇️</div><div class="scr-share-lbl">Save QR</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-label">Receive / QR Code</div>
-        </div>
-
-        <!-- Screen 5: Savings -->
-        <div class="carousel-slide" onclick="goSlide(4)">
-          <div class="slide-phone">
-            <div class="slide-notch"></div>
-            <div class="slide-screen">
-              <div class="scr-topbar"><span class="scr-topbar-title">Savings Goals</span><i class="ti ti-plus scr-topbar-icon"></i></div>
-              <div style="padding:14px;">
-                <div class="scr-sav-total" style="margin-bottom:12px;">
-                  <div class="scr-sav-apy">Earning 4.5% APY automatically</div>
-                  <div class="scr-sav-amount" style="font-size:1.6rem;">$1,240.00</div>
-                  <div class="scr-sav-label">Total USDC Savings</div>
-                </div>
-                <div class="scr-goal" style="margin-bottom:8px;">
-                  <div class="scr-goal-top"><span class="scr-goal-name">🏠 New House</span><span class="scr-goal-pct">42% · $520/$1,200</span></div>
-                  <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:42%"></div></div>
-                </div>
-                <div class="scr-goal" style="margin-bottom:8px;">
-                  <div class="scr-goal-top"><span class="scr-goal-name">🎓 School Fund</span><span class="scr-goal-pct">78% · $390/$500</span></div>
-                  <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:78%;background:linear-gradient(90deg,var(--green),var(--cyan));"></div></div>
-                </div>
-                <div class="scr-goal">
-                  <div class="scr-goal-top"><span class="scr-goal-name">✈️ Vacation</span><span class="scr-goal-pct">25% · $83/$330</span></div>
-                  <div class="scr-goal-bar"><div class="scr-goal-fill" style="width:25%;background:linear-gradient(90deg,var(--gold),var(--cyan));"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-label">Savings Goals</div>
-        </div>
-
-      </div>
-    </div>
-    <div class="carousel-nav" id="carousel-nav"></div>
-    <div class="carousel-arrows">
-      <button class="c-arrow" onclick="shiftCarousel(-1)"><i class="ti ti-arrow-left"></i></button>
-      <button class="c-arrow" onclick="shiftCarousel(1)"><i class="ti ti-arrow-right"></i></button>
-    </div>
+<section class="section section-dark" style="text-align:center">
+  <div class="wrap">
+    <h2>Be first to download</h2>
+    <p style="color:#9aabc8;margin:14px auto 28px;max-width:500px">Join the waitlist and get notified the moment the app launches on iOS and Android.</p>
+    <a class="btn btn-gold" href="signup.html">Join Waitlist →</a>
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
-<section class="how-section">
-  <div class="how-inner">
-    <div style="text-align:center;" class="reveal">
-      <div class="section-tag"><i class="ti ti-route"></i> How It Works</div>
-      <h2 class="section-title">Up and running in minutes</h2>
-      <p class="section-sub" style="margin:0 auto;">No bank account needed. Just a phone number and a government ID.</p>
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div class="logo" style="color:#fff"><img src="assets/logo.png" alt=""><div>TchotchoPay<small style="color:#9aabc8">Money for the Caribbean</small></div></div>
+      <div><h4>PRODUCT</h4><a href="send.html">Send Money</a><a href="app.html">Download app</a><a href="card.html">Card</a><a href="compare.html">Compare</a></div>
+      <div><h4>BUSINESS</h4><a href="merchant-signup.html">Merchant</a><a href="agent-signup.html">Agent</a><a href="recipient.html">Receive in Haiti</a></div>
+      <div><h4>COMPANY</h4><a href="security.html">Security</a><a href="contact.html">Contact</a><a href="mailto:hello@tchotchopay.com">hello@tchotchopay.com</a></div>
     </div>
-    <div class="how-steps">
-      <div class="how-step reveal">
-        <div class="how-step-num">1</div>
-        <div class="how-step-title">Download & Sign Up</div>
-        <div class="how-step-desc">Create your free account in under 3 minutes. Verify your identity with a government ID.</div>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-step-num">2</div>
-        <div class="how-step-title">Add Funds</div>
-        <div class="how-step-desc">Load money via bank transfer (free), debit card (2%), or credit card (3%). Converts to USDC instantly.</div>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-step-num">3</div>
-        <div class="how-step-title">Send or Pay</div>
-        <div class="how-step-desc">Send to anyone in Haiti by username, phone, or QR code. Pay bills, top up phones, save.</div>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-step-num">4</div>
-        <div class="how-step-title">Cash Out Anytime</div>
-        <div class="how-step-desc">Recipients cash out HTG at 300+ agents across Haiti. Funds in hand in minutes.</div>
-      </div>
-    </div>
+    <p class="copy">© 2026 TchotchoPay LLC · Miami · Port-au-Prince · Paris · tchotchopay.com</p>
   </div>
-</section>
-
-<!-- ── REVIEWS ── -->
-<section class="reviews">
-  <div class="reviews-inner">
-    <div style="text-align:center;" class="reveal">
-      <div class="section-tag">⭐ Reviews</div>
-      <h2 class="section-title">Loved by the community</h2>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card reveal">
-        <div class="rv-stars">★★★★★</div>
-        <div class="rv-quote">"Finally an app that understands what Haitians need. I send money every week and the fees are incredibly low compared to Western Union."</div>
-        <div class="rv-author">
-          <div class="rv-avatar" style="background:rgba(0,174,239,.15);color:var(--cyan);">J</div>
-          <div><div class="rv-name">Jean-Baptiste M.</div><div class="rv-city">Miami, Florida 🇺🇸</div></div>
-        </div>
-        <div class="rv-platform"><i class="ti ti-brand-google"></i> Google Play</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="rv-stars">★★★★★</div>
-        <div class="rv-quote">"My family in Port-au-Prince can now pay EDH and school fees directly from the app. No more sending cash with strangers on the plane!"</div>
-        <div class="rv-author">
-          <div class="rv-avatar" style="background:rgba(0,200,150,.15);color:var(--green);">R</div>
-          <div><div class="rv-name">Rose-Marie D.</div><div class="rv-city">Montréal, Canada 🇨🇦</div></div>
-        </div>
-        <div class="rv-platform"><i class="ti ti-brand-apple"></i> App Store</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="rv-stars">★★★★★</div>
-        <div class="rv-quote">"The USDC savings feature is incredible. My mom keeps her money in USDC instead of gourdes and it hasn't lost any value in 8 months."</div>
-        <div class="rv-author">
-          <div class="rv-avatar" style="background:rgba(247,183,49,.15);color:var(--gold);">P</div>
-          <div><div class="rv-name">Pierre-Louis F.</div><div class="rv-city">Paris, France 🇫🇷</div></div>
-        </div>
-        <div class="rv-platform"><i class="ti ti-brand-google"></i> Google Play</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── WAITLIST ── -->
-<section class="waitlist-section">
-  <div class="waitlist-inner reveal">
-    <div class="waitlist-count-badge">
-      <div class="bdot" style="width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite;"></div>
-      <span id="wl-count">3,241</span> people on the waitlist
-    </div>
-    <h2 class="section-title">Be first when we launch</h2>
-    <p style="color:var(--gray);font-size:.92rem;line-height:1.6;margin-top:8px;">Join the waitlist and get early access, a $10 welcome bonus, and lifetime 0% fees on your first 10 transfers.</p>
-    <!-- Hidden form for Netlify to detect at deploy time -->
-    <form name="app-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="app-waitlist"/>
-      <input type="email" name="email"/>
-      <input type="text" name="source"/>
-    </form>
-    <form class="waitlist-form" onsubmit="joinWaitlist(event)">
-      <input class="waitlist-input" type="email" id="wl-email" name="email" placeholder="Enter your email address" required/>
-      <button class="waitlist-btn" type="submit">Join Waitlist →</button>
-    </form>
-    <div class="waitlist-note">🔒 No spam. Unsubscribe anytime. We'll notify you the moment the app is ready.</div>
-    <div class="platform-badges">
-      <div class="plat-badge"><i class="ti ti-brand-apple"></i> iOS</div>
-      <div class="plat-badge"><i class="ti ti-brand-android"></i> Android</div>
-      <div class="plat-badge"><i class="ti ti-device-mobile"></i> Works on any phone</div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<div class="footer-mini">
-  <div class="footer-mini-links">
-    <a href="index.html">Home</a>
-    <a href="calculator.html">Calculator</a>
-    <a href="p2p.html" style="color:var(--cyan);">⇄ P2P Trading</a>
-    <a href="billpay.html">Bill Pay</a>
-    <a href="topup.html">Top-Up</a>
-    <a href="recipient.html">For Haiti Recipients</a>
-    <a href="social.html" style="color:var(--cyan);">📲 Social Media</a>
-    <a href="faq.html">Help Center</a>
-    <a href="contact.html">Contact</a>
-    <a href="about.html">About Us</a>
-    <a href="terms.html">Terms</a>
-    <a href="invest.html" style="color:#F7B731;font-weight:700;">💼 Investors</a>
-  </div>
-  
-  <div style="margin-top:10px;display:flex;gap:12px;justify-content:center;"><a href="https://www.instagram.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Instagram"><i class="ti ti-brand-instagram"></i></a><a href="https://www.facebook.com/share/1DB3GnhrFS/" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="Facebook"><i class="ti ti-brand-facebook"></i></a><a href="https://x.com/tchotchopay" target="_blank" rel="noopener" style="color:#8FA8CC;text-decoration:none;margin:0 6px;font-size:1rem;" onmouseenter="this.style.color='#00AEEF'" onmouseleave="this.style.color='#8FA8CC'" title="X"><i class="ti ti-brand-x"></i></a></div>
-  <div class="footer-copy">© 2026 Tchotcho Pay LLC · Available on iOS & Android · <a href="mailto:hello@tchotchopay.com" style="color:var(--cyan);text-decoration:none;">hello@tchotchopay.com</a></div>
-</div>
-
-<div id="toast"></div>
-
+</footer>
 <script>
-  // ── CAROUSEL ──────────────────────────────────────────────────────
-  let currentSlide = 0;
-  const totalSlides = 5;
-  const track = document.getElementById('carousel-track');
-
-  function buildNav() {
-    const nav = document.getElementById('carousel-nav');
-    nav.innerHTML = '';
-    for(let i = 0; i < totalSlides; i++) {
-      const btn = document.createElement('button');
-      btn.className = 'cnav-btn' + (i === 0 ? ' active' : '');
-      btn.onclick = () => goSlide(i);
-      nav.appendChild(btn);
-    }
-  }
-
-  function goSlide(n) {
-    currentSlide = n;
-    const slides = document.querySelectorAll('.carousel-slide');
-    slides.forEach((s, i) => {
-      s.classList.toggle('active', i === n);
-      s.querySelector('.slide-phone').classList.toggle('active-phone', i === n);
-    });
-    // Center active slide
-    const slideWidth = 220 + 20;
-    const containerWidth = track.parentElement.offsetWidth;
-    const offset = Math.max(0, n * slideWidth - (containerWidth / 2) + slideWidth / 2);
-    track.style.transform = `translateX(-${offset}px)`;
-    // Update nav dots
-    document.querySelectorAll('.cnav-btn').forEach((b, i) => b.classList.toggle('active', i === n));
-  }
-
-  function shiftCarousel(dir) {
-    goSlide((currentSlide + dir + totalSlides) % totalSlides);
-  }
-
-  // Auto-advance
-  setInterval(() => shiftCarousel(1), 3500);
-
-  buildNav();
-
-  // ── WAITLIST ──────────────────────────────────────────────────────
-  function joinWaitlist(e) {
-    e.preventDefault();
-    const email = document.getElementById('wl-email').value.trim();
-    const btn = e.target.querySelector('.waitlist-btn');
-    btn.textContent = 'Joining…';
-    btn.disabled = true;
-    // POST to Netlify Forms
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'app-waitlist',
-        'email': email,
-        'source': 'app-page'
-      }).toString()
-    }).catch(() => {}).finally(() => {
-      showToast('🎉 You\'re on the list! We\'ll email you when the app launches.');
-      btn.textContent = '✓ You\'re on the list!';
-      btn.style.background = 'var(--green)';
-      const num = parseInt(document.getElementById('wl-count').textContent.replace(',','')) + 1;
-      document.getElementById('wl-count').textContent = num.toLocaleString();
-      document.getElementById('wl-email').value = '';
-    });
-  }
-
-  // ── SCROLL REVEAL ──────────────────────────────────────────────────
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ── TOAST ──────────────────────────────────────────────────────────
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
+// Accordion
+document.querySelectorAll('.accordion-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.closest('.accordion-item').classList.toggle('open');
+  });
+});
+// Mobile menu
+const hamburger=document.querySelector('.hamburger');
+const navEl=document.querySelector('nav');
+if(hamburger&&navEl){
+  hamburger.addEventListener('click',()=>navEl.classList.toggle('open'));
+}
 </script>
-  <script src="lang.js"></script>
-<script src="chat-widget.js" defer></script>
-<script src="cookie-consent.js" defer></script>
 </body>
 </html>
