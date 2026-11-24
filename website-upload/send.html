@@ -1,1186 +1,489 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Send Money to MonCash & NatCash — Tchotcho Pay</title>
-  <meta name="description" content="Voye lajan dirèkteman nan MonCash ak NatCash ann Ayiti. Send money to Haiti fast, secure, low fees. Pay with debit or credit card from the U.S., Canada, or France."/>
-  <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://tchotchopay.com/send.html"/>
-  <link rel="alternate" hreflang="en" href="https://tchotchopay.com/send.html"/>
-  <link rel="alternate" hreflang="ht" href="https://tchotchopay.com/send.html"/>
-  <link rel="alternate" hreflang="fr" href="https://tchotchopay.com/send.html"/>
-  <link rel="alternate" hreflang="es" href="https://tchotchopay.com/send.html"/>
-  <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/send.html"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://tchotchopay.com/send.html"/>
-  <meta property="og:title" content="Send Money to MonCash & NatCash — Tchotcho Pay"/>
-  <meta property="og:description" content="Send money directly to MonCash and NatCash wallets in Haiti. Fast, secure, low fees."/>
-  <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta property="og:site_name" content="Tchotcho Pay"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:site" content="@TchotchoPay"/>
-  <meta name="twitter:title" content="Send Money to MonCash & NatCash — Tchotcho Pay"/>
-  <meta name="twitter:description" content="Send money directly to MonCash and NatCash wallets in Haiti. Fast, secure, low fees."/>
-  <meta name="twitter:image" content="https://tchotchopay.com/og-image.png"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
-  <style>
-    html { overflow-x: hidden; }
-    :root {
-      --navy:#020B2D; --blue:#0A1F6E; --mid:#1055CC;
-      --cyan:#00AEEF; --light:#7FD4F7; --gray:#8FA8CC;
-      --white:#F0F6FF; --green:#00C896; --red:#FF4C6A;
-      --moncash:#00A651; --natcash:#003087;
-    }
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Send Money — TchotchoPay</title>
+<meta name="description" content="Send money straight to Haitian mobile wallets — MonCash & NatCash. Fast, low fees, no hidden charges.">
+<style>
+@font-face{font-family:"Cook Conthic";src:url("fonts/CookConthic.otf") format("opentype");font-weight:700;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI-Semibold.ttf") format("truetype");font-weight:600;font-display:swap}
+@font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+:root{
+  --navy:#011240;--cream:#FFF7ED;--gold:#C4A035;
+  --blue:#1557D6;--ink:#0E1630;--muted:#5C6780;--line:#E6D9C4;
+  --display:"Cook Conthic",Impact,"Arial Narrow",sans-serif;
+  --sans:"Segoe UI",ui-sans-serif,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit}
+.wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
 
-    /* ── NAV ── */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:9999;
-      display:flex; align-items:center; padding:14px 32px;
-      background:rgba(2,11,45,0.96); backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(0,174,239,0.2); gap:16px;
-    }
-    .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--white); }
-    .nav-logo { width:34px; height:34px; border-radius:8px; overflow:hidden; flex-shrink:0; background:linear-gradient(135deg,#0A1F6E,#00AEEF); }
-    .nav-logo img { width:100%; height:100%; object-fit:cover; }
-    .nav-brand span { font-weight:700; font-size:1rem; }
-    .nav-brand em { color:var(--cyan); font-style:normal; }
-    .nav-links { display:flex; gap:20px; margin-left:auto; align-items:center; }
-    .nav-link { color:var(--gray); text-decoration:none; font-size:0.85rem; transition:color .2s; white-space:nowrap; }
-    .nav-link:hover { color:var(--white); }
-    .nav-link.active { color:var(--cyan); font-weight:600; }
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);color:#c9d4ea;font-size:12px;font-weight:500;padding:8px 0}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px}
+.topbar b{color:#fff}
 
-    /* ── HERO ── */
-    .hero {
-      padding:120px 24px 48px;
-      text-align:center;
-      background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,174,239,0.1) 0%, transparent 70%);
-    }
-    .hero-badge {
-      display:inline-flex; align-items:center; gap:8px;
-      background:rgba(0,166,81,0.12); border:1px solid rgba(0,166,81,0.35);
-      color:#4fd48a; padding:6px 16px; border-radius:50px;
-      font-size:0.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:18px;
-    }
-    .hero h1 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; line-height:1.15; margin-bottom:12px; }
-    .hero h1 em { color:var(--cyan); font-style:normal; }
-    .hero p { color:var(--gray); font-size:1rem; max-width:480px; margin:0 auto; }
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:50;background:rgba(255,247,237,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em}
+.logo img{width:38px;height:38px}
+.logo small{font-size:11px;color:var(--muted);font-weight:500;display:block;margin-top:-1px;letter-spacing:0}
+nav{display:flex;gap:20px;font-size:14px;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--navy)}
+nav a.active{color:var(--navy);font-weight:700}
+.actions{display:flex;gap:10px}
+.lang-wrap{position:relative;margin-left:4px}
+.lang-btn{display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 11px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--navy);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans)}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(1,18,64,.12);min-width:140px;overflow:hidden;display:none;z-index:200}
+.lang-drop.open{display:block}
+.lang-opt{display:block;width:100%;text-align:left;padding:11px 16px;border:none;background:none;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans)}
+.lang-opt:hover{background:var(--cream)}
+.lang-opt.active{color:var(--blue);font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:8px;font-weight:600;font-size:14.5px;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 10px 18px rgba(1,18,64,.18)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-ghost{background:#fff;border:1.5px solid var(--navy);color:var(--navy)}
+.btn-full{width:100%}
 
-    /* ── TRUST STRIP ── */
-    .trust-strip {
-      display:flex; justify-content:center; gap:24px; flex-wrap:wrap;
-      padding:0 24px 36px; margin-top:8px;
-    }
-    .trust-item { display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--gray); }
-    .trust-item i { color:var(--cyan); }
+/* ── MOBILE NAV ── */
+.mob-btn{display:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex:0 0 40px}
+.mob-btn span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px}
+#mobNav{position:fixed;inset:0;z-index:999;background:var(--cream);display:flex;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+#mobNav.open{transform:translateX(0)}
+.mob-nav-inner{padding:28px 24px 40px;display:flex;flex-direction:column;min-height:100%}
+.mob-nav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.mob-close{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mob-nav-links{display:flex;flex-direction:column}
+.mob-nav-links a{display:block;padding:15px 0;font-size:17px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--line)}
+.mob-nav-actions{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.mob-nav-actions .btn{justify-content:center;width:100%;height:52px}
+@media(max-width:960px){.mob-btn{display:flex}header .actions,header nav{display:none}}
 
-    /* ── MAIN LAYOUT ── */
-    .page-wrap { max-width:960px; margin:0 auto; padding:0 24px 80px; display:grid; grid-template-columns:1fr 340px; gap:32px; align-items:start; }
-    @media(max-width:760px) { .page-wrap { grid-template-columns:1fr; } .phone-preview { display:none; } }
+/* ── HERO ── */
+.hero{padding:56px 0 48px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:20px}
+.eyebrow svg{stroke:var(--blue);fill:none;width:16px;height:16px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+h1{font-family:var(--display);font-size:48px;line-height:1.05;color:var(--navy);font-weight:700;letter-spacing:.01em;margin-bottom:16px}
+h1 em{font-style:normal;color:var(--blue)}
+.hero-desc{color:var(--muted);font-size:16px;max-width:480px;margin-bottom:24px}
+.trust-row{display:flex;flex-wrap:wrap;gap:16px 24px;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:32px}
+.trust-row span{display:flex;align-items:center;gap:7px}
+.trust-row svg{stroke:var(--blue);fill:none;width:16px;height:16px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 
-    /* ── FLOW CARD ── */
-    .flow-card {
-      background:linear-gradient(135deg,rgba(10,31,110,0.55),rgba(2,11,45,0.8));
-      border:1px solid rgba(0,174,239,0.2); border-radius:24px; padding:36px;
-      backdrop-filter:blur(8px);
-    }
+/* Steps */
+.steps{display:flex;flex-direction:column;margin-bottom:28px}
+.step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-label{font-size:14px;font-weight:600}
+.step-sub{font-size:13px;color:var(--muted);margin-top:2px}
 
-    /* Steps bar */
-    .steps-bar { display:flex; align-items:center; margin-bottom:32px; }
-    .step-dot {
-      width:32px; height:32px; border-radius:50%; border:2px solid rgba(0,174,239,0.3);
-      display:flex; align-items:center; justify-content:center;
-      font-size:0.78rem; font-weight:800; color:var(--gray); flex-shrink:0;
-      transition:all .3s;
-    }
-    .step-dot.active { border-color:var(--cyan); color:var(--cyan); background:rgba(0,174,239,0.1); }
-    .step-dot.done { border-color:var(--green); background:var(--green); color:#000; }
-    .step-line { flex:1; height:2px; background:rgba(0,174,239,0.15); transition:background .3s; }
-    .step-line.done { background:var(--green); }
+/* Wallet info */
+.wallet-cards{display:flex;flex-direction:column;gap:12px}
+.wc-dark{background:var(--navy);border-radius:16px;padding:20px 22px;color:#fff}
+.wc-dark h4{font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:8px;color:#9aabc8;text-transform:uppercase}
+.wc-dark p{font-size:13px;color:#c9d4ea;line-height:1.6}
+.wc-light{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.wc-light b{color:var(--ink)}
+.wc-light svg{stroke:var(--navy);fill:none;width:20px;height:20px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-    /* Panels */
-    .panel { display:none; }
-    .panel.active { display:block; }
-    .panel-title { font-size:1.15rem; font-weight:800; margin-bottom:6px; }
-    .panel-sub { color:var(--gray); font-size:0.88rem; margin-bottom:24px; }
+/* Send form */
+.send-card{background:#fff;border:1.5px solid rgba(196,160,53,.2);border-radius:22px;padding:28px;box-shadow:0 28px 70px rgba(1,18,64,.09)}
+.send-card h3{font-size:17px;font-weight:700;margin-bottom:20px}
+.wallet-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.wallet-opt{padding:13px 16px;border-radius:11px;border:1.5px solid var(--line);cursor:pointer;font-size:14px;font-weight:500;color:var(--ink);background:#fff;transition:all .15s;text-align:left;width:100%}
+.wallet-opt.selected{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
+.wallet-opt .badge{font-size:11px;font-weight:600;opacity:.65;float:right;margin-top:1px}
+.f-label{font-size:13px;font-weight:600;margin-bottom:7px}
+.f-input{width:100%;height:48px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;font-size:15px;color:var(--ink);background:#fff;outline:none;margin-bottom:18px;transition:border .15s}
+.f-input:focus{border-color:var(--navy)}
+.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.amt-btn{height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+.amt-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.amt-btn:hover:not(.on){border-color:var(--navy);color:var(--navy)}
+.summary{background:#f9f4ec;border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--muted)}
+.sum-row b{color:var(--ink);font-weight:600}
+.sum-row.total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:700;color:var(--ink)}
+.sum-row.total b{font-size:15px;color:var(--navy)}
 
-    /* Wallet grid */
-    .wallet-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
-    .wallet-card {
-      border:2px solid rgba(0,174,239,0.2); border-radius:16px;
-      padding:22px 16px; cursor:pointer; text-align:center;
-      transition:all .2s; position:relative; overflow:hidden;
-      background:rgba(2,11,45,0.5);
-    }
-    .wallet-card:hover { border-color:rgba(0,174,239,0.5); transform:translateY(-2px); }
-    .wallet-card.selected { border-color:var(--green); background:rgba(0,200,150,0.06); }
-    .wallet-card.selected::after {
-      content:'✓'; position:absolute; top:10px; right:12px;
-      color:var(--green); font-size:1rem; font-weight:800;
-    }
-    .wallet-logo {
-      width:58px; height:58px; border-radius:16px; margin:0 auto 12px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1rem; font-weight:900; letter-spacing:-1px; color:#fff;
-    }
-    .wallet-logo.moncash { background:linear-gradient(135deg,#00A651,#007a3d); }
-    .wallet-logo.natcash { background:linear-gradient(135deg,#003087,#0057A8); }
-    .wallet-name { font-weight:700; font-size:1rem; margin-bottom:4px; }
-    .wallet-sub  { color:var(--gray); font-size:0.75rem; }
-    .wallet-tag  { display:inline-block; margin-top:8px; font-size:0.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 8px; border-radius:50px; }
-    .wallet-tag.moncash { background:rgba(0,166,81,0.15); color:#4fd48a; border:1px solid rgba(0,166,81,0.3); }
-    .wallet-tag.natcash { background:rgba(0,87,168,0.15); color:#7fb3e8; border:1px solid rgba(0,87,168,0.3); }
+/* ── CALCULATOR ── */
+.calc-sec{padding:56px 0;background:#fff;border-top:1px solid var(--line)}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+h2{font-family:var(--display);font-size:36px;color:var(--navy);font-weight:700;margin-bottom:8px;letter-spacing:.01em}
+h2 em{font-style:normal;color:var(--blue)}
+.calc-sub{color:var(--muted);font-size:15px;max-width:560px;margin-bottom:6px}
+.live-rate{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:32px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.calc-you{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:28px}
+.cy-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.cy-amt{font-family:var(--display);font-size:48px;color:var(--navy);font-weight:700;line-height:1;margin-bottom:4px}
+.cy-min{font-size:12px;color:var(--muted);margin-bottom:18px}
+.method-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.method-tab{padding:7px 13px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
+.method-tab.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.calc-amts{display:flex;gap:8px;flex-wrap:wrap}
+.c-amt{flex:1;min-width:56px;height:40px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .15s}
+.c-amt.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.calc-gets{background:var(--navy);border-radius:20px;padding:28px;color:#fff}
+.cg-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:#6b8bb8;text-transform:uppercase;margin-bottom:6px}
+.cg-amt{font-family:var(--display);font-size:44px;color:#fff;font-weight:700;line-height:1;margin-bottom:4px}
+.cg-equiv{font-size:13px;color:#9aabc8;margin-bottom:24px}
+.gets-breakdown{display:flex;flex-direction:column}
+.g-row{display:flex;justify-content:space-between;font-size:13px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#9aabc8}
+.g-row b{color:#fff;font-weight:600}
+.g-row:last-child{border-bottom:none}
+.btn-sm{height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;transition:transform .15s}
+.btn-sm:hover{transform:translateY(-1px)}
+.btn-cream{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
 
-    /* Input */
-    .input-label { font-size:0.78rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--gray); margin-bottom:6px; }
-    .phone-row { display:flex; gap:10px; margin-bottom:20px; }
-    .country-code {
-      background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25); border-radius:12px;
-      color:var(--white); font-size:0.95rem; font-weight:700; padding:14px 14px;
-      display:flex; align-items:center; gap:6px; white-space:nowrap; flex-shrink:0;
-    }
-    .phone-input {
-      flex:1; background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25);
-      border-radius:12px; color:var(--white); font-size:1rem; font-weight:600;
-      padding:14px 16px; font-family:inherit; outline:none; transition:border-color .2s; width:100%;
-    }
-    .phone-input:focus { border-color:var(--cyan); }
-    .phone-input::placeholder { color:rgba(143,168,204,0.4); }
+/* ── WALLET PARTNERS ── */
+.wallets-sec{padding:48px 0;border-top:1px solid var(--line)}
+.wallets-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.wcard{border-radius:20px;padding:28px;border:1px solid var(--line)}
+.wcard.dark{background:var(--navy);border-color:var(--navy);color:#fff}
+.wcard.light{background:#fff}
+.wc-name{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;color:#9aabc8}
+.wcard.light .wc-name{color:var(--muted)}
+.wcard h3{font-size:20px;font-weight:700;margin-bottom:8px;color:#fff}
+.wcard.light h3{color:var(--navy)}
+.wcard p{font-size:13px;line-height:1.6;color:#9aabc8}
+.wcard.light p{color:var(--muted)}
+.wcard-cta{margin-top:18px}
+.btn-navy-sm{background:var(--navy);color:#fff;height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;border:0;cursor:pointer}
 
-    .field-error { color:var(--red); font-size:0.8rem; margin-bottom:12px; display:none; }
-    .field-error.show { display:block; }
+/* ── FOOTER ── */
+footer{background:#010b28;color:#9aabc8;padding:48px 0 24px;line-height:1.5}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;margin-bottom:28px}
+footer h4{color:#fff;font-size:11px;letter-spacing:.12em;margin-bottom:12px;font-weight:700;text-transform:uppercase}
+footer a{display:block;margin:7px 0;font-size:13px;font-weight:500}
+footer a:hover{color:#fff}
+.copy{border-top:1px solid #1a2a55;padding-top:16px;font-size:12px}
 
-    /* Amount section */
-    .amount-presets { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
-    .preset-card {
-      border:1.5px solid rgba(0,174,239,0.2); border-radius:14px;
-      padding:14px 10px; text-align:center; cursor:pointer;
-      background:rgba(2,11,45,0.5); transition:all .2s;
-    }
-    .preset-card:hover { border-color:rgba(0,174,239,0.5); }
-    .preset-card.selected { border-color:var(--cyan); background:rgba(0,174,239,0.08); }
-    .preset-usd { font-size:1.2rem; font-weight:800; }
-    .preset-htg { font-size:0.72rem; color:var(--gray); margin-top:3px; }
-
-    .custom-row { display:flex; gap:10px; align-items:center; margin-bottom:20px; }
-    .custom-prefix {
-      background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25); border-radius:12px;
-      color:var(--white); font-size:1rem; font-weight:700; padding:14px 14px; flex-shrink:0;
-    }
-    .custom-input {
-      flex:1; background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25);
-      border-radius:12px; color:var(--white); font-size:1rem; font-weight:600;
-      padding:14px 16px; font-family:inherit; outline:none; transition:border-color .2s;
-    }
-    .custom-input:focus { border-color:var(--cyan); }
-    .custom-input::placeholder { color:rgba(143,168,204,0.4); }
-
-    .fx-note {
-      background:rgba(0,200,150,0.06); border:1px solid rgba(0,200,150,0.15);
-      border-radius:12px; padding:12px 16px; margin-bottom:20px;
-      font-size:0.82rem; color:var(--gray); display:none;
-    }
-    .fx-note.show { display:flex; align-items:center; gap:10px; }
-    .fx-note i { color:var(--green); font-size:1rem; flex-shrink:0; }
-    .fx-note strong { color:var(--white); }
-
-    /* Summary box */
-    .summary-box {
-      background:rgba(2,11,45,0.6); border:1px solid rgba(0,174,239,0.15);
-      border-radius:16px; padding:20px; margin-bottom:20px; display:none;
-    }
-    .summary-box.show { display:block; }
-    .summary-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,174,239,0.08); font-size:0.9rem; }
-    .summary-row:last-child { border-bottom:none; }
-    .summary-row .lbl { color:var(--gray); }
-    .summary-row .val { font-weight:700; }
-    .summary-row .val.green { color:var(--green); }
-    .summary-row .val.cyan { color:var(--cyan); }
-    .summary-row .val.big { font-size:1.05rem; }
-
-    /* Payment step */
-    .payment-mini-summary {
-      background:rgba(2,11,45,0.6); border:1px solid rgba(0,174,239,0.15);
-      border-radius:16px; padding:16px; margin-bottom:20px;
-    }
-    .pms-row { display:flex; justify-content:space-between; padding:6px 0; font-size:0.85rem; border-bottom:1px solid rgba(0,174,239,0.07); }
-    .pms-row:last-child { border-bottom:none; }
-    .pms-label { color:var(--gray); }
-    .pms-val { font-weight:700; }
-    .pms-total .pms-label,
-    .pms-total .pms-val { color:var(--cyan); font-size:0.95rem; font-weight:800; }
-
-    /* ── Payment method tabs ── */
-    .pay-method-tabs{display:flex;gap:8px;margin-bottom:16px;}
-    .pm-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--border);background:none;color:var(--gray);font-size:.83rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;}
-    .pm-tab.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,174,239,0.08);}
-    .wallet-pay-box{background:rgba(0,174,239,0.04);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;}
-    .wpb-bal{text-align:center;padding:10px 0;}
-    .wpb-label{font-size:.72rem;color:var(--gray);margin-bottom:4px;}
-    .wpb-amount{font-size:1.8rem;font-weight:900;color:var(--cyan);}
-    .wpb-sub{font-size:.73rem;color:var(--gray);margin-top:3px;}
-    .wpb-divider{border:none;border-top:1px solid rgba(0,174,239,0.1);margin:10px 0;}
-    .wpb-fee-note{font-size:.77rem;color:var(--green);text-align:center;margin:8px 0 0;}
-
-    .stripe-card-wrap {
-      background:rgba(2,11,45,0.7); border:1.5px solid rgba(0,174,239,0.25);
-      border-radius:12px; padding:14px 16px; margin-bottom:16px; transition:border-color .2s;
-    }
-    .stripe-card-wrap.focused { border-color:var(--cyan); }
-    .stripe-card-wrap.invalid { border-color:var(--red); }
-
-    .security-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
-    .sec-badge {
-      display:flex; align-items:center; gap:5px; font-size:0.73rem; color:var(--gray);
-      background:rgba(0,174,239,0.06); border:1px solid rgba(0,174,239,0.15);
-      border-radius:50px; padding:4px 10px;
-    }
-    .sec-badge i { color:var(--cyan); }
-
-    .payment-error {
-      background:rgba(255,76,106,0.1); border:1px solid rgba(255,76,106,0.3);
-      color:var(--red); border-radius:10px; padding:12px 16px;
-      font-size:0.85rem; margin-bottom:16px; display:none;
-    }
-
-    /* Buttons */
-    .btn-primary {
-      width:100%; background:linear-gradient(135deg,var(--mid),var(--cyan));
-      color:#fff; border:none; border-radius:50px; padding:16px;
-      font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit;
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      transition:opacity .2s, transform .15s;
-    }
-    .btn-primary:hover { opacity:.9; transform:translateY(-1px); }
-    .btn-primary:disabled { opacity:.4; cursor:not-allowed; transform:none; }
-    .btn-primary.moncash-btn { background:linear-gradient(135deg,#007a3d,#00A651); }
-    .btn-primary.natcash-btn { background:linear-gradient(135deg,#003087,#0057A8); }
-    .btn-secondary {
-      width:100%; background:none; border:1.5px solid rgba(0,174,239,0.3);
-      color:var(--gray); border-radius:50px; padding:13px;
-      font-size:0.9rem; font-weight:600; cursor:pointer; font-family:inherit;
-      margin-top:10px; transition:all .2s;
-    }
-    .btn-secondary:hover { border-color:var(--cyan); color:var(--white); }
-
-    @keyframes spin { to { transform:rotate(360deg); } }
-
-    /* Success */
-    .success-wrap { text-align:center; padding:12px 0; }
-    .success-icon {
-      width:80px; height:80px; border-radius:50%; background:rgba(0,200,150,0.12);
-      border:2px solid var(--green); margin:0 auto 20px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:2.2rem; animation:popIn .4s ease;
-    }
-    @keyframes popIn { 0%{transform:scale(0)} 80%{transform:scale(1.1)} 100%{transform:scale(1)} }
-    .success-title { font-size:1.5rem; font-weight:800; color:var(--green); margin-bottom:8px; }
-    .success-sub { color:var(--gray); font-size:0.9rem; margin-bottom:24px; line-height:1.6; max-width:340px; margin-left:auto; margin-right:auto; }
-    .success-detail {
-      background:rgba(0,200,150,0.06); border:1px solid rgba(0,200,150,0.2);
-      border-radius:16px; padding:20px; text-align:left; margin-bottom:24px;
-    }
-    .srow { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,174,239,0.07); font-size:0.88rem; }
-    .srow:last-child { border:none; }
-    .sl { color:var(--gray); }
-    .sv { font-weight:700; }
-    .sv.green { color:var(--green); }
-    .confetti { display:flex; justify-content:center; gap:8px; font-size:1.4rem; margin-bottom:14px; }
-
-    /* Phone preview */
-    .phone-preview { position:sticky; top:100px; }
-    .phone-shell {
-      width:250px; margin:0 auto;
-      background:linear-gradient(160deg,#0d1f4e,#050e28);
-      border:2px solid rgba(0,174,239,0.35); border-radius:40px;
-      padding:14px; box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,174,239,0.1);
-    }
-    .phone-notch { width:80px; height:22px; background:#000; border-radius:12px; margin:0 auto 10px; }
-    .phone-screen { background:#0a1428; border-radius:28px; overflow:hidden; min-height:490px; }
-    .ps-header-mc { background:linear-gradient(135deg,#005e2e,#00A651); padding:18px 16px; text-align:center; }
-    .ps-header-nc { background:linear-gradient(135deg,#001f5e,#003087); padding:18px 16px; text-align:center; }
-    .ps-wallet-icon { width:44px; height:44px; border-radius:12px; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.9rem; color:#fff; }
-    .ps-wallet-icon.mc { background:rgba(0,0,0,0.25); }
-    .ps-wallet-icon.nc { background:rgba(0,0,0,0.25); }
-    .ps-wallet-name { font-size:1rem; font-weight:800; color:#fff; margin-bottom:2px; }
-    .ps-wallet-sub  { font-size:0.68rem; color:rgba(255,255,255,0.6); }
-    .ps-body { padding:14px; }
-    .ps-label { font-size:0.65rem; color:var(--gray); margin-bottom:4px; letter-spacing:.05em; text-transform:uppercase; }
-    .ps-value { font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:12px; }
-    .ps-divider { height:1px; background:rgba(0,174,239,0.1); margin:10px 0; }
-    .ps-send-box {
-      background:rgba(0,200,150,0.1); border:1px solid rgba(0,200,150,0.25);
-      border-radius:10px; padding:10px 12px; margin-bottom:10px;
-    }
-    .ps-send-usd { font-size:1.3rem; font-weight:800; color:var(--green); }
-    .ps-send-htg { font-size:0.72rem; color:var(--gray); }
-    .ps-btn-mc { width:100%; background:linear-gradient(135deg,#005e2e,#00A651); color:#fff; border:none; border-radius:50px; padding:11px; font-size:0.82rem; font-weight:700; cursor:pointer; font-family:inherit; }
-    .ps-btn-nc { width:100%; background:linear-gradient(135deg,#001f5e,#003087); color:#fff; border:none; border-radius:50px; padding:11px; font-size:0.82rem; font-weight:700; cursor:pointer; font-family:inherit; }
-    .ps-fee-note { font-size:0.65rem; color:var(--gray); text-align:center; margin-top:8px; }
-
-    /* How it works */
-    .how-strip { max-width:960px; margin:0 auto 48px; padding:0 24px; }
-    .how-strip h2 { font-size:1.3rem; font-weight:800; margin-bottom:20px; text-align:center; }
-    .how-steps { display:flex; gap:0; justify-content:center; flex-wrap:wrap; }
-    .how-step { display:flex; align-items:center; gap:12px; padding:0 20px; }
-    .how-step:not(:last-child)::after { content:'→'; color:var(--cyan); font-size:1.2rem; margin-left:12px; }
-    .hs-num { width:40px; height:40px; border-radius:50%; background:rgba(0,174,239,0.12); border:1.5px solid rgba(0,174,239,0.3); display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--cyan); flex-shrink:0; font-size:0.9rem; }
-    .hs-text .ht { font-weight:700; font-size:0.9rem; margin-bottom:2px; }
-    .hs-text .hs { color:var(--gray); font-size:0.78rem; }
-
-    /* Supported wallets info */
-    .wallets-info { max-width:960px; margin:0 auto 60px; padding:0 24px; }
-    .wallets-info h2 { font-size:1.3rem; font-weight:800; margin-bottom:8px; text-align:center; }
-    .wallets-info p { color:var(--gray); text-align:center; font-size:0.88rem; margin-bottom:28px; }
-    .wallet-cards { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-    @media(max-width:600px) { .wallet-cards { grid-template-columns:1fr; } }
-    .winfo-card {
-      border:1px solid rgba(0,174,239,0.15); border-radius:20px; padding:24px;
-      background:rgba(10,31,110,0.2);
-    }
-    .winfo-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-    .winfo-logo { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:1rem; flex-shrink:0; }
-    .winfo-logo.mc { background:linear-gradient(135deg,#005e2e,#00A651); }
-    .winfo-logo.nc { background:linear-gradient(135deg,#001f5e,#003087); }
-    .winfo-name { font-size:1.1rem; font-weight:800; }
-    .winfo-operator { color:var(--gray); font-size:0.8rem; }
-    .winfo-feat { display:flex; align-items:flex-start; gap:8px; font-size:0.85rem; color:var(--gray); margin-bottom:8px; line-height:1.4; }
-    .winfo-feat i { color:var(--green); flex-shrink:0; margin-top:1px; }
-
-    /* Rate disclaimer */
-    .rate-note {
-      max-width:600px; margin:0 auto 48px; padding:16px 24px;
-      background:rgba(0,174,239,0.05); border:1px solid rgba(0,174,239,0.15);
-      border-radius:14px; font-size:0.8rem; color:var(--gray); text-align:center; line-height:1.5;
-    }
-    .rate-note strong { color:var(--white); }
-  </style>
-  <!-- GA4 Consent Mode: default denied until user accepts -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      analytics_storage: 'denied',
-      ad_storage: 'denied',
-      wait_for_update: 500
-    });
-  </script>
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKXNGW0JJ5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-LKXNGW0JJ5');
-</script>
+@media(max-width:900px){
+  .hero-grid,.calc-grid,.wallets-grid{grid-template-columns:1fr}
+  h1{font-size:36px}h2{font-size:28px}
+  .cy-amt,.cg-amt{font-size:34px}
+}
+@media(max-width:600px){.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.fg{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo"><img src="tchotchopay-logo.png" alt="Tchotcho Pay" onerror="this.style.display='none'"/></div>
-    <span>Tchotcho <em>Pay</em></span>
-  </a>
-  <div class="nav-links">
-    <a href="topup.html" class="nav-link">Top-Up</a>
-    <a href="send.html" class="nav-link active">Send Money</a>
-    <a href="calculator.html" class="nav-link">Calculator</a>
-    <a href="p2p.html" class="nav-link" style="color:var(--cyan);font-weight:700;">⇄ P2P Trading</a>
-    <a href="index.html" class="nav-link">← Home</a>
+<div class="topbar">
+  <div class="wrap">
+    <div>EN · HT · FR · ES &nbsp;·&nbsp; Live rate <b>1 USD = 130.50 HTG</b></div>
+    <div>hello@tchotchopay.com &nbsp;·&nbsp; 24/7 support</div>
   </div>
-</nav>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="TchotchoPay">
+      <div>TchotchoPay<small>Money for the Caribbean</small></div>
+    </a>
+    <nav>
+      <a href="send.html" class="active">Send</a>
+      <a href="topup.html">Top Up</a>
+      <a href="app.html">App</a>
+      <a href="#pay">Pay</a>
+      <a href="card.html">Card</a>
+      <a href="compare.html">Compare</a>
+      <a href="#business">Business</a>
+      <a href="recipient.html">Haiti</a>
+    </nav>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="langBtn">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+        <span>EN</span>
+        <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <button class="lang-opt active">🇺🇸 English</button>
+        <button class="lang-opt">🇭🇹 Kreyòl</button>
+        <button class="lang-opt">🇪🇸 Español</button>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-ghost" href="login.html">Log In</a>
+      <a class="btn btn-blue" href="signup.html">Get started</a>
+    </div>
+    <button class="mob-btn" id="mobBtn"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div id="mobNav">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-head">
+      <a class="logo" href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">
+        <img src="assets/logo.png" alt="" style="width:34px;height:34px">
+        <div>TchotchoPay<small>Money for the Caribbean</small></div>
+      </a>
+      <button class="mob-close" id="mobClose">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mob-nav-links">
+      <a href="send.html">Send Money</a>
+      <a href="topup.html">Top Up</a>
+      <a href="app.html">App</a>
+      <a href="card.html">Virtual Card</a>
+      <a href="compare.html">Compare</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <a href="recipient.html">Receive in Haiti</a>
+    </nav>
+    <div class="mob-nav-actions">
+      <a class="btn btn-ghost" href="login.html" style="border-color:var(--navy);color:var(--navy)">Log In</a>
+      <a class="btn btn-blue" href="signup.html">Get started</a>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-badge"><i class="ti ti-wallet"></i> MonCash &amp; NatCash</div>
-  <h1>Send money straight to<br><em>Haitian mobile wallets</em></h1>
-  <p>Pay with your debit or credit card. Recipients get funds in their MonCash or NatCash wallet — fast, secure, low fees.</p>
-</div>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <!-- LEFT -->
+    <div>
+      <div class="eyebrow">
+        <svg viewBox="0 0 24 24"><path d="M4 12h14M13 6l7 6-7 6"/></svg>
+        MonCash &amp; NatCash
+      </div>
+      <h1>Send money straight to<br><em>Haitian mobile wallet</em></h1>
+      <p class="hero-desc">Pay with your debit or credit card. Recipients get funds in their MonCash or NatCash wallet — fast, secure, low fees.</p>
+      <div class="trust-row">
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          Secured by Stripe
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M13 2L4 14h8l-1 8 9-12h-8l1-8z"/></svg>
+          Fast delivery
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+          SSL Encrypted
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          24/7 service
+        </span>
+      </div>
 
-<!-- TRUST STRIP -->
-<div class="trust-strip">
-  <div class="trust-item"><i class="ti ti-shield-check"></i> Secured by Stripe</div>
-  <div class="trust-item"><i class="ti ti-bolt"></i> Fast delivery</div>
-  <div class="trust-item"><i class="ti ti-lock"></i> SSL Encrypted</div>
-  <div class="trust-item"><i class="ti ti-24-hours"></i> 24/7 service</div>
-</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div><div class="step-label">Choose Wallet</div><div class="step-sub">MonCash or NatCash</div></div></div>
+        <div class="step"><div class="step-num">2</div><div><div class="step-label">Enter Number</div><div class="step-sub">Recipient's phone in Haiti</div></div></div>
+        <div class="step"><div class="step-num">3</div><div><div class="step-label">Pick Amount</div><div class="step-sub">$10 – $1,000 USD</div></div></div>
+        <div class="step"><div class="step-num">4</div><div><div class="step-label">Pay &amp; Done</div><div class="step-sub">Card charged securely via Stripe</div></div></div>
+      </div>
 
-<!-- HOW IT WORKS -->
-<div class="how-strip">
-  <h2>How it works</h2>
-  <div class="how-steps">
-    <div class="how-step">
-      <div class="hs-num">1</div>
-      <div class="hs-text">
-        <div class="ht">Choose Wallet</div>
-        <div class="hs">MonCash or NatCash</div>
+      <div class="wallet-cards">
+        <div class="wc-dark">
+          <h4>MonCash · Digicel Haiti</h4>
+          <p>Haiti's most widely used mobile wallet. Pay bills, buy goods, send to family. Cash out at Digicel agents nationwide.</p>
+        </div>
+        <div class="wc-light">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16" cy="14" r="1"/></svg>
+          <span><b>NatCash · Natcom / BNC</b> — Bank-grade security, BNC network.</span>
+        </div>
       </div>
     </div>
-    <div class="how-step">
-      <div class="hs-num">2</div>
-      <div class="hs-text">
-        <div class="ht">Enter Number</div>
-        <div class="hs">Recipient in Haiti</div>
+
+    <!-- RIGHT — Send Form -->
+    <div class="send-card">
+      <h3>Send Money</h3>
+      <div class="wallet-opts">
+        <button class="wallet-opt selected" onclick="selectWallet(this,'MonCash')">MonCash <span class="badge">— most popular</span></button>
+        <button class="wallet-opt" onclick="selectWallet(this,'NatCash')">NatCash <span class="badge">— widely used</span></button>
+        <button class="wallet-opt" onclick="selectWallet(this,'TchotchoPay Wallet')">TchotchoPay Wallet <span class="badge">— free &amp; instant</span></button>
       </div>
-    </div>
-    <div class="how-step">
-      <div class="hs-num">3</div>
-      <div class="hs-text">
-        <div class="ht">Pick Amount</div>
-        <div class="hs">$10 – $1,000 USD</div>
+      <div class="f-label">Recipient Phone Number</div>
+      <input class="f-input" type="tel" placeholder="+509 ">
+      <div class="f-label">Amount</div>
+      <div class="amt-grid">
+        <button class="amt-btn" onclick="selectAmt(this,25)">$25</button>
+        <button class="amt-btn on" onclick="selectAmt(this,100)">$100</button>
+        <button class="amt-btn" onclick="selectAmt(this,200)">$200</button>
+        <button class="amt-btn" onclick="selectAmt(this,350)">$350</button>
+        <button class="amt-btn" onclick="selectAmt(this,500)">$500</button>
+        <button class="amt-btn" onclick="selectAmt(this,1000)">$1,000</button>
       </div>
+      <div class="summary">
+        <div class="sum-row"><span>Wallet</span><b id="s-wallet">MonCash</b></div>
+        <div class="sum-row"><span>Send</span><b id="s-send">$100.00</b></div>
+        <div class="sum-row"><span>Recipient gets</span><b id="s-gets">12,869 HTG</b></div>
+        <div class="sum-row"><span>Fee (2% + $0.30)</span><b id="s-fee">$2.30</b></div>
+        <div class="sum-row total"><span>Total Charged</span><b id="s-total">$100.00</b></div>
+      </div>
+      <a href="signup.html" class="btn btn-navy btn-full">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12h14M13 6l7 6-7 6"/></svg>
+        Send Money Now
+      </a>
     </div>
-    <div class="how-step">
-      <div class="hs-num">4</div>
-      <div class="hs-text">
-        <div class="ht">Pay &amp; Done</div>
-        <div class="hs">Card charged securely</div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-sec">
+  <div class="wrap">
+    <div class="sec-label">No hidden fees</div>
+    <h2>See exactly <em>how much arrives</em></h2>
+    <p class="calc-sub">Real exchange rates. Know what your family receives before you send.</p>
+    <div class="live-rate">Live rate: 1 USDC = 130.50 HTG · Updated just now</div>
+    <div class="calc-grid">
+      <div class="calc-you">
+        <div class="cy-label">You send</div>
+        <div class="cy-amt" id="c-send">$200.00</div>
+        <div class="cy-min">Min $10 · Max $10,000 per transfer</div>
+        <div class="method-tabs">
+          <button class="method-tab on" onclick="setMethod(this,0)">Bank / ACH — Free</button>
+          <button class="method-tab" onclick="setMethod(this,0.02)">Debit Card — 2%</button>
+          <button class="method-tab" onclick="setMethod(this,0.03)">Credit Card — 3%</button>
+          <button class="method-tab" onclick="setMethod(this,0)">Wire — Free</button>
+        </div>
+        <div class="calc-amts">
+          <button class="c-amt" onclick="setCalcAmt(this,50)">$50</button>
+          <button class="c-amt" onclick="setCalcAmt(this,100)">$100</button>
+          <button class="c-amt on" onclick="setCalcAmt(this,200)">$200</button>
+          <button class="c-amt" onclick="setCalcAmt(this,500)">$500</button>
+          <button class="c-amt" onclick="setCalcAmt(this,1000)">$1,000</button>
+        </div>
+      </div>
+      <div class="calc-gets">
+        <div class="cg-label">Recipient gets</div>
+        <div class="cg-amt" id="c-gets">26,100 HTG</div>
+        <div class="cg-equiv" id="c-equiv">≈ $200.00 · Arrives in ~2 minutes</div>
+        <div class="gets-breakdown">
+          <div class="g-row"><span>Amount you send</span><b id="c-you">$200.00</b></div>
+          <div class="g-row"><span>Payment method fee</span><b id="c-fee">$0.00</b></div>
+          <div class="g-row"><span>Exchange rate</span><b>1 USDC = 130.50 HTG</b></div>
+          <div class="g-row"><span>USDC converted</span><b id="c-usdc">200.00 USDC</b></div>
+          <div class="g-row"><span>Transfer speed</span><b>~2 minutes</b></div>
+        </div>
+        <a href="signup.html" class="btn-sm btn-cream" style="margin-top:22px;text-decoration:none">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Join Waitlist — Free
+        </a>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- MAIN -->
-<div class="page-wrap">
-
-  <!-- FLOW CARD -->
-  <div class="flow-card">
-
-    <!-- Steps bar -->
-    <div class="steps-bar">
-      <div class="step-dot active" id="dot1">1</div>
-      <div class="step-line" id="line1"></div>
-      <div class="step-dot" id="dot2">2</div>
-      <div class="step-line" id="line2"></div>
-      <div class="step-dot" id="dot3">3</div>
-      <div class="step-line" id="line3"></div>
-      <div class="step-dot" id="dot4">4</div>
-      <div class="step-line" id="line4"></div>
-      <div class="step-dot" id="dot5">5</div>
-    </div>
-
-    <!-- STEP 1: Choose wallet -->
-    <div class="panel active" id="panel1">
-      <div class="panel-title">Choose wallet</div>
-      <div class="panel-sub">Select the mobile wallet the recipient uses in Haiti.</div>
-      <div class="wallet-grid">
-        <div class="wallet-card" id="card-moncash" onclick="selectWallet('moncash', this)">
-          <div class="wallet-logo moncash">MC</div>
-          <div class="wallet-name">MonCash</div>
-          <div class="wallet-sub">Digicel Haiti's mobile wallet</div>
-          <span class="wallet-tag moncash">Most popular</span>
-        </div>
-        <div class="wallet-card" id="card-natcash" onclick="selectWallet('natcash', this)">
-          <div class="wallet-logo natcash">NC</div>
-          <div class="wallet-name">NatCash</div>
-          <div class="wallet-sub">Natcom / BNC mobile wallet</div>
-          <span class="wallet-tag natcash">Widely used</span>
-        </div>
+<!-- WALLET PARTNERS -->
+<section class="wallets-sec">
+  <div class="wrap">
+    <div class="wallets-grid">
+      <div class="wcard dark">
+        <div class="wc-name">01 · MonCash</div>
+        <h3>MONCASH · DIGICEL HAITI</h3>
+        <p>Haiti's most widely used mobile wallet. Cash out at 300+ Digicel agents nationwide. Send instantly, 24/7.</p>
+        <div class="wcard-cta"><a href="signup.html" class="btn-sm btn-cream" style="text-decoration:none">Send to MonCash</a></div>
       </div>
-      <button class="btn-primary" id="btn1" onclick="goStep(2)" disabled>
-        <i class="ti ti-arrow-right"></i> Continue
-      </button>
-    </div>
-
-    <!-- STEP 2: Phone number -->
-    <div class="panel" id="panel2">
-      <div class="panel-title">Recipient's number</div>
-      <div class="panel-sub" id="p2-sub">Enter the Haiti phone number registered to their <span id="p2-wallet">MonCash</span> wallet.</div>
-      <div class="input-label">Recipient Phone Number</div>
-      <div class="phone-row">
-        <div class="country-code">🇭🇹 +509</div>
-        <input class="phone-input" id="phone-input" type="tel" placeholder="XX XX XXXX" maxlength="11"
-               oninput="formatPhone(this); validatePhone()" />
+      <div class="wcard light">
+        <div class="wc-name">02 · NatCash</div>
+        <h3>NatCash · Natcom / BNC</h3>
+        <p>Bank-grade security backed by Natcom and BNC. Preferred by recipients in the BNC banking network.</p>
+        <div class="wcard-cta"><a href="signup.html" class="btn-navy-sm" style="text-decoration:none">Send to NatCash</a></div>
       </div>
-      <div class="field-error" id="phone-error">Please enter a valid 8-digit Haiti phone number.</div>
-      <div style="font-size:.78rem;color:var(--gray);margin-bottom:24px;" id="phone-hint">
-        MonCash (Digicel): 36, 37, 38, 46, 47, 55…<br>NatCash (Natcom): 34, 35, 48…
-      </div>
-      <button class="btn-primary" id="btn2" onclick="goStep(3)" disabled>
-        <i class="ti ti-arrow-right"></i> Continue
-      </button>
-      <button class="btn-secondary" onclick="goStep(1)">← Back</button>
-    </div>
-
-    <!-- STEP 3: Amount -->
-    <div class="panel" id="panel3">
-      <div class="panel-title">How much to send?</div>
-      <div class="panel-sub">Choose a preset or enter a custom amount in USD.</div>
-
-      <div class="amount-presets" id="preset-grid">
-        <!-- Filled by JS -->
-      </div>
-
-      <div class="input-label">Or enter custom amount</div>
-      <div class="custom-row">
-        <div class="custom-prefix">$</div>
-        <input class="custom-input" id="custom-amount" type="number" min="10" max="1000"
-               placeholder="e.g. 150" oninput="onCustomAmount(this)" />
-      </div>
-      <div class="field-error" id="amount-error">Amount must be between $10 and $1,000.</div>
-
-      <div class="fx-note" id="fx-note">
-        <i class="ti ti-currency-dollar"></i>
-        <div>Recipient gets <strong id="htg-preview">—</strong> in their wallet<br>
-        <span style="font-size:0.75rem;">Rate: 1 USD ≈ 130 HTG · locked at time of transfer</span></div>
-      </div>
-
-      <div class="summary-box" id="summary-box">
-        <div class="summary-row"><span class="lbl">Wallet</span><span class="val" id="sv-wallet">—</span></div>
-        <div class="summary-row"><span class="lbl">Recipient</span><span class="val" id="sv-phone">—</span></div>
-        <div class="summary-row"><span class="lbl">Send Amount</span><span class="val cyan" id="sv-amount">—</span></div>
-        <div class="summary-row"><span class="lbl">Recipient Gets</span><span class="val green" id="sv-htg">—</span></div>
-        <div class="summary-row"><span class="lbl">Fees (4.9% + $0.30)</span><span class="val" id="sv-fee">—</span></div>
-        <div class="summary-row"><span class="lbl">Total Charged</span><span class="val cyan big" id="sv-total">—</span></div>
-      </div>
-
-      <button class="btn-primary" id="btn3" onclick="goStep(4)" disabled>
-        <i class="ti ti-credit-card"></i> Continue to Payment
-      </button>
-      <button class="btn-secondary" onclick="goStep(2)">← Back</button>
-    </div>
-
-    <!-- STEP 4: Payment -->
-    <div class="panel" id="panel4">
-      <div class="panel-title">Payment</div>
-      <div class="panel-sub">Choose how to pay.</div>
-
-      <!-- Payment method tabs -->
-      <div class="pay-method-tabs">
-        <button class="pm-tab active" id="tab-card" onclick="switchPayMethod('card')">
-          <i class="ti ti-credit-card"></i> Credit / Debit Card
-        </button>
-        <button class="pm-tab" id="tab-usdc" onclick="switchPayMethod('usdc')">
-          <i class="ti ti-wallet"></i> USDC Wallet
-        </button>
-      </div>
-
-      <!-- USDC Wallet panel -->
-      <div id="usdc-panel" style="display:none;">
-        <div class="wallet-pay-box">
-          <div class="wpb-bal">
-            <div class="wpb-label">Your USDC Balance</div>
-            <div class="wpb-amount" id="wpb-amount">—</div>
-            <div class="wpb-sub" id="wpb-sub"></div>
-          </div>
-          <hr class="wpb-divider"/>
-          <div class="payment-mini-summary">
-            <div class="pms-row"><span class="pms-label">Wallet</span><span class="pms-val" id="upay-wallet">—</span></div>
-            <div class="pms-row"><span class="pms-label">Recipient</span><span class="pms-val" id="upay-phone">—</span></div>
-            <div class="pms-row"><span class="pms-label">Send Amount</span><span class="pms-val" id="upay-amount">—</span></div>
-            <div class="pms-row"><span class="pms-label">Recipient Gets</span><span class="pms-val" style="color:var(--green)" id="upay-htg">—</span></div>
-            <div class="pms-row"><span class="pms-label">Platform Fee (1%)</span><span class="pms-val" id="upay-fee">—</span></div>
-            <div class="pms-row pms-total"><span class="pms-label">Total USDC</span><span class="pms-val" id="upay-total">—</span></div>
-          </div>
-          <div class="wpb-fee-note"><i class="ti ti-piggy-bank"></i> No card fees — save up to 4.9% + $0.30</div>
-        </div>
-        <div id="usdc-error" class="payment-error" style="display:none;"></div>
-        <button class="btn-primary" id="btn-usdc" onclick="doWalletPayment()">
-          <i class="ti ti-wallet"></i> Pay with USDC Wallet
-        </button>
-        <p style="text-align:center;font-size:.8rem;color:var(--gray);margin-top:10px;">
-          Not logged in? <a href="login.html" style="color:var(--cyan);">Sign in</a> to use your wallet.
-        </p>
-      </div>
-
-      <!-- Card panel -->
-      <div id="card-panel">
-        <div class="payment-mini-summary">
-          <div class="pms-row"><span class="pms-label">Wallet</span><span class="pms-val" id="pay-wallet">—</span></div>
-          <div class="pms-row"><span class="pms-label">Recipient</span><span class="pms-val" id="pay-phone">—</span></div>
-          <div class="pms-row"><span class="pms-label">Send Amount</span><span class="pms-val" id="pay-amount">—</span></div>
-          <div class="pms-row"><span class="pms-label">Recipient Gets</span><span class="pms-val" style="color:var(--green);" id="pay-htg">—</span></div>
-          <div class="pms-row"><span class="pms-label">Service Fee</span><span class="pms-val" id="pay-fee">—</span></div>
-          <div class="pms-row pms-total"><span class="pms-label">Total Charged</span><span class="pms-val" id="pay-total">—</span></div>
-        </div>
-
-        <div class="input-label" style="margin-bottom:6px;">Name on Card</div>
-        <input type="text" id="name-on-card" class="phone-input" placeholder="e.g. Jean Baptiste"
-               autocomplete="cc-name" style="margin-bottom:16px;width:100%;" />
-
-        <div class="input-label" style="margin-bottom:6px;">Card Details</div>
-        <div id="card-element" class="stripe-card-wrap"></div>
-        <div id="card-errors" class="field-error" style="margin-bottom:12px;"></div>
-
-        <div class="security-row">
-          <span class="sec-badge"><i class="ti ti-lock"></i> SSL Encrypted</span>
-          <span class="sec-badge"><i class="ti ti-shield-check"></i> Secured by Stripe</span>
-          <span class="sec-badge"><i class="ti ti-certificate"></i> PCI Compliant</span>
-        </div>
-
-        <button class="btn-primary" id="btn4" onclick="doPayment()">
-          <i class="ti ti-send"></i> <span id="btn4-text">Send Money Now</span>
-        </button>
-        <div id="payment-error" class="payment-error"></div>
-      </div>
-
-      <button class="btn-secondary" onclick="goStep(3)">← Back</button>
-    </div>
-
-    <!-- STEP 5: Success -->
-    <div class="panel" id="panel5">
-      <div class="success-wrap">
-        <div class="confetti" id="confetti">🎉 💸 🇭🇹 ✅ 🙌</div>
-        <div class="success-icon">✓</div>
-        <div class="success-title">Transfer Confirmed!</div>
-        <div class="success-sub" id="success-sub">Your money is on its way. The recipient will receive funds in their wallet shortly.</div>
-        <div class="success-detail" id="success-detail"><!-- filled by JS --></div>
-        <button class="btn-primary" onclick="resetFlow()">
-          <i class="ti ti-plus"></i> Send Another Transfer
-        </button>
-        <button class="btn-secondary" onclick="window.location.href='index.html'">
-          Go to Homepage
-        </button>
-      </div>
-    </div>
-
-  </div><!-- /flow-card -->
-
-  <!-- PHONE PREVIEW -->
-  <div class="phone-preview">
-    <div class="phone-shell">
-      <div class="phone-notch"></div>
-      <div class="phone-screen">
-        <div id="ps-header" class="ps-header-mc">
-          <div class="ps-wallet-icon mc" id="ps-icon">MC</div>
-          <div class="ps-wallet-name" id="ps-name">MonCash</div>
-          <div class="ps-wallet-sub" id="ps-op">by Digicel Haiti</div>
-        </div>
-        <div class="ps-body">
-          <div class="ps-label">Sending to</div>
-          <div class="ps-value" id="ps-phone">+509 __ __ ____</div>
-          <div class="ps-divider"></div>
-          <div class="ps-label">Amount (USD)</div>
-          <div class="ps-value" id="ps-usd">$0.00</div>
-          <div class="ps-send-box">
-            <div class="ps-label" style="margin-bottom:4px;">Recipient receives</div>
-            <div class="ps-send-usd" id="ps-htg">0 HTG</div>
-            <div class="ps-send-htg">≈ Haitian Gourdes · rate 1 USD = 130 HTG</div>
-          </div>
-          <button class="ps-btn-mc" id="ps-send-btn">Send Money →</button>
-          <div class="ps-fee-note" id="ps-fee-note">Fee: $0.00 · Total: $0.00</div>
-        </div>
-      </div>
-    </div>
-    <p style="text-align:center;color:var(--gray);font-size:.75rem;margin-top:12px;">Live preview</p>
-  </div>
-
-</div><!-- /page-wrap -->
-
-<!-- WALLET INFO -->
-<div class="wallets-info">
-  <h2>Supported Mobile Wallets</h2>
-  <p>Send to over 8 million wallet holders across Haiti.</p>
-  <div class="wallet-cards">
-    <div class="winfo-card">
-      <div class="winfo-header">
-        <div class="winfo-logo mc">MC</div>
-        <div>
-          <div class="winfo-name">MonCash</div>
-          <div class="winfo-operator">by Digicel Haiti</div>
-        </div>
-      </div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Haiti's most widely used mobile wallet</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Pay bills, buy goods, send to family</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Cash out at Digicel agents nationwide</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Available on all Digicel phone numbers</div>
-    </div>
-    <div class="winfo-card">
-      <div class="winfo-header">
-        <div class="winfo-logo nc">NC</div>
-        <div>
-          <div class="winfo-name">NatCash</div>
-          <div class="winfo-operator">by Natcom / BNC Bank</div>
-        </div>
-      </div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Mobile wallet backed by BNC (Natbank)</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Bank-grade security for your funds</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Withdraw at Natcom points &amp; ATMs</div>
-      <div class="winfo-feat"><i class="ti ti-check"></i>Available on all Natcom phone numbers</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- RATE NOTE -->
-<div class="rate-note">
-  <strong>Exchange Rate Notice:</strong> The displayed HTG equivalent is based on an indicative rate of 1 USD ≈ 130 HTG.
-  The actual rate is locked at the time your transfer is processed and may vary slightly.
-  Tchotcho Pay is not responsible for currency fluctuations after funds are delivered to the recipient's wallet.
-</div>
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div class="logo" style="color:#fff"><img src="assets/logo.png" alt=""><div>TchotchoPay<small style="color:#9aabc8">Money for the Caribbean</small></div></div>
+      <div><h4>Product</h4><a href="send.html">Send Money</a><a href="topup.html">Top Up</a><a href="app.html">Download App</a><a href="card.html">Card</a><a href="compare.html">Compare</a><a href="pricing.html">Pricing</a></div>
+      <div><h4>Business</h4><a href="merchant-signup.html">Merchant</a><a href="agent-signup.html">Agent</a><a href="recipient.html">Receive in Haiti</a></div>
+      <div><h4>Company</h4><a href="security.html">Security</a><a href="contact.html">Contact</a><a href="mailto:hello@tchotchopay.com">hello@tchotchopay.com</a></div>
+    </div>
+    <p class="copy">© 2026 TchotchoPay LLC · Miami · Port-au-Prince · Paris · tchotchopay.com</p>
+  </div>
+</footer>
 
-<!-- Stripe.js -->
-<script src="https://js.stripe.com/v3/"></script>
 <script>
-  // ── CONSTANTS ────────────────────────────────────────────────
-  const HTG_RATE = 130; // 1 USD = 130 HTG (indicative)
-  const PRESETS  = [25, 50, 100, 200, 300, 500];
-  const SEND_PAYMENT_FN   = '/.netlify/functions/send-payment';
-  const TRANSFER_FN       = '/.netlify/functions/moncash-transfer';
-  const STRIPE_PK = 'pk_live_51U0wFAC4eLwVz6CMDQGr4RBg6l9muv0k0ZV3y8ESZSFVuwfPHhz7JPb6VsAwE4kxFvAcyZwDJX15gpJpvFJUSAcx00EqGDVqmI';
+const RATE = 130.50;
 
-  let selectedWallet = null;
-  let selectedAmount = null;
-  let currentStep    = 1;
+// Hero send form
+let curAmt = 100, curWallet = 'MonCash';
 
-  // ── STRIPE INIT ──────────────────────────────────────────────
-  const stripe     = Stripe(STRIPE_PK);
-  const elements   = stripe.elements();
-  const cardElement = elements.create('card', {
-    style: {
-      base: {
-        color: '#F0F6FF', fontSize: '16px',
-        fontFamily: "'Segoe UI', system-ui, sans-serif",
-        fontSmoothing: 'antialiased',
-        '::placeholder': { color: 'rgba(143,168,204,0.45)' },
-      },
-      invalid: { color: '#FF4C6A', iconColor: '#FF4C6A' },
-    },
-    hidePostalCode: true,
-  });
-  let cardMounted = false;
-  function mountCard() {
-    if (!cardMounted) {
-      cardElement.mount('#card-element');
-      cardMounted = true;
-      cardElement.on('change', e => {
-        const errEl = document.getElementById('card-errors');
-        const wrap  = document.getElementById('card-element');
-        if (e.error) {
-          errEl.textContent = e.error.message; errEl.classList.add('show');
-          wrap.classList.add('invalid');
-        } else {
-          errEl.textContent = ''; errEl.classList.remove('show');
-          wrap.classList.remove('invalid');
-          if (e.complete) wrap.classList.add('focused');
-        }
-      });
-    }
-  }
+function selectWallet(el, name){
+  document.querySelectorAll('.wallet-opt').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  curWallet = name;
+  document.getElementById('s-wallet').textContent = name;
+}
 
-  // ── FEE CALC ────────────────────────────────────────────────
-  function calcFees(usd) {
-    const amtCents      = Math.round(usd * 100);
-    const stripeCents   = Math.round(usd * 0.029 * 100) + 30;
-    const platformCents = Math.round(usd * 0.02 * 100);
-    const feeCents      = stripeCents + platformCents;
-    const totalCents    = amtCents + feeCents;
-    return {
-      amtCents, feeCents, totalCents,
-      feeUsd:   (feeCents / 100).toFixed(2),
-      totalUsd: (totalCents / 100).toFixed(2),
-    };
-  }
+function calcHero(){
+  const fee = +(curAmt * 0.02 + 0.30).toFixed(2);
+  const net = +(curAmt - fee).toFixed(2);
+  const htg = Math.round(net * RATE).toLocaleString();
+  document.getElementById('s-send').textContent = '$' + curAmt.toFixed(2);
+  document.getElementById('s-fee').textContent = '$' + fee.toFixed(2);
+  document.getElementById('s-gets').textContent = htg + ' HTG';
+  document.getElementById('s-total').textContent = '$' + curAmt.toFixed(2);
+}
 
-  // ── WALLET SELECT ────────────────────────────────────────────
-  function selectWallet(name, el) {
-    selectedWallet = name;
-    document.querySelectorAll('.wallet-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('btn1').disabled = false;
+function selectAmt(el, v){
+  document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  curAmt = v;
+  calcHero();
+}
 
-    // Update preview header
-    const hdr  = document.getElementById('ps-header');
-    const icon = document.getElementById('ps-icon');
-    const nm   = document.getElementById('ps-name');
-    const op   = document.getElementById('ps-op');
-    const btn  = document.getElementById('ps-send-btn');
-    if (name === 'moncash') {
-      hdr.className  = 'ps-header-mc'; icon.className = 'ps-wallet-icon mc';
-      icon.textContent = 'MC'; nm.textContent = 'MonCash'; op.textContent = 'by Digicel Haiti';
-      btn.className = 'ps-btn-mc';
-    } else {
-      hdr.className  = 'ps-header-nc'; icon.className = 'ps-wallet-icon nc';
-      icon.textContent = 'NC'; nm.textContent = 'NatCash'; op.textContent = 'by Natcom / BNC';
-      btn.className = 'ps-btn-nc';
-    }
-    // Update step 2 sub
-    document.getElementById('p2-wallet').textContent = name === 'moncash' ? 'MonCash' : 'NatCash';
-    document.getElementById('phone-hint').innerHTML = name === 'moncash'
-      ? 'MonCash (Digicel): 36, 37, 38, 46, 47, 55…'
-      : 'NatCash (Natcom): 34, 35, 48…';
-  }
+// Calculator
+let cAmt = 200, cFee = 0;
 
-  // ── PHONE FORMAT ─────────────────────────────────────────────
-  function formatPhone(el) {
-    let v = el.value.replace(/\D/g,'').slice(0,8);
-    if (v.length > 4) v = v.slice(0,2)+' '+v.slice(2,4)+' '+v.slice(4);
-    else if (v.length > 2) v = v.slice(0,2)+' '+v.slice(2);
-    el.value = v;
-    document.getElementById('ps-phone').textContent = '+509 ' + (el.value || '__ __ ____');
-  }
-  function validatePhone() {
-    const raw   = document.getElementById('phone-input').value.replace(/\D/g,'');
-    const valid = raw.length === 8;
-    document.getElementById('btn2').disabled = !valid;
-    document.getElementById('phone-error').classList.toggle('show', raw.length > 0 && !valid);
-    return valid;
-  }
+function calcC(){
+  const fee = +(cAmt * cFee).toFixed(2);
+  const net = +(cAmt - fee).toFixed(2);
+  const htg = Math.round(net * RATE).toLocaleString();
+  document.getElementById('c-send').textContent = '$' + cAmt.toFixed(2);
+  document.getElementById('c-gets').textContent = htg + ' HTG';
+  document.getElementById('c-equiv').textContent = '≈ $' + net.toFixed(2) + ' · Arrives in ~2 minutes';
+  document.getElementById('c-you').textContent = '$' + cAmt.toFixed(2);
+  document.getElementById('c-fee').textContent = '$' + fee.toFixed(2);
+  document.getElementById('c-usdc').textContent = net.toFixed(2) + ' USDC';
+}
 
-  // ── AMOUNT SELECT ────────────────────────────────────────────
-  function buildPresets() {
-    const grid = document.getElementById('preset-grid');
-    grid.innerHTML = '';
-    PRESETS.forEach(usd => {
-      const d = document.createElement('div');
-      d.className = 'preset-card';
-      const htg = (usd * HTG_RATE).toLocaleString();
-      d.innerHTML = `<div class="preset-usd">$${usd}</div><div class="preset-htg">${htg} HTG</div>`;
-      d.onclick = () => { selectAmount(usd, d); clearCustomInput(); };
-      grid.appendChild(d);
-    });
-  }
+function setMethod(el, pct){
+  document.querySelectorAll('.method-tab').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  cFee = pct;
+  calcC();
+}
 
-  function selectAmount(usd, el) {
-    selectedAmount = usd;
-    document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('selected'));
-    if (el) el.classList.add('selected');
-    document.getElementById('btn3').disabled = false;
-    updateAmountUI(usd);
-  }
+function setCalcAmt(el, v){
+  document.querySelectorAll('.c-amt').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  cAmt = v;
+  calcC();
+}
 
-  function clearCustomInput() {
-    document.getElementById('custom-amount').value = '';
-  }
+// Nav
+var mb = document.getElementById('mobBtn'), mc = document.getElementById('mobClose'), mn = document.getElementById('mobNav');
+if(mb) mb.addEventListener('click', function(){ mn.classList.add('open'); });
+if(mc) mc.addEventListener('click', function(){ mn.classList.remove('open'); });
+var lb = document.getElementById('langBtn'), ld = document.getElementById('langDrop');
+if(lb){
+  lb.addEventListener('click', function(e){ e.stopPropagation(); ld.classList.toggle('open'); });
+  document.addEventListener('click', function(){ ld.classList.remove('open'); });
+}
 
-  function onCustomAmount(el) {
-    const v = parseFloat(el.value);
-    document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('selected'));
-    const errEl = document.getElementById('amount-error');
-    if (!el.value || isNaN(v) || v < 10 || v > 1000) {
-      selectedAmount = null;
-      document.getElementById('btn3').disabled = true;
-      document.getElementById('summary-box').classList.remove('show');
-      document.getElementById('fx-note').classList.remove('show');
-      errEl.classList.toggle('show', !!el.value);
-      return;
-    }
-    errEl.classList.remove('show');
-    selectAmount(v, null);
-  }
-
-  function updateAmountUI(usd) {
-    const htg      = Math.round(usd * HTG_RATE).toLocaleString();
-    const fees     = calcFees(usd);
-    const phone    = document.getElementById('phone-input').value;
-    const walletLabel = selectedWallet === 'moncash' ? 'MonCash (Digicel)' : 'NatCash (Natcom)';
-
-    // FX note
-    const fxEl = document.getElementById('fx-note');
-    fxEl.classList.add('show');
-    document.getElementById('htg-preview').textContent = `${htg} HTG`;
-
-    // Summary box
-    const box = document.getElementById('summary-box');
-    box.classList.add('show');
-    document.getElementById('sv-wallet').textContent = walletLabel;
-    document.getElementById('sv-phone').textContent  = '+509 ' + phone;
-    document.getElementById('sv-amount').textContent = `$${Number(usd).toFixed(2)} USD`;
-    document.getElementById('sv-htg').textContent    = `${htg} HTG`;
-    document.getElementById('sv-fee').textContent    = `$${fees.feeUsd}`;
-    document.getElementById('sv-total').textContent  = `$${fees.totalUsd}`;
-
-    // Phone preview
-    document.getElementById('ps-usd').textContent  = `$${Number(usd).toFixed(2)}`;
-    document.getElementById('ps-htg').textContent  = `${htg} HTG`;
-    document.getElementById('ps-fee-note').textContent = `Fee: $${fees.feeUsd} · Total: $${fees.totalUsd}`;
-  }
-
-  // ── POPULATE PAYMENT SUMMARY ──────────────────────────────────
-  function populatePaySummary() {
-    if (!selectedAmount) return;
-    const phone = document.getElementById('phone-input').value;
-    const fees  = calcFees(selectedAmount);
-    const htg   = Math.round(selectedAmount * HTG_RATE).toLocaleString();
-    const walletLabel = selectedWallet === 'moncash' ? 'MonCash (Digicel)' : 'NatCash (Natcom)';
-    document.getElementById('pay-wallet').textContent = walletLabel;
-    document.getElementById('pay-phone').textContent  = '+509 ' + phone;
-    document.getElementById('pay-amount').textContent = `$${Number(selectedAmount).toFixed(2)}`;
-    document.getElementById('pay-htg').textContent    = `${htg} HTG`;
-    document.getElementById('pay-fee').textContent    = `$${fees.feeUsd}`;
-    document.getElementById('pay-total').textContent  = `$${fees.totalUsd}`;
-  }
-
-  // ── STEP NAVIGATION ──────────────────────────────────────────
-  function goStep(n) {
-    if (n === 3) buildPresets();
-    if (n === 4) { mountCard(); populatePaySummary(); }
-    currentStep = n;
-    for (let i = 1; i <= 5; i++) {
-      const panel = document.getElementById('panel' + i);
-      if (panel) panel.classList.toggle('active', i === n);
-      const dot = document.getElementById('dot' + i);
-      if (dot) {
-        dot.classList.remove('active', 'done');
-        if (i < n)      { dot.classList.add('done'); dot.textContent = '✓'; }
-        else if (i === n) { dot.classList.add('active'); dot.textContent = i; }
-        else            dot.textContent = i;
-      }
-    }
-    for (let i = 1; i <= 4; i++) {
-      const line = document.getElementById('line' + i);
-      if (line) line.classList.toggle('done', i < n);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ── PAY & TRANSFER ───────────────────────────────────────────
-  async function doPayment() {
-    const btn      = document.getElementById('btn4');
-    const errDiv   = document.getElementById('payment-error');
-    const nameVal  = document.getElementById('name-on-card').value.trim();
-
-    if (!nameVal) {
-      errDiv.style.display = 'block';
-      errDiv.textContent   = '⚠️ Please enter the name on your card.';
-      return;
-    }
-
-    btn.disabled  = true;
-    btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Processing payment…';
-    errDiv.style.display = 'none';
-
-    const phoneRaw = document.getElementById('phone-input').value.replace(/\D/g, '');
-
-    try {
-      // 1 — Create PaymentIntent
-      const piRes = await fetch(SEND_PAYMENT_FN, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount:      selectedAmount,
-          wallet:      selectedWallet,
-          phoneNumber: phoneRaw,
-        }),
-      });
-      const piData = await piRes.json();
-      if (!piRes.ok) throw new Error(piData.error || 'Payment setup failed');
-
-      // 2 — Confirm card payment
-      const { paymentIntent, error } = await stripe.confirmCardPayment(piData.clientSecret, {
-        payment_method: { card: cardElement, billing_details: { name: nameVal } },
-      });
-      if (error) throw new Error(error.message);
-      if (paymentIntent.status !== 'succeeded') throw new Error('Payment did not complete. Please try again.');
-
-      // 3 — Trigger wallet transfer
-      btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Sending to wallet…';
-
-      const txRes = await fetch(TRANSFER_FN, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          wallet:          selectedWallet,
-          phoneNumber:     phoneRaw,
-          amountUsd:       selectedAmount,
-          paymentIntentId: paymentIntent.id,
-        }),
-      });
-      const txData = await txRes.json();
-
-      if (!txRes.ok) {
-        // Payment captured but transfer failed — show special message
-        const fees = calcFees(selectedAmount);
-        errDiv.style.display = 'block';
-        errDiv.innerHTML = `
-          ⚠️ <strong>Payment received but transfer failed.</strong><br>
-          Your payment of <strong>$${fees.totalUsd}</strong> was captured.<br>
-          Reference: <code>${paymentIntent.id}</code><br>
-          We will manually process your transfer within 2 hours and notify you.
-          Contact us at <a href="mailto:support@tchotchopay.com" style="color:var(--cyan);">support@tchotchopay.com</a>.
-        `;
-        btn.disabled = false;
-        btn.innerHTML = '<i class="ti ti-send"></i> Send Money Now';
-        return;
-      }
-
-      // 4 — Show success
-      showSuccess(paymentIntent, txData);
-
-    } catch (err) {
-      errDiv.style.display = 'block';
-      errDiv.textContent   = '⚠️ ' + err.message;
-      btn.disabled  = false;
-      btn.innerHTML = '<i class="ti ti-send"></i> Send Money Now';
-    }
-  }
-
-  // ── USDC WALLET PAYMENT ──────────────────────────────────────────────────
-  let payMethod = 'card';
-  let walletBal = null;
-
-  function switchPayMethod(m) {
-    payMethod = m;
-    document.getElementById('tab-card').classList.toggle('active', m === 'card');
-    document.getElementById('tab-usdc').classList.toggle('active', m === 'usdc');
-    document.getElementById('card-panel').style.display  = m === 'card'  ? '' : 'none';
-    document.getElementById('usdc-panel').style.display  = m === 'usdc'  ? '' : 'none';
-    if (m === 'usdc') { loadWalletBal(); updateUsdcSummary(); }
-  }
-
-  async function loadWalletBal() {
-    const amtEl = document.getElementById('wpb-amount');
-    const subEl = document.getElementById('wpb-sub');
-    const token = sessionStorage.getItem('tp_session_token');
-    if (!token) {
-      amtEl.textContent = '—';
-      subEl.textContent = 'Sign in to use your wallet balance';
-      return;
-    }
-    amtEl.textContent = 'Loading…';
-    try {
-      const res  = await fetch('/.netlify/functions/user-profile', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      walletBal  = parseFloat(data.wallet?.usdc_balance) || 0;
-      amtEl.textContent = walletBal.toFixed(2) + ' USDC';
-      subEl.textContent = '≈ $' + walletBal.toFixed(2) + ' USD available';
-      updateUsdcSummary();
-    } catch {
-      amtEl.textContent = 'Could not load balance';
-      subEl.textContent = '';
-    }
-  }
-
-  function updateUsdcSummary() {
-    if (!selectedAmount || !selectedWallet) return;
-    const walletLabel = selectedWallet === 'moncash' ? 'MonCash' : 'NatCash';
-    const phone = document.getElementById('phone-input')?.value || '';
-    const amt   = parseFloat(selectedAmount);
-    const fee   = parseFloat((amt * 0.01).toFixed(2));
-    const total = parseFloat((amt + fee).toFixed(2));
-    const htg   = Math.round(amt * HTG_RATE).toLocaleString();
-    document.getElementById('upay-wallet').textContent = walletLabel;
-    document.getElementById('upay-phone').textContent  = '+509 ' + phone;
-    document.getElementById('upay-amount').textContent = '$' + amt.toFixed(2);
-    document.getElementById('upay-htg').textContent    = htg + ' HTG';
-    document.getElementById('upay-fee').textContent    = '$' + fee.toFixed(2);
-    document.getElementById('upay-total').textContent  = total.toFixed(2) + ' USDC';
-  }
-
-  async function doWalletPayment() {
-    const token  = sessionStorage.getItem('tp_session_token');
-    const errDiv = document.getElementById('usdc-error');
-    const btn    = document.getElementById('btn-usdc');
-    errDiv.style.display = 'none';
-
-    if (!token) {
-      errDiv.style.display = 'block';
-      errDiv.textContent = '⚠️ Please sign in to pay with your USDC wallet.';
-      return;
-    }
-    if (!selectedAmount || !selectedWallet) return;
-
-    const amt   = parseFloat(selectedAmount);
-    const fee   = parseFloat((amt * 0.01).toFixed(2));
-    const total = parseFloat((amt + fee).toFixed(6));
-
-    if (walletBal !== null && walletBal < total) {
-      errDiv.style.display = 'block';
-      errDiv.textContent = `⚠️ Insufficient balance. You have ${walletBal.toFixed(2)} USDC but need ${total.toFixed(2)} USDC.`;
-      return;
-    }
-
-    const phoneRaw = document.getElementById('phone-input').value.replace(/\D/g,'');
-    btn.disabled  = true;
-    btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Processing…';
-
-    try {
-      // 1 — Deduct USDC from wallet
-      const deductRes = await fetch('/.netlify/functions/wallet-pay', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionToken: token, amountUSDC: total }),
-      });
-      const deductData = await deductRes.json();
-      if (!deductRes.ok) throw new Error(deductData.error || 'Wallet payment failed. Please try again.');
-
-      // 2 — Trigger MonCash/NatCash transfer
-      btn.innerHTML = '<i class="ti ti-loader" style="animation:spin 1s linear infinite"></i> Sending to wallet…';
-      const txRes = await fetch(TRANSFER_FN, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          wallet: selectedWallet, phoneNumber: phoneRaw,
-          amountUsd: selectedAmount, paymentIntentId: 'USDC-WALLET',
-        }),
-      });
-      const txData = await txRes.json();
-
-      if (!txRes.ok) {
-        errDiv.style.display = 'block';
-        errDiv.innerHTML = `⚠️ <strong>Wallet debited but transfer failed.</strong><br>
-          USDC deducted: <strong>${total.toFixed(2)} USDC</strong>. Ref: USDC-WALLET<br>
-          Please email <a href="mailto:support@tchotchopay.com" style="color:var(--cyan);">support@tchotchopay.com</a> for a refund.`;
-        btn.disabled = false;
-        btn.innerHTML = '<i class="ti ti-wallet"></i> Pay with USDC Wallet';
-        return;
-      }
-
-      walletBal = deductData.newBalance;
-      showSuccess({ id: 'USDC-WALLET', _usdc: total }, txData);
-
-    } catch (err) {
-      errDiv.style.display = 'block';
-      errDiv.textContent = '⚠️ ' + err.message;
-      btn.disabled  = false;
-      btn.innerHTML = '<i class="ti ti-wallet"></i> Pay with USDC Wallet';
-    }
-  }
-
-  // ── SHOW SUCCESS ─────────────────────────────────────────────
-  function showSuccess(pi, txData) {
-    const phone   = document.getElementById('phone-input').value;
-    const fees    = calcFees(selectedAmount);
-    const htg     = Math.round(selectedAmount * HTG_RATE).toLocaleString();
-    const walletLabel = selectedWallet === 'moncash' ? 'MonCash' : 'NatCash';
-    const txId    = txData.transactionId || pi.id;
-    const eta     = txData.eta || 'Within 30 minutes';
-    const isUsdc  = pi._usdc != null;
-    const chargeDisplay = isUsdc ? pi._usdc.toFixed(2) + ' USDC' : '$' + fees.totalUsd + ' USD';
-
-    const detail = document.getElementById('success-detail');
-    detail.innerHTML = `
-      <div class="srow"><span class="sl">Wallet</span><span class="sv">${walletLabel}</span></div>
-      <div class="srow"><span class="sl">Recipient</span><span class="sv">+509 ${phone}</span></div>
-      <div class="srow"><span class="sl">Amount Sent</span><span class="sv">$${Number(selectedAmount).toFixed(2)} USD</span></div>
-      <div class="srow"><span class="sl">Recipient Gets</span><span class="sv green">${htg} HTG</span></div>
-      <div class="srow"><span class="sl">Total Charged</span><span class="sv" style="color:var(--cyan)">${chargeDisplay}</span></div>
-      <div class="srow"><span class="sl">Reference</span><span class="sv" style="font-size:0.75rem;">${txId}</span></div>
-      <div class="srow"><span class="sl">ETA</span><span class="sv green">${eta}</span></div>
-    `;
-
-    document.getElementById('success-sub').textContent =
-      `Sending $${Number(selectedAmount).toFixed(2)} → ${htg} HTG to a ${walletLabel} wallet.`;
-
-    goStep(5);
-  }
-
-  // ── RESET ────────────────────────────────────────────────────
-  function resetFlow() {
-    selectedWallet = null; selectedAmount = null;
-    document.querySelectorAll('.wallet-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('btn1').disabled = true;
-    document.getElementById('phone-input').value = '';
-    document.getElementById('custom-amount').value = '';
-    document.getElementById('summary-box').classList.remove('show');
-    document.getElementById('fx-note').classList.remove('show');
-    document.getElementById('payment-error').style.display = 'none';
-    document.getElementById('btn4').innerHTML = '<i class="ti ti-send"></i> <span>Send Money Now</span>';
-    document.getElementById('btn4').disabled = false;
-    document.getElementById('ps-phone').textContent = '+509 __ __ ____';
-    document.getElementById('ps-usd').textContent = '$0.00';
-    document.getElementById('ps-htg').textContent = '0 HTG';
-    document.getElementById('ps-fee-note').textContent = 'Fee: $0.00 · Total: $0.00';
-    goStep(1);
-  }
+calcHero();
+calcC();
 </script>
-<script src="lang.js" defer></script>
-<script src="chat-widget.js" defer></script>
-<script src="cookie-consent.js" defer></script>
 </body>
 </html>
