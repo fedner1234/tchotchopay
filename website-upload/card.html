@@ -78,17 +78,9 @@ h2 em{font-style:normal;color:var(--blue)}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 
 /* Card visual */
-.card-visual{position:relative;border-radius:20px;padding:30px 28px 28px;background:linear-gradient(135deg,var(--navy) 0%,#0a2272 60%,#1557D6 100%);color:#fff;min-height:220px;box-shadow:0 32px 80px rgba(1,18,64,.28);max-width:380px}
-.card-chip{width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--gold),#e8c85a);margin-bottom:28px}
-.card-num{font-family:monospace;font-size:17px;letter-spacing:.18em;margin-bottom:20px;color:rgba(255,255,255,.85)}
-.card-bottom{display:flex;justify-content:space-between;align-items:flex-end}
-.card-label{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
-.card-value{font-size:14px;font-weight:600}
-.card-logo{font-family:var(--display);font-size:16px;color:#fff;letter-spacing:.01em;text-align:right}
-.card-visa{font-size:22px;font-weight:900;font-style:italic;color:#fff;margin-top:3px}
-.visa-rings{display:flex;gap:-4px;align-items:center}
-.visa-ring1{width:30px;height:30px;border-radius:50%;background:rgba(255,100,50,.85)}
-.visa-ring2{width:30px;height:30px;border-radius:50%;background:rgba(255,180,0,.85);margin-left:-12px}
+.card-visual{max-width:440px;filter:drop-shadow(0 32px 60px rgba(1,18,64,.22)) drop-shadow(0 8px 24px rgba(1,18,64,.14));transform:perspective(900px) rotateY(-8deg) rotateX(2deg);transition:transform .4s ease}
+.card-visual:hover{transform:perspective(900px) rotateY(-2deg) rotateX(1deg)}
+.card-visual img{width:100%;border-radius:18px;display:block}
 
 /* Comparison table */
 .compare-sec{padding:56px 0;background:#fff;border-top:1px solid var(--line)}
@@ -130,7 +122,7 @@ footer a:hover{color:#fff}
 @media(max-width:900px){
   .hero-grid,.two-col{grid-template-columns:1fr}
   h1{font-size:36px}h2{font-size:28px}
-  .card-visual{max-width:100%}
+  .card-visual{max-width:100%;transform:none}
 }
 @media(max-width:600px){.fg{grid-template-columns:1fr 1fr}.cta-row{flex-direction:column}}
 @media(max-width:420px){.fg{grid-template-columns:1fr}}
@@ -233,26 +225,7 @@ footer a:hover{color:#fff}
     </div>
     <div>
       <div class="card-visual">
-        <div class="card-chip"></div>
-        <div class="card-num">4532 •••• •••• 7291</div>
-        <div class="card-bottom">
-          <div>
-            <div class="card-label">Card Holder</div>
-            <div class="card-value">Your Name</div>
-            <div style="margin-top:12px">
-              <div class="card-label">Expires</div>
-              <div class="card-value">12/28</div>
-            </div>
-          </div>
-          <div style="text-align:right">
-            <div class="card-logo">TchotchoPay</div>
-            <div style="display:flex;justify-content:flex-end;gap:0;margin-top:8px">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,100,50,.85)"></div>
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,180,0,.85);margin-left:-10px"></div>
-            </div>
-            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px">VISA</div>
-          </div>
-        </div>
+        <img src="assets/card-front.png" alt="TchotchoPay Virtual Debit Card">
       </div>
     </div>
   </div>
