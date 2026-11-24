@@ -666,16 +666,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)}
       <p style="color:var(--muted);margin-top:8px">Join thousands sending money to Haiti the smart way.</p>
     </div>
     <div class="form-box">
-      <form name="signup" method="POST" data-netlify="true" action="/thankyou.html">
-        <input type="hidden" name="form-name" value="signup"/>
+      <div id="signupError" style="display:none;background:#fef2f2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 16px;border-radius:10px;font-size:14px;margin-bottom:16px"></div>
+      <form id="signupForm">
         <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="Prénom" required/></div>
-          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Nom" required/></div>
+          <div class="form-group"><label>First Name</label><input type="text" id="signupFirst" placeholder="Prénom" required/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="signupLast" placeholder="Nom" required/></div>
         </div>
-        <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@email.com" required/></div>
-        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="+1 (305) ..."/></div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="signupEmail" placeholder="you@email.com" required/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="signupPhone" placeholder="+1 (305) ..."/></div>
         <div class="form-group"><label>Country</label>
-          <select name="country">
+          <select id="signupCountry">
             <option>United States</option>
             <option>Canada</option>
             <option>France</option>
@@ -683,8 +683,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)}
             <option>Other</option>
           </select>
         </div>
-        <div class="form-group"><label>Password</label><input type="password" name="password" placeholder="Min. 8 characters" required/></div>
-        <button type="submit" class="btn btn-navy" style="width:100%;justify-content:center;margin-top:8px">Create Free Account</button>
+        <div class="form-group"><label>Password</label><input type="password" id="signupPassword" placeholder="Min. 8 characters" required/></div>
+        <button type="submit" id="signupBtn" class="btn btn-navy" style="width:100%;justify-content:center;margin-top:8px">Create Free Account</button>
         <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px">By signing up you agree to our <a href="terms.html" style="color:var(--blue)">Terms</a> and <a href="terms.html" style="color:var(--blue)">Privacy Policy</a>.</p>
       </form>
       <div class="accs" style="justify-content:center;margin-top:16px">Already have an account? <a href="login.html">Log in →</a></div>
@@ -721,6 +721,65 @@ if(hamburger&&navEl){
 var mb = document.getElementById('mobBtn'), mc = document.getElementById('mobClose'), mn = document.getElementById('mobNav');
 if(mb) mb.addEventListener('click', function(){ mn.classList.add('open'); });
 if(mc) mc.addEventListener('click', function(){ mn.classList.remove('open'); });
+
+// ── Signup form ───────────────────────────────────────────────────────────
+document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn   = document.getElementById('signupBtn');
+  const errEl = document.getElementById('signupError');
+
+  const first    = document.getElementById('signupFirst').value.trim();
+  const last     = document.getElementById('signupLast').value.trim();
+  const email    = document.getElementById('signupEmail').value.trim();
+  const phone    = document.getElementById('signupPhone').value.trim();
+  const country  = document.getElementById('signupCountry').value;
+  const password = document.getElementById('signupPassword').value;
+
+  if (password.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Creating account…';
+
+  try {
+    const res = await fetch('/.netlify/functions/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ first_name: first, last_name: last, email, phone, country, password }),
+    });
+    const data = await res.json();
+
+    if (!res.ok || !data.success) {
+      errEl.textContent = data.error || 'Registration failed. Please try again.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Create Free Account';
+      return;
+    }
+
+    // Store session
+    sessionStorage.setItem('tp_session_token', data.sessionToken);
+    sessionStorage.setItem('tp_user_id', data.user.id);
+    sessionStorage.setItem('tp_user', JSON.stringify(data.user));
+
+    // Redirect to dashboard
+    window.location.href = 'dashboard.html';
+  } catch (err) {
+    errEl.textContent = 'Connection error. Please check your internet and try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Create Free Account';
+  }
+});
+
+// Auto-redirect if already logged in
+if (sessionStorage.getItem('tp_session_token')) {
+  window.location.href = 'dashboard.html';
+}
 </script>
 </body>
 </html>
