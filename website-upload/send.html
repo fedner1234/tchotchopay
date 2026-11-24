@@ -138,9 +138,14 @@ h2 em{font-style:normal;color:var(--blue)}
 .method-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .method-tab{padding:7px 13px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
 .method-tab.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-.calc-amts{display:flex;gap:8px;flex-wrap:wrap}
+.calc-amts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .c-amt{flex:1;min-width:56px;height:40px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .15s}
 .c-amt.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.c-custom-wrap{position:relative;margin-bottom:16px}
+.c-custom-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:600;color:var(--muted);pointer-events:none}
+.c-custom-input{width:100%;height:40px;border-radius:9px;border:1.5px solid var(--line);padding:0 11px 0 22px;font-size:13px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;box-sizing:border-box;font-family:var(--sans)}
+.c-custom-input:focus{border-color:var(--navy)}
+.c-custom-input::placeholder{font-weight:400;color:var(--muted)}
 .calc-gets{background:var(--navy);border-radius:20px;padding:28px;color:#fff}
 .cg-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:#6b8bb8;text-transform:uppercase;margin-bottom:6px}
 .cg-amt{font-family:var(--display);font-size:44px;color:#fff;font-weight:700;line-height:1;margin-bottom:4px}
@@ -371,6 +376,10 @@ footer a:hover{color:#fff}
           <button class="c-amt" onclick="setCalcAmt(this,500)">$500</button>
           <button class="c-amt" onclick="setCalcAmt(this,1000)">$1,000</button>
         </div>
+        <div class="c-custom-wrap">
+          <span>$</span>
+          <input class="c-custom-input" id="calcCCustom" type="number" min="1" max="10000" step="1" placeholder="Enter your own amount">
+        </div>
       </div>
       <div class="calc-gets">
         <div class="cg-label">Recipient gets</div>
@@ -503,9 +512,21 @@ function setMethod(el, pct){
 function setCalcAmt(el, v){
   document.querySelectorAll('.c-amt').forEach(b=>b.classList.remove('on'));
   el.classList.add('on');
+  const ci=document.getElementById('calcCCustom');
+  if(ci) ci.value='';
   cAmt = v;
   calcC();
 }
+document.addEventListener('DOMContentLoaded',function(){
+  const ci=document.getElementById('calcCCustom');
+  if(ci) ci.addEventListener('input',function(){
+    const v=parseFloat(this.value);
+    if(v>0){
+      document.querySelectorAll('.c-amt').forEach(b=>b.classList.remove('on'));
+      cAmt=v; calcC();
+    }
+  });
+});
 
 // Nav
 var mb = document.getElementById('mobBtn'), mc = document.getElementById('mobClose'), mn = document.getElementById('mobNav');
