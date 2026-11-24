@@ -401,6 +401,19 @@ footer a:hover{color:#fff}
   h1{font-size:48px}
   .campaign h2{font-size:40px}
 }
+
+/* ── MOBILE NAV ── */
+.mob-btn{display:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex:0 0 40px}
+.mob-btn span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px}
+#mobNav{position:fixed;inset:0;z-index:999;background:var(--cream);display:flex;flex-direction:column;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+#mobNav.open{transform:translateX(0)}
+.mob-nav-inner{padding:28px 24px 40px;display:flex;flex-direction:column;min-height:100%}
+.mob-nav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.mob-close{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mob-nav-links{display:flex;flex-direction:column}
+.mob-nav-links a{display:block;padding:15px 0;font-size:17px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--line)}
+.mob-nav-actions{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.mob-nav-actions .btn{justify-content:center;width:100%;height:52px}
 @media(max-width:960px){
   h1{font-size:40px} h2{font-size:32px}
   .hero-grid,.scene,.haiti-grid,.biz,.feats,.cmp-cards,.fg,.corridor,.quotes,.infl,.path,.camp-grid,.grid4,.kyc,.biz-block,.secu-stats,.getapp-grid{grid-template-columns:1fr}
@@ -410,6 +423,8 @@ footer a:hover{color:#fff}
   .kyc-line{display:none}
   .row-app{flex-direction:column}
   nav{display:none}
+  .actions{display:none}
+  .mob-btn{display:flex}
   .cmp-cards{grid-template-columns:1fr 1fr}
   .phones,.journey{flex-direction:column;align-items:center}
   .iphone.l,.iphone.r,.iphone.mid{transform:none}
@@ -612,7 +627,36 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)}
       <a class="btn btn-blue" href="signup.html">Get started</a>
     </div>
   </div>
+    <button class="mob-btn" id="mobBtn"><span></span><span></span><span></span></button>
 </header>
+
+<div id="mobNav">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-head">
+      <a class="logo" href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">
+        <img src="assets/logo.png" alt="" style="width:34px;height:34px">
+        <div>TchotchoPay<small>Money for the Caribbean</small></div>
+      </a>
+      <button class="mob-close" id="mobClose">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mob-nav-links">
+      <a href="send.html">Send Money</a>
+      <a href="topup.html">Top Up</a>
+      <a href="app.html">App</a>
+      <a href="card.html">Virtual Card</a>
+      <a href="compare.html">Compare</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <a href="recipient.html">Receive in Haiti</a>
+    </nav>
+    <div class="mob-nav-actions">
+      <a class="btn btn-ghost" href="login.html" style="border-color:var(--navy);color:var(--navy)">Log In</a>
+      <a class="btn btn-blue" href="signup.html">Get started</a>
+    </div>
+  </div>
+</div>
 
 <section class="page-hero" style="background:linear-gradient(160deg,#011240 0%,#C4A035 200%)">
   <div class="wrap">
@@ -719,6 +763,11 @@ const navEl=document.querySelector('nav');
 if(hamburger&&navEl){
   hamburger.addEventListener('click',()=>navEl.classList.toggle('open'));
 }
+
+// Mobile nav
+var mb = document.getElementById('mobBtn'), mc = document.getElementById('mobClose'), mn = document.getElementById('mobNav');
+if(mb) mb.addEventListener('click', function(){ mn.classList.add('open'); });
+if(mc) mc.addEventListener('click', function(){ mn.classList.remove('open'); });
 </script>
 </body>
 </html>
