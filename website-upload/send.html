@@ -110,7 +110,9 @@ h1 em{font-style:normal;color:var(--blue)}
 .amt-btn{height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
 .amt-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .amt-btn:hover:not(.on){border-color:var(--navy);color:var(--navy)}
-.custom-amt-wrap{position:relative;margin-bottom:20px}
+.custom-amt-wrap{position:relative;margin-bottom:6px}
+.custom-amt-preview{font-size:13px;color:var(--navy);font-weight:600;min-height:20px;margin-bottom:14px;padding-left:2px;display:none}
+.custom-amt-preview.show{display:block}
 .custom-amt-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:600;color:var(--muted);pointer-events:none;z-index:1}
 .custom-amt-input{width:100%;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px 0 26px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;font-family:var(--sans)}
 .custom-amt-input:focus{border-color:var(--navy)}
@@ -328,6 +330,7 @@ footer a:hover{color:#fff}
         <span class="custom-amt-prefix">$</span>
         <input class="custom-amt-input" id="customAmt" type="number" min="1" max="10000" step="1" placeholder="Enter your own amount">
       </div>
+      <div class="custom-amt-preview" id="customPreview"></div>
       <div class="summary">
         <div class="sum-row"><span>Wallet</span><b id="s-wallet">MonCash</b></div>
         <div class="sum-row"><span>Send</span><b id="s-send">$100.00</b></div>
@@ -443,6 +446,11 @@ function calcHero(){
   document.getElementById('s-fee').textContent = '$' + fee.toFixed(2);
   document.getElementById('s-gets').textContent = htg + ' HTG';
   document.getElementById('s-total').textContent = '$' + curAmt.toFixed(2);
+  const p = document.getElementById('customPreview');
+  if(p && document.getElementById('customAmt').value){
+    p.textContent = '→ Recipient gets ' + htg + ' HTG';
+    p.classList.add('show');
+  }
 }
 
 function selectAmt(el, v){
@@ -450,6 +458,8 @@ function selectAmt(el, v){
   el.classList.add('on');
   const ci = document.getElementById('customAmt');
   if(ci) ci.value = '';
+  const p = document.getElementById('customPreview');
+  if(p) p.classList.remove('show');
   curAmt = v;
   calcHero();
 }
