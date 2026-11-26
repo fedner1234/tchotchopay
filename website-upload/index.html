@@ -300,7 +300,7 @@ td.win{color:var(--ok);font-weight:700}
 .corridor{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
 .cor{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .2s,box-shadow .2s}
 .cor:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,18,64,.08)}
-.cor h3{margin:10px 0 6px;font-size:20px;font-family:var(--display);font-weight:700;letter-spacing:.02em}
+.cor h3{margin:10px 0 6px;font-size:20px;font-family:var(--display);font-weight:700;letter-spacing:.02em;color:var(--navy)}
 .cor p{color:var(--muted);font-size:14px}
 .path{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
 .path .box{background:#0A1C4A;border-radius:16px;padding:22px 16px;text-align:center;color:#fff}
@@ -408,6 +408,10 @@ footer a:hover{color:#fff}
   .row-app{flex-direction:column}
   nav{display:none}
   .cmp-cards{grid-template-columns:1fr 1fr}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+  table th,table td{white-space:normal;min-width:80px}
+  table th:first-child,table td:first-child{min-width:140px}
+  .secu-shell{grid-template-columns:1fr}
   .phones,.journey{flex-direction:column;align-items:center}
   .iphone.l,.iphone.r,.iphone.mid{transform:none}
   .stats{grid-template-columns:1fr 1fr}
