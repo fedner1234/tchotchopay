@@ -390,7 +390,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="hero-right">
           <div class="hero-balance">
             <div class="hero-balance-lbl">Pending Balance</div>
-            <div class="hero-balance-amt" id="hero-balance">842.30 USDC</div>
+            <div class="hero-balance-amt" id="hero-balance">842.30 USD</div>
             <div class="hero-balance-htg" id="hero-htg">≈ 109,920 HTG</div>
           </div>
           <div class="hero-actions">
@@ -404,7 +404,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="stat-card">
           <div class="stat-icon" style="background:#00e5ff15;"><i class="ti ti-currency-dollar" style="color:var(--cyan);"></i></div>
           <div class="stat-val">$1,284</div>
-          <div class="stat-lbl">Revenue Today (USDC)</div>
+          <div class="stat-lbl">Revenue Today (USD)</div>
           <div class="stat-delta up"><i class="ti ti-trending-up"></i> +18% vs yesterday</div>
         </div>
         <div class="stat-card">
@@ -483,7 +483,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
               <div class="qr-store-name">Marché Soleil</div>
               <div class="qr-handle">@marche.soleil · Pétion-Ville</div>
               <div class="qr-amount-row">
-                <input type="number" id="qr-amt" placeholder="Amount (USDC)" min="0" oninput="updateQRAmount()" />
+                <input type="number" id="qr-amt" placeholder="Amount (USD)" min="0" oninput="updateQRAmount()" />
               </div>
               <div class="qr-actions">
                 <button class="btn btn-cyan btn-sm"><i class="ti ti-download"></i> Download QR</button>
@@ -555,7 +555,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="section-card">
           <div class="section-head">
             <div class="section-title">Weekly Revenue</div>
-            <div style="font-size:11px;color:var(--muted);">USDC</div>
+            <div style="font-size:11px;color:var(--muted);">USD</div>
           </div>
           <div class="bars-wrap" id="weekly-bars" style="height:120px;padding:20px 18px 10px;"></div>
         </div>
@@ -598,7 +598,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="pb-icon"><i class="ti ti-wallet"></i></div>
         <div class="pb-info">
           <div class="pb-label">Available to Withdraw</div>
-          <div class="pb-amount">842.30 USDC</div>
+          <div class="pb-amount">842.30 USD</div>
           <div class="pb-sub">≈ 109,920 HTG · Clears within 1–2 hours</div>
         </div>
         <button class="btn btn-green" onclick="openPayoutModal()"><i class="ti ti-arrow-up-right"></i> Withdraw Now</button>
@@ -638,7 +638,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <div class="method-radio"></div>
             <div class="method-icon"><i class="ti ti-currency-dollar" style="color:var(--cyan);font-size:16px;"></i></div>
             <div class="method-info">
-              <div class="method-name">Keep as USDC</div>
+              <div class="method-name">Keep as USD</div>
               <div class="method-sub">Stays in Tchotcho wallet · No fee</div>
             </div>
             <div class="method-fee" style="color:var(--green);">Free</div>
@@ -652,10 +652,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           </div>
           <div class="section-card" style="padding:18px;">
             <div class="section-title" style="margin-bottom:12px;">Monthly Summary</div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Gross Revenue</span><span style="font-weight:600;">$8,420 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Gross Revenue</span><span style="font-weight:600;">$8,420 USD</span></div>
             <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Platform Fee (2%)</span><span style="color:var(--red);">-$168.40</span></div>
             <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--muted);">Withdrawn</span><span style="color:var(--muted);">-$7,409.30</span></div>
-            <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;font-weight:700;"><span>Pending Balance</span><span style="color:var(--cyan);">842.30 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;font-weight:700;"><span>Pending Balance</span><span style="color:var(--cyan);">842.30 USD</span></div>
           </div>
         </div>
       </div>
@@ -730,7 +730,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <select id="p-cat"><option>🥬 Fresh Produce</option><option>🥩 Meat & Fish</option><option>🍳 Pantry</option><option>🧴 Household</option><option>📱 Electronics</option><option>👗 Clothing</option><option>💊 Medicine</option><option>Other</option></select>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div class="form-row"><label>Price (USDC)</label><input type="number" id="p-price" placeholder="0.00" min="0" step="0.01" oninput="updateHTG()"/></div>
+        <div class="form-row"><label>Price (USD)</label><input type="number" id="p-price" placeholder="0.00" min="0" step="0.01" oninput="updateHTG()"/></div>
         <div class="form-row"><label>Price (HTG)</label><input type="text" id="p-htg" placeholder="≈ 0 HTG" readonly style="background:#ffffff04;color:var(--muted);"/></div>
       </div>
       <div class="form-row"><label>Stock Available</label><input type="number" id="p-stock" placeholder="Enter quantity" min="0"/></div>
@@ -747,21 +747,21 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <div class="overlay" id="payout-overlay" onclick="closePayoutModal(event)">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Withdraw Funds</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Transfer your USDC balance</div></div>
+      <div><div class="modal-title">Withdraw Funds</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Transfer your USD balance</div></div>
       <button class="modal-close" onclick="document.getElementById('payout-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
     </div>
     <div class="modal-body">
       <div style="background:#00e67610;border:1px solid #00e67630;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
         <span style="font-size:12px;color:var(--muted);">Available Balance</span>
-        <span style="font-size:20px;font-weight:700;color:var(--green);">842.30 USDC</span>
+        <span style="font-size:20px;font-weight:700;color:var(--green);">842.30 USD</span>
       </div>
       <div class="form-row">
-        <label>Amount to Withdraw (USDC)</label>
+        <label>Amount to Withdraw (USD)</label>
         <input type="number" id="payout-amt" value="842.30" max="842.30" min="10" oninput="updatePayoutCalc()"/>
       </div>
       <div id="payout-calc" style="background:#ffffff06;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;">
         <div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:var(--muted);">Platform fee (1%)</span><span id="pc-fee">-$8.42</span></div>
-        <div style="display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px;font-weight:700;"><span>You receive</span><span id="pc-net" style="color:var(--green);">833.88 USDC</span></div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--border);margin-top:4px;font-weight:700;"><span>You receive</span><span id="pc-net" style="color:var(--green);">833.88 USD</span></div>
         <div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:var(--muted);">≈ HTG</span><span id="pc-htg" style="color:var(--muted);">108,791 HTG</span></div>
       </div>
       <div class="form-row"><label>Destination</label>
@@ -858,7 +858,7 @@ function renderFeed() {
         <div class="pay-meta">${p.items}</div>
       </div>
       <div class="pay-right">
-        <div class="pay-amt">+${p.amt.toFixed(2)} USDC</div>
+        <div class="pay-amt">+${p.amt.toFixed(2)} USD</div>
         <div class="pay-time">${p.time}</div>
       </div>
     </div>
@@ -887,7 +887,7 @@ function renderAllPayments(f) {
       </div>
       <div class="pay-right">
         <div class="pay-amt" style="color:${p.status==='refunded'?'var(--red)':'var(--green)'}">
-          ${p.status==='refunded'?'-':'+'}${p.amt.toFixed(2)} USDC
+          ${p.status==='refunded'?'-':'+'}${p.amt.toFixed(2)} USD
         </div>
         <div class="pay-time">${p.time}</div>
         <span class="pill ${statusClass[p.status]}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
@@ -905,7 +905,7 @@ function renderProducts() {
       <div class="product-body">
         <div class="product-name">${p.name}</div>
         <div class="product-cat">${p.cat}</div>
-        <div class="product-price">${p.price.toFixed(2)} USDC</div>
+        <div class="product-price">${p.price.toFixed(2)} USD</div>
         <div class="product-htg">≈ ${Math.round(p.price*RATE).toLocaleString()} HTG</div>
         <div class="product-footer">
           <div class="product-stock">Stock: ${p.stock}</div>
@@ -1023,7 +1023,7 @@ function renderPayoutHistory() {
         <div class="pay-meta">REF: ${p.ref}</div>
       </div>
       <div class="pay-right">
-        <div class="pay-amt" style="color:var(--muted);">-${p.amt} USDC</div>
+        <div class="pay-amt" style="color:var(--muted);">-${p.amt} USD</div>
         <div class="pay-time">${p.date}</div>
         <span class="pill pill-done">Paid</span>
       </div>
@@ -1039,14 +1039,14 @@ function updatePayoutCalc(){
   const fee=amt*0.01;
   const net=amt-fee;
   document.getElementById('pc-fee').textContent='-$'+fee.toFixed(2);
-  document.getElementById('pc-net').textContent=net.toFixed(2)+' USDC';
+  document.getElementById('pc-net').textContent=net.toFixed(2)+' USD';
   document.getElementById('pc-htg').textContent=(net*RATE).toLocaleString('en',{maximumFractionDigits:0})+' HTG';
 }
 function submitPayout(){
   const amt=parseFloat(document.getElementById('payout-amt').value)||0;
-  if(!amt||amt<10){showToast('error','Invalid amount','Minimum payout is 10 USDC');return;}
+  if(!amt||amt<10){showToast('error','Invalid amount','Minimum payout is 10 USD');return;}
   document.getElementById('payout-overlay').classList.remove('show');
-  showToast('success','Payout Requested!',`${amt} USDC → bank transfer initiated`);
+  showToast('success','Payout Requested!',`${amt} USD → bank transfer initiated`);
 }
 
 // ── METHOD SELECT ──
@@ -1058,7 +1058,7 @@ function selMethod(el){
 // ── QR AMOUNT ──
 function updateQRAmount(){
   const v=parseFloat(document.getElementById('qr-amt').value)||0;
-  if(v) showToast('info','QR Updated',`QR now requests ${v.toFixed(2)} USDC from customer`);
+  if(v) showToast('info','QR Updated',`QR now requests ${v.toFixed(2)} USD from customer`);
 }
 
 // ── TOAST ──
@@ -1094,7 +1094,7 @@ setTimeout(()=>{
   renderFeed();
   document.getElementById('live-count').textContent='3 new';
   document.getElementById('new-badge').textContent='3';
-  showToast('success','New Payment! +22.00 USDC','Claudette René · Avocado ×4, Plantains');
+  showToast('success','New Payment! +22.00 USD','Claudette René · Avocado ×4, Plantains');
 },12000);
 
 // Mobile hamburger

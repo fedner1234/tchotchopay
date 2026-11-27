@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Wallet — TchotchoPay</title>
-  <meta name="description" content="Manage your TchotchoPay USDC wallet — send money, pay bills, check balance, and more."/>
+  <meta name="description" content="Manage your TchotchoPay USD wallet — send money, pay bills, check balance, and more."/>
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="canonical" href="https://tchotchopay.com/dashboard.html"/>
   <link rel="alternate" hreflang="en" href="https://tchotchopay.com/dashboard.html"/>
@@ -13,7 +13,7 @@
   <link rel="alternate" hreflang="es" href="https://tchotchopay.com/dashboard.html"/>
   <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/dashboard.html"/>
   <meta property="og:title" content="My Wallet — TchotchoPay"/>
-  <meta property="og:description" content="Manage your TchotchoPay USDC wallet."/>
+  <meta property="og:description" content="Manage your TchotchoPay USD wallet."/>
   <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
   <meta property="og:url" content="https://tchotchopay.com/dashboard.html"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -368,8 +368,8 @@
 
     <!-- Balance card -->
     <div class="balance-card">
-      <div class="balance-label">USDC Balance</div>
-      <div class="balance-amount" id="balance-amount">0.00 <span>USDC</span></div>
+      <div class="balance-label">USD Balance</div>
+      <div class="balance-amount" id="balance-amount">0.00 <span>USD</span></div>
       <div class="balance-sub-row">
         <div class="bsr-item">
           <div class="bsr-label">≈ HTG Value</div>
@@ -445,12 +445,12 @@
 
     <!-- Wallet address -->
     <div class="info-card" style="margin-bottom:24px;">
-      <div class="info-card-title"><i class="ti ti-wallet"></i> USDC Wallet Address (Base Network)</div>
+      <div class="info-card-title"><i class="ti ti-wallet"></i> USD Wallet Address (Base Network)</div>
       <div class="address-box">
         <span class="address-text" id="wallet-address">Loading...</span>
         <button class="copy-btn" onclick="copyAddress()" title="Copy address"><i class="ti ti-copy"></i></button>
       </div>
-      <p style="font-size:.75rem;color:var(--gray);margin-top:10px;"><i class="ti ti-info-circle"></i> Send only USDC on Base network to this address.</p>
+      <p style="font-size:.75rem;color:var(--gray);margin-top:10px;"><i class="ti ti-info-circle"></i> Send only USD on Base network to this address.</p>
     </div>
 
     <!-- ── VIRTUAL CARD SECTION ── -->
@@ -471,7 +471,7 @@
       <div id="vc-none" style="display:none;text-align:center;padding:36px 24px;background:var(--card);border:1.5px dashed rgba(0,174,239,.25);border-radius:18px;">
         <i class="ti ti-credit-card-off" style="font-size:2.5rem;color:var(--cyan);display:block;margin-bottom:12px;"></i>
         <h3 style="font-size:1rem;font-weight:800;margin-bottom:6px;">No virtual card yet</h3>
-        <p style="color:var(--gray);font-size:.85rem;margin-bottom:20px;line-height:1.5;">Issue your free TchotchoPay virtual card — spend USDC anywhere Visa is accepted.</p>
+        <p style="color:var(--gray);font-size:.85rem;margin-bottom:20px;line-height:1.5;">Issue your free TchotchoPay virtual card — spend USD anywhere Visa is accepted.</p>
         <button onclick="issueCard()" style="background:linear-gradient(135deg,var(--mid),var(--cyan));border:none;border-radius:12px;color:#fff;font-size:.9rem;font-weight:800;padding:12px 28px;cursor:pointer;font-family:inherit;">
           <i class="ti ti-plus"></i> Issue My Card
         </button>
@@ -527,12 +527,12 @@
       <div class="savings-header">
         <i class="ti ti-pig-money"></i>
         <div class="savings-header-text">
-          <h3>USDC Savings Wallet</h3>
+          <h3>USD Savings Wallet</h3>
           <p>Hold digital dollars. Earn while you save.</p>
         </div>
-        <span class="savings-apy"><i class="ti ti-trending-up"></i> Stable USDC</span>
+        <span class="savings-apy"><i class="ti ti-trending-up"></i> Stable USD</span>
       </div>
-      <div class="savings-balance" id="savings-balance">0.00 <span>USDC</span></div>
+      <div class="savings-balance" id="savings-balance">0.00 <span>USD</span></div>
       <div class="savings-sub" id="savings-sub">≈ 0 HTG · No lock-up · Withdraw anytime</div>
       <div class="savings-actions">
         <button class="savings-btn add" onclick="openSavingsDepositModal()"><i class="ti ti-circle-plus"></i> Move to Savings</button>
@@ -575,7 +575,7 @@
       <button onclick="selectSendDest('usdc')" id="dest-usdc" style="width:100%;border:2px solid rgba(0,174,239,0.2);border-radius:14px;padding:14px 16px;cursor:pointer;text-align:left;background:rgba(2,11,45,0.5);transition:all .2s;display:flex;align-items:center;gap:12px;margin-bottom:16px;">
         <div style="width:40px;height:40px;border-radius:12px;background:rgba(0,174,239,0.12);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--cyan);flex-shrink:0;"><i class="ti ti-currency-dollar"></i></div>
         <div>
-          <div style="font-weight:700;font-size:.88rem;color:var(--white);">USDC Address</div>
+          <div style="font-weight:700;font-size:.88rem;color:var(--white);">USD Address</div>
           <div style="font-size:.72rem;color:var(--gray);">Send to any Base wallet address</div>
         </div>
       </button>
@@ -598,7 +598,7 @@
         </div>
       </div>
 
-      <!-- USDC address -->
+      <!-- USD address -->
       <div id="send-addr-row" style="display:none;margin-bottom:14px;">
         <div style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;">Wallet Address</div>
         <input id="send-addr" type="text" placeholder="0x..." style="width:100%;background:rgba(2,11,45,0.7);border:1.5px solid rgba(0,174,239,0.25);border-radius:10px;color:var(--white);font-size:.88rem;padding:12px 14px;font-family:monospace;outline:none;transition:border-color .2s;" oninput="updateSendSummary()"/>
@@ -649,7 +649,7 @@
         <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:.9rem;"><span style="color:var(--white);font-weight:700;">They receive</span><span id="cs-they" style="font-weight:800;color:var(--green);font-size:.95rem;"></span></div>
       </div>
       <div style="background:rgba(0,174,239,0.04);border:1px solid rgba(0,174,239,0.12);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:.75rem;color:var(--gray);">
-        <i class="ti ti-shield-check" style="color:var(--cyan);"></i> Payment debited from your USDC wallet balance · Instant settlement
+        <i class="ti ti-shield-check" style="color:var(--cyan);"></i> Payment debited from your USD wallet balance · Instant settlement
       </div>
       <p id="send-step3-error" style="color:var(--red);font-size:.8rem;margin-bottom:10px;display:none;"></p>
       <button id="send-confirm-btn" onclick="doSendNow()" style="width:100%;background:linear-gradient(135deg,#007a3d,#00A651);color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;"><i class="ti ti-send"></i> Send Now</button>
@@ -678,7 +678,7 @@
 
     <!-- Bank tab -->
     <div class="fund-panel active" id="fund-bank-panel">
-      <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px;">Connect your bank account to fund your USDC wallet via ACH. Free transfers, usually settle in 1–3 business days.</p>
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:16px;">Connect your bank account to fund your USD wallet via ACH. Free transfers, usually settle in 1–3 business days.</p>
       <button class="bank-option-btn" onclick="linkBank();closeFundModal();">
         <i class="ti ti-building-bank"></i>
         <span>Connect Bank Account (ACH)</span>
@@ -726,8 +726,8 @@
 <!-- Receive modal -->
 <div class="modal-overlay" id="receive-modal">
   <div class="modal" style="max-width:420px;text-align:center;">
-    <div class="modal-title" style="justify-content:center;"><i class="ti ti-qrcode" style="color:var(--cyan)"></i> Receive USDC</div>
-    <p style="font-size:.82rem;color:var(--gray);margin-bottom:18px;">Share your QR code or address to receive USDC on Base.</p>
+    <div class="modal-title" style="justify-content:center;"><i class="ti ti-qrcode" style="color:var(--cyan)"></i> Receive USD</div>
+    <p style="font-size:.82rem;color:var(--gray);margin-bottom:18px;">Share your QR code or address to receive USD on Base.</p>
 
     <!-- QR Code -->
     <div class="qr-card-inner">
@@ -782,7 +782,7 @@
     </div>
 
     <!-- Address -->
-    <div class="recv-field-label" style="text-align:left;">Wallet Address (USDC on Base)</div>
+    <div class="recv-field-label" style="text-align:left;">Wallet Address (USD on Base)</div>
     <div class="recv-addr" onclick="copyAddress()">
       <span id="recv-addr-text">Loading...</span>
       <i class="ti ti-copy" style="color:var(--gray);flex-shrink:0;"></i>
@@ -806,7 +806,7 @@
 
     <!-- Step 1: Choose method -->
     <div class="cashout-step active" id="cashout-step-1">
-      <p style="font-size:.83rem;color:var(--gray);margin-bottom:16px;">How would you like to cash out your USDC?</p>
+      <p style="font-size:.83rem;color:var(--gray);margin-bottom:16px;">How would you like to cash out your USD?</p>
       <button class="cashout-option" onclick="selectCashOutMethod('bank')">
         <i class="ti ti-building-bank"></i>
         <span class="cashout-option-text">
@@ -831,7 +831,7 @@
       <button class="cashout-option" onclick="selectCashOutMethod('keep')">
         <i class="ti ti-pig-money"></i>
         <span class="cashout-option-text">
-          <span class="opt-title">Keep as USDC Savings</span>
+          <span class="opt-title">Keep as USD Savings</span>
           <span class="opt-sub">Move to your savings wallet · free · no lock-up</span>
         </span>
       </button>
@@ -843,7 +843,7 @@
     <!-- Step 2: Enter amount -->
     <div class="cashout-step" id="cashout-step-2">
       <p style="font-size:.83rem;color:var(--gray);margin-bottom:6px;" id="cashout-method-desc">—</p>
-      <label style="display:block;font-size:.8rem;color:var(--gray);margin:14px 0 6px;">Amount (USDC)</label>
+      <label style="display:block;font-size:.8rem;color:var(--gray);margin:14px 0 6px;">Amount (USD)</label>
       <input type="number" id="cashout-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
       <div id="cashout-extra" style="margin-top:10px;"></div>
       <p style="font-size:.75rem;color:var(--gray);margin-top:8px;" id="cashout-fee-note"></p>
@@ -860,10 +860,10 @@
 <div class="modal-overlay" id="savings-deposit-modal">
   <div class="modal">
     <div class="modal-title"><i class="ti ti-circle-plus" style="color:var(--green)"></i> Move to Savings</div>
-    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Transfer USDC from your main wallet to your savings wallet. Free, instant, no lock-up.</p>
-    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USDC)</label>
+    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Transfer USD from your main wallet to your savings wallet. Free, instant, no lock-up.</p>
+    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USD)</label>
     <input type="number" id="savings-deposit-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
-    <p class="fee-note" style="margin-top:8px;">Free · Available balance: <span id="savings-available">—</span> USDC</p>
+    <p class="fee-note" style="margin-top:8px;">Free · Available balance: <span id="savings-available">—</span> USD</p>
     <p id="sd-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
     <div class="modal-actions">
       <button class="action-btn cancel-btn" onclick="closeSavingsDepositModal()">Cancel</button>
@@ -876,10 +876,10 @@
 <div class="modal-overlay" id="savings-withdraw-modal">
   <div class="modal">
     <div class="modal-title"><i class="ti ti-circle-minus" style="color:var(--green)"></i> Withdraw from Savings</div>
-    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Move USDC back to your main wallet. Free, instant.</p>
-    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USDC)</label>
+    <p style="font-size:.83rem;color:var(--gray);margin-bottom:14px;">Move USD back to your main wallet. Free, instant.</p>
+    <label style="display:block;font-size:.8rem;color:var(--gray);margin-bottom:6px;">Amount (USD)</label>
     <input type="number" id="savings-withdraw-amount" placeholder="0.00" min="1" step="0.01" style="width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-size:.9rem;font-family:inherit;outline:none;"/>
-    <p class="fee-note" style="margin-top:8px;">Free · Savings balance: <span id="savings-avail-withdraw">—</span> USDC</p>
+    <p class="fee-note" style="margin-top:8px;">Free · Savings balance: <span id="savings-avail-withdraw">—</span> USD</p>
     <p id="sw-error" style="color:var(--red);font-size:.8rem;margin-top:8px;display:none;"></p>
     <div class="modal-actions">
       <button class="action-btn cancel-btn" onclick="closeSavingsWithdrawModal()">Cancel</button>
@@ -943,7 +943,7 @@
   function shareWhatsApp() {
     const addr = document.getElementById('wallet-address').textContent;
     const name = document.getElementById('recv-username-val').textContent;
-    const msg  = `Send me USDC on TchotchoPay!\n\nUsername: @${name}\nWallet: ${addr}\n\nhttps://tchotchopay.com`;
+    const msg  = `Send me USD on TchotchoPay!\n\nUsername: @${name}\nWallet: ${addr}\n\nhttps://tchotchopay.com`;
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
@@ -999,7 +999,7 @@
       if (el) el.style.borderColor = d === dest ? 'var(--green)' : 'rgba(0,174,239,0.2)';
     });
     // Update step 2 label
-    const labels = { moncash: '🇭🇹 MonCash', natcash: '🇭🇹 NatCash', usdc: '💰 USDC Address' };
+    const labels = { moncash: '🇭🇹 MonCash', natcash: '🇭🇹 NatCash', usdc: '💰 USD Address' };
     document.getElementById('send-dest-label').textContent = labels[dest];
     // Show correct input
     document.getElementById('send-phone-row').style.display = dest !== 'usdc' ? 'block' : 'none';
@@ -1044,17 +1044,17 @@
     const fee      = +(amt * 0.01).toFixed(2);
     const net      = +(amt - fee).toFixed(2);
     const htg      = Math.round(net * HTG_RATE).toLocaleString();
-    const isUSDC   = _sendDest === 'usdc';
+    const isUSD   = _sendDest === 'usdc';
 
     document.getElementById('send-fx-note').style.display = 'flex';
-    document.getElementById('send-fx-text').innerHTML = isUSDC
-      ? `<strong>${net.toFixed(2)} USDC</strong> delivered after 1% fee`
+    document.getElementById('send-fx-text').innerHTML = isUSD
+      ? `<strong>${net.toFixed(2)} USD</strong> delivered after 1% fee`
       : `<strong>${net.toFixed(2)} USD</strong> → <strong>${htg} HTG</strong> after 1% fee`;
 
     document.getElementById('send-summary').style.display = 'block';
     document.getElementById('ss-send').textContent = `$${amt.toFixed(2)}`;
     document.getElementById('ss-fee').textContent  = `$${fee.toFixed(2)}`;
-    document.getElementById('ss-recv').textContent = isUSDC ? `${net.toFixed(2)} USDC` : `${htg} HTG`;
+    document.getElementById('ss-recv').textContent = isUSD ? `${net.toFixed(2)} USD` : `${htg} HTG`;
   }
 
   function confirmSend() {
@@ -1067,19 +1067,19 @@
 
     if (!recipient) { errEl.textContent = 'Enter a recipient.'; errEl.style.display = 'block'; return; }
     if (!_sendAmount || _sendAmount <= 0) { errEl.textContent = 'Choose an amount.'; errEl.style.display = 'block'; return; }
-    if (_sendAmount > _mainBalance) { errEl.textContent = `Insufficient balance. You have ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+    if (_sendAmount > _mainBalance) { errEl.textContent = `Insufficient balance. You have ${_mainBalance.toFixed(2)} USD.`; errEl.style.display = 'block'; return; }
 
     const fee  = +(_sendAmount * 0.01).toFixed(2);
     const net  = +(_sendAmount - fee).toFixed(2);
     const htg  = Math.round(net * HTG_RATE).toLocaleString();
-    const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USDC Wallet' };
+    const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USD Wallet' };
 
     // Populate confirm step
     document.getElementById('cs-dest').textContent   = destLabels[_sendDest];
     document.getElementById('cs-recv').textContent   = _sendDest === 'usdc' ? addr : `+509 ${phone}`;
     document.getElementById('cs-amount').textContent = `$${_sendAmount.toFixed(2)}`;
     document.getElementById('cs-fee').textContent    = `$${fee.toFixed(2)}`;
-    document.getElementById('cs-they').textContent   = _sendDest === 'usdc' ? `${net.toFixed(2)} USDC` : `${htg} HTG`;
+    document.getElementById('cs-they').textContent   = _sendDest === 'usdc' ? `${net.toFixed(2)} USD` : `${htg} HTG`;
 
     // Update confirm btn color per dest
     const btn = document.getElementById('send-confirm-btn');
@@ -1108,7 +1108,7 @@
       const res  = await fetch('/.netlify/functions/wallet-pay', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ sessionToken, amountUSDC: _sendAmount }),
+        body:    JSON.stringify({ sessionToken, amountUSD: _sendAmount }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -1128,11 +1128,11 @@
       const fee   = +(_sendAmount * 0.01).toFixed(2);
       const net   = +(_sendAmount - fee).toFixed(2);
       const htg   = Math.round(net * HTG_RATE).toLocaleString();
-      const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USDC Wallet' };
+      const destLabels = { moncash: 'MonCash', natcash: 'NatCash', usdc: 'USD Wallet' };
 
       document.getElementById('success-msg').innerHTML =
         `<strong>$${_sendAmount.toFixed(2)}</strong> sent to <strong>${_sendDest === 'usdc' ? addr : '+509 ' + phone}</strong> via ${destLabels[_sendDest]}.<br>
-        They receive: <strong style="color:var(--green)">${_sendDest === 'usdc' ? net.toFixed(2) + ' USDC' : htg + ' HTG'}</strong>`;
+        They receive: <strong style="color:var(--green)">${_sendDest === 'usdc' ? net.toFixed(2) + ' USD' : htg + ' HTG'}</strong>`;
 
       sendGoStep(4);
     } catch (err) {
@@ -1239,11 +1239,11 @@
       const bal = wallet.usdc_balance || 0;
       _mainBalance = bal;
       _savingsBalance = user.savings_balance || 0;
-      document.getElementById('balance-amount').innerHTML = `${bal.toFixed(2)} <span>USDC</span>`;
+      document.getElementById('balance-amount').innerHTML = `${bal.toFixed(2)} <span>USD</span>`;
       const htgVal = (bal * HTG_RATE).toLocaleString('en-US', { maximumFractionDigits: 0 });
       document.getElementById('balance-htg').textContent = htgVal + ' HTG';
       // Savings
-      document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USDC</span>`;
+      document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USD</span>`;
       document.getElementById('savings-sub').textContent = `≈ ${Math.round(_savingsBalance * HTG_RATE).toLocaleString()} HTG · No lock-up · Withdraw anytime`;
 
       // Wallet address
@@ -1461,10 +1461,10 @@
   function selectCashOutMethod(method) {
     _cashoutMethod = method;
     const descs = {
-      bank:  'Enter how much USDC to withdraw to your linked bank account (USD). 1% fee applies.',
-      agent: 'Enter how much USDC to cash out via a TchotchoPay agent in Haiti (HTG). 1% fee applies.',
-      htg:   'Enter how much USDC to convert to HTG in your MonCash or NatCash wallet. FX spread applies.',
-      keep:  'Enter how much USDC to move to your savings wallet. Free, no lock-up.',
+      bank:  'Enter how much USD to withdraw to your linked bank account (USD). 1% fee applies.',
+      agent: 'Enter how much USD to cash out via a TchotchoPay agent in Haiti (HTG). 1% fee applies.',
+      htg:   'Enter how much USD to convert to HTG in your MonCash or NatCash wallet. FX spread applies.',
+      keep:  'Enter how much USD to move to your savings wallet. Free, no lock-up.',
     };
     const fees = {
       bank:  '1% withdrawal fee · Settle in 1–3 business days',
@@ -1504,7 +1504,7 @@
       errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return;
     }
     if (amount > _mainBalance) {
-      errEl.textContent = `Insufficient balance. Available: ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return;
+      errEl.textContent = `Insufficient balance. Available: ${_mainBalance.toFixed(2)} USD.`; errEl.style.display = 'block'; return;
     }
 
     if (_cashoutMethod === 'keep') {
@@ -1513,7 +1513,7 @@
         const res  = await fetch('/.netlify/functions/wallet-pay', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ sessionToken, amountUSDC: amount }),
+          body:    JSON.stringify({ sessionToken, amountUSD: amount }),
         });
         const data = await res.json();
         if (!res.ok) {
@@ -1526,7 +1526,7 @@
         _savingsBalance = _savingsBalance + amount;
         updateBalanceDisplay();
         closeCashOutModal();
-        showToast(`✅ ${amount.toFixed(2)} USDC moved to Savings!`);
+        showToast(`✅ ${amount.toFixed(2)} USD moved to Savings!`);
       } catch {
         showToast('Network error. Please try again.');
       }
@@ -1538,7 +1538,7 @@
       const res  = await fetch('/.netlify/functions/wallet-pay', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ sessionToken, amountUSDC: amount }),
+        body:    JSON.stringify({ sessionToken, amountUSD: amount }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -1558,9 +1558,9 @@
 
   function updateBalanceDisplay() {
     const HTG_RATE = 130.5;
-    document.getElementById('balance-amount').innerHTML = `${_mainBalance.toFixed(2)} <span>USDC</span>`;
+    document.getElementById('balance-amount').innerHTML = `${_mainBalance.toFixed(2)} <span>USD</span>`;
     document.getElementById('balance-htg').textContent = Math.round(_mainBalance * HTG_RATE).toLocaleString() + ' HTG';
-    document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USDC</span>`;
+    document.getElementById('savings-balance').innerHTML = `${_savingsBalance.toFixed(2)} <span>USD</span>`;
     document.getElementById('savings-sub').textContent = `≈ ${Math.round(_savingsBalance * HTG_RATE).toLocaleString()} HTG · No lock-up · Withdraw anytime`;
   }
 
@@ -1586,12 +1586,12 @@
     const errEl  = document.getElementById('sd-error');
     errEl.style.display = 'none';
     if (!amount || amount <= 0) { errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return; }
-    if (amount > _mainBalance)  { errEl.textContent = `Max available: ${_mainBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+    if (amount > _mainBalance)  { errEl.textContent = `Max available: ${_mainBalance.toFixed(2)} USD.`; errEl.style.display = 'block'; return; }
     _mainBalance    = Math.max(0, _mainBalance - amount);
     _savingsBalance = _savingsBalance + amount;
     updateBalanceDisplay();
     closeSavingsDepositModal();
-    showToast(`✅ ${amount.toFixed(2)} USDC moved to Savings!`);
+    showToast(`✅ ${amount.toFixed(2)} USD moved to Savings!`);
   }
 
   function submitSavingsWithdraw() {
@@ -1599,12 +1599,12 @@
     const errEl  = document.getElementById('sw-error');
     errEl.style.display = 'none';
     if (!amount || amount <= 0)    { errEl.textContent = 'Enter a valid amount.'; errEl.style.display = 'block'; return; }
-    if (amount > _savingsBalance)  { errEl.textContent = `Max savings: ${_savingsBalance.toFixed(2)} USDC.`; errEl.style.display = 'block'; return; }
+    if (amount > _savingsBalance)  { errEl.textContent = `Max savings: ${_savingsBalance.toFixed(2)} USD.`; errEl.style.display = 'block'; return; }
     _savingsBalance = Math.max(0, _savingsBalance - amount);
     _mainBalance    = _mainBalance + amount;
     updateBalanceDisplay();
     closeSavingsWithdrawModal();
-    showToast(`✅ ${amount.toFixed(2)} USDC returned to main wallet!`);
+    showToast(`✅ ${amount.toFixed(2)} USD returned to main wallet!`);
   }
 
   // ── Init ──────────────────────────────────────────────────────────────────

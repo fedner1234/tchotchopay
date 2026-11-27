@@ -1224,10 +1224,10 @@ function payWith(method) {
   const usdAmount = (total/130).toFixed(2);
   document.getElementById('pay-htg').textContent = total.toLocaleString() + ' HTG';
   document.getElementById('pay-usd').textContent = method === 'tchotcho'
-    ? '≈ ' + usdAmount + ' USDC (TchotchoPay Wallet)'
+    ? '≈ ' + usdAmount + ' USD (TchotchoPay Wallet)'
     : '≈ $' + usdAmount + ' USD';
   document.getElementById('qr-badge').textContent = method === 'tchotcho'
-    ? usdAmount + ' USDC'
+    ? usdAmount + ' USD'
     : total.toLocaleString() + ' HTG';
 
   // Update steps for method
@@ -1236,7 +1236,7 @@ function payWith(method) {
     <li class="payment-step"><span class="step-num">1</span> Customer opens their <strong style="color:white">TchotchoPay</strong> app</li>
     <li class="payment-step"><span class="step-num">2</span> Tap <strong style="color:white">Pay</strong> → <strong style="color:white">Scan QR</strong></li>
     <li class="payment-step"><span class="step-num">3</span> Point camera at the QR code</li>
-    <li class="payment-step"><span class="step-num">4</span> USDC deducted instantly from their wallet</li>
+    <li class="payment-step"><span class="step-num">4</span> USD deducted instantly from their wallet</li>
   ` : `
     <li class="payment-step"><span class="step-num">1</span> Open their <strong style="color:white">${appName}</strong> app on their phone</li>
     <li class="payment-step"><span class="step-num">2</span> Tap <strong style="color:white">Scan QR</strong> or <strong style="color:white">Pay Merchant</strong></li>
@@ -1296,7 +1296,7 @@ function simulatePayment() {
     '💎 Paid via TchotchoPay Wallet';
   document.getElementById('receipt-badge').className =
     'receipt-wallet-badge ' + (method === 'tchotcho' ? 'moncash' : method);
-  // Add USDC note on receipt if TchotchoPay
+  // Add USD note on receipt if TchotchoPay
   if (method === 'tchotcho') {
     document.getElementById('receipt-badge').style.background = 'rgba(0,174,239,0.15)';
     document.getElementById('receipt-badge').style.color = 'var(--cyan)';

@@ -336,7 +336,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <span class="kpi-change up"><i class="ti ti-trending-up" style="font-size:10px;"></i> +24%</span>
           </div>
           <div class="kpi-val">$94,210</div>
-          <div class="kpi-lbl">Volume Today (USDC)</div>
+          <div class="kpi-lbl">Volume Today (USD)</div>
         </div>
         <div class="kpi">
           <div class="kpi-top">
@@ -384,7 +384,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
           <!-- Volume Chart -->
           <div class="card">
-            <div class="card-head"><div class="card-title">7-Day Volume</div><div style="font-size:10px;color:var(--muted);">USDC processed</div></div>
+            <div class="card-head"><div class="card-title">7-Day Volume</div><div style="font-size:10px;color:var(--muted);">USD processed</div></div>
             <div class="bars" id="vol-bars" style="height:80px;padding:12px 16px 0;"></div>
             <div style="display:flex;gap:16px;padding:10px 16px 14px;flex-wrap:wrap;">
               <div><div style="font-size:14px;font-weight:700;color:var(--cyan);">$623,400</div><div style="font-size:9px;color:var(--muted);">7-day volume</div></div>
@@ -429,7 +429,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
                 </div>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-size:11px;color:var(--muted);">Circle USDC Bridge</span>
+                <span style="font-size:11px;color:var(--muted);">Circle USD Bridge</span>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <div style="height:4px;width:120px;background:var(--border);border-radius:2px;"><div style="height:100%;width:98%;background:var(--yellow);border-radius:2px;"></div></div>
                   <span style="font-size:11px;font-weight:700;color:var(--yellow);">Degraded</span>
@@ -702,7 +702,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
               <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="1.5%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
-              <div><div style="font-size:12px;font-weight:600;">HTG/USDC Rate</div><div style="font-size:10px;color:var(--muted);">Live rate from feed · Auto-updated</div></div>
+              <div><div style="font-size:12px;font-weight:600;">HTG/USD Rate</div><div style="font-size:10px;color:var(--muted);">Live rate from feed · Auto-updated</div></div>
               <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="130.5" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--cyan);font-size:12px;text-align:center;outline:none;" readonly/><span style="font-size:10px;color:var(--muted);">auto</span></div>
             </div>
           </div>
@@ -710,10 +710,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="card" style="margin-bottom:16px;">
           <div class="card-head"><div class="card-title">Transaction Limits</div></div>
           <div style="padding:16px;display:flex;flex-direction:column;gap:10px;font-size:11px;">
-            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Max single transfer</span><span style="font-weight:700;">$500 USDC</span></div>
-            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (unverified)</span><span style="font-weight:700;">$200 USDC</span></div>
-            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (KYC verified)</span><span style="font-weight:700;">$5,000 USDC</span></div>
-            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Agent max float</span><span style="font-weight:700;">$10,000 USDC</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Max single transfer</span><span style="font-weight:700;">$500 USD</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (unverified)</span><span style="font-weight:700;">$200 USD</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Daily limit (KYC verified)</span><span style="font-weight:700;">$5,000 USD</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--card2);border-radius:7px;"><span style="color:var(--muted);">Agent max float</span><span style="font-weight:700;">$10,000 USD</span></div>
           </div>
         </div>
         <div class="card">
@@ -937,8 +937,8 @@ const DEMO_USERS_SEED = [
 ];
 
 const FLAGS = [
-  {id:'FL-001',title:'Large transfer to unverified wallet',user:'Suspicious Account (@anon.x)',amt:2400,type:'High Risk',risk:'red',time:'10:40 AM',detail:'Transfer of $2,400 USDC to an unverified external address. Account created 1 day ago. Flagged by AML model.'},
-  {id:'FL-002',title:'Unusual cash-out velocity',user:'Unknown sender',amt:1800,type:'High Risk',risk:'red',time:'10:10 AM',detail:'3 cash-out requests in 8 minutes, totaling $1,800 USDC. Exceeds velocity threshold.'},
+  {id:'FL-001',title:'Large transfer to unverified wallet',user:'Suspicious Account (@anon.x)',amt:2400,type:'High Risk',risk:'red',time:'10:40 AM',detail:'Transfer of $2,400 USD to an unverified external address. Account created 1 day ago. Flagged by AML model.'},
+  {id:'FL-002',title:'Unusual cash-out velocity',user:'Unknown sender',amt:1800,type:'High Risk',risk:'red',time:'10:10 AM',detail:'3 cash-out requests in 8 minutes, totaling $1,800 USD. Exceeds velocity threshold.'},
   {id:'FL-003',title:'Multiple failed KYC attempts',user:'Jean Remy (@jean.r)',amt:0,type:'Velocity',risk:'orange',time:'9:20 AM',detail:'User failed KYC identity check 3 times in 24 hours with different document images.'},
   {id:'FL-004',title:'Repeated small transfers (structuring)',user:'Max Louis (@max.l)',amt:990,type:'Velocity',risk:'orange',time:'8:45 AM',detail:'9 transfers of $110 each over 2 hours. Pattern consistent with structuring.'},
   {id:'FL-005',title:'New account with high balance load',user:'Claudette René (@claudette.r)',amt:620,type:'Pattern',risk:'yellow',time:'8:00 AM',detail:'Account created today, immediately loaded $620 via credit card. Low-risk but flagged for review.'},
@@ -1147,7 +1147,7 @@ function openUserModal(i) {
   document.getElementById('um-details').innerHTML=`
     <div class="detail-row"><span class="dr-label">KYC Status</span><span class="dr-val"><span class="pill ${kycPill[u.kyc]||'pill-yellow'}">${u.kyc}</span></span></div>
     <div class="detail-row"><span class="dr-label">Phone</span><span class="dr-val">${u.phone||'—'}</span></div>
-    <div class="detail-row"><span class="dr-label">USDC Balance</span><span class="dr-val" style="color:var(--cyan);">Live via Circle API</span></div>
+    <div class="detail-row"><span class="dr-label">USD Balance</span><span class="dr-val" style="color:var(--cyan);">Live via Circle API</span></div>
     <div class="detail-row"><span class="dr-label">Wallet Address</span><span class="dr-val" style="font-family:monospace;font-size:11px;word-break:break-all;">${u.wallet_address||'<span style="color:var(--red)">Not created</span>'}</span></div>
     <div class="detail-row"><span class="dr-label">Circle Wallet ID</span><span class="dr-val" style="font-family:monospace;font-size:11px;">${u.circle_wallet_id||'—'}</span></div>
     <div class="detail-row"><span class="dr-label">User ID</span><span class="dr-val" style="font-family:monospace;font-size:10px;color:var(--muted);">${u.id||'—'}</span></div>
@@ -1201,13 +1201,13 @@ function renderAgents() {
     <tr>
       <td><div class="tbl-user"><div class="tbl-av" style="background:linear-gradient(135deg,var(--cyan),var(--cyan2));">${a.name.split(' ').map(n=>n[0]).join('')}</div><div><div class="tbl-name">${a.name}</div><div style="font-size:10px;color:var(--muted);">${a.id}</div></div></div></td>
       <td style="font-size:11px;">${a.zone}</td>
-      <td style="font-weight:700;color:var(--cyan);">${a.float.toLocaleString()} USDC</td>
+      <td style="font-weight:700;color:var(--cyan);">${a.float.toLocaleString()} USD</td>
       <td style="font-weight:600;">${a.tx}</td>
       <td style="color:var(--green);font-weight:600;">$${a.commission.toFixed(2)}</td>
       <td style="color:var(--yellow);">${a.rating}★</td>
       <td><span class="status-dot ${a.status}">${a.status}</span></td>
       <td><div style="display:flex;gap:4px;">
-        <button class="btn btn-ghost btn-xs" onclick="showToast('info','Agent ${a.id}','Float: ${a.float} USDC · Tx: ${a.tx} today')"><i class="ti ti-eye"></i></button>
+        <button class="btn btn-ghost btn-xs" onclick="showToast('info','Agent ${a.id}','Float: ${a.float} USD · Tx: ${a.tx} today')"><i class="ti ti-eye"></i></button>
         ${a.status==='active'?`<button class="btn btn-red btn-xs" onclick="showToast('warn','Agent suspended','${a.name} temporarily suspended')">Suspend</button>`:`<button class="btn btn-green btn-xs" onclick="showToast('success','Restored','${a.name} is now active')">Restore</button>`}
       </div></td>
     </tr>

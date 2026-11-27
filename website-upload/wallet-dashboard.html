@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Wallet — Tchotcho Pay</title>
-  <meta name="description" content="View your TchotchoPay USDC balance, transaction history, and manage your digital wallet."/>
+  <meta name="description" content="View your TchotchoPay USD balance, transaction history, and manage your digital wallet."/>
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="canonical" href="https://tchotchopay.com/wallet-dashboard.html"/>
   <link rel="alternate" hreflang="en" href="https://tchotchopay.com/wallet-dashboard.html"/>
@@ -13,7 +13,7 @@
   <link rel="alternate" hreflang="es" href="https://tchotchopay.com/wallet-dashboard.html"/>
   <link rel="alternate" hreflang="x-default" href="https://tchotchopay.com/wallet-dashboard.html"/>
   <meta property="og:title" content="My Wallet — Tchotcho Pay"/>
-  <meta property="og:description" content="Your TchotchoPay USDC wallet dashboard."/>
+  <meta property="og:description" content="Your TchotchoPay USD wallet dashboard."/>
   <meta property="og:image" content="https://tchotchopay.com/og-image.png"/>
   <meta property="og:url" content="https://tchotchopay.com/wallet-dashboard.html"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -413,7 +413,7 @@
           <div class="balance-card">
             <div class="bc-label">Total Balance <span id="balance-status" style="font-size:.65rem;opacity:.6;margin-left:6px;">loading…</span></div>
             <div class="bc-amount" id="bc-amount">—</div>
-            <div class="bc-usdc"><span id="bc-usdc-amount">— USDC</span> · Base Network</div>
+            <div class="bc-usdc"><span id="bc-usdc-amount">— USD</span> · Base Network</div>
             <div class="bc-sub">
               <div class="bc-sub-item">
                 <div class="bsi-label">≈ HTG Value</div>
@@ -462,7 +462,7 @@
           <div class="rate-card">
             <div class="rate-live"><div class="rate-dot"></div><span>Live Exchange Rate</span></div>
             <div class="rate-big">130.50 HTG</div>
-            <div class="rate-sub">per 1 USDC · Updated just now</div>
+            <div class="rate-sub">per 1 USD · Updated just now</div>
             <div class="rate-mini-grid">
               <div class="rate-mini">
                 <div class="rm-label">$100 =</div>
@@ -507,7 +507,7 @@
           <!-- Refer banner -->
           <div style="background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(0,174,239,0.1));border:1px solid rgba(139,92,246,0.25);border-radius:16px;padding:18px;cursor:pointer;" onclick="window.open('referral.html','_blank')">
             <div style="font-size:.8rem;color:var(--gold);font-weight:700;margin-bottom:4px;">🎁 REFER & EARN</div>
-            <div style="font-size:.95rem;font-weight:800;margin-bottom:4px;">Invite a friend — get $5 USDC</div>
+            <div style="font-size:.95rem;font-weight:800;margin-bottom:4px;">Invite a friend — get $5 USD</div>
             <div style="font-size:.78rem;color:var(--gray);">Your code: <strong style="color:var(--cyan)">MARIE-K3X7</strong></div>
           </div>
         </div>
@@ -518,7 +518,7 @@
     <div class="view" id="view-send">
       <div style="margin-bottom:24px;">
         <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Send Money</div>
-        <div style="font-size:.88rem;color:var(--gray);">Send USDC instantly — anywhere in the world.</div>
+        <div style="font-size:.88rem;color:var(--gray);">Send USD instantly — anywhere in the world.</div>
       </div>
       <div class="send-wrap">
         <div class="send-card" id="send-form-card">
@@ -569,7 +569,7 @@
     <div class="view" id="view-receive">
       <div style="margin-bottom:24px;">
         <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Receive Money</div>
-        <div style="font-size:.88rem;color:var(--gray);">Share your QR code or address to receive USDC.</div>
+        <div style="font-size:.88rem;color:var(--gray);">Share your QR code or address to receive USD.</div>
       </div>
       <div class="receive-wrap">
         <div class="qr-card">
@@ -653,7 +653,7 @@
             <button style="background:none;border:none;color:var(--cyan);cursor:pointer;font-size:.8rem;font-weight:700;" onclick="showToast('Username copied!')">Copy</button>
           </div>
 
-          <div class="field-label">Wallet Address (USDC on Base)</div>
+          <div class="field-label">Wallet Address (USD on Base)</div>
           <div class="address-box" onclick="copyAddress()">
             <span id="wallet-address">0x65b587e050908446e69b00f4097c0ffbf89fbaf3</span>
             <i class="ti ti-copy"></i>
@@ -688,12 +688,12 @@
     <div class="view" id="view-savings">
       <div style="margin-bottom:20px;">
         <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Savings Goals</div>
-        <div style="font-size:.88rem;color:var(--gray);">Grow your USDC — earn 4.5% APY on your savings balance.</div>
+        <div style="font-size:.88rem;color:var(--gray);">Grow your USD — earn 4.5% APY on your savings balance.</div>
       </div>
       <div class="total-savings-bar">
         <div>
           <div class="tsb-label">Total Saved</div>
-          <div class="tsb-val">$1,230.00 USDC</div>
+          <div class="tsb-val">$1,230.00 USD</div>
           <div class="tsb-sub">Earning 4.5% APY</div>
         </div>
         <div class="apy-badge">4.5% APY 🌱</div>
@@ -702,21 +702,21 @@
         <div class="goal-card">
           <div class="goal-icon">🏠</div>
           <div class="goal-name">New House in Haiti</div>
-          <div class="goal-target">Goal: $2,000 USDC</div>
+          <div class="goal-target">Goal: $2,000 USD</div>
           <div class="goal-bar"><div class="goal-fill" style="width:42%;background:linear-gradient(90deg,var(--mid),var(--cyan))"></div></div>
           <div class="goal-bottom"><span class="goal-saved">$840 saved</span><span class="goal-remain">$1,160 to go</span></div>
         </div>
         <div class="goal-card">
           <div class="goal-icon">🎓</div>
           <div class="goal-name">School Fees — Jean</div>
-          <div class="goal-target">Goal: $500 USDC</div>
+          <div class="goal-target">Goal: $500 USD</div>
           <div class="goal-bar"><div class="goal-fill" style="width:78%;background:linear-gradient(90deg,var(--green),#00E5AC)"></div></div>
           <div class="goal-bottom"><span class="goal-saved">$390 saved</span><span class="goal-remain">$110 to go</span></div>
         </div>
         <div class="goal-card">
           <div class="goal-icon">✈️</div>
           <div class="goal-name">Visit Haiti — Christmas</div>
-          <div class="goal-target">Goal: $800 USDC</div>
+          <div class="goal-target">Goal: $800 USD</div>
           <div class="goal-bar"><div class="goal-fill" style="width:25%;background:linear-gradient(90deg,var(--gold),#FFD700)"></div></div>
           <div class="goal-bottom"><span class="goal-saved">$200 saved</span><span class="goal-remain">$600 to go</span></div>
         </div>
@@ -819,7 +819,7 @@
   // In production, walletId comes from the authenticated user's session.
   // For this demo we use the TchotchoPay test wallet on Base Sepolia.
   const WALLET_ID = 'c3e5342f-a4d7-55a0-bfaf-c52e0d24bfc9';
-  const HTG_RATE  = 130.5; // 1 USDC ≈ 130.5 HTG
+  const HTG_RATE  = 130.5; // 1 USD ≈ 130.5 HTG
 
   async function loadWalletData() {
     const statusEl  = document.getElementById('balance-status');
@@ -842,7 +842,7 @@
 
       // 2. Update UI
       amountEl.textContent  = '$' + usdc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      usdcEl.textContent    = usdc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USDC';
+      usdcEl.textContent    = usdc.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD';
       htgEl.textContent     = htg + ' HTG';
       statusEl.textContent  = '✓ Live';
       statusEl.style.color  = 'var(--green)';
@@ -863,7 +863,7 @@
       statusEl.style.color = 'var(--red)';
       // Fall back to demo values
       amountEl.textContent = '$0.00';
-      usdcEl.textContent   = '0.00 USDC';
+      usdcEl.textContent   = '0.00 USD';
       htgEl.textContent    = '0 HTG';
     }
   }

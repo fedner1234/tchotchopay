@@ -344,7 +344,7 @@
     <div class="rate-ticker">
       <div class="rate-dot"></div>
       <span id="ticker-label">Live rate:</span>
-      <strong id="ticker-rate">1 USDC = 130.50 HTG</strong>
+      <strong id="ticker-rate">1 USD = 130.50 HTG</strong>
       <span>·</span>
       <span id="ticker-updated">Updated just now</span>
     </div>
@@ -384,7 +384,7 @@
     <!-- Recipient gets in -->
     <div class="section-label" id="rcv-label">Recipient Gets In</div>
     <div class="rcv-tabs">
-      <button class="rcv-tab" onclick="setRcv('usdc',this)" id="tab-usdc">USDC</button>
+      <button class="rcv-tab" onclick="setRcv('usdc',this)" id="tab-usdc">USD</button>
       <button class="rcv-tab active" onclick="setRcv('htg',this)" id="tab-htg">🇭🇹 HTG (Gourdes)</button>
       <button class="rcv-tab" onclick="setRcv('usd',this)" id="tab-usd">🇺🇸 USD</button>
     </div>
@@ -408,14 +408,14 @@
           <i class="ti ti-coins"></i>
           <span id="lbl-fx">Exchange Rate</span>
         </span>
-        <span class="breakdown-value rate" id="val-fx">1 USDC = 130.50 HTG</span>
+        <span class="breakdown-value rate" id="val-fx">1 USD = 130.50 HTG</span>
       </div>
       <div class="breakdown-row">
         <span class="breakdown-label">
           <i class="ti ti-arrows-exchange"></i>
-          <span id="lbl-usdc">USDC Converted</span>
+          <span id="lbl-usdc">USD Converted</span>
         </span>
-        <span class="breakdown-value" id="val-usdc">196.00 USDC</span>
+        <span class="breakdown-value" id="val-usdc">196.00 USD</span>
       </div>
       <div class="breakdown-row">
         <span class="breakdown-label">
@@ -479,7 +479,7 @@
   // ── RATES & FEES ──────────────────────────────────────────────────
   const RATES = {
     htg:  { rate: 130.50, symbol: 'HTG',  flag: '🇭🇹', name: 'Haitian Gourdes' },
-    usdc: { rate: 1,      symbol: 'USDC', flag: '💰', name: 'USDC' },
+    usdc: { rate: 1,      symbol: 'USD', flag: '💰', name: 'USD' },
     usd:  { rate: 1,      symbol: 'USD',  flag: '🇺🇸', name: 'US Dollars' },
   };
 
@@ -513,7 +513,7 @@
     const fee = method.fee * amount;
     const afterFee = amount - fee;
 
-    // USDC is 1:1 USD
+    // USD is 1:1 USD
     const usdc = afterFee;
 
     // Convert
@@ -523,7 +523,7 @@
       totalCurrency = 'HTG';
     } else if (currentRcv === 'usdc') {
       received = usdc;
-      totalCurrency = 'USDC';
+      totalCurrency = 'USD';
     } else {
       received = usdc;
       totalCurrency = 'USD';
@@ -533,8 +533,8 @@
     document.getElementById('val-you-send').textContent = '$' + fmt(amount);
     document.getElementById('val-method-fee').textContent = fee > 0 ? '−$' + fmt(fee) : 'Free';
     document.getElementById('val-method-fee').style.color = fee > 0 ? '#FF9F43' : 'var(--green)';
-    document.getElementById('val-fx').textContent = currentRcv === 'htg' ? '1 USDC = 130.50 HTG' : '1 USDC = 1 USD';
-    document.getElementById('val-usdc').textContent = fmt(usdc) + ' USDC';
+    document.getElementById('val-fx').textContent = currentRcv === 'htg' ? '1 USD = 130.50 HTG' : '1 USD = 1 USD';
+    document.getElementById('val-usdc').textContent = fmt(usdc) + ' USD';
     document.getElementById('val-speed').textContent = method.speed;
 
     document.getElementById('total-amount').textContent = fmt(received, currentRcv === 'htg' ? 0 : 2);
@@ -545,7 +545,7 @@
     document.getElementById('speed-badge-text').textContent = i18n('arrives_in') + ' ' + method.speed;
 
     // Update ticker
-    document.getElementById('ticker-rate').textContent = '1 USDC = 130.50 HTG';
+    document.getElementById('ticker-rate').textContent = '1 USD = 130.50 HTG';
 
     // Compare table
     renderCompare(amount);
@@ -624,7 +624,7 @@
       lbl_you_send: 'Amount You Send',
       lbl_method_fee: 'Payment Method Fee',
       lbl_fx: 'Exchange Rate',
-      lbl_usdc: 'USDC Converted',
+      lbl_usdc: 'USD Converted',
       lbl_speed: 'Transfer Speed',
       rcv_total_label: 'Recipient Receives',
       cta_text: 'Send Money Now',
@@ -650,7 +650,7 @@
       lbl_you_send: 'Montan Ou Voye',
       lbl_method_fee: 'Frè Metòd Pèman',
       lbl_fx: 'To Echanj',
-      lbl_usdc: 'USDC Konvèti',
+      lbl_usdc: 'USD Konvèti',
       lbl_speed: 'Vitès Transfè',
       rcv_total_label: 'Benefisyè Resevwa',
       cta_text: 'Voye Lajan Kounye a',
@@ -676,7 +676,7 @@
       lbl_you_send: 'Montant Envoyé',
       lbl_method_fee: 'Frais de Paiement',
       lbl_fx: 'Taux de Change',
-      lbl_usdc: 'USDC Converti',
+      lbl_usdc: 'USD Converti',
       lbl_speed: 'Vitesse de Transfert',
       rcv_total_label: 'Le Bénéficiaire Reçoit',
       cta_text: 'Envoyer Maintenant',
@@ -702,7 +702,7 @@
       lbl_you_send: 'Monto que Envías',
       lbl_method_fee: 'Comisión de Pago',
       lbl_fx: 'Tipo de Cambio',
-      lbl_usdc: 'USDC Convertido',
+      lbl_usdc: 'USD Convertido',
       lbl_speed: 'Velocidad de Transferencia',
       rcv_total_label: 'El Beneficiario Recibe',
       cta_text: 'Enviar Dinero Ahora',

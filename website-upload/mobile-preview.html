@@ -236,7 +236,7 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
             <span class="bal-label">Total Available Balance</span>
             <button class="eye-btn" onclick="toggleBalance()">👁</button>
           </div>
-          <div class="bal-amount" id="bal-usdc">$1,240.50 <span>USDC</span></div>
+          <div class="bal-amount" id="bal-usdc">$1,240.50 <span>USD</span></div>
           <div class="bal-htg" id="bal-htg">≈ 164,466.25 HTG</div>
           <div class="bal-tag">
             <div class="pulse"></div>
@@ -276,7 +276,7 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
           </div>
         </div>
         <div class="tx">
-          <div class="tx-badge" style="background:#EBF4FF; color:#0052FF;">USDC</div>
+          <div class="tx-badge" style="background:#EBF4FF; color:#0052FF;">USD</div>
           <div class="tx-info">
             <div class="tx-title">Received from 0x8a...4f</div>
             <div class="tx-sub">Base Chain • 2 mins ago</div>
@@ -309,14 +309,14 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
         <div class="method-tabs">
           <button class="m-tab mc" id="mt-mc" onclick="setMethod('mc')">MonCash</button>
           <button class="m-tab" id="mt-nc" onclick="setMethod('nc')">NatCash</button>
-          <button class="m-tab" id="mt-base" onclick="setMethod('base')">Base USDC</button>
+          <button class="m-tab" id="mt-base" onclick="setMethod('base')">Base USD</button>
         </div>
 
         <div class="inp-box">
           <div class="inp-lbl">You send</div>
           <div class="inp-row">
             <input class="inp-amount" type="number" placeholder="0.00" id="send-amount" oninput="calcHtg()" value="50">
-            <span class="inp-currency">USDC</span>
+            <span class="inp-currency">USD</span>
           </div>
           <div class="inp-convert" id="htg-calc">Recipient gets: ~6,625.00 HTG</div>
         </div>
@@ -327,7 +327,7 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
         </div>
 
         <div class="summary">
-          <div class="sum-row"><span class="sum-key">Platform Fee</span><span class="sum-val">$0.50 USDC</span></div>
+          <div class="sum-row"><span class="sum-key">Platform Fee</span><span class="sum-val">$0.50 USD</span></div>
           <div class="sum-row"><span class="sum-key">Network Speed</span><span class="sum-val">Instant (&lt; 5 sec)</span></div>
           <div class="sum-row"><span class="sum-key">Delivery</span><span class="sum-val" id="delivery-lbl">MonCash</span></div>
         </div>
@@ -395,7 +395,7 @@ input:checked + .toggle-slider::before { transform:translateX(20px); }
         <div class="info-box">
           <div class="info-icon">✅</div>
           <div>
-            <div class="info-title">Funded with Base USDC</div>
+            <div class="info-title">Funded with Base USD</div>
             <div class="info-sub">Spend anywhere Visa is accepted online — worldwide.</div>
           </div>
         </div>
@@ -445,7 +445,7 @@ function showScreen(name, btnEl) {
 
 function toggleBalance() {
   balVisible = !balVisible;
-  document.getElementById('bal-usdc').innerHTML = balVisible ? '$1,240.50 <span>USDC</span>' : '•••••• <span>USDC</span>';
+  document.getElementById('bal-usdc').innerHTML = balVisible ? '$1,240.50 <span>USD</span>' : '•••••• <span>USD</span>';
   document.getElementById('bal-htg').textContent = balVisible ? '≈ 164,466.25 HTG' : '••••••••';
 }
 
@@ -474,7 +474,7 @@ function setMethod(m) {
     const el = document.getElementById('mt-'+x);
     el.className = 'm-tab' + (x===m ? ' '+x : '');
   });
-  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USDC'};
+  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USD'};
   const placeholderMap = {mc:'+509 3XXX XXXX', nc:'+509 4XXX XXXX', base:'0x... or name.base.eth'};
   const recipLbl = {mc:"Recipient's Haiti Phone Number", nc:"Recipient's Haiti Phone Number", base:"Recipient Base Wallet / ENS"};
   document.getElementById('delivery-lbl').textContent = lblMap[m];
@@ -491,8 +491,8 @@ function calcHtg() {
 function confirmSend() {
   const amt = document.getElementById('send-amount').value || '0';
   const recip = document.getElementById('recip-input').value || 'recipient';
-  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USDC'};
-  alert('✅ Confirm Transfer\n\nSend ' + amt + ' USDC to ' + recip + ' via ' + lblMap[curMethod] + '?\n\n(Tap OK to simulate confirmation)');
+  const lblMap = {mc:'MonCash', nc:'NatCash', base:'Base USD'};
+  alert('✅ Confirm Transfer\n\nSend ' + amt + ' USD to ' + recip + ' via ' + lblMap[curMethod] + '?\n\n(Tap OK to simulate confirmation)');
 }
 
 let detailsOn = false;

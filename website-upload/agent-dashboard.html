@@ -510,7 +510,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="float-icon"><i class="ti ti-currency-dollar"></i></div>
         <div class="float-info">
           <div class="float-label">Current Float Balance</div>
-          <div class="float-amount" id="float-display">1,240.50 USDC</div>
+          <div class="float-amount" id="float-display">1,240.50 USD</div>
           <div class="float-htg" id="float-htg">≈ 161,885 HTG</div>
         </div>
         <div class="float-actions">
@@ -588,7 +588,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div class="section-card">
             <div class="section-head">
               <div class="section-title">Weekly Volume</div>
-              <div style="font-size:11px;color:var(--muted);">USDC processed</div>
+              <div style="font-size:11px;color:var(--muted);">USD processed</div>
             </div>
             <div class="mini-bars" id="mini-bars"></div>
           </div>
@@ -632,10 +632,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div class="section-head"><div class="section-title">Float Movement</div></div>
           <div class="mini-bars" id="float-chart" style="height:120px;padding:20px 18px;"></div>
           <div style="border-top:1px solid var(--border);">
-            <div class="earn-item"><span class="earn-label">Opening Balance (Mon)</span><span class="earn-val" style="color:var(--muted);">2,000 USDC</span></div>
-            <div class="earn-item"><span class="earn-label">Total Disbursed This Week</span><span class="earn-val" style="color:var(--red);">-1,840 USDC</span></div>
-            <div class="earn-item"><span class="earn-label">Top-ups Received</span><span class="earn-val" style="color:var(--green);">+1,080 USDC</span></div>
-            <div class="earn-item"><span class="earn-label">Current Balance</span><span class="earn-val" style="font-size:16px;">1,240.50 USDC</span></div>
+            <div class="earn-item"><span class="earn-label">Opening Balance (Mon)</span><span class="earn-val" style="color:var(--muted);">2,000 USD</span></div>
+            <div class="earn-item"><span class="earn-label">Total Disbursed This Week</span><span class="earn-val" style="color:var(--red);">-1,840 USD</span></div>
+            <div class="earn-item"><span class="earn-label">Top-ups Received</span><span class="earn-val" style="color:var(--green);">+1,080 USD</span></div>
+            <div class="earn-item"><span class="earn-label">Current Balance</span><span class="earn-val" style="font-size:16px;">1,240.50 USD</span></div>
           </div>
         </div>
         <div class="right-col">
@@ -659,7 +659,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
                 <div class="tx-ref">REF #TU-4412</div>
               </div>
               <div class="tx-right">
-                <div class="tx-amt" style="color:var(--green);">+500 USDC</div>
+                <div class="tx-amt" style="color:var(--green);">+500 USD</div>
                 <div class="tx-time">Today 8:30 AM</div>
                 <span class="pill pill-done">Credited</span>
               </div>
@@ -671,7 +671,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
                 <div class="tx-ref">REF #TU-4389</div>
               </div>
               <div class="tx-right">
-                <div class="tx-amt" style="color:var(--green);">+580 USDC</div>
+                <div class="tx-amt" style="color:var(--green);">+580 USD</div>
                 <div class="tx-time">Yesterday 2:15 PM</div>
                 <span class="pill pill-done">Credited</span>
               </div>
@@ -760,8 +760,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
                 Zone 4 · Covers Rue Lamartinière, Blvd Jean-Jacques Dessalines, and surrounding streets within 1km radius.
               </div>
             </div>
-            <div style="margin-top:14px;font-size:13px;color:var(--muted);">Max single withdrawal: <strong style="color:var(--txt);">$500 USDC</strong></div>
-            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Daily limit: <strong style="color:var(--txt);">$5,000 USDC</strong></div>
+            <div style="margin-top:14px;font-size:13px;color:var(--muted);">Max single withdrawal: <strong style="color:var(--txt);">$500 USD</strong></div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px;">Daily limit: <strong style="color:var(--txt);">$5,000 USD</strong></div>
           </div>
         </div>
       </div>
@@ -793,8 +793,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
       <div class="modal-rows">
         <div class="modal-row">
-          <span class="mr-label">USDC Amount</span>
-          <span class="mr-val big" id="m-usdc">100.00 USDC</span>
+          <span class="mr-label">USD Amount</span>
+          <span class="mr-val big" id="m-usdc">100.00 USD</span>
         </div>
         <div class="modal-row">
           <span class="mr-label">HTG Equivalent</span>
@@ -845,14 +845,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     <div class="modal-body">
       <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Select amount</div>
       <div class="topup-amounts">
-        <div class="ta-btn" onclick="selectTopup(this,'500')">500 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'1000')">1,000 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'2000')">2,000 USDC</div>
-        <div class="ta-btn" onclick="selectTopup(this,'5000')">5,000 USDC</div>
+        <div class="ta-btn" onclick="selectTopup(this,'500')">500 USD</div>
+        <div class="ta-btn" onclick="selectTopup(this,'1000')">1,000 USD</div>
+        <div class="ta-btn" onclick="selectTopup(this,'2000')">2,000 USD</div>
+        <div class="ta-btn" onclick="selectTopup(this,'5000')">5,000 USD</div>
       </div>
       <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Or enter custom amount</div>
-      <input class="custom-input" type="number" id="topup-amount" placeholder="Enter USDC amount" min="100" max="10000" />
-      <div class="topup-note">Current balance: 1,240.50 USDC · Minimum request: 100 USDC</div>
+      <input class="custom-input" type="number" id="topup-amount" placeholder="Enter USD amount" min="100" max="10000" />
+      <div class="topup-note">Current balance: 1,240.50 USD · Minimum request: 100 USD</div>
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="document.getElementById('topup-overlay').classList.remove('show')">Cancel</button>
         <button class="btn btn-cyan" onclick="submitTopup()"><i class="ti ti-arrow-up"></i> Submit Request</button>
@@ -873,7 +873,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 <script>
 // ── DATA ──
-const RATE = 130.5; // HTG per USDC
+const RATE = 130.5; // HTG per USD
 let floatBalance = 1240.50;
 
 const QUEUE = [
@@ -896,7 +896,7 @@ const HISTORY = [
   { id:'TX008', name:'Sophia Germain',    type:'cashout', amt:100, time:'Yesterday 11:00 AM', status:'done', ref:'TCH-8772' },
 ];
 
-const WEEK = [120,280,430,310,520,670,184]; // Mon–Sun USDC processed
+const WEEK = [120,280,430,310,520,670,184]; // Mon–Sun USD processed
 const WEEK_LABELS = ['M','T','W','T','F','S','Su'];
 
 let activeRequest = null;
@@ -938,7 +938,7 @@ function renderQueue() {
         <div class="q-meta">${q.handle} · ${q.method}</div>
       </div>
       <div class="q-right">
-        <div class="q-amt">${q.usdc} USDC</div>
+        <div class="q-amt">${q.usdc} USD</div>
         <div class="q-time">${q.time}</div>
         <div class="q-actions" onclick="event.stopPropagation()">
           <button class="btn btn-red btn-xs" onclick="rejectDirect(${i})">Reject</button>
@@ -963,7 +963,7 @@ function renderRecent() {
       </div>
       <div class="tx-right">
         <div class="tx-amt" style="color:${t.type==='topup'?'var(--green)':'var(--txt)'}">
-          ${t.type==='topup'?'+':''}${t.amt} USDC
+          ${t.type==='topup'?'+':''}${t.amt} USD
         </div>
         <div class="tx-time">${t.time}</div>
         <span class="pill pill-done">Completed</span>
@@ -994,7 +994,7 @@ function renderHistory(f) {
       </div>
       <div class="tx-right">
         <div class="tx-amt" style="color:${t.type==='topup'?'var(--green)':'var(--txt)'}">
-          ${t.type==='topup'?'+':'-'}${t.amt} USDC
+          ${t.type==='topup'?'+':'-'}${t.amt} USD
         </div>
         <div class="tx-time">${t.time}</div>
         <span class="pill pill-done">Completed</span>
@@ -1026,7 +1026,7 @@ function openModal(idx) {
   document.getElementById('m-av').style.background = `linear-gradient(135deg,${q.color},${q.color}aa)`;
   document.getElementById('m-name').textContent = q.name;
   document.getElementById('m-info').textContent = q.handle+' · TP verified';
-  document.getElementById('m-usdc').textContent = q.usdc.toFixed(2)+' USDC';
+  document.getElementById('m-usdc').textContent = q.usdc.toFixed(2)+' USD';
   document.getElementById('m-htg').textContent = '≈ '+(q.usdc*RATE).toLocaleString()+' HTG';
   document.getElementById('m-method').textContent = q.method;
   document.getElementById('m-fee').textContent = '$'+(q.usdc*0.01).toFixed(2);
@@ -1057,7 +1057,7 @@ function confirmWithdrawal() {
     updateFloatDisplay();
     const stat = parseInt(document.getElementById('stat-tx').textContent)||0;
     document.getElementById('stat-tx').textContent = stat+1;
-    showToast('success','Payment Processed!',`${q.usdc} USDC → ${q.name} dispensed successfully`);
+    showToast('success','Payment Processed!',`${q.usdc} USD → ${q.name} dispensed successfully`);
   }
 }
 function rejectWithdrawal() {
@@ -1090,14 +1090,14 @@ function selectTopup(el, val) {
 }
 function submitTopup() {
   const amt = parseFloat(document.getElementById('topup-amount').value);
-  if(!amt || amt<100){ showToast('error','Invalid amount','Minimum top-up is 100 USDC'); return; }
+  if(!amt || amt<100){ showToast('error','Invalid amount','Minimum top-up is 100 USD'); return; }
   document.getElementById('topup-overlay').classList.remove('show');
-  showToast('success','Top-up Requested!',`${amt} USDC will be credited within 30 minutes`);
+  showToast('success','Top-up Requested!',`${amt} USD will be credited within 30 minutes`);
 }
 
 // ── FLOAT DISPLAY ──
 function updateFloatDisplay() {
-  document.getElementById('float-display').textContent = floatBalance.toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2})+' USDC';
+  document.getElementById('float-display').textContent = floatBalance.toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2})+' USD';
   document.getElementById('float-htg').textContent = '≈ '+(floatBalance*RATE).toLocaleString('en',{maximumFractionDigits:0})+' HTG';
   if(floatBalance < 300) {
     document.getElementById('float-warning').classList.add('show');
@@ -1140,7 +1140,7 @@ setTimeout(()=>{
     usdc:175, method:'Cash (HTG)', time:'Just now', urgent:true, pin:'2291'
   });
   renderQueue();
-  showToast('info','New Withdrawal Request!','Rosena Mathurin wants to cash out 175 USDC');
+  showToast('info','New Withdrawal Request!','Rosena Mathurin wants to cash out 175 USD');
 }, 20000);
 
 // Mobile hamburger

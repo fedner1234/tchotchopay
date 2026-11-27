@@ -357,7 +357,7 @@ footer a:hover{color:#fff}
     <div class="sec-label">No hidden fees</div>
     <h2>See exactly <em>how much arrives</em></h2>
     <p class="calc-sub">Real exchange rates. Know what your family receives before you send.</p>
-    <div class="live-rate">Live rate: 1 USDC = 130.50 HTG · Updated just now</div>
+    <div class="live-rate">Live rate: 1 USD = 130.50 HTG · Updated just now</div>
     <div class="calc-grid">
       <div class="calc-you">
         <div class="cy-label">You send</div>
@@ -388,8 +388,8 @@ footer a:hover{color:#fff}
         <div class="gets-breakdown">
           <div class="g-row"><span>Amount you send</span><b id="c-you">$200.00</b></div>
           <div class="g-row"><span>Payment method fee</span><b id="c-fee">$0.00</b></div>
-          <div class="g-row"><span>Exchange rate</span><b>1 USDC = 130.50 HTG</b></div>
-          <div class="g-row"><span>USDC converted</span><b id="c-usdc">200.00 USDC</b></div>
+          <div class="g-row"><span>Exchange rate</span><b>1 USD = 130.50 HTG</b></div>
+          <div class="g-row"><span>USD converted</span><b id="c-usdc">200.00 USD</b></div>
           <div class="g-row"><span>Transfer speed</span><b>~2 minutes</b></div>
         </div>
         <a href="signup.html" class="btn-sm btn-cream" style="margin-top:22px;text-decoration:none">
@@ -499,7 +499,7 @@ function calcC(){
   document.getElementById('c-equiv').textContent = '≈ $' + net.toFixed(2) + ' · Arrives in ~2 minutes';
   document.getElementById('c-you').textContent = '$' + cAmt.toFixed(2);
   document.getElementById('c-fee').textContent = '$' + fee.toFixed(2);
-  document.getElementById('c-usdc').textContent = net.toFixed(2) + ' USDC';
+  document.getElementById('c-usdc').textContent = net.toFixed(2) + ' USD';
 }
 
 function setMethod(el, pct){
