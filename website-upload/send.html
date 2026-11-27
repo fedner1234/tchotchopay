@@ -174,9 +174,19 @@ nav a.active{color:var(--navy);font-weight:700}
 .secure-note svg{width:13px;height:13px;stroke:var(--ok);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ══════════════════════════════════════
+   DARK SECTION (navy background)
+══════════════════════════════════════ */
+.dark{background:var(--navy);color:#fff}
+.dark h2{color:#fff}
+.dark h2 em{color:var(--gold)}
+.dark .sec-eyebrow{color:var(--gold)}
+.dark .calc-sub{color:#9aabc8}
+.dark .live-rate{color:#c8d6f0}
+
+/* ══════════════════════════════════════
    CALCULATOR SECTION
 ══════════════════════════════════════ */
-.calc-sec{padding:60px 0;background:#fff;border-top:1px solid var(--line)}
+.calc-sec{padding:60px 0}
 .sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 h2{font-family:var(--display);font-size:36px;color:var(--navy);font-weight:700;margin-bottom:8px;letter-spacing:.01em}
 h2 em{font-style:normal;color:var(--blue)}
@@ -212,7 +222,7 @@ h2 em{font-style:normal;color:var(--blue)}
 .btn-cream{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
 
 /* ── WALLET PARTNERS ── */
-.wallets-sec{padding:48px 0;border-top:1px solid var(--line)}
+.wallets-sec{padding:48px 0}
 .wallets-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .wcard{border-radius:20px;padding:28px;border:1px solid var(--line)}
 .wcard.dark{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -488,7 +498,7 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- CALCULATOR -->
-<section class="calc-sec">
+<section class="calc-sec dark">
   <div class="wrap">
     <p class="sec-eyebrow">No hidden fees</p>
     <h2>See exactly <em>how much arrives</em></h2>
@@ -541,7 +551,7 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- WALLET PARTNERS -->
-<section class="wallets-sec">
+<section class="wallets-sec dark">
   <div class="wrap">
     <div class="wallets-grid">
       <div class="wcard dark">
