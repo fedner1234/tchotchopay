@@ -460,20 +460,20 @@ footer a:hover{color:#fff}
           <b id="s-wallet">MonCash</b>
         </div>
         <div class="sum-row">
+          <span>Transfer amount</span>
+          <b id="s-send">$100.00</b>
+        </div>
+        <div class="sum-row">
           <span>Fee (2% + $0.30)</span>
           <b id="s-fee">$2.30</b>
         </div>
         <div class="sum-row">
-          <span>Amount after fee</span>
-          <b id="s-send">$97.70</b>
-        </div>
-        <div class="sum-row">
           <span>Recipient gets</span>
-          <b id="s-gets">12,750 HTG</b>
+          <b id="s-gets">13,050 HTG</b>
         </div>
         <div class="sum-row total">
           <span>Total charged</span>
-          <b id="s-total">$100.00</b>
+          <b id="s-total">$102.30</b>
         </div>
       </div>
 
@@ -589,12 +589,12 @@ function selectWallet(el, name){
 
 function calcHero(){
   const fee = +(curAmt * 0.02 + 0.30).toFixed(2);
-  const net = +(curAmt - fee).toFixed(2);
-  const htg = Math.round(net * RATE).toLocaleString();
-  document.getElementById('s-send').textContent = '$' + net.toFixed(2);
+  const total = +(curAmt + fee).toFixed(2);
+  const htg = Math.round(curAmt * RATE).toLocaleString();
+  document.getElementById('s-send').textContent = '$' + curAmt.toFixed(2);
   document.getElementById('s-fee').textContent = '$' + fee.toFixed(2);
   document.getElementById('s-gets').textContent = htg + ' HTG';
-  document.getElementById('s-total').textContent = '$' + curAmt.toFixed(2);
+  document.getElementById('s-total').textContent = '$' + total.toFixed(2);
 }
 
 function selectAmt(el, v){
@@ -622,14 +622,14 @@ let cAmt = 200, cFee = 0, cFlat = 0;
 
 function calcC(){
   const fee = +(cAmt * cFee + cFlat).toFixed(2);
-  const net = +(cAmt - fee).toFixed(2);
-  const htg = Math.round(net * RATE).toLocaleString();
-  document.getElementById('c-send').textContent = '$' + cAmt.toFixed(2);
+  const total = +(cAmt + fee).toFixed(2);
+  const htg = Math.round(cAmt * RATE).toLocaleString();
+  document.getElementById('c-send').textContent = '$' + total.toFixed(2);
   document.getElementById('c-gets').textContent = htg + ' HTG';
-  document.getElementById('c-equiv').textContent = '≈ $' + net.toFixed(2) + ' · Arrives in ~2 minutes';
+  document.getElementById('c-equiv').textContent = '≈ $' + cAmt.toFixed(2) + ' transferred · Arrives in ~2 minutes';
   document.getElementById('c-you').textContent = '$' + cAmt.toFixed(2);
-  document.getElementById('c-fee').textContent = '$' + fee.toFixed(2);
-  document.getElementById('c-usdc').textContent = net.toFixed(2) + ' USD';
+  document.getElementById('c-fee').textContent = fee > 0 ? '$' + fee.toFixed(2) : 'Free';
+  document.getElementById('c-usdc').textContent = cAmt.toFixed(2) + ' USD';
 }
 
 function setMethod(el, pct, flat){
