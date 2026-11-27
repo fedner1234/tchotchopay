@@ -433,7 +433,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div class="section-head">
             <div>
               <div class="section-title">Live Payment Feed</div>
-              <div class="section-sub">Real-time incoming payments</div>
+              <div class="section-sub">Real time incoming payments</div>
             </div>
             <span class="count-pill" id="live-count">2 new</span>
           </div>
@@ -579,7 +579,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           </div>
           <div style="text-align:center;">
             <div style="font-size:28px;font-weight:700;color:var(--gold);">21%</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Scan-to-Pay QR</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Scan to Pay QR</div>
             <div style="height:4px;background:var(--border);border-radius:2px;margin-top:8px;"><div style="height:100%;width:21%;border-radius:2px;background:var(--gold);"></div></div>
           </div>
           <div style="text-align:center;">
@@ -630,7 +630,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <div class="method-icon">💵</div>
             <div class="method-info">
               <div class="method-name">Cash via Agent</div>
-              <div class="method-sub">Nearest agent · Same-day HTG</div>
+              <div class="method-sub">Nearest agent · Same day HTG</div>
             </div>
             <div class="method-fee">1% fee</div>
           </div>
@@ -682,11 +682,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <div class="toggle on" onclick="this.classList.toggle('on')"></div>
           </div>
           <div class="settings-row">
-            <div class="sr-left"><div class="sr-icon"><i class="ti ti-receipt"></i></div><div><div class="sr-label">Auto-send Receipts</div><div class="sr-sub">Email receipt to customer</div></div></div>
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-receipt"></i></div><div><div class="sr-label">Auto send Receipts</div><div class="sr-sub">Email receipt to customer</div></div></div>
             <div class="toggle on" onclick="this.classList.toggle('on')"></div>
           </div>
           <div class="settings-row">
-            <div class="sr-left"><div class="sr-icon"><i class="ti ti-cash"></i></div><div><div class="sr-label">Auto Payout</div><div class="sr-sub">Auto-withdraw weekly on Fridays</div></div></div>
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-cash"></i></div><div><div class="sr-label">Auto Payout</div><div class="sr-sub">Auto withdraw weekly on Fridays</div></div></div>
             <div class="toggle" onclick="this.classList.toggle('on')"></div>
           </div>
           <div class="settings-row">
@@ -701,7 +701,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <i class="ti ti-chevron-right" style="color:var(--muted);"></i>
           </div>
           <div class="settings-row" style="cursor:pointer;">
-            <div class="sr-left"><div class="sr-icon"><i class="ti ti-device-mobile"></i></div><div><div class="sr-label">Two-Factor Authentication</div><div class="sr-sub">Enabled · SMS to +509 3412-8844</div></div></div>
+            <div class="sr-left"><div class="sr-icon"><i class="ti ti-device-mobile"></i></div><div><div class="sr-label">Two Factor Authentication</div><div class="sr-sub">Enabled · SMS to +509 3412-8844</div></div></div>
             <span class="pill pill-done">On</span>
           </div>
         </div>
@@ -801,7 +801,7 @@ const PAYMENTS = [
   {id:'P003',name:'Nadia Clervil',handle:'@nadia.c',color:'#6c5ce7',avatar:'NC',amt:72.00,items:'Chicken 3kg, Oil',time:'10:12 AM',status:'completed',new:false},
   {id:'P004',name:'Rolph Pierre',handle:'@rolph.p',color:'#00b894',avatar:'RP',amt:12.00,items:'Bread x4, Butter',time:'9:55 AM',status:'completed',new:false},
   {id:'P005',name:'Gladys Mentor',handle:'@gladys.m',color:'#e17055',avatar:'GM',amt:9.50,items:'Plantains, Limes',time:'9:40 AM',status:'pending',new:false},
-  {id:'P006',name:'Jean Remy',handle:'@jean.r',color:'#fd79a8',avatar:'JR',amt:28.00,items:'Phone top-up 500 HTG',time:'9:20 AM',status:'refunded',new:false},
+  {id:'P006',name:'Jean Remy',handle:'@jean.r',color:'#fd79a8',avatar:'JR',amt:28.00,items:'Phone top up 500 HTG',time:'9:20 AM',status:'refunded',new:false},
   {id:'P007',name:'Sophie Bernard',handle:'@sophie.b',color:'#0984e3',avatar:'SB',amt:55.50,items:'Weekly groceries',time:'Yesterday 4:30 PM',status:'completed',new:false},
 ];
 
@@ -813,7 +813,7 @@ const PRODUCTS = [
   {emoji:'🥑',name:'Avocado (each)',cat:'Fresh Produce',price:1.00,stock:35},
   {emoji:'🛢️',name:'Cooking Oil (1L)',cat:'Pantry',price:4.50,stock:22},
   {emoji:'🍌',name:'Plantains (bunch)',cat:'Fresh Produce',price:2.00,stock:18},
-  {emoji:'📱',name:'Phone Top-up (500HTG)',cat:'Electronics',price:3.82,stock:999},
+  {emoji:'📱',name:'Phone Top up (500HTG)',cat:'Electronics',price:3.82,stock:999},
 ];
 
 const EMOJIS = ['🛒','🍔','🥩','🥬','🍚','💊','👗','📱','🔧','🏠','🎓','🚗'];
@@ -993,7 +993,7 @@ function renderTopProducts() {
     {emoji:'🍚',name:'White Rice (5kg)',rev:1240,orders:146},
     {emoji:'🐔',name:'Fresh Chicken (1kg)',rev:980,orders:140},
     {emoji:'🛢️',name:'Cooking Oil (1L)',rev:756,orders:168},
-    {emoji:'📱',name:'Phone Top-up',rev:612,orders:160},
+    {emoji:'📱',name:'Phone Top up',rev:612,orders:160},
     {emoji:'🫘',name:'Black Beans (2kg)',rev:480,orders:96},
   ];
   const maxRev=tops[0].rev;

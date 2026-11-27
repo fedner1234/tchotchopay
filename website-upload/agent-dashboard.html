@@ -519,7 +519,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         </div>
         <div class="float-warning" id="float-warning">
           <i class="ti ti-alert-triangle"></i>
-          Low float balance — you may not be able to process large withdrawals. Request a top-up now.
+          Low float balance — you may not be able to process large withdrawals. Request a top up now.
         </div>
       </div>
 
@@ -619,7 +619,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
         <div class="h-tabs">
           <div class="h-tab on" onclick="filterHistory('all',this)">All</div>
           <div class="h-tab" onclick="filterHistory('cashout',this)">Cash Outs</div>
-          <div class="h-tab" onclick="filterHistory('topup',this)">Float Top-ups</div>
+          <div class="h-tab" onclick="filterHistory('topup',this)">Float Top ups</div>
         </div>
         <div id="history-list"></div>
       </div>
@@ -634,7 +634,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div style="border-top:1px solid var(--border);">
             <div class="earn-item"><span class="earn-label">Opening Balance (Mon)</span><span class="earn-val" style="color:var(--muted);">2,000 USD</span></div>
             <div class="earn-item"><span class="earn-label">Total Disbursed This Week</span><span class="earn-val" style="color:var(--red);">-1,840 USD</span></div>
-            <div class="earn-item"><span class="earn-label">Top-ups Received</span><span class="earn-val" style="color:var(--green);">+1,080 USD</span></div>
+            <div class="earn-item"><span class="earn-label">Top ups Received</span><span class="earn-val" style="color:var(--green);">+1,080 USD</span></div>
             <div class="earn-item"><span class="earn-label">Current Balance</span><span class="earn-val" style="font-size:16px;">1,240.50 USD</span></div>
           </div>
         </div>
@@ -651,11 +651,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             </div>
           </div>
           <div class="section-card">
-            <div class="section-head"><div class="section-title">Top-up Requests</div></div>
+            <div class="section-head"><div class="section-title">Top up Requests</div></div>
             <div class="tx-item">
               <div class="tx-icon in"><i class="ti ti-arrow-down-left"></i></div>
               <div class="tx-info">
-                <div class="tx-name">Float Top-up</div>
+                <div class="tx-name">Float Top up</div>
                 <div class="tx-ref">REF #TU-4412</div>
               </div>
               <div class="tx-right">
@@ -667,7 +667,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <div class="tx-item">
               <div class="tx-icon in"><i class="ti ti-arrow-down-left"></i></div>
               <div class="tx-info">
-                <div class="tx-name">Float Top-up</div>
+                <div class="tx-name">Float Top up</div>
                 <div class="tx-ref">REF #TU-4389</div>
               </div>
               <div class="tx-right">
@@ -678,7 +678,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             </div>
             <div style="padding:12px 18px;">
               <button class="btn btn-cyan" style="width:100%;justify-content:center;" onclick="openTopup()">
-                <i class="ti ti-plus"></i> Request Float Top-up
+                <i class="ti ti-plus"></i> Request Float Top up
               </button>
             </div>
           </div>
@@ -728,7 +728,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
             <div class="settings-row">
               <div class="sr-left">
                 <div class="sr-icon"><i class="ti ti-moon"></i></div>
-                <div><div class="sr-label">Auto-offline at 9PM</div><div class="sr-sub">Stop receiving requests at night</div></div>
+                <div><div class="sr-label">Auto offline at 9PM</div><div class="sr-sub">Stop receiving requests at night</div></div>
               </div>
               <div class="toggle" onclick="this.classList.toggle('on')"></div>
             </div>
@@ -837,7 +837,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="modal-title">Request Float Top-up</div>
+        <div class="modal-title">Request Float Top up</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px;">Funds will be credited within 30 minutes</div>
       </div>
       <button class="modal-close" onclick="document.getElementById('topup-overlay').classList.remove('show')"><i class="ti ti-x"></i></button>
@@ -889,10 +889,10 @@ const HISTORY = [
   { id:'TX001', name:'Joseph Marcelin',  type:'cashout', amt:150, time:'10:42 AM', status:'done', ref:'TCH-8812' },
   { id:'TX002', name:'Nathalie Pierre',   type:'cashout', amt:80,  time:'10:15 AM', status:'done', ref:'TCH-8807' },
   { id:'TX003', name:'Renold Baptiste',   type:'cashout', amt:200, time:'9:50 AM',  status:'done', ref:'TCH-8799' },
-  { id:'TX004', name:'Float Top-up',      type:'topup',   amt:500, time:'8:30 AM',  status:'done', ref:'TU-4412' },
+  { id:'TX004', name:'Float Top up',      type:'topup',   amt:500, time:'8:30 AM',  status:'done', ref:'TU-4412' },
   { id:'TX005', name:'Lucie Desrosiers',  type:'cashout', amt:75,  time:'8:20 AM',  status:'done', ref:'TCH-8794' },
   { id:'TX006', name:'Max Louis',         type:'cashout', amt:320, time:'Yesterday 4:12 PM', status:'done', ref:'TCH-8780' },
-  { id:'TX007', name:'Float Top-up',      type:'topup',   amt:580, time:'Yesterday 2:15 PM', status:'done', ref:'TU-4389' },
+  { id:'TX007', name:'Float Top up',      type:'topup',   amt:580, time:'Yesterday 2:15 PM', status:'done', ref:'TU-4389' },
   { id:'TX008', name:'Sophia Germain',    type:'cashout', amt:100, time:'Yesterday 11:00 AM', status:'done', ref:'TCH-8772' },
 ];
 
@@ -1090,9 +1090,9 @@ function selectTopup(el, val) {
 }
 function submitTopup() {
   const amt = parseFloat(document.getElementById('topup-amount').value);
-  if(!amt || amt<100){ showToast('error','Invalid amount','Minimum top-up is 100 USD'); return; }
+  if(!amt || amt<100){ showToast('error','Invalid amount','Minimum top up is 100 USD'); return; }
   document.getElementById('topup-overlay').classList.remove('show');
-  showToast('success','Top-up Requested!',`${amt} USD will be credited within 30 minutes`);
+  showToast('success','Top up Requested!',`${amt} USD will be credited within 30 minutes`);
 }
 
 // ── FLOAT DISPLAY ──

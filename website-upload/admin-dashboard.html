@@ -305,7 +305,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   <div class="topbar">
     <div>
       <div class="tb-title" id="page-title">Platform Overview</div>
-      <div class="tb-sub" id="page-sub">Real-time · All data as of <span id="clock">—</span></div>
+      <div class="tb-sub" id="page-sub">Real time · All data as of <span id="clock">—</span></div>
     </div>
     <div class="tb-right">
       <button class="btn btn-ghost btn-sm" onclick="showToast('info','Report exported','CSV downloading...')"><i class="ti ti-download"></i> Export</button>
@@ -470,7 +470,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div class="tab on" onclick="filterTx('all',this)">All</div>
           <div class="tab" onclick="filterTx('transfer',this)">Transfers</div>
           <div class="tab" onclick="filterTx('cashout',this)">Cash Outs</div>
-          <div class="tab" onclick="filterTx('topup',this)">Top-ups</div>
+          <div class="tab" onclick="filterTx('topup',this)">Top ups</div>
           <div class="tab" onclick="filterTx('flagged',this)">Flagged <span style="background:var(--red);color:#fff;font-size:9px;padding:1px 5px;border-radius:8px;margin-left:4px;">3</span></div>
         </div>
         <div class="search-bar">
@@ -595,7 +595,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">
         <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,229,255,.1);"><i class="ti ti-building-bank" style="color:var(--cyan);font-size:14px;"></i></div></div><div class="kpi-val">148</div><div class="kpi-lbl">Active Agents</div></div>
         <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(0,230,118,.1);"><i class="ti ti-cash" style="color:var(--green);font-size:14px;"></i></div></div><div class="kpi-val">$42,800</div><div class="kpi-lbl">Total Float Deployed</div></div>
-        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-arrows-exchange" style="color:var(--yellow);font-size:14px;"></i></div></div><div class="kpi-val">1,240</div><div class="kpi-lbl">Cash-outs Today</div></div>
+        <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(255,215,64,.1);"><i class="ti ti-arrows-exchange" style="color:var(--yellow);font-size:14px;"></i></div></div><div class="kpi-val">1,240</div><div class="kpi-lbl">Cash outs Today</div></div>
         <div class="kpi"><div class="kpi-top"><div class="kpi-icon" style="background:rgba(179,136,255,.1);"><i class="ti ti-coins" style="color:var(--gold);font-size:14px;"></i></div></div><div class="kpi-val">$1,240</div><div class="kpi-lbl">Agent Commissions Today</div></div>
       </div>
       <div class="card">
@@ -640,7 +640,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
           <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
             <div style="display:flex;align-items:center;justify-content:space-between;"><span style="color:var(--muted);">Card deposit fees (2–3%)</span><span style="font-weight:700;color:var(--cyan);">$1,240 · 44%</span></div>
             <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:44%;background:var(--cyan);border-radius:2px;"></div></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">Cash-out fees (1%)</span><span style="font-weight:700;color:var(--green);">$840 · 30%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">Cash out fees (1%)</span><span style="font-weight:700;color:var(--green);">$840 · 30%</span></div>
             <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:30%;background:var(--green);border-radius:2px;"></div></div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;"><span style="color:var(--muted);">Merchant fees (1–2%)</span><span style="font-weight:700;color:var(--orange);">$614 · 22%</span></div>
             <div style="height:4px;background:var(--border);border-radius:2px;"><div style="height:100%;width:22%;background:var(--orange);border-radius:2px;"></div></div>
@@ -694,7 +694,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
               <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="2.5%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
-              <div><div style="font-size:12px;font-weight:600;">Cash-out Fee</div><div style="font-size:10px;color:var(--muted);">Charged on agent withdrawals</div></div>
+              <div><div style="font-size:12px;font-weight:600;">Cash out Fee</div><div style="font-size:10px;color:var(--muted);">Charged on agent withdrawals</div></div>
               <div style="display:flex;align-items:center;gap:6px;"><input type="text" value="1.0%" style="width:60px;background:var(--border);border:1px solid var(--border2);border-radius:5px;padding:5px 8px;color:var(--txt);font-size:12px;text-align:center;outline:none;"/><button class="btn btn-ghost btn-xs" onclick="showToast('success','Saved','Fee updated')">Save</button></div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card2);border-radius:8px;border:1px solid var(--border);">
@@ -938,7 +938,7 @@ const DEMO_USERS_SEED = [
 
 const FLAGS = [
   {id:'FL-001',title:'Large transfer to unverified wallet',user:'Suspicious Account (@anon.x)',amt:2400,type:'High Risk',risk:'red',time:'10:40 AM',detail:'Transfer of $2,400 USD to an unverified external address. Account created 1 day ago. Flagged by AML model.'},
-  {id:'FL-002',title:'Unusual cash-out velocity',user:'Unknown sender',amt:1800,type:'High Risk',risk:'red',time:'10:10 AM',detail:'3 cash-out requests in 8 minutes, totaling $1,800 USD. Exceeds velocity threshold.'},
+  {id:'FL-002',title:'Unusual cash out velocity',user:'Unknown sender',amt:1800,type:'High Risk',risk:'red',time:'10:10 AM',detail:'3 cash out requests in 8 minutes, totaling $1,800 USD. Exceeds velocity threshold.'},
   {id:'FL-003',title:'Multiple failed KYC attempts',user:'Jean Remy (@jean.r)',amt:0,type:'Velocity',risk:'orange',time:'9:20 AM',detail:'User failed KYC identity check 3 times in 24 hours with different document images.'},
   {id:'FL-004',title:'Repeated small transfers (structuring)',user:'Max Louis (@max.l)',amt:990,type:'Velocity',risk:'orange',time:'8:45 AM',detail:'9 transfers of $110 each over 2 hours. Pattern consistent with structuring.'},
   {id:'FL-005',title:'New account with high balance load',user:'Claudette René (@claudette.r)',amt:620,type:'Pattern',risk:'yellow',time:'8:00 AM',detail:'Account created today, immediately loaded $620 via credit card. Low-risk but flagged for review.'},

@@ -380,7 +380,7 @@
     <button class="nav-item" onclick="showView('history',this)"><i class="ti ti-list"></i> History <span class="nav-badge green">New</span></button>
 
     <div class="nav-section">Services</div>
-    <button class="nav-item" onclick="window.open('topup.html','_blank')"><i class="ti ti-device-mobile"></i> Mobile Top-Up</button>
+    <button class="nav-item" onclick="window.open('topup.html','_blank')"><i class="ti ti-device-mobile"></i> Mobile Top Up</button>
     <button class="nav-item" onclick="showView('savings',this)"><i class="ti ti-piggy-bank"></i> Savings</button>
     <button class="nav-item" onclick="showToast('Marketplace coming soon!')"><i class="ti ti-shopping-bag"></i> Marketplace</button>
     <button class="nav-item" onclick="showToast('Cash out coming soon!')"><i class="ti ti-cash"></i> Cash Out</button>
@@ -443,7 +443,7 @@
             </button>
             <button class="qa-btn" onclick="window.open('topup.html','_blank')">
               <div class="qa-icon" style="background:rgba(139,92,246,0.15)"><i class="ti ti-device-mobile" style="color:var(--gold)"></i></div>
-              <span class="qa-label">Top-Up</span>
+              <span class="qa-label">Top Up</span>
             </button>
             <button class="qa-btn" onclick="showToast('Cash out coming soon!')">
               <div class="qa-icon" style="background:rgba(247,183,49,0.15)"><i class="ti ti-cash" style="color:var(--gold)"></i></div>
@@ -672,13 +672,13 @@
     <div class="view" id="view-history">
       <div style="margin-bottom:20px;">
         <div style="font-size:1.3rem;font-weight:800;margin-bottom:4px;">Transaction History</div>
-        <div style="font-size:.88rem;color:var(--gray);">All your transfers, payments, and top-ups.</div>
+        <div style="font-size:.88rem;color:var(--gray);">All your transfers, payments, and top ups.</div>
       </div>
       <div class="history-filters">
         <button class="hf-btn active" onclick="filterHistory('all',this)">All</button>
         <button class="hf-btn" onclick="filterHistory('sent',this)">Sent</button>
         <button class="hf-btn" onclick="filterHistory('received',this)">Received</button>
-        <button class="hf-btn" onclick="filterHistory('topup',this)">Top-Ups</button>
+        <button class="hf-btn" onclick="filterHistory('topup',this)">Top Ups</button>
         <button class="hf-btn" onclick="filterHistory('bills',this)">Bills</button>
       </div>
       <div id="history-list"></div>
@@ -882,11 +882,11 @@
 
   const TRANSACTIONS = [
     { type:'received', icon:'👤', iconBg:'rgba(0,200,150,0.15)', name:'John François', time:'2 min ago',  amt:'+$120.00', pos:true,  status:'done', htg:'+15,660 HTG', bal:'$485.20', cat:'received' },
-    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Digicel Top-Up',time:'Yesterday',  amt:'-$10.00',  pos:false, status:'done', htg:'-1,305 HTG',  bal:'$365.20', cat:'topup' },
+    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Digicel Top Up',time:'Yesterday',  amt:'-$10.00',  pos:false, status:'done', htg:'-1,305 HTG',  bal:'$365.20', cat:'topup' },
     { type:'sent',     icon:'⚡', iconBg:'rgba(247,183,49,0.15)', name:"EDH Electricité",time:'2 days ago',amt:'-$18.00',  pos:false, status:'done', htg:'-2,349 HTG',  bal:'$375.20', cat:'bills' },
     { type:'sent',     icon:'👤', iconBg:'rgba(0,174,239,0.15)', name:'Claire Pierre',  time:'3 days ago', amt:'-$50.00',  pos:false, status:'done', htg:'-6,525 HTG',  bal:'$393.20', cat:'sent' },
     { type:'received', icon:'💰', iconBg:'rgba(0,200,150,0.15)', name:'Add Funds (ACH)', time:'5 days ago', amt:'+$300.00', pos:true,  status:'done', htg:'+39,150 HTG', bal:'$443.20', cat:'received' },
-    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Natcom Top-Up',  time:'6 days ago', amt:'-$5.00',   pos:false, status:'done', htg:'-652 HTG',    bal:'$143.20', cat:'topup' },
+    { type:'sent',     icon:'📱', iconBg:'rgba(139,92,246,0.15)',name:'Natcom Top Up',  time:'6 days ago', amt:'-$5.00',   pos:false, status:'done', htg:'-652 HTG',    bal:'$143.20', cat:'topup' },
     { type:'sent',     icon:'🎓', iconBg:'rgba(247,183,49,0.15)', name:'School Fees Savings',time:'1 week ago',amt:'-$50.00',  pos:false, status:'done', htg:'-6,525 HTG',  bal:'$148.20', cat:'bills' },
     { type:'sent',     icon:'👤', iconBg:'rgba(0,174,239,0.15)', name:'Marie D.',        time:'1 week ago', amt:'-$25.00',  pos:false, status:'pend', htg:'-3,262 HTG',  bal:'$198.20', cat:'sent' },
   ];
