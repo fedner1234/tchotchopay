@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Send Money — TchotchoPay</title>
+<title>Send Money to Haiti — TchotchoPay</title>
 <meta name="description" content="Send money straight to Haitian mobile wallets — MonCash & NatCash. Fast, low fees, no hidden charges.">
 <style>
 @font-face{font-family:"Cook Conthic";src:url("fonts/CookConthic.otf") format("opentype");font-weight:700;font-display:swap}
@@ -12,7 +12,7 @@
 @font-face{font-family:"Segoe UI";src:url("fonts/SegoeUI-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
 :root{
   --navy:#011240;--cream:#FFF7ED;--gold:#C4A035;
-  --blue:#1557D6;--ink:#0E1630;--muted:#5C6780;--line:#E6D9C4;
+  --blue:#1557D6;--ink:#0E1630;--muted:#5C6780;--line:#E6D9C4;--ok:#1aA36A;
   --display:"Cook Conthic",Impact,"Arial Narrow",sans-serif;
   --sans:"Segoe UI",ui-sans-serif,system-ui,sans-serif;
 }
@@ -25,9 +25,9 @@ button,input,select,textarea{font-family:inherit}
 .wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
 
 /* ── TOPBAR ── */
-.topbar{background:var(--navy);color:#c9d4ea;font-size:12px;font-weight:500;padding:8px 0}
+.topbar{background:var(--navy);color:#e8eef8;font-size:13px;font-weight:600;padding:9px 0}
 .topbar .wrap{display:flex;justify-content:space-between;gap:16px}
-.topbar b{color:#fff}
+.topbar b{color:#fff;font-weight:700}
 
 /* ── HEADER ── */
 header{position:sticky;top:0;z-index:50;background:rgba(255,247,237,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
@@ -35,7 +35,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em}
 .logo img{width:38px;height:38px}
 .logo small{font-size:11px;color:var(--muted);font-weight:500;display:block;margin-top:-1px;letter-spacing:0}
-nav{display:flex;gap:20px;font-size:14px;font-weight:500;color:var(--muted)}
+nav{display:flex;gap:20px;font-size:14px;font-weight:500;color:var(--blue)}
 nav a:hover{color:var(--navy)}
 nav a.active{color:var(--navy);font-weight:700}
 .actions{display:flex;gap:10px}
@@ -67,69 +67,122 @@ nav a.active{color:var(--navy);font-weight:700}
 .mob-nav-actions .btn{justify-content:center;width:100%;height:52px}
 @media(max-width:960px){.mob-btn{display:flex}header .actions,header nav{display:none}}
 
-/* ── HERO ── */
-.hero{padding:56px 0 48px}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:20px}
-.eyebrow svg{stroke:var(--blue);fill:none;width:16px;height:16px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-h1{font-family:var(--display);font-size:48px;line-height:1.05;color:var(--navy);font-weight:700;letter-spacing:.01em;margin-bottom:16px}
-h1 em{font-style:normal;color:var(--blue)}
-.hero-desc{color:var(--muted);font-size:16px;max-width:480px;margin-bottom:24px}
-.trust-row{display:flex;flex-wrap:wrap;gap:16px 24px;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:32px}
-.trust-row span{display:flex;align-items:center;gap:7px}
-.trust-row svg{stroke:var(--blue);fill:none;width:16px;height:16px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+/* ══════════════════════════════════════
+   HERO — light cream, easy to read
+══════════════════════════════════════ */
+.hero{
+  padding:60px 0 72px;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%,rgba(1,18,64,.07),transparent 70%),
+    radial-gradient(ellipse 70% 50% at 80% 60%,rgba(196,160,53,.10),transparent 65%),
+    linear-gradient(180deg,#fffaf3 0%,#f3e9d8 100%);
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 
-/* Steps */
-.steps{display:flex;flex-direction:column;margin-bottom:28px}
-.step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
-.step:last-child{border-bottom:none}
-.step-num{width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-label{font-size:14px;font-weight:600}
-.step-sub{font-size:13px;color:var(--muted);margin-top:2px}
+/* Left column */
+.sec-k{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.hero h1{font-family:var(--display);font-size:46px;line-height:1.05;color:var(--navy);font-weight:700;letter-spacing:.01em;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-desc{color:var(--muted);font-size:16px;max-width:440px;margin-bottom:28px;line-height:1.65}
 
-/* Wallet info */
-.wallet-cards{display:flex;flex-direction:column;gap:12px}
-.wc-dark{background:var(--navy);border-radius:16px;padding:20px 22px;color:#fff}
-.wc-dark h4{font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:8px;color:#9aabc8;text-transform:uppercase}
-.wc-dark p{font-size:13px;color:#c9d4ea;line-height:1.6}
-.wc-light{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px}
-.wc-light b{color:var(--ink)}
-.wc-light svg{stroke:var(--navy);fill:none;width:20px;height:20px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+/* Trust badges */
+.trust-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.trust-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--navy)}
+.trust-badge svg{width:14px;height:14px;stroke:var(--ok);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-/* Send form */
-.send-card{background:#fff;border:1.5px solid rgba(196,160,53,.2);border-radius:22px;padding:28px;box-shadow:0 28px 70px rgba(1,18,64,.09)}
-.send-card h3{font-size:17px;font-weight:700;margin-bottom:20px}
-.wallet-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
-.wallet-opt{padding:13px 16px;border-radius:11px;border:1.5px solid var(--line);cursor:pointer;font-size:14px;font-weight:500;color:var(--ink);background:#fff;transition:all .15s;text-align:left;width:100%}
-.wallet-opt.selected{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
-.wallet-opt .badge{font-size:11px;font-weight:600;opacity:.65;float:right;margin-top:1px}
-.f-label{font-size:13px;font-weight:600;margin-bottom:7px}
-.f-input{width:100%;height:48px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;font-size:15px;color:var(--ink);background:#fff;outline:none;margin-bottom:18px;transition:border .15s}
-.f-input:focus{border-color:var(--navy)}
+/* Steps — horizontal pills */
+.steps-row{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-bottom:28px}
+.step-item{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--display);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-text{flex:1}
+.step-label{font-size:14px;font-weight:700;color:var(--navy)}
+.step-sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.step-check{width:22px;height:22px;border-radius:50%;background:rgba(26,163,106,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-check svg{width:12px;height:12px;stroke:var(--ok);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* Wallet info cards */
+.wallet-info{display:flex;flex-direction:column;gap:10px}
+.wi-card{border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.wi-card.moncash{background:var(--navy);color:#fff}
+.wi-card.natcash{background:#fff;border:1px solid var(--line)}
+.wi-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wi-card.moncash .wi-icon{background:rgba(196,160,53,.2)}
+.wi-card.natcash .wi-icon{background:var(--cream)}
+.wi-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.wi-card.moncash .wi-icon svg{stroke:var(--gold)}
+.wi-card.natcash .wi-icon svg{stroke:var(--navy)}
+.wi-title{font-size:13px;font-weight:700}
+.wi-card.moncash .wi-title{color:#fff}
+.wi-card.natcash .wi-title{color:var(--navy)}
+.wi-desc{font-size:12px;margin-top:2px}
+.wi-card.moncash .wi-desc{color:#9aabc8}
+.wi-card.natcash .wi-desc{color:var(--muted)}
+
+/* ══════════════════════════════════════
+   SEND FORM CARD — right column
+══════════════════════════════════════ */
+.send-card{background:#fff;border:1.5px solid rgba(196,160,53,.25);border-radius:24px;padding:32px;box-shadow:0 24px 64px rgba(1,18,64,.10)}
+.form-title{font-family:var(--display);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:.01em}
+.form-subtitle{font-size:13px;color:var(--muted);margin-bottom:24px}
+
+/* Wallet selector */
+.wallet-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.wallet-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.wallet-opt{padding:14px 18px;border-radius:12px;border:1.5px solid #E0E8F4;cursor:pointer;font-size:14.5px;font-weight:600;color:var(--ink);background:#fff;transition:all .15s;text-align:left;width:100%;display:flex;align-items:center;justify-content:space-between}
+.wallet-opt .w-name{display:flex;align-items:center;gap:10px}
+.wallet-opt .w-dot{width:10px;height:10px;border-radius:50%;background:#E0E8F4;flex-shrink:0;transition:background .15s}
+.wallet-opt.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+.wallet-opt.selected .w-dot{background:var(--gold)}
+.wallet-opt .badge{font-size:11px;font-weight:600;opacity:.6}
+.wallet-opt.selected .badge{opacity:.8;color:#9aabc8}
+
+/* Phone field */
+.f-label{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.f-input{width:100%;height:52px;border:1.5px solid #D5DCE8;border-radius:12px;padding:0 16px;font-size:16px;color:var(--ink);background:#fff;outline:none;margin-bottom:22px;transition:border .15s}
+.f-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(1,18,64,.07)}
+.f-input::placeholder{color:#B0B9CC;font-size:15px}
+
+/* Amount grid */
 .amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.amt-btn{height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+.amt-btn{height:48px;border-radius:12px;border:1.5px solid #D5DCE8;background:#fff;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;transition:all .15s}
 .amt-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.amt-btn:hover:not(.on){border-color:var(--navy);color:var(--navy)}
-.custom-amt-wrap{position:relative;margin-bottom:6px}
-.custom-amt-preview{font-size:13px;color:var(--navy);font-weight:600;min-height:20px;margin-bottom:14px;padding-left:2px;display:none}
-.custom-amt-preview.show{display:block}
-.custom-amt-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:600;color:var(--muted);pointer-events:none;z-index:1}
-.custom-amt-input{width:100%;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px 0 26px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;font-family:var(--sans)}
-.custom-amt-input:focus{border-color:var(--navy)}
-.custom-amt-input::placeholder{font-weight:400;color:var(--muted)}
-.summary{background:#f9f4ec;border-radius:12px;padding:14px 16px;margin-bottom:18px}
-.sum-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--muted)}
-.sum-row b{color:var(--ink);font-weight:600}
-.sum-row.total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:700;color:var(--ink)}
-.sum-row.total b{font-size:15px;color:var(--navy)}
+.amt-btn:hover:not(.on){border-color:var(--navy);color:var(--navy);background:#f0f4ff}
 
-/* ── CALCULATOR ── */
-.calc-sec{padding:56px 0;background:#fff;border-top:1px solid var(--line)}
-.sec-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+/* Custom amount */
+.custom-wrap{position:relative;margin-bottom:20px}
+.custom-prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:700;color:var(--muted);pointer-events:none;z-index:1}
+.custom-input{width:100%;height:48px;border:1.5px solid #D5DCE8;border-radius:12px;padding:0 16px 0 28px;font-size:16px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;font-family:var(--sans)}
+.custom-input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(1,18,64,.07)}
+.custom-input::placeholder{font-weight:400;color:#B0B9CC}
+
+/* Summary box */
+.summary{background:#F4F7FF;border:1.5px solid #D9E2F3;border-radius:14px;padding:18px 20px;margin-bottom:20px}
+.sum-row{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:7px 0;color:var(--muted);border-bottom:1px solid #E5EAFA}
+.sum-row:last-child{border-bottom:none}
+.sum-row b{color:var(--ink);font-weight:600;font-size:14px}
+.sum-row.total{padding-top:12px;margin-top:4px}
+.sum-row.total span{font-size:14px;font-weight:700;color:var(--navy)}
+.sum-row.total b{font-size:18px;font-weight:700;color:var(--navy)}
+.htg-pill{display:inline-block;background:rgba(26,163,106,.1);color:var(--ok);font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;margin-left:6px}
+
+/* Send button */
+.send-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:56px;background:var(--blue);color:#fff;border:0;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none;font-family:var(--sans);box-shadow:0 8px 24px rgba(21,87,214,.28)}
+.send-btn:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(21,87,214,.35)}
+.send-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.secure-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px}
+.secure-note svg{width:13px;height:13px;stroke:var(--ok);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ══════════════════════════════════════
+   CALCULATOR SECTION
+══════════════════════════════════════ */
+.calc-sec{padding:60px 0;background:#fff;border-top:1px solid var(--line)}
+.sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 h2{font-family:var(--display);font-size:36px;color:var(--navy);font-weight:700;margin-bottom:8px;letter-spacing:.01em}
 h2 em{font-style:normal;color:var(--blue)}
 .calc-sub{color:var(--muted);font-size:15px;max-width:560px;margin-bottom:6px}
-.live-rate{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:32px}
+.live-rate{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:32px;display:inline-flex;align-items:center;gap:6px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#1aA36A}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .calc-you{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:28px}
 .cy-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
@@ -141,7 +194,7 @@ h2 em{font-style:normal;color:var(--blue)}
 .calc-amts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .c-amt{flex:1;min-width:56px;height:40px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .15s}
 .c-amt.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.c-custom-wrap{position:relative;margin-bottom:16px}
+.c-custom-wrap{position:relative;margin-bottom:4px}
 .c-custom-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:600;color:var(--muted);pointer-events:none}
 .c-custom-input{width:100%;height:40px;border-radius:9px;border:1.5px solid var(--line);padding:0 11px 0 22px;font-size:13px;font-weight:600;color:var(--ink);background:#fff;outline:none;transition:border .15s;box-sizing:border-box;font-family:var(--sans)}
 .c-custom-input:focus{border-color:var(--navy)}
@@ -154,7 +207,7 @@ h2 em{font-style:normal;color:var(--blue)}
 .g-row{display:flex;justify-content:space-between;font-size:13px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#9aabc8}
 .g-row b{color:#fff;font-weight:600}
 .g-row:last-child{border-bottom:none}
-.btn-sm{height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;transition:transform .15s}
+.btn-sm{height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;transition:transform .15s;text-decoration:none}
 .btn-sm:hover{transform:translateY(-1px)}
 .btn-cream{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
 
@@ -166,12 +219,13 @@ h2 em{font-style:normal;color:var(--blue)}
 .wcard.light{background:#fff}
 .wc-name{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;color:#9aabc8}
 .wcard.light .wc-name{color:var(--muted)}
-.wcard h3{font-size:20px;font-weight:700;margin-bottom:8px;color:#fff}
+.wcard h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.wcard.dark h3{color:#fff}
 .wcard.light h3{color:var(--navy)}
 .wcard p{font-size:13px;line-height:1.6;color:#9aabc8}
 .wcard.light p{color:var(--muted)}
 .wcard-cta{margin-top:18px}
-.btn-navy-sm{background:var(--navy);color:#fff;height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;border:0;cursor:pointer}
+.btn-navy-sm{background:var(--navy);color:#fff;height:38px;padding:0 16px;font-size:13px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;border:0;cursor:pointer;text-decoration:none}
 
 /* ── FOOTER ── */
 footer{background:#010b28;color:#9aabc8;padding:48px 0 24px;line-height:1.5}
@@ -183,10 +237,16 @@ footer a:hover{color:#fff}
 
 @media(max-width:900px){
   .hero-grid,.calc-grid,.wallets-grid{grid-template-columns:1fr}
-  h1{font-size:36px}h2{font-size:28px}
+  .hero h1{font-size:36px}
+  h2{font-size:28px}
   .cy-amt,.cg-amt{font-size:34px}
+  .send-card{padding:24px}
 }
-@media(max-width:600px){.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){
+  .fg{grid-template-columns:1fr 1fr}
+  .trust-row{gap:8px}
+  .amt-btn{height:44px;font-size:14px}
+}
 @media(max-width:420px){.fg{grid-template-columns:1fr}}
 </style>
 </head>
@@ -263,66 +323,120 @@ footer a:hover{color:#fff}
   </div>
 </div>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero">
   <div class="wrap hero-grid">
-    <!-- LEFT -->
+
+    <!-- LEFT: info + steps -->
     <div>
-      <div class="eyebrow">
-        <svg viewBox="0 0 24 24"><path d="M4 12h14M13 6l7 6-7 6"/></svg>
-        MonCash &amp; NatCash
-      </div>
-      <h1>Send money straight to<br><em>Haitian mobile wallet</em></h1>
-      <p class="hero-desc">Pay with your debit or credit card. Recipients get funds in their MonCash or NatCash wallet — fast, secure, low fees.</p>
+      <p class="sec-k">MonCash &amp; NatCash</p>
+      <h1>Send money straight to<br><em>Haitian mobile wallets</em></h1>
+      <p class="hero-desc">Pay with your debit or credit card. Recipients receive funds in their MonCash or NatCash wallet within minutes — no bank account needed.</p>
+
+      <!-- Trust badges -->
       <div class="trust-row">
-        <span>
+        <span class="trust-badge">
           <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
           Secured by Stripe
         </span>
-        <span>
+        <span class="trust-badge">
           <svg viewBox="0 0 24 24"><path d="M13 2L4 14h8l-1 8 9-12h-8l1-8z"/></svg>
-          Fast delivery
+          Arrives in ~2 min
         </span>
-        <span>
+        <span class="trust-badge">
           <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
           SSL Encrypted
         </span>
-        <span>
+        <span class="trust-badge">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           24/7 service
         </span>
       </div>
 
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div><div class="step-label">Choose Wallet</div><div class="step-sub">MonCash or NatCash</div></div></div>
-        <div class="step"><div class="step-num">2</div><div><div class="step-label">Enter Number</div><div class="step-sub">Recipient's phone in Haiti</div></div></div>
-        <div class="step"><div class="step-num">3</div><div><div class="step-label">Pick Amount</div><div class="step-sub">$10 – $1,000 USD</div></div></div>
-        <div class="step"><div class="step-num">4</div><div><div class="step-label">Pay &amp; Done</div><div class="step-sub">Card charged securely via Stripe</div></div></div>
+      <!-- Steps -->
+      <div class="steps-row">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <div class="step-label">Choose Wallet</div>
+            <div class="step-sub">MonCash, NatCash, or TchotchoPay Wallet</div>
+          </div>
+          <div class="step-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <div class="step-label">Enter Recipient's Number</div>
+            <div class="step-sub">Their phone number in Haiti (+509)</div>
+          </div>
+          <div class="step-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <div class="step-label">Pick Your Amount</div>
+            <div class="step-sub">$10 to $1,000 — see exact HTG before sending</div>
+          </div>
+          <div class="step-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <div class="step-label">Pay &amp; Done</div>
+            <div class="step-sub">Card charged securely via Stripe — money lands instantly</div>
+          </div>
+          <div class="step-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        </div>
       </div>
 
-      <div class="wallet-cards">
-        <div class="wc-dark">
-          <h4>MonCash · Digicel Haiti</h4>
-          <p>Haiti's most widely used mobile wallet. Pay bills, buy goods, send to family. Cash out at Digicel agents nationwide.</p>
+      <!-- Wallet info -->
+      <div class="wallet-info">
+        <div class="wi-card moncash">
+          <div class="wi-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16" cy="14" r="1"/></svg>
+          </div>
+          <div>
+            <div class="wi-title">MonCash · Digicel Haiti</div>
+            <div class="wi-desc">Haiti's most widely used mobile wallet — 300+ agents nationwide</div>
+          </div>
         </div>
-        <div class="wc-light">
-          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16" cy="14" r="1"/></svg>
-          <span><b>NatCash · Natcom / BNC</b> — Bank grade security, BNC network.</span>
+        <div class="wi-card natcash">
+          <div class="wi-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="8" cy="14" r="1"/></svg>
+          </div>
+          <div>
+            <div class="wi-title">NatCash · Natcom / BNC</div>
+            <div class="wi-desc">Bank grade security backed by Natcom and BNC network</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT — Send Form -->
+    <!-- RIGHT: Send form -->
     <div class="send-card">
-      <h3>Send Money</h3>
+      <div class="form-title">Send Money</div>
+      <div class="form-subtitle">Your family receives HTG directly in their wallet</div>
+
+      <div class="wallet-label">Select destination wallet</div>
       <div class="wallet-opts">
-        <button class="wallet-opt selected" onclick="selectWallet(this,'MonCash')">MonCash <span class="badge">— most popular</span></button>
-        <button class="wallet-opt" onclick="selectWallet(this,'NatCash')">NatCash <span class="badge">— widely used</span></button>
-        <button class="wallet-opt" onclick="selectWallet(this,'TchotchoPay Wallet')">TchotchoPay Wallet <span class="badge">— free &amp; instant</span></button>
+        <button class="wallet-opt selected" onclick="selectWallet(this,'MonCash')">
+          <div class="w-name"><div class="w-dot"></div>MonCash</div>
+          <span class="badge">Most popular</span>
+        </button>
+        <button class="wallet-opt" onclick="selectWallet(this,'NatCash')">
+          <div class="w-name"><div class="w-dot"></div>NatCash</div>
+          <span class="badge">Widely used</span>
+        </button>
+        <button class="wallet-opt" onclick="selectWallet(this,'TchotchoPay Wallet')">
+          <div class="w-name"><div class="w-dot"></div>TchotchoPay Wallet</div>
+          <span class="badge">Free &amp; instant</span>
+        </button>
       </div>
+
       <div class="f-label">Recipient Phone Number</div>
       <input class="f-input" type="tel" placeholder="+509 ">
-      <div class="f-label">Amount</div>
+
+      <div class="f-label">Amount to Send</div>
       <div class="amt-grid">
         <button class="amt-btn" onclick="selectAmt(this,25)">$25</button>
         <button class="amt-btn on" onclick="selectAmt(this,100)">$100</button>
@@ -331,33 +445,58 @@ footer a:hover{color:#fff}
         <button class="amt-btn" onclick="selectAmt(this,500)">$500</button>
         <button class="amt-btn" onclick="selectAmt(this,1000)">$1,000</button>
       </div>
-      <div class="custom-amt-wrap">
-        <span class="custom-amt-prefix">$</span>
-        <input class="custom-amt-input" id="customAmt" type="number" min="1" max="10000" step="1" placeholder="Enter your own amount">
+      <div class="custom-wrap">
+        <span class="custom-prefix">$</span>
+        <input class="custom-input" id="customAmt" type="number" min="1" max="10000" step="1" placeholder="Enter your own amount">
       </div>
-      <div class="custom-amt-preview" id="customPreview"></div>
+
+      <!-- Summary -->
       <div class="summary">
-        <div class="sum-row"><span>Wallet</span><b id="s-wallet">MonCash</b></div>
-        <div class="sum-row"><span>Send</span><b id="s-send">$100.00</b></div>
-        <div class="sum-row"><span>Recipient gets</span><b id="s-gets">12,869 HTG</b></div>
-        <div class="sum-row"><span>Fee (2% + $0.30)</span><b id="s-fee">$2.30</b></div>
-        <div class="sum-row total"><span>Total Charged</span><b id="s-total">$100.00</b></div>
+        <div class="sum-row">
+          <span>Destination wallet</span>
+          <b id="s-wallet">MonCash</b>
+        </div>
+        <div class="sum-row">
+          <span>Fee (2% + $0.30)</span>
+          <b id="s-fee">$2.30</b>
+        </div>
+        <div class="sum-row">
+          <span>Amount after fee</span>
+          <b id="s-send">$97.70</b>
+        </div>
+        <div class="sum-row">
+          <span>Recipient gets</span>
+          <b id="s-gets">12,750 HTG</b>
+        </div>
+        <div class="sum-row total">
+          <span>Total charged</span>
+          <b id="s-total">$100.00</b>
+        </div>
       </div>
-      <a href="signup.html" class="btn btn-navy btn-full">
-        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12h14M13 6l7 6-7 6"/></svg>
+
+      <a href="signup.html" class="send-btn">
+        <svg viewBox="0 0 24 24"><path d="M4 12h14M13 6l7 6-7 6"/></svg>
         Send Money Now
       </a>
+      <div class="secure-note">
+        <svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        Secured by Stripe · SSL Encrypted · No hidden fees
+      </div>
     </div>
+
   </div>
 </section>
 
 <!-- CALCULATOR -->
 <section class="calc-sec">
   <div class="wrap">
-    <div class="sec-label">No hidden fees</div>
+    <p class="sec-eyebrow">No hidden fees</p>
     <h2>See exactly <em>how much arrives</em></h2>
     <p class="calc-sub">Real exchange rates. Know what your family receives before you send.</p>
-    <div class="live-rate">Live rate: 1 USD = 130.50 HTG · Updated just now</div>
+    <div class="live-rate">
+      <span class="live-dot"></span>
+      Live rate: 1 USD = 130.50 HTG · Updated just now
+    </div>
     <div class="calc-grid">
       <div class="calc-you">
         <div class="cy-label">You send</div>
@@ -392,7 +531,7 @@ footer a:hover{color:#fff}
           <div class="g-row"><span>USD converted</span><b id="c-usdc">200.00 USD</b></div>
           <div class="g-row"><span>Transfer speed</span><b>~2 minutes</b></div>
         </div>
-        <a href="signup.html" class="btn-sm btn-cream" style="margin-top:22px;text-decoration:none">
+        <a href="signup.html" class="btn-sm btn-cream" style="margin-top:22px">
           <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           Join Waitlist — Free
         </a>
@@ -407,15 +546,15 @@ footer a:hover{color:#fff}
     <div class="wallets-grid">
       <div class="wcard dark">
         <div class="wc-name">01 · MonCash</div>
-        <h3>MONCASH · DIGICEL HAITI</h3>
+        <h3>MonCash · Digicel Haiti</h3>
         <p>Haiti's most widely used mobile wallet. Cash out at 300+ Digicel agents nationwide. Send instantly, 24/7.</p>
-        <div class="wcard-cta"><a href="signup.html" class="btn-sm btn-cream" style="text-decoration:none">Send to MonCash</a></div>
+        <div class="wcard-cta"><a href="signup.html" class="btn-sm btn-cream">Send to MonCash</a></div>
       </div>
       <div class="wcard light">
         <div class="wc-name">02 · NatCash</div>
         <h3>NatCash · Natcom / BNC</h3>
         <p>Bank grade security backed by Natcom and BNC. Preferred by recipients in the BNC banking network.</p>
-        <div class="wcard-cta"><a href="signup.html" class="btn-navy-sm" style="text-decoration:none">Send to NatCash</a></div>
+        <div class="wcard-cta"><a href="signup.html" class="btn-navy-sm">Send to NatCash</a></div>
       </div>
     </div>
   </div>
@@ -436,8 +575,6 @@ footer a:hover{color:#fff}
 
 <script>
 const RATE = 130.50;
-
-// Hero send form
 let curAmt = 100, curWallet = 'MonCash';
 
 function selectWallet(el, name){
@@ -451,15 +588,10 @@ function calcHero(){
   const fee = +(curAmt * 0.02 + 0.30).toFixed(2);
   const net = +(curAmt - fee).toFixed(2);
   const htg = Math.round(net * RATE).toLocaleString();
-  document.getElementById('s-send').textContent = '$' + curAmt.toFixed(2);
+  document.getElementById('s-send').textContent = '$' + net.toFixed(2);
   document.getElementById('s-fee').textContent = '$' + fee.toFixed(2);
   document.getElementById('s-gets').textContent = htg + ' HTG';
   document.getElementById('s-total').textContent = '$' + curAmt.toFixed(2);
-  const p = document.getElementById('customPreview');
-  if(p && document.getElementById('customAmt').value){
-    p.textContent = '→ Recipient gets ' + htg + ' HTG';
-    p.classList.add('show');
-  }
 }
 
 function selectAmt(el, v){
@@ -467,24 +599,19 @@ function selectAmt(el, v){
   el.classList.add('on');
   const ci = document.getElementById('customAmt');
   if(ci) ci.value = '';
-  const p = document.getElementById('customPreview');
-  if(p) p.classList.remove('show');
   curAmt = v;
   calcHero();
 }
 
-function setCustomAmt(el){
-  const v = parseFloat(el.value);
-  if(v > 0){
-    document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('on'));
-    curAmt = v;
-    calcHero();
-  }
-}
-
 document.addEventListener('DOMContentLoaded', function(){
   const ci = document.getElementById('customAmt');
-  if(ci) ci.addEventListener('input', function(){ setCustomAmt(this); });
+  if(ci) ci.addEventListener('input', function(){
+    const v = parseFloat(this.value);
+    if(v > 0){
+      document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('on'));
+      curAmt = v; calcHero();
+    }
+  });
 });
 
 // Calculator
@@ -517,6 +644,7 @@ function setCalcAmt(el, v){
   cAmt = v;
   calcC();
 }
+
 document.addEventListener('DOMContentLoaded',function(){
   const ci=document.getElementById('calcCCustom');
   if(ci) ci.addEventListener('input',function(){
@@ -529,13 +657,13 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 // Nav
-var mb = document.getElementById('mobBtn'), mc = document.getElementById('mobClose'), mn = document.getElementById('mobNav');
-if(mb) mb.addEventListener('click', function(){ mn.classList.add('open'); });
-if(mc) mc.addEventListener('click', function(){ mn.classList.remove('open'); });
-var lb = document.getElementById('langBtn'), ld = document.getElementById('langDrop');
+var mb=document.getElementById('mobBtn'),mc=document.getElementById('mobClose'),mn=document.getElementById('mobNav');
+if(mb) mb.addEventListener('click',function(){mn.classList.add('open');});
+if(mc) mc.addEventListener('click',function(){mn.classList.remove('open');});
+var lb=document.getElementById('langBtn'),ld=document.getElementById('langDrop');
 if(lb){
-  lb.addEventListener('click', function(e){ e.stopPropagation(); ld.classList.toggle('open'); });
-  document.addEventListener('click', function(){ ld.classList.remove('open'); });
+  lb.addEventListener('click',function(e){e.stopPropagation();ld.classList.toggle('open');});
+  document.addEventListener('click',function(){ld.classList.remove('open');});
 }
 
 calcHero();
