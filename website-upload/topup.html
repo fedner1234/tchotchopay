@@ -95,7 +95,8 @@ h2 em{font-style:normal;color:var(--blue)}
 .topup-card{background:#fff;border:1.5px solid rgba(196,160,53,.2);border-radius:22px;padding:28px;box-shadow:0 28px 70px rgba(1,18,64,.09)}
 .topup-card h3{font-size:17px;font-weight:700;margin-bottom:20px}
 .country-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.ctab{padding:7px 13px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
+.ctab{padding:8px 13px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s;display:flex;align-items:center;gap:5px}
+.ctab .flag{font-size:20px;line-height:1}
 .ctab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .carrier-tabs{display:flex;gap:8px;margin-bottom:18px}
 .cartab{flex:1;height:40px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
@@ -250,14 +251,14 @@ footer a:hover{color:#fff}
       <h3>Mobile Top Up</h3>
       <div class="f-label">Country</div>
       <div class="country-tabs">
-        <button class="ctab on">🇭🇹 Haiti</button>
-        <button class="ctab">🇩🇴 DR</button>
-        <button class="ctab">🇨🇺 Cuba</button>
-        <button class="ctab">🇯🇲 Jamaica</button>
-        <button class="ctab">🇹🇹 Trinidad</button>
-        <button class="ctab">🇬🇾 Guyana</button>
-        <button class="ctab">🇧🇸 Bahamas</button>
-        <button class="ctab">🇹🇨 Turks</button>
+        <button class="ctab on"><span class="flag">🇭🇹</span> Haiti</button>
+        <button class="ctab"><span class="flag">🇩🇴</span> DR</button>
+        <button class="ctab"><span class="flag">🇨🇺</span> Cuba</button>
+        <button class="ctab"><span class="flag">🇯🇲</span> Jamaica</button>
+        <button class="ctab"><span class="flag">🇹🇹</span> Trinidad</button>
+        <button class="ctab"><span class="flag">🇬🇾</span> Guyana</button>
+        <button class="ctab"><span class="flag">🇧🇸</span> Bahamas</button>
+        <button class="ctab"><span class="flag">🇹🇨</span> Turks</button>
       </div>
       <div class="f-label">Carrier</div>
       <div class="carrier-tabs" id="carrier-tabs">
