@@ -536,10 +536,20 @@ footer{padding:32px 0 18px}
 </style>
 <style>
 /* Inner page extras */
-.page-hero{padding:72px 0 56px;background:linear-gradient(160deg,var(--navy) 0%,#0a1c4a 100%);color:#fff;text-align:center}
-.page-hero h1{font-family:var(--display);font-size:52px;line-height:1;color:#fff;letter-spacing:.01em}
-.page-hero .lead{color:#9aabc8;font-size:17px;margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto}
-.page-hero .cta{justify-content:center;margin-top:28px}
+.page-hero{padding:80px 0 72px;background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(21,87,214,.22) 0%,transparent 70%);pointer-events:none}
+.page-hero h1{font-family:var(--display);font-size:54px;line-height:1;color:#fff;letter-spacing:.01em;position:relative}
+.page-hero h1 em{font-style:normal;color:var(--gold)}
+.page-hero .lead{color:#9aabc8;font-size:17px;margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;position:relative}
+.page-hero .cta{justify-content:center;margin-top:32px;position:relative}
+.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#c8d6f0}
+.hero-stats{display:flex;justify-content:center;gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,.1);padding-top:40px;position:relative;flex-wrap:wrap}
+.hero-stat{flex:0 0 auto;padding:0 36px;text-align:center;border-right:1px solid rgba(255,255,255,.1)}
+.hero-stat:last-child{border-right:0}
+.hero-stat-num{font-family:var(--display);font-size:34px;color:#fff;letter-spacing:.01em;line-height:1}
+.hero-stat-num em{font-style:normal;color:var(--gold)}
+.hero-stat-label{font-size:12px;color:#9aabc8;font-weight:500;margin-top:4px}
 .section{padding:72px 0}
 .section-alt{background:#fff}
 .section-dark{background:var(--navy);color:#fff}
@@ -658,13 +668,38 @@ input:focus,select:focus,textarea:focus{border-color:var(--blue)}
   </div>
 </div>
 
-<section class="page-hero" style="background:linear-gradient(160deg,#011240 0%,#C4A035 200%)">
+<section class="page-hero">
   <div class="wrap">
-    <div class="eyebrow">🇭🇹 For Recipients in Haiti</div>
-    <h1>Receive Money in Haiti</h1>
-    <p class="lead">Your family abroad can send you money directly to your TchotchoPay wallet, MonCash, NatCash, or bank account.</p>
+    <div class="eyebrow" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#c8d6f0">🇭🇹 For Recipients in Haiti</div>
+    <h1>Receive Money in <em>Haiti</em></h1>
+    <p class="lead">Your family abroad can send you money directly to your TchotchoPay wallet, MonCash, NatCash, or bank account — in seconds.</p>
     <div class="cta">
       <a class="btn btn-gold" href="signup.html">Get Your Free Wallet</a>
+      <a class="btn" href="#how" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#fff;margin-left:12px">How it works</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge">⚡ Arrives in seconds</span>
+      <span class="hero-badge">💵 Hold USD — not gourdes</span>
+      <span class="hero-badge">🔒 Bank-grade security</span>
+      <span class="hero-badge">📱 Works on any phone</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num"><em>&lt;</em>60s</div>
+        <div class="hero-stat-label">Average arrival time</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"><em>$0</em></div>
+        <div class="hero-stat-label">Fee to receive</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4<em>+</em></div>
+        <div class="hero-stat-label">Cash out options</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24<em>/7</em></div>
+        <div class="hero-stat-label">Always available</div>
+      </div>
     </div>
   </div>
 </section>
