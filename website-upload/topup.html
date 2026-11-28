@@ -216,20 +216,20 @@ footer a:hover{color:#fff}
     <div>
       <div class="eyebrow">
         <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-        Digicel &amp; Natcom
+        <span id="hero-badge">Digicel &amp; Natcom</span>
       </div>
-      <h1>Top up Haiti phones <em>instantly</em></h1>
-      <p class="hero-desc">Send airtime to Digicel and Natcom numbers in Haiti from anywhere in the world. No delays, no hassle.</p>
+      <h1 id="hero-title">Top up <em id="hero-country">Haiti</em> phones <em>instantly</em></h1>
+      <p class="hero-desc" id="hero-desc">Send airtime to Digicel and Natcom numbers in Haiti from anywhere in the world. No delays, no hassle.</p>
 
       <div class="steps" style="margin-bottom:28px">
         <div class="step"><div class="step-num">1</div><div><div class="step-label">Choose Country</div><div class="step-sub">Haiti, Dominican Republic, Cuba & more</div></div></div>
-        <div class="step"><div class="step-num">2</div><div><div class="step-label">Select Carrier</div><div class="step-sub">Digicel or Natcom</div></div></div>
+        <div class="step"><div class="step-num">2</div><div><div class="step-label">Select Carrier</div><div class="step-sub" id="step2-sub">Digicel or Natcom</div></div></div>
         <div class="step"><div class="step-num">3</div><div><div class="step-label">Enter Number</div><div class="step-sub">Recipient's mobile number</div></div></div>
         <div class="step"><div class="step-num">4</div><div><div class="step-label">Pick Amount &amp; Pay</div><div class="step-sub">$5 – $50, delivered in seconds</div></div></div>
       </div>
 
-      <!-- Digicel plans -->
-      <div class="plans-sec">
+      <!-- Plans — only shown for Haiti -->
+      <div class="plans-sec" id="haiti-plans">
         <h3>Digicel Plans</h3>
         <div class="plans-grid">
           <div class="plan-card"><div class="plan-amt">$5</div><div class="plan-desc">Basic bundle</div><div class="plan-data">650 HTG</div></div>
@@ -307,22 +307,24 @@ footer a:hover{color:#fff}
 </footer>
 
 <script>
-// Country → { carriers, prefix }
+// Country → { name, carriers, prefix, desc }
 const COUNTRIES = {
-  '🇭🇹 Haiti':    { carriers:['Digicel','Natcom'],           prefix:'+509 ' },
-  '🇩🇴 DR':       { carriers:['Claro','Altice','Viva'],      prefix:'+1-809 ' },
-  '🇨🇺 Cuba':     { carriers:['Cubacel (ETECSA)'],           prefix:'+53 ' },
-  '🇯🇲 Jamaica':  { carriers:['Digicel','Flow'],             prefix:'+1-876 ' },
-  '🇹🇹 Trinidad': { carriers:['Digicel','bmobile'],          prefix:'+1-868 ' },
-  '🇬🇾 Guyana':   { carriers:['Digicel','GTT'],              prefix:'+592 ' },
-  '🇧🇸 Bahamas':  { carriers:['Aliv (BTC)','Flow'],          prefix:'+1-242 ' },
-  '🇹🇨 Turks':    { carriers:['Digicel','Flow'],             prefix:'+1-649 ' },
+  '🇭🇹 Haiti':    { name:'Haiti',           carriers:['Digicel','Natcom'],           prefix:'+509 ',    desc:'Send airtime to Digicel and Natcom numbers in Haiti from anywhere in the world.' },
+  '🇩🇴 DR':       { name:'Dominican Rep.',  carriers:['Claro','Altice','Viva'],      prefix:'+1-809 ',  desc:'Send airtime to Claro, Altice, and Viva numbers in the Dominican Republic.' },
+  '🇨🇺 Cuba':     { name:'Cuba',            carriers:['Cubacel (ETECSA)'],           prefix:'+53 ',     desc:'Send airtime to Cubacel numbers in Cuba — fast, reliable, no delays.' },
+  '🇯🇲 Jamaica':  { name:'Jamaica',         carriers:['Digicel','Flow'],             prefix:'+1-876 ',  desc:'Send airtime to Digicel and Flow numbers in Jamaica instantly.' },
+  '🇹🇹 Trinidad': { name:'Trinidad',        carriers:['Digicel','bmobile'],          prefix:'+1-868 ',  desc:'Send airtime to Digicel and bmobile numbers in Trinidad & Tobago.' },
+  '🇬🇾 Guyana':   { name:'Guyana',          carriers:['Digicel','GTT'],              prefix:'+592 ',    desc:'Send airtime to Digicel and GTT numbers in Guyana instantly.' },
+  '🇧🇸 Bahamas':  { name:'Bahamas',         carriers:['Aliv (BTC)','Flow'],          prefix:'+1-242 ',  desc:'Send airtime to Aliv (BTC) and Flow numbers in the Bahamas.' },
+  '🇹🇨 Turks':    { name:'Turks & Caicos',  carriers:['Digicel','Flow'],             prefix:'+1-649 ',  desc:'Send airtime to Digicel and Flow numbers in Turks & Caicos.' },
 };
 
 let curAmt = 10, curCarrier = 'Digicel';
 
 function setCountry(label) {
   const info = COUNTRIES[label] || COUNTRIES['🇭🇹 Haiti'];
+  const isHaiti = label === '🇭🇹 Haiti';
+
   // rebuild carrier tabs
   const ct = document.getElementById('carrier-tabs');
   ct.innerHTML = '';
@@ -333,11 +335,23 @@ function setCountry(label) {
     b.onclick = () => setCarrier(c, b);
     ct.appendChild(b);
   });
+
   // set first carrier active
   curCarrier = info.carriers[0];
   document.getElementById('s-carrier').textContent = curCarrier;
+
   // update phone placeholder
   document.getElementById('phone-input').placeholder = info.prefix;
+
+  // update hero text
+  document.getElementById('hero-country').textContent = info.name;
+  document.getElementById('hero-desc').textContent = info.desc + ' No delays, no hassle.';
+  document.getElementById('hero-badge').textContent = info.carriers.join(' & ');
+  document.getElementById('step2-sub').textContent = info.carriers.join(' or ');
+
+  // show/hide Haiti-specific plans
+  const plans = document.getElementById('haiti-plans');
+  if(plans) plans.style.display = isHaiti ? '' : 'none';
 }
 
 function setCarrier(c, el) {
