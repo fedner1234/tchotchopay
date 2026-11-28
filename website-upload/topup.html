@@ -260,12 +260,12 @@ footer a:hover{color:#fff}
         <button class="ctab">🇹🇨 Turks</button>
       </div>
       <div class="f-label">Carrier</div>
-      <div class="carrier-tabs">
-        <button class="cartab on" id="car-dig" onclick="setCarrier('Digicel')">Digicel</button>
-        <button class="cartab" id="car-nat" onclick="setCarrier('Natcom')">Natcom</button>
+      <div class="carrier-tabs" id="carrier-tabs">
+        <button class="cartab on">Digicel</button>
+        <button class="cartab">Natcom</button>
       </div>
       <div class="f-label">Phone Number</div>
-      <input class="f-input" type="tel" placeholder="+509 ">
+      <input class="f-input" type="tel" id="phone-input" placeholder="+509 ">
       <div class="f-label">Amount</div>
       <div class="amt-grid">
         <button class="amt-btn" onclick="selectAmt(this,5)">$5</button>
@@ -307,7 +307,46 @@ footer a:hover{color:#fff}
 </footer>
 
 <script>
+// Country → { carriers, prefix }
+const COUNTRIES = {
+  '🇭🇹 Haiti':    { carriers:['Digicel','Natcom'],           prefix:'+509 ' },
+  '🇩🇴 DR':       { carriers:['Claro','Altice','Viva'],      prefix:'+1-809 ' },
+  '🇨🇺 Cuba':     { carriers:['Cubacel (ETECSA)'],           prefix:'+53 ' },
+  '🇯🇲 Jamaica':  { carriers:['Digicel','Flow'],             prefix:'+1-876 ' },
+  '🇹🇹 Trinidad': { carriers:['Digicel','bmobile'],          prefix:'+1-868 ' },
+  '🇬🇾 Guyana':   { carriers:['Digicel','GTT'],              prefix:'+592 ' },
+  '🇧🇸 Bahamas':  { carriers:['Aliv (BTC)','Flow'],          prefix:'+1-242 ' },
+  '🇹🇨 Turks':    { carriers:['Digicel','Flow'],             prefix:'+1-649 ' },
+};
+
 let curAmt = 10, curCarrier = 'Digicel';
+
+function setCountry(label) {
+  const info = COUNTRIES[label] || COUNTRIES['🇭🇹 Haiti'];
+  // rebuild carrier tabs
+  const ct = document.getElementById('carrier-tabs');
+  ct.innerHTML = '';
+  info.carriers.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'cartab' + (i === 0 ? ' on' : '');
+    b.textContent = c;
+    b.onclick = () => setCarrier(c, b);
+    ct.appendChild(b);
+  });
+  // set first carrier active
+  curCarrier = info.carriers[0];
+  document.getElementById('s-carrier').textContent = curCarrier;
+  // update phone placeholder
+  document.getElementById('phone-input').placeholder = info.prefix;
+}
+
+function setCarrier(c, el) {
+  curCarrier = c;
+  document.getElementById('s-carrier').textContent = c;
+  document.querySelectorAll('.cartab').forEach(b => b.classList.remove('on'));
+  if(el) el.classList.add('on');
+}
+
 function calc(){
   document.getElementById('s-amt').textContent='$'+curAmt.toFixed(2);
   document.getElementById('s-total').textContent='$'+(curAmt+0.99).toFixed(2);
@@ -337,14 +376,10 @@ document.addEventListener('DOMContentLoaded',function(){
   const ci=document.getElementById('customAmt');
   if(ci) ci.addEventListener('input',function(){setCustomAmt(this);});
 });
-function setCarrier(c){
-  curCarrier=c;
-  document.getElementById('s-carrier').textContent=c;
-  document.querySelectorAll('.cartab').forEach(b=>b.classList.remove('on'));
-  document.getElementById('car-'+c.toLowerCase().slice(0,3)).classList.add('on');
-}
 document.querySelectorAll('.ctab').forEach(b=>b.addEventListener('click',function(){
-  document.querySelectorAll('.ctab').forEach(x=>x.classList.remove('on'));this.classList.add('on');
+  document.querySelectorAll('.ctab').forEach(x=>x.classList.remove('on'));
+  this.classList.add('on');
+  setCountry(this.textContent.trim());
 }));
 var mb=document.getElementById('mobBtn'),mc=document.getElementById('mobClose'),mn=document.getElementById('mobNav');
 if(mb)mb.addEventListener('click',function(){mn.classList.add('open')});
